@@ -17,6 +17,9 @@
 	}elseif($page == 'seg_menuadmin'){
 		$title = 'REGISTRO DE MENU';
 		$descripcion = 'Menú de Opciones';
+	}elseif($page == 'addmenu'){
+		$title = 'AGREGAR MENU';
+		$descripcion = 'Ingrese nombre del menu';
 	}
 
 ?>	

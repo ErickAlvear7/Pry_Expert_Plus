@@ -34,6 +34,8 @@
 		include '_content.php';
 	}else if($page == 'seg_menuadmin'){
 		include __DIR__ . '/../pages/menu_admin.php';
+	}elseif($page == 'addmenu'){
+        include __DIR__ . '/../pages/agregar_menu.php';
 	}else{
 		include '_content.php';
 	}
