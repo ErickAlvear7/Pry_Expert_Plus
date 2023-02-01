@@ -1,13 +1,109 @@
 <?php
-	$page = isset($_GET['page']) ? $_GET['page'] : 'index';
-?>
+    
+	//error_reporting(E_ALL);
+    ini_set('display_errors', 0);
 
+    putenv("TZ=America/Guayaquil");
+    date_default_timezone_set('America/Guayaquil');	
+
+	$page = isset($_GET['page']) ? $_GET['page'] : 'index';
+
+	session_start();
+
+	/*if ($_SESSION["s_usuario"] === null){
+	  header("Location: ../logut.php");
+	}*/
+
+	//file_put_contents('log_errores.txt', $xNombreusuario . "\n\n", FILE_APPEND);
+
+	require_once("dbcon/config.php");
+	require_once("dbcon/functions.php");
+
+    mysqli_query($con,'SET NAMES utf8');  
+    mysqli_set_charset($con,'utf8');	
+
+    $xServidor = $_SERVER['HTTP_HOST'];
+    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
+	//$yUsuaCodigo = $_SESSION["i_codigousuario"];	
+	$yUsuaCodigo = 1;
+
+	$xSql = "SELECT (SELECT mpa.mepa_id FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS CodigoMenuPadre,";
+	$xSql .= "(SELECT mpa.mepa_descripcion FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS MenuPadre," ;
+	$xSql .= "(SELECT mpa.mepa_icono FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS IcoMenuPadre,";
+	$xSql .= "men.menu_id AS MenuId,men.menu_descripcion AS Menu,men.menu_icono AS Icono,tar.tare_nombre AS SubMenu,tar.tare_ruta AS Pagina ";
+	$xSql .= "FROM `expert_usuarios` usu, `expert_perfil` per, `expert_perfil_menu_tarea` pmt, `expert_menu` men,`expert_menu_tarea` mnt, `expert_tarea` tar ";
+	$xSql .= "WHERE usu.perf_id = per.perf_id AND per.perf_id = pmt.perf_id AND pmt.meta_id = mnt.meta_id AND mnt.menu_id = men.menu_id AND ";
+	$xSql .= "mnt.tare_id = tar.tare_id AND men.menu_estado='A' AND tar.tare_estado='A' AND USU.usua_id=" . $yUsuaCodigo . " AND men.mepa_id>0 ";
+	$xSql .= "ORDER BY men.menu_orden,mnt.meta_orden";
+
+	$all_menupadre = mysqli_query($con, $xSql);
+
+
+	$xSql = "SELECT (SELECT mpa.mepa_id FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS CodigoMenuPadre,";
+	$xSql .= "(SELECT mpa.mepa_descripcion FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS MenuPadre," ;
+	$xSql .= "(SELECT mpa.mepa_icono FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS IcoMenuPadre,";
+	$xSql .= "men.menu_id AS MenuId,men.menu_descripcion AS Menu,men.menu_icono AS Icono,tar.tare_nombre AS SubMenu,tar.tare_ruta AS Pagina ";
+	$xSql .= "FROM `expert_usuarios` usu, `expert_perfil` per, `expert_perfil_menu_tarea` pmt, `expert_menu` men,`expert_menu_tarea` mnt, `expert_tarea` tar ";
+	$xSql .= "WHERE usu.perf_id = per.perf_id AND per.perf_id = pmt.perf_id AND pmt.meta_id = mnt.meta_id AND mnt.menu_id = men.menu_id AND ";
+	$xSql .= "mnt.tare_id = tar.tare_id AND men.menu_estado='A' AND tar.tare_estado='A' AND USU.usua_id=" . $yUsuaCodigo;
+	$xSql .= " ORDER BY men.menu_orden,mnt.meta_orden";
+
+	$all_menu = mysqli_query($con, $xSql);
+
+
+?>
 
 						<!--begin::Aside Menu-->
 						<div class="hover-scroll-overlay-y my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="0">
 							<!--begin::Menu-->
 							<div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true" data-kt-menu-expand="false">
-								<div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+								<?php
+									$tempmenu = null;
+									$menupadre = null;
+									foreach ($all_menu as $menurow){
+										if ($menurow["CodigoMenuPadre"] == null){
+											if ($tempmenu != $menurow["MenuId"]){
+												echo "<div data-kt-menu-trigger='click' class='menu-item here show menu-accordion'>";
+													echo "<span class='menu-link'>";
+														// echo "<span class='menu-icon'>";
+														// 	echo "<span class='svg-icon svg-icon-2'>";
+														// 		echo "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>";																	
+														// 		echo "</svg>";
+														// 	echo "</span>";
+														// echo "</span>";
+														echo "<span class='menu-title'>" . $menurow['Menu'] . "</span>";
+														echo "<span class='menu-arrow'></span>";
+													echo "</span>";
+													echo "<div class='menu-sub menu-sub-accordion menu-active-bg'>";
+														echo "<div class='menu-item'>";
+														$xActivo = '';
+														foreach ($all_menu as $submenu){
+															$xPagina = $submenu["Pagina"];
+															if($page == $xPagina){
+																$xActivo = 'active';
+															}
+															if ($submenu["MenuId"] == $menurow["MenuId"]){
+																echo "<a class='menu-link " . $xActivo . "' ";
+																	echo "href=" . "'?page=" . $xPagina . "'> ";
+																	echo "<span class='menu-bullet'> ";
+																		echo "<span class='bullet bullet-dot'></span> ";
+																	echo "</span>";
+																	echo "<span class='menu-title'>" . $submenu["SubMenu"] . "</span> ";
+																echo "</a>";
+															}
+														}												
+														echo "</div>";
+													echo "</div>";
+												echo "</div>";
+											}
+										}else{
+
+										}
+										$tempmenu = $menurow['MenuId'];
+										$menusuperior = $menurow['CodigoMenuPadre'];
+									}
+								 ?>
+								 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
 									<span class="menu-link">
 										<span class="menu-title">Seguridad</span>
 										<span class="menu-arrow"></span>

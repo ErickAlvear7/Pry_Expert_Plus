@@ -26,9 +26,8 @@
 <?php 
 	if($page == 'index'){
 		include '_content.php';
-	}
-	elseif($page == 'usr_usuariorol'){
-		include __DIR__ . '../pages/usuarioadmin.php';
+	}else if($page == 'seg_menuadmin'){
+		include __DIR__ . '/../pages/menu_admin.php';
 	}else{
 		include '_content.php';
 	}

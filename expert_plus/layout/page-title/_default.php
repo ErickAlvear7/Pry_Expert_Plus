@@ -7,9 +7,9 @@
 	if($page == 'index'){
 		$title = 'Inicio';
 		$descripcion = 'Tablero de Control - DASHBOARD';
-	}elseif($page == 'usr_usuariorol'){
-		$title = 'USUARIOS REGISTRADOS';
-		$descripcion = 'Registro de Usuarios';
+	}elseif($page == 'seg_menuadmin'){
+		$title = 'REGISTRO DE MENU';
+		$descripcion = 'Menú de Opciones';
 	}
 
 ?>	
