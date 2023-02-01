@@ -26,6 +26,7 @@
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 	//$yUsuaCodigo = $_SESSION["i_codigousuario"];	
 	$yUsuaCodigo = 1;
+	$xIcono = "";
 
 	$xSql = "SELECT (SELECT mpa.mepa_id FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS CodigoMenuPadre,";
 	$xSql .= "(SELECT mpa.mepa_descripcion FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS MenuPadre," ;
@@ -63,14 +64,21 @@
 									foreach ($all_menu as $menurow){
 										if ($menurow["CodigoMenuPadre"] == null){
 											if ($tempmenu != $menurow["MenuId"]){
+												$xSql = "SELECT * FROM `expert_iconos_menu` WHERE menu_id=" . $menurow["MenuId"];
+												$dataicono = mysqli_query($con, $xSql);
+												foreach ($dataicono as $data){
+													$xIcono = $data["icono"];
+												}
 												echo "<div data-kt-menu-trigger='click' class='menu-item here show menu-accordion'>";
 													echo "<span class='menu-link'>";
-														// echo "<span class='menu-icon'>";
-														// 	echo "<span class='svg-icon svg-icon-2'>";
-														// 		echo "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>";																	
-														// 		echo "</svg>";
-														// 	echo "</span>";
-														// echo "</span>";
+														if(strlen($xIcono) > 100 ){
+															echo "<span class='menu-icon'>";
+															echo "<span class='svg-icon svg-icon-2'>";
+																echo $xIcono;
+															echo "</span>";
+															echo "</span>";															
+														}
+
 														echo "<span class='menu-title'>" . $menurow['Menu'] . "</span>";
 														echo "<span class='menu-arrow'></span>";
 													echo "</span>";

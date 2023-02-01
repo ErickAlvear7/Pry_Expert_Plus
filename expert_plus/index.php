@@ -1,17 +1,24 @@
 <?php
 
-	$mode = 'light';
-	/*require_once("dbcon/config.php");
-	$log_file = "error_index";
+	//error_reporting(E_ALL);
+    ini_set('display_errors', 0);
 
-	$xSQL = "SELECT * FROM parametro_paginas WHERE nombre_pagina='index_content'";
+    putenv("TZ=America/Guayaquil");
+    date_default_timezone_set('America/Guayaquil');	
+
+	$mode = 'dark';
+	require_once("./dbcon/config.php");
+
+	$log_file = "error_conexion";
+
+	$xSQL = "SELECT * FROM `expert_parametro_paginas` WHERE empr_id=1 AND usua_id=1 AND estado='A'";
 	$all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));	
 
 	if(mysqli_num_rows($all_datos)>0) {
 		foreach ($all_datos as $datos){ 
-			$mode = $datos['tipo_pagina'];
+			$mode = $datos['index_content'];
 		}
-	}*/
+	}	
 ?>
 
 
@@ -30,7 +37,7 @@ License: For each use you must have a valid license purchased only from above li
 <html lang="en">
 	<!--begin::Head-->
 	<head><base href="">
-		<title>Metronic - the world's #1 selling Bootstrap Admin Theme Ecosystem for HTML, Vue, React, Angular &amp; Laravel by Keenthemes</title>
+		<title>Sistema de Agendamientos (Expert Extendent)</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
 		<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
@@ -41,7 +48,7 @@ License: For each use you must have a valid license purchased only from above li
 		<meta property="og:url" content="https://keenthemes.com/metronic" />
 		<meta property="og:site_name" content="Keenthemes | Metronic" />
 		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+		<link rel="shortcut icon" href="assets/media/logos/logoPresta.ico" />
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
@@ -50,8 +57,21 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Page Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
-		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+
+		<?php
+			if($mode == 'dark'){
+		?>
+			<link href="assets/plugins/global/plugins.dark.bundle.css" rel="stylesheet" type="text/css" />
+			<link href="assets/css/style.dark.bundle.css" rel="stylesheet" type="text/css" />		
+		<?php	
+			}else{
+		?>
+			<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+			<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<?php
+			}
+		?>	
+
 		<!--end::Global Stylesheets Bundle-->
 	</head>
 	<!--end::Head-->

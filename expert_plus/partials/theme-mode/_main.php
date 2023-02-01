@@ -6,6 +6,6 @@
 										</a>
 										<!--begin::Menu toggle-->
 
-<!--layout-partial:partials/theme-mode/__menu.html-->
 
-										
+
+<?php include 'partials/theme-mode/__menu.php' ?>										

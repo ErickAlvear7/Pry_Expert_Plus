@@ -7,7 +7,7 @@
 													<span class="menu-icon">
 														<i class="fonticon-sun fs-2"></i>
 													</span>
-													<span class="menu-title">Light</span>
+													<span class="menu-title">Fondo Blanco</span>
 												</a>
 											</div>
 											<!--end::Menu item-->
@@ -17,7 +17,7 @@
 													<span class="menu-icon">
 														<i class="fonticon-moon fs-2"></i>
 													</span>
-													<span class="menu-title">Dark</span>
+													<span class="menu-title">Fondo Negro</span>
 												</a>
 											</div>
 											<!--end::Menu item-->

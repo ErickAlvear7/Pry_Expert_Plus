@@ -1,11 +1,34 @@
 				
-				<!--begin::Aside-->
-				<div id="kt_aside" class="aside aside-dark aside-hoverable" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
+<?php
+	//error_reporting(E_ALL);
+    ini_set('display_errors', 0);
+
+    putenv("TZ=America/Guayaquil");
+    date_default_timezone_set('America/Guayaquil');	
+	$mode = 'dark';
+	require_once("./dbcon/config.php");
+
+	$log_file = "error_conexion";
+
+	$xSQL = "SELECT * FROM `expert_parametro_paginas` WHERE empr_id=1 AND usua_id=1 AND estado='A'";
+	$all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));	
+
+	if(mysqli_num_rows($all_datos)>0) {
+		foreach ($all_datos as $datos){ 
+			$mode = $datos['index_menu'];
+		}
+	}	
+
+?>
+
+
+<!--begin::Aside-->
+				<div id="kt_aside" class="aside aside-<?php echo $mode ?> aside-hoverable" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
 					<!--begin::Brand-->
 					<div class="aside-logo flex-column-auto" id="kt_aside_logo">
 						<!--begin::Logo-->
 						<a href="?page=index">
-							<img alt="Logo" src="assets/media/logos/logo-1-dark.svg" class="h-25px logo" />
+							<img alt="Logo" src="assets/media/logos/<?php if($mode == 'dark') { echo 'LogoPresta.png'; } else { echo 'LogoPresta.png'; } ?>" class="h-75px logo" />
 						</a>
 						<!--end::Logo-->
 						<!--begin::Aside toggler-->
