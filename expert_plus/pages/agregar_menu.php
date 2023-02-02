@@ -4,15 +4,13 @@
 ?>
 <div id="kt_content_container" class="container-xxl">
    <div class="card card-flush">
-        <div class="card-header align-items-center py-5 gap-2 gap-md-5">
-            <div class="card-toolbar">
+            <div class="card-toolbar d-flex align-self-end">
                 <a href="?page=seg_menuadmin" class="btn btn-light-primary"><i class="las la-arrow-left"></i>Regresar</a>
             </div>	
-        </div>
         <div class="card-body">
             <div class="form-group">
                 <div class="d-flex align-items-center mb-3">
-                    <span class="font-weight-bold mr-2">Informacion General:</span> &nbsp; &nbsp;
+                    <span class="font-weight-bold mr-2">Informacion Menu:</span> &nbsp; &nbsp;
                 </div>
             </div>	
         </div>
@@ -28,11 +26,11 @@
         </div>
         <form action="m-0" class="form mb-15" method="post" id="kt_careers_form"> 
             <div class="tab-content" id="myTabContent">
-                    <div class="card-header">
+                    <div class="card-header"> 
                         <div class="card-toolbar">
                             <button type="submit" class="btn btn-light-success"><i class="las la-save"></i>Guardar</button>
                         </div>
-                    </div>
+                    </div> 
                 <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel">
                     <div class="card-body">
                         <div class="mb-3">
@@ -40,7 +38,7 @@
                             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
                         </div>
                             <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Icono Menu</label>
+                                <label for="exampleFormControlTextarea1" class="form-label">Descripcion</label>
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
                     </div>

@@ -44,8 +44,9 @@
 				<div class="w-150px">
 					<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Estado" data-kt-ecommerce-order-filter="status">
 						<option></option>
-						<option value="all">Activo</option>
-						<option value="EN VALIDACION">Inactivo</option>
+						<option value="all">Todos</option>
+						<option value="">Activo</option>
+						<option value="">Inactivo</option>
 					</select>
 				</div>
 			</div>
