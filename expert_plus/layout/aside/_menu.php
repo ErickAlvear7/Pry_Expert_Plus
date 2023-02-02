@@ -22,11 +22,12 @@
     mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
 
-    $xServidor = $_SERVER['HTTP_HOST'];
+    //$xServidor = $_SERVER['HTTP_HOST'];
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 	//$yUsuaCodigo = $_SESSION["i_codigousuario"];	
 	$yUsuaCodigo = 1;
 	$xIcono = "";
+	$xActivo = "";
 
 	$xSql = "SELECT (SELECT mpa.mepa_id FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS CodigoMenuPadre,";
 	$xSql .= "(SELECT mpa.mepa_descripcion FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS MenuPadre," ;
@@ -84,11 +85,13 @@
 													echo "</span>";
 													echo "<div class='menu-sub menu-sub-accordion menu-active-bg'>";
 														echo "<div class='menu-item'>";
-														$xActivo = '';
+														
 														foreach ($all_menu as $submenu){
 															$xPagina = $submenu["Pagina"];
 															if($page == $xPagina){
-																$xActivo = 'active';
+																$xActivo = "active";
+															}else{
+																$xActivo = "";
 															}
 															if ($submenu["MenuId"] == $menurow["MenuId"]){
 																echo "<a class='menu-link " . $xActivo . "' ";

@@ -1,11 +1,5 @@
 <?php
 
-	//error_reporting(E_ALL);
-    ini_set('display_errors', 0);
-
-    putenv("TZ=America/Guayaquil");
-    date_default_timezone_set('America/Guayaquil');	
-	
 	$page = isset($_GET['page']) ? $_GET['page'] : "index";
 
 	$title = 'Dashboard';
@@ -17,6 +11,9 @@
 	}elseif($page == 'seg_menuadmin'){
 		$title = 'REGISTRO DE MENU';
 		$descripcion = 'Menú de Opciones';
+	}elseif($page == 'seg_perfiladmin'){
+		$title = 'REGISTRO DE PERFIL';
+		$descripcion = 'Definición de Perfiles (Acceso a las operaciones del sistema)';
 	}
 
 ?>	

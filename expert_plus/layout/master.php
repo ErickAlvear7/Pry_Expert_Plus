@@ -1,10 +1,4 @@
 <?php
-	//error_reporting(E_ALL);
-    ini_set('display_errors', 0);
-
-    putenv("TZ=America/Guayaquil");
-    date_default_timezone_set('America/Guayaquil');	
-
 	$page = isset($_GET['page']) ? $_GET['page'] : 'index';
 ?>
 
@@ -34,6 +28,8 @@
 		include '_content.php';
 	}else if($page == 'seg_menuadmin'){
 		include __DIR__ . '/../pages/menu_admin.php';
+	}else if($page == 'seg_perfiladmin'){
+		include __DIR__ . '/../pages/perfil_admin.php';	
 	}else{
 		include '_content.php';
 	}
