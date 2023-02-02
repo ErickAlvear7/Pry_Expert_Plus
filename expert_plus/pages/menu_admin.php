@@ -45,8 +45,8 @@
 					<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Estado" data-kt-ecommerce-order-filter="status">
 						<option></option>
 						<option value="all">Todos</option>
-						<option value="">Activo</option>
-						<option value="">Inactivo</option>
+						<option value="Activo">Activo</option>
+						<option value="Inactivo">Inactivo</option>
 					</select>
 				</div>
 			</div>
@@ -55,32 +55,57 @@
 			<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
 				<thead>
 					<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
-						<th style="display:none; width: 15px;">Idmenu</th>
-						<th style="display:none; width: 15px;">Idemp</th>
+						<th style="display:none;">Idmenu</th>
+						<th style="display:none;">Idemp</th>
 						<th style="width: 30px;">Menu</th>
 						<th style="width: 30px;">Estado</th>
-						<th style="width: 10px; text-align: center">Acción</th>
+						<th style="width: 30px; text-align:center;">Opciones</th>
+						<th style="width: 10px;">Acción</th>
 					</tr>
 				</thead>
 				<tbody class="fw-bold text-gray-600">
-					<?php foreach($expertmenu as $menu){
+					<?php 
+					
+					foreach($expertmenu as $menu){
+                      $xMenu = $menu['Menu'];
+					?>
+					<?php 
 
+					if($xMenu == 'Seguridad'){
+						$chkEstado = "disabled";
+					}
+
+					if ($menu['Menu'] != 'Seguridad' && $menu['Estado'] == 'Inactivo') {
+						$xDisabledEdit = 'disabled';
+					}
+					if($menu['Estado'] == 'Activo'){
+						$xTextColor = "badge badge-light-success";
+					}else{
+						$xTextColor = "badge badge-light-danger";
+					}
+					
 					?>
 					<tr>
 						<td style="display:none;"><?php echo $menu['Idmenu']; ?></td>
 						<td style="display:none;"><?php echo $menu['Empid']; ?></td>
 						<td><?php echo $menu['Menu']; ?></td>
-						<td><?php echo $menu['Estado']; ?></td>
+						<td>
+						   <div class="<?php  echo $xTextColor; ?>"><?php echo $menu['Estado']; ?></div>
+						</td>
 						<td>
 							<div class="text-center">
 								<div class="btn-group">
-									<a href="?page=revisolpn&id=2222" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Menu'>
+									<a href="?page=revisolpn&id=2222" <?php echo $xDisabledEdit ?> id="btnEditar<?php echo $menu['Idmenu']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Menu'>
 										<i class='fa fa-edit'></i>
-									</a>
-									
-									<a href="?page=revisolpn&id=2222" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Eliminar Menu'>
-									<i class='fas fa-trash'></i>
-									</a>																																 
+									</a>																															 
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="text-center">
+								<div class="form-check form-check-sm form-check-custom form-check-solid">
+										<input class="form-check-input" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $menu['Idmenu']; ?>" <?php if ($menu['Estado'] == 'Activo') {
+												echo "checked";} else {'';} ?> value="<?php echo $menu['Idmenu']; ?>" />
 								</div>
 							</div>
 						</td>
