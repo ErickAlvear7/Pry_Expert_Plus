@@ -15,6 +15,9 @@
 		$title = 'REGISTRO DE PERFIL';
 		$descripcion = 'Registrar Perfil (Opciones de menú y submenu para el perfil)';
 
+	}elseif($page == 'addmenu'){
+		$title = 'AGREGAR MENU';
+		$descripcion = 'Ingrese nombre del menu';
 	}
 
 ?>	

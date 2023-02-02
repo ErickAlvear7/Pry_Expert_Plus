@@ -30,6 +30,8 @@
 		include __DIR__ . '/../pages/menu_admin.php';
 	}else if ($page == 'seg_perfiladmin'){
 		include __DIR__ . '/../pages/perfil_admin.php';
+	}else if($page == 'addmenu'){
+		include __DIR__ . '/../pages/agregar_menu.php';
 	}else{
 		include '_content.php';
 	}
