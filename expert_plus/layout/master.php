@@ -28,8 +28,8 @@
 		include '_content.php';
 	}else if($page == 'seg_menuadmin'){
 		include __DIR__ . '/../pages/menu_admin.php';
-	}else if($page == 'seg_perfiladmin'){
-		include __DIR__ . '/../pages/perfil_admin.php';	
+	}else if ($page == 'seg_perfiladmin'){
+		include __DIR__ . '/../pages/perfil_admin.php';
 	}else{
 		include '_content.php';
 	}

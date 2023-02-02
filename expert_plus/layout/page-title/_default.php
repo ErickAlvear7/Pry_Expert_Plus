@@ -13,7 +13,8 @@
 		$descripcion = 'Menú de Opciones';
 	}elseif($page == 'seg_perfiladmin'){
 		$title = 'REGISTRO DE PERFIL';
-		$descripcion = 'Definición de Perfiles (Acceso a las operaciones del sistema)';
+		$descripcion = 'Registrar Perfil (Opciones de menú y submenu para el perfil)';
+
 	}
 
 ?>	
