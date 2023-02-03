@@ -14,14 +14,15 @@
 	}elseif($page == 'seg_perfiladmin'){
 		$title = 'REGISTRO DE PERFIL';
 		$descripcion = 'Registrar Perfil (Opciones de menú y submenu para el perfil)';
-
 	}elseif($page == 'addmenu'){
-		$title = 'AGREGAR MENU';
-		$descripcion = 'Ingrese nombre del menu';
+		$title = 'AGREGAR NUEVO MENU';
+		$descripcion = 'Ingrese Datos para crear opción menú';
+	}elseif($page == 'addperfil'){
+		$title = 'AGREGAR NUEVO PERFIL';
+		$descripcion = 'Ingrese Datos para crear opción perfil';
 	}
 
 ?>	
-
 
 				<!--begin::Page title-->
 				<div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">

@@ -39,7 +39,7 @@
 		<div id="kt_content_container" class="container-xxl">
 			<div class="card card-flush">
 				<div class="card-toolbar">
-					<a href="#" class="btn btn-sm btn-light-primary">
+					<a href="?page=addperfil" class="btn btn-sm btn-light-primary">
 						<span class="svg-icon svg-icon-2">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 								<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
@@ -49,8 +49,7 @@
 					Nuevo Perfil</a>
 				</div>					
 				<div class="card-header align-items-center py-5 gap-2 gap-md-5">					
-					<div class="card-title">
-					
+					<div class="card-title">					
 						<div class="d-flex align-items-center position-relative my-1">
 							<span class="svg-icon svg-icon-1 position-absolute ms-4">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -79,9 +78,9 @@
 						<thead>
 							<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
                                     <th>Perfil</th>
-                                    <th>Descipción</th>
-                                    <th>Estado</th>
+                                    <th>Descipción</th>                                    
                                     <th style="text-align:center;">Opciones</th>
+									<th>Estado</th>
                                     <th>Status</th>
 							</tr>
 						</thead>
@@ -107,9 +106,6 @@
                                 <td><?php echo $perfil['Perfil']; ?></td>
                                 <td><?php echo $perfil['Descripcion']; ?></td>
 								<td>
-									<div class="<?php  echo $xTextColor; ?>"><?php echo $perfil['Estado']; ?></div>
-								</td>
-								<td>
 									<div class="text-center">
 										<div class="btn-group">
 											<a href="?page=revisolpn&id=2222" <?php echo $xDisabledEdit ?> id="btnEditar<?php echo $perfil['perf_id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Revisar Solicitud'>
@@ -118,11 +114,14 @@
 										</div>
 									</div>
 								</td>
-                                <td>
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
-                                             echo "checked";} else {'';} ?> value="<?php echo $perfil['Id']; ?>" />
-                                    </div>
+								<td>
+									<div class="<?php  echo $xTextColor; ?>"><?php echo $perfil['Estado']; ?></div>
+								</td>								
+                                <td style="text-align:center">
+									<div class="form-check form-check-sm form-check-custom form-check-solid">
+										<input class="form-check-input" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
+											echo "checked";} else {'';} ?> value="<?php echo $perfil['Id']; ?>" />
+									</div>
                                 </td>                                                           
 							</tr>
                             <?php }

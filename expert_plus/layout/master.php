@@ -32,6 +32,8 @@
 		include __DIR__ . '/../pages/perfil_admin.php';
 	}else if($page == 'addmenu'){
 		include __DIR__ . '/../pages/agregar_menu.php';
+	}else if($page == 'addperfil'){
+		include __DIR__ . '/../pages/agregar_perfil.php';	
 	}else{
 		include '_content.php';
 	}
