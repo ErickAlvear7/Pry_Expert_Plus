@@ -1,5 +1,8 @@
 <?php 
 
+//error_reporting(E_ALL);
+ini_set('display_errors', 0);
+
 require_once("dbcon/config.php");
 require_once("dbcon/functions.php");
 
@@ -13,49 +16,101 @@ $xSQL = "SELECT tare_id AS Idtarea, empr_id AS Empid, tare_nombre as SubMenu, ta
 $xSQL .= "ELSE 'Inactivo' END AS Estado FROM expert_tarea";
 $expertsubmenu = mysqli_query($con, $xSQL);
 
+if(isset($_POST['guardar'])){
+
+    $xMenu = $_POST['txtMenu'];
+
+    $xSQL ="INSERT INTO `expert_menu` (menu_orden,menu_descripcion,menu_estado,fechacreacion) ";
+    $xSQL .="VALUES (2,'$xMenu','A','$xFecha')";
+    mysqli_query($con, $xSQL);
+    $idmenu = mysqli_insert_id($con);
+
+    if(isset($_POST['sub'])){
+
+        foreach( $_POST['sub'] as $submenu){
+         $xSQL ="INSERT INTO `expert_menu_tarea`(menu_id,tare_id,meta_orden) ";
+         $xSQL .="VALUES ('$idmenu','$submenu',4)";
+         mysqli_query($con, $xSQL);
+        }
+            
+        }else{
+          
+        }
+
+}
+
+
+
 ?>
 <div id="kt_content_container" class="container-xxl">
    <div class="card card-flush">
             <div class="card-toolbar d-flex align-self-end">
                 <a href="?page=seg_menuadmin" class="btn btn-light-primary"><i class="las la-arrow-left"></i>Regresar</a>
             </div>	
-        <div class="card-body">
-            <div class="form-group">
-                <div class="d-flex align-items-center mb-3">
-                    <span class="font-weight-bold mr-2">Informacion Menu:</span> &nbsp; &nbsp;
-                </div>
-            </div>	
-        </div>
         <div class="card-header">
-                <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x mb-5 fs-6">
+                <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
                     <li class="nav-item">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#kt_tab_pane_1">Menu</a>
+                        <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_settings_general">											
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M16.0173 9H15.3945C14.2833 9 13.263 9.61425 12.7431 10.5963L12.154 11.7091C12.0645 11.8781 12.1072 12.0868 12.2559 12.2071L12.6402 12.5183C13.2631 13.0225 13.7556 13.6691 14.0764 14.4035L14.2321 14.7601C14.2957 14.9058 14.4396 15 14.5987 15H18.6747C19.7297 15 20.4057 13.8774 19.912 12.945L18.6686 10.5963C18.1487 9.61425 17.1285 9 16.0173 9Z" fill="currentColor" />
+                                <rect opacity="0.3" x="14" y="4" width="4" height="4" rx="2" fill="currentColor" />
+                                <path d="M4.65486 14.8559C5.40389 13.1224 7.11161 12 9 12C10.8884 12 12.5961 13.1224 13.3451 14.8559L14.793 18.2067C15.3636 19.5271 14.3955 21 12.9571 21H5.04292C3.60453 21 2.63644 19.5271 3.20698 18.2067L4.65486 14.8559Z" fill="currentColor" />
+                                <rect opacity="0.3" x="6" y="5" width="6" height="6" rx="3" fill="currentColor" />
+                            </svg>
+                        Menu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_2">Sub-Menu</a>
+                        <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_settings_store">
+                            <span class="svg-icon svg-icon-2 me-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path opacity="0.3" d="M18 10V20C18 20.6 18.4 21 19 21C19.6 21 20 20.6 20 20V10H18Z" fill="currentColor" />
+                                    <path opacity="0.3" d="M11 10V17H6V10H4V20C4 20.6 4.4 21 5 21H12C12.6 21 13 20.6 13 20V10H11Z" fill="currentColor" />
+                                    <path opacity="0.3" d="M10 10C10 11.1 9.1 12 8 12C6.9 12 6 11.1 6 10H10Z" fill="currentColor" />
+                                    <path opacity="0.3" d="M18 10C18 11.1 17.1 12 16 12C14.9 12 14 11.1 14 10H18Z" fill="currentColor" />
+                                    <path opacity="0.3" d="M14 4H10V10H14V4Z" fill="currentColor" />
+                                    <path opacity="0.3" d="M17 4H20L22 10H18L17 4Z" fill="currentColor" />
+                                    <path opacity="0.3" d="M7 4H4L2 10H6L7 4Z" fill="currentColor" />
+                                    <path d="M6 10C6 11.1 5.1 12 4 12C2.9 12 2 11.1 2 10H6ZM10 10C10 11.1 10.9 12 12 12C13.1 12 14 11.1 14 10H10ZM18 10C18 11.1 18.9 12 20 12C21.1 12 22 11.1 22 10H18ZM19 2H5C4.4 2 4 2.4 4 3V4H20V3C20 2.4 19.6 2 19 2ZM12 17C12 16.4 11.6 16 11 16H6C5.4 16 5 16.4 5 17C5 17.6 5.4 18 6 18H11C11.6 18 12 17.6 12 17Z" fill="currentColor" />
+                                </svg>
+                            </span>
+                        Opciones SubMenu</a>
                     </li>
-                </ul>	
+                    </ul>
         </div>
-        <form action="m-0" class="form mb-15" method="post" id="kt_careers_form"> 
+        <form class="form mb-15" method="post" id="kt_careers_form" enctype='multipart/form-data'> 
             <div class="tab-content" id="myTabContent">
                     <div class="card-header"> 
                         <div class="card-toolbar">
-                            <button type="submit" class="btn btn-light-success"><i class="las la-save"></i>Guardar</button>
+                            <button type="submit" name="guardar" class="btn btn-light-primary"><i class="las la-save"></i>Guardar</button>
                         </div>
                     </div> 
-                <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel">
+                <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
                     <div class="card-body">
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Menu</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
-                        </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Descripcion</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                       <div class="row fv-row mb-7">
+                            <div class="col-md-2 text-md-end">
+                                <label class="fs-6 fw-bold form-label mt-3">
+                                    <span class="required">Menu</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Nombre del Menu"></i>
+                                </label>
                             </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control form-control-solid" name="txtMenu" id="txtMenu" maxlength="150" placeholder="Nombre del Menu" required />
+                            </div>
+                        </div>
+                        <div class="row fv-row mb-7">
+                            <!-- <div class="col-md-2  text-md-end">
+                                <label class="fs-6 fw-bold form-label mt-3">
+                                    <span>Descripción</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripción del Perfil"></i>
+                                </label>
+                            </div>
+                            <div class="col-md-9">
+                                <textarea class="form-control form-control-solid" name="txtDescripcion" id="txtDescripcion" maxlength="255" onkeydown="return (event.keyCode!=13);"></textarea>
+                            </div>                                                           -->
+                        </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel">
+                <div class="tab-pane fade" id="kt_ecommerce_settings_store" role="tabpanel">
                    <div class="card">
                         <div class="card-header border-0 pt-6">                
                             <div class="card-title">
@@ -114,7 +169,7 @@ $expertsubmenu = mysqli_query($con, $xSQL);
                                     <tr>
                                         <td style="text-align: center;" >
                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input class="form-check-input"  id="chk<?php echo $submenu['Idtarea']; ?>" type="checkbox" value="1" />
+                                                <input class="form-check-input" name="sub[]" type="checkbox" value="<?php echo $submenu['Idtarea']; ?>" />
                                             </div>
                                         </td>
                                         <td style="display:none;"><?php echo $submenu['Idtarea']; ?></td>
