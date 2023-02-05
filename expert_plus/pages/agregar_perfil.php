@@ -159,7 +159,7 @@
                                             </div>
                                         </div>                                                    
                                         <div class="card-body pt-0">
-                                            <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
+                                            <table class="table align-middle table-row-dashed fs-6 gy-5 table-hover" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
                                                 <thead>
                                                     <tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
                                                             <th>Seleccionar</th>
@@ -167,18 +167,22 @@
                                                             <th>Tarea</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="fw-bold text-gray-600">
+                                                <tbody class="fw-bold text-gray-700">
                                                     <?php
                                                         foreach ($all_perfiles as $perfil){    
                                                     ?>
                                                     <tr id="tr_<?php echo $perfil['MentId']; ?>">
                                                         <td style="text-align:center">
                                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" name="chkMenu" id="chkMenu" value="<?php echo $perfil['MentId']; ?>" />
+                                                                <input class="form-check-input chkMenu" type="checkbox" name="chkMenu" id="chk<?php echo $perfil['MentId']; ?>" value="<?php echo $perfil['MentId']; ?>" />
                                                             </div>
                                                         </td>                                                                      
                                                         <td><?php echo $perfil['Menu']; ?></td>
-                                                        <td><?php echo $perfil['Tarea']; ?></td>                                                         
+                                                        <td>
+                                                            <div id="div_<?php echo $perfil['MentId']; ?>" >
+                                                                <?php echo $perfil['Tarea']; ?>
+                                                            </div>
+                                                        </td>                                                         
                                                     </tr>
                                                     <?php }
                                                         ?>                            
@@ -201,9 +205,18 @@
 
                 $(document).ready(function(){
 
-                    $(document).on("click","#chkMenu",function(){
-                        let _rowid = $(this).attr("id");
-                        alert(_rowid);
+                    $(document).on("click",".chkMenu",function(){
+                        //let _id = $(this).closest('tr').attr('id');  OBTENER EL ID DEL TR
+                        let _rowid = $(this).attr("id");         
+                        let _id = _rowid.substring(3);
+                        let _div = "div_" + _id;              
+                        let _check = $("#chk" + _id).is(":checked");
+                        if(_check){
+                            $("#"+_div).addClass("badge badge-light-success");
+                        }else{
+                            $("#"+_div).removeClass("badge badge-light-success");
+                        }                        
+                        //_tarea = $(this).closest("tr").find('td:eq(2)').text();                         
                     });
                     
                     $('#btnGuardar').click(function(){
