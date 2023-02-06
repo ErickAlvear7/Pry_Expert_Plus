@@ -79,13 +79,13 @@
                                 </li>
                             </ul>
                         </div>
-                        <form class="form mb-15" method="post" enctype='multipart/form-data'>                                               
-                            <div class="tab-content" id="myTabContent">  
                                     <div class="card-header"> 
                                         <div class="card-toolbar">
-                                            <button type="button" id="btnGuardar" class="btn btn-light-primary"><i class="las la-save"></i>Guardar</button>
+                                            <button type="button" id="btnGuardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>)"><i class="las la-save"></i>Guardar</button>
                                         </div>
-                                    </div>                                                                                
+                                    </div>                              
+                        
+                            <div class="tab-content" id="myTabContent">                                                                            
                                 <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">                                                                                        
                                         <div class="card-body pt-0">													
                                             <div class="row fv-row mb-7">
@@ -174,7 +174,7 @@
                                                     <tr id="tr_<?php echo $perfil['MentId']; ?>">
                                                         <td style="text-align:center">
                                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input chkMenu" type="checkbox" name="chkMenu" id="chk<?php echo $perfil['MentId']; ?>" value="<?php echo $perfil['MentId']; ?>" />
+                                                                <input class="form-check-input chkMenu" type="checkbox" name="check[]" id="chk<?php echo $perfil['MentId']; ?>" value="<?php echo $perfil['MentId']; ?>" />
                                                             </div>
                                                         </td>                                                                      
                                                         <td><?php echo $perfil['Menu']; ?></td>
@@ -188,18 +188,14 @@
                                                         ?>                            
                                                 </tbody>
                                             </table>
-
                                         </div>
                                     </div>
                                 </div>                                                                             
                             </div>
-                        </form>   
-                        
                     </div>
                 </div>
                 
-                <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-                <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
 
             <script>
 
@@ -219,56 +215,104 @@
                         //_tarea = $(this).closest("tr").find('td:eq(2)').text();                         
                     });
                     
-                    $('#btnGuardar').click(function(){
-                        _perfil = $.trim($("#txtPerfil").val());
-                        _observacion = $.trim($("#txtDescripcion").val());
-                        _estado = "Activo";
+                    // $('#btnGuardar').click(function(){
+                    //     _perfil = $.trim($("#txtPerfil").val());
+                    //     _observacion = $.trim($("#txtDescripcion").val());
+                    //     _estado = "Activo";
 
-                        alert(_perfil);
+                    //     if(_perfil == '')
+                    //     {       
+                    //         //mensajesalertify("Ingrese Nombre del Perfil..!!","W","top-right",3);  
+                    //         mensajesweetalert("center-start","warning","Ingrese Nombre del Perfil..!",false,1800);  
+                    //         return;
+                    //     }
 
-                        // if(_perfil == '')
-                        // {       
+                    //     var i = 0;
 
-                        //     mensajesalertify("Ingrese Nombre del Perfil..!!","W","top-right",3);  
-                        //     return;
-                        // }
+                    //     $("input[type=checkbox]:checked").map(function(){
+                    //         if($(this).val() != 'on'){
+                    //             _result[i] = $(this).val();
+                    //             i++;
+                    //         }
+                    //     });
 
-                        // var i = 0;
+                    //     if(i == 0)
+                    //     {                        
+                    //         mensajesweetalert("center-start","warning","Seleccione al menos un opción Menu/Tareal",false,1800);
+                    //         return;
+                    //     }
 
-                        // $("input[type=checkbox]:checked").map(function(){
-                        //     if($(this).val() != 'on'){
-                        //         _result[i] = $(this).val();
-                        //         i++;
-                        //     }
-                        // });
+                    //     $parametros = {
 
-                        // if(i == 0)
-                        // {
-                        
-                        //     mensajesalertify("Seleccione al menos un opción Menu/Tareal..!!","W","top-right",3);
-                        //     return;
-                        // }
+                    //     }
 
-                        // $.ajax({
-                        //     url: "../db/consultadatos.php",
-                        //     type: "POST",
-                        //     dataType: "json",
-                        //     data: {tipo:14, auxv1:"", auxv2:_perfil, auxv3:"", auxv4:"", auxv5:"", auxv6:"", auxi1:0, auxi2:0, auxi3:0, auxi4:0, auxi5:0, auxi6:0, 
-                        //     opcion:0},
-                        //     success: function(data){                    
-                        //         if(data[0].contar == "0"){                         
-                        //             _continuar = true;
-                        //         }else{                      
-                        //             _continuar = false;
-                        //         }   
-                        //         FunGrabar(_continuar);
-                        //     },
-                        //     error: function (error) {
-                        //         console.log(error);
-                        //     }
-                        // });
-                    });                     
+                    // });                     
 
 
                 }); 
+
+                function f_Guardar(_emprid){
+                    _perfil=$.trim($("#txtPerfil").val());
+                    _observacion=$.trim($("#txtDescripcion").val());
+                    _estado="Activo";
+                    _result=[];
+
+                    if(_perfil == '')
+                    {       
+                        mensajesweetalert("center","warning","Ingrese Nombre del Perfil..!",false,1800);  
+                        return;
+                    }
+
+                    var _contar = 0;
+
+                    //debugger;
+                    /*$("input[type=checkbox]:checked").map(function(){
+                        if($(this).val() == 'on'){
+                            _result[i] = $(this).val();
+                            i++;
+                        }
+                    });*/
+
+                    /*var tbl = document.getElementById('kt_ecommerce_report_shipping_table');
+                    var rCount = tbl.rows.length;
+                    var cCount = 1;
+                    var allArray = [];
+                    for (var i = 1; i <rCount; i++){
+                        var rowArray = [];
+                        for (var j = 0; j <cCount; j++){                            
+                            rowArray.push(tbl.rows[i].cells[j].children[0].value);
+                        }
+                        allArray.push(rowArray);
+                    }
+                    console.log(allArray);                 
+
+                    if(i == 0)*/
+                    
+                    var grid = document.getElementById("kt_ecommerce_report_shipping_table");
+                    var checkBoxes = grid.getElementsByTagName("input");
+                    for (var i = 0; i < checkBoxes.length; i++) {
+                        if (checkBoxes[i].checked) {
+                            //var row = checkBoxes[i].parentNode.parentNode;
+                            _result.push(checkBoxes[i].value);
+                            _contar++
+                        }
+                    }
+
+                    //console.log( _result);
+
+                    if(_contar == 0){                        
+                        mensajesweetalert("center-start","warning","Seleccione al menos un opción Menu/Tareal",false,1800);
+                        return;
+                    }
+
+                    $parametros = {
+                        xxPerfil: _perfil,
+                        xxEmprid: _emprid
+                    }      
+                    
+                    //var xrespuesta = $.post("codephp/consultar_perfil.php", $parametros);
+                    
+                }
+
+
             </script> 

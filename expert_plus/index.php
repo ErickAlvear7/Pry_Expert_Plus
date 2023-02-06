@@ -58,6 +58,9 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Page Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
 
+		<link href="assets/sweetalert2/css/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+		<link href="assets/alertify/css/alertify.min.css" rel="stylesheet" type="text/css" />
+
 		<?php
 			if($mode == 'dark'){
 		?>
@@ -73,6 +76,8 @@ License: For each use you must have a valid license purchased only from above li
 		?>	
 
 		<!--end::Global Stylesheets Bundle-->
+		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>		
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -115,6 +120,11 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="assets/js/custom/intro.js"></script>
 		<script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script>
 		<script src="assets/js/custom/utilities/modals/users-search.js"></script>
+
+		<script src="assets/sweetalert2/js/sweetalert2.min.js"></script>
+		<script src="assets/alertify/js/alertify.min.js"></script>
+		<script src="assets/redirect/js/redirect.js"></script>
+		<script src="assets/js/funciones.js"></script>
 
 	</body>
 	<!--end::Body-->
