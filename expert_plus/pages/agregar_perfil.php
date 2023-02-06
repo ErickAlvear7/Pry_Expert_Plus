@@ -208,9 +208,9 @@
                         let _div = "div_" + _id;              
                         let _check = $("#chk" + _id).is(":checked");
                         if(_check){
-                            $("#"+_div).addClass("badge badge-light-success");
+                            $("#"+_div).addClass("badge badge-light-primary");
                         }else{
-                            $("#"+_div).removeClass("badge badge-light-success");
+                            $("#"+_div).removeClass("badge badge-light-primary");
                         }                        
                         //_tarea = $(this).closest("tr").find('td:eq(2)').text();                         
                     });
