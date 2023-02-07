@@ -32,7 +32,7 @@
 
                 foreach($xResult as $drfila){
                     $xSql = "INSERT INTO `expert_perfil_menu_tarea`(empr_id,meta_id,perf_id,meta_estado) ";
-                    $xSql .= "VALUES($yEmprid,$drfila[0],$id,'A')";
+                    $xSql .= "VALUES($yEmprid,$drfila,$id,'A')";
                     mysqli_query($con, $xSql);
                 }
 

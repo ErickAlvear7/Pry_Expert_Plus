@@ -94,7 +94,7 @@
                                     </div>                              
                         
                             <div class="tab-content" id="myTabContent">                                                                            
-                                <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">                                                                                        
+                                <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel"> 
                                         <div class="card-body pt-0">													
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-3 text-md-end">
@@ -182,7 +182,7 @@
                                                     <tr id="tr_<?php echo $perfil['MentId']; ?>">
                                                         <td style="text-align:center">
                                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input chkMenu" type="checkbox" name="chkTareas" id="chk<?php echo $perfil['MentId']; ?>" value="<?php echo $perfil['MentId']; ?>" />
+                                                                <input class="form-check-input chkTarea" type="checkbox" name="chkTarea" id="chk<?php echo $perfil['MentId']; ?>" value="<?php echo $perfil['MentId']; ?>" />
                                                             </div>
                                                         </td>                                                                      
                                                         <td><?php echo $perfil['Menu']; ?></td>
@@ -209,7 +209,7 @@
 
                 $(document).ready(function(){
 
-                    $(document).on("click",".chkMenu",function(){
+                    $(document).on("click",".chkTarea",function(){
                         //let _id = $(this).closest('tr').attr('id');  OBTENER EL ID DEL TR
                         let _rowid = $(this).attr("id");         
                         let _id = _rowid.substring(3);
@@ -309,7 +309,7 @@
                     //console.log( _result);
 
                     if(_contar == 0){                        
-                        mensajesweetalert("center","warning","Seleccione al menos un opción Menu/Tareal",false,1800);
+                        mensajesweetalert("center","warning","Seleccione al menos un opción Menu/Tarea",false,1800);
                         return;
                     }
 
@@ -338,8 +338,10 @@
                                 dataType: "json",
                                 data: $datosperfil,          
                                 success: function(data){ 
-                                    console.log(data);                                      
-                                    $.redirect('?page=seg_perfiladmin', {'mensaje': 'Guardado con Exito..!'}); 
+                                    console.log(data);
+                                    if(data == 'OK'){
+                                        $.redirect('?page=seg_perfiladmin', {'mensaje': 'Guardado con Exito..!'}); 
+                                    }                                                                         
                                 },
                                 error: function (error){
                                     console.log(error);
