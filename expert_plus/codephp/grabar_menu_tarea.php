@@ -20,8 +20,8 @@ if(isset($_POST['xxMenu']) and isset($_POST['xxEmprid']) and isset($_POST['xxRes
         $xResult = $_POST['xxResult']; 
         $xEstado =  $_POST['xxEstado'];
 
-        $xSQL ="INSERT INTO `expert_menu` (menu_orden,menu_descripcion,menu_estado,fechacreacion,usuariocreacion,terminalcreacion) ";
-        $xSQL .="VALUES (2,'$xMenu','$xEstado','$xFecha','$yUserid','$xTerminal')";
+        $xSQL ="INSERT INTO `expert_menu` (empr_id,menu_orden,menu_descripcion,menu_estado,fechacreacion,usuariocreacion,terminalcreacion) ";
+        $xSQL .="VALUES ('$yEmprid',2,'$xMenu','$xEstado','$xFecha','$yUserid','$xTerminal')";
         if(mysqli_query($con, $xSQL)){
             $idmenu = mysqli_insert_id($con);
 
