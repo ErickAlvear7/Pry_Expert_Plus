@@ -144,7 +144,7 @@ $expertsubmenu = mysqli_query($con, $xSQL);
                                         ?>
                                         <?php 
                                             if($submenu['Estado'] == 'Activo'){
-                                                $xTextColor = "badge badge-light-success";
+                                                $xTextColor = "badge badge-light-primary";
                                             }else{
                                                 $xTextColor = "badge badge-light-danger";
                                             }
