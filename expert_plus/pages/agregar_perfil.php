@@ -19,7 +19,11 @@
 
     @session_start();
 
-    
+    //$yEmprid = $_SESSION["i_empreid"];
+    //$yUserid = $_SESSION["i_userid"];
+    $yEmprid = 1;
+    $yPerfid = 1;
+    $yUserid = 1;    
     $xDisabledEdit = "";
     
     /*if(isset($_SESSION["s_usuario"])){
