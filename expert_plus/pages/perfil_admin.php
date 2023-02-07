@@ -6,6 +6,12 @@
     putenv("TZ=America/Guayaquil");
     date_default_timezone_set('America/Guayaquil');
 
+	require_once("dbcon/config.php");
+	require_once("dbcon/functions.php");
+
+	mysqli_query($con,'SET NAMES utf8');  
+    mysqli_set_charset($con,'utf8');		
+
     //$xServidor = $_SERVER['HTTP_HOST'];
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());    
@@ -15,6 +21,7 @@
     //$yEmprid = $_SESSION["i_empre_id"];
     $yEmprid = 1;
     $xDisabledEdit = "";
+	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
     
     /*if(isset($_SESSION["s_usuario"])){
         if($_SESSION["s_login"] != "loged"){
@@ -37,6 +44,7 @@
 ?>				
 					
 		<div id="kt_content_container" class="container-xxl">
+			<input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
 			<div class="card card-flush">
 				<div class="card-toolbar">
 					<a href="?page=addperfil" class="btn btn-sm btn-light-primary">
@@ -133,4 +141,15 @@
 		</div>
 
 		
-							
+		<script>
+			$(document).ready(function(){
+				_mensaje = $('input#mensaje').val();
+
+				if(_mensaje != ''){
+					//mensajesweetalert("center","success",_mensaje+"..!",false,1800);
+					mensajesalertify(_mensaje+"..!","S","top-center",5);
+				}
+
+			});
+
+		</script> 

@@ -7,15 +7,23 @@
     putenv("TZ=America/Guayaquil");
     date_default_timezone_set('America/Guayaquil');
 
+	require_once("dbcon/config.php");
+	require_once("dbcon/functions.php");
+
+	mysqli_query($con,'SET NAMES utf8');  
+    mysqli_set_charset($con,'utf8');	    
+
     //$xServidor = $_SERVER['HTTP_HOST'];
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());    
 
     @session_start();
 
-    //$yEmprid = $_SESSION["i_empre_id"];
+    //$yEmprid = $_SESSION["i_empreid"];
+    //$yUserid = $_SESSION["i_userid"];
     $yEmprid = 1;
     $yPerfid = 1;
+    $yUserid = 1;
     $xDisabledEdit = "";
     
     /*if(isset($_SESSION["s_usuario"])){
@@ -81,7 +89,7 @@
                         </div>
                                     <div class="card-header"> 
                                         <div class="card-toolbar">
-                                            <button type="button" id="btnGuardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>)"><i class="las la-save"></i>Guardar</button>
+                                            <button type="button" id="btnGuardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $yUserid; ?>)"><i class="las la-save"></i>Guardar</button>
                                         </div>
                                     </div>                              
                         
@@ -96,7 +104,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <input type="text" class="form-control form-control-solid" name="txtPerfil" id="txtPerfil" maxlength="80" placeholder="Nombre del Perfil" value="" />
+                                                    <input type="text" class="form-control form-control-solid" name="txtPerfil" id="txtPerfil" maxlength="150" placeholder="Nombre del Perfil" value="" />
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -107,7 +115,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <textarea class="form-control form-control-solid" name="txtDescripcion" id="txtDescripcion" maxlength="255" onkeydown="return (event.keyCode!=13);"></textarea>
+                                                    <textarea class="form-control form-control-solid text-uppercase" name="txtDescripcion" id="txtDescripcion" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
                                                 </div>                                                          
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -174,7 +182,7 @@
                                                     <tr id="tr_<?php echo $perfil['MentId']; ?>">
                                                         <td style="text-align:center">
                                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input chkMenu" type="checkbox" name="check[]" id="chk<?php echo $perfil['MentId']; ?>" value="<?php echo $perfil['MentId']; ?>" />
+                                                                <input class="form-check-input chkMenu" type="checkbox" name="chkTareas" id="chk<?php echo $perfil['MentId']; ?>" value="<?php echo $perfil['MentId']; ?>" />
                                                             </div>
                                                         </td>                                                                      
                                                         <td><?php echo $perfil['Menu']; ?></td>
@@ -251,10 +259,10 @@
 
                 }); 
 
-                function f_Guardar(_emprid){
-                    _perfil=$.trim($("#txtPerfil").val());
-                    _observacion=$.trim($("#txtDescripcion").val());
-                    _estado="Activo";
+                function f_Guardar(_emprid, _userid){
+                    _perfil = $.trim($("#txtPerfil").val());
+                    _observacion = $.trim($("#txtDescripcion").val());
+                    _estado = "A";
                     _result=[];
 
                     if(_perfil == '')
@@ -265,7 +273,7 @@
 
                     var _contar = 0;
 
-                    //debugger;
+                    
                     /*$("input[type=checkbox]:checked").map(function(){
                         if($(this).val() == 'on'){
                             _result[i] = $(this).val();
@@ -284,10 +292,8 @@
                         }
                         allArray.push(rowArray);
                     }
-                    console.log(allArray);                 
+                    console.log(allArray);    */             
 
-                    if(i == 0)*/
-                    
                     var grid = document.getElementById("kt_ecommerce_report_shipping_table");
                     var checkBoxes = grid.getElementsByTagName("input");
                     for (var i = 0; i < checkBoxes.length; i++) {
@@ -298,10 +304,12 @@
                         }
                     }
 
+                    //debugger;
+
                     //console.log( _result);
 
                     if(_contar == 0){                        
-                        mensajesweetalert("center-start","warning","Seleccione al menos un opción Menu/Tareal",false,1800);
+                        mensajesweetalert("center","warning","Seleccione al menos un opción Menu/Tareal",false,1800);
                         return;
                     }
 
@@ -310,8 +318,38 @@
                         xxEmprid: _emprid
                     }      
                     
-                    //var xrespuesta = $.post("codephp/consultar_perfil.php", $parametros);
-                    
+                    var xrespuesta = $.post("codephp/consultar_perfil.php", $parametros);
+                    xrespuesta.done(function(response) {
+                        console.log(response);
+                        if(response == 0){
+
+                            $datosperfil = {
+                                xxPerfil: _perfil,
+                                xxEmprid: _emprid,
+                                xxUserid: _userid,
+                                xxObservacion: _observacion,
+                                xxEstado: _estado,
+                                xxResult: _result
+                            }
+
+                            $.ajax({
+                                url: "codephp/grabar_perfil.php",
+                                type: "POST",
+                                dataType: "json",
+                                data: $datosperfil,          
+                                success: function(data){ 
+                                    console.log(data);                                      
+                                    $.redirect('?page=seg_perfiladmin', {'mensaje': 'Guardado con Exito..!'}); 
+                                },
+                                error: function (error){
+                                    console.log(error);
+                                }                            
+                            }); 
+                        }else{
+                            mensajesweetalert("center","warning","Nombre del Perfil ya Existe..!",false,1800);
+                        }
+
+                    });
                 }
 
 
