@@ -12,32 +12,15 @@ mysqli_set_charset($con,'utf8');
 $xServidor = $_SERVER['HTTP_HOST'];
 $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
+//$yEmprid = $_SESSION["i_empreid"];
+//$yUserid = $_SESSION["i_userid"];
+$yEmprid = 1;
+$yUserid = 1;
+
 $xSQL = "SELECT tare_id AS Idtarea, empr_id AS Empid, tare_nombre as SubMenu, tare_ruta AS Ruta, CASE tare_estado WHEN 'A' THEN 'Activo' ";
 $xSQL .= "ELSE 'Inactivo' END AS Estado FROM expert_tarea";
 $expertsubmenu = mysqli_query($con, $xSQL);
 
-if(isset($_POST['guardar'])){
-
-    $xMenu = $_POST['txtMenu'];
-
-    $xSQL ="INSERT INTO `expert_menu` (menu_orden,menu_descripcion,menu_estado,fechacreacion) ";
-    $xSQL .="VALUES (2,'$xMenu','A','$xFecha')";
-    mysqli_query($con, $xSQL);
-    $idmenu = mysqli_insert_id($con);
-
-    if(isset($_POST['sub'])){
-
-        foreach( $_POST['sub'] as $submenu){
-         $xSQL ="INSERT INTO `expert_menu_tarea`(menu_id,tare_id,meta_orden) ";
-         $xSQL .="VALUES ('$idmenu','$submenu',4)";
-         mysqli_query($con, $xSQL);
-        }
-            
-        }else{
-          
-        }
-
-}
 
 
 
@@ -77,11 +60,11 @@ if(isset($_POST['guardar'])){
                     </li>
                     </ul>
         </div>
-        <form class="form mb-15" method="post" id="kt_careers_form" enctype='multipart/form-data'> 
+        <!-- <form class="form mb-15" method="post" id="kt_careers_form" enctype='multipart/form-data'>  -->
             <div class="tab-content" id="myTabContent">
                     <div class="card-header"> 
                         <div class="card-toolbar">
-                            <button type="submit" name="guardar" class="btn btn-light-primary"><i class="las la-save"></i>Guardar</button>
+                            <button type="button" name="guardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $yUserid; ?>)"><i class="las la-save"></i>Guardar</button>
                         </div>
                     </div> 
                 <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
@@ -161,19 +144,23 @@ if(isset($_POST['guardar'])){
                                         ?>
                                         <?php 
                                             if($submenu['Estado'] == 'Activo'){
-                                                $xTextColor = "badge badge-light-success";
+                                                $xTextColor = "badge badge-light-primary";
                                             }else{
                                                 $xTextColor = "badge badge-light-danger";
                                             }
                                         ?>
-                                    <tr>
+                                    <tr id="tr_<?php echo $submenu['Idtarea']; ?>">
                                         <td style="text-align: center;" >
                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input class="form-check-input" name="sub[]" type="checkbox" value="<?php echo $submenu['Idtarea']; ?>" />
+                                                <input class="form-check-input chkSubMenu" name="chkSubMenu" id="chk<?php echo $submenu['Idtarea']; ?>" type="checkbox" value="<?php echo $submenu['Idtarea']; ?>" />
                                             </div>
                                         </td>
                                         <td style="display:none;"><?php echo $submenu['Idtarea']; ?></td>
-                                        <td><?php echo $submenu['SubMenu']; ?></td>
+                                        <td>
+                                            <div id="div_<?php echo $submenu['Idtarea']; ?>" >
+                                               <?php echo $submenu['SubMenu']; ?>
+                                             </div>
+                                        </td>
                                         <td>
                                         <div class="<?php echo $xTextColor; ?>"><?php echo $submenu['Estado']; ?></div>
                                         </td>
@@ -186,8 +173,98 @@ if(isset($_POST['guardar'])){
                     </div>
                 </div>
             </div>
-        </form> 
+        <!-- </form>  -->
    </div>
-
 </div>
+<script>
+
+$(document).ready(function(){
+
+    $(document).on("click",".chkSubMenu",function(){
+        let _rowid = $(this).attr("id");  
+        let _id = _rowid.substring(3);
+        let _div = "div_" + _id; 
+        let _check = $("#chk" + _id).is(":checked");
+        
+        if(_check){
+            $("#"+_div).addClass("badge badge-light-primary");
+        }else{
+            $("#"+_div).removeClass("badge badge-light-primary");
+        }
+
+    });
+
+});
+
+function f_Guardar(_emprid, _userid){
+
+    _menu = $.trim($("#txtMenu").val());
+    _estado = "A";
+    _result=[];
+
+    if(_menu == '')
+    {       
+        mensajesweetalert("center","warning","Ingrese Nombre del Menu..!",false,1800);  
+        return;
+    }
+
+        var _contar = 0;
+
+        var grid = document.getElementById("kt_ecommerce_report_shipping_table");
+        var checkBoxes = grid.getElementsByTagName("input");
+        for (var i = 0; i < checkBoxes.length; i++) {
+            if (checkBoxes[i].checked) {
+                _result.push(checkBoxes[i].value);
+                _contar++
+            }
+        }
+
+         //console.log( _result);
+
+        if(_contar == 0){                        
+            mensajesweetalert("center","warning","Seleccione al menos un opción para el SubMenu",false,1800);
+            return;
+        }
+
+        $parametros = {
+            xxMenu: _menu,
+            xxEmprid: _emprid
+        }   
+
+        var xrespuesta = $.post("codephp/consultar_menu.php", $parametros);
+        xrespuesta.done(function(response) {
+            //console.log(response);
+            if(response == 0){
+
+                $datosMenu = {
+                    xxMenu: _menu,
+                    xxEmprid: _emprid,
+                    xxUserid: _userid,
+                    xxEstado: _estado,
+                    xxResult: _result
+                }
+
+                $.ajax({
+                    url: "codephp/grabar_menu_tarea.php",
+                    type: "POST",
+                    dataType: "json",
+                    data: $datosMenu,          
+                    success: function(data){ 
+                        //console.log(data);
+                        if(data == 'OK'){
+                            $.redirect('?page=seg_menuadmin', {'mensaje': 'Guardado con Exito..!'}); 
+                        }                                                                         
+                    },
+                    error: function (error){
+                        console.log(error);
+                    }                            
+                }); 
+            }else{
+                mensajesweetalert("center","warning","Nombre del Menu ya Existe..!",false,1800);
+            }
+
+        });
+}
+
+</script>     
 

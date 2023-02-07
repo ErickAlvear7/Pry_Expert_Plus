@@ -71,15 +71,20 @@
 					?>
 					<?php 
 
-					if($xMenu == 'Seguridad'){
-						$chkEstado = "disabled";
-					}
+                     $chkEstado = '';
+					 $xDisabledEdit = '';
 
-					if ($menu['Menu'] != 'Seguridad' && $menu['Estado'] == 'Inactivo') {
+					if($xMenu == 'Seguridad'){
+						$chkEstado = 'disabled';
 						$xDisabledEdit = 'disabled';
 					}
+
+					// if ($menu['Menu'] != 'Seguridad' && $menu['Estado'] == 'Inactivo') {
+					// 	$xDisabledEdit = 'disabled';
+					// }
+
 					if($menu['Estado'] == 'Activo'){
-						$xTextColor = "badge badge-light-success";
+						$xTextColor = "badge badge-light-primary";
 					}else{
 						$xTextColor = "badge badge-light-danger";
 					}
