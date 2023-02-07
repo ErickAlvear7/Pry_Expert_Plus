@@ -14,7 +14,7 @@
     mysqli_set_charset($con,'utf8');	    
 
     //$xServidor = $_SERVER['HTTP_HOST'];
-    //$page = isset($_GET['page']) ? $_GET['page'] : "index";
+    $page = isset($_GET['page']) ? $_GET['page'] : "index";
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());    
 
     @session_start();

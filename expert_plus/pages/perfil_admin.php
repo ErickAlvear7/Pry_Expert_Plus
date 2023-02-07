@@ -82,7 +82,7 @@
 					</div>
 				</div>
 				<div class="card-body pt-0">
-					<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
+					<table class="table align-middle table-row-dashed fs-6 gy-5 table-hover" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
 						<thead>
 							<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
                                     <th>Perfil</th>
@@ -105,7 +105,7 @@
                                     $xDisabledEdit = 'disabled';
                                 }
 								if($perfil['Estado'] == 'Activo'){
-									$xTextColor = "badge badge-light-success";
+									$xTextColor = "badge badge-light-primary";
 								}else{
 									$xTextColor = "badge badge-light-danger";
 								}
@@ -116,9 +116,12 @@
 								<td>
 									<div class="text-center">
 										<div class="btn-group">
-											<a href="?page=revisolpn&id=2222" <?php echo $xDisabledEdit ?> id="btnEditar<?php echo $perfil['perf_id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Revisar Solicitud'>
+											<!-- <a href="?page=revisolpn&id=2222" <?php echo $xDisabledEdit ?> id="btnEditar<?php echo $perfil['perf_id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Revisar Solicitud'>
 												<i class='fa fa-edit'></i>
-											</a>																														
+											</a>-->
+											<button <?php echo $xDisabledEdit ?> onclick="f_Editar(<?php echo $perfil['Id']; ?>)" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Perfil'>
+												<i class='fa fa-edit'></i>
+											</button>											
 										</div>
 									</div>
 								</td>
@@ -151,5 +154,10 @@
 				}
 
 			});
+
+			function f_Editar(_perfid){
+				alert(_perfid);
+
+			}
 
 		</script> 
