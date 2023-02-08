@@ -35,7 +35,9 @@
 	}else if($page == 'addperfil'){
 		include __DIR__ . '/../pages/agregar_perfil.php';
 	}else if($page == 'editperfil'){
-			include __DIR__ . '/../pages/editar_perfil.php';			
+			include __DIR__ . '/../pages/editar_perfil.php';
+	}else if($page == 'editmenu'){
+		include __DIR__ . '/../pages/editar_menu.php';						
 	}else{
 		include '_content.php';
 	}

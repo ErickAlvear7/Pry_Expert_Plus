@@ -23,6 +23,9 @@
 	}else if($page == 'editperfil'){
 		$title = 'EDITAR PERFIL';
 		$descripcion = 'Edición Datos del Perfil';
+	}else if('editmenu'){
+		$title = 'EDITAR MENU';
+		$descripcion = 'Edición Datos del Menu';
 	}
 
 ?>	

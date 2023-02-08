@@ -16,6 +16,7 @@
 ?>				
 					
 <div id="kt_content_container" class="container-xxl">
+    <input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
 	<div class="card card-flush">
 		<div class="card-toolbar">
 			<a href="?page=addmenu" class="btn btn-sm btn-light-primary">
@@ -100,9 +101,9 @@
 						<td>
 							<div class="text-center">
 								<div class="btn-group">
-									<a href="?page=revisolpn&id=2222" <?php echo $xDisabledEdit ?> id="btnEditar<?php echo $menu['Idmenu']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Menu'>
+									<button <?php echo $xDisabledEdit ?> onclick="f_Editar(<?php echo $menu['Idmenu']; ?>)" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Perfil'>
 										<i class='fa fa-edit'></i>
-									</a>																															 
+									</button>																															 
 								</div>
 							</div>
 						</td>
@@ -121,6 +122,24 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function(){
+		_mensaje = $('input#mensaje').val();
+
+		if(_mensaje != ''){
+			//mensajesweetalert("center","success",_mensaje+"..!",false,1800);
+			mensajesalertify(_mensaje+"..!","S","top-center",5);
+		}
+	});
+
+	function f_Editar(_idmenu){
+		//alert(_idmenu);
+		$.redirect('?page=editmenu', {'idmenu': _idmenu}); //POR METODO POST
+
+	}
+
+</script> 	
 
 		
 		
