@@ -47,9 +47,6 @@
     $xSql .= "ORDER BY OrdenMenu,OrdenTarea";
 
     $all_perfiles = mysqli_query($con, $xSql);
-    foreach ($all_perfiles as $perfil){
-        $xName = $perfil["Perfil"];
-    }
 	
 ?>	
 

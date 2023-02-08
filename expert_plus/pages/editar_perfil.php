@@ -17,12 +17,13 @@
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());    
 
+    $idperfil = $_POST['idperfil'];
+
     @session_start();
 
     //$yEmprid = $_SESSION["i_empreid"];
     //$yUserid = $_SESSION["i_userid"];
     $yEmprid = 1;
-    $yPerfid = 1;
     $yUserid = 1;
     $xDisabledEdit = "";
     
@@ -35,21 +36,26 @@
         header("Location: ./logout.php");
         exit();
     }*/
+    $xSql = "SELECT per.perf_descripcion AS Perfil,per.perf_observacion AS Observacion, CASE per.perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
+    $xSql .= "FROM `expert_perfil` per WHERE perf_id=" . $idperfil ." AND empr_id=" . $yEmprid;
+    $all_datos = mysqli_query($con, $xSql);
+    foreach ($all_datos as $datperfil){
+        $xPerfil = $datperfil["Perfil"];
+        $xObservacion = $datperfil["Observacion"];
+        $xEstado = $datperfil["Estado"];
+    }    
+
 
     $xSql = "SELECT mta.meta_id AS MentId,men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'NO' AS Ckeck,";
-    $xSql .= "men.menu_orden AS OrdenMenu,tar.tare_orden AS OrdenTarea FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id ";
-    $xSql .= "INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id WHERE men.empr_id=" . $yEmprid . " AND men.menu_estado= 'A' AND tar.tare_estado= 'A'AND mta.meta_id NOT IN ";
-    $xSql .= "(SELECT pmt.meta_id FROM `expert_perfil_menu_tarea` pmt WHERE pmt.perf_id=" . $yPerfid . " AND pmt.empr_id=" . $yEmprid .") UNION SELECT ";
-    $xSql .= "mta.meta_id AS MentId,men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'SI' AS Ckeck,men.menu_orden AS OrdenMenu,";
-    $xSql .= "tar.tare_orden AS OrdenTarea FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id ";
-    $xSql .= "INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id INNER JOIN expert_perfil_menu_tarea pmt ON mta.meta_id=pmt.meta_id ";
-    $xSql .= " WHERE pmt.empr_id=" . $yEmprid . " AND pmt.perf_id=" . $yPerfid . " AND men.menu_estado='A' AND tar.tare_estado='A'";
-    $xSql .= "ORDER BY OrdenMenu,OrdenTarea";
+	$xSql .= "men.menu_orden AS OrdenMenu,tar.tare_orden AS OrdenTarea FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id ";
+    $xSql .= "INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id WHERE men.empr_id=1 AND men.menu_estado= 'A'  AND tar.tare_estado= 'A'AND mta.meta_id NOT IN ";
+	$xSql .= "(SELECT pmt.meta_id FROM `expert_perfil_menu_tarea` pmt WHERE pmt.perf_id=2 AND pmt.empr_id=1) UNION SELECT mta.meta_id AS MentId,";
+	$xSql .= "men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'SI' AS Ckeck,men.menu_orden AS OrdenMenu,tar.tare_orden AS OrdenTarea ";
+	$xSql .= "FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id ";
+    $xSql .= "INNER JOIN `expert_perfil_menu_tarea` pmt ON mta.meta_id=pmt.meta_id WHERE pmt.empr_id=1 AND pmt.perf_id=2 AND men.menu_estado= 'A' AND tar.tare_estado= 'A' ";
+    $xSql .= "ORDER BY OrdenMenu,OrdenTarea;";
 
     $all_perfiles = mysqli_query($con, $xSql);
-    foreach ($all_perfiles as $perfil){
-        $xName = $perfil["Perfil"];
-    }
 	
 ?>	
 
@@ -104,7 +110,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <input type="text" class="form-control form-control-solid" name="txtPerfil" id="txtPerfil" maxlength="150" placeholder="Nombre del Perfil" value="" />
+                                                    <input type="text" class="form-control form-control-solid" name="txtPerfil" id="txtPerfil" maxlength="150" placeholder="Nombre del Perfil" value="<?php echo $xPerfil; ?>" />
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -115,11 +121,27 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <textarea class="form-control form-control-solid text-uppercase" name="txtDescripcion" id="txtDescripcion" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                                                    <textarea class="form-control form-control-solid text-uppercase" name="txtDescripcion" id="txtDescripcion" maxlength="150" onkeydown="return (event.keyCode!=13);" ><?php echo $xObservacion; ?></textarea>
                                                 </div>                                                          
                                             </div>
-                                            <div class="row fv-row mb-7">
 
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-3 text-md-end">
+                                                    <label class="fs-6 fw-bold form-label mt-3">
+                                                        <span>Estado</span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-8 fv-row">
+                                                    <div class="d-flex align-items-center mt-3">
+                                                        <label class="form-check form-check-inline form-check-solid me-5">
+                                                            <input class="form-check-input" name="chkEstado" <?php if($xEstado == 'Activo') { echo "checked='checked'";} ?> type="checkbox" />
+                                                            <span class="fw-bold ps-2 fs-6"><?php echo $xEstado; ?></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row fv-row mb-7">
                                                 <div class="col-md-3 text-md-end">
                                                     <label class="fs-6 fw-bold form-label mt-3">
                                                         <span>Parámetros</span>
@@ -179,15 +201,24 @@
                                                     <?php
                                                         foreach ($all_perfiles as $perfil){    
                                                     ?>
-                                                    <tr id="tr_<?php echo $perfil['MentId']; ?>">
+                                                        <?php
+                                                        
+                                                        if($perfil['Ckeck'] == 'SI'){
+                                                            $xTextColor = "badge badge-light-primary";
+                                                        }else{
+                                                            $xTextColor = "";
+                                                        }
+                                                        ?>                                                    
+                                                    <tr>
                                                         <td style="text-align:center">
                                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input chkTarea" type="checkbox" name="chkTarea" id="chk<?php echo $perfil['MentId']; ?>" value="<?php echo $perfil['MentId']; ?>" />
+                                                                <input class="form-check-input chkTarea" type="checkbox" name="chkTarea" id="chk<?php echo $perfil['MentId']; ?>" <?php if ($perfil['Ckeck'] == 'SI') {
+                                                                     echo "checked='checked'"; } ?> value="<?php echo $perfil['MentId']; ?>" />
                                                             </div>
-                                                        </td>                                                                      
+                                                        </td>                                                                       
                                                         <td><?php echo $perfil['Menu']; ?></td>
                                                         <td>
-                                                            <div id="div_<?php echo $perfil['MentId']; ?>" >
+                                                            <div id="div_<?php echo $perfil['MentId']; ?>" class="<?php  echo $xTextColor; ?>" >
                                                                 <?php echo $perfil['Tarea']; ?>
                                                             </div>
                                                         </td>                                                         

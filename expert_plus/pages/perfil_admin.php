@@ -94,9 +94,7 @@
 						</thead>
 						<tbody class="fw-bold text-gray-600">
                             <?php
-                                if($xName == "Administrador"){
-                                    $chkEstado = "disabled";
-                                }
+
                                 foreach ($all_perfiles as $perfil){    
                             ?>
                             <?php
@@ -121,7 +119,7 @@
 											</a>-->
 											<button <?php echo $xDisabledEdit ?> onclick="f_Editar(<?php echo $perfil['Id']; ?>)" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Perfil'>
 												<i class='fa fa-edit'></i>
-											</button>											
+											</button>
 										</div>
 									</div>
 								</td>
@@ -152,11 +150,11 @@
 					//mensajesweetalert("center","success",_mensaje+"..!",false,1800);
 					mensajesalertify(_mensaje+"..!","S","top-center",5);
 				}
-
 			});
 
 			function f_Editar(_perfid){
 				alert(_perfid);
+				$.redirect('?page=editperfil', {'idperfil': _perfid}); //POR METODO POST
 
 			}
 

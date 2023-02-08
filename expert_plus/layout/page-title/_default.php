@@ -8,18 +8,21 @@
 	if($page == 'index'){
 		$title = 'Inicio';
 		$descripcion = 'Tablero de Control - DASHBOARD';
-	}elseif($page == 'seg_menuadmin'){
+	}else if($page == 'seg_menuadmin'){
 		$title = 'REGISTRO DE MENU';
 		$descripcion = 'Menú de Opciones';
-	}elseif($page == 'seg_perfiladmin'){
+	}else if($page == 'seg_perfiladmin'){
 		$title = 'REGISTRO DE PERFIL';
 		$descripcion = 'Registrar Perfil (Opciones de menú y submenu para el perfil)';
-	}elseif($page == 'addmenu'){
+	}else if($page == 'addmenu'){
 		$title = 'AGREGAR NUEVO MENU';
 		$descripcion = 'Ingrese Datos para crear opción menú';
-	}elseif($page == 'addperfil'){
+	}else if($page == 'addperfil'){
 		$title = 'AGREGAR NUEVO PERFIL';
 		$descripcion = 'Ingrese Datos para crear opción perfil';
+	}else if($page == 'editperfil'){
+		$title = 'EDITAR PERFIL';
+		$descripcion = 'Edición Datos del Perfil';
 	}
 
 ?>	
