@@ -11,7 +11,7 @@
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
 	$xSQL = "SELECT menu_id AS Idmenu, empr_id AS Empid, menu_descripcion as Menu, CASE menu_estado WHEN 'A' THEN 'Activo' ";
-	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM expert_menu";
+	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_menu`";
 	$expertmenu = mysqli_query($con, $xSQL);
 ?>				
 					
