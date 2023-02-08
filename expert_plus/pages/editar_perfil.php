@@ -212,8 +212,8 @@
                                                     <tr>
                                                         <td style="text-align:center">
                                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input chkTarea" type="checkbox" name="chkTarea" id="chk<?php echo $perfil['MentId']; ?>" <?php if ($perfil['Ckeck'] == 'SI') {
-                                                                     echo "checked='checked'"; } ?> value="<?php echo $perfil['MentId']; ?>" />
+                                                                <input class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $perfil['MentId']; ?>" <?php if ($perfil['Ckeck'] == 'SI') {
+                                                                     echo "checked='checked'"; } ?> onchange="f_Perfil(<?php echo $idperfil; ?>,<?php echo $perfil['MentId']; ?>)" />
                                                             </div>
                                                         </td>                                                                       
                                                         <td><?php echo $perfil['Menu']; ?></td>
@@ -234,14 +234,11 @@
                     </div>
                 </div>
                 
-
-
             <script>
 
                 $(document).ready(function(){
 
                     $(document).on("click",".chkTarea",function(){
-                        //let _id = $(this).closest('tr').attr('id');  OBTENER EL ID DEL TR
                         let _rowid = $(this).attr("id");         
                         let _id = _rowid.substring(3);
                         let _div = "div_" + _id;              
@@ -251,44 +248,14 @@
                         }else{
                             $("#"+_div).removeClass("badge badge-light-primary");
                         }                        
-                        //_tarea = $(this).closest("tr").find('td:eq(2)').text();                         
                     });
-                    
-                    // $('#btnGuardar').click(function(){
-                    //     _perfil = $.trim($("#txtPerfil").val());
-                    //     _observacion = $.trim($("#txtDescripcion").val());
-                    //     _estado = "Activo";
-
-                    //     if(_perfil == '')
-                    //     {       
-                    //         //mensajesalertify("Ingrese Nombre del Perfil..!!","W","top-right",3);  
-                    //         mensajesweetalert("center-start","warning","Ingrese Nombre del Perfil..!",false,1800);  
-                    //         return;
-                    //     }
-
-                    //     var i = 0;
-
-                    //     $("input[type=checkbox]:checked").map(function(){
-                    //         if($(this).val() != 'on'){
-                    //             _result[i] = $(this).val();
-                    //             i++;
-                    //         }
-                    //     });
-
-                    //     if(i == 0)
-                    //     {                        
-                    //         mensajesweetalert("center-start","warning","Seleccione al menos un opción Menu/Tareal",false,1800);
-                    //         return;
-                    //     }
-
-                    //     $parametros = {
-
-                    //     }
-
-                    // });                     
-
-
                 }); 
+
+                function f_Perfil(_idperfil, _idmetaid){
+                    let _check = $("#chk" + _idmetaid).is(":checked");
+                    alert(_check);
+                    //alert(_idperfil + ' ' + _idmetaid );
+                }
 
                 function f_Guardar(_emprid, _userid){
                     _perfil = $.trim($("#txtPerfil").val());
@@ -305,25 +272,6 @@
                     var _contar = 0;
 
                     
-                    /*$("input[type=checkbox]:checked").map(function(){
-                        if($(this).val() == 'on'){
-                            _result[i] = $(this).val();
-                            i++;
-                        }
-                    });*/
-
-                    /*var tbl = document.getElementById('kt_ecommerce_report_shipping_table');
-                    var rCount = tbl.rows.length;
-                    var cCount = 1;
-                    var allArray = [];
-                    for (var i = 1; i <rCount; i++){
-                        var rowArray = [];
-                        for (var j = 0; j <cCount; j++){                            
-                            rowArray.push(tbl.rows[i].cells[j].children[0].value);
-                        }
-                        allArray.push(rowArray);
-                    }
-                    console.log(allArray);    */             
 
                     var grid = document.getElementById("kt_ecommerce_report_shipping_table");
                     var checkBoxes = grid.getElementsByTagName("input");
