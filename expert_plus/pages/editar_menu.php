@@ -36,108 +36,108 @@ foreach ($exertmenu as $datmenu){
 ?>
 <div id="kt_content_container" class="container-xxl">
    <div class="card card-flush">
-            <div class="card-toolbar d-flex align-self-end">
-                <a href="?page=seg_menuadmin" class="btn btn-light-primary"><i class="las la-arrow-left"></i>Regresar</a>
-            </div>	
+        <div class="card-toolbar d-flex align-self-end">
+            <a href="?page=seg_menuadmin" class="btn btn-light-primary"><i class="las la-arrow-left"></i>Regresar</a>
+        </div>	
         <div class="card-header">
-                <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
-                    <li class="nav-item">
-                        <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_settings_general">											
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M16.0173 9H15.3945C14.2833 9 13.263 9.61425 12.7431 10.5963L12.154 11.7091C12.0645 11.8781 12.1072 12.0868 12.2559 12.2071L12.6402 12.5183C13.2631 13.0225 13.7556 13.6691 14.0764 14.4035L14.2321 14.7601C14.2957 14.9058 14.4396 15 14.5987 15H18.6747C19.7297 15 20.4057 13.8774 19.912 12.945L18.6686 10.5963C18.1487 9.61425 17.1285 9 16.0173 9Z" fill="currentColor" />
-                                <rect opacity="0.3" x="14" y="4" width="4" height="4" rx="2" fill="currentColor" />
-                                <path d="M4.65486 14.8559C5.40389 13.1224 7.11161 12 9 12C10.8884 12 12.5961 13.1224 13.3451 14.8559L14.793 18.2067C15.3636 19.5271 14.3955 21 12.9571 21H5.04292C3.60453 21 2.63644 19.5271 3.20698 18.2067L4.65486 14.8559Z" fill="currentColor" />
-                                <rect opacity="0.3" x="6" y="5" width="6" height="6" rx="3" fill="currentColor" />
+            <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
+                <li class="nav-item">
+                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_settings_general">											
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M16.0173 9H15.3945C14.2833 9 13.263 9.61425 12.7431 10.5963L12.154 11.7091C12.0645 11.8781 12.1072 12.0868 12.2559 12.2071L12.6402 12.5183C13.2631 13.0225 13.7556 13.6691 14.0764 14.4035L14.2321 14.7601C14.2957 14.9058 14.4396 15 14.5987 15H18.6747C19.7297 15 20.4057 13.8774 19.912 12.945L18.6686 10.5963C18.1487 9.61425 17.1285 9 16.0173 9Z" fill="currentColor" />
+                            <rect opacity="0.3" x="14" y="4" width="4" height="4" rx="2" fill="currentColor" />
+                            <path d="M4.65486 14.8559C5.40389 13.1224 7.11161 12 9 12C10.8884 12 12.5961 13.1224 13.3451 14.8559L14.793 18.2067C15.3636 19.5271 14.3955 21 12.9571 21H5.04292C3.60453 21 2.63644 19.5271 3.20698 18.2067L4.65486 14.8559Z" fill="currentColor" />
+                            <rect opacity="0.3" x="6" y="5" width="6" height="6" rx="3" fill="currentColor" />
+                        </svg>
+                    Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_settings_store">
+                        <span class="svg-icon svg-icon-2 me-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path opacity="0.3" d="M18 10V20C18 20.6 18.4 21 19 21C19.6 21 20 20.6 20 20V10H18Z" fill="currentColor" />
+                                <path opacity="0.3" d="M11 10V17H6V10H4V20C4 20.6 4.4 21 5 21H12C12.6 21 13 20.6 13 20V10H11Z" fill="currentColor" />
+                                <path opacity="0.3" d="M10 10C10 11.1 9.1 12 8 12C6.9 12 6 11.1 6 10H10Z" fill="currentColor" />
+                                <path opacity="0.3" d="M18 10C18 11.1 17.1 12 16 12C14.9 12 14 11.1 14 10H18Z" fill="currentColor" />
+                                <path opacity="0.3" d="M14 4H10V10H14V4Z" fill="currentColor" />
+                                <path opacity="0.3" d="M17 4H20L22 10H18L17 4Z" fill="currentColor" />
+                                <path opacity="0.3" d="M7 4H4L2 10H6L7 4Z" fill="currentColor" />
+                                <path d="M6 10C6 11.1 5.1 12 4 12C2.9 12 2 11.1 2 10H6ZM10 10C10 11.1 10.9 12 12 12C13.1 12 14 11.1 14 10H10ZM18 10C18 11.1 18.9 12 20 12C21.1 12 22 11.1 22 10H18ZM19 2H5C4.4 2 4 2.4 4 3V4H20V3C20 2.4 19.6 2 19 2ZM12 17C12 16.4 11.6 16 11 16H6C5.4 16 5 16.4 5 17C5 17.6 5.4 18 6 18H11C11.6 18 12 17.6 12 17Z" fill="currentColor" />
                             </svg>
-                        Menu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_settings_store">
-                            <span class="svg-icon svg-icon-2 me-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path opacity="0.3" d="M18 10V20C18 20.6 18.4 21 19 21C19.6 21 20 20.6 20 20V10H18Z" fill="currentColor" />
-                                    <path opacity="0.3" d="M11 10V17H6V10H4V20C4 20.6 4.4 21 5 21H12C12.6 21 13 20.6 13 20V10H11Z" fill="currentColor" />
-                                    <path opacity="0.3" d="M10 10C10 11.1 9.1 12 8 12C6.9 12 6 11.1 6 10H10Z" fill="currentColor" />
-                                    <path opacity="0.3" d="M18 10C18 11.1 17.1 12 16 12C14.9 12 14 11.1 14 10H18Z" fill="currentColor" />
-                                    <path opacity="0.3" d="M14 4H10V10H14V4Z" fill="currentColor" />
-                                    <path opacity="0.3" d="M17 4H20L22 10H18L17 4Z" fill="currentColor" />
-                                    <path opacity="0.3" d="M7 4H4L2 10H6L7 4Z" fill="currentColor" />
-                                    <path d="M6 10C6 11.1 5.1 12 4 12C2.9 12 2 11.1 2 10H6ZM10 10C10 11.1 10.9 12 12 12C13.1 12 14 11.1 14 10H10ZM18 10C18 11.1 18.9 12 20 12C21.1 12 22 11.1 22 10H18ZM19 2H5C4.4 2 4 2.4 4 3V4H20V3C20 2.4 19.6 2 19 2ZM12 17C12 16.4 11.6 16 11 16H6C5.4 16 5 16.4 5 17C5 17.6 5.4 18 6 18H11C11.6 18 12 17.6 12 17Z" fill="currentColor" />
-                                </svg>
-                            </span>
-                        Opciones SubMenu</a>
-                    </li>
-                    </ul>
+                        </span>
+                    Opciones SubMenu</a>
+                </li>
+            </ul>
         </div>
-            <div class="tab-content" id="myTabContent">
-                    <div class="card-header"> 
-                        <div class="card-toolbar">
-                            <button type="button" name="guardar" class="btn btn-light-primary" onclick=""><i class="las la-save"></i>Guardar</button>
+        <div class="tab-content" id="myTabContent">
+            <div class="card-header"> 
+                <div class="card-toolbar">
+                    <button type="button" name="guardar" class="btn btn-light-primary" onclick=""><i class="las la-save"></i>Guardar</button>
+                </div>
+            </div> 
+            <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
+                <div class="card-body">
+                    <div class="row fv-row mb-7">
+                        <div class="col-md-2 text-md-end">
+                            <label class="fs-6 fw-bold form-label mt-3">
+                                <span class="required">Menu</span>
+                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Nombre del Menu"></i>
+                            </label>
                         </div>
-                    </div> 
-                <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
-                    <div class="card-body">
-                       <div class="row fv-row mb-7">
-                            <div class="col-md-2 text-md-end">
-                                <label class="fs-6 fw-bold form-label mt-3">
-                                    <span class="required">Menu</span>
-                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Nombre del Menu"></i>
-                                </label>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control form-control-solid" name="txtMenu" id="txtMenu" maxlength="150" value="<?php  echo $xMenu; ?>" />
-                            </div>
-                        </div>
-                        <div class="row fv-row mb-7">
-                            <!-- <div class="col-md-2  text-md-end">
-                                <label class="fs-6 fw-bold form-label mt-3">
-                                    <span>Descripción</span>
-                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripción del Perfil"></i>
-                                </label>
-                            </div>
-                            <div class="col-md-9">
-                                <textarea class="form-control form-control-solid" name="txtDescripcion" id="txtDescripcion" maxlength="255" onkeydown="return (event.keyCode!=13);"></textarea>
-                            </div>                                                           -->
+                        <div class="col-md-9">
+                            <input type="text" class="form-control form-control-solid" name="txtMenu" id="txtMenu" maxlength="150" value="<?php  echo $xMenu; ?>" />
                         </div>
                     </div>
-                </div>
-                <div class="tab-pane fade" id="kt_ecommerce_settings_store" role="tabpanel">
-                   <div class="card">
-                        <div class="card-header border-0 pt-6">                
-                            <div class="card-title">
-                                <div class="d-flex align-items-center position-relative my-1">
-                                    <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
-                                            <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                    <input type="text" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Dato" />
-                                </div>
-                            </div>
-                            <div class="card-toolbar">
-                                <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                                    <div class="w-150px me-3">
-                                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Estado" data-kt-ecommerce-order-filter="status">
-                                            <option></option>
-                                            <option value="all">Todos</option>
-                                            <option value="Activo">Activo</option>
-                                            <option value="Inactivo">Inactivo</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
-                                    <div class="fw-bolder me-5">
-                                    <span class="me-2" data-kt-customer-table-select="selected_count"></span>Selected</div>
-                                    <button type="button" class="btn btn-danger" data-kt-customer-table-select="delete_selected">Delete Selected</button>
-                                </div>
-                            </div>
-                                                
+                    <div class="row fv-row mb-7">
+                        <!-- <div class="col-md-2  text-md-end">
+                            <label class="fs-6 fw-bold form-label mt-3">
+                                <span>Descripción</span>
+                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripción del Perfil"></i>
+                            </label>
                         </div>
-                        <div class="row d-flex justify-content-center">
+                        <div class="col-md-9">
+                            <textarea class="form-control form-control-solid" name="txtDescripcion" id="txtDescripcion" maxlength="255" onkeydown="return (event.keyCode!=13);"></textarea>
+                        </div>                                                           -->
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="kt_ecommerce_settings_store" role="tabpanel">
+                <div class="card">
+                    <div class="card-header border-0 pt-6">                
+                        <div class="card-title">
+                            <div class="d-flex align-items-center position-relative my-1">
+                                <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                        <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <input type="text" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Dato" />
+                            </div>
+                        </div>
+                        <div class="card-toolbar">
+                            <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+                                <div class="w-150px me-3">
+                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Estado" data-kt-ecommerce-order-filter="status">
+                                        <option></option>
+                                        <option value="all">Todos</option>
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
+                                <div class="fw-bolder me-5">
+                                <span class="me-2" data-kt-customer-table-select="selected_count"></span>Selected</div>
+                                <button type="button" class="btn btn-danger" data-kt-customer-table-select="delete_selected">Delete Selected</button>
+                            </div>
+                        </div>
+                                            
+                    </div>
+                    <div class="row d-flex justify-content-center">
                         <div class="card-body pt-0 ">
                             <table class="table align-middle table-row-dashed fs-6 gy-5 table-hover" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
-                               <thead>
+                            <thead>
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 gs-0">
                                         <th>Seleccionar</th>
                                         <th style="display:none;">IdTarea</th>
@@ -146,7 +146,7 @@ foreach ($exertmenu as $datmenu){
                                         <th>Ruta</th>
                                     </tr>
                                 </thead>
-                               <tbody class="fw-bold text-gray-600">
+                            <tbody class="fw-bold text-gray-600">
                                     <tr>
                                         <td style="text-align: center;" >
                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -156,22 +156,23 @@ foreach ($exertmenu as $datmenu){
                                         <td></td>
                                         <td>
                                             <div id="" >
-                                              
-                                             </div>
+                                            
+                                            </div>
                                         </td>
                                         <td>
                                         <div class=""></div>
                                         </td>
                                         <td></td>
                                     </tr>
-                                  
+                                
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-   </div>
+        </div>
+    </div>
 </div>
 <script>
 
