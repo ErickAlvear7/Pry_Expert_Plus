@@ -23,15 +23,22 @@ $idmenu = $_POST['idmenu'];
 
 $xSQL = "SELECT menu_descripcion AS Menu, CASE menu_estado WHEN 'A' THEN 'Activo' ";
 $xSQL .= "ELSE 'Inactivo' END AS Estado FROM expert_menu WHERE menu_id=" . $idmenu ." AND empr_id=" . $yEmprid;
-$exertmenu = mysqli_query($con, $xSQL);
+$expertmenu = mysqli_query($con, $xSQL);
 
-foreach ($exertmenu as $datmenu){
-    $xMenu = $datmenu["Menu"];
-    $xEstado = $datmenu["Estado"];
-}  
+foreach($expertmenu as $menu){
+
+    $xMenu = $menu['Menu'];
+
+}
 
 
 
+$xSQL="SELECT tar.tare_id AS TareaId, 'SI' as Ckeck, tar.tare_nombre AS Tarea, tar.tare_ruta AS Ruta, CASE tar.tare_estado WHEN 'A' THEN 'Activo' ELSE ";
+$xSQL .="'Inactivo' END AS Estado, met.meta_orden AS Orden FROM expert_tarea tar INNER JOIN expert_menu_tarea met ON tar.tare_id=met.tare_id WHERE ";
+$xSQL .="met.menu_id=$idmenu AND tar.empr_id=$yEmprid UNION SELECT tar.tare_id AS TareaId, 'NO' as Ckeck, tar.tare_nombre AS Tarea, tar.tare_ruta AS Ruta, CASE ";
+$xSQL .="tar.tare_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, 50000 AS Orden FROM expert_tarea tar WHERE tar.tare_id NOT IN(SELECT ";
+$xSQL .="met.tare_id FROM expert_menu_tarea met WHERE met.menu_id=$idmenu) AND tar.empr_id=$yEmprid  ORDER BY Orden; ";
+$expertarea = mysqli_query($con, $xSQL);
 
 ?>
 <div id="kt_content_container" class="container-xxl">
@@ -146,25 +153,39 @@ foreach ($exertmenu as $datmenu){
                                         <th>Ruta</th>
                                     </tr>
                                 </thead>
-                            <tbody class="fw-bold text-gray-600">
+                               <tbody class="fw-bold text-gray-600">
+                                    <?php
+                                        foreach ($expertarea as $tareas){    
+                                            $tareaid = $tareas['TareaId'];
+                                    ?>
+                                        <?php
+                                                        
+                                            if($tareas['Ckeck'] == 'SI'){
+                                                $xTextColor = "badge badge-light-primary";
+                                            }else{
+                                                $xTextColor = "";
+                                            }
+                                        ?>     
                                     <tr>
                                         <td style="text-align: center;" >
                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input class="form-check-input" name="chkSubMenu" id="chk" type="checkbox" value="" />
+                                                <input class="form-check-input chkTarea" id="chk<?php echo $tareas['TareaId']; ?>" <?php if ($tareas['Ckeck'] == 'SI') {
+                                                    echo "checked='checked'"; } ?> onchange="f_Menu(<?php echo $tareaid; ?>,<?php echo $idmenu; ?>)"/>
                                             </div>
                                         </td>
-                                        <td></td>
+                                        <td style="display:none;"><?php echo $tareas['TareaId']; ?></td>
                                         <td>
-                                            <div id="" >
-                                            
+                                            <div>
+                                               <?php echo $tareas['Tarea']; ?>
                                             </div>
                                         </td>
                                         <td>
-                                        <div class=""></div>
+                                           <div class="<?php echo $xTextColor; ?>"><?php echo $tareas['Estado']; ?></div>
                                         </td>
-                                        <td></td>
+                                        <td><?php echo $tareas['Ruta']; ?></td>
                                     </tr>
-                                
+                                    <?php }
+                                    ?>    
                                 </tbody>
                             </table>
                         </div>
