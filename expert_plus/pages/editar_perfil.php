@@ -135,8 +135,8 @@
                                                 <div class="col-lg-8 fv-row">
                                                     <div class="d-flex align-items-center mt-3">
                                                         <label class="form-check form-check-inline form-check-solid me-5">
-                                                            <input class="form-check-input" name="chkEstado" <?php if($xEstado == 'Activo') { echo "checked='checked'";} ?> type="checkbox" />
-                                                            <span class="fw-bold ps-2 fs-6"><?php echo $xEstado; ?></span>
+                                                            <input class="form-check-input" id="chkEstado" name="chkEstado" onchange="f_ChkEstado()" <?php if($xEstado == 'Activo') { echo "checked='checked'";} ?> type="checkbox" />
+                                                            <span id="SpanTxt" class="fw-bold ps-2 fs-6"><?php echo $xEstado; ?></span>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -239,6 +239,14 @@
 
                 $(document).ready(function(){
 
+                    _nameoldperfil = $.trim($("#txtPerfil").val());
+
+                    if($("#chkEstado").is(":checked")){
+                        _estado = "A";
+                    }else{
+                        _estado = "I";
+                    }
+
                     $(document).on("click",".chkTarea",function(){
                         let _rowid = $(this).attr("id");         
                         let _id = _rowid.substring(3);
@@ -252,10 +260,19 @@
                     });
                 }); 
 
+                function f_ChkEstado(){
+                    if($("#chkEstado").is(":checked")){
+                        _estado = "A";
+                        document.getElementById("SpanTxt").innerHTML = "Activo";
+                    }else{
+                        _estado = "I";
+                        document.getElementById("SpanTxt").innerHTML = "Inactivo";
+                    }                    
+                }
+
                 function f_Perfil(_idperfil, _idmeta, _emprid){
                     let _check = $("#chk" + _idmeta).is(":checked");
                     let _tipo = "";
-                    alert(_check);
 
                     if(_check){
                         _tipo = "Add";
@@ -281,8 +298,8 @@
                 function f_Guardar(_emprid, _userid){
                     _perfil = $.trim($("#txtPerfil").val());
                     _observacion = $.trim($("#txtDescripcion").val());
-                    _estado = "A";
-                    _result=[];
+                    //_estado = "A";
+                    //_result=[];
 
                     if(_perfil == '')
                     {       
@@ -291,13 +308,14 @@
                     }
 
                     var _contar = 0;
+                    var _continuar = true;
 
                     var grid = document.getElementById("kt_ecommerce_report_shipping_table");
                     var checkBoxes = grid.getElementsByTagName("input");
                     for (var i = 0; i < checkBoxes.length; i++) {
                         if (checkBoxes[i].checked) {
                             //var row = checkBoxes[i].parentNode.parentNode;
-                            _result.push(checkBoxes[i].value);
+                            //_result.push(checkBoxes[i].value);
                             _contar++
                         }
                     }
@@ -309,45 +327,54 @@
                         return;
                     }
 
-                    $parametros = {
-                        xxPerfil: _perfil,
-                        xxEmprid: _emprid
-                    }      
-                    
-                    var xrespuesta = $.post("codephp/consultar_perfil.php", $parametros);
-                    xrespuesta.done(function(response){
-                        console.log(response);
-                        if(response == 0){
+                    if(_perfil != _nameoldperfil){
 
-                            $datosperfil = {
-                                xxPerfil: _perfil,
-                                xxEmprid: _emprid,
-                                xxUserid: _userid,
-                                xxObservacion: _observacion,
-                                xxEstado: _estado,
-                                xxResult: _result
+                        $parametros = {
+                            xxPerfil: _perfil,
+                            xxEmprid: _emprid
+                        }      
+                    
+                        var xrespuesta = $.post("codephp/consultar_perfil.php", $parametros);
+                        xrespuesta.done(function(response){
+                            if(response == 0){
+                                _continuar = true;
+                            }else{
+                                mensajesweetalert("center","warning","Nombre del Perfil ya Existe..!",false,1800);
+                                _continuar = false;
+                                return false;
+                            }
+                        });
+
+                    }
+
+                    if(_continuar){
+    
+                        $datosperfil = {
+                            xxPerfil: _perfil,
+                            xxEmprid: _emprid,
+                            xxUserid: _userid,
+                            xxObservacion: _observacion,
+                            xxEstado: _estado,
                             }
 
-                            $.ajax({
-                                url: "codephp/grabar_perfil.php",
-                                type: "POST",
-                                dataType: "json",
-                                data: $datosperfil,          
-                                success: function(data){ 
-                                    console.log(data);
-                                    if(data == 'OK'){
-                                        $.redirect('?page=seg_perfiladmin', {'mensaje': 'Guardado con Exito..!'}); 
-                                    }                                                                         
-                                },
-                                error: function (error){
-                                    console.log(error);
-                                }                            
-                            }); 
-                        }else{
-                            mensajesweetalert("center","warning","Nombre del Perfil ya Existe..!",false,1800);
-                        }
+                        $.ajax({
+                            url: "codephp/grabar_perfil.php",
+                            type: "POST",
+                            dataType: "json",
+                            data: $datosperfil,          
+                            success: function(data){ 
+                                console.log(data);
+                                if(data == 'OK'){
+                                    $.redirect('?page=seg_perfiladmin', {'mensaje': 'Guardado con Exito..!'}); 
+                                }                                                                         
+                            },
+                            error: function (error){
+                                console.log(error);
+                            }
+                        }); 
 
-                    });
+                    }
+
                 }
 
 
