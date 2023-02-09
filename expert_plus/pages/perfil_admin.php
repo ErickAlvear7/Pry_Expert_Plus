@@ -34,7 +34,7 @@
     }*/
 
     $xSql = "SELECT per.perf_id AS Id,per.perf_descripcion AS Perfil,per.perf_observacion AS Descripcion,CASE per.perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
-    $xSql .= "FROM `expert_perfil` per WHERE per.empr_id=" . $yEmprid;
+    $xSql .= "FROM `expert_perfil` per WHERE per.empr_id=$yEmprid";
 
     $all_perfiles = mysqli_query($con, $xSql);
     foreach ($all_perfiles as $perfil){
@@ -99,13 +99,16 @@
                             ?>
                             <?php
                             
-                                if ($perfil['Perfil'] != 'Administrador' && $perfil['Estado'] == 'Inactivo') {
+								$xDisabledEdit = '';
+
+                                if ($perfil['Estado'] == 'Inactivo') {
                                     $xDisabledEdit = 'disabled';
                                 }
+
 								if($perfil['Estado'] == 'Activo'){
-									$xTextColor = "badge badge-light-primary";
+									$xTextColor = 'badge badge-light-primary';
 								}else{
-									$xTextColor = "badge badge-light-danger";
+									$xTextColor = 'badge badge-light-danger';
 								}
                             ?>
 							<tr>
@@ -117,19 +120,19 @@
 											<!-- <a href="?page=revisolpn&id=2222" <?php echo $xDisabledEdit ?> id="btnEditar<?php echo $perfil['perf_id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Revisar Solicitud'>
 												<i class='fa fa-edit'></i>
 											</a>-->
-											<button <?php echo $xDisabledEdit ?> onclick="f_Editar(<?php echo $perfil['Id']; ?>)" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Perfil'>
+											<button <?php echo $xDisabledEdit ?> onclick="f_Editar(<?php echo $perfil['Id']; ?>)" id="btnEdit<?php echo $perfil['Id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Perfil'>
 												<i class='fa fa-edit'></i>
 											</button>
 										</div>
 									</div>
 								</td>
-								<td>
-									<div class="<?php  echo $xTextColor; ?>"><?php echo $perfil['Estado']; ?></div>
+								<td id="td<?php echo $perfil['Id']; ?>">
+									<div class="<?php echo $xTextColor; ?>"><?php echo $perfil['Estado']; ?></div>
 								</td>								
                                 <td style="text-align:center">
 									<div class="form-check form-check-sm form-check-custom form-check-solid">
-										<input class="form-check-input" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
-											echo "checked";} else {'';} ?> value="<?php echo $perfil['Id']; ?>" />
+										<input class="form-check-input" type="checkbox" id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
+											echo "checked='checked'";} else {'';} ?> onchange="f_Check(<?php echo $yEmprid; ?>,<?php echo $perfil['Id']; ?>)" value="<?php echo $perfil['Id']; ?>" />
 									</div>
                                 </td>                                                           
 							</tr>
@@ -147,14 +150,46 @@
 				_mensaje = $('input#mensaje').val();
 
 				if(_mensaje != ''){
-					//mensajesweetalert("center","success",_mensaje+"..!",false,1800);
 					mensajesalertify(_mensaje+"..!","S","top-center",5);
 				}
+
 			});
 
 			function f_Editar(_perfid){
-				alert(_perfid);
 				$.redirect('?page=editperfil', {'idperfil': _perfid}); //POR METODO POST
+			}
+
+			function f_Check(_emprid, _perfid){
+				let _div = "div_" + _perfid;              
+				let _check = $("#chk" + _perfid).is(":checked");
+				let _btn = "btnEdit" + _perfid;
+				let _td = "td" + _perfid;
+
+				if(_check){
+					//$("#"+_div).removeClass("badge badge-light-danger");
+					//$("#"+_div).addClass("badge badge-light-primary");
+					document.getElementById(_btn).disabled = false;
+					document.getElementById(_td).innerHTML  = "<div class='badge badge-light-primary'>Activo</div>";
+					_tipo = "Activo";
+				}else{
+					//$("#"+_div).removeClass("badge badge-light-primary");
+					//$("#"+_div).addClass("badge badge-light-danger");
+					document.getElementById(_btn).disabled = true;
+					document.getElementById(_td).innerHTML  = "<div class='badge badge-light-danger'>Inactivo</div>";
+					_tipo = "Inactivo";
+				}
+
+				$parametros = {
+                        xxIdPerfil: _perfid,
+                        xxIdMeta: 0,
+                        xxEmprid: _emprid,
+                        xxTipo: _tipo                    
+                    }				
+				
+				var xrespuesta = $.post("codephp/delnew_perfil.php", $parametros);
+				xrespuesta.done(function(response){
+					console.log(response);
+				});				
 
 			}
 

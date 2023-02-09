@@ -37,7 +37,7 @@
         exit();
     }*/
     $xSql = "SELECT per.perf_descripcion AS Perfil,per.perf_observacion AS Observacion, CASE per.perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
-    $xSql .= "FROM `expert_perfil` per WHERE perf_id=" . $idperfil ." AND empr_id=" . $yEmprid;
+    $xSql .= "FROM `expert_perfil` per WHERE perf_id=$idperfil AND empr_id=$yEmprid";
     $all_datos = mysqli_query($con, $xSql);
     foreach ($all_datos as $datperfil){
         $xPerfil = $datperfil["Perfil"];
@@ -48,11 +48,11 @@
 
     $xSql = "SELECT mta.meta_id AS MentId,men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'NO' AS Ckeck,";
 	$xSql .= "men.menu_orden AS OrdenMenu,tar.tare_orden AS OrdenTarea FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id ";
-    $xSql .= "INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id WHERE men.empr_id=1 AND men.menu_estado= 'A'  AND tar.tare_estado= 'A'AND mta.meta_id NOT IN ";
-	$xSql .= "(SELECT pmt.meta_id FROM `expert_perfil_menu_tarea` pmt WHERE pmt.perf_id=2 AND pmt.empr_id=1) UNION SELECT mta.meta_id AS MentId,";
+    $xSql .= "INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id WHERE men.empr_id=$yEmprid AND men.menu_estado='A' AND tar.tare_estado='A' AND mta.meta_id NOT IN ";
+	$xSql .= "(SELECT pmt.meta_id FROM `expert_perfil_menu_tarea` pmt WHERE pmt.perf_id=$idperfil AND pmt.empr_id=1) UNION SELECT mta.meta_id AS MentId,";
 	$xSql .= "men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'SI' AS Ckeck,men.menu_orden AS OrdenMenu,tar.tare_orden AS OrdenTarea ";
 	$xSql .= "FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id ";
-    $xSql .= "INNER JOIN `expert_perfil_menu_tarea` pmt ON mta.meta_id=pmt.meta_id WHERE pmt.empr_id=1 AND pmt.perf_id=2 AND men.menu_estado= 'A' AND tar.tare_estado= 'A' ";
+    $xSql .= "INNER JOIN `expert_perfil_menu_tarea` pmt ON mta.meta_id=pmt.meta_id WHERE pmt.empr_id=$yEmprid AND pmt.perf_id=$idperfil AND men.menu_estado= 'A' AND tar.tare_estado= 'A' ";
     $xSql .= "ORDER BY OrdenMenu,OrdenTarea;";
 
     $all_perfiles = mysqli_query($con, $xSql);
@@ -93,14 +93,15 @@
                                 </li>
                             </ul>
                         </div>
-                                    <div class="card-header"> 
-                                        <div class="card-toolbar">
-                                            <button type="button" id="btnGuardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $yUserid; ?>)"><i class="las la-save"></i>Guardar</button>
-                                        </div>
-                                    </div>                              
                         
                             <div class="tab-content" id="myTabContent">                                                                            
                                 <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel"> 
+                                        <div class="card-header"> 
+                                            <div class="card-toolbar">
+                                                <button type="button" id="btnGuardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $yUserid; ?>)"><i class="las la-save"></i>Guardar</button>
+                                            </div>
+                                        </div>
+
                                         <div class="card-body pt-0">													
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-3 text-md-end">
@@ -213,7 +214,7 @@
                                                         <td style="text-align:center">
                                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                                 <input class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $perfil['MentId']; ?>" <?php if ($perfil['Ckeck'] == 'SI') {
-                                                                     echo "checked='checked'"; } ?> onchange="f_Perfil(<?php echo $idperfil; ?>,<?php echo $perfil['MentId']; ?>)" />
+                                                                     echo "checked='checked'"; } ?> onchange="f_Perfil(<?php echo $idperfil; ?>, <?php echo $perfil['MentId']; ?>, <?php echo $yEmprid; ?>)" />
                                                             </div>
                                                         </td>                                                                       
                                                         <td><?php echo $perfil['Menu']; ?></td>
@@ -251,10 +252,30 @@
                     });
                 }); 
 
-                function f_Perfil(_idperfil, _idmetaid){
-                    let _check = $("#chk" + _idmetaid).is(":checked");
+                function f_Perfil(_idperfil, _idmeta, _emprid){
+                    let _check = $("#chk" + _idmeta).is(":checked");
+                    let _tipo = "";
                     alert(_check);
-                    //alert(_idperfil + ' ' + _idmetaid );
+
+                    if(_check){
+                        _tipo = "Add";
+                    }else{
+                        _tipo = "Del";
+                    }
+
+                    $parametros = {
+                        xxIdPerfil: _idperfil,
+                        xxIdMeta: _idmeta,
+                        xxEmprid: _emprid,
+                        xxTipo: _tipo                    
+                    }
+
+                    var xrespuesta = $.post("codephp/delnew_perfil.php", $parametros);
+                    xrespuesta.done(function(response){
+                        console.log(response);
+
+                    });
+
                 }
 
                 function f_Guardar(_emprid, _userid){
@@ -271,8 +292,6 @@
 
                     var _contar = 0;
 
-                    
-
                     var grid = document.getElementById("kt_ecommerce_report_shipping_table");
                     var checkBoxes = grid.getElementsByTagName("input");
                     for (var i = 0; i < checkBoxes.length; i++) {
@@ -285,8 +304,6 @@
 
                     //debugger;
 
-                    //console.log( _result);
-
                     if(_contar == 0){                        
                         mensajesweetalert("center","warning","Seleccione al menos un opción Menu/Tarea",false,1800);
                         return;
@@ -298,7 +315,7 @@
                     }      
                     
                     var xrespuesta = $.post("codephp/consultar_perfil.php", $parametros);
-                    xrespuesta.done(function(response) {
+                    xrespuesta.done(function(response){
                         console.log(response);
                         if(response == 0){
 
