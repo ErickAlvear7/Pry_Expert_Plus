@@ -175,9 +175,9 @@ $expertarea = mysqli_query($con, $xSQL);
                                         </td>
                                         <td style="display:none;"><?php echo $tareas['TareaId']; ?></td>
                                         <td>
-                                            <div>
+                                            <div id="div_<?php echo $tareas['TareaId']; ?>" >
                                                <?php echo $tareas['Tarea']; ?>
-                                            </div>
+                                             </div>
                                         </td>
                                         <td>
                                            <div class="<?php echo $xTextColor; ?>"><?php echo $tareas['Estado']; ?></div>
@@ -197,7 +197,27 @@ $expertarea = mysqli_query($con, $xSQL);
 </div>
 <script>
 
+$(document).ready(function(){
 
+    $(document).on("click",".chkTarea",function(){
+        let _rowid = $(this).attr("id");         
+        let _id = _rowid.substring(3);
+        //alert(_id);
+        let _div = "div_" + _id;              
+        let _check = $("#chk" + _id).is(":checked");
+        if(_check){
+            $("#"+_div).addClass("badge badge-light-primary");
+        }else{
+            $("#"+_div).removeClass("badge badge-light-primary");
+        }                        
+    });
+}); 
+
+function f_Menu(_idtarea, _idmenu){
+    let _check = $("#chk" + _idtarea).is(":checked");
+    alert(_check);
+    //alert(_idperfil + ' ' + _idmetaid );
+}
 
 </script>     
 
