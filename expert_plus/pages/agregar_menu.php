@@ -79,15 +79,15 @@
                             </div>
                         </div>
                         <div class="row fv-row mb-7">
-                            <!-- <div class="col-md-2  text-md-end">
+                            <div class="col-md-2  text-md-end">
                                 <label class="fs-6 fw-bold form-label mt-3">
                                     <span>Descripción</span>
                                     <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripción del Perfil"></i>
                                 </label>
                             </div>
                             <div class="col-md-9">
-                                <textarea class="form-control form-control-solid" name="txtDescripcion" id="txtDescripcion" maxlength="255" onkeydown="return (event.keyCode!=13);"></textarea>
-                            </div>                                                           -->
+                                <textarea class="form-control form-control-solid" name="txtDescripcion" id="txtDescripcion" maxlength="255" onkeydown="return (event.keyCode!=13);" placeholder="Opcional"></textarea>
+                            </div>                                                          
                         </div>
                     </div>
                 </div>
@@ -197,6 +197,7 @@ $(document).ready(function(){
 function f_Guardar(_emprid, _userid){
 
     _menu = $.trim($("#txtMenu").val());
+    _observacion = $.trim($("#txtDescripcion").val());
     _estado = "A";
     _result=[];
 
@@ -236,6 +237,7 @@ function f_Guardar(_emprid, _userid){
 
                 $datosMenu = {
                     xxMenu: _menu,
+                    xxObserva: _observacion,
                     xxEmprid: _emprid,
                     xxUserid: _userid,
                     xxEstado: _estado,

@@ -15,19 +15,20 @@ $data = "ERROR";
 if(isset($_POST['xxMenu']) and isset($_POST['xxEmprid']) and isset($_POST['xxResult'])){
     if(isset($_POST['xxMenu']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxResult']) <> ''){
         $yEmprid = $_POST['xxEmprid'];
-        $xMenu = safe($_POST['xxMenu']); 
+        $xMenu = safe($_POST['xxMenu']);
+        $xObservacion = safe($_POST['xxObserva']);
         $yUserid = $_POST['xxUserid']; 
         $xResult = $_POST['xxResult']; 
         $xEstado =  $_POST['xxEstado'];
 
-        $xSQL ="INSERT INTO `expert_menu` (empr_id,menu_orden,menu_descripcion,menu_estado,fechacreacion,usuariocreacion,terminalcreacion) ";
-        $xSQL .="VALUES ($yEmprid,2,'$xMenu','$xEstado','{$xFecha}',$yUserid,'$xTerminal')";
+        $xSQL ="INSERT INTO `expert_menu` (empr_id,menu_orden,menu_descripcion,menu_observacion,menu_estado,fechacreacion,usuariocreacion,terminalcreacion) ";
+        $xSQL .="VALUES ($yEmprid,2,'$xMenu','$xObservacion','$xEstado','{$xFecha}',$yUserid,'$xTerminal')";
         if(mysqli_query($con, $xSQL)){
             $idmenu = mysqli_insert_id($con);
 
             foreach( $xResult as $submenu){
                 $xSQL ="INSERT INTO `expert_menu_tarea`(menu_id,empr_id,tare_id,meta_orden) ";
-                $xSQL .="VALUES ($idmenu,'$submenu',4)";
+                $xSQL .="VALUES ($idmenu,$yEmprid,'$submenu',4)";
                 mysqli_query($con, $xSQL);
             }
     

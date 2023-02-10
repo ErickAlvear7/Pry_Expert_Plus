@@ -10,7 +10,7 @@
 	$xServidor = $_SERVER['HTTP_HOST'];
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
-	$xSQL = "SELECT menu_id AS Idmenu, empr_id AS Empid, menu_descripcion as Menu, CASE menu_estado WHEN 'A' THEN 'Activo' ";
+	$xSQL = "SELECT menu_id AS Idmenu, empr_id AS Empid, menu_descripcion AS Menu, menu_observacion AS Observacion, CASE menu_estado WHEN 'A' THEN 'Activo' ";
 	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_menu`";
 	$expertmenu = mysqli_query($con, $xSQL);
 ?>				
@@ -57,11 +57,11 @@
 				<thead>
 					<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
 						<th style="display:none;">Idmenu</th>
-						<th style="display:none;">Idemp</th>
 						<th style="width: 30px;">Menu</th>
+						<th style="width: 30px;">Descripcion</th>
 						<th style="width: 30px;">Estado</th>
 						<th style="width: 30px; text-align:center;">Opciones</th>
-						<th style="width: 10px;">Acción</th>
+						<th style="width: 10px;">Status</th>
 					</tr>
 				</thead>
 				<tbody class="fw-bold text-gray-600">
@@ -93,8 +93,8 @@
 					?>
 					<tr>
 						<td style="display:none;"><?php echo $menu['Idmenu']; ?></td>
-						<td style="display:none;"><?php echo $menu['Empid']; ?></td>
 						<td><?php echo $menu['Menu']; ?></td>
+						<td><?php echo $menu['Observacion']; ?></td>
 						<td>
 						   <div class="<?php  echo $xTextColor; ?>"><?php echo $menu['Estado']; ?></div>
 						</td>

@@ -21,12 +21,13 @@
     $idmenu = $_POST['idmenu'];
 
 
-    $xSQL = "SELECT menu_descripcion AS Menu, CASE menu_estado WHEN 'A' THEN 'Activo' ";
-    $xSQL .= "ELSE 'Inactivo' END AS Estado FROM expert_menu WHERE menu_id=$idmenu AND empr_id=$yEmprid";
+    $xSQL = "SELECT menu_descripcion AS Menu, menu_observacion AS Observacion, CASE menu_estado WHEN 'A' THEN 'Activo' ";
+    $xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_menu` WHERE menu_id=$idmenu AND empr_id=$yEmprid";
     $expertmenu = mysqli_query($con, $xSQL);
 
     foreach($expertmenu as $menu){
         $xMenu = $menu['Menu'];
+        $xObservacion = $menu['Observacion'];
     }
 
     $xSQL="SELECT tar.tare_id AS TareaId, 'SI' as Ckeck, tar.tare_nombre AS Tarea, tar.tare_ruta AS Ruta, CASE tar.tare_estado WHEN 'A' THEN 'Activo' ELSE ";
@@ -93,15 +94,15 @@
                         </div>
                     </div>
                     <div class="row fv-row mb-7">
-                        <!-- <div class="col-md-2  text-md-end">
+                        <div class="col-md-2  text-md-end">
                             <label class="fs-6 fw-bold form-label mt-3">
                                 <span>Descripción</span>
-                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripción del Perfil"></i>
+                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripción del Menu"></i>
                             </label>
                         </div>
                         <div class="col-md-9">
-                            <textarea class="form-control form-control-solid" name="txtDescripcion" id="txtDescripcion" maxlength="255" onkeydown="return (event.keyCode!=13);"></textarea>
-                        </div>                                                           -->
+                            <textarea class="form-control form-control-solid" name="txtDescripcion" id="txtDescripcion" maxlength="200" onkeydown="return (event.keyCode!=13);" value="<?php echo $xObservacion; ?>"><?php echo $xObservacion; ?></textarea>
+                        </div>                                                          
                     </div>
                 </div>
             </div>
