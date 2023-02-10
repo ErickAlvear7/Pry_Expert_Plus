@@ -80,10 +80,6 @@
 						$xDisabledEdit = 'disabled';
 					}
 
-					// if ($menu['Menu'] != 'Seguridad' && $menu['Estado'] == 'Inactivo') {
-					// 	$xDisabledEdit = 'disabled';
-					// }
-
 					if($menu['Estado'] == 'Activo'){
 						$xTextColor = "badge badge-light-primary";
 					}else{
@@ -134,7 +130,6 @@
 	});
 
 	function f_Editar(_idmenu){
-		//alert(_idmenu);
 		$.redirect('?page=editmenu', {'idmenu': _idmenu}); //POR METODO POST
 
 	}

@@ -75,12 +75,12 @@
             </ul>
         </div>
         <div class="tab-content" id="myTabContent">
-            <div class="card-header"> 
-                <div class="card-toolbar">
-                    <button type="button" name="guardar" class="btn btn-light-primary" onclick=""><i class="las la-save"></i>Guardar</button>
-                </div>
-            </div> 
             <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
+                <div class="card-header"> 
+                    <div class="card-toolbar">
+                        <button type="button" name="editar" id="editar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $yUserid; ?>)"><i class="las la-save"></i>Guardar</button>
+                    </div>
+                </div> 
                 <div class="card-body">
                     <div class="row fv-row mb-7">
                         <div class="col-md-2 text-md-end">
@@ -90,6 +90,7 @@
                             </label>
                         </div>
                         <div class="col-md-9">
+                            <input type="hidden" class="form-control form-control-solid" name="txtIdMenu" id="txtIdMenu" maxlength="150" value="<?php  echo $idmenu; ?>" />
                             <input type="text" class="form-control form-control-solid" name="txtMenu" id="txtMenu" maxlength="150" value="<?php  echo $xMenu; ?>" />
                         </div>
                     </div>
@@ -169,19 +170,19 @@
                                     <tr>
                                         <td style="text-align: center;" >
                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $tareas['TareaId']; ?>" <?php echo $Checked; ?> onchange="f_Menu(<?php echo $tareaid; ?>,<?php echo $idmenu; ?>)"/>
+                                                <input class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $tareas['TareaId']; ?>" <?php echo $Checked; ?> onchange="f_Menu(<?php echo $tareaid; ?>,<?php echo $idmenu; ?>,<?php echo $yEmprid; ?>)"/>
                                             </div>
                                         </td>
 
                                         <td style="display:none;"><?php echo $tareas['TareaId']; ?></td>
                                         
                                         <td>
-                                            <div id="div_<?php echo $tareas['TareaId']; ?>" >
+                                            <div id="div_<?php echo $tareas['TareaId']; ?>" class="<?php  echo $xTextColor; ?>" >
                                                <?php echo $tareas['Tarea']; ?>
                                              </div>
                                         </td>
                                         <td>
-                                           <div class="<?php echo $xTextColor; ?>"><?php echo $tareas['Estado']; ?></div>
+                                           <div  id="est_<?php echo $tareas['TareaId']; ?>" class="<?php echo $xTextColor; ?>"><?php echo $tareas['Estado']; ?></div>
                                         </td>
                                         <td><?php echo $tareas['Ruta']; ?></td>
                                     </tr>
@@ -203,7 +204,6 @@ $(document).ready(function(){
     $(document).on("click",".chkTarea",function(){
         let _rowid = $(this).attr("id");         
         let _id = _rowid.substring(3);
-        //alert(_id);
         let _div = "div_" + _id;              
         let _check = $("#chk" + _id).is(":checked");
         if(_check){
@@ -212,12 +212,89 @@ $(document).ready(function(){
             $("#"+_div).removeClass("badge badge-light-primary");
         }                        
     });
+
+
 }); 
 
-function f_Menu(_idtarea, _idmenu){
+function f_Menu(_idtarea, _idmenu, _idempr){
     let _check = $("#chk" + _idtarea).is(":checked");
-    alert(_check);
-    //alert(_idperfil + ' ' + _idmetaid );
+
+    let _tipo = "";
+
+    if(_check){
+        _tipo = "Add";
+    }else{
+        _tipo = "Del";
+    }
+
+    $parametros = {
+        xxIdTarea: _idtarea,
+        xxIdMenu: _idmenu,
+        xxEmprid: _idempr,
+        xxTipo: _tipo                    
+    }
+
+    var xrespuesta = $.post("codephp/delnew_menu.php", $parametros);
+    xrespuesta.done(function(response){
+        console.log(response);
+
+    });
+
+}
+
+function f_Guardar(_emprid, _userid){
+
+    _idmenu = $('#txtIdMenu').val();
+    _menu = $.trim($("#txtMenu").val());
+    _observacion = $.trim($("#txtDescripcion").val());
+
+  
+    if(_menu == '')
+    {       
+        mensajesweetalert("center","warning","Ingrese Nombre del Menu..!",false,1800);  
+        return;
+    }
+
+    $parametros = {
+        xxMenu: _menu,
+        xxEmprid: _emprid
+        
+    }  
+
+    var xrespuesta = $.post("codephp/consultar_menu.php", $parametros);
+    xrespuesta.done(function(response) {
+        //console.log(response);
+        if(response == 0){
+
+            $datosMenu = {
+                xxMenu: _menu,
+                xxObserva: _observacion,
+                xxEmprid: _emprid,
+                xxUsuario: _userid,
+                xxIdMenu: _idmenu
+            }
+
+            $.ajax({
+                url: "codephp/update_menu.php",
+                type: "POST",
+                dataType: "json",
+                data: $datosMenu,          
+                success: function(data){ 
+                    //console.log(data);
+                    if(data == 'OK'){
+                        $.redirect('?page=seg_menuadmin', {'mensaje': 'Actualizado con Exito..!'}); 
+                    }                                                                         
+                },
+                error: function (error){
+                    console.log(error);
+                }                            
+            }); 
+        }else{
+            mensajesweetalert("center","warning","Nombre del Menu ya Existe..!",false,1800);
+        }
+
+    });
+
 }
 
 </script>     
