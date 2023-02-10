@@ -1,30 +1,28 @@
 <?php 
 
-//error_reporting(E_ALL);
-ini_set('display_errors', 0);
+    //error_reporting(E_ALL);
+    ini_set('display_errors', 0);
 
-require_once("dbcon/config.php");
-require_once("dbcon/functions.php");
+    require_once("dbcon/config.php");
+    require_once("dbcon/functions.php");
 
-mysqli_query($con,'SET NAMES utf8');  
-mysqli_set_charset($con,'utf8');	
+    mysqli_query($con,'SET NAMES utf8');  
+    mysqli_set_charset($con,'utf8');	
 
-$xServidor = $_SERVER['HTTP_HOST'];
-$xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
+    $xServidor = $_SERVER['HTTP_HOST'];
+    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
-//$yEmprid = $_SESSION["i_empreid"];
-//$yUserid = $_SESSION["i_userid"];
-$yEmprid = 1;
-$yUserid = 1;
+    //$yEmprid = $_SESSION["i_empreid"];
+    //$yUserid = $_SESSION["i_userid"];
+    $yEmprid = 1;
+    $yUserid = 1;
 
-$xSQL = "SELECT tare_id AS Idtarea, empr_id AS Empid, tare_nombre as SubMenu, tare_ruta AS Ruta, CASE tare_estado WHEN 'A' THEN 'Activo' ";
-$xSQL .= "ELSE 'Inactivo' END AS Estado FROM expert_tarea";
-$expertsubmenu = mysqli_query($con, $xSQL);
-
-
-
+    $xSQL = "SELECT tare_id AS Idtarea, empr_id AS Empid, tare_nombre as SubMenu, tare_ruta AS Ruta, CASE tare_estado WHEN 'A' THEN 'Activo' ";
+    $xSQL .= "ELSE 'Inactivo' END AS Estado FROM expert_tarea";
+    $expertsubmenu = mysqli_query($con, $xSQL);
 
 ?>
+
 <div id="kt_content_container" class="container-xxl">
    <div class="card card-flush">
             <div class="card-toolbar d-flex align-self-end">
