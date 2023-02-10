@@ -1,46 +1,43 @@
 <?php 
 
-//error_reporting(E_ALL);
-ini_set('display_errors', 0);
+    //error_reporting(E_ALL);
+    ini_set('display_errors', 0);
 
-require_once("dbcon/config.php");
-require_once("dbcon/functions.php");
+    require_once("dbcon/config.php");
+    require_once("dbcon/functions.php");
 
-mysqli_query($con,'SET NAMES utf8');  
-mysqli_set_charset($con,'utf8');	
+    mysqli_query($con,'SET NAMES utf8');  
+    mysqli_set_charset($con,'utf8');	
 
-$xServidor = $_SERVER['HTTP_HOST'];
-$xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
+    $xServidor = $_SERVER['HTTP_HOST'];
+    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
-//$yEmprid = $_SESSION["i_empreid"];
-//$yUserid = $_SESSION["i_userid"];
+    //$yEmprid = $_SESSION["i_empreid"];
+    //$yUserid = $_SESSION["i_userid"];
 
-$yEmprid = 1;
-$yUserid = 1;
+    $yEmprid = 1;
+    $yUserid = 1;
 
-$idmenu = $_POST['idmenu'];
-
-
-$xSQL = "SELECT menu_descripcion AS Menu, CASE menu_estado WHEN 'A' THEN 'Activo' ";
-$xSQL .= "ELSE 'Inactivo' END AS Estado FROM expert_menu WHERE menu_id=" . $idmenu ." AND empr_id=" . $yEmprid;
-$expertmenu = mysqli_query($con, $xSQL);
-
-foreach($expertmenu as $menu){
-
-    $xMenu = $menu['Menu'];
-
-}
+    $idmenu = $_POST['idmenu'];
 
 
+    $xSQL = "SELECT menu_descripcion AS Menu, CASE menu_estado WHEN 'A' THEN 'Activo' ";
+    $xSQL .= "ELSE 'Inactivo' END AS Estado FROM expert_menu WHERE menu_id=$idmenu AND empr_id=$yEmprid";
+    $expertmenu = mysqli_query($con, $xSQL);
 
-$xSQL="SELECT tar.tare_id AS TareaId, 'SI' as Ckeck, tar.tare_nombre AS Tarea, tar.tare_ruta AS Ruta, CASE tar.tare_estado WHEN 'A' THEN 'Activo' ELSE ";
-$xSQL .="'Inactivo' END AS Estado, met.meta_orden AS Orden FROM expert_tarea tar INNER JOIN expert_menu_tarea met ON tar.tare_id=met.tare_id WHERE ";
-$xSQL .="met.menu_id=$idmenu AND tar.empr_id=$yEmprid UNION SELECT tar.tare_id AS TareaId, 'NO' as Ckeck, tar.tare_nombre AS Tarea, tar.tare_ruta AS Ruta, CASE ";
-$xSQL .="tar.tare_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, 50000 AS Orden FROM expert_tarea tar WHERE tar.tare_id NOT IN(SELECT ";
-$xSQL .="met.tare_id FROM expert_menu_tarea met WHERE met.menu_id=$idmenu) AND tar.empr_id=$yEmprid  ORDER BY Orden; ";
-$expertarea = mysqli_query($con, $xSQL);
+    foreach($expertmenu as $menu){
+        $xMenu = $menu['Menu'];
+    }
+
+    $xSQL="SELECT tar.tare_id AS TareaId, 'SI' as Ckeck, tar.tare_nombre AS Tarea, tar.tare_ruta AS Ruta, CASE tar.tare_estado WHEN 'A' THEN 'Activo' ELSE ";
+    $xSQL .="'Inactivo' END AS Estado, met.meta_orden AS Orden FROM `expert_tarea` tar INNER JOIN `expert_menu_tarea` met ON tar.tare_id=met.tare_id WHERE ";
+    $xSQL .="met.menu_id=$idmenu AND tar.empr_id=$yEmprid UNION SELECT tar.tare_id AS TareaId, 'NO' as Ckeck, tar.tare_nombre AS Tarea, tar.tare_ruta AS Ruta, CASE ";
+    $xSQL .="tar.tare_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, 50000 AS Orden FROM `expert_tarea` tar WHERE tar.tare_id NOT IN(SELECT ";
+    $xSQL .="met.tare_id FROM `expert_menu_tarea` met WHERE met.menu_id=$idmenu AND met.empr_id=$yEmprid) AND tar.empr_id=$yEmprid  ORDER BY Orden; ";
+    $expertarea = mysqli_query($con, $xSQL);
 
 ?>
+
 <div id="kt_content_container" class="container-xxl">
    <div class="card card-flush">
         <div class="card-toolbar d-flex align-self-end">
@@ -162,18 +159,21 @@ $expertarea = mysqli_query($con, $xSQL);
                                                         
                                             if($tareas['Ckeck'] == 'SI'){
                                                 $xTextColor = "badge badge-light-primary";
+                                                $Checked = "checked='checked'";
                                             }else{
                                                 $xTextColor = "";
+                                                $Checked = "";
                                             }
                                         ?>     
                                     <tr>
                                         <td style="text-align: center;" >
                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input class="form-check-input chkTarea" id="chk<?php echo $tareas['TareaId']; ?>" <?php if ($tareas['Ckeck'] == 'SI') {
-                                                    echo "checked='checked'"; } ?> onchange="f_Menu(<?php echo $tareaid; ?>,<?php echo $idmenu; ?>)"/>
+                                                <input class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $tareas['TareaId']; ?>" <?php echo $Checked; ?> onchange="f_Menu(<?php echo $tareaid; ?>,<?php echo $idmenu; ?>)"/>
                                             </div>
                                         </td>
+
                                         <td style="display:none;"><?php echo $tareas['TareaId']; ?></td>
+                                        
                                         <td>
                                             <div id="div_<?php echo $tareas['TareaId']; ?>" >
                                                <?php echo $tareas['Tarea']; ?>

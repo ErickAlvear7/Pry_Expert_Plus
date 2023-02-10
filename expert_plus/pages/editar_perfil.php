@@ -15,7 +15,8 @@
 
     //$xServidor = $_SERVER['HTTP_HOST'];
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
-    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());    
+    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time()); 
+    $xTerminal = gethostname();   
 
     $idperfil = $_POST['idperfil'];
 
@@ -216,8 +217,10 @@
                                                                 <input class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $perfil['MentId']; ?>" <?php if ($perfil['Ckeck'] == 'SI') {
                                                                      echo "checked='checked'"; } ?> onchange="f_Perfil(<?php echo $idperfil; ?>, <?php echo $perfil['MentId']; ?>, <?php echo $yEmprid; ?>)" />
                                                             </div>
-                                                        </td>                                                                       
+                                                        </td>       
+
                                                         <td><?php echo $perfil['Menu']; ?></td>
+                                                        
                                                         <td>
                                                             <div id="div_<?php echo $perfil['MentId']; ?>" class="<?php  echo $xTextColor; ?>" >
                                                                 <?php echo $perfil['Tarea']; ?>

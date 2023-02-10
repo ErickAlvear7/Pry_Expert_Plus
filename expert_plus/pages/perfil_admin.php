@@ -152,7 +152,6 @@
 				if(_mensaje != ''){
 					mensajesalertify(_mensaje+"..!","S","top-center",5);
 				}
-
 			});
 
 			function f_Editar(_perfid){
@@ -160,7 +159,7 @@
 			}
 
 			function f_Check(_emprid, _perfid){
-				let _div = "div_" + _perfid;              
+				//let _div = "div_" + _perfid;              
 				let _check = $("#chk" + _perfid).is(":checked");
 				let _btn = "btnEdit" + _perfid;
 				let _td = "td" + _perfid;
@@ -183,7 +182,7 @@
                         xxIdPerfil: _perfid,
                         xxIdMeta: 0,
                         xxEmprid: _emprid,
-                        xxTipo: _tipo                    
+                        xxTipo: _tipo
                     }				
 				
 				var xrespuesta = $.post("codephp/delnew_perfil.php", $parametros);
