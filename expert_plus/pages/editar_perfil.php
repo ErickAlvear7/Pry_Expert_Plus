@@ -98,7 +98,7 @@
                                 <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel"> 
                                         <div class="card-header"> 
                                             <div class="card-toolbar">
-                                                <button type="button" id="btnGuardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $yUserid; ?>)"><i class="las la-save"></i>Guardar</button>
+                                                <button type="button" id="btnGuardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $idperfil; ?>,<?php echo $yUserid; ?>)"><i class="las la-save"></i>Guardar</button>
                                             </div>
                                         </div>
 
@@ -126,7 +126,7 @@
                                                 </div>                                                          
                                             </div>
 
-                                            <div class="row fv-row mb-7">
+                                            <!-- <div class="row fv-row mb-7">
                                                 <div class="col-md-3 text-md-end">
                                                     <label class="fs-6 fw-bold form-label mt-3">
                                                         <span>Estado</span>
@@ -140,7 +140,7 @@
                                                         </label>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-3 text-md-end">
@@ -260,15 +260,15 @@
                     });
                 }); 
 
-                function f_ChkEstado(){
-                    if($("#chkEstado").is(":checked")){
-                        _estado = "A";
-                        document.getElementById("SpanTxt").innerHTML = "Activo";
-                    }else{
-                        _estado = "I";
-                        document.getElementById("SpanTxt").innerHTML = "Inactivo";
-                    }                    
-                }
+                // function f_ChkEstado(){
+                //     if($("#chkEstado").is(":checked")){
+                //         _estado = "A";
+                //         document.getElementById("SpanTxt").innerHTML = "Activo";
+                //     }else{
+                //         _estado = "I";
+                //         document.getElementById("SpanTxt").innerHTML = "Inactivo";
+                //     }                    
+                // }
 
                 function f_Perfil(_idperfil, _idmeta, _emprid){
                     let _check = $("#chk" + _idmeta).is(":checked");
@@ -295,11 +295,9 @@
 
                 }
 
-                function f_Guardar(_emprid, _userid){
+                function f_Guardar(_emprid, _idperfil, _userid){
                     _perfil = $.trim($("#txtPerfil").val());
                     _observacion = $.trim($("#txtDescripcion").val());
-                    //_estado = "A";
-                    //_result=[];
 
                     if(_perfil == '')
                     {       
@@ -314,13 +312,11 @@
                     var checkBoxes = grid.getElementsByTagName("input");
                     for (var i = 0; i < checkBoxes.length; i++) {
                         if (checkBoxes[i].checked) {
-                            //var row = checkBoxes[i].parentNode.parentNode;
-                            //_result.push(checkBoxes[i].value);
                             _contar++
                         }
                     }
 
-                    //debugger;
+                    debugger;
 
                     if(_contar == 0){                        
                         mensajesweetalert("center","warning","Seleccione al menos un opción Menu/Tarea",false,1800);
@@ -352,13 +348,13 @@
                         $datosperfil = {
                             xxPerfil: _perfil,
                             xxEmprid: _emprid,
+                            xxIdPerfil: _idperfil,
                             xxUserid: _userid,
-                            xxObservacion: _observacion,
-                            xxEstado: _estado,
-                            }
+                            xxObservacion: _observacion
+                        }
 
                         $.ajax({
-                            url: "codephp/grabar_perfil.php",
+                            url: "codephp/update_perfil.php",
                             type: "POST",
                             dataType: "json",
                             data: $datosperfil,          
