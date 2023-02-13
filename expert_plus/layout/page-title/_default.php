@@ -23,9 +23,12 @@
 	}else if($page == 'editperfil'){
 		$title = 'EDITAR PERFIL';
 		$descripcion = 'Edición Datos del Perfil';
-	}else if('editmenu'){
+	}else if($page =='editmenu'){
 		$title = 'EDITAR MENU';
 		$descripcion = 'Edición Datos del Menu';
+	}else if($page=='seg_usuarioadmin'){
+        $title = 'AGREGAR USUARIO';
+		$descripcion = 'Datos del Usuario';
 	}
 
 ?>	

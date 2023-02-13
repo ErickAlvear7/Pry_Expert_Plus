@@ -38,6 +38,8 @@
 			include __DIR__ . '/../pages/editar_perfil.php';
 	}else if($page == 'editmenu'){
 		include __DIR__ . '/../pages/editar_menu.php';						
+	}else if($page == 'seg_usuarioadmin'){
+		include __DIR__ . '/../pages/usuario_admin.php';	
 	}else{
 		include '_content.php';
 	}
