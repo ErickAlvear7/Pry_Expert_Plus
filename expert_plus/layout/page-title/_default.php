@@ -27,7 +27,7 @@
 		$title = 'EDITAR MENU';
 		$descripcion = 'Edición Datos del Menu';
 	}else if($page=='seg_usuarioadmin'){
-        $title = 'AGREGAR USUARIO';
+        $title = 'USUARIOS';
 		$descripcion = 'Datos del Usuario';
 	}
 
