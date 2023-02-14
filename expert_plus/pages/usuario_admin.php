@@ -1,5 +1,5 @@
 <?php
-	$page = isset($_GET['page']) ? $_GET['page'] : "index";
+	
 
 	require_once("dbcon/config.php");
 	require_once("dbcon/functions.php");
@@ -10,9 +10,18 @@
 	$xServidor = $_SERVER['HTTP_HOST'];
 	$xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
+	$yEmprid = 1;
+
     $xSQL = "SELECT usua_id AS Idusuario, CONCAT(usua_nombres,' ',usua_apellidos) AS Nombres, usua_login AS Log, CASE usua_estado WHEN 'A' THEN 'Activo' ";
 	$xSQL .= "ELSE 'Inactivo' END AS Estado, usua_caducapass AS CaducaPass FROM `expert_usuarios`";
 	$expertusuario = mysqli_query($con, $xSQL);
+
+	$xSQL = "SELECT p.perf_descripcion AS Descripcion,p.perf_id AS Codigo FROM `expert_perfil` p ";
+	$xSQL .= " WHERE empr_id= $yEmprid AND perf_estado = 'A' ";
+	$xSQL .= " UNION SELECT '  --Seleccione Perfil--  ',0";
+	$xSQL .= " ORDER BY Codigo ";
+    $expertperfil = mysqli_query($con, $xSQL);
+
 
 
 
@@ -20,17 +29,17 @@
 ?>
 
 <div id="kt_content_container" class="container-xxl">
-    <input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
+    <input type="hidden" id="idempr" value="<?php echo $yEmprid; ?>"  />
 	<div class="card card-flush">
 		<div class="card-toolbar">
-			<a href="?page=addmenu" class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_ticket">
+			<button class="btn btn-sm btn-light-primary" id="nuevoUsuario">
 			<span class="svg-icon svg-icon-2">
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 					<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
 					<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
 				</svg>
 			</span>
-		    Nuevo Usuario</a>
+		    Nuevo Usuario</button>
 		</div>
 		<div class="card-header align-items-center py-5 gap-2 gap-md-5">
 			<div class="card-title">
@@ -125,7 +134,7 @@
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="kt_modal_new_ticket" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="user_modal" tabindex="-1" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered mw-750px">
 		<div class="modal-content rounded">
 			<div class="modal-header pb-0 border-0 justify-content-end">
@@ -139,7 +148,7 @@
 				</div>
 			</div>
 			<div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-				<form id="kt_modal_new_ticket_form" class="form" action="#">
+				<form id="kt_modal_new_ticket_form" class="form" id="frm_user">
 					<div class="mb-13 text-center">
 						<h1 class="mb-3">Datos Usuario</h1>
 					</div>
@@ -178,52 +187,53 @@
 					<div class="row g-9 mb-8">
 						<div class="col-md-6 fv-row">
 							<label class="required fs-6 fw-bold mb-2">Departamento</label>
-							<select class="form-select form-select-solid" id="cboDepartamento" name="cboDepartamento" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Departamento" name="departamento">
+							<select class="form-select form-select-solid" id="cboDepart" name="cboDepart" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Departamento" name="departamento">
 								<option value=""><--Seleccione--></option>
-								<option value="1">HTML Theme</option>
+								<option value="2">Call-Center</option>
 							</select>
 						</div>
 						<div class="col-md-6 fv-row">
 							<label class="required fs-6 fw-bold mb-2">Perfil</label>
 							<select class="form-select form-select-solid" id="cboPerfil" name="cboPerfil" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Perfil" name="perfil">
-								<option value=""><--Seleccione--></option>
-								<option value="1">Karina Clark</option>
+							    <?php foreach ($expertperfil as $per) : ?>
+								  <option value="<?= $per['Codigo'] ?>"><?= $per['Descripcion'] ?></option>
+								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
-					<div class="d-flex flex-column mb-8 fv-row">
+					<!-- <div class="d-flex flex-column mb-8 fv-row">
 						<label class="fs-6 fw-bold mb-2">Email</label>
 						<input type="email" class="form-control form-control-solid" id="txtEmail" name="txtEmail" placeholder="ejemplo@email.com" />
-					</div>
+					</div> -->
+					<br/>
+					<br/>
 					<div class="row g-9 mb-8 text-center">
-						<div class="col-md-4 fv-row">
+						<div class="col-md-6 fv-row">
 							<label class="fs-6 fw-bold mb-2">Passward Caduca</label>
 						</div>
-						<div class="col-md-4 fv-row">
+						<div class="col-md-6 fv-row">
 						    <label class="fs-6 fw-bold mb-2">Cambiar Password</label>   
-						</div>
-						<div class="col-md-4 fv-row">
-						    <label class="fs-6 fw-bold mb-2">Permisos Especiales</label>   
 						</div>
 					</div>
 					<div class="row g-9 mb-4 text-center">
-						<div class="col-md-4 fv-row">
+						<div class="col-md-6 fv-row">
 						    <input class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chkCaducaPass" name="chkCaducaPass" value=""  />
-							<span class="form-check-label fw-bold">NO</span>
+							<label class="form-check-label" id="lblCaducaPass">NO</label>
 						</div>
-						<div class="col-md-4 fv-row">
+						<div class="col-md-6 fv-row">
 						    <input class="form-check-input h-20px w-20px border border-primary" type="checkbox" id="chkCamPass" name="chkCamPass" value="email" />
-							<span class="form-check-label fw-bold">NO</span>
+							<label class="form-check-label" id="lblCamPass">NO</label>
 						</div>
-						<div class="col-md-4 fv-row">
-						    <input class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chkPerEspe" name="chkPerEspe" value=""  />
-							<span class="form-check-label fw-bold">NO</span>
+					</div>
+					<div class="row g-9 mb-4 text-center">
+						<div class="col-md-4 fv-row" id="content" style="display: none;">
+							<input type="date" class="form-control" id="txtFechacaduca" name="fechacaduca">
 						</div>
 					</div>
 					<br/>
 					<br/>
 					<div class="text-center">
-						<button type="button" id="kt_modal_new_ticket_submit" class="btn btn-primary">
+						<button type="button" id="btnSave" class="btn btn-primary">
 							<span class="indicator-label">Guardar</span>
 						</button>
 					</div>
@@ -233,18 +243,130 @@
 	</div>
 </div>
 <script>
-	$(document).ready(function(){
-		_mensaje = $('input#mensaje').val();
+$(document).ready(function(){
 
-		if(_mensaje != ''){
-			//mensajesweetalert("center","success",_mensaje+"..!",false,1800);
-			mensajesalertify(_mensaje+"..!","S","top-center",5);
-		}
+		var _emprid, _estado,caduca,_campass,_nombre,_apellido,_login,_password,_perfil,estado,_caduca,
+		_fechacaduca;
+	
+
+    //abrir-modal-nuevo-usuario
+	$("#nuevoUsuario").click(function(){
+
+       $("#frm_user").trigger("reset");
+	   $("#user_modal").modal("show");
+	   $("#chkCaducaPass").prop("checked", false);
+       $("#lblCaducaPass").text("NO");
+	   $("#chkCamPass").prop("checked", false);
+       $("#lblCamPass").text("NO");  
+	   estado = 'A';
+	   _fecha = new Date();
+	   _fechacaduca = moment(_fecha).format("YYYY/MM/DD");
+
+	   //alert(_fechacaduca);
 	});
 
-	function f_Editar(_idmenu){
-		$.redirect('?page=editmenu', {'idmenu': _idmenu}); //POR METODO POST
+    //cambiar label -SI-NO
+	$(document).on("click","#chkCaducaPass",function(){
+		element = document.getElementById("content");
+		if($("#chkCaducaPass").is(":checked")){
+			element.style.display='block';
+			$("#lblCaducaPass").text("SI");
+			caduca = 'SI';
+		}else{
+			element.style.display='none';
+			$("#lblCaducaPass").text("NO");
+			caduca = 'NO';
+		}
 
-	}
+	});
+
+	$(document).on("click","#chkCamPass",function(){
+		if($("#chkCamPass").is(":checked")){
+			$("#lblCamPass").text("SI");
+			cambiarpass = 'SI';
+		}else{
+			element.style.display='none';
+			$("#lblCamPass").text("NO");
+			cambiarpass = 'NO';
+		}
+
+	});
+
+	//GUardar nuevo usuario
+
+	$('#btnSave').click(function(e){
+		e.preventDefault();
+
+		_emprid = $('#idempr').val();
+		_estado = estado
+		_nombre = $.trim($("#txtNombre").val());
+		_apellido = $.trim($("#txtApellido").val());
+		_login = $.trim($("#txtLogin").val());
+		_password = $.trim($("#txtPassword").val());
+		_perfil = $('#cboPerfil').val();
+		_departamento = $('#cboDepart').val();
+		_caduca = caduca;
+		_cambiarpass = cambiarpass;
+		_fechacaduca = $.trim($("#txtFechacaduca").val());
+
+		//alert(_emprid);
+
+		if(_nombre == ' '){                        
+			mensajesweetalert("center","warning","ingrese un nombre",false,1800);
+			return;
+		}
+
+
+		$parametros = {
+			xxEmprid: _emprid,
+			xxNombre: _nombre + ' ' + _apellido,
+
+		} 
+		
+		var xrespuesta = $.post("codephp/consultar_usuarios.php", $parametros);
+		xrespuesta.done(function(response) {
+			//console.log(response);
+			if(response == 0){
+
+				$datosUser = {
+					xxEmprid: _emprid,
+					xxEstado: _estado,
+					xxNombre: _nombre,
+					xxApellido:_apellido,
+					xxLogin: _login,
+					xxPassword: _password,
+					xxPerfil: _perfil,
+                    xxCaducaPass: _caduca,
+					xxCambiarPass: _cambiarpass,
+					xxFecha: _fechacaduca
+				}
+
+				$.ajax({
+					url: "codephp/grabar_usuarios.php",
+					type: "POST",
+					dataType: "json",
+					data: $datosUser,          
+					success: function(data){ 
+						//console.log(data);
+						if(data == 'OK'){
+							$.redirect('?page=seg_menuadmin', {'mensaje': 'Guardado con Exito..!'}); 
+						}                                                                         
+					},
+					error: function (error){
+						console.log(error);
+					}                            
+				}); 
+			}else{
+				mensajesweetalert("center","warning","Nombre del Usuario ya Existe..!",false,1800);
+			}
+
+		});
+
+	});
+
+	
+});	
+
+
 
 </script> 	
