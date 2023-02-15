@@ -86,8 +86,8 @@
 						<thead>
 							<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
                                     <th>Perfil</th>
-                                    <th>Descipción</th>                                    
-                                    <th style="text-align:center;">Opciones</th>
+                                    <th>Descipción</th>                                                                        									
+									<th style="text-align:center;">Opciones</th>
 									<th>Estado</th>
                                     <th>Status</th>
 							</tr>
@@ -113,13 +113,10 @@
                             ?>
 							<tr>
                                 <td><?php echo $perfil['Perfil']; ?></td>
-                                <td><?php echo $perfil['Descripcion']; ?></td>
+                                <td><?php echo $perfil['Descripcion']; ?></td>								
 								<td>
 									<div class="text-center">
 										<div class="btn-group">
-											<!-- <a href="?page=revisolpn&id=2222" <?php echo $xDisabledEdit ?> id="btnEditar<?php echo $perfil['perf_id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Revisar Solicitud'>
-												<i class='fa fa-edit'></i>
-											</a>-->
 											<button <?php echo $xDisabledEdit ?> onclick="f_Editar(<?php echo $perfil['Id']; ?>)" id="btnEdit<?php echo $perfil['Id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Perfil'>
 												<i class='fa fa-edit'></i>
 											</button>
@@ -131,7 +128,7 @@
 								</td>								
                                 <td style="text-align:center">
 									<div class="form-check form-check-sm form-check-custom form-check-solid">
-										<input class="form-check-input" type="checkbox" id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
+										<input class="form-check-input btnEstado" type="checkbox" id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
 											echo "checked='checked'";} else {'';} ?> onchange="f_Check(<?php echo $yEmprid; ?>,<?php echo $perfil['Id']; ?>)" value="<?php echo $perfil['Id']; ?>" />
 									</div>
                                 </td>                                                           
@@ -152,6 +149,15 @@
 				if(_mensaje != ''){
 					mensajesalertify(_mensaje+"..!","S","top-center",5);
 				}
+
+				$(document).on("click",".btnEstado",function(e){
+					_fila = $(this).closest("tr");
+					_perfil = $(this).closest("tr").find('td:eq(0)').text(); 
+					_descripcion = $(this).closest("tr").find('td:eq(1)').text(); 
+        			console.log(_fila);
+				});
+
+
 			});
 
 			function f_Editar(_perfid){
@@ -163,21 +169,51 @@
 				let _check = $("#chk" + _perfid).is(":checked");
 				let _btn = "btnEdit" + _perfid;
 				let _td = "td" + _perfid;
+				let _checked = "";
+				let _disabled = "";
+				let _classes = "badge badge-light-primary";
+
+				//alert(_perfil);
+				//alert(_descripcion);
 
 				if(_check){
 					//$("#"+_div).removeClass("badge badge-light-danger");
 					//$("#"+_div).addClass("badge badge-light-primary");
-					document.getElementById(_btn).disabled = false;
-					document.getElementById(_td).innerHTML  = "<div class='badge badge-light-primary'>Activo</div>";
+					//document.getElementById(_btn).disabled = false;
+					//document.getElementById(_td).innerHTML  = "<div class='badge badge-light-primary'>Activo</div>";
 					_tipo = "Activo";
+					_checked = "checked='checked'";
 				}else{
 					//$("#"+_div).removeClass("badge badge-light-primary");
 					//$("#"+_div).addClass("badge badge-light-danger");
-					document.getElementById(_btn).disabled = true;
-					document.getElementById(_td).innerHTML  = "<div class='badge badge-light-danger'>Inactivo</div>";
+					//document.getElementById(_btn).disabled = true;
+					//document.getElementById(_td).innerHTML  = "<div class='badge badge-light-danger'>Inactivo</div>";
 					_tipo = "Inactivo";
+					_disabled = "disabled";
+					_classes = "badge badge-light-danger";
 				}
 
+				// var _tdperfil = '<td>' + _perfil + '</td>';
+
+				 var _boton = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + ' onclick="f_Editar(' + _perfid + ')" ' +
+				 			'id="btnEdit' + _perfid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Editar Perfil" >' + 
+				 			'<i class="fa fa-edit"></i></button></div></div></td>';
+				
+				 var _estado = '<td><div class="' + _classes + '">' + _tipo + ' </div>' ;
+
+				 var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+				 			'<input class="form-check-input btnEstado" type="checkbox" id="chk' + _perfid + '" ' + _checked + ' onchange="f_Check(' +
+				 			_emprid + ',' + _perfid + ')"' + ' value="' + _perfid + '"' + '/></div></td>';
+
+				// console.log(_tdperfil);
+				// console.log(_boton);
+				// console.log(_estado);
+				// console.log(_btnchk);
+
+				TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+
+				TableData.row(_fila).data([_perfil , _descripcion, _boton, _estado, _btnchk ]).draw();
+				
 				$parametros = {
                         xxIdPerfil: _perfid,
                         xxIdMeta: 0,
@@ -187,7 +223,7 @@
 				
 				var xrespuesta = $.post("codephp/delnew_perfil.php", $parametros);
 				xrespuesta.done(function(response){
-					console.log(response);
+					//console.log(response);
 				});				
 
 			}
