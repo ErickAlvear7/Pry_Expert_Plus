@@ -242,131 +242,128 @@
 		</div>
 	</div>
 </div>
-<script>
-$(document).ready(function(){
 
-		var _emprid, _estado,caduca,_campass,_nombre,_apellido,_login,_password,_perfil,estado,_caduca,
-		_fechacaduca;
-	
+	<script>
+		$(document).ready(function(){
 
-    //abrir-modal-nuevo-usuario
-	$("#nuevoUsuario").click(function(){
+				var _emprid, _estado,caduca,_campass,_nombre,_apellido,_login,_password,_perfil,estado,_caduca,
+				_fechacaduca;
+			
 
-       $("#frm_user").trigger("reset");
-	   $("#user_modal").modal("show");
-	   $("#chkCaducaPass").prop("checked", false);
-       $("#lblCaducaPass").text("NO");
-	   $("#chkCamPass").prop("checked", false);
-       $("#lblCamPass").text("NO");  
-	   estado = 'A';
-	   _fecha = new Date();
-	   _fechacaduca = moment(_fecha).format("YYYY/MM/DD");
+			//abrir-modal-nuevo-usuario
+			$("#nuevoUsuario").click(function(){
 
-	   //alert(_fechacaduca);
-	});
-
-    //cambiar label -SI-NO
-	$(document).on("click","#chkCaducaPass",function(){
-		element = document.getElementById("content");
-		if($("#chkCaducaPass").is(":checked")){
-			element.style.display='block';
-			$("#lblCaducaPass").text("SI");
-			caduca = 'SI';
-		}else{
-			element.style.display='none';
+			$("#frm_user").trigger("reset");
+			$("#user_modal").modal("show");
+			$("#chkCaducaPass").prop("checked", false);
 			$("#lblCaducaPass").text("NO");
-			caduca = 'NO';
-		}
+			$("#chkCamPass").prop("checked", false);
+			$("#lblCamPass").text("NO");  
+			estado = 'A';
+			_fecha = new Date();
+			_fechacaduca = moment(_fecha).format("YYYY/MM/DD");
 
-	});
+			//alert(_fechacaduca);
+			});
 
-	$(document).on("click","#chkCamPass",function(){
-		if($("#chkCamPass").is(":checked")){
-			$("#lblCamPass").text("SI");
-			cambiarpass = 'SI';
-		}else{
-			element.style.display='none';
-			$("#lblCamPass").text("NO");
-			cambiarpass = 'NO';
-		}
-
-	});
-
-	//GUardar nuevo usuario
-
-	$('#btnSave').click(function(e){
-		e.preventDefault();
-
-		_emprid = $('#idempr').val();
-		_estado = estado
-		_nombre = $.trim($("#txtNombre").val());
-		_apellido = $.trim($("#txtApellido").val());
-		_login = $.trim($("#txtLogin").val());
-		_password = $.trim($("#txtPassword").val());
-		_perfil = $('#cboPerfil').val();
-		_departamento = $('#cboDepart').val();
-		_caduca = caduca;
-		_cambiarpass = cambiarpass;
-		_fechacaduca = $.trim($("#txtFechacaduca").val());
-
-		//alert(_emprid);
-
-		if(_nombre == ' '){                        
-			mensajesweetalert("center","warning","ingrese un nombre",false,1800);
-			return;
-		}
-
-
-		$parametros = {
-			xxEmprid: _emprid,
-			xxNombre: _nombre + ' ' + _apellido,
-
-		} 
-		
-		var xrespuesta = $.post("codephp/consultar_usuarios.php", $parametros);
-		xrespuesta.done(function(response) {
-			//console.log(response);
-			if(response == 0){
-
-				$datosUser = {
-					xxEmprid: _emprid,
-					xxEstado: _estado,
-					xxNombre: _nombre,
-					xxApellido:_apellido,
-					xxLogin: _login,
-					xxPassword: _password,
-					xxPerfil: _perfil,
-                    xxCaducaPass: _caduca,
-					xxCambiarPass: _cambiarpass,
-					xxFecha: _fechacaduca
+			//cambiar label -SI-NO
+			$(document).on("click","#chkCaducaPass",function(){
+				element = document.getElementById("content");
+				if($("#chkCaducaPass").is(":checked")){
+					element.style.display='block';
+					$("#lblCaducaPass").text("SI");
+					caduca = 'SI';
+				}else{
+					element.style.display='none';
+					$("#lblCaducaPass").text("NO");
+					caduca = 'NO';
 				}
 
-				$.ajax({
-					url: "codephp/grabar_usuarios.php",
-					type: "POST",
-					dataType: "json",
-					data: $datosUser,          
-					success: function(data){ 
-						//console.log(data);
-						if(data == 'OK'){
-							$.redirect('?page=seg_menuadmin', {'mensaje': 'Guardado con Exito..!'}); 
-						}                                                                         
-					},
-					error: function (error){
-						console.log(error);
-					}                            
-				}); 
-			}else{
-				mensajesweetalert("center","warning","Nombre del Usuario ya Existe..!",false,1800);
-			}
+			});
 
-		});
+			$(document).on("click","#chkCamPass",function(){
+				if($("#chkCamPass").is(":checked")){
+					$("#lblCamPass").text("SI");
+					cambiarpass = 'SI';
+				}else{
+					element.style.display='none';
+					$("#lblCamPass").text("NO");
+					cambiarpass = 'NO';
+				}
 
-	});
+			});
 
-	
-});	
+			//GUardar nuevo usuario
+
+			$('#btnSave').click(function(e){
+				e.preventDefault();
+
+				_emprid = $('#idempr').val();
+				_estado = estado
+				_nombre = $.trim($("#txtNombre").val());
+				_apellido = $.trim($("#txtApellido").val());
+				_login = $.trim($("#txtLogin").val());
+				_password = $.trim($("#txtPassword").val());
+				_perfil = $('#cboPerfil').val();
+				_departamento = $('#cboDepart').val();
+				_caduca = caduca;
+				_cambiarpass = cambiarpass;
+				_fechacaduca = $.trim($("#txtFechacaduca").val());
+
+				//alert(_emprid);
+
+				if(_nombre == ' '){                        
+					mensajesweetalert("center","warning","ingrese un nombre",false,1800);
+					return;
+				}
 
 
+				$parametros = {
+					xxEmprid: _emprid,
+					xxNombre: _nombre + ' ' + _apellido,
 
-</script> 	
+				} 
+				
+				var xrespuesta = $.post("codephp/consultar_usuarios.php", $parametros);
+				xrespuesta.done(function(response) {
+					//console.log(response);
+					if(response == 0){
+
+						$datosUser = {
+							xxEmprid: _emprid,
+							xxEstado: _estado,
+							xxNombre: _nombre,
+							xxApellido:_apellido,
+							xxLogin: _login,
+							xxPassword: _password,
+							xxPerfil: _perfil,
+							xxCaducaPass: _caduca,
+							xxCambiarPass: _cambiarpass,
+							xxFecha: _fechacaduca
+						}
+
+						$.ajax({
+							url: "codephp/grabar_usuarios.php",
+							type: "POST",
+							dataType: "json",
+							data: $datosUser,          
+							success: function(data){ 
+								//console.log(data);
+								if(data == 'OK'){
+									$.redirect('?page=seg_menuadmin', {'mensaje': 'Guardado con Exito..!'}); 
+								}                                                                         
+							},
+							error: function (error){
+								console.log(error);
+							}                            
+						}); 
+					}else{
+						mensajesweetalert("center","warning","Nombre del Usuario ya Existe..!",false,1800);
+					}
+
+				});
+
+			});
+		});	
+
+	</script> 	
