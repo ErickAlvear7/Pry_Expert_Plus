@@ -28,7 +28,7 @@
             <div class="card-toolbar d-flex align-self-end">
                 <a href="?page=seg_menuadmin" class="btn btn-light-primary"><i class="las la-arrow-left"></i>Regresar</a>
             </div>	
-        <div class="card-header">
+            <div class="card-header">
                 <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
                     <li class="nav-item">
                         <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_settings_general">											
@@ -56,9 +56,9 @@
                             </span>
                         Opciones SubMenu</a>
                     </li>
-                    </ul>
-        </div>
-        <!-- <form class="form mb-15" method="post" id="kt_careers_form" enctype='multipart/form-data'>  -->
+                </ul>
+            </div>
+
             <div class="tab-content" id="myTabContent">
                     <div class="card-header"> 
                         <div class="card-toolbar">
@@ -171,7 +171,6 @@
                     </div>
                 </div>
             </div>
-        <!-- </form>  -->
    </div>
 </div>
 <script>
