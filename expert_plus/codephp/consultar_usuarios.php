@@ -14,15 +14,17 @@
 
     if(isset($_POST['xxEmprid']) and isset($_POST['xxNombre']) ){
         if(isset($_POST['xxEmprid']) <> '' and isset($_POST['xxNombre']) <> ''){ 
-                $yEmprid = $_POST['xxEmprid'];
-                $xNombre = $_POST['xxNombre'];            
 
-                $xSql = "SELECT * FROM `expert_usuarios` WHERE CONCAT(usua_nombres,' ',usua_apellidos) = '$xNombre' AND empr_id = $yEmprid ";
-                $all_user = mysqli_query($con, $xSql) or die (error_log(mysqli_error($con), 3, $log_file));
-                $xRow = mysqli_num_rows($all_user);
+            $yEmprid = $_POST['xxEmprid'];
+            $xNombre = $_POST['xxNombre'];            
+
+            $xSql = "SELECT * FROM `expert_usuarios` WHERE CONCAT(usua_nombres,' ',usua_apellidos) = '$xNombre' AND empr_id = $yEmprid ";
+            $all_user = mysqli_query($con, $xSql) or die (error_log(mysqli_error($con), 3, $log_file));
+            $xRow = mysqli_num_rows($all_user);
+                
 
 
-                echo $xRow;
+             echo $xRow;
 
         }
 

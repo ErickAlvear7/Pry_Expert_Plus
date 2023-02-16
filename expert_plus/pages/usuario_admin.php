@@ -69,13 +69,14 @@
 			<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
 				<thead>
 					<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
-					<th class="min-w-125px">Usuario</th>
-					<th class="min-w-125px">Login</th>
-					<th class="min-w-125px">Departamento</th>
-					<th class="min-w-125px">Estado</th>
-					<th class="min-w-125px" style="text-align: center;">Reset Password</th>
-					<th class="min-w-125px" style="text-align: center;">Opciones</th>
-					<th class="min-w-125px">Estado</th>
+					    <th style="display:none;">Id</th>
+						<th class="min-w-125px">Usuario</th>
+						<th class="min-w-125px">Login</th>
+						<th class="min-w-125px">Estado</th>
+						<th class="min-w-125px">Departamento</th>
+						<th class="min-w-125px" style="text-align: center;">Reset Password</th>
+						<th class="min-w-125px" style="text-align: center;">Opciones</th>
+						<th class="min-w-125px">Estado</th>
 					</tr>
 				</thead>
 				<tbody class="fw-bold text-gray-600">
@@ -96,12 +97,13 @@
 						}
 					?>
 					<tr>
+					<td style="display:none;"><?php echo $usu['Idusuario'] ?></td>
 						<td><?php echo $usu['Nombres']; ?></td>
 						<td><?php echo $usu['Log']; ?></td>
-						<td>Administracion</td>
 						<td>
 							<div class="<?php echo $xTextColor; ?>"><?php echo $usu['Estado']; ?></div>
 						</td>
+						<td>Administracion</td>
 						<td>
 							<div class="text-center">
 								<div class="btn-group">
@@ -114,7 +116,7 @@
 						<td>
 							<div class="text-center">
 								<div class="btn-group">
-									<button onclick="" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Usuario'>
+									<button id="btnEditar<?php echo $idusuario; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Usuario'>
 										<i class='fa fa-edit'></i>
 									</button>																															 
 								</div>
@@ -150,7 +152,7 @@
 			<div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
 				<form id="kt_modal_new_ticket_form" class="form" id="frm_user">
 					<div class="mb-13 text-center">
-						<h1 class="mb-3">Datos Usuario</h1>
+					    <h3 class="modal-title" id="modalLabel"></h3>
 					</div>
 					<div class="row g-9 mb-8">
 					   <div class="col-md-6 fv-row">
@@ -246,8 +248,9 @@
 	<script>
 		$(document).ready(function(){
 
-				var _emprid, _estado,caduca,_campass,_nombre,_apellido,_login,_password,_perfil,estado,_caduca,
-				_fechacaduca;
+				var _emprid,cambiarpass, _estado,caduca,_campass,_nombre,_apellido,_login,_password,_perfil,estado,_caduca,
+				_fechacaduca,_cambiarpass,_opcion;
+
 			
 
 			//abrir-modal-nuevo-usuario
@@ -255,6 +258,8 @@
 
 			$("#frm_user").trigger("reset");
 			$("#user_modal").modal("show");
+			$(".modal-title").text("Nuevo Usuario");
+			$("#btnSave").text("Guardar");
 			$("#chkCaducaPass").prop("checked", false);
 			$("#lblCaducaPass").text("NO");
 			$("#chkCamPass").prop("checked", false);
@@ -266,8 +271,15 @@
 			//alert(_fechacaduca);
 			});
 
+			
+
 			//cambiar label -SI-NO
+
+			caduca = 'NO';
+			cambiarpass = 'NO';
+
 			$(document).on("click","#chkCaducaPass",function(){
+                
 				element = document.getElementById("content");
 				if($("#chkCaducaPass").is(":checked")){
 					element.style.display='block';
@@ -277,16 +289,19 @@
 					element.style.display='none';
 					$("#lblCaducaPass").text("NO");
 					caduca = 'NO';
+					
 				}
 
 			});
 
+		
+
 			$(document).on("click","#chkCamPass",function(){
+
 				if($("#chkCamPass").is(":checked")){
 					$("#lblCamPass").text("SI");
 					cambiarpass = 'SI';
 				}else{
-					element.style.display='none';
 					$("#lblCamPass").text("NO");
 					cambiarpass = 'NO';
 				}
@@ -350,7 +365,7 @@
 							success: function(data){ 
 								//console.log(data);
 								if(data == 'OK'){
-									$.redirect('?page=seg_menuadmin', {'mensaje': 'Guardado con Exito..!'}); 
+									$.redirect('?page=seg_usuarioadmin', {'mensaje': 'Guardado con Exito..!'}); 
 								}                                                                         
 							},
 							error: function (error){
@@ -362,6 +377,50 @@
 					}
 
 				});
+
+			});
+
+			//editar modal usuario
+
+			$(document).on("click",".btnEditar",function(){
+
+                
+				_fila = $(this).closest("tr");
+				_data = $('#kt_ecommerce_report_shipping_table').dataTable().fnGetData(_fila);
+				_idusu = _data[0];
+				_loginold = _data[3];
+
+				$parametros = {
+					xxIdUsuario: _idusu,
+
+				}
+
+				$.ajax({
+					url: "codephp/editar_usuarios.php",
+					type: "POST",
+					dataType: "json",
+					data: $parametros,          
+					success: function(data){ 
+						console.log(data);
+
+						$("#txtNombre").val(data[0].Nombres);
+						                                                                      
+					},
+					error: function (error){
+						console.log(error);
+					}                            
+				}); 
+				
+				
+
+
+				//alert(_id);
+
+
+                $(".modal-title").text("Editar Usuario");
+                $("#btnSave").text("Modificar");
+				$("#frm_user").trigger("reset");
+			    $("#user_modal").modal("show");
 
 			});
 		});	
