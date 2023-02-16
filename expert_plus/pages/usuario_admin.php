@@ -397,12 +397,28 @@
 					success: function(data){ 
 						console.log(data);
 						var _nombres = data[0]['Nombres'];
-						var _apellidos = data[1]['Apellidos'];
-						//console.log(_nombres);
-
-					
+						var _apellidos = data[0]['Apellidos'];
+						var _login = data[0]['Login'];
+						var _password = data[0]['Password'];
+						var _cboPerfil = data[0]['CodigoPerfil'];
+						var _passCaduca = data[0]['CaducaPass'];
 
 						$("#txtNombre").val(_nombres);
+						$("#txtApellido").val(_apellidos);
+						$("#txtApellido").val(_apellidos);
+						$("#txtLogin").val(_login);
+						$("#txtPassword").val(_password);
+						$("#cboPerfil").val(_cboPerfil).change();
+
+						if(_passCaduca == 'SI'){
+							$("#chkCaducaPass").prop("checked", true);
+							$("#lblCaducaPass").text("SI");                
+						}
+
+						// if(_cambiar == 'SI'){
+						// 	$("#chkCambiar").prop("checked", true);
+						// 	$("#lblCambiar").text('SI');
+						// }
 						                                                                      
 					},
 					error: function (error){
