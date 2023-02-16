@@ -397,7 +397,8 @@
 					success: function(data){ 
 						console.log(data);
 						var _nombres = data[0]['Nombres'];
-						console.log(_nombres);
+						var _apellidos = data[1]['Apellidos'];
+						//console.log(_nombres);
 
 					
 
@@ -416,15 +417,16 @@
 
 			});
 
-			$(document).on("click",".btnEstado",function(e){
+		
+		});	
+
+		$(document).on("click",".btnEstado",function(e){
 				_fila = $(this).closest("tr");
-				console.log(_fila);
 				_usu = $(this).closest("tr").find('td:eq(1)').text();
 				_log = $(this).closest("tr").find('td:eq(2)').text();  
 				_dep = $(this).closest("tr").find('td:eq(4)').text(); 
 				//console.log(_usuario);
-			});
-		});	
+		});
 
 		function f_Check(_emprid, _userid){
                 
@@ -460,12 +462,12 @@
 							  '<input ' + _checked + 'class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chk' + _userid + '"' +
 							  'onchange="f_Check(' +_emprid  + ',' + _userid + ')"' + 'value="' + _userid + '"' + '/></div></div></td>';
 	
-				console.log(_fila);
+				//console.log(_fila);
 	
 	
 				TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
 	
-				TableData.row(_fila).data([_usu,_login,_lblEstado, _departamento, _btnReset,_btnEdit,_btnchk ]).draw();
+				TableData.row(_fila).data([_usu,_log,_lblEstado,_dep,_btnReset,_btnEdit,_btnchk ]).draw();
 	
 						$parametros = {
 						  xxUsuId: _userid,

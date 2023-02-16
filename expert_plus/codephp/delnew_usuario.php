@@ -19,6 +19,12 @@
             $yUsuId = $_POST['xxUsuId'];
             $yEmprId = $_POST['xxEmpr'];
             $xTipo = $_POST['xxTipo'];
+
+            if($xTipo == 'Activo'){
+                $xSql = "UPDATE `expert_usuarios` SET usua_estado='A' WHERE empr_id=$yEmprId AND usua_id=$yUsuId";
+            }else if($xTipo == 'Inactivo'){
+                $xSql = "UPDATE `expert_usuarios` SET usua_estado='I' WHERE empr_id=$yEmprId AND perf_id=$yUsuId";
+            }
             
 
             echo $xData;
