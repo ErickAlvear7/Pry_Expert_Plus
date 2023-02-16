@@ -250,7 +250,7 @@
 		$(document).ready(function(){
 
 				var _emprid,cambiarpass, _estado,caduca,_campass,_nombre,_apellido,_login,_password,_perfil,estado,_caduca,
-				_fechacaduca,_cambiarpass,_usuario;
+				_fechacaduca,_cambiarpass,_log,_usu,_dep,_fila,_tipo;
 
 			
 			//abrir-modal-nuevo-usuario
@@ -428,10 +428,10 @@
 
 			$(document).on("click",".btnEstado",function(e){
 				_fila = $(this).closest("tr");
-				_usuario = $(this).closest("tr").find('td:eq(1)').text();
-				_login = $(this).closest("tr").find('td:eq(2)').text();  
-				_departamento = $(this).closest("tr").find('td:eq(4)').text(); 
-				console.log(_usuario);
+				_usu = $(this).closest("tr").find('td:eq(1)').text();
+				_log = $(this).closest("tr").find('td:eq(2)').text();  
+				_dep = $(this).closest("tr").find('td:eq(4)').text(); 
+				//console.log(_usuario);
 			});
 		});	
 
@@ -474,7 +474,18 @@
 
 			TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
 
-			TableData.row(_fila).data([_usuario,_login,_lblEstado, _departamento, _btnReset,_btnEdit,_btnchk ]).draw();
+			TableData.row(_fila).data([_usu,_login,_lblEstado, _departamento, _btnReset,_btnEdit,_btnchk ]).draw();
+
+			        $parametros = {
+                      xxUsuId: _userid,
+					  xxEmpr: _emprid,
+					  xxTipo: _tipo
+                    }	
+
+			    var xrespuesta = $.post("codephp/delnew_usuario.php", $parametros);
+				xrespuesta.done(function(response){
+					//console.log(response);
+				});	
 		    				   
 		}
 
