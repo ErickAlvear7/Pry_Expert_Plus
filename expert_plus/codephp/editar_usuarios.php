@@ -17,13 +17,22 @@
 
             $yIdusua = $_POST['xxIdUsuario'];
 
-            $xSQL =  "SELECT usua_nombres AS Nombres, usua_apellidos AS Apellidos, usua_login AS Login, usua_password AS Pass, perf_id AS CodigoPerf, CASE ";
+            $xSQL =  "SELECT usua_nombres AS Nombres, usua_apellidos AS Apellidos, usua_login AS Logi, usua_password AS Pass, perf_id AS CodigoPerf, CASE ";
             $xSQL .= "usua_caducapass WHEN 'SI' THEN 'SI' ELSE 'NO' END AS Caduca, DATE_FORMAT(usua_fechacaduca,'%Y/%m/%d') AS FechaCaduca, CASE usua_cambiarpass WHEN ";
             $xSQL .= "'SI' THEN 'SI' ELSE 'NO' END AS Cambiar FROM expert_usuarios WHERE usua_id= $yIdusua AND empr_id=$yEmprid; ";
-            $data = mysqli_query($con, $xSQL);
+            $consulta = mysqli_query($con, $xSQL);
+
+            foreach ($consulta as $datos){ 
+                $data = $datos["Nombres"];
+                $data = $datos["Apellidos"];
+                $data = $datos["Logi"];
+            }
+
+
     
 
                 print json_encode($data, JSON_UNESCAPED_UNICODE);
+
         
         }
 

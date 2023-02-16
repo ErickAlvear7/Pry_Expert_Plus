@@ -97,17 +97,17 @@
 						}
 					?>
 					<tr>
-					<td style="display:none;"><?php echo $usu['Idusuario'] ?></td>
+					    <td style="display:none;"><?php echo $usu['Idusuario'] ?></td>
 						<td><?php echo $usu['Nombres']; ?></td>
 						<td><?php echo $usu['Log']; ?></td>
-						<td>
+						<td id="<?php echo $usu['Idusuario']; ?>">
 							<div class="<?php echo $xTextColor; ?>"><?php echo $usu['Estado']; ?></div>
 						</td>
 						<td>Administracion</td>
 						<td>
 							<div class="text-center">
 								<div class="btn-group">
-									<button onclick="" id="btnResetPass" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Resetear Password'>
+									<button id="btnReset<?php echo $idusuario; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Resetear Password'>
 										<i class='fa fa-key'></i>
 									</button>																															 
 								</div>
@@ -125,7 +125,8 @@
 						<td>
 							<div class="text-center">
 								<div class="form-check form-check-sm form-check-custom form-check-solid">
-									<input <?php echo $cheking; ?> class="form-check-input h-20px w-20px border-primary" type="checkbox" id="" />
+									<input <?php echo $cheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $idusuario; ?>" 
+									    onchange="f_Check(<?php echo $yEmprid; ?>,<?php echo $usu['Idusuario']; ?>)" value="<?php echo $idusuario; ?>"/>
 								</div>
 							</div>
 						</td>
@@ -249,10 +250,9 @@
 		$(document).ready(function(){
 
 				var _emprid,cambiarpass, _estado,caduca,_campass,_nombre,_apellido,_login,_password,_perfil,estado,_caduca,
-				_fechacaduca,_cambiarpass,_opcion;
+				_fechacaduca,_cambiarpass,_usuario;
 
 			
-
 			//abrir-modal-nuevo-usuario
 			$("#nuevoUsuario").click(function(){
 
@@ -401,9 +401,11 @@
 					dataType: "json",
 					data: $parametros,          
 					success: function(data){ 
-						console.log(data);
+						console.log(_nombre);
 
-						$("#txtNombre").val(data[0].Nombres);
+					
+
+						$("#txtNombre").val(data.Nombres);
 						                                                                      
 					},
 					error: function (error){
@@ -423,6 +425,57 @@
 			    $("#user_modal").modal("show");
 
 			});
+
+			$(document).on("click",".btnEstado",function(e){
+				_fila = $(this).closest("tr");
+				_usuario = $(this).closest("tr").find('td:eq(1)').text();
+				_login = $(this).closest("tr").find('td:eq(2)').text();  
+				_departamento = $(this).closest("tr").find('td:eq(4)').text(); 
+				console.log(_usuario);
+			});
 		});	
+
+		function f_Check(_emprid, _userid){
+                
+			let _check = $("#chk" + _userid).is(":checked");
+			let _btn = "btnEditar" + _userid;
+			let _td = "td" + _userid;
+			let _checked = "";
+			let _disabled = "";
+			let _class = "badge badge-light-primary";
+
+			//alert(_td);
+
+			if(_check){
+				_tipo = "Activo";
+				_checked = "checked='checked'";
+			}else{
+				    _tipo = "Inactivo";
+					_disabled = "disabled";
+					_class = "badge badge-light-danger";
+			}
+
+			var _lblEstado = '<td><div class="' + _class + '">' + _tipo + ' </div>';
+
+			var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + 'id="btnEditar' + _userid + '"' +
+							  'class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Usuario">' +
+							  '<i class="fa fa-edit"></i></button></div></div></td>';
+			
+			var _btnReset = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + 'id="btnReset' + _userid + '"' +
+			                'class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Resetear Password">' +
+							'<i class="fa fa-key"></i></button></div></div></td>';
+
+			var _btnchk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+			              '<input ' + _checked + 'class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chk' + _userid + '"' +
+						  'onchange="f_Check(' +_emprid  + ',' + _userid + ')"' + 'value="' + _userid + '"' + '/></div></div></td>';
+
+			//console.log(_btnchk);
+
+
+			TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+
+			TableData.row(_fila).data([_usuario,_login,_lblEstado, _departamento, _btnReset,_btnEdit,_btnchk ]).draw();
+		    				   
+		}
 
 	</script> 	
