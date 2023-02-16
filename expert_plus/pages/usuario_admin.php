@@ -151,7 +151,7 @@
 				</div>
 			</div>
 			<div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-				<form id="kt_modal_new_ticket_form" class="form" id="frm_user">
+				<form id="frm_user" class="form">
 					<div class="mb-13 text-center">
 					    <h3 class="modal-title" id="modalLabel"></h3>
 					</div>
@@ -161,7 +161,7 @@
 								<span class="required">Nombre</span>
 								<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nombre del usuario"></i>
 							</label>
-							<input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100" placeholder="" />
+							<input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100" placeholder="Ingrese Nombre" value="" />
 						</div>
 						<div class="col-md-6 fv-row">
 						    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
@@ -256,22 +256,20 @@
 			//abrir-modal-nuevo-usuario
 			$("#nuevoUsuario").click(function(){
 
-			$("#frm_user").trigger("reset");
-			$("#user_modal").modal("show");
-			$(".modal-title").text("Nuevo Usuario");
-			$("#btnSave").text("Guardar");
-			$("#chkCaducaPass").prop("checked", false);
-			$("#lblCaducaPass").text("NO");
-			$("#chkCamPass").prop("checked", false);
-			$("#lblCamPass").text("NO");  
-			estado = 'A';
-			_fecha = new Date();
-			_fechacaduca = moment(_fecha).format("YYYY/MM/DD");
+				$("#frm_user").trigger("reset");
+				$("#user_modal").modal("show");
+				$(".modal-title").text("Nuevo Usuario");
+				$("#btnSave").text("Guardar");
+				$("#chkCaducaPass").prop("checked", false);
+				$("#lblCaducaPass").text("NO");
+				$("#chkCamPass").prop("checked", false);
+				$("#lblCamPass").text("NO");  
+				estado = 'A';
+				_fecha = new Date();
+				_fechacaduca = moment(_fecha).format("YYYY/MM/DD");
 
-			//alert(_fechacaduca);
+				//alert(_fechacaduca);
 			});
-
-			
 
 			//cambiar label -SI-NO
 
@@ -288,13 +286,10 @@
 				}else{
 					element.style.display='none';
 					$("#lblCaducaPass").text("NO");
-					caduca = 'NO';
-					
+					caduca = 'NO';					
 				}
 
 			});
-
-		
 
 			$(document).on("click","#chkCamPass",function(){
 
@@ -383,7 +378,6 @@
 			//editar modal usuario
 
 			$(document).on("click",".btnEditar",function(){
-
                 
 				_fila = $(this).closest("tr");
 				_data = $('#kt_ecommerce_report_shipping_table').dataTable().fnGetData(_fila);
@@ -401,11 +395,13 @@
 					dataType: "json",
 					data: $parametros,          
 					success: function(data){ 
-						console.log(_nombre);
+						console.log(data);
+						var _nombres = data[0]['Nombres'];
+						console.log(_nombres);
 
 					
 
-						$("#txtNombre").val(data.Nombres);
+						$("#txtNombre").val(_nombres);
 						                                                                      
 					},
 					error: function (error){
@@ -413,12 +409,6 @@
 					}                            
 				}); 
 				
-				
-
-
-				//alert(_id);
-
-
                 $(".modal-title").text("Editar Usuario");
                 $("#btnSave").text("Modificar");
 				$("#frm_user").trigger("reset");
@@ -428,6 +418,7 @@
 
 			$(document).on("click",".btnEstado",function(e){
 				_fila = $(this).closest("tr");
+				console.log(_fila);
 				_usu = $(this).closest("tr").find('td:eq(1)').text();
 				_log = $(this).closest("tr").find('td:eq(2)').text();  
 				_dep = $(this).closest("tr").find('td:eq(4)').text(); 
@@ -437,56 +428,56 @@
 
 		function f_Check(_emprid, _userid){
                 
-			let _check = $("#chk" + _userid).is(":checked");
-			let _btn = "btnEditar" + _userid;
-			let _td = "td" + _userid;
-			let _checked = "";
-			let _disabled = "";
-			let _class = "badge badge-light-primary";
-
-			//alert(_td);
-
-			if(_check){
-				_tipo = "Activo";
-				_checked = "checked='checked'";
-			}else{
-				    _tipo = "Inactivo";
-					_disabled = "disabled";
-					_class = "badge badge-light-danger";
-			}
-
-			var _lblEstado = '<td><div class="' + _class + '">' + _tipo + ' </div>';
-
-			var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + 'id="btnEditar' + _userid + '"' +
-							  'class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Usuario">' +
-							  '<i class="fa fa-edit"></i></button></div></div></td>';
-			
-			var _btnReset = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + 'id="btnReset' + _userid + '"' +
-			                'class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Resetear Password">' +
-							'<i class="fa fa-key"></i></button></div></div></td>';
-
-			var _btnchk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-			              '<input ' + _checked + 'class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chk' + _userid + '"' +
-						  'onchange="f_Check(' +_emprid  + ',' + _userid + ')"' + 'value="' + _userid + '"' + '/></div></div></td>';
-
-			//console.log(_btnchk);
-
-
-			TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
-
-			TableData.row(_fila).data([_usu,_login,_lblEstado, _departamento, _btnReset,_btnEdit,_btnchk ]).draw();
-
-			        $parametros = {
-                      xxUsuId: _userid,
-					  xxEmpr: _emprid,
-					  xxTipo: _tipo
-                    }	
-
-			    var xrespuesta = $.post("codephp/delnew_usuario.php", $parametros);
+				let _check = $("#chk" + _userid).is(":checked");
+				let _btn = "btnEditar" + _userid;
+				let _td = "td" + _userid;
+				let _checked = "";
+				let _disabled = "";
+				let _class = "badge badge-light-primary";
+	
+				//alert(_td);
+	
+				if(_check){
+					_tipo = "Activo";
+					_checked = "checked='checked'";
+				}else{
+						_tipo = "Inactivo";
+						_disabled = "disabled";
+						_class = "badge badge-light-danger";
+				}
+	
+				var _lblEstado = '<td><div class="' + _class + '">' + _tipo + ' </div>';
+	
+				var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + 'id="btnEditar' + _userid + '"' +
+								  'class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Usuario">' +
+								  '<i class="fa fa-edit"></i></button></div></div></td>';
+				
+				var _btnReset = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + 'id="btnReset' + _userid + '"' +
+								'class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Resetear Password">' +
+								'<i class="fa fa-key"></i></button></div></div></td>';
+	
+				var _btnchk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+							  '<input ' + _checked + 'class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chk' + _userid + '"' +
+							  'onchange="f_Check(' +_emprid  + ',' + _userid + ')"' + 'value="' + _userid + '"' + '/></div></div></td>';
+	
+				console.log(_fila);
+	
+	
+				TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+	
+				TableData.row(_fila).data([_usu,_login,_lblEstado, _departamento, _btnReset,_btnEdit,_btnchk ]).draw();
+	
+						$parametros = {
+						  xxUsuId: _userid,
+						  xxEmpr: _emprid,
+						  xxTipo: _tipo
+						}	
+	
+				var xrespuesta = $.post("codephp/delnew_usuario.php", $parametros);
 				xrespuesta.done(function(response){
 					//console.log(response);
 				});	
-		    				   
-		}
+								   
+			}
 
 	</script> 	
