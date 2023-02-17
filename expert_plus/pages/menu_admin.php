@@ -10,6 +10,8 @@
 	$xServidor = $_SERVER['HTTP_HOST'];
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
+	$yEmprid = 1;
+
 	$xSQL = "SELECT menu_id AS Idmenu, empr_id AS Empid, menu_descripcion AS Menu, menu_observacion AS Observacion, CASE menu_estado WHEN 'A' THEN 'Activo' ";
 	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_menu`";
 	$expertmenu = mysqli_query($con, $xSQL);
@@ -106,8 +108,8 @@
 						<td>
 							<div class="text-center">
 								<div class="form-check form-check-sm form-check-custom form-check-solid">
-										<input class="form-check-input" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $menu['Idmenu']; ?>" <?php if ($menu['Estado'] == 'Activo') {
-												echo "checked";} else {'';} ?> value="<?php echo $menu['Idmenu']; ?>" />
+										<input class="form-check-input btnEstado" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $menu['Idmenu']; ?>" <?php if ($menu['Estado'] == 'Activo') {
+												echo "checked";} else {'';} ?> value="<?php echo $menu['Idmenu']; ?>"  onchange="f_Check(<?php echo $yEmprid; ?>,<?php echo $menu['Idmenu']; ?>)" />
 								</div>
 							</div>
 						</td>
@@ -133,6 +135,64 @@
 		$.redirect('?page=editmenu', {'idmenu': _idmenu}); //POR METODO POST
 
 	}
+
+	$(document).on("click",".btnEstado",function(e){
+			_fila = $(this).closest("tr");
+			_menuid = $(this).closest("tr").find('td:eq(0)').text();
+			_menu = $(this).closest("tr").find('td:eq(1)').text();  
+			_desc = $(this).closest("tr").find('td:eq(2)').text(); 
+	});
+
+	function f_Check(_emprid, _menuid){
+
+		let _check = $("#chk" + _menuid).is(":checked");
+		let _checked = "";
+		let _disabled = "";
+		let _class = "badge badge-light-primary";
+
+		if(_check){
+			_tipo = "Activo";
+			_disabled = "";
+			_checked = "checked='checked'";
+			_class = "badge badge-light-primary";
+		}else{
+			_tipo = "Inactivo";
+			_disabled = "disabled";
+			_class = "badge badge-light-danger";
+		}
+
+
+		var _lblEstado = '<td><div class="' + _class + '">' + _tipo + ' </div>';
+
+		var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + ' onclick="f_Editar(' +  _menuid + ')"' +
+		               'id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Editar Perfil">' +
+					   '<i class="fa fa-edit"></i></button></div></div></td>';
+
+		var _btnchk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+		              '<input class="form-check-input btnEstado" type="checkbox" ' +  _tipo  +  ' id="chk' + _menuid + '"' +
+					  ' ' + _checked + ' value="' + _menuid + '" onchange="f_Check(' +_emprid  + ',' + _menuid + ')"/>' +
+					  '</div></div></td>';
+
+		//console.log(_btnchk);
+		
+		TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+
+		TableData.row(_fila).data([_menuid,_menu,_desc,_lblEstado,_btnEdit,_btnchk ]).draw();
+
+		$parametros = {
+		xxMenuId: _menuid,
+		xxEmpr: _emprid,
+		xxTipo: _tipo
+	}	
+
+		var xrespuesta = $.post("codephp/estado_menu.php", $parametros);
+		xrespuesta.done(function(response){
+			//console.log(response);
+		});	
+
+
+	}
+
 
 </script> 	
 
