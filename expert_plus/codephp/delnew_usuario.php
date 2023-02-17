@@ -23,7 +23,13 @@
             if($xTipo == 'Activo'){
                 $xSql = "UPDATE `expert_usuarios` SET usua_estado='A' WHERE empr_id=$yEmprId AND usua_id=$yUsuId";
             }else if($xTipo == 'Inactivo'){
-                $xSql = "UPDATE `expert_usuarios` SET usua_estado='I' WHERE empr_id=$yEmprId AND perf_id=$yUsuId";
+                $xSql = "UPDATE `expert_usuarios` SET usua_estado='I' WHERE empr_id=$yEmprId AND usua_id=$yUsuId";
+            }
+
+            if(mysqli_query($con, $xSql)){
+                $xData="OK";
+            }else{
+                $xData="ERR";
             }
             
 

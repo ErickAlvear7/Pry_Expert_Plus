@@ -610,6 +610,7 @@
 		});
 
 		function f_Check(_emprid, _userid){
+
                 
 				let _check = $("#chk" + _userid).is(":checked");
 				let _btn = "btnEditar" + _userid;
@@ -618,10 +619,10 @@
 				let _disabled = "";
 				let _class = "badge badge-light-primary";
 	
-				//alert(_td);
 	
 				if(_check){
 					_tipo = "Activo";
+					_disabled = "";
 					_checked = "checked='checked'";
 				}else{
 						_tipo = "Inactivo";
@@ -631,13 +632,14 @@
 	
 				var _lblEstado = '<td><div class="' + _class + '">' + _tipo + ' </div>';
 	
-				var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + 'id="btnEditar' + _userid + '"' +
+				var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button ' +  _disabled +  ' id="btnEditar' + _userid + '"' +
 								  'class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Usuario">' +
-								  '<i class="fa fa-edit"></i></button></div></div></td>';
+								  '<i class="fa fa-edit"></i></button></div></div></td>';		  
 				
-				var _btnReset = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + 'id="btnReset' + _userid + '"' +
+				var _btnReset = '<td><div class="text-center"><div class="btn-group"><button ' +  _disabled +  ' id="btnReset' + _userid + '"' +
 								'class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Resetear Password">' +
 								'<i class="fa fa-key"></i></button></div></div></td>';
+
 	
 				var _btnchk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
 							  '<input ' + _checked + 'class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chk' + _userid + '"' +
