@@ -147,7 +147,7 @@
 				</div>
 			</div>
 			<div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-				<input class="form-control form-control-solid" type="text" id="txtid" name="txtid" />
+				<input class="form-control form-control-solid" type="hidden" id="txtid" name="txtid" />
 				<form id="frm_user" class="form">
 					<div class="mb-13 text-center">
 					    <h3 class="modal-title" id="modalLabel"></h3>
@@ -302,7 +302,7 @@
 
 			});
 
-			//GUardar nuevo usuario
+			//Guardar usuario
 
 			$('#btnSave').click(function(e){
 				e.preventDefault();
@@ -327,6 +327,27 @@
 
 				if(_nombre == ''){                        
 					mensajesweetalert("center","warning","ingrese un nombre",false,1800);
+					return;
+				}
+
+				if(_apellido == ''){                        
+					mensajesweetalert("center","warning","ingrese un apellido",false,1800);
+					return;
+				}
+
+				if(_login == ''){                        
+					mensajesweetalert("center","warning","ingrese un login",false,1800);
+					return;
+				}
+
+				if(_password == ''){                        
+					mensajesweetalert("center","warning","ingrese una contraseña",false,1800);
+					return;
+				}
+
+				
+				if(_perfil == 0){                        
+					mensajesweetalert("center","warning","ingrese un perfil",false,1800);
 					return;
 				}
 
@@ -541,6 +562,8 @@
 						var _password = data[0]['Password'];
 						var _cboPerfil = data[0]['CodigoPerfil'];
 						var _passCaduca = data[0]['CaducaPass'];
+						var _fechaCaduca = data[0]['FechaCaduca'];
+						var _cambiarPass = data[0]['CambiarPass'];
 
 						$("#txtNombre").val(_nombres);
 						$("#txtApellido").val(_apellidos);
@@ -548,16 +571,17 @@
 						$("#txtLogin").val(_login);
 						$("#txtPassword").val(_password);
 						$("#cboPerfil").val(_cboPerfil).change();
+						$("#txtFechacaduca").val(_fechaCaduca);
 
 						if(_passCaduca == 'SI'){
 							$("#chkCaducaPass").prop("checked", true);
 							$("#lblCaducaPass").text("SI");                
 						}
 
-						// if(_cambiar == 'SI'){
-						// 	$("#chkCambiar").prop("checked", true);
-						// 	$("#lblCambiar").text('SI');
-						// }
+						if(_cambiarPass == 'SI'){
+							$("#chkCamPass").prop("checked", true);
+							$("#lblCamPass").text('SI');
+						}
 						                                                                      
 					},
 					error: function (error){
@@ -638,5 +662,11 @@
 				});	
 								   
 			}
+
+            //desplazar ventana modal
+			$("#user_modal").draggable({
+				handle: ".modal-header"
+			}); 
+
 
 	</script> 	
