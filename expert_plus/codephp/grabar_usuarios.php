@@ -28,21 +28,16 @@
                 $xFechaCaduca =  $_POST['xxFecha'];
                 $xCambiarPass = $_POST['xxCambiarPass'];
 
-                
-        
                 $xSQL ="INSERT INTO `expert_usuarios` (perf_id,empr_id,usua_nombres,usua_apellidos,usua_login,usua_password,usua_estado, ";
                 $xSQL .= "usua_contador,usua_caducapass,usua_fechacaduca,usua_cambiarpass,usua_estadologin,usua_terminallogin, ";
                 $xSQL .= "usua_fechacreacion,usua_terminalcreacion)";
                 $xSQL .="VALUES ($xPerfil,$yEmprid,'$xNombre','$xApellido','$xLogin','$xPass','$xEstado',1,'$xCaducaPass','{$xFechaCaduca}', ";
                 $xSQL .= "'$xCambiarPass', 'NO','$xTerminal','{$xFecha}','$xTerminal') ";
                 if(mysqli_query($con, $xSQL)){
-                
-                    $data = "OK";
+                    $last_id = mysqli_insert_id($con);
                 }
 
-        
-
-                    print json_encode($data, JSON_UNESCAPED_UNICODE);
+                print json_encode($last_id, JSON_UNESCAPED_UNICODE);
         
         }
 

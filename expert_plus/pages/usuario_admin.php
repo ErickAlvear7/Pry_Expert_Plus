@@ -22,10 +22,6 @@
 	$xSQL .= " ORDER BY Codigo ";
     $expertperfil = mysqli_query($con, $xSQL);
 
-
-
-
-
 ?>
 
 <div id="kt_content_container" class="container-xxl">
@@ -151,10 +147,12 @@
 				</div>
 			</div>
 			<div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+				<input class="form-control form-control-solid" type="text" id="txtid" name="txtid" />
 				<form id="frm_user" class="form">
 					<div class="mb-13 text-center">
 					    <h3 class="modal-title" id="modalLabel"></h3>
 					</div>
+					
 					<div class="row g-9 mb-8">
 					   <div class="col-md-6 fv-row">
 						    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
@@ -249,10 +247,10 @@
 	<script>
 		$(document).ready(function(){
 
-				var _emprid,cambiarpass, _estado,caduca,_campass,_nombre,_apellido,_login,_password,_perfil,estado,_caduca,
-				_fechacaduca,_cambiarpass,_log,_usu,_dep,_fila,_tipo;
+			var _emprid,cambiarpass, _estado,caduca,_campass,_nombre,_apellido,_login,_password,_perfil,estado,_caduca,
+			_fechacaduca,_cambiarpass,_log,_usu,_dep,_fila,_tipo;
 
-			
+		
 			//abrir-modal-nuevo-usuario
 			$("#nuevoUsuario").click(function(){
 
@@ -267,6 +265,7 @@
 				estado = 'A';
 				_fecha = new Date();
 				_fechacaduca = moment(_fecha).format("YYYY/MM/DD");
+				_addmod = 'add';
 
 				//alert(_fechacaduca);
 			});
@@ -315,30 +314,51 @@
 				_login = $.trim($("#txtLogin").val());
 				_password = $.trim($("#txtPassword").val());
 				_perfil = $('#cboPerfil').val();
+				_perfilname = $("#cboPerfil option:selected").text();				
 				_departamento = $('#cboDepart').val();
 				_caduca = caduca;
 				_cambiarpass = cambiarpass;
 				_fechacaduca = $.trim($("#txtFechacaduca").val());
+				_buscar = 'SI';
+				_continuar = 'SI';
 
 				//alert(_emprid);
+				//debugger;
 
-				if(_nombre == ' '){                        
+				if(_nombre == ''){                        
 					mensajesweetalert("center","warning","ingrese un nombre",false,1800);
 					return;
 				}
 
-
 				$parametros = {
 					xxEmprid: _emprid,
-					xxNombre: _nombre + ' ' + _apellido,
-
-				} 
+					xxLogin: _login
+				}
 				
-				var xrespuesta = $.post("codephp/consultar_usuarios.php", $parametros);
-				xrespuesta.done(function(response) {
-					//console.log(response);
-					if(response == 0){
+				if(_addmod == 'mod'){
+					if(_loginold != _login){
+						_buscar = 'SI';
+					}else{
+						_buscar = 'NO';
+					}
+				}
 
+				if(_buscar == 'SI'){
+					var xrespuesta = $.post("codephp/consultar_usuarios.php", $parametros);
+					xrespuesta.done(function(response){
+						if(response == 0){
+							_continuar = 'SI'
+						}else{
+							_continuar = 'NO'
+							mensajesweetalert("center","warning","Nombre del Usuario ya Existe..!",false,1800);
+							return;
+						}
+					});
+				}
+
+				if(_continuar == 'SI'){
+					
+					if(_addmod == 'add'){
 						$datosUser = {
 							xxEmprid: _emprid,
 							xxEstado: _estado,
@@ -351,27 +371,146 @@
 							xxCambiarPass: _cambiarpass,
 							xxFecha: _fechacaduca
 						}
+						_ulr = "codephp/grabar_usuarios.php";	
+					}else{
+						_userid = $('#txtid').val();
 
-						$.ajax({
-							url: "codephp/grabar_usuarios.php",
+						$datosUser = {
+							xxEmprid: _emprid,
+							xxUserid: _userid,
+							xxEstado: _estado,
+							xxNombre: _nombre,
+							xxApellido:_apellido,
+							xxLogin: _login,
+							xxPerfil: _perfil,
+							xxCaducaPass: _caduca,
+							xxCambiarPass: _cambiarpass,
+							xxFecha: _fechacaduca
+						}	
+						_ulr = "codephp/editar_usuarios.php";
+					}
+					
+					$.ajax({
+							url: _ulr,
 							type: "POST",
 							dataType: "json",
 							data: $datosUser,          
 							success: function(data){ 
-								//console.log(data);
-								if(data == 'OK'){
-									$.redirect('?page=seg_usuarioadmin', {'mensaje': 'Guardado con Exito..!'}); 
+								if(data != 0){
+
+									_userid = data;										
+									_usuario = _nombre + ' ' + _apellido;
+
+									var _estado = '<td><div class="badge badge-light-primary">Activo</div>' ;
+
+									var _btnreset = '<td><div class="text-center"><div class="btn-group"><button id="btnReset' + _userid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Resetear Perfil" >' + 
+				 						'<i class="fa fa-key"></i></button></div></div></td>';
+
+									var _btnedit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar' + _userid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Usuario" >' + 
+				 						'<i class="fa fa-edit"></i></button></div></div></td>';
+
+									var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+												'<input class="form-check-input btnEstado" type="checkbox" id="chk' + _userid + '" checked onchange="f_Check(' +
+												_emprid + ',' + _userid + ')"' + ' value="' + _userid + '"' + '/></div></td>';	
+												
+									TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+
+									TableData.column(0).visible(0);
+										
+									if(_addmod == 'add'){
+										TableData.row.add([_userid, _usuario, _login, _estado, _perfilname, _btnreset, _btnedit, _btnchk]).draw();
+									}
+									else{
+										TableData.row(_fila).data([_userid, _usuario, _login, _estado, _perfilname, _btnreset, _btnedit, _btnchk]).draw();
+									} 
+
+									$("#user_modal").modal("hide");									
+
 								}                                                                         
 							},
 							error: function (error){
 								console.log(error);
 							}                            
-						}); 
-					}else{
-						mensajesweetalert("center","warning","Nombre del Usuario ya Existe..!",false,1800);
-					}
+						}); 					
 
-				});
+				}
+
+				// var xrespuesta = $.post("codephp/consultar_usuarios.php", $parametros);
+				// xrespuesta.done(function(response){
+				// 	//console.log(response);
+				// 	if(response == 0){
+
+				// 		$datosUser = {
+				// 			xxEmprid: _emprid,
+				// 			xxEstado: _estado,
+				// 			xxNombre: _nombre,
+				// 			xxApellido:_apellido,
+				// 			xxLogin: _login,
+				// 			xxPassword: _password,
+				// 			xxPerfil: _perfil,
+				// 			xxCaducaPass: _caduca,
+				// 			xxCambiarPass: _cambiarpass,
+				// 			xxFecha: _fechacaduca
+				// 		}
+
+				// 		if(_addmod == 'add'){
+				// 			_ulr = "codephp/grabar_usuarios.php";							
+				// 		}else{
+				// 			_ulr = "codephp/editar_usuarios.php";							
+				// 		}
+
+				// 		$.ajax({
+				// 			url: _ulr,
+				// 			type: "POST",
+				// 			dataType: "json",
+				// 			data: $datosUser,          
+				// 			success: function(data){ 
+				// 				if(data != 0){
+
+				// 					if(_addmod == 'add'){
+				// 						_userid = data;
+				// 					}else{
+				// 						_userid = $('#txtid').val();
+				// 					}
+									
+				// 					_usuario = _nombre + ' ' + _apellido;
+
+				// 					var _estado = '<td><div class="badge badge-light-primary">Activo</div>' ;
+
+				// 					var _btnreset = '<td><div class="text-center"><div class="btn-group"><button id="btnReset' + _userid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Resetear Perfil" >' + 
+				//  						'<i class="fa fa-key"></i></button></div></div></td>';
+
+				// 					var _btnedit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar' + _userid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Usuario" >' + 
+				//  						'<i class="fa fa-edit"></i></button></div></div></td>';
+
+				// 					var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+				// 								'<input class="form-check-input btnEstado" type="checkbox" id="chk' + _userid + '" checked onchange="f_Check(' +
+				// 								_emprid + ',' + _userid + ')"' + ' value="' + _userid + '"' + '/></div></td>';	
+												
+				// 					TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+
+				// 					TableData.column(0).visible(0);
+										
+
+				// 					if(_addmod == 'add'){
+
+				// 						TableData.row.add([_userid, _usuario, _login, _estado, _perfilname, _btnreset, _btnedit, _btnchk]).draw();
+				// 					}
+				// 					else{
+				// 						TableData.row(_fila).data([_userid, _usuario, _login, _estado, _perfilname, _btnreset, _btnedit, _btnchk]).draw();
+				// 					} 
+
+				// 					$("#user_modal").modal("hide");									
+				// 				}                                                                         
+				// 			},
+				// 			error: function (error){
+				// 				console.log(error);
+				// 			}                            
+				// 		}); 
+				// 	}else{
+				// 		mensajesweetalert("center","warning","Nombre del Usuario ya Existe..!",false,1800);
+				// 	}
+				// });
 
 			});
 
@@ -382,11 +521,11 @@
 				_fila = $(this).closest("tr");
 				_data = $('#kt_ecommerce_report_shipping_table').dataTable().fnGetData(_fila);
 				_idusu = _data[0];
-				_loginold = _data[3];
-
+				_loginold = _data[2];
+				_addmod = 'mod';
+				
 				$parametros = {
 					xxIdUsuario: _idusu,
-
 				}
 
 				$.ajax({
@@ -395,7 +534,7 @@
 					dataType: "json",
 					data: $parametros,          
 					success: function(data){ 
-						console.log(data);
+						//console.log(data);
 						var _nombres = data[0]['Nombres'];
 						var _apellidos = data[0]['Apellidos'];
 						var _login = data[0]['Login'];
@@ -426,10 +565,12 @@
 					}                            
 				}); 
 				
-                $(".modal-title").text("Editar Usuario");
+                $(".modal-title").text("Editar Usuario");				
                 $("#btnSave").text("Modificar");
+				$("#txtid").val(_idusu);
 				$("#frm_user").trigger("reset");
 			    $("#user_modal").modal("show");
+				
 
 			});
 
@@ -483,7 +624,7 @@
 	
 				TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
 	
-				TableData.row(_fila).data([_usu,_log,_lblEstado,_dep,_btnReset,_btnEdit,_btnchk ]).draw();
+				TableData.row(_fila).data([_userid,_usu,_log,_lblEstado,_dep,_btnReset,_btnEdit,_btnchk ]).draw();
 	
 						$parametros = {
 						  xxUsuId: _userid,

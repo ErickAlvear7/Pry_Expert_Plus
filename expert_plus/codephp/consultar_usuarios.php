@@ -12,24 +12,17 @@
     $log_file = "err_consulta";
     $xRow = 0;  
 
-    if(isset($_POST['xxEmprid']) and isset($_POST['xxNombre']) ){
-        if(isset($_POST['xxEmprid']) <> '' and isset($_POST['xxNombre']) <> ''){ 
+    if(isset($_POST['xxEmprid']) and isset($_POST['xxLogin']) ){
+        if(isset($_POST['xxEmprid']) <> '' and isset($_POST['xxLogin']) <> ''){ 
 
             $yEmprid = $_POST['xxEmprid'];
-            $xNombre = $_POST['xxNombre'];            
+            $xLogin = $_POST['xxLogin'];            
 
-            $xSql = "SELECT * FROM `expert_usuarios` WHERE CONCAT(usua_nombres,' ',usua_apellidos) = '$xNombre' AND empr_id = $yEmprid ";
+            $xSql = "SELECT * FROM `expert_usuarios` WHERE usua_login='$xLogin' AND empr_id=$yEmprid ";
             $all_user = mysqli_query($con, $xSql) or die (error_log(mysqli_error($con), 3, $log_file));
             $xRow = mysqli_num_rows($all_user);
-                
-
-
-             echo $xRow;
-
+            echo $xRow;
         }
-
-
     }
-
 
 ?>
