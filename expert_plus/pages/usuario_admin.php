@@ -276,12 +276,16 @@
 				$("#lblCaducaPass").text("NO");
 				$("#chkCamPass").prop("checked", false);
 				$("#lblCamPass").text("NO");  
-				 estado = 'A';
-				_fecha = new Date();
-				_fechacaduca = moment(_fecha).format("YYYY/MM/DD");
+
+				var now = new Date();
+				var day = ("0" + now.getDate()).slice(-2);
+				var month = ("0" + (now.getMonth() + 1)).slice(-2);
+				var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+				$('#txtFechacaduca').val(today);
+				
+				estado = 'A';
 				_addmod = 'add';
 
-				//alert(_fechacaduca);
 			});
 
 			//cambiar label -SI-NO
