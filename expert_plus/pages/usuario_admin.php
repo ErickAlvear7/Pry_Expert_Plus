@@ -81,15 +81,29 @@
 					foreach($expertusuario as $usu){
 						$idusuario = $usu['Idusuario'];
 						$estado = $usu['Estado'];
+						$usuario = $usu['Nombres'];
 					?>
 					<?php 
 
 						$cheking = '';
+						$chkEstado = '';
+						$xDisabledEdit = '';
+						$xDisabledReset = '';
+
 						if($estado == 'Activo'){
 							$cheking = 'checked="checked"';
 							$xTextColor = "badge badge-light-primary";
 						}else{
 							$xTextColor = "badge badge-light-danger";
+						}
+
+						if($usuario == 'Administrador Principal'){
+							$chkEstado = 'disabled';
+							$xDisabledEdit = 'disabled';
+							$xDisabledReset = 'disabled';
+						}elseif($estado == 'Inactivo'){
+							  $xDisabledEdit = 'disabled';
+							  $xDisabledReset = 'disabled';
 						}
 					?>
 					<tr>
@@ -103,7 +117,7 @@
 						<td>
 							<div class="text-center">
 								<div class="btn-group">
-									<button id="btnReset<?php echo $idusuario; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Resetear Password'>
+									<button id="btnReset" onclick="f_ResetPass(<?php echo $idusuario; ?>,<?php echo $yEmprid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledReset;?> title='Resetear Password'>
 										<i class='fa fa-key'></i>
 									</button>																															 
 								</div>
@@ -112,7 +126,7 @@
 						<td>
 							<div class="text-center">
 								<div class="btn-group">
-									<button id="btnEditar<?php echo $idusuario; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Usuario'>
+									<button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Usuario'>
 										<i class='fa fa-edit'></i>
 									</button>																															 
 								</div>
@@ -121,7 +135,7 @@
 						<td>
 							<div class="text-center">
 								<div class="form-check form-check-sm form-check-custom form-check-solid">
-									<input <?php echo $cheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $idusuario; ?>" 
+									<input <?php echo $cheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $idusuario; ?>" 
 									    onchange="f_Check(<?php echo $yEmprid; ?>,<?php echo $usu['Idusuario']; ?>)" value="<?php echo $idusuario; ?>"/>
 								</div>
 							</div>
@@ -262,7 +276,7 @@
 				$("#lblCaducaPass").text("NO");
 				$("#chkCamPass").prop("checked", false);
 				$("#lblCamPass").text("NO");  
-				estado = 'A';
+				 estado = 'A';
 				_fecha = new Date();
 				_fechacaduca = moment(_fecha).format("YYYY/MM/DD");
 				_addmod = 'add';
@@ -636,9 +650,10 @@
 								  'class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Usuario">' +
 								  '<i class="fa fa-edit"></i></button></div></div></td>';		  
 				
-				var _btnReset = '<td><div class="text-center"><div class="btn-group"><button ' +  _disabled +  ' id="btnReset' + _userid + '"' +
-								'class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Resetear Password">' +
+				var _btnReset = '<td><div class="text-center"><div class="btn-group"><button ' +  _disabled +  ' id="btnReset"' +
+								' onclick="f_ResetPass(' +_userid + ',' +_emprid + ')"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Resetear Password">' +
 								'<i class="fa fa-key"></i></button></div></div></td>';
+				//console.log(_btnReset);				
 
 	
 				var _btnchk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
@@ -669,6 +684,36 @@
 			$("#user_modal").draggable({
 				handle: ".modal-header"
 			}); 
+
+			//resetaer password
+
+			function f_ResetPass(idusu,idempr){
+
+					_idusu= idusu;
+					_idempr= idempr;
+
+				$parametros ={
+					xxUsuId: _idusu,
+					xxEmprId: _idempr
+				}
+
+				$.ajax({
+					url: "codephp/reset_password.php",
+					type: "POST",
+					dataType: "json",
+					data: $parametros,          
+					success: function(data){ 
+						//console.log(data);
+						if(data == 'OK'){
+							mensajesweetalert("center","success","password actualizado con exito..!",false,1800);
+						}                                                                         
+					},
+					error: function (error){
+						console.log(error);
+					}                            
+				}); 
+			 
+			}
 
 
 	</script> 	
