@@ -201,13 +201,6 @@
 					</div>
 					<div class="row g-9 mb-8">
 						<div class="col-md-6 fv-row">
-							<label class="required fs-6 fw-bold mb-2">Departamento</label>
-							<select class="form-select form-select-solid" id="cboDepart" name="cboDepart" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Departamento" name="departamento">
-								<option value=""><--Seleccione--></option>
-								<option value="2">Call-Center</option>
-							</select>
-						</div>
-						<div class="col-md-6 fv-row">
 							<label class="required fs-6 fw-bold mb-2">Perfil</label>
 							<select class="form-select form-select-solid" id="cboPerfil" name="cboPerfil" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Perfil" name="perfil">
 							    <?php foreach ($expertperfil as $per) : ?>
@@ -333,7 +326,6 @@
 				_password = $.trim($("#txtPassword").val());
 				_perfil = $('#cboPerfil').val();
 				_perfilname = $("#cboPerfil option:selected").text();				
-				_departamento = $('#cboDepart').val();
 				_caduca = caduca;
 				_cambiarpass = cambiarpass;
 				_fechacaduca = $.trim($("#txtFechacaduca").val());
@@ -562,7 +554,9 @@
 				_idusu = _data[0];
 				_loginold = _data[2];
 				_addmod = 'mod';
-				
+
+				$('#txtPassword').prop('readonly', true);
+
 				$parametros = {
 					xxIdUsuario: _idusu,
 				}
@@ -584,7 +578,6 @@
 						var _cambiarPass = data[0]['CambiarPass'];
 
 						$("#txtNombre").val(_nombres);
-						$("#txtApellido").val(_apellidos);
 						$("#txtApellido").val(_apellidos);
 						$("#txtLogin").val(_login);
 						$("#txtPassword").val(_password);
@@ -619,13 +612,16 @@
 		
 		});	
 
+		//cambiar estado y desactivar botones en linea
+
 		$(document).on("click",".btnEstado",function(e){
 				_fila = $(this).closest("tr");
 				_usu = $(this).closest("tr").find('td:eq(1)').text();
 				_log = $(this).closest("tr").find('td:eq(2)').text();  
 				_dep = $(this).closest("tr").find('td:eq(4)').text(); 
-				//console.log(_usuario);
 		});
+
+		//cambiar estado y desactivar botones en linea
 
 		function f_Check(_emprid, _userid){
 
@@ -656,15 +652,13 @@
 				
 				var _btnReset = '<td><div class="text-center"><div class="btn-group"><button ' +  _disabled +  ' id="btnReset"' +
 								' onclick="f_ResetPass(' +_userid + ',' +_emprid + ')"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Resetear Password">' +
-								'<i class="fa fa-key"></i></button></div></div></td>';
-				//console.log(_btnReset);				
+								'<i class="fa fa-key"></i></button></div></div></td>';			
 
 	
 				var _btnchk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
 							  '<input ' + _checked + 'class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chk' + _userid + '"' +
 							  'onchange="f_Check(' +_emprid  + ',' + _userid + ')"' + 'value="' + _userid + '"' + '/></div></div></td>';
 	
-				//console.log(_fila);
 	
 	
 				TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
