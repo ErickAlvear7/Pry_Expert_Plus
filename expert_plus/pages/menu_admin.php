@@ -80,6 +80,8 @@
 					if($xMenu == 'Seguridad'){
 						$chkEstado = 'disabled';
 						$xDisabledEdit = 'disabled';
+					}elseif($menu['Estado'] == 'Inactivo'){
+                          $xDisabledEdit = 'disabled';
 					}
 
 					if($menu['Estado'] == 'Activo'){

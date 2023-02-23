@@ -81,15 +81,29 @@
 					foreach($expertusuario as $usu){
 						$idusuario = $usu['Idusuario'];
 						$estado = $usu['Estado'];
+						$usuario = $usu['Nombres'];
 					?>
 					<?php 
 
 						$cheking = '';
+						$chkEstado = '';
+						$xDisabledEdit = '';
+						$xDisabledReset = '';
+
 						if($estado == 'Activo'){
 							$cheking = 'checked="checked"';
 							$xTextColor = "badge badge-light-primary";
 						}else{
 							$xTextColor = "badge badge-light-danger";
+						}
+
+						if($usuario == 'Administrador Principal'){
+							$chkEstado = 'disabled';
+							$xDisabledEdit = 'disabled';
+							$xDisabledReset = 'disabled';
+						}elseif($estado == 'Inactivo'){
+							  $xDisabledEdit = 'disabled';
+							  $xDisabledReset = 'disabled';
 						}
 					?>
 					<tr>
@@ -103,7 +117,7 @@
 						<td>
 							<div class="text-center">
 								<div class="btn-group">
-									<button id="btnReset<?php echo $idusuario; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Resetear Password'>
+									<button id="btnReset" onclick="f_ResetPass(<?php echo $idusuario; ?>,<?php echo $yEmprid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledReset;?> title='Resetear Password'>
 										<i class='fa fa-key'></i>
 									</button>																															 
 								</div>
@@ -112,7 +126,7 @@
 						<td>
 							<div class="text-center">
 								<div class="btn-group">
-									<button id="btnEditar<?php echo $idusuario; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Usuario'>
+									<button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Usuario'>
 										<i class='fa fa-edit'></i>
 									</button>												 
 								</div>
@@ -121,7 +135,7 @@
 						<td>
 							<div class="text-center">
 								<div class="form-check form-check-sm form-check-custom form-check-solid">
-									<input <?php echo $cheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $idusuario; ?>" 
+									<input <?php echo $cheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $idusuario; ?>" 
 									    onchange="f_Check(<?php echo $yEmprid; ?>,<?php echo $usu['Idusuario']; ?>)" value="<?php echo $idusuario; ?>"/>
 								</div>
 							</div>
@@ -186,13 +200,6 @@
 						</div>
 					</div>
 					<div class="row g-9 mb-8">
-						<div class="col-md-6 fv-row">
-							<label class="required fs-6 fw-bold mb-2">Departamento</label>
-							<select class="form-select form-select-solid" id="cboDepart" name="cboDepart" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Departamento" name="departamento">
-								<option value=""><--Seleccione--></option>
-								<option value="2">Call-Center</option>
-							</select>
-						</div>
 						<div class="col-md-6 fv-row">
 							<label class="required fs-6 fw-bold mb-2">Perfil</label>
 							<select class="form-select form-select-solid" id="cboPerfil" name="cboPerfil" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Perfil" name="perfil">
@@ -262,12 +269,16 @@
 				$("#lblCaducaPass").text("NO");
 				$("#chkCamPass").prop("checked", false);
 				$("#lblCamPass").text("NO");  
+
+				var now = new Date();
+				var day = ("0" + now.getDate()).slice(-2);
+				var month = ("0" + (now.getMonth() + 1)).slice(-2);
+				var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+				$('#txtFechacaduca').val(today);
+				
 				estado = 'A';
-				_fecha = new Date();
-				_fechacaduca = moment(_fecha).format("YYYY/MM/DD");
 				_addmod = 'add';
 
-				//alert(_fechacaduca);
 			});
 
 			//cambiar label -SI-NO
@@ -315,7 +326,6 @@
 				_password = $.trim($("#txtPassword").val());
 				_perfil = $('#cboPerfil').val();
 				_perfilname = $("#cboPerfil option:selected").text();				
-				_departamento = $('#cboDepart').val();
 				_caduca = caduca;
 				_cambiarpass = cambiarpass;
 				_fechacaduca = $.trim($("#txtFechacaduca").val());
@@ -544,7 +554,9 @@
 				_idusu = _data[0];
 				_loginold = _data[2];
 				_addmod = 'mod';
-				
+
+				$('#txtPassword').prop('readonly', true);
+
 				$parametros = {
 					xxIdUsuario: _idusu,
 				}
@@ -566,7 +578,6 @@
 						var _cambiarPass = data[0]['CambiarPass'];
 
 						$("#txtNombre").val(_nombres);
-						$("#txtApellido").val(_apellidos);
 						$("#txtApellido").val(_apellidos);
 						$("#txtLogin").val(_login);
 						$("#txtPassword").val(_password);
@@ -601,13 +612,16 @@
 		
 		});	
 
+		//cambiar estado y desactivar botones en linea
+
 		$(document).on("click",".btnEstado",function(e){
 				_fila = $(this).closest("tr");
 				_usu = $(this).closest("tr").find('td:eq(1)').text();
 				_log = $(this).closest("tr").find('td:eq(2)').text();  
 				_dep = $(this).closest("tr").find('td:eq(4)').text(); 
-				//console.log(_usuario);
 		});
+
+		//cambiar estado y desactivar botones en linea
 
 		function f_Check(_emprid, _userid){
 
@@ -636,16 +650,15 @@
 								  'class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Usuario">' +
 								  '<i class="fa fa-edit"></i></button></div></div></td>';		  
 				
-				var _btnReset = '<td><div class="text-center"><div class="btn-group"><button ' +  _disabled +  ' id="btnReset' + _userid + '"' +
-								'class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Resetear Password">' +
-								'<i class="fa fa-key"></i></button></div></div></td>';
+				var _btnReset = '<td><div class="text-center"><div class="btn-group"><button ' +  _disabled +  ' id="btnReset"' +
+								' onclick="f_ResetPass(' +_userid + ',' +_emprid + ')"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Resetear Password">' +
+								'<i class="fa fa-key"></i></button></div></div></td>';			
 
 	
 				var _btnchk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
 							  '<input ' + _checked + 'class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chk' + _userid + '"' +
 							  'onchange="f_Check(' +_emprid  + ',' + _userid + ')"' + 'value="' + _userid + '"' + '/></div></div></td>';
 	
-				//console.log(_fila);
 	
 	
 				TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
@@ -669,6 +682,36 @@
 			$("#user_modal").draggable({
 				handle: ".modal-header"
 			}); 
+
+			//resetaer password
+
+			function f_ResetPass(idusu,idempr){
+
+					_idusu= idusu;
+					_idempr= idempr;
+
+				$parametros ={
+					xxUsuId: _idusu,
+					xxEmprId: _idempr
+				}
+
+				$.ajax({
+					url: "codephp/reset_password.php",
+					type: "POST",
+					dataType: "json",
+					data: $parametros,          
+					success: function(data){ 
+						//console.log(data);
+						if(data == 'OK'){
+							mensajesweetalert("center","success","password actualizado con exito..!",false,1800);
+						}                                                                         
+					},
+					error: function (error){
+						console.log(error);
+					}                            
+				}); 
+			 
+			}
 
 
 	</script> 	
