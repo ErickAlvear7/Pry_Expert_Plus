@@ -10,9 +10,12 @@
 	$xServidor = $_SERVER['HTTP_HOST'];
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
-	$xSQL = "SELECT tare_nombre AS Tarea, tare_ruta AS Programa, CASE menu_estado WHEN 'A' THEN 'Activo' ";
-	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_menu`";
-	$expertmenu = mysqli_query($con, $xSQL);
+    //$yEmprid = $_SESSION["i_empre_id"];
+    $yEmprid = 1;	
+
+	$xSQL = "SELECT tare_id AS Id, tare_nombre AS Tarea, tare_ruta AS Accion, CASE tare_estado WHEN 'A' THEN 'Activo' ";
+	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_tarea` AND empr_id=$yEmprid ORDER BY tare_orden";
+	$all_tareas = mysqli_query($con, $xSQL);
 ?>				
 					
 <div id="kt_content_container" class="container-xxl">
@@ -56,9 +59,9 @@
 			<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
 				<thead>
 					<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
-						<th style="display:none;">Idmenu</th>
-						<th style="width: 30px;">Menu</th>
-						<th style="width: 30px;">Descripcion</th>
+						<th style="display:none;">IdTarea</th>
+						<th style="width: 30px;">Tarea</th>
+						<th style="width: 30px;">Accion</th>
 						<th style="width: 30px;">Estado</th>
 						<th style="width: 30px; text-align:center;">Opciones</th>
 						<th style="width: 10px;">Status</th>
@@ -67,37 +70,40 @@
 				<tbody class="fw-bold text-gray-600">
 					<?php 
 					
-					foreach($expertmenu as $menu){
-                      $xMenu = $menu['Menu'];
+					foreach($all_tareas as $tareas){
+                      
 					?>
 					<?php 
 
-                     $chkEstado = '';
-					 $xDisabledEdit = '';
-
-					if($xMenu == 'Seguridad'){
-						$chkEstado = 'disabled';
-						$xDisabledEdit = 'disabled';
-					}
-
-					if($menu['Estado'] == 'Activo'){
+                     	$chkEstado = '';
+					 	$xDisabledEdit = '';
 						$xTextColor = "badge badge-light-primary";
-					}else{
-						$xTextColor = "badge badge-light-danger";
-					}
+
+						if($tareas['Id'] == '100001' || $tareas['Id'] == "100002" || $tareas['Id'] == "100003" || $tareas['Id'] == "100004"){
+
+							$xDisabledEdit = 'disabled';
+							$chkEstado = 'disabled';
+						}
+
+						if($tareas['Id'] != '100001' || $tareas['Id'] != "100002" || $tareas['Id'] != "100003" || $tareas['Id'] != "100004"){								
+							if ($tareas['Estado'] == 'Inactivo'){
+								$xDisabledEdit = 'disabled';
+								$xTextColor = "badge badge-light-danger";
+							}
+						}						
 					
 					?>
 					<tr>
-						<td style="display:none;"><?php echo $menu['Idmenu']; ?></td>
-						<td><?php echo $menu['Menu']; ?></td>
-						<td><?php echo $menu['Observacion']; ?></td>
+						<td style="display:none;"><?php echo $tareas['Id']; ?></td>
+						<td><?php echo $tareas['Tarea']; ?></td>
+						<td><?php echo $tareas['Accion']; ?></td>
 						<td>
-						   <div class="<?php  echo $xTextColor; ?>"><?php echo $menu['Estado']; ?></div>
+						   <div class="<?php  echo $xTextColor; ?>"><?php echo $tareas['Estado']; ?></div>
 						</td>
 						<td>
 							<div class="text-center">
 								<div class="btn-group">
-									<button <?php echo $xDisabledEdit ?> onclick="f_Editar(<?php echo $menu['Idmenu']; ?>)" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Perfil'>
+									<button <?php echo $xDisabledEdit ?> id="btnEditar<?php echo $tareas['Id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Perfil'>
 										<i class='fa fa-edit'></i>
 									</button>																															 
 								</div>

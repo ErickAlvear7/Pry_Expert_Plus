@@ -114,7 +114,7 @@
 								<div class="btn-group">
 									<button id="btnEditar<?php echo $idusuario; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Usuario'>
 										<i class='fa fa-edit'></i>
-									</button>																															 
+									</button>												 
 								</div>
 							</div>
 						</td>
