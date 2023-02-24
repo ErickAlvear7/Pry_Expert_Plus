@@ -39,7 +39,9 @@
 	}else if($page == 'editmenu'){
 		include __DIR__ . '/../pages/editar_menu.php';						
 	}else if($page == 'seg_usuarioadmin'){
-		include __DIR__ . '/../pages/usuario_admin.php';	
+		include __DIR__ . '/../pages/usuario_admin.php';
+	}else if($page == 'seg_tareadmin'){
+		include __DIR__ . '/../pages/tarea_admin.php';
 	}else{
 		include '_content.php';
 	}

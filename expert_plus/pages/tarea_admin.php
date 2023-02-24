@@ -14,7 +14,7 @@
     $yEmprid = 1;	
 
 	$xSQL = "SELECT tare_id AS Id, tare_nombre AS Tarea, tare_ruta AS Accion, CASE tare_estado WHEN 'A' THEN 'Activo' ";
-	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_tarea` AND empr_id=$yEmprid ORDER BY tare_orden";
+	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_tarea` WHERE empr_id=$yEmprid ORDER BY tare_orden";
 	$all_tareas = mysqli_query($con, $xSQL);
 ?>				
 					
@@ -29,7 +29,7 @@
 						<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
 					</svg>
 				</span>
-			Nuevo Menu</a>
+			Nueva Tarea</a>
 		</div>
 		<div class="card-header align-items-center py-5 gap-2 gap-md-5">
 			<div class="card-title">
@@ -60,11 +60,11 @@
 				<thead>
 					<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
 						<th style="display:none;">IdTarea</th>
-						<th style="width: 30px;">Tarea</th>
-						<th style="width: 30px;">Accion</th>
-						<th style="width: 30px;">Estado</th>
-						<th style="width: 30px; text-align:center;">Opciones</th>
-						<th style="width: 10px;">Status</th>
+						<th>Tarea</th>
+						<th>Accion</th>
+						<th>Estado</th>
+						<th style="text-align:center;">Opciones</th>
+						<th>Status</th>
 					</tr>
 				</thead>
 				<tbody class="fw-bold text-gray-600">
@@ -103,7 +103,7 @@
 						<td>
 							<div class="text-center">
 								<div class="btn-group">
-									<button <?php echo $xDisabledEdit ?> id="btnEditar<?php echo $tareas['Id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Perfil'>
+									<button <?php echo $xDisabledEdit ?> id="btnEditar<?php echo $tareas['Id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Tareas'>
 										<i class='fa fa-edit'></i>
 									</button>																															 
 								</div>
@@ -112,8 +112,8 @@
 						<td>
 							<div class="text-center">
 								<div class="form-check form-check-sm form-check-custom form-check-solid">
-										<input class="form-check-input" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $menu['Idmenu']; ?>" <?php if ($menu['Estado'] == 'Activo') {
-												echo "checked";} else {'';} ?> value="<?php echo $menu['Idmenu']; ?>" />
+										<input class="form-check-input" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $tareas['Id']; ?>" <?php if ($tareas['Estado'] == 'Activo') {
+												echo "checked";} else {'';} ?> value="<?php echo $tareas['Id']; ?>" />
 								</div>
 							</div>
 						</td>

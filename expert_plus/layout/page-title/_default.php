@@ -12,13 +12,13 @@
 		$title = 'REGISTRO DE MENU';
 		$descripcion = 'Menú de Opciones';
 	}else if($page == 'seg_perfiladmin'){
-		$title = 'REGISTRO DE PERFIL';
+		$title = 'Administrar Perfil';
 		$descripcion = 'Registrar Perfil (Opciones de menú y submenu para el perfil)';
 	}else if($page == 'addmenu'){
-		$title = 'AGREGAR NUEVO MENU';
+		$title = 'Crear Menu';
 		$descripcion = 'Ingrese Datos para crear opción menú';
 	}else if($page == 'addperfil'){
-		$title = 'AGREGAR NUEVO PERFIL';
+		$title = 'Crear Perfil';
 		$descripcion = 'Ingrese Datos para crear opción perfil';
 	}else if($page == 'editperfil'){
 		$title = 'EDITAR PERFIL';
@@ -27,8 +27,12 @@
 		$title = 'EDITAR MENU';
 		$descripcion = 'Edición Datos del Menu';
 	}else if($page=='seg_usuarioadmin'){
-        $title = 'USUARIOS';
+        $title = 'Administrar Usuarios';
 		$descripcion = 'Datos del Usuario';
+	}else if($page == 'seg_tareadmin'){
+        $title = 'Administrar Tareas';
+		$descripcion = 'Registro de Tareas';
+
 	}
 
 ?>	
