@@ -168,13 +168,14 @@
 				<div class="modal-body py-10 px-lg-17">
 					<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
 						<div class="fw-bolder fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_add_customer_billing_info" role="button" aria-expanded="false" aria-controls="kt_customer_view_details">Informacion Usuario
-						<span class="ms-2 rotate-180">
-							<span class="svg-icon svg-icon-3">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-									<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-								</svg>
+							<span class="ms-2 rotate-180">
+								<span class="svg-icon svg-icon-3">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+										<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+									</svg>
+								</span>
 							</span>
-						</span></div>
+					    </div>
 						<div id="kt_modal_add_customer_billing_info" class="collapse show">
 						    <input class="form-control form-control-solid" type="hidden" id="txtid" name="txtid" />
 							<div class="row g-9 mb-7">
@@ -208,11 +209,9 @@
 								</label>
 								<input type="password" class="form-control form-control-solid" id="txtPassword" name="subject" minlength="1" maxlength="100" />
 							  </div>
-							
 							</div>
 							<div class="d-flex flex-column mb-7 fv-row">
 							    <label class="required fs-6 fw-bold mb-2">Perfil</label>
-								</label>
 								<select id="cboPerfil" aria-label="Seleccione Perfil..." data-control="select2" data-placeholder="Seleccione Perfil..." data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bolder">
 									<?php foreach ($expertperfil as $per) : ?>
 									<option value="<?= $per['Codigo'] ?>"><?= $per['Descripcion'] ?></option>
@@ -462,7 +461,7 @@
 										TableData.row(_fila).data([_userid, _usuario, _login, _estado, _perfilname, _btnreset, _btnedit, _btnchk]).draw();
 									} 
 
-									$("#user_modal").modal("hide");									
+									$("#kt_modal_add_customer").modal("hide");									
 
 								}                                                                         
 							},
