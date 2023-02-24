@@ -181,7 +181,7 @@
 								<span class="required">Apellido</span>
 								<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el apellido del usuario"></i>
 							</label>
-							<input type="text" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" placeholder="" />
+							<input type="text" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" placeholder="Ingrese Apellido" />
 						</div>
 					</div>
 					<div class="row g-9 mb-8">
@@ -707,12 +707,10 @@
 				$("#chkCamPass").prop("checked", false);
 				$("#lblCamPass").text("NO");  
 
-				var now = new Date();
-				var day = ("0" + now.getDate()).slice(-2);
-				var month = ("0" + (now.getMonth() + 1)).slice(-2);
-				var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-				$('#txtFechacaduca').val(today);
-				
+				$('#txtPassword').prop('readonly', false);
+				$('#content').css('display','none'); 
+				$('#cboPerfil').val(null).trigger('change');  
+
 				estado = 'A';
 				_addmod = 'add';
 
@@ -730,6 +728,11 @@
 					element.style.display='block';
 					$("#lblCaducaPass").text("SI");
 					caduca = 'SI';
+					var now = new Date();
+					var day = ("0" + now.getDate()).slice(-2);
+					var month = ("0" + (now.getMonth() + 1)).slice(-2);
+					var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+					$('#txtFechacaduca').val(today);
 				}else{
 					element.style.display='none';
 					$("#lblCaducaPass").text("NO");
@@ -1005,6 +1008,7 @@
 					data: $parametros,          
 					success: function(data){ 
 						//console.log(data);
+						//debugger;
 						var _nombres = data[0]['Nombres'];
 						var _apellidos = data[0]['Apellidos'];
 						var _login = data[0]['Login'];
@@ -1023,12 +1027,21 @@
 
 						if(_passCaduca == 'SI'){
 							$("#chkCaducaPass").prop("checked", true);
-							$("#lblCaducaPass").text("SI");                
+							$("#lblCaducaPass").text("SI");  
+							$('#content').css('display','block');       
+						}else if(_passCaduca == 'NO'){
+							$("#chkCaducaPass").prop("checked", false);
+							$("#lblCaducaPass").text("NO");  
+							$('#content').css('display','none');   
+
 						}
 
 						if(_cambiarPass == 'SI'){
 							$("#chkCamPass").prop("checked", true);
 							$("#lblCamPass").text('SI');
+						}else if(_cambiarPass == 'NO'){
+							$("#chkCamPass").prop("checked", false);
+							$("#lblCamPass").text('NO');
 						}
 						                                                                      
 					},
