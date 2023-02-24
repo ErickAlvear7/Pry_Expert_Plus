@@ -149,7 +149,7 @@
 </div>
 
 <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered mw-750px">
+	<div class="modal-dialog modal-dialog-centered mw-650px">
 		<div class="modal-content">
 			<form class="form" id="frm_user">
 				<div class="modal-header" id="kt_modal_add_customer_header">
@@ -696,7 +696,7 @@
 			}
 
             //desplazar ventana modal
-			$("#user_modal").draggable({
+			$("#kt_modal_add_customer").draggable({
 				handle: ".modal-header"
 			}); 
 
