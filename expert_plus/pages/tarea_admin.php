@@ -130,38 +130,38 @@
 		<div class="modal fade" id="modal-tarea" tabindex="-1" aria-hidden="true">
 			<!--begin::Modal dialog-->
 			<div class="modal-dialog modal-dialog-centered mw-650px">
-				<!--begin::Modal content-->
+				
 				<div class="modal-content">
-					<!--begin::Form-->
+					
 					<form class="form" action="#" id="kt_modal_new_address_form">
-						<!--begin::Modal header-->
+						
 						<div class="modal-header" id="kt_modal_new_address_header">
-							<!--begin::Modal title-->
-							<h2>Add New Address</h2>
-							<!--end::Modal title-->
-							<!--begin::Close-->
+							
+							<h2 class="modal-title" id="modalLabel"></h2>
+							
+							
 							<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-								<!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+								
 								<span class="svg-icon svg-icon-1">
 									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 										<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
 										<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
 									</svg>
 								</span>
-								<!--end::Svg Icon-->
+								
 							</div>
-							<!--end::Close-->
+							
 						</div>
-						<!--end::Modal header-->
-						<!--begin::Modal body-->
+						
+						
 						<div class="modal-body py-10 px-lg-17">
-							<!--begin::Scroll-->
+							
 							<div class="scroll-y me-n7 pe-7" id="kt_modal_new_address_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_address_header" data-kt-scroll-wrappers="#kt_modal_new_address_scroll" data-kt-scroll-offset="300px">
-								<!--begin::Notice-->
-								<!--begin::Notice-->
+								
+								
 								<div class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-9 p-6">
-									<!--begin::Icon-->
-									<!--begin::Svg Icon | path: icons/duotune/general/gen044.svg-->
+									
+									
 									<span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
 										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 											<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor" />
@@ -169,55 +169,55 @@
 											<rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor" />
 										</svg>
 									</span>
-									<!--end::Svg Icon-->
-									<!--end::Icon-->
-									<!--begin::Wrapper-->
+									
+									
+									
 									<div class="d-flex flex-stack flex-grow-1">
-										<!--begin::Content-->
+										
 										<div class="fw-bold">
 											<h4 class="text-gray-900 fw-bolder">Warning</h4>
 											<div class="fs-6 text-gray-700">Updating address may affter to your
 											<a href="#">Tax Location</a></div>
 										</div>
-										<!--end::Content-->
+										
 									</div>
-									<!--end::Wrapper-->
+									
 								</div>
-								<!--end::Notice-->
-								<!--end::Notice-->
-								<!--begin::Input group-->
+								
+								
+								
 								<div class="row mb-5">
-									<!--begin::Col-->
+									
 									<div class="col-md-6 fv-row">
-										<!--begin::Label-->
+										
 										<label class="required fs-5 fw-bold mb-2">First name</label>
-										<!--end::Label-->
-										<!--begin::Input-->
+										
+										
 										<input type="text" class="form-control form-control-solid" placeholder="" name="first-name" />
-										<!--end::Input-->
+										
 									</div>
-									<!--end::Col-->
-									<!--begin::Col-->
+									
+									
 									<div class="col-md-6 fv-row">
-										<!--end::Label-->
+										
 										<label class="required fs-5 fw-bold mb-2">Last name</label>
-										<!--end::Label-->
-										<!--end::Input-->
+										
+										
 										<input type="text" class="form-control form-control-solid" placeholder="" name="last-name" />
-										<!--end::Input-->
+										
 									</div>
-									<!--end::Col-->
+									
 								</div>
-								<!--end::Input group-->
-								<!--begin::Input group-->
+								
+								
 								<div class="d-flex flex-column mb-5 fv-row">
-									<!--begin::Label-->
+									
 									<label class="d-flex align-items-center fs-5 fw-bold mb-2">
 										<span class="required">Country</span>
 										<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Your payment statements may very based on selected country"></i>
 									</label>
-									<!--end::Label-->
-									<!--begin::Select-->
+									
+									
 									<select name="country" data-control="select2" data-dropdown-parent="#modal-tarea" data-placeholder="Select a Country..." class="form-select form-select-solid">
 										<option value="">Select a Country...</option>
 										<option value="AF">Afghanistan</option>
@@ -445,7 +445,7 @@
 										<option value="ZM">Zambia</option>
 										<option value="ZW">Zimbabwe</option>
 									</select>
-									<!--end::Select-->
+									
 								</div>
 
 								<div class="col-md-3 fv-row">
@@ -457,55 +457,55 @@
 									</select>
 									<div class="fv-plugins-message-container" style="color: red;" id="errorSexo"></div>																
 								</div>								
-								<!--end::Input group-->
-								<!--begin::Input group-->
+								
+								
 								<div class="d-flex flex-column mb-5 fv-row">
-									<!--begin::Label-->
+									
 									<label class="required fs-5 fw-bold mb-2">Address Line 1</label>
-									<!--end::Label-->
-									<!--begin::Input-->
+									
+									
 									<input class="form-control form-control-solid" placeholder="" name="address1" />
-									<!--end::Input-->
+									
 								</div>
-								<!--end::Input group-->
-								<!--begin::Input group-->
+								
+								
 								<div class="d-flex flex-column mb-5 fv-row">
-									<!--begin::Label-->
+									
 									<label class="required fs-5 fw-bold mb-2">Address Line 2</label>
-									<!--end::Label-->
-									<!--begin::Input-->
+									
+									
 									<input class="form-control form-control-solid" placeholder="" name="address2" />
-									<!--end::Input-->
+									
 								</div>
-								<!--end::Input group-->
-								<!--begin::Input group-->
+								
+								
 								<div class="d-flex flex-column mb-5 fv-row">
-									<!--begin::Label-->
+									
 									<label class="fs-5 fw-bold mb-2">Town</label>
-									<!--end::Label-->
-									<!--begin::Input-->
+									
+									
 									<input class="form-control form-control-solid" placeholder="" name="city" />
-									<!--end::Input-->
+									
 								</div>
-								<!--end::Input group-->
-								<!--begin::Input group-->
+								
+								
 								<div class="row g-9 mb-5">
-									<!--begin::Col-->
+									
 									<div class="col-md-6 fv-row">
-										<!--begin::Label-->
+										
 										<label class="fs-5 fw-bold mb-2">State / Province</label>
-										<!--end::Label-->
-										<!--begin::Input-->
+										
+										
 										<input class="form-control form-control-solid" placeholder="" name="state" />
-										<!--end::Input-->
+										
 									</div>
-									<!--end::Col-->
-									<!--begin::Col-->
+									
+									
 									<div class="col-md-6 fv-row">
-										<!--begin::Label-->
+										
 										<label class="fs-5 fw-bold mb-2">Post Code</label>
-										<!--end::Label-->
-										<!--begin::Input-->
+										
+										
 										<input class="form-control form-control-solid" placeholder="" name="postcode" />
 										<!--end::Input-->
 									</div>

@@ -42,6 +42,8 @@
 		include __DIR__ . '/../pages/usuario_admin.php';
 	}else if($page == 'seg_tareadmin'){
 		include __DIR__ . '/../pages/tarea_admin.php';
+	}else if($page == 'suptarea'){
+		include __DIR__ . '/../pages/tareasuper_admin.php';
 	}else{
 		include '_content.php';
 	}
