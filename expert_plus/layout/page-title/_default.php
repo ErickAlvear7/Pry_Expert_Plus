@@ -32,7 +32,9 @@
 	}else if($page == 'seg_tareadmin'){
         $title = 'Administrar Tareas';
 		$descripcion = 'Registro de Tareas';
-
+	}else if($page == 'suptarea'){
+		$title = 'Administrar Tareas';
+		$descripcion = 'Registro de Tareas';
 	}
 
 ?>	

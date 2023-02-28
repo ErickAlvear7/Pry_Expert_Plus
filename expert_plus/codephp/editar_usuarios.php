@@ -33,8 +33,15 @@
                 $xFechaCaduca = $datos["FechaCaduca"];
                 $xCambiarPass = $datos["Cambiar"];
 
-                $xDataUsuarios[] = array('Nombres'=> $xNombres, 'Apellidos'=> $xApellidos, 'Login'=> $xLogin, 'Password'=>$xPassword, 'CodigoPerfil'=> $xCodPerfil,
-                'CaducaPass'=> $xCaducaPass, 'FechaCaduca'=> $xFechaCaduca, 'CambiarPass'=> $xCambiarPass);                
+                $xDataUsuarios[] = array(
+                        'Nombres'=> $xNombres, 
+                        'Apellidos'=> $xApellidos, 
+                        'Login'=> $xLogin, 
+                        'Password'=> $xPassword, 
+                        'CodigoPerfil'=> $xCodPerfil,
+                        'CaducaPass'=> $xCaducaPass, 
+                        'FechaCaduca'=> $xFechaCaduca, 
+                        'CambiarPass'=> $xCambiarPass);                
             }
 
             print json_encode($xDataUsuarios, JSON_UNESCAPED_UNICODE);

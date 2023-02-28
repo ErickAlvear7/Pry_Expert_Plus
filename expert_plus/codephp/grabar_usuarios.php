@@ -10,7 +10,6 @@
 
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());  
     $xTerminal = gethostname();
-    $data = "ERROR";
 
     if(isset($_POST['xxEmprid']) and isset($_POST['xxNombre']) and isset($_POST['xxApellido']) and isset($_POST['xxLogin'])
         and isset($_POST['xxPassword'])  and isset($_POST['xxPerfil'])){
@@ -37,11 +36,7 @@
                     $last_id = mysqli_insert_id($con);
                 }
 
-                print json_encode($last_id, JSON_UNESCAPED_UNICODE);
-        
+                print json_encode($last_id, JSON_UNESCAPED_UNICODE);        
         }
-
-
     }
-
 ?>

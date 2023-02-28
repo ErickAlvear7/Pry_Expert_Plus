@@ -151,7 +151,7 @@
 <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered mw-650px">
 		<div class="modal-content">
-			<form class="form" id="frm_user">
+			<form class="form" id="frm_datos">
 				<div class="modal-header" id="kt_modal_add_customer_header">
 				    <h3 class="modal-title" id="modalLabel"></h3>
 					<div class="modal-header pb-0 border-0 justify-content-end">
@@ -274,7 +274,7 @@
 			    
 				$('#txtPassword').prop('readonly', false);
 				$('#content').css('display','none'); 
-				$("#frm_user").trigger("reset");
+				$("#frm_datos").trigger("reset");
 				$('#cboPerfil').val(null).trigger('change');  
 
 				estado = 'A';
@@ -468,8 +468,7 @@
 							error: function (error){
 								console.log(error);
 							}                            
-						}); 					
-
+						});
 				}
 
 				// var xrespuesta = $.post("codephp/consultar_usuarios.php", $parametros);
