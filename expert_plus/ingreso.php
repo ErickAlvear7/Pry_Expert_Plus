@@ -5,7 +5,6 @@
 	putenv("TZ=America/Guayaquil");
 	date_default_timezone_set('America/Guayaquil');	
 
-	$mode = 'dark';
 	require_once("./dbcon/config.php");
 
 	$log_file = "error_conexion";
@@ -20,22 +19,26 @@
 	$_SESSION["s_login"] = null;
 	$_SESSION["s_namehost"] = gethostname();
 
-	if(isset($_POST['email']) and isset($_POST['password']) and isset($_POST['login'])){
-		if(isset($_POST['email']) <> '' and isset($_POST['password']) <> '' and isset($_POST['login']) <> ''){
+	$respuesta = '';
+
+	if(isset($_POST['usuario']) and isset($_POST['password'])){
+		if(isset($_POST['usuario']) <> '' and isset($_POST['password']) <> ''){
               
-			$usuario = $_POST['email'];
-			$password = $_POST['password'];
+			$xUsuario = $_POST['usuario'];
+			$xPassword = $_POST['password'];
+			$xnewPassword = md5($xPassword);
+
 
 			$xSQL = " SELECT usu.usua_id AS UsuarioId, usu.pais_id AS PaisId, usu.empr_id AS EmprID, usu.usua_login AS NombreLogin, ";
 			$xSQL .= " CONCAT(usu.usua_nombres,' ',usu.usua_apellidos) AS NombreUsuario, per.perf_id AS PerfilId, per.perf_descripcion AS PerfilName FROM `expert_usuarios` usu ";
-			$xSQL .= " INNER JOIN `expert_perfil` per ON usu.perf_id=per.perf_id WHERE usu.usua_login='superadmin'; ";
+			$xSQL .= " INNER JOIN `expert_perfil` per ON usu.perf_id=per.perf_id WHERE usu.usua_login='$xUsuario'and usua_password = '$xnewPassword' ";
 		
-			$usuario = mysqli_query($con, $xSQL);
-			$rowcount=mysqli_num_rows($usuario);
+			$login = mysqli_query($con, $xSQL);
+			$rowcount=mysqli_num_rows($login);
 		
 			if($rowcount > 0){
 			   
-				$row= mysqli_fetch_row($usuario);
+				$row= mysqli_fetch_row($login);
 		
 				$_SESSION["i_usuaid"] = $row[0];
 				$_SESSION["i_paisid"] = $row[1];
@@ -44,6 +47,9 @@
 				$_SESSION["s_usuario"] = $row[4];
 				$_SESSION["i_perfilid"] = $row[5];
 				$_SESSION["s_perfdesc"] = $row[6];
+
+				$respuesta  = 'ok';
+
 		
 			}else{
 		
@@ -54,17 +60,14 @@
 				$_SESSION["i_emprid"] = null;
 				$_SESSION["s_perfdesc"] = null;
 				$_SESSION["s_login"] = null;
+
+				$respuesta  = 'error';
 		
 			}
 		}
-
+		echo $respuesta;
+		exit();
 	}
-
-
-
-
-
-	
 
 
 
@@ -107,14 +110,14 @@
 							</div>
 							<div class="fv-row mb-10">
 								<label class="form-label fs-6 fw-bolder text-dark">Email</label>
-								<input class="form-control form-control-lg form-control-solid" type="text" name="email" autocomplete="off" />
+								<input class="form-control form-control-lg form-control-solid" type="text" id="email" name="email" autocomplete="off" />
 							</div>
 							<div class="fv-row mb-10">
 								<div class="d-flex flex-stack mb-2">
 									<label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
 									<a href="../../demo1/dist/authentication/layouts/dark/password-reset.html" class="link-primary fs-6 fw-bolder">Olvido el Password ?</a>
 								</div>
-								<input class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" />
+								<input class="form-control form-control-lg form-control-solid" type="password" id="password" name="password" autocomplete="off" />
 							</div>
 							<div class="text-center">
 								<button type="submit" id="kt_sign_in_submit" name="login" class="btn btn-lg btn-primary w-100 mb-5">
@@ -139,6 +142,46 @@
 		<script src="assets/js/custom/authentication/sign-in/general.js"></script>
 		<script src="assets/redirect/js/redirect.js"></script>
 		<script src="assets/js/funciones.js"></script>
+		
 	</body>
 </html>
+<script>
+	
+	$('#kt_sign_in_form').submit(function(e){
+		e.preventDefault();
+
+
+		var _usuario = $.trim($("#email").val()); 
+		var _password = $.trim($("#password").val()); 
+
+		if(_usuario == ''){
+			mensajesweetalert("center","warning","Ingrese usuario..!",false,1800);
+			return false; 
+		}
+
+		if(_password == ''){
+			mensajesweetalert("center","warning","Ingrese pasword..!",false,1800);
+			return false; 
+		}
+
+		   $.post("ingreso.php", {usuario:_usuario, password:_password} , function(response){
+
+			   if(response == 'error'){
+                    
+					mensajesweetalert("center","warning","Usuario y/o Password incorrecto!",false,1800);
+             
+                    $("#email").val('');
+                    $("#password").val(''); 
+					
+					
+
+                }else{
+                    window.location.href = "index.php";              
+                }			
+
+		
+
+			});
+		});
+</script>
 
