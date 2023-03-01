@@ -182,10 +182,10 @@
 		TableData.row(_fila).data([_menuid,_menu,_desc,_lblEstado,_btnEdit,_btnchk ]).draw();
 
 		$parametros = {
-		xxMenuId: _menuid,
-		xxEmpr: _emprid,
-		xxTipo: _tipo
-	}	
+			xxMenuId: _menuid,
+			xxEmpr: _emprid,
+			xxTipo: _tipo
+		}	
 
 		var xrespuesta = $.post("codephp/estado_menu.php", $parametros);
 		xrespuesta.done(function(response){
