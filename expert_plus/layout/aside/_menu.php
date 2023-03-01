@@ -11,13 +11,34 @@
 
 	session_start();
 
-	if ($_SESSION["s_usuario"] === null){
-	  header("Location: ../logut.php");
-	}
-
+    //$xServidor = $_SERVER['HTTP_HOST'];
+    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
+	
+	//$yUsuaCodigo = $_SESSION["i_codigousuario"];	
+	//$yCodigoPais = $_SESSION["i_codigopais"];	
 	//$xPerfiText = $_SESSION["s_perfiltext"];
 
 	$xPerfiText = "Super Administrador";
+	$yCodigoPais = 1;
+	$yUsuaCodigo = 1;
+	$xIcono = "";
+	$xActivo = "";
+	$xPagina = "index";
+
+    // if(isset($_SESSION["s_usuario"])){
+    //     if($_SESSION["s_login"] != "loged"){
+    //         header("Location: ../logout");
+    //         exit();
+    //     }else{
+    //         if($xPerfil != "partner"){
+    //             header("Location: ../logout");
+    //             exit();                
+    //         }
+    //     }
+    // }else{
+    //     header("Location: ../logout");
+    //     exit();
+    // }	
 
 	//file_put_contents('log_errores.txt', $xNombreusuario . "\n\n", FILE_APPEND);
 
@@ -27,19 +48,7 @@
     mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
 
-    //$xServidor = $_SERVER['HTTP_HOST'];
-    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
-	
-	//$yUsuaCodigo = $_SESSION["i_codigousuario"];	
-	//$yCodigoPais = $_SESSION["i_codigopais"];	
-
-	$yCodigoPais = 1;
-	$yUsuaCodigo = 1;
-	$xIcono = "";
-	$xActivo = "";
-	$xPagina = "index";
-
-	$xSql = "SELECT (SELECT mpa.mepa_id FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS CodigoMenuPadre,";
+	/*$xSql = "SELECT (SELECT mpa.mepa_id FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS CodigoMenuPadre,";
 	$xSql .= "(SELECT mpa.mepa_descripcion FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS MenuPadre," ;
 	$xSql .= "(SELECT mpa.mepa_icono FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS IcoMenuPadre,";
 	$xSql .= "men.menu_id AS MenuId,men.menu_descripcion AS Menu,men.menu_icono AS Icono,tar.tare_nombre AS SubMenu,tar.tare_ruta AS Pagina ";
@@ -48,8 +57,7 @@
 	$xSql .= "mnt.tare_id = tar.tare_id AND men.menu_estado='A' AND tar.tare_estado='A' AND USU.usua_id=" . $yUsuaCodigo . " AND men.mepa_id>0 ";
 	$xSql .= "ORDER BY men.menu_orden,mnt.meta_orden";
 
-	$all_menupadre = mysqli_query($con, $xSql);
-
+	$all_menupadre = mysqli_query($con, $xSql);*/
 
 	// $xSql = "SELECT (SELECT mpa.mepa_id FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS CodigoMenuPadre,";
 	// $xSql .= "(SELECT mpa.mepa_descripcion FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS MenuPadre," ;
@@ -138,11 +146,9 @@
 										echo "</div>";
 									}
 								}else{
-
 								}
 									$tempmenu = $menurow['MenuId'];
 									$menusuperior = $menurow['CodigoMenuPadre'];
-									
 								}
 							?>
 
