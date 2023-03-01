@@ -11,12 +11,26 @@
 
 	$log_file = "error_conexion";
 
+	if(isset($_POST['pais']) and isset($_POST['nombre']) and isset($_POST['apellido']) and isset($_POST['email']) and isset($_POST['password'])){
+		if(isset($_POST['pais']) <> '' and isset($_POST['nombre']) <> '' and isset($_POST['apellido']) <> '' and isset($_POST['email']) <> '' and isset($_POST['password']) <> ''){
+
+          $xPais = $_POST['pais'];
+		  $xNombre = $_POST['nombre'];
+		  $xApellido = $_POST['apellido'];
+		  $xEmail = $_POST['email'];
+		  $xPass = $_POST['password'];
+		  $xNewPass = md5($xPass);
+
+		  $xSQL = "";
+
+		}
+	}
+
 
 ?>
 <!DOCTYPE html>
 
 <html lang="en">
-	<!--begin::Head-->
 	<head>
 		<title>Registro-Explert-PLus</title>
 		<meta charset="utf-8" />
@@ -42,7 +56,7 @@
 						<img alt="Logo" src="assets/media/logos/LogoPresta.png" class="h-40px" />
 					</a>
 					<div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
-						<form class="form w-100" novalidate="novalidate" id="kt_sign_up_form">
+						<form class="form w-100" method="post" novalidate="novalidate" id="kt_sign_up_form">
 							<div class="mb-10 text-center">
 								<h1 class="text-dark mb-3">Crear Usuario Expert</h1>
 							</div>
@@ -55,7 +69,7 @@
                                 <div class="col-xl-6">
                                     <label class="form-label fw-bolder text-dark fs-6">Pais</label>
                                     <select id="cboPais" name="cboPais" class="form-select" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
+                                        <option value="0" >--Seleccione Pais--</option>
                                         <option value="1">Ecuador</option>
                                         <option value="2">Colombia</option>
                                     </select>
@@ -65,22 +79,22 @@
 							<div class="row fv-row mb-7">
 								<div class="col-xl-6">
 									<label class="form-label fw-bolder text-dark fs-6">Nombres</label>
-									<input class="form-control form-control-lg form-control-solid" id="txtNombre" type="text" placeholder="" name="first-name" autocomplete="off" minlength="5" maxlength="50"/>
+									<input class="form-control form-control-lg form-control-solid" id="txtNombre" type="text" placeholder="ingrese nombre" name="first-name" autocomplete="off" minlength="5" maxlength="50"/>
 								</div>
 								<div class="col-xl-6">
 									<label class="form-label fw-bolder text-dark fs-6">Apellidos</label>
-									<input class="form-control form-control-lg form-control-solid"  id="txtApellido" type="text" placeholder="" name="last-name" autocomplete="off" minlength="5" maxlength="50" />
+									<input class="form-control form-control-lg form-control-solid"  id="txtApellido" type="text" placeholder="ingrese apellido" name="last-name" autocomplete="off" minlength="5" maxlength="50" />
 								</div>
 							</div>
 							<div class="fv-row mb-7">
 								<label class="form-label fw-bolder text-dark fs-6">Email</label>
-								<input class="form-control form-control-lg form-control-solid" type="email" placeholder="" name="email" autocomplete="off" maxlength="50" />
+								<input class="form-control form-control-lg form-control-solid" type="email" placeholder="example@gmail.con" id="email" name="email" autocomplete="off" maxlength="50" />
 							</div>
 							<div class="mb-10 fv-row" data-kt-password-meter="true">
 								<div class="mb-1">
 									<label class="form-label fw-bolder text-dark fs-6">Password</label>
 									<div class="position-relative mb-3">
-										<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password" autocomplete="off"  maxlength="20">
+										<input class="form-control form-control-lg form-control-solid" type="password" id="password" name="password" autocomplete="off"  maxlength="20">
 										<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
 											<i class="bi bi-eye-slash fs-2"></i>
 											<i class="bi bi-eye fs-2 d-none"></i>
@@ -97,12 +111,12 @@
 							</div>
 							<div class="fv-row mb-5">
 								<label class="form-label fw-bolder text-dark fs-6">Confirmar Password</label>
-								<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm-password" autocomplete="off"  maxlength="20"/>
+								<input class="form-control form-control-lg form-control-solid" type="password" id="confpass" name="confirm-password" autocomplete="off"  maxlength="20"/>
 							</div>
                             <br/>
                             <br/>
 							<div class="d-flex flex-wrap justify-content-center pb-lg-0">
-								<button type="button" id="kt_sign_up_submit" class="btn btn-lg btn-primary fw-bolder me-4">
+								<button type="submit" id="kt_sign_up_submit" class="btn btn-lg btn-primary fw-bolder me-4">
 									<span class="indicator-label">Enviar</span>
 								</button>
                                 <a href="ingreso.php" class="btn btn-lg btn-light-primary fw-bolder">Cancelar</a>
@@ -123,5 +137,80 @@
 		<script src="assets/plugins/global/plugins.bundle.js"></script>
 		<script src="assets/js/scripts.bundle.js"></script>
 		<script src="assets/js/custom/authentication/sign-up/general.js"></script>
+		<script src="assets/js/funciones.js"></script>
 	</body>
 </html>
+<script>
+
+$('#kt_sign_up_form').submit(function(e){
+	  e.preventDefault();
+
+      var _cboPais = $('#cboPais').val();
+	  var _nombre = $.trim($("#txtNombre").val()); 
+	  var _apellido = $.trim($("#txtApellido").val());
+	  var _email = $.trim($("#email").val());
+	  var _password = $.trim($("#password").val());
+	  var _confpass = $.trim($("#confpass").val());
+
+	    if(_cboPais == 0){
+			mensajesweetalert("center","warning","Seleccione Pais..!",false,1800);
+			return false; 
+		}
+	  
+	    if(_nombre == ''){
+			mensajesweetalert("center","warning","Ingrese Nombre..!",false,1800);
+			return false; 
+		}
+
+		if(_apellido == ''){
+			mensajesweetalert("center","warning","Ingrese Apellido..!",false,1800);
+			return false; 
+		}
+
+		if(_email == ''){
+			mensajesweetalert("center","warning","Ingrese un Email..!",false,1800);
+			return false; 
+		}
+
+		if(_password == ''){
+			mensajesweetalert("center","warning","Ingrese password..!",false,1800);
+			return false; 
+		}
+
+		if(_confpass == ''){
+			mensajesweetalert("center","warning","Confirme password..!",false,1800);
+			return false; 
+		}
+
+		$.post("registro.php", {
+
+			pais:_cboPais, 
+			nombre:_nombre,
+			apellido:_apellido, 
+			email:_email,
+			password:_password
+
+		}, function(response){
+
+			if(response == 'error'){
+				
+				mensajesweetalert("center","warning","Usuario y/o Password incorrecto!",false,1800);
+
+				$("#email").val('');
+				$("#password").val(''); 
+				
+				
+
+			}else{
+				window.location.href = "ingreso.php";              
+			}			
+
+
+
+});
+
+
+
+
+});
+</script>
