@@ -226,23 +226,7 @@
 			mensajesweetalert("center","warning","Confirme password..!",false,1800);
 			return false; 
 		}
-
-        $parametros = {
-			xxEmail: _email
-		}
-		
-		var xrespuesta = $.post("codephp/consultar_login.php", $parametros);
-		xrespuesta.done(function(response){
-			if(response == 0){
-				var _continuar = 'SI'
-			}else{
-				var _continuar = 'NO'
-				mensajesweetalert("center","warning","Nombre del Usuario ya Existe..!",false,1800);
-				return;
-			}
-		});
-				
-
+	
         
 
 		$.post("registro.php", {
