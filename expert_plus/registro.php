@@ -88,7 +88,7 @@
 							</div>
 							<div class="fv-row mb-7">
 								<label class="form-label fw-bolder text-dark fs-6">Email</label>
-								<input class="form-control form-control-lg form-control-solid" type="email" placeholder="example@gmail.con" id="email" name="email" autocomplete="off" maxlength="50" />
+								<input class="form-control form-control-lg form-control-solid" type="email" placeholder="example@gmail.con" id="email" name="email" autocomplete="off" maxlength="80" />
 							</div>
 							<div class="mb-10 fv-row" data-kt-password-meter="true">
 								<div class="mb-1">
@@ -181,6 +181,8 @@ $('#kt_sign_up_form').submit(function(e){
 			mensajesweetalert("center","warning","Confirme password..!",false,1800);
 			return false; 
 		}
+
+
 
 		$.post("registro.php", {
 

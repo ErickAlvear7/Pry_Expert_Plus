@@ -18,31 +18,31 @@ var KTSignupGeneral = function() {
 					'first-name': {
 						validators: {
 							notEmpty: {
-								message: 'First Name is required'
+								message: 'ingrese nombre'
 							}
 						}
                     },
                     'last-name': {
 						validators: {
 							notEmpty: {
-								message: 'Last Name is required'
+								message: 'ingrese apellido'
 							}
 						}
 					},
 					'email': {
                         validators: {
 							notEmpty: {
-								message: 'Email address is required'
+								message: 'ingrese email'
 							},
                             emailAddress: {
-								message: 'The value is not a valid email address'
+								message: 'email ingresado es incorrecto'
 							}
 						}
 					},
                     'password': {
                         validators: {
                             notEmpty: {
-                                message: 'The password is required'
+                                message: 'ingrese password'
                             },
                             callback: {
                                 message: 'Please enter valid password',
@@ -57,13 +57,13 @@ var KTSignupGeneral = function() {
                     'confirm-password': {
                         validators: {
                             notEmpty: {
-                                message: 'The password confirmation is required'
+                                message: 'Se requiere la confirmación de la contraseña.'
                             },
                             identical: {
                                 compare: function() {
                                     return form.querySelector('[name="password"]').value;
                                 },
-                                message: 'The password and its confirm are not the same'
+                                message: 'La contraseña y su confirmación no son lo mismo.'
                             }
                         }
                     },
