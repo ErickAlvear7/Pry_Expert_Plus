@@ -11,6 +11,12 @@
 
 	$log_file = "error_conexion";
 
+	$xSQL = "SELECT pais_id AS IdPais, pais_nombre AS Pais, pais_flag AS Bandera FROM `expert_pais` ";
+	$xSQL .= " ORDER BY pais_id ";
+    $resultado = mysqli_query($con, $xSQL);
+
+	
+
 	if(isset($_POST['pais']) and isset($_POST['nombre']) and isset($_POST['apellido']) and isset($_POST['email']) and isset($_POST['password'])){
 		if(isset($_POST['pais']) <> '' and isset($_POST['nombre']) <> '' and isset($_POST['apellido']) <> '' and isset($_POST['email']) <> '' and isset($_POST['password']) <> ''){
 
@@ -21,7 +27,17 @@
 		  $xPass = $_POST['password'];
 		  $xNewPass = md5($xPass);
 
-		  $xSQL = "";
+		  $xSQL = "SELECT * FROM `expert_usuarios` WHERE usua_login = '$xEmail '";
+		  $login = mysqli_query($con, $xSQL);
+		  $rowcount=mysqli_num_rows($login);
+
+		  if($rowcount == 0){
+
+			$xSQL = "";
+
+		  }else{
+			echo 'SI';
+		  }
 
 		}
 	}
@@ -66,12 +82,16 @@
 								<div class="border-bottom border-gray-300 mw-50 w-100"></div>
 							</div>
                             <div class="row fv-row mb-7">
-                                <div class="col-xl-6">
+                                <div class="col-xl-12">
                                     <label class="form-label fw-bolder text-dark fs-6">Pais</label>
-                                    <select id="cboPais" name="cboPais" class="form-select" aria-label="Default select example">
-                                        <option value="0" >--Seleccione Pais--</option>
-                                        <option value="1">Ecuador</option>
-                                        <option value="2">Colombia</option>
+                                    <select id="cboPais" name="cboPais" class="form-select form-select-transparent">
+                                              <option value="0" >--Seleccione Pais--</option>
+											<?php foreach ($resultado as $pais) : 
+												$flag = 'data-kt-select2-country="' . 'assets/media/flags/'. $pais['Bandera'] . '"';
+											?>
+											  <option value="<?= $pais['IdPais'] ?>" <?php $flag; ?> ><?= $pais['Pais'] ?></option>
+											<?php endforeach ?>
+						
                                     </select>
 								</select>
                                 </div>
@@ -142,7 +162,32 @@
 </html>
 <script>
 
-$('#kt_sign_up_form').submit(function(e){
+	
+	var optionFormat = function(item) {
+			if ( !item.id ) {
+				return item.text;
+			}
+
+			var span = document.createElement('span');
+			var imgUrl = item.element.getAttribute('data-kt-select2-country');
+			var template = '';
+
+			template += '<img src="' + imgUrl + '" class="rounded-circle h-20px me-2" alt="image"/>';
+			template += item.text;
+
+			span.innerHTML = template;
+
+			return $(span);
+	}	
+	
+	$('#cboPais').select2({
+			templateSelection: optionFormat,
+			templateResult: optionFormat
+		});
+
+		//$("#cboPais").val('ECUATORIANA').change();
+
+   $('#kt_sign_up_form').submit(function(e){
 	  e.preventDefault();
 
       var _cboPais = $('#cboPais').val();
@@ -182,7 +227,23 @@ $('#kt_sign_up_form').submit(function(e){
 			return false; 
 		}
 
+        $parametros = {
+			xxEmail: _email
+		}
+		
+		var xrespuesta = $.post("codephp/consultar_login.php", $parametros);
+		xrespuesta.done(function(response){
+			if(response == 0){
+				var _continuar = 'SI'
+			}else{
+				var _continuar = 'NO'
+				mensajesweetalert("center","warning","Nombre del Usuario ya Existe..!",false,1800);
+				return;
+			}
+		});
+				
 
+        
 
 		$.post("registro.php", {
 
@@ -194,7 +255,7 @@ $('#kt_sign_up_form').submit(function(e){
 
 		}, function(response){
 
-			if(response == 'error'){
+			if(response == 'SI'){
 				
 				mensajesweetalert("center","warning","Usuario y/o Password incorrecto!",false,1800);
 
@@ -209,10 +270,7 @@ $('#kt_sign_up_form').submit(function(e){
 
 
 
-});
+		});
 
-
-
-
-});
+	});
 </script>
