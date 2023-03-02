@@ -3,20 +3,25 @@
     //error_reporting(E_ALL);
     ini_set('display_errors', 0);
 
+    putenv("TZ=America/Guayaquil");
+    date_default_timezone_set('America/Guayaquil');	       
+
     require_once("dbcon/config.php");
     require_once("dbcon/functions.php");
 
     mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
 
-    $xServidor = $_SERVER['HTTP_HOST'];
+    //$xServidor = $_SERVER['HTTP_HOST'];
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
-    //$yEmprid = $_SESSION["i_empreid"];
-    //$yUserid = $_SESSION["i_userid"];
-
-    $yEmprid = 1;
-    $yUserid = 1;
+	//$yUsuaid = $_SESSION["i_usuaid"];	
+	//$yPaisid = $_SESSION["i_paisid"];	
+    //$yEmprid = $_SESSION["i_empre_id"];
+    
+	$yEmprid = 1;	
+	$yPaisid = 1;
+	$yUsuaid = 1;
 
     $idmenu = $_POST['idmenu'];
 
@@ -149,7 +154,6 @@
                                         <th style="display:none;">IdTarea</th>
                                         <th>SubMenu</th>
                                         <th>Estado</th>
-                                        <th>Ruta</th>
                                     </tr>
                                 </thead>
                                <tbody class="fw-bold text-gray-600">
@@ -160,7 +164,7 @@
                                         <?php
                                                         
                                             if($tareas['Ckeck'] == 'SI'){
-                                                $xTextColor = "badge badge-light-primary";
+                                                $xTextColor = "badge badge-light-success";
                                                 $Checked = "checked='checked'";
                                             }else{
                                                 $xTextColor = "";
@@ -184,10 +188,8 @@
                                         <td>
                                            <div  id="est_<?php echo $tareas['TareaId']; ?>" class="<?php echo $xTextColor; ?>"><?php echo $tareas['Estado']; ?></div>
                                         </td>
-                                        <td><?php echo $tareas['Ruta']; ?></td>
                                     </tr>
-                                    <?php }
-                                    ?>    
+                                    <?php } ?>    
                                 </tbody>
                             </table>
                         </div>

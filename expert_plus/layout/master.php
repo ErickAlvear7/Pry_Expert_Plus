@@ -44,6 +44,8 @@
 		include __DIR__ . '/../pages/tarea_admin.php';
 	}else if($page == 'suptarea'){
 		include __DIR__ . '/../pages/tareasuper_admin.php';
+	}else if($page == 'supmenu'){
+		include __DIR__ . '/../pages/menusuper_admin.php';
 	}else{
 		include '_content.php';
 	}

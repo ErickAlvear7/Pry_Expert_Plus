@@ -178,7 +178,7 @@
 											</a>
 										</div>										
 										<div class="menu-item">
-											<a class="menu-link <?php if($page == 'supmenu'){echo 'active';} ?>" href="?page=supmenu&menuid=0">
+											<a class="menu-link <?php if($page == 'supmenu' || $page == 'addmenu' || $page == 'editmenu'){echo 'active';} ?>" href="?page=supmenu&menuid=0">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>

@@ -12,7 +12,8 @@
 	$log_file = "error_conexion";
 
 	$xSQL = "SELECT pais_id AS IdPais, pais_nombre AS Pais, pais_flag AS Bandera FROM `expert_pais` ";
-	$xSQL .= " ORDER BY pais_id ";
+	//$xSQL .= " UNION SELECT 0,'--Seleccione Pais--',''";
+	$xSQL .= " ORDER BY IdPais ";
     $resultado = mysqli_query($con, $xSQL);
 
 	
@@ -84,16 +85,15 @@
                             <div class="row fv-row mb-7">
                                 <div class="col-xl-12">
                                     <label class="form-label fw-bolder text-dark fs-6">Pais</label>
-                                    <select id="cboPais" name="cboPais" class="form-select form-select-transparent">
-                                              <option value="0" >--Seleccione Pais--</option>
-											<?php foreach ($resultado as $pais) : 
-												$flag = 'data-kt-select2-country="' . 'assets/media/flags/'. $pais['Bandera'] . '"';
-											?>
-											  <option value="<?= $pais['IdPais'] ?>" <?php $flag; ?> ><?= $pais['Pais'] ?></option>
-											<?php endforeach ?>
-						
+                                    <select id="cboPais" name="cboPais" placeholder="Seleccione Pais" class="form-select form-select-transparent">
+										<option value="0">--Seleccione Pais--</option>
+										<?php foreach ($resultado as $pais) : 
+											
+											$flag = ' data-kt-select2-country=' . '"assets/media/flags/' . $pais['Bandera'] . '"';
+										?>
+											<option value="<?php echo $pais['IdPais']; ?>"<?php echo $flag; ?>><?php echo $pais['Pais']; ?></option>
+										<?php endforeach ?>						
                                     </select>
-								</select>
                                 </div>
                             </div>
 							<div class="row fv-row mb-7">
@@ -168,14 +168,19 @@
 				return item.text;
 			}
 
+			//debugger;
 			var span = document.createElement('span');
 			var imgUrl = item.element.getAttribute('data-kt-select2-country');
 			var template = '';
 
-			template += '<img src="' + imgUrl + '" class="rounded-circle h-20px me-2" alt="image"/>';
+			if(item.id != 0){
+
+				template += '<img src="' + imgUrl + '" class="rounded-circle h-20px me-2" alt="image"/>';
+			}
+			
 			template += item.text;
 
-			span.innerHTML = template;
+			span.innerHTML = template;			
 
 			return $(span);
 	}	

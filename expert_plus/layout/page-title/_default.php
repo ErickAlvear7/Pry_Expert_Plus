@@ -35,6 +35,9 @@
 	}else if($page == 'suptarea'){
 		$title = 'Administrar Tareas';
 		$descripcion = 'Registro de Tareas';
+	}else if($page == 'supmenu'){
+		$title = 'Administrar Menu';
+		$descripcion = 'Registro Opciones de Menú';
 	}
 
 ?>	

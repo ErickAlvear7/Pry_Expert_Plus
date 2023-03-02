@@ -329,54 +329,53 @@
 									<tbody class="fw-bold text-gray-600">
 										<?php 
 										
-										foreach($all_tareas as $tareas){
+										foreach($all_tareas as $tareas) { ?>
 										
-										?>
-										<?php 
+											<?php 
 
-											$chkEstado = '';
-											$xDisabledEdit = '';
-											$xTextColor = "badge badge-light-primary";
+												$chkEstado = '';
+												$xDisabledEdit = '';
+												$xTextColor = "badge badge-light-primary";
 
-											if($tareas['Id'] == '100001' || $tareas['Id'] == "100002" || $tareas['Id'] == "100003" || $tareas['Id'] == "100004"){
+												if($tareas['Id'] == '100001' || $tareas['Id'] == "100002" || $tareas['Id'] == "100003" || $tareas['Id'] == "100004"){
 
-												$xDisabledEdit = 'disabled';
-												$chkEstado = 'disabled';
-											}
-
-											if($tareas['Id'] != '100001' || $tareas['Id'] != "100002" || $tareas['Id'] != "100003" || $tareas['Id'] != "100004"){								
-												if ($tareas['Estado'] == 'Inactivo'){
 													$xDisabledEdit = 'disabled';
-													$xTextColor = "badge badge-light-danger";
+													$chkEstado = 'disabled';
 												}
-											}						
-										
-										?>
-										<tr>
-											<td style="display:none;"><?php echo $tareas['Id']; ?></td>
-											<td><?php echo $tareas['Tarea']; ?></td>
-											<td><?php echo $tareas['Accion']; ?></td>
-											<td>
-											<div class="<?php  echo $xTextColor; ?>"><?php echo $tareas['Estado']; ?></div>
-											</td>
-											<td>
-												<div class="text-center">
-													<div class="btn-group">
-														<button <?php echo $xDisabledEdit ?> id="btnEditar<?php echo $tareas['Id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Tarea'>
-															<i class='fa fa-edit'></i>
-														</button>																															 
+
+												if($tareas['Id'] != '100001' || $tareas['Id'] != "100002" || $tareas['Id'] != "100003" || $tareas['Id'] != "100004"){								
+													if ($tareas['Estado'] == 'Inactivo'){
+														$xDisabledEdit = 'disabled';
+														$xTextColor = "badge badge-light-danger";
+													}
+												}						
+											
+											?>
+											<tr>
+												<td style="display:none;"><?php echo $tareas['Id']; ?></td>
+												<td><?php echo $tareas['Tarea']; ?></td>
+												<td><?php echo $tareas['Accion']; ?></td>
+												<td>
+												<div class="<?php  echo $xTextColor; ?>"><?php echo $tareas['Estado']; ?></div>
+												</td>
+												<td>
+													<div class="text-center">
+														<div class="btn-group">
+															<button <?php echo $xDisabledEdit ?> id="btnEditar<?php echo $tareas['Id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Tarea'>
+																<i class='fa fa-edit'></i>
+															</button>																															 
+														</div>
 													</div>
-												</div>
-											</td>
-											<td>
-												<div class="text-center">
-													<div class="form-check form-check-sm form-check-custom form-check-solid">
-															<input class="form-check-input btnEstado" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $tareas['Id']; ?>" <?php if ($tareas['Estado'] == 'Activo') {
-																	echo "checked";} else {'';} ?> value="<?php echo $tareas['Id']; ?>" onchange="f_UpdateEstado(<?php echo $tareas['Id']; ?>,<?php echo $yEmprid; ?>)"/>
+												</td>
+												<td>
+													<div class="text-center">
+														<div class="form-check form-check-sm form-check-custom form-check-solid">
+																<input class="form-check-input btnEstado" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $tareas['Id']; ?>" <?php if ($tareas['Estado'] == 'Activo') {
+																		echo "checked";} else {'';} ?> value="<?php echo $tareas['Id']; ?>" onchange="f_UpdateEstado(<?php echo $tareas['Id']; ?>,<?php echo $yEmprid; ?>)"/>
+														</div>
 													</div>
-												</div>
-											</td>
-										</tr>
+												</td>
+											</tr>
 										<?php } ?>  
 									</tbody>
 								</table>
@@ -792,7 +791,6 @@
 					_fila = $(this).closest("tr");
 					_tarea = $(this).closest("tr").find('td:eq(1)').text();  
 					_ruta = $(this).closest("tr").find('td:eq(2)').text(); 					
-					//console.log(_fila);
 				});
 				
 			});
@@ -843,22 +841,23 @@
 
 				$.post("codephp/update_estado_tarea.php", $parametros , function(data){
 
-					$parametros = {
-						xxPaisid: _paisid,
-						xxEmprid: _emprid,
-						xxUsuaid: _usuaid,
-						xxDetalle: 'Cambio Estado Tarea',
-					}					
+					// $parametros = {
+					// 	xxPaisid: _paisid,
+					// 	xxEmprid: _emprid,
+					// 	xxUsuaid: _usuaid,
+					// 	xxDetalle: 'Cambio Estado Tarea',
+					// }					
 
-					var xrespuesta = $.post("codephp/new_log.php", $parametros);						
-						xrespuesta.done(function(response) {
-							//console.log(response);
-					});	
+					// var xrespuesta = $.post("codephp/new_log.php", $parametros);						
+					// 	xrespuesta.done(function(response) {
+					// });	
 
 				});
 			}			
 
 			function funGrabar(_paisid,_emprid,_usuaid,_tarea,_ruta){
+
+				var _respuesta = 'OK';
 
 				if(_addmod == 'add'){
 					_ulr = "codephp/new_tarea.php";
@@ -903,10 +902,16 @@
 					}else{
 						//console.log('Error encontrado en sentecia SQL');
 						_detalle = 'Error encontrado en sentecia SQL';
+						_respuesta = 'ERR';
 					}
 
 					$("#modal-tarea").modal("hide");
 
+					if(_respuesta == 'OK'){
+						mensajesweetalert("center","success","Grabado con Exito..!",false,1800);
+					}
+					
+					/**PARA CREAR REGISTRO DE LOGS */
 					$parametros = {
 						xxPaisid: _paisid,
 						xxEmprid: _emprid,
@@ -914,13 +919,10 @@
 						xxDetalle: _detalle,
 					}					
 
-					var xrespuesta = $.post("codephp/new_log.php", $parametros);						
-					xrespuesta.done(function(response) {
-						//console.log(response);
-						if(response == 'OK'){
-							mensajesweetalert("center","success","Grabado con Exito..!",false,1800);
-						}
-					});
+                    $.post("codephp/new_log.php", $parametros, function(response){
+                        //console.log(response);
+                    }); 
+
 				});	
 
 				// $.ajax({

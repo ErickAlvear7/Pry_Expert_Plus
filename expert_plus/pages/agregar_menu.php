@@ -3,31 +3,34 @@
     //error_reporting(E_ALL);
     ini_set('display_errors', 0);
 
+    putenv("TZ=America/Guayaquil");
+    date_default_timezone_set('America/Guayaquil');	        
+
     require_once("dbcon/config.php");
     require_once("dbcon/functions.php");
 
     mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
 
-    $xServidor = $_SERVER['HTTP_HOST'];
+    //$xServidor = $_SERVER['HTTP_HOST'];
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
-    //$yEmprid = $_SESSION["i_empreid"];
-    //$yUserid = $_SESSION["i_userid"];
-    $yEmprid = 1;
-    $yUserid = 1;
+	//$yUsuaid = $_SESSION["i_usuaid"];	
+	//$yPaisid = $_SESSION["i_paisid"];	
+    //$yEmprid = $_SESSION["i_empre_id"];
+    
+	$yEmprid = 1;	
+	$yPaisid = 1;
+	$yUsuaid = 1;
 
-    $xSQL = "SELECT tare_id AS Idtarea, empr_id AS Empid, tare_nombre as SubMenu, tare_ruta AS Ruta, CASE tare_estado WHEN 'A' THEN 'Activo' ";
-    $xSQL .= "ELSE 'Inactivo' END AS Estado FROM expert_tarea";
+    $xSQL = "SELECT tare_id AS Idtarea, tare_nombre as SubMenu, tare_ruta AS Ruta, CASE tare_estado WHEN 'A' THEN 'Activo' ";
+    $xSQL .= "ELSE 'Inactivo' END AS Estado FROM expert_tarea WHERE empr_id=$yEmprid ORDER BY tare_orden " ;
     $expertsubmenu = mysqli_query($con, $xSQL);
 
 ?>
 
 <div id="kt_content_container" class="container-xxl">
    <div class="card card-flush">
-            <div class="card-toolbar d-flex align-self-end">
-                <a href="?page=seg_menuadmin" class="btn btn-light-primary"><i class="las la-arrow-left"></i>Regresar</a>
-            </div>	
             <div class="card-header">
                 <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
                     <li class="nav-item">
@@ -62,7 +65,7 @@
             <div class="tab-content" id="myTabContent">
                     <div class="card-header"> 
                         <div class="card-toolbar">
-                            <button type="button" name="guardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $yUserid; ?>)"><i class="las la-save"></i>Guardar</button>
+                            <button type="button" name="guardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $yUsuaid; ?>)"><i class="las la-save"></i>Guardar</button>
                         </div>
                     </div> 
                 <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
@@ -133,7 +136,6 @@
                                         <th style="display:none;">IdTarea</th>
                                         <th>SubMenu</th>
                                         <th>Estado</th>
-                                        <th>Ruta</th>
                                     </tr>
                                 </thead>
                                <tbody class="fw-bold text-gray-600">
@@ -162,7 +164,6 @@
                                         <td>
                                         <div class="<?php echo $xTextColor; ?>"><?php echo $submenu['Estado']; ?></div>
                                         </td>
-                                        <td><?php echo $submenu['Ruta']; ?></td>
                                     </tr>
                                     <?php } ?>  
                                 </tbody>
@@ -173,97 +174,130 @@
             </div>
    </div>
 </div>
-<script>
 
-$(document).ready(function(){
+    <script>
 
-    $(document).on("click",".chkSubMenu",function(){
-        let _rowid = $(this).attr("id");  
-        let _id = _rowid.substring(3);
-        let _div = "div_" + _id; 
-        let _check = $("#chk" + _id).is(":checked");
-        
-        if(_check){
-            $("#"+_div).addClass("badge badge-light-primary");
-        }else{
-            $("#"+_div).removeClass("badge badge-light-primary");
-        }
+        $(document).ready(function(){
 
-    });
-
-});
-
-function f_Guardar(_emprid, _userid){
-
-    _menu = $.trim($("#txtMenu").val());
-    _observacion = $.trim($("#txtDescripcion").val());
-    _estado = "A";
-    _result=[];
-
-    if(_menu == '')
-    {       
-        mensajesweetalert("center","warning","Ingrese Nombre del Menu..!",false,1800);  
-        return;
-    }
-
-        var _contar = 0;
-
-        var grid = document.getElementById("kt_ecommerce_report_shipping_table");
-        var checkBoxes = grid.getElementsByTagName("input");
-        for (var i = 0; i < checkBoxes.length; i++) {
-            if (checkBoxes[i].checked) {
-                _result.push(checkBoxes[i].value);
-                _contar++
-            }
-        }
-
-         //console.log( _result);
-
-        if(_contar == 0){                        
-            mensajesweetalert("center","warning","Seleccione al menos un opción para el SubMenu",false,1800);
-            return;
-        }
-
-        $parametros = {
-            xxMenu: _menu,
-            xxEmprid: _emprid
-        }   
-
-        var xrespuesta = $.post("codephp/consultar_menu.php", $parametros);
-        xrespuesta.done(function(response) {
-            //console.log(response);
-            if(response == 0){
-
-                $datosMenu = {
-                    xxMenu: _menu,
-                    xxObserva: _observacion,
-                    xxEmprid: _emprid,
-                    xxUserid: _userid,
-                    xxEstado: _estado,
-                    xxResult: _result
+            $(document).on("click",".chkSubMenu",function(){
+                let _rowid = $(this).attr("id");  
+                let _id = _rowid.substring(3);
+                let _div = "div_" + _id; 
+                let _check = $("#chk" + _id).is(":checked");
+                
+                if(_check){
+                    $("#"+_div).addClass("badge badge-light-success");
+                }else{
+                    $("#"+_div).removeClass("badge badge-light-success");
                 }
-
-                $.ajax({
-                    url: "codephp/grabar_menu_tarea.php",
-                    type: "POST",
-                    dataType: "json",
-                    data: $datosMenu,          
-                    success: function(data){ 
-                        //console.log(data);
-                        if(data == 'OK'){
-                            $.redirect('?page=seg_menuadmin', {'mensaje': 'Guardado con Exito..!'}); 
-                        }                                                                         
-                    },
-                    error: function (error){
-                        console.log(error);
-                    }                            
-                }); 
-            }else{
-                mensajesweetalert("center","warning","Nombre del Menu ya Existe..!",false,1800);
-            }
+            });
 
         });
-}
 
-</script>     
+        function f_Guardar(_emprid, _usuaid){
+
+            var _paisid = "<?php echo $yPaisid; ?>"
+            var _menu = $.trim($("#txtMenu").val());
+            var _observacion = $.trim($("#txtDescripcion").val());
+            var _estado = "A";
+            var _result=[];
+
+            if(_menu == '')
+            {       
+                mensajesweetalert("center","warning","Ingrese Nombre del Menu..!",false,1800);  
+                return;
+            }
+
+            var _contar = 0;
+
+            var grid = document.getElementById("kt_ecommerce_report_shipping_table");
+            var checkBoxes = grid.getElementsByTagName("input");
+            for (var i = 0; i < checkBoxes.length; i++) {
+                if (checkBoxes[i].checked) {
+                    _result.push(checkBoxes[i].value);
+                    _contar++
+                }
+            }
+
+            if(_contar == 0){                        
+                mensajesweetalert("center","warning","Seleccione al menos un opción para el SubMenu",false,1800);
+                return;
+            }
+
+            $parametros = {
+                xxMenu: _menu,
+                xxEmprid: _emprid
+            }   
+
+            var xrespuesta = $.post("codephp/consultar_menu.php", $parametros);
+            xrespuesta.done(function(response){
+                
+                if(response == 0){
+
+                    $datosMenu = {
+                        xxMenu: _menu,
+                        xxObserva: _observacion,
+                        xxEmprid: _emprid,
+                        xxUserid: _usuaid,
+                        xxEstado: _estado,
+                        xxResult: _result
+                    }
+
+                    var xresponse = $.post("codephp/grabar_menu_tarea.php", $datosMenu);
+                    xresponse.done(function(response){
+                        if(response == 'OK'){
+                            /**PARA CREAR REGISTRO DE LOGS */
+                            $parametros = {
+                                xxPaisid: _paisid,
+                                xxEmprid: _emprid,
+                                xxUsuaid: _usuaid,
+                                xxDetalle: 'Crear Nuevo Menú',
+                            }					
+
+                            $.post("codephp/new_log.php", $parametros, function(response){
+                                
+                            }); 
+
+                            $.redirect('?page=supmenu&menuid=0', {'mensaje': 'Guardado con Exito..!'});                             
+                        }else{
+                            console.log(response);
+                        }
+
+                    });
+
+                    // $.ajax({
+                    //     url: "codephp/grabar_menu_tarea.php",
+                    //     type: "POST",
+                    //     dataType: "json",
+                    //     data: $datosMenu,          
+                    //     success: function(data){ 
+                            
+                    //         if(data == 'OK'){
+                    //             $parametros = {
+                    //                 xxPaisid: _paisid,
+                    //                 xxEmprid: _emprid,
+                    //                 xxUsuaid: _usuaid,
+                    //                 xxDetalle: _detalle,
+                    //             }					
+
+                    //             $.post("codephp/new_log.php", $parametros, function(response){
+                                   
+                    //             }); 
+
+                    //             $.redirect('?page=supmenu&menuid=0', {'mensaje': 'Guardado con Exito..!'}); 
+                    //         }                                                                         
+                    //     },
+                    //     error: function (error){
+                    //         console.log(error);
+                    //     }                            
+                    // }); 
+
+                }else{
+                    mensajesweetalert("center","warning","Nombre del Menu ya Existe..!",false,1800);
+                }
+
+            });
+        }
+
+    </script>     
 
