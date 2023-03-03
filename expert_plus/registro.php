@@ -6,8 +6,14 @@
     putenv("TZ=America/Guayaquil");
     date_default_timezone_set('America/Guayaquil');	
 
-	$mode = 'dark';
 	require_once("./dbcon/config.php");
+
+	mysqli_query($con,'SET NAMES utf8');  
+	mysqli_set_charset($con,'utf8');
+	
+	$xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
+    $xTerminal = gethostname();
+    $yEmprid = 1;
 
 	$log_file = "error_conexion";
 
@@ -21,7 +27,7 @@
 	if(isset($_POST['pais']) and isset($_POST['nombre']) and isset($_POST['apellido']) and isset($_POST['email']) and isset($_POST['password'])){
 		if(isset($_POST['pais']) <> '' and isset($_POST['nombre']) <> '' and isset($_POST['apellido']) <> '' and isset($_POST['email']) <> '' and isset($_POST['password']) <> ''){
 
-          $xPais = $_POST['pais'];
+          $yPais = $_POST['pais'];
 		  $xNombre = $_POST['nombre'];
 		  $xApellido = $_POST['apellido'];
 		  $xEmail = $_POST['email'];
@@ -34,13 +40,16 @@
 
 		  if($rowcount == 0){
 
-			$xSQL = "";
+			$xSQL =  "INSERT INTO `expert_usuarios`(perf_id,pais_id,empr_id,usua_nombres,usua_apellidos,usua_login,usua_password, ";
+			$xSQL .= "usua_estado,usua_fechacreacion,usua_terminalcreacion )";
+			$xSQL .= "VALUES (0,$yPais,$yEmprid,'$xNombre','$xApellido','$xEmail','$xNewPass','A','{$xFecha}','$xTerminal')";
+			$registro = mysqli_query($con, $xSQL);
 
-		  }else{
-			echo 'SI';
 		  }
 
 		}
+
+		echo 'EXITO';
 	}
 
 
@@ -244,17 +253,20 @@
 
 		}, function(response){
 
-			if(response == 'SI'){
-				
-				mensajesweetalert("center","warning","Usuario y/o Password incorrecto!",false,1800);
+			//debugger;
 
-				$("#email").val('');
-				$("#password").val(''); 
+			if(response == 'EXITO'){
+				
+				mensajesweetalert("center","success","Usuario Registrado..!!",false,2000);
+				window.location.href = "ingreso.php";     
 				
 				
 
 			}else{
-				window.location.href = "ingreso.php";              
+				mensajesweetalert("center","warning","Email ya esta registrado..!!",false,2500);
+
+				$("#kt_sign_up_form")[0].reset();
+				         
 			}			
 
 
