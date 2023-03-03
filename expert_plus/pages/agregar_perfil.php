@@ -13,8 +13,7 @@
 	mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	    
 
-    //$xServidor = $_SERVER['HTTP_HOST'];
-    //$page = isset($_GET['page']) ? $_GET['page'] : "index";
+    //$xServidor = $_SERVER['HTTP_HOST'];    
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());    
 
     @session_start();

@@ -80,10 +80,11 @@
             </ul>
         </div>
         <div class="tab-content" id="myTabContent">
+            <input type="text" id="menuold" value="<?php echo $xMenu ?>">
             <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
                 <div class="card-header"> 
                     <div class="card-toolbar">
-                        <button type="button" name="editar" id="editar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $yUserid; ?>)"><i class="las la-save"></i>Guardar</button>
+                        <button type="button" name="editar" id="editar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $yUsuaid; ?>)"><i class="las la-save"></i>Guardar</button>
                     </div>
                 </div> 
                 <div class="card-body">
@@ -95,7 +96,7 @@
                             </label>
                         </div>
                         <div class="col-md-9">
-                            <input type="hidden" class="form-control form-control-solid" name="txtIdMenu" id="txtIdMenu" maxlength="150" value="<?php  echo $idmenu; ?>" />
+                            <input type="hidden" class="form-control form-control-solid" name="txtIdMenu" id="txtIdMenu" value="<?php  echo $idmenu; ?>" />
                             <input type="text" class="form-control form-control-solid" name="txtMenu" id="txtMenu" maxlength="150" value="<?php  echo $xMenu; ?>" />
                         </div>
                     </div>
@@ -164,29 +165,35 @@
                                         <?php
                                                         
                                             if($tareas['Ckeck'] == 'SI'){
-                                                $xTextColor = "badge badge-light-success";
+                                                $xTextColorSub = "badge badge-light-success";
                                                 $Checked = "checked='checked'";
                                             }else{
-                                                $xTextColor = "";
+                                                $xTextColorSub = "";
                                                 $Checked = "";
+                                            }
+
+                                            if($tareas['Estado'] == 'Activo'){
+                                                $xTextColorEst = "badge badge-light-primary";
+                                            }else{
+                                                $xTextColorEst = "";
                                             }
                                         ?>     
                                     <tr>
                                         <td style="text-align: center;" >
                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $tareas['TareaId']; ?>" <?php echo $Checked; ?> onchange="f_Menu(<?php echo $tareaid; ?>,<?php echo $idmenu; ?>,<?php echo $yEmprid; ?>)"/>
+                                                <input class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $tareas['TareaId']; ?>" <?php echo $Checked; ?> onclick="f_SelectSubMenu(<?php echo $tareaid; ?>,<?php echo $idmenu; ?>,<?php echo $yEmprid; ?>)"/>
                                             </div>
                                         </td>
 
                                         <td style="display:none;"><?php echo $tareas['TareaId']; ?></td>
                                         
                                         <td>
-                                            <div id="div_<?php echo $tareas['TareaId']; ?>" class="<?php  echo $xTextColor; ?>" >
+                                            <div id="div_<?php echo $tareas['TareaId']; ?>" class="<?php  echo $xTextColorSub; ?>" >
                                                <?php echo $tareas['Tarea']; ?>
                                              </div>
                                         </td>
                                         <td>
-                                           <div  id="est_<?php echo $tareas['TareaId']; ?>" class="<?php echo $xTextColor; ?>"><?php echo $tareas['Estado']; ?></div>
+                                           <div  id="est_<?php echo $tareas['TareaId']; ?>" class="<?php echo $xTextColorEst; ?>"><?php echo $tareas['Estado']; ?></div>
                                         </td>
                                     </tr>
                                     <?php } ?>    
@@ -199,105 +206,117 @@
         </div>
     </div>
 </div>
-<script>
 
-$(document).ready(function(){
+    <script>
 
-    $(document).on("click",".chkTarea",function(){
-        let _rowid = $(this).attr("id");         
-        let _id = _rowid.substring(3);
-        let _div = "div_" + _id;              
-        let _check = $("#chk" + _id).is(":checked");
-        if(_check){
-            $("#"+_div).addClass("badge badge-light-primary");
-        }else{
-            $("#"+_div).removeClass("badge badge-light-primary");
-        }                        
-    });
+        $(document).ready(function(){
 
+            $(document).on("click",".chkTarea",function(){
+                let _rowid = $(this).attr("id");         
+                let _id = _rowid.substring(3);
+                let _div = "div_" + _id;              
+                let _check = $("#chk" + _id).is(":checked");
+                if(_check){
+                    $("#"+_div).addClass("badge badge-light-primary");
+                }else{
+                    $("#"+_div).removeClass("badge badge-light-primary");
+                }                        
+            });
+        }); 
 
-}); 
+        function f_SelectSubMenu(_idtarea, _idmenu, _idempr){
+            let _check = $("#chk" + _idtarea).is(":checked");
 
-function f_Menu(_idtarea, _idmenu, _idempr){
-    let _check = $("#chk" + _idtarea).is(":checked");
+            let _tipo = "";
 
-    let _tipo = "";
+            if(_check){
+                _tipo = "Add";
+            }else{
+                _tipo = "Del";
+            }
 
-    if(_check){
-        _tipo = "Add";
-    }else{
-        _tipo = "Del";
-    }
+            $parametros = {
+                xxIdTarea: _idtarea,
+                xxIdMenu: _idmenu,
+                xxEmprid: _idempr,
+                xxTipo: _tipo                    
+            }
 
-    $parametros = {
-        xxIdTarea: _idtarea,
-        xxIdMenu: _idmenu,
-        xxEmprid: _idempr,
-        xxTipo: _tipo                    
-    }
+            var xrespuesta = $.post("codephp/delnew_menu.php", $parametros);
+            xrespuesta.done(function(response){
+            });
 
-    var xrespuesta = $.post("codephp/delnew_menu.php", $parametros);
-    xrespuesta.done(function(response){
-        console.log(response);
+        }
 
-    });
+        function f_Guardar(_emprid, _usuaid){
 
-}
+            var _paisid = "<?php echo $yPaisid; ?>"
+            var _idmenu = $('#txtIdMenu').val();
+            var _menu = $.trim($("#txtMenu").val());
+            var _observacion = $.trim($("#txtDescripcion").val());
+            var _buscar = 'NO';
+            var _menuold = $.trim($("#menuold").val());
+    
+            if(_menu == '')
+            {       
+                mensajesweetalert("center","warning","Ingrese Nombre del Menu..!",false,1800);  
+                return;
+            }
 
-function f_Guardar(_emprid, _userid){
+            if(_menuold != _menu){
+                _buscar = 'SI';
+            }
 
-    _idmenu = $('#txtIdMenu').val();
-    _menu = $.trim($("#txtMenu").val());
-    _observacion = $.trim($("#txtDescripcion").val());
+            $parametros = {
+                xxMenu: _menu,
+                xxEmprid: _emprid                
+            }  
 
-  
-    if(_menu == '')
-    {       
-        mensajesweetalert("center","warning","Ingrese Nombre del Menu..!",false,1800);  
-        return;
-    }
+            if(_buscar == 'SI'){                
+                var xresponse = $.post("codephp/consultar_menu.php", $parametros);
+                xresponse.done(function(response){
+                    if(response == '0'){
+                        funGrabar(_paisid,_emprid,_usuaid,_idmenu,_menu,_observacion);                        
+                    }else{
+                        mensajesweetalert("center","warning","Menú ya Existe..!",false,1800);
+                    }
+                }); 
+            }else{
+                funGrabar(_paisid,_emprid,_usuaid,_idmenu,_menu,_observacion);
+            }            
+        }
 
-    $parametros = {
-        xxMenu: _menu,
-        xxEmprid: _emprid
-        
-    }  
-
-    var xrespuesta = $.post("codephp/consultar_menu.php", $parametros);
-    xrespuesta.done(function(response) {
-        //console.log(response);
-        if(response == 0){
-
+        function funGrabar(_paisid,_emprid,_usuaid,_idmenu,_menu,_observacion){
+            
             $datosMenu = {
                 xxMenu: _menu,
                 xxObserva: _observacion,
                 xxEmprid: _emprid,
-                xxUsuario: _userid,
                 xxIdMenu: _idmenu
             }
 
-            $.ajax({
-                url: "codephp/update_menu.php",
-                type: "POST",
-                dataType: "json",
-                data: $datosMenu,          
-                success: function(data){ 
-                    //console.log(data);
-                    if(data == 'OK'){
-                        $.redirect('?page=seg_menuadmin', {'mensaje': 'Actualizado con Exito..!'}); 
-                    }                                                                         
-                },
-                error: function (error){
-                    console.log(error);
-                }                            
+            var xresponse = $.post("codephp/update_menu.php", $datosMenu);
+            xresponse.done(function(response){    
+                if(response.trim() == 'OK'){
+                    /**PARA CREAR REGISTRO DE LOGS */
+                    $parametros = {
+                        xxPaisid: _paisid,
+                        xxEmprid: _emprid,
+                        xxUsuaid: _usuaid,
+                        xxDetalle: 'Modificar Menú',
+                    }					
+
+                    $.post("codephp/new_log.php", $parametros, function(response){
+                        
+                    }); 
+
+                    $.redirect('?page=supmenu&menuid=0', {'mensaje': 'Actualizado con Exito..!'});                             
+                }else{
+                    console.log(response);
+                }
+
             }); 
-        }else{
-            mensajesweetalert("center","warning","Nombre del Menu ya Existe..!",false,1800);
         }
 
-    });
-
-}
-
-</script>     
+    </script>     
 

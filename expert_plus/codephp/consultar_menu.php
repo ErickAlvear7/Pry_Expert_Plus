@@ -14,23 +14,16 @@
 
     if(isset($_POST['xxMenu']) and isset($_POST['xxEmprid']) ){
         if(isset($_POST['xxMenu']) <> '' and isset($_POST['xxEmprid']) <> ''){ 
+
                 $yEmprid = $_POST['xxEmprid'];
                 $xMenu = $_POST['xxMenu'];            
 
                 $xSql = "SELECT * FROM `expert_menu` men WHERE men.empr_id=$yEmprid AND men.menu_descripcion='$xMenu'";
                 $all_menus = mysqli_query($con, $xSql) or die (error_log(mysqli_error($con), 3, $log_file));
                 $xRow = mysqli_num_rows($all_menus);
-
-                // if(mysqli_num_rows($all_perfiles)>0){
-                //     $xRow=1;
-                // }
-
-                echo $xRow;
-
         }
-
-
     }
-
+    
+    echo $xRow;
 
 ?>
