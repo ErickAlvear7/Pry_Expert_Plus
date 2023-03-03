@@ -245,6 +245,7 @@
 
                     var xresponse = $.post("codephp/grabar_menu_tarea.php", $datosMenu);
                     xresponse.done(function(response){
+                        debugger;
                         if(response == 'OK'){
                             /**PARA CREAR REGISTRO DE LOGS */
                             $parametros = {

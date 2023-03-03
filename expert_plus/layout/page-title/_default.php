@@ -38,6 +38,9 @@
 	}else if($page == 'supmenu'){
 		$title = 'Administrar Menu';
 		$descripcion = 'Registro Opciones de Menú';
+	}else if($page == 'supperfil'){
+		$title = 'Administrar Perfil';
+		$descripcion = 'Registro Opciones de Perfil';
 	}
 
 ?>	

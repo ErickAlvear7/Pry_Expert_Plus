@@ -177,7 +177,6 @@
 				return item.text;
 			}
 
-			//debugger;
 			var span = document.createElement('span');
 			var imgUrl = item.element.getAttribute('data-kt-select2-country');
 			var template = '';
@@ -186,7 +185,7 @@
 
 				template += '<img src="' + imgUrl + '" class="rounded-circle h-20px me-2" alt="image"/>';
 			}
-			
+
 			template += item.text;
 
 			span.innerHTML = template;			

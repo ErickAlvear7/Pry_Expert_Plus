@@ -54,5 +54,5 @@
         }
     }
 
-    echo $respuesta
+    echo $respuesta;
 ?>
