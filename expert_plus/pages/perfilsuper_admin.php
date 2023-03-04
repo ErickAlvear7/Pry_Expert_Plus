@@ -178,6 +178,16 @@
                                 
                                     $xDisabledEdit = '';
 
+									$chkEstado = '';
+									$xDisabledEdit = '';
+
+									// if($perfil['Id'] == 1){
+									// 	$chkEstado = 'disabled';
+									// 	$xDisabledEdit = 'disabled';
+									// }elseif($menu['Estado'] == 'Inactivo'){
+									// 	$xDisabledEdit = 'disabled';
+									// }									
+
                                     if ($perfil['Estado'] == 'Inactivo') {
                                         $xDisabledEdit = 'disabled';
                                     }

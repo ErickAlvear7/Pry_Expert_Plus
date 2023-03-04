@@ -21,8 +21,10 @@
             $xSql = "SELECT * FROM `expert_usuarios` WHERE usua_login='$xLogin' AND empr_id=$yEmprid ";
             $all_user = mysqli_query($con, $xSql) or die (error_log(mysqli_error($con), 3, $log_file));
             $xRow = mysqli_num_rows($all_user);
-            echo $xRow;
+            
         }
     }
+    
+    echo $xRow;
 
 ?>

@@ -16,8 +16,6 @@
 	$xSQL .= " ORDER BY IdPais ";
     $resultado = mysqli_query($con, $xSQL);
 
-	
-
 	if(isset($_POST['pais']) and isset($_POST['nombre']) and isset($_POST['apellido']) and isset($_POST['email']) and isset($_POST['password'])){
 		if(isset($_POST['pais']) <> '' and isset($_POST['nombre']) <> '' and isset($_POST['apellido']) <> '' and isset($_POST['email']) <> '' and isset($_POST['password']) <> ''){
 
@@ -185,9 +183,9 @@
 	}	
 	
 	$('#cboPais').select2({
-			templateSelection: optionFormat,
-			templateResult: optionFormat
-		});
+		templateSelection: optionFormat,
+		templateResult: optionFormat
+	});
 
 		//$("#cboPais").val('ECUATORIANA').change();
 
@@ -231,8 +229,6 @@
 			return false; 
 		}
 	
-        
-
 		$.post("registro.php", {
 
 			pais:_cboPais, 
@@ -249,15 +245,9 @@
 
 				$("#email").val('');
 				$("#password").val(''); 
-				
-				
-
 			}else{
 				window.location.href = "ingreso.php";              
-			}			
-
-
-
+			}
 		});
 
 	});

@@ -37,12 +37,13 @@
 
     $xSql = "SELECT mta.meta_id AS MentId,men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'NO' AS Ckeck,";
     $xSql .= "men.menu_orden AS OrdenMenu,tar.tare_orden AS OrdenTarea FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id ";
-    $xSql .= "INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id WHERE men.empr_id=" . $yEmprid . " AND men.menu_estado= 'A' AND tar.tare_estado= 'A'AND mta.meta_id NOT IN ";
-    $xSql .= "(SELECT pmt.meta_id FROM `expert_perfil_menu_tarea` pmt WHERE pmt.perf_id=" . $yPerfid . " AND pmt.empr_id=" . $yEmprid .") UNION SELECT ";
+    $xSql .= "INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id WHERE men.empr_id=$yEmprid AND men.menu_estado= 'A' AND men.menu_id != 200001 AND tar.tare_superadmin=0 AND tar.tare_estado= 'A'AND mta.meta_id NOT IN ";
+    $xSql .= "(SELECT pmt.meta_id FROM `expert_perfil_menu_tarea` pmt WHERE pmt.perf_id=$yPerfid AND pmt.empr_id= $yEmprid )"; 
+    $xSql .= "UNION SELECT ";
     $xSql .= "mta.meta_id AS MentId,men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'SI' AS Ckeck,men.menu_orden AS OrdenMenu,";
     $xSql .= "tar.tare_orden AS OrdenTarea FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id ";
     $xSql .= "INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id INNER JOIN expert_perfil_menu_tarea pmt ON mta.meta_id=pmt.meta_id ";
-    $xSql .= " WHERE pmt.empr_id=" . $yEmprid . " AND pmt.perf_id=" . $yPerfid . " AND men.menu_estado='A' AND tar.tare_estado='A'";
+    $xSql .= " WHERE pmt.empr_id=$yEmprid AND pmt.perf_id=$yPerfid AND men.menu_estado='A' AND men.menu_id != 200001 AND tar.tare_superadmin=0 AND tar.tare_estado='A' ";
     $xSql .= "ORDER BY OrdenMenu,OrdenTarea";
 
     $all_perfiles = mysqli_query($con, $xSql);

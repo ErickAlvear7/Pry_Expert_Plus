@@ -24,7 +24,7 @@
 	$yUsuaid = 1;
 
     $xSQL = "SELECT tare_id AS Idtarea, tare_nombre as SubMenu, tare_ruta AS Ruta, CASE tare_estado WHEN 'A' THEN 'Activo' ";
-    $xSQL .= "ELSE 'Inactivo' END AS Estado FROM expert_tarea WHERE empr_id=$yEmprid ORDER BY tare_orden " ;
+    $xSQL .= "ELSE 'Inactivo' END AS Estado FROM expert_tarea WHERE empr_id=$yEmprid AND tare_superadmin=0 ORDER BY tare_orden " ;
     $expertsubmenu = mysqli_query($con, $xSQL);
 
 ?>

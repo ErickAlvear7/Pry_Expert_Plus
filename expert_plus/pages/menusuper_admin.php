@@ -166,7 +166,7 @@
 										$chkEstado = '';
 										$xDisabledEdit = '';
 
-										if($xMenu == 'Seguridad'){
+										if($menu['Idmenu'] == 200001){
 											$chkEstado = 'disabled';
 											$xDisabledEdit = 'disabled';
 										}elseif($menu['Estado'] == 'Inactivo'){

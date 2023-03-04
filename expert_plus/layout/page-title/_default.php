@@ -41,6 +41,9 @@
 	}else if($page == 'supperfil'){
 		$title = 'Administrar Perfil';
 		$descripcion = 'Registro Opciones de Perfil';
+	}else if($page == 'supusuario'){
+		$title = 'Administrar Usuarios';
+		$descripcion = 'Registro Opciones de Usuarios';
 	}
 
 ?>	

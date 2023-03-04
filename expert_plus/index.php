@@ -57,9 +57,10 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Page Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
-
+		<link href="assets/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 		<link href="assets/sweetalert2/css/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 		<link href="assets/alertify/css/alertify.min.css" rel="stylesheet" type="text/css" />
+		
 
 		<?php
 			if($mode == 'dark'){
@@ -124,6 +125,7 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="assets/sweetalert2/js/sweetalert2.min.js"></script>
 		<script src="assets/alertify/js/alertify.min.js"></script>
 		<script src="assets/redirect/js/redirect.js"></script>
+		
 		<script src="assets/js/funciones.js"></script>
 
 	</body>

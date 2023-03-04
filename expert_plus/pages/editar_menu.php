@@ -27,7 +27,7 @@
 
 
     $xSQL = "SELECT menu_descripcion AS Menu, menu_observacion AS Observacion, CASE menu_estado WHEN 'A' THEN 'Activo' ";
-    $xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_menu` WHERE menu_id=$idmenu AND empr_id=$yEmprid";
+    $xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_menu` WHERE menu_id=$idmenu AND empr_id=$yEmprid ";
     $expertmenu = mysqli_query($con, $xSQL);
 
     foreach($expertmenu as $menu){
@@ -37,18 +37,18 @@
 
     $xSQL="SELECT tar.tare_id AS TareaId, 'SI' as Ckeck, tar.tare_nombre AS Tarea, tar.tare_ruta AS Ruta, CASE tar.tare_estado WHEN 'A' THEN 'Activo' ELSE ";
     $xSQL .="'Inactivo' END AS Estado, met.meta_orden AS Orden FROM `expert_tarea` tar INNER JOIN `expert_menu_tarea` met ON tar.tare_id=met.tare_id WHERE ";
-    $xSQL .="met.menu_id=$idmenu AND tar.empr_id=$yEmprid UNION SELECT tar.tare_id AS TareaId, 'NO' as Ckeck, tar.tare_nombre AS Tarea, tar.tare_ruta AS Ruta, CASE ";
+    $xSQL .="met.menu_id=$idmenu AND tar.empr_id=$yEmprid AND tar.tare_superadmin=0 UNION SELECT tar.tare_id AS TareaId, 'NO' as Ckeck, tar.tare_nombre AS Tarea, tar.tare_ruta AS Ruta, CASE ";
     $xSQL .="tar.tare_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, 50000 AS Orden FROM `expert_tarea` tar WHERE tar.tare_id NOT IN(SELECT ";
-    $xSQL .="met.tare_id FROM `expert_menu_tarea` met WHERE met.menu_id=$idmenu AND met.empr_id=$yEmprid) AND tar.empr_id=$yEmprid  ORDER BY Orden; ";
+    $xSQL .="met.tare_id FROM `expert_menu_tarea` met WHERE met.menu_id=$idmenu AND met.empr_id=$yEmprid) AND tar.empr_id=$yEmprid AND tar.tare_superadmin=0  ORDER BY Orden; ";
     $expertarea = mysqli_query($con, $xSQL);
 
 ?>
 
 <div id="kt_content_container" class="container-xxl">
    <div class="card card-flush">
-        <div class="card-toolbar d-flex align-self-end">
+        <!-- <div class="card-toolbar d-flex align-self-end">
             <a href="?page=seg_menuadmin" class="btn btn-light-primary"><i class="las la-arrow-left"></i>Regresar</a>
-        </div>	
+        </div>	 -->
         <div class="card-header">
             <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
                 <li class="nav-item">
@@ -80,7 +80,7 @@
             </ul>
         </div>
         <div class="tab-content" id="myTabContent">
-            <input type="text" id="menuold" value="<?php echo $xMenu ?>">
+            <input type="hidden" id="menuold" value="<?php echo $xMenu ?>">
             <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
                 <div class="card-header"> 
                     <div class="card-toolbar">

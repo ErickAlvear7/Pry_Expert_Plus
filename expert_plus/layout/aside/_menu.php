@@ -186,7 +186,7 @@
 											</a>
 										</div>
 										<div class="menu-item">
-											<a class="menu-link <?php if($page == 'supperfil'){echo 'active';} ?>" href="?page=supperfil&menuid=0">
+											<a class="menu-link <?php if($page == 'supperfil' || $page == 'addperfil' || $page == 'editperfil'){echo 'active';} ?>" href="?page=supperfil&menuid=0">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
@@ -194,7 +194,7 @@
 											</a>
 										</div>
 										<div class="menu-item">
-											<a class="menu-link <?php if($page == 'supusuarios'){echo 'active';} ?>" href="?page=supusuarios&menuid=0">
+											<a class="menu-link <?php if($page == 'supusuario'){echo 'active';} ?>" href="?page=supusuario&menuid=0">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
