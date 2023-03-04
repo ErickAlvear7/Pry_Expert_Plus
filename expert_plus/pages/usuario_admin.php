@@ -9,6 +9,7 @@
 
 	$xServidor = $_SERVER['HTTP_HOST'];
 	$xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
+    $xTerminal = gethostname();
 
 	$yEmprid = 1;
 
