@@ -23,9 +23,12 @@
 					<!--begin::Brand-->
 					<div class="aside-logo flex-column-auto" id="kt_aside_logo">
 						<!--begin::Logo-->
-						<a href="?page=index">
-							<img alt="Logo" src="assets/media/logos/<?php if($mode == 'dark') { echo 'LogoPresta.png'; } else { echo 'LogoPresta.png'; } ?>" class="h-75px logo" />
-						</a>
+						
+						<!-- <a href="#">
+							
+						</a> -->
+						
+						<img alt="Logo" src="assets/media/logos/<?php if($mode == 'dark') { echo 'LogoPresta.png'; } else { echo 'LogoPresta.png'; } ?>" class="h-75px logo" />
 						<!--end::Logo-->
 						<!--begin::Aside toggler-->
 						<div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="aside-minimize">

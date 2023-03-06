@@ -6,39 +6,30 @@
     putenv("TZ=America/Guayaquil");
     date_default_timezone_set('America/Guayaquil');	
 
+	//$xServidor = $_SERVER['HTTP_HOST'];
+	
 	$page = isset($_GET['page']) ? $_GET['page'] : 'index';
 	$menuid = isset($_GET['menuid']) ? $_GET['menuid'] : '200001';
 
-	session_start();
+	@session_start();
 
-    //$xServidor = $_SERVER['HTTP_HOST'];
-    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
-	
-	//$yUsuaCodigo = $_SESSION["i_codigousuario"];	
-	//$yCodigoPais = $_SESSION["i_codigopais"];	
-	//$xPerfiText = $_SESSION["s_perfiltext"];
+    if(isset($_SESSION["s_usuario"])){
+        if($_SESSION["s_loged"] != "loged"){
+            header("Location: ./logout.php");
+            exit();
+        }
+    } else{
+        header("Location: ./logout.php");
+        exit();
+    }
 
-	$xPerfiText = "Super Administrador";
-	$yCodigoPais = 1;
-	$yUsuaCodigo = 1;
+	$yUsuaid = $_SESSION["i_codigousuario"];	
+	$yPaisid = $_SESSION["i_paisid"];	
+	$xPerfilName = $_SESSION["s_perfdesc"];
+
 	$xIcono = "";
 	$xActivo = "";
 	$xPagina = "index";
-
-    // if(isset($_SESSION["s_usuario"])){
-    //     if($_SESSION["s_login"] != "loged"){
-    //         header("Location: ../logout");
-    //         exit();
-    //     }else{
-    //         if($xPerfil != "partner"){
-    //             header("Location: ../logout");
-    //             exit();                
-    //         }
-    //     }
-    // }else{
-    //     header("Location: ../logout");
-    //     exit();
-    // }	
 
 	//file_put_contents('log_errores.txt', $xNombreusuario . "\n\n", FILE_APPEND);
 
@@ -71,8 +62,8 @@
 	$xSql = "SELECT distinct (SELECT mpa.mepa_id FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS CodigoMenuPadre,";
 	$xSql .= "(SELECT mpa.mepa_descripcion FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS MenuPadre," ;
 	$xSql .= "men.menu_id AS MenuId,men.menu_descripcion AS Menu FROM `expert_usuarios` usu, `expert_perfil_menu_tarea` pmt, `expert_menu_tarea` mta, `expert_menu` men ";
-	$xSql .= "WHERE usu.pais_id=$yCodigoPais AND usu.perf_id=pmt.perf_id AND pmt.meta_id=mta.meta_id AND mta.menu_id=men.menu_id ";
-	$xSql .= "AND men.menu_estado='A' AND USU.usua_id=$yUsuaCodigo ORDER BY men.menu_orden";
+	$xSql .= "WHERE usu.pais_id=$yPaisid AND usu.perf_id=pmt.perf_id AND pmt.meta_id=mta.meta_id AND mta.menu_id=men.menu_id ";
+	$xSql .= "AND men.menu_estado='A' AND USU.usua_id=$yUsuaid ORDER BY men.menu_orden";
 
 	$all_menu = mysqli_query($con, $xSql);
 
@@ -153,7 +144,7 @@
 							?>
 
 						<?php
-							if($xPerfiText == 'Super Administrador' and $yCodigoPais == 1 ) { ?>
+							if($xPerfilName == 'Super Administrador' and $yPaisid == 1 ) { ?>
 
 								<div data-kt-menu-trigger="click" class="menu-item <?php if($menuid == '0'){echo 'here show';} ?>  menu-accordion mb-1">
 									<span class="menu-link">

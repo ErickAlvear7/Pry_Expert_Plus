@@ -9,8 +9,10 @@
 
 	$log_file = "error_conexion";
 
-	session_start();
+	@session_start();
+
 	$_SESSION["s_usuario"] = null;
+	$_SESSION["s_logued"] = null;
 	$_SESSION["i_usuaid"] = null;
 	$_SESSION["i_paisid"] = null;
 	$_SESSION["i_perfilid"] = null;
@@ -28,18 +30,18 @@
 			$xPassword = $_POST['password'];
 			$xnewPassword = md5($xPassword);
 
-
 			$xSQL = " SELECT usu.usua_id AS UsuarioId, usu.pais_id AS PaisId, usu.empr_id AS EmprID, usu.usua_login AS NombreLogin, ";
 			$xSQL .= " CONCAT(usu.usua_nombres,' ',usu.usua_apellidos) AS NombreUsuario, per.perf_id AS PerfilId, per.perf_descripcion AS PerfilName FROM `expert_usuarios` usu ";
-			$xSQL .= " INNER JOIN `expert_perfil` per ON usu.perf_id=per.perf_id WHERE usu.usua_login='$xUsuario'and usua_password = '$xnewPassword' ";
+			$xSQL .= " INNER JOIN `expert_perfil` per ON usu.perf_id=per.perf_id WHERE usu.usua_login='$xUsuario' AND usua_password='$xnewPassword' ";
 		
 			$login = mysqli_query($con, $xSQL);
-			$rowcount=mysqli_num_rows($login);
+			$rowcount = mysqli_num_rows($login);
 		
 			if($rowcount > 0){
 			   
 				$row= mysqli_fetch_row($login);
 		
+				$_SESSION["s_loged"] = "loged";
 				$_SESSION["i_usuaid"] = $row[0];
 				$_SESSION["i_paisid"] = $row[1];
 				$_SESSION["i_emprid"] = $row[2];
@@ -53,6 +55,7 @@
 		
 			}else{
 		
+				$_SESSION["s_loged"] = "";
 				$_SESSION["s_usuario"] = null;
 				$_SESSION["i_usuaid"] = null;
 				$_SESSION["i_paisid"] = null;
@@ -68,9 +71,6 @@
 		echo $respuesta;
 		exit();
 	}
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -78,7 +78,7 @@
 
 <html lang="en">
 	<head>
-		<title>Metronic - the world's #1 selling Bootstrap Admin Theme Ecosystem for HTML, Vue, React, Angular &amp; Laravel by Keenthemes</title>
+		<title>Sistema de Agedamientos Expert Plus - Extendent </title>
 		<meta charset="utf-8" />
 		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
 		<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
@@ -89,7 +89,7 @@
 		<meta property="og:url" content="https://keenthemes.com/metronic" />
 		<meta property="og:site_name" content="Keenthemes | Metronic" />
 		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+		<link rel="shortcut icon" href="assets/media/logos/LogoPresta.ico" />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />

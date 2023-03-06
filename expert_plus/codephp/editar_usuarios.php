@@ -16,7 +16,7 @@
             $xDataUsuarios = [];
 
             $xSQL =  "SELECT usua_nombres AS Nombres, usua_apellidos AS Apellidos, usua_login AS Logi, usua_password AS Pass, perf_id AS CodigoPerf, pais_id AS CodigoPais, CASE ";
-            $xSQL .= "usua_caducapass WHEN 'SI' THEN 'SI' ELSE 'NO' END AS Caduca, DATE_FORMAT(usua_fechacaduca,'%Y/%m/%d') AS FechaCaduca, CASE usua_cambiarpass WHEN ";
+            $xSQL .= "usua_caducapass WHEN 'SI' THEN 'SI' ELSE 'NO' END AS Caduca, DATE_FORMAT(usua_fechacaduca,'%Y-%m-%d') AS FechaCaduca, CASE usua_cambiarpass WHEN ";
             $xSQL .= "'SI' THEN 'SI' ELSE 'NO' END AS Cambiar FROM `expert_usuarios` WHERE usua_id= $yIdusua AND empr_id=$yEmprid; ";
             $consulta = mysqli_query($con, $xSQL);
 

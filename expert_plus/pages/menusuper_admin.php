@@ -99,7 +99,7 @@
 							<a class="nav-link text-active-primary ms-0 me-10 py-5" href="?page=supperfil&menuid=0">Perfil</a>
 						</li>
 						<li class="nav-item mt-2">
-							<a class="nav-link text-active-primary ms-0 me-10 py-5" href="?page=supusuarios&menuid=0">Usuarios</a>
+							<a class="nav-link text-active-primary ms-0 me-10 py-5" href="?page=supusuario&menuid=0">Usuarios</a>
 						</li>
 					</ul>
 				</div>

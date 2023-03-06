@@ -18,20 +18,22 @@
 
     @session_start();
 
-    //$yEmprid = $_SESSION["i_empre_id"];
-    $yEmprid = 1;
-    $xDisabledEdit = "";
-	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
-    
-    /*if(isset($_SESSION["s_usuario"])){
-        if($_SESSION["s_login"] != "loged"){
+    if(isset($_SESSION["s_usuario"])){
+        if($_SESSION["s_loged"] != "loged"){
             header("Location: ./logout.php");
             exit();
         }
     } else{
         header("Location: ./logout.php");
         exit();
-    }*/
+    }
+
+	$yUsuaid = $_SESSION["i_usuaid"];
+    $yPaisid = $_SESSION["i_paisid"];
+    $yEmprid = $_SESSION["i_emprid"];
+    $xDisabledEdit = "";
+	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
+
 
     $xSql = "SELECT per.perf_id AS Id,per.perf_descripcion AS Perfil,per.perf_observacion AS Descripcion,CASE per.perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
     $xSql .= "FROM `expert_perfil` per WHERE per.empr_id=$yEmprid";
@@ -115,7 +117,7 @@
 							<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="?page=supperfil&menuid=0">Perfil</a>
 						</li>
 						<li class="nav-item mt-2">
-							<a class="nav-link text-active-primary ms-0 me-10 py-5" href="?page=supusuarios&menuid=0">Usuarios</a>
+							<a class="nav-link text-active-primary ms-0 me-10 py-5" href="?page=supusuario&menuid=0">Usuarios</a>
 						</li>
 					</ul>
 				</div>

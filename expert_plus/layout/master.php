@@ -49,7 +49,7 @@
 	}else if($page == 'supperfil'){
 		include __DIR__ . '/../pages/perfilsuper_admin.php';		
 	}else if($page == 'supusuario'){
-		include __DIR__ . '/../pages/usuariosuper_admin.php';		
+		include __DIR__ . '/../pages/usuariosuper_admin.php';
 	}else{
 		include '_content.php';
 	}
