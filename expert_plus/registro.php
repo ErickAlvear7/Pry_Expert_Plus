@@ -18,9 +18,10 @@
 	$log_file = "error_conexion";
 
 	$xSQL = "SELECT pais_id AS IdPais, pais_nombre AS Pais, pais_flag AS Bandera FROM `expert_pais` ";
-	//$xSQL .= " UNION SELECT 0,'--Seleccione Pais--',''";
 	$xSQL .= " ORDER BY IdPais ";
     $resultado = mysqli_query($con, $xSQL);
+
+	$respuesta = 'ERR';
 
 	if(isset($_POST['pais']) and isset($_POST['nombre']) and isset($_POST['apellido']) and isset($_POST['email']) and isset($_POST['password'])){
 		if(isset($_POST['pais']) <> '' and isset($_POST['nombre']) <> '' and isset($_POST['apellido']) <> '' and isset($_POST['email']) <> '' and isset($_POST['password']) <> ''){
@@ -43,11 +44,14 @@
 			$xSQL .= "VALUES (0,$yPais,$yEmprid,'$xNombre','$xApellido','$xEmail','$xNewPass','A','{$xFecha}','$xTerminal')";
 			$registro = mysqli_query($con, $xSQL);
 
+			$respuesta = 'OK';
+
 		  }
 
 		}
 
-		echo 'EXITO';
+		echo $respuesta;
+		exit();
 	}
 
 
@@ -196,17 +200,16 @@
 		templateResult: optionFormat
 	});
 
-		//$("#cboPais").val('ECUATORIANA').change();
 
    $('#kt_sign_up_form').submit(function(e){
-	  e.preventDefault();
+	    e.preventDefault();
 
-      var _cboPais = $('#cboPais').val();
-	  var _nombre = $.trim($("#txtNombre").val()); 
-	  var _apellido = $.trim($("#txtApellido").val());
-	  var _email = $.trim($("#email").val());
-	  var _password = $.trim($("#password").val());
-	  var _confpass = $.trim($("#confpass").val());
+		let _cboPais = $('#cboPais').val();
+		let _nombre = $.trim($("#txtNombre").val()); 
+		let _apellido = $.trim($("#txtApellido").val());
+		let _email = $.trim($("#email").val());
+		let _password = $.trim($("#password").val());
+		let _confpass = $.trim($("#confpass").val());
 
 	    if(_cboPais == 0){
 			mensajesweetalert("center","warning","Seleccione Pais..!",false,1800);
@@ -248,17 +251,13 @@
 
 		}, function(response){
 
-			//debugger;
-
-			if(response == 'EXITO'){
+			if(response == 'OK'){
 				
-				mensajesweetalert("center","success","Usuario Registrado..!!",false,2000);
+				mensajesweetalert("center","success","Usuario Registrado..!!",false,2000);   
 				window.location.href = "ingreso.php";     
-				
-				
 
 			}else{
-				window.location.href = "ingreso.php";              
+				mensajesweetalert("center","error","Email se encuentra ya registrado..!!",false,2000);           
 			}			
 
 
