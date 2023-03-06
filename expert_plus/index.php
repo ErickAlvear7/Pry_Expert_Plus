@@ -117,11 +117,10 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="assets/js/custom/apps/ecommerce/reports/shipping/shipping.js"></script>
 		<script src="assets/js/widgets.bundle.js"></script>
 		<script src="assets/js/custom/widgets.js"></script>
-		<script src="assets/js/custom/apps/chat/chat.js"></script>
+		<script src="assets/js/custom/apps/chat/chat.js"></script>		
 		<script src="assets/js/custom/intro.js"></script>
 		<script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script>
 		<script src="assets/js/custom/utilities/modals/users-search.js"></script>
-
 		<script src="assets/sweetalert2/js/sweetalert2.min.js"></script>
 		<script src="assets/alertify/js/alertify.min.js"></script>
 		<script src="assets/redirect/js/redirect.js"></script>

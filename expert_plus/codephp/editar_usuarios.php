@@ -8,7 +8,6 @@
     mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
 
-
     if(isset($_POST['xxIdUsuario']) and isset($_POST['xxEmprid'])){
         if(isset($_POST['xxIdUsuario']) <> '' and isset($_POST['xxEmprid']) <> ''){
 
