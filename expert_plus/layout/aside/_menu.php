@@ -23,7 +23,7 @@
         exit();
     }
 
-	$yUsuaid = $_SESSION["i_codigousuario"];	
+	$yUsuaid = $_SESSION["i_usuaid"];	
 	$yPaisid = $_SESSION["i_paisid"];	
 	$xPerfilName = $_SESSION["s_perfdesc"];
 

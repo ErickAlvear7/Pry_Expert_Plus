@@ -6,7 +6,13 @@
 
 	$log_file = "error_conexion";
 
-	$xSQL = "SELECT * FROM `expert_parametro_paginas` WHERE empr_id=1 AND usua_id=1 AND estado='A'";
+	@session_start();
+
+	$yUsuaid = $_SESSION["i_usuaid"];	
+    $yPaisid = $_SESSION["i_paisid"];	
+    $yEmprid = $_SESSION["i_emprid"];		
+
+	$xSQL = "SELECT * FROM `expert_parametro_paginas` WHERE empr_id=$yEmprid AND usua_id=$yUsuaid AND estado='A'";
 	$all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));	
 
 	if(mysqli_num_rows($all_datos)>0) {
