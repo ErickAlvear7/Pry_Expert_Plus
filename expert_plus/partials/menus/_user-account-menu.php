@@ -31,9 +31,7 @@
 						<!--begin::Username-->
 						<div class="d-flex flex-column">
 							<div class="fw-bolder d-flex align-items-center fs-5"><?php echo $xUserName; ?>
-							<?php if($yUsuaid == 1 and $yPerfilid == 1) {  ?>
-								<span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Super</span></div>
-							<?php } ?>
+							<span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2"></span></div>
 							<a href="#" class="fw-bold text-muted text-hover-primary fs-7"><?php echo $xLoginName; ?></a>
 						</div>
 						<!--end::Username-->

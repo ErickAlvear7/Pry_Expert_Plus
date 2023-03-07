@@ -33,6 +33,10 @@
                 $xFechaCaduca =  $_POST['xxFecha'];
                 $xCambiarPass = $_POST['xxCambiarPass'];
 
+                $xSQL = "INSERT INTO `expert_parametro_paginas` (empr_id,usua_id,index_menu,index_content,estado) ";
+                $xSQL .= "VALUES($yEmprid,$yUserid,'dark','dark','A')";
+                mysqli_query($con, $xSQL);
+
                 $xSQL ="INSERT INTO `expert_usuarios` (perf_id,pais_id,empr_id,usua_nombres,usua_apellidos,usua_login,usua_password,usua_estado, ";
                 $xSQL .= "usua_contador,usua_caducapass,usua_fechacaduca,usua_cambiarpass,usua_estadologin,usua_terminallogin, ";
                 $xSQL .= "usua_fechacreacion,usua_terminalcreacion)";
