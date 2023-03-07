@@ -15,13 +15,22 @@
     //$xServidor = $_SERVER['HTTP_HOST'];
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
-	//$yUsuaid = $_SESSION["i_usuaid"];	
-	//$yPaisid = $_SESSION["i_paisid"];	
-    //$yEmprid = $_SESSION["i_empre_id"];
-    
-	$yEmprid = 1;	
-	$yPaisid = 1;
-	$yUsuaid = 1;
+    @session_start();
+
+    if(isset($_SESSION["s_usuario"])){
+        if($_SESSION["s_loged"] != "loged"){
+            header("Location: ./logout.php");
+            exit();
+        }
+    } else{
+        header("Location: ./logout.php");
+        exit();
+    }    
+
+	$yUsuaid = $_SESSION["i_usuaid"];
+    $yPaisid = $_SESSION["i_paisid"];
+    $yEmprid = $_SESSION["i_emprid"];
+
 
     $idmenu = $_POST['idmenu'];
 

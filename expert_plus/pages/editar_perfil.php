@@ -22,21 +22,23 @@
 
     @session_start();
 
-    //$yEmprid = $_SESSION["i_empreid"];
-    //$yUserid = $_SESSION["i_userid"];
-    $yEmprid = 1;
-    $yUserid = 1;
-    $xDisabledEdit = "";
-    
-    /*if(isset($_SESSION["s_usuario"])){
-        if($_SESSION["s_login"] != "loged"){
+    if(isset($_SESSION["s_usuario"])){
+        if($_SESSION["s_loged"] != "loged"){
             header("Location: ./logout.php");
             exit();
         }
     } else{
         header("Location: ./logout.php");
         exit();
-    }*/
+    }    
+
+	$yUsuaid = $_SESSION["i_usuaid"];
+    $yEmprid = $_SESSION["i_emprid"];
+
+
+    $xDisabledEdit = "";
+    
+
     $xSql = "SELECT per.perf_descripcion AS Perfil,per.perf_observacion AS Observacion, CASE per.perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
     $xSql .= "FROM `expert_perfil` per WHERE perf_id=$idperfil AND empr_id=$yEmprid";
     $all_datos = mysqli_query($con, $xSql);
@@ -99,7 +101,7 @@
                                 <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel"> 
                                         <div class="card-header"> 
                                             <div class="card-toolbar">
-                                                <button type="button" id="btnGuardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $idperfil; ?>,<?php echo $yUserid; ?>)"><i class="las la-save"></i>Guardar</button>
+                                                <button type="button" id="btnGuardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $idperfil; ?>,<?php echo $yUsuaid; ?>)"><i class="las la-save"></i>Guardar</button>
                                             </div>
                                         </div>
 

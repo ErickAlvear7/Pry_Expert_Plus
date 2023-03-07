@@ -18,22 +18,23 @@
 
     @session_start();
 
-    //$yEmprid = $_SESSION["i_empreid"];
-    //$yUserid = $_SESSION["i_userid"];
-    $yEmprid = 1;
-    $yPerfid = 1;
-    $yUserid = 1;    
-    $xDisabledEdit = "";
-    
-    /*if(isset($_SESSION["s_usuario"])){
-        if($_SESSION["s_login"] != "loged"){
+    if(isset($_SESSION["s_usuario"])){
+        if($_SESSION["s_loged"] != "loged"){
             header("Location: ./logout.php");
             exit();
         }
     } else{
         header("Location: ./logout.php");
         exit();
-    }*/
+    }    
+
+	$yUsuaid = $_SESSION["i_usuaid"];
+    $yPaisid = $_SESSION["i_paisid"];
+    $yEmprid = $_SESSION["i_emprid"];
+    $yPerfid = $_SESSION["i_perfilid"];
+ 
+    $xDisabledEdit = "";
+    
 
     $xSql = "SELECT mta.meta_id AS MentId,men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'NO' AS Ckeck,";
     $xSql .= "men.menu_orden AS OrdenMenu,tar.tare_orden AS OrdenTarea FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id ";

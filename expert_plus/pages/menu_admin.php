@@ -10,7 +10,20 @@
 	$xServidor = $_SERVER['HTTP_HOST'];
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
-	$yEmprid = 1;
+	@session_start();
+
+    if(isset($_SESSION["s_usuario"])){
+        if($_SESSION["s_loged"] != "loged"){
+            header("Location: ./logout.php");
+            exit();
+        }
+    } else{
+        header("Location: ./logout.php");
+        exit();
+    }    
+
+    $yEmprid = $_SESSION["i_emprid"];
+
 
 	$xSQL = "SELECT menu_id AS Idmenu, empr_id AS Empid, menu_descripcion AS Menu, menu_observacion AS Observacion, CASE menu_estado WHEN 'A' THEN 'Activo' ";
 	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_menu`";

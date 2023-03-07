@@ -14,24 +14,26 @@
 
     //$xServidor = $_SERVER['HTTP_HOST'];
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
-    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());    
+    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());  
+	
+	@session_start();
 
-    @session_start();
-
-    //$yEmprid = $_SESSION["i_empre_id"];
-    $yEmprid = 1;
-    $xDisabledEdit = "";
-	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
-    
-    /*if(isset($_SESSION["s_usuario"])){
-        if($_SESSION["s_login"] != "loged"){
+    if(isset($_SESSION["s_usuario"])){
+        if($_SESSION["s_loged"] != "loged"){
             header("Location: ./logout.php");
             exit();
         }
     } else{
         header("Location: ./logout.php");
         exit();
-    }*/
+    }    
+
+
+    $yEmprid = $_SESSION["i_emprid"];
+
+    $xDisabledEdit = "";
+	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
+    
 
     $xSql = "SELECT per.perf_id AS Id,per.perf_descripcion AS Perfil,per.perf_observacion AS Descripcion,CASE per.perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
     $xSql .= "FROM `expert_perfil` per WHERE per.empr_id=$yEmprid";

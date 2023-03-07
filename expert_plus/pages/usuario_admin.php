@@ -11,7 +11,21 @@
 	$xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
     $xTerminal = gethostname();
 
-	$yEmprid = 1;
+	@session_start();
+
+    if(isset($_SESSION["s_usuario"])){
+        if($_SESSION["s_loged"] != "loged"){
+            header("Location: ./logout.php");
+            exit();
+        }
+    } else{
+        header("Location: ./logout.php");
+        exit();
+    }    
+
+
+    $yEmprid = $_SESSION["i_emprid"];
+
 
     $xSQL = "SELECT usua_id AS Idusuario, CONCAT(usua_nombres,' ',usua_apellidos) AS Nombres, usua_login AS Log, CASE usua_estado WHEN 'A' THEN 'Activo' ";
 	$xSQL .= "ELSE 'Inactivo' END AS Estado, usua_caducapass AS CaducaPass FROM `expert_usuarios`";
