@@ -1,4 +1,4 @@
 <?php
-    $xclave = md5("Admin.200$");
+    $xclave = md5("12345");
     echo $xclave;
 ?>
