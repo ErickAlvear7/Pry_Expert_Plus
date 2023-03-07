@@ -63,7 +63,7 @@
 	$xSql .= "(SELECT mpa.mepa_descripcion FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS MenuPadre," ;
 	$xSql .= "men.menu_id AS MenuId,men.menu_descripcion AS Menu FROM `expert_usuarios` usu, `expert_perfil_menu_tarea` pmt, `expert_menu_tarea` mta, `expert_menu` men ";
 	$xSql .= "WHERE usu.pais_id=$yPaisid AND usu.perf_id=pmt.perf_id AND pmt.meta_id=mta.meta_id AND mta.menu_id=men.menu_id ";
-	$xSql .= "AND men.menu_estado='A' AND USU.usua_id=$yUsuaid ORDER BY men.menu_orden";
+	$xSql .= "AND men.menu_estado='A' AND usu.usua_id=$yUsuaid ORDER BY men.menu_orden";
 
 	$all_menu = mysqli_query($con, $xSql);
 
