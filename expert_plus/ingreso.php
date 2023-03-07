@@ -208,18 +208,14 @@
 
 			   if(response == 'error'){
                     
-					mensajesweetalert("center","warning","Usuario y/o Password incorrecto!",false,1800);
-             
+					mensajesweetalert("center","warning","Usuario y/o Password incorrecto!",false,1800);             
                     $("#email").val('');
                     $("#password").val(''); 
 					
-					
-
                 }else{
-                    window.location.href = "index.php";              
-                }			
-
-		
+                    window.location.href = "index.php";
+					//$.redirect('index.php'); 
+                }
 
 			});
 		});

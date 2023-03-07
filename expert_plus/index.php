@@ -65,7 +65,7 @@ License: For each use you must have a valid license purchased only from above li
 		<meta property="og:url" content="https://keenthemes.com/metronic" />
 		<meta property="og:site_name" content="Keenthemes | Metronic" />
 		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-		<link rel="shortcut icon" href="assets/media/logos/logoPresta.ico" />
+		<link rel="shortcut icon" href="assets/media/logos/LogoPresta.ico" />
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
@@ -74,7 +74,7 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Page Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
-		<link href="assets/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+		
 		<link href="assets/sweetalert2/css/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 		<link href="assets/alertify/css/alertify.min.css" rel="stylesheet" type="text/css" />
 		
@@ -94,8 +94,8 @@ License: For each use you must have a valid license purchased only from above li
 		?>	
 
 		<!--end::Global Stylesheets Bundle-->
-		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>		
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>		
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->

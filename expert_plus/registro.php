@@ -257,13 +257,10 @@
 			if(response == 'OK'){
 				
 				mensajesweetalert("center","success","Usuario Registrado..!!",false,2000);   
-				window.location.href = "ingreso.php";     
-
+				window.location.href = "ingreso.php";
 			}else{
 				mensajesweetalert("center","error","Email se encuentra ya registrado..!!",false,2000);           
 			}			
-
-
 
 		});
 
