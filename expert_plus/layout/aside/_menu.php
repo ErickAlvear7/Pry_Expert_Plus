@@ -161,7 +161,7 @@
 									</span>
 									<div class="menu-sub menu-sub-accordion">
 										<div class="menu-item">
-											<a class="menu-link <?php if($page == 'suptarea'){echo 'active';} ?>" href="?page=supmenu&menuid=0">
+											<a class="menu-link <?php if($page == 'suptarea'){echo 'active';} ?>" href="?page=suptarea&menuid=0">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
