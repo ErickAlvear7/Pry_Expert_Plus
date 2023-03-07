@@ -22,6 +22,16 @@
 	$_SESSION["s_namehost"] = gethostname();
 
 	$respuesta = '';
+	$mode = 'dark';
+
+	$xSQL = "SELECT * FROM `expert_parametro_paginas` WHERE empr_id=0 AND usua_id=0 AND estado='A'";
+	$all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));	
+
+	if(mysqli_num_rows($all_datos)>0) {
+		foreach ($all_datos as $datos){ 
+			$mode = $datos['index_content'];
+		}
+	}		
 
 	if(isset($_POST['usuario']) and isset($_POST['password'])){
 		if(isset($_POST['usuario']) <> '' and isset($_POST['password']) <> ''){
@@ -91,8 +101,26 @@
 		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
 		<link rel="shortcut icon" href="assets/media/logos/LogoPresta.ico" />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+
+
+		<!-- <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" /> -->
+
+		<?php
+			if($mode == 'dark'){
+		?>
+			<link href="assets/plugins/global/plugins.dark.bundle.css" rel="stylesheet" type="text/css" />
+			<link href="assets/css/style.dark.bundle.css" rel="stylesheet" type="text/css" />		
+		<?php	
+			}else{
+		?>
+			<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+			<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<?php
+			}
+		?>			
+
+
 	</head>
 	<style>
 	
@@ -106,9 +134,9 @@
 		margin: 10px; }
 		
 	</style>
-	<body id="kt_body" class="bg-dark">
+	<body id="kt_body" class="<?php if($mode == 'dark'){ echo ''; }else{ echo 'bg-dark'; } ?>">
 		<div class="d-flex flex-column flex-root">
-			<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(assets/media/illustrations/sketchy-1/14-dark.png)">
+			<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(assets/media/illustrations/sketchy-1/<?php if($mode == 'dark'){ echo '14.png'; }else{ echo '14-dark.png'; } ?>">
 				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 					<div class="imagen">
 					   <img alt="Logo" src="assets/media/logos/LogoPresta.png" class="h-40px" />
