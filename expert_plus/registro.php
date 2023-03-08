@@ -213,6 +213,8 @@
 		let _email = $.trim($("#email").val());
 		let _password = $.trim($("#password").val());
 		let _confpass = $.trim($("#confpass").val());
+		let tampass = _password.length;
+		let tamconfpass = _confpass.length;
 
 	    if(_cboPais == 0){
 			mensajesweetalert("center","warning","Seleccione Pais..!",false,1800);
@@ -243,6 +245,20 @@
 			mensajesweetalert("center","warning","Confirme password..!",false,1800);
 			return false; 
 		}
+
+		
+
+		if(tampass != tamconfpass ){
+			mensajesweetalert("center","warning","No coincide el numero de caracteres del password..!",false,1800);
+			return false; 
+		}
+
+		if(_password != _confpass){
+			mensajesweetalert("center","warning","No coincide el password ingresado..!",false,1800);
+			return false; 
+		}
+
+	
 	
 		$.post("registro.php", {
 
