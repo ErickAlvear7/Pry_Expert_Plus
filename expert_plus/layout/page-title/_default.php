@@ -44,6 +44,9 @@
 	}else if($page == 'supusuario'){
 		$title = 'Administrar Usuarios';
 		$descripcion = 'Registro Opciones de Usuarios';
+	}else if($page == 'param_generales'){
+		$title = 'Parametros del Sistema';
+		$descripcion = 'Registro de Parametros';
 	}
 
 ?>	
