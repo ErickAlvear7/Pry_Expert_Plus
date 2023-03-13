@@ -13,7 +13,6 @@
 	$page = isset($_GET['page']) ? $_GET['page'] : 'index';
 	$menuid = isset($_GET['menuid']) ? $_GET['menuid'] : '200001';
 	
-	file_put_contents('log_seguimiento.txt', $menuid . "\n\n", FILE_APPEND);
 	
 	@session_start();
 
