@@ -16,9 +16,19 @@
     $yEmprid = 1;
 
 	$log_file = "error_conexion";
+	$mode = 'dark';
+	
+	$xSQL = "SELECT * FROM `expert_parametro_paginas` WHERE empr_id=0 AND usua_id=0 AND estado='A'";
+	$all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));	
+
+	if(mysqli_num_rows($all_datos)>0) {
+		foreach ($all_datos as $datos){ 
+			$mode = $datos['index_content'];
+		}
+	}	
 
 	$xSQL = "SELECT pais_id AS IdPais, pais_nombre AS Pais, pais_flag AS Bandera FROM `expert_pais` ";
-	$xSQL .= " ORDER BY IdPais ";
+	$xSQL .= " ORDER BY pais_id ";
     $resultado = mysqli_query($con, $xSQL);
 
 	$respuesta = 'ERR';
@@ -41,7 +51,7 @@
 
 			$xSQL =  "INSERT INTO `expert_usuarios`(perf_id,pais_id,empr_id,usua_nombres,usua_apellidos,usua_login,usua_password, ";
 			$xSQL .= "usua_estado,usua_fechacreacion,usua_terminalcreacion )";
-			$xSQL .= "VALUES (0,$yPais,$yEmprid,'$xNombre','$xApellido','$xEmail','$xNewPass','A','{$xFecha}','$xTerminal')";
+			$xSQL .= "VALUES (-1,$yPais,$yEmprid,'$xNombre','$xApellido','$xEmail','$xNewPass','A','{$xFecha}','$xTerminal')";
 			$registro = mysqli_query($con, $xSQL);
 
 			$respuesta = 'OK';
@@ -74,9 +84,24 @@
 		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 
-		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 
+		<!--<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" /> -->
+		
+		<?php
+			if($mode == 'dark'){
+		?>
+			<link href="assets/plugins/global/plugins.dark.bundle.css" rel="stylesheet" type="text/css" />
+			<link href="assets/css/style.dark.bundle.css" rel="stylesheet" type="text/css" />		
+		<?php	
+			}else{
+		?>
+			<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+			<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<?php
+			}
+		?>	
+		
 
 	</head>
 	<body id="kt_body" class="bg-dark">
@@ -84,7 +109,7 @@
 			<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(assets/media/illustrations/sketchy-1/14-dark.png)">
 				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 					<a href="../../demo1/dist/index.html" class="mb-12">
-						<img alt="Logo" src="assets/media/logos/LogoPresta.png" class="h-40px" />
+						<img alt="Logo" src="assets/media/logos/LogoPresta.png" class="h-100px w-350px" />
 					</a>
 					<div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
 						<form class="form w-100" method="post" novalidate="novalidate" id="kt_sign_up_form">
@@ -214,7 +239,7 @@
 		let _password = $.trim($("#password").val());
 		let _confpass = $.trim($("#confpass").val());
 		let tampass = _password.length;
-		let tamconfpass = _confpass.length;
+	    let tamconfpass = _confpass.length;
 
 	    if(_cboPais == 0){
 			mensajesweetalert("center","warning","Seleccione Pais..!",false,1800);
@@ -245,20 +270,17 @@
 			mensajesweetalert("center","warning","Confirme password..!",false,1800);
 			return false; 
 		}
-
 		
 
 		if(tampass != tamconfpass ){
 			mensajesweetalert("center","warning","No coincide el numero de caracteres del password..!",false,1800);
 			return false; 
 		}
-
-		if(_password != _confpass){
+		
+			if(_password != _confpass){
 			mensajesweetalert("center","warning","No coincide el password ingresado..!",false,1800);
 			return false; 
 		}
-
-	
 	
 		$.post("registro.php", {
 
@@ -273,7 +295,8 @@
 			if(response == 'OK'){
 				
 				mensajesweetalert("center","success","Usuario Registrado..!!",false,2000);   
-				window.location.href = "ingreso.php";
+				window.location.href = "ingreso.php";     
+
 			}else{
 				mensajesweetalert("center","error","Email se encuentra ya registrado..!!",false,2000);           
 			}			

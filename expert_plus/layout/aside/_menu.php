@@ -5,12 +5,16 @@
 
     putenv("TZ=America/Guayaquil");
     date_default_timezone_set('America/Guayaquil');	
+    
+    //file_put_contents('log_seguimiento.txt', '1ero' . "\n\n", FILE_APPEND);
 
 	//$xServidor = $_SERVER['HTTP_HOST'];
 	
 	$page = isset($_GET['page']) ? $_GET['page'] : 'index';
 	$menuid = isset($_GET['menuid']) ? $_GET['menuid'] : '200001';
-
+	
+	file_put_contents('log_seguimiento.txt', $menuid . "\n\n", FILE_APPEND);
+	
 	@session_start();
 
     if(isset($_SESSION["s_usuario"])){
@@ -31,11 +35,9 @@
 	$xActivo = "";
 	$xPagina = "index";
 
-	//file_put_contents('log_errores.txt', $xNombreusuario . "\n\n", FILE_APPEND);
-
-	require_once("dbcon/config.php");
-	require_once("dbcon/functions.php");
-
+	require_once("./dbcon/config.php");
+	require_once("./dbcon/functions.php");
+	
     mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
 
@@ -64,7 +66,7 @@
 	$xSql .= "men.menu_id AS MenuId,men.menu_descripcion AS Menu FROM `expert_usuarios` usu, `expert_perfil_menu_tarea` pmt, `expert_menu_tarea` mta, `expert_menu` men ";
 	$xSql .= "WHERE usu.pais_id=$yPaisid AND usu.perf_id=pmt.perf_id AND pmt.meta_id=mta.meta_id AND mta.menu_id=men.menu_id ";
 	$xSql .= "AND men.menu_estado='A' AND usu.usua_id=$yUsuaid ORDER BY men.menu_orden";
-
+	
 	$all_menu = mysqli_query($con, $xSql);
 
 
@@ -89,6 +91,7 @@
 
 										if($menuid  == $menurow["MenuId"]){
 											$xActiveHere = 'here show';
+											file_put_contents('log_seguimiento.txt', $xActiveHere . "\n\n", FILE_APPEND);
 										}else{
 											$xActiveHere = '';
 										}
@@ -144,7 +147,7 @@
 							?>
 
 						<?php
-							if($xPerfilName == 'Super Administrador' and $yPaisid == 1 ) { ?>
+							if($xPerfilName == 'Super Administrador' and $yPaisid == -1 ) { ?>
 
 								<div data-kt-menu-trigger="click" class="menu-item <?php if($menuid == '0'){echo 'here show';} ?>  menu-accordion mb-1">
 									<span class="menu-link">
@@ -177,7 +180,7 @@
 											</a>
 										</div>
 										<div class="menu-item">
-											<a class="menu-link <?php if($page == 'supperfil' || $page == 'addperfil' || $page == 'editperfil'){echo 'active';} ?>" href="?page=supperfil&menuid=0">
+											<a class="menu-link <?php if($page == 'supperfil' || $page == 'addsuperperfil' || $page == 'editsuperperfil'){echo 'active';} ?>" href="?page=supperfil&menuid=0">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>

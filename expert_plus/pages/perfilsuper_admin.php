@@ -14,7 +14,6 @@
 
     //$xServidor = $_SERVER['HTTP_HOST'];
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
-    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());    
 
     @session_start();
 
@@ -28,17 +27,16 @@
         exit();
     }
 
-	$yUsuaid = $_SESSION["i_usuaid"];
-    $yPaisid = $_SESSION["i_paisid"];
-    $yEmprid = $_SESSION["i_emprid"];
-    $xDisabledEdit = "";
+	$xUsuaid = $_SESSION["i_usuaid"];
+    $xPaisid = $_SESSION["i_paisid"];
+    $xEmprid = $_SESSION["i_emprid"];
+    
 	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
 
+    $xSQL = "SELECT per.perf_id AS Id,per.perf_descripcion AS Perfil,per.perf_observacion AS Descripcion,CASE per.perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, (SELECT pai.pais_nombre FROM `expert_pais` pai WHERE pai.pais_id=per.pais_id) AS Pais ";
+    $xSQL .= "FROM `expert_perfil` per WHERE per.empr_id=$xEmprid";
 
-    $xSql = "SELECT per.perf_id AS Id,per.perf_descripcion AS Perfil,per.perf_observacion AS Descripcion,CASE per.perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
-    $xSql .= "FROM `expert_perfil` per WHERE per.empr_id=$yEmprid";
-
-    $all_perfiles = mysqli_query($con, $xSql);
+    $all_perfiles = mysqli_query($con, $xSQL);
     foreach ($all_perfiles as $perfil){
         $xName = $perfil["Perfil"];
     }
@@ -127,7 +125,7 @@
                 <input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
                 <div class="card card-flush">
                     <div class="card-toolbar">
-                        <a href="?page=addperfil&menuid=0" class="btn btn-sm btn-light-primary">
+                        <a href="?page=addsuperperfil&menuid=0" class="btn btn-sm btn-light-primary">
                             <span class="svg-icon svg-icon-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
@@ -165,10 +163,11 @@
                             <thead>
                                 <tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
                                         <th>Perfil</th>
-                                        <th>Descipción</th>                                                                        									
-                                        <th style="text-align:center;">Opciones</th>
+                                        <th>Descipcion</th>                                                                        									
+                                        <th>Pais</th>
                                         <th>Estado</th>
                                         <th>Status</th>
+                                        <th style="text-align:center;">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody class="fw-bold text-gray-600">
@@ -203,6 +202,19 @@
                                 <tr>
                                     <td><?php echo $perfil['Perfil']; ?></td>
                                     <td><?php echo $perfil['Descripcion']; ?></td>								
+                                    <td><?php echo $perfil['Pais']; ?></td>
+                                    
+                                    <td id="td<?php echo $perfil['Id']; ?>">
+                                        <div class="<?php echo $xTextColor; ?>"><?php echo $perfil['Estado']; ?></div>
+                                    </td>                                    
+
+                                    <td style="text-align:center">
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input class="form-check-input btnEstado" type="checkbox" id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
+                                                echo "checked='checked'";} else {'';} ?> onchange="f_Check(<?php echo $xEmprid; ?>,<?php echo $perfil['Id']; ?>)" value="<?php echo $perfil['Id']; ?>" />
+                                        </div>
+                                    </td>     
+                                    
                                     <td>
                                         <div class="text-center">
                                             <div class="btn-group">
@@ -211,16 +223,8 @@
                                                 </button>
                                             </div>
                                         </div>
-                                    </td>
-                                    <td id="td<?php echo $perfil['Id']; ?>">
-                                        <div class="<?php echo $xTextColor; ?>"><?php echo $perfil['Estado']; ?></div>
-                                    </td>								
-                                    <td style="text-align:center">
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input btnEstado" type="checkbox" id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
-                                                echo "checked='checked'";} else {'';} ?> onchange="f_Check(<?php echo $yEmprid; ?>,<?php echo $perfil['Id']; ?>)" value="<?php echo $perfil['Id']; ?>" />
-                                        </div>
-                                    </td>                                                           
+                                    </td>                                    
+                                    
                                 </tr>
                                 <?php }
                                     ?>                            
@@ -237,21 +241,21 @@
 				_mensaje = $('input#mensaje').val();
 
 				if(_mensaje != ''){
-					mensajesalertify(_mensaje+"..!","S","top-center",5);
+					//mensajesalertify(_mensaje+"..!","S","top-center",5);
+					mensajesweetalert("center","warning",_mensaje,false,1800);
 				}
 
 				$(document).on("click",".btnEstado",function(e){
 					_fila = $(this).closest("tr");
 					_perfil = $(this).closest("tr").find('td:eq(0)').text(); 
 					_descripcion = $(this).closest("tr").find('td:eq(1)').text(); 
-        			console.log(_fila);
+					_pais = $(this).closest("tr").find('td:eq(2)').text(); 
+        			//console.log(_fila);
 				});
-
-
 			});
 
 			function f_Editar(_perfid){
-				$.redirect('?page=editperfil&menuid=0', {'idperfil': _perfid}); //POR METODO POST
+				$.redirect('?page=editsuperperfil&menuid=0', {'idperfil': _perfid}); //POR METODO POST
 			}
 
 			function f_Check(_emprid, _perfid){
@@ -285,24 +289,19 @@
 
 				// var _tdperfil = '<td>' + _perfil + '</td>';
 
-				 var _boton = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + ' onclick="f_Editar(' + _perfid + ')" ' +
-				 			'id="btnEdit' + _perfid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Editar Perfil" >' + 
-				 			'<i class="fa fa-edit"></i></button></div></div></td>';
-				
 				 var _estado = '<td><div class="' + _classes + '">' + _tipo + ' </div>' ;
 
 				 var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
 				 			'<input class="form-check-input btnEstado" type="checkbox" id="chk' + _perfid + '" ' + _checked + ' onchange="f_Check(' +
 				 			_emprid + ',' + _perfid + ')"' + ' value="' + _perfid + '"' + '/></div></td>';
-
-				// console.log(_tdperfil);
-				// console.log(_boton);
-				// console.log(_estado);
-				// console.log(_btnchk);
-
+				 			
+				 var _boton = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + ' onclick="f_Editar(' + _perfid + ')" ' +
+				 			'id="btnEdit' + _perfid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Editar Perfil" >' + 
+				 			'<i class="fa fa-edit"></i></button></div></div></td>';
+				 			
 				TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
 
-				TableData.row(_fila).data([_perfil , _descripcion, _boton, _estado, _btnchk ]).draw();
+				TableData.row(_fila).data([_perfil , _descripcion, _pais, _estado, _btnchk, _boton ]).draw();
 				
 				$parametros = {
                         xxIdPerfil: _perfid,

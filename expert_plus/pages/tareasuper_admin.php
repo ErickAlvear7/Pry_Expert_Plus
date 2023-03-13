@@ -19,11 +19,6 @@
 
 	session_start();
 
-	//$xServidor = $_SERVER['HTTP_HOST'];
-	$xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
-
-	@session_start();
-
     if(isset($_SESSION["s_usuario"])){
         if($_SESSION["s_loged"] != "loged"){
             header("Location: ./logout.php");
@@ -32,15 +27,14 @@
     } else{
         header("Location: ./logout.php");
         exit();
-    }    
+    }
 
-	$yUsuaid = $_SESSION["i_usuaid"];
-    $yPaisid = $_SESSION["i_paisid"];
-    $yEmprid = $_SESSION["i_emprid"];
-
+	$xUsuaid = $_SESSION["i_usuaid"];
+    $xPaisid = $_SESSION["i_paisid"];
+    $xEmprid = $_SESSION["i_emprid"];
 
 	$xSQL = "SELECT tare_id AS Id, tare_nombre AS Tarea, tare_ruta AS Accion, CASE tare_estado WHEN 'A' THEN 'Activo' ";
-	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_tarea` WHERE empr_id=$yEmprid ORDER BY tare_orden";
+	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_tarea` WHERE empr_id=$xEmprid ORDER BY tare_orden";
 	$all_tareas = mysqli_query($con, $xSQL);
 ?>	
                 <!--begin::Container-->
@@ -331,8 +325,8 @@
 											<th>Tarea</th>
 											<th>Accion</th>
 											<th>Estado</th>
-											<th style="text-align:center;">Opciones</th>
 											<th>Status</th>
+											<th style="text-align:center;">Opciones</th>
 										</tr>
 									</thead>
 									<tbody class="fw-bold text-gray-600">
@@ -365,7 +359,15 @@
 												<td><?php echo $tareas['Tarea']; ?></td>
 												<td><?php echo $tareas['Accion']; ?></td>
 												<td>
-												<div class="<?php  echo $xTextColor; ?>"><?php echo $tareas['Estado']; ?></div>
+												    <div class="<?php  echo $xTextColor; ?>"><?php echo $tareas['Estado']; ?></div>
+												</td>
+												<td>
+													<div class="text-center">
+														<div class="form-check form-check-sm form-check-custom form-check-solid">
+																<input class="form-check-input btnEstado" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $tareas['Id']; ?>" <?php if ($tareas['Estado'] == 'Activo') {
+																		echo "checked";} else {'';} ?> value="<?php echo $tareas['Id']; ?>" onchange="f_UpdateEstado(<?php echo $tareas['Id']; ?>,<?php echo $xEmprid; ?>)"/>
+														</div>
+													</div>
 												</td>
 												<td>
 													<div class="text-center">
@@ -375,15 +377,7 @@
 															</button>																															 
 														</div>
 													</div>
-												</td>
-												<td>
-													<div class="text-center">
-														<div class="form-check form-check-sm form-check-custom form-check-solid">
-																<input class="form-check-input btnEstado" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $tareas['Id']; ?>" <?php if ($tareas['Estado'] == 'Activo') {
-																		echo "checked";} else {'';} ?> value="<?php echo $tareas['Id']; ?>" onchange="f_UpdateEstado(<?php echo $tareas['Id']; ?>,<?php echo $yEmprid; ?>)"/>
-														</div>
-													</div>
-												</td>
+												</td>												
 											</tr>
 										<?php } ?>  
 									</tbody>
@@ -758,7 +752,7 @@
 				$('#btnSave').click(function(e){
 
 					var _paisid = "<?php echo $yPaisid; ?>"
-					var _emprid = "<?php echo $yEmprid; ?>"
+					var _emprid = "<?php echo $xEmprid; ?>"
 					var _usuaid = "<?php echo $yUsuaid; ?>"
 					var _tarea = $.trim($("#txtTarea").val());
 					var _ruta = $.trim($("#txtRuta").val());
@@ -807,7 +801,7 @@
 			function f_UpdateEstado(_tareaid, _emprid){
 
 				var _paisid = "<?php echo $yPaisid; ?>"
-				var _emprid = "<?php echo $yEmprid; ?>"
+				var _emprid = "<?php echo $xEmprid; ?>"
 				var _usuaid = "<?php echo $yUsuaid; ?>"
 				
 				let _check = $("#chk" + _tareaid).is(":checked");

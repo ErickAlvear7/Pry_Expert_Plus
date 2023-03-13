@@ -6,17 +6,19 @@
     putenv("TZ=America/Guayaquil");
     date_default_timezone_set('America/Guayaquil');
 
-	require_once("dbcon/config.php");
-	require_once("dbcon/functions.php");
+	require_once("./dbcon/config.php");
+	require_once("./dbcon/functions.php");
 
 	mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');		
 
     //$xServidor = $_SERVER['HTTP_HOST'];
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
-    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());  
-	
-	@session_start();
+    $menuid = $_GET['menuid'] ;
+    
+    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());    
+
+    @session_start();
 
     if(isset($_SESSION["s_usuario"])){
         if($_SESSION["s_loged"] != "loged"){
@@ -26,19 +28,18 @@
     } else{
         header("Location: ./logout.php");
         exit();
-    }    
+    }
 
-
-    $yEmprid = $_SESSION["i_emprid"];
-
-    $xDisabledEdit = "";
+	$xUsuaid = $_SESSION["i_usuaid"];
+    $xPaisid = $_SESSION["i_paisid"];
+    $xEmprid = $_SESSION["i_emprid"];
+    
 	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
     
+    $xSQL = "SELECT per.perf_id AS Id,per.perf_descripcion AS Perfil,per.perf_observacion AS Descripcion,CASE per.perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
+    $xSQL .= "FROM `expert_perfil` per WHERE per.pais_id=$xPaisid AND per.empr_id=$xEmprid";
 
-    $xSql = "SELECT per.perf_id AS Id,per.perf_descripcion AS Perfil,per.perf_observacion AS Descripcion,CASE per.perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
-    $xSql .= "FROM `expert_perfil` per WHERE per.empr_id=$yEmprid";
-
-    $all_perfiles = mysqli_query($con, $xSql);
+    $all_perfiles = mysqli_query($con, $xSQL);
     foreach ($all_perfiles as $perfil){
         $xName = $perfil["Perfil"];
     }
@@ -49,7 +50,7 @@
 			<input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
 			<div class="card card-flush">
 				<div class="card-toolbar">
-					<a href="?page=addperfil" class="btn btn-sm btn-light-primary">
+					<a href="?page=addperfil&menuid=<?php echo $menuid; ?>" class="btn btn-sm btn-light-primary">
 						<span class="svg-icon svg-icon-2">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 								<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
@@ -71,8 +72,8 @@
 						</div>
 						<div id="kt_ecommerce_report_shipping_export" class="d-none"></div>
 					</div>
-					<div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-						<!-- <input class="form-control form-control-solid w-100 mw-250px" placeholder="Pick date range" id="kt_ecommerce_report_shipping_daterangepicker" /> -->
+					
+					<!--<div class="card-toolbar flex-row-fluid justify-content-end gap-5">
 						<div class="w-150px">
 							<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Estado" data-kt-ecommerce-order-filter="status">
 								<option></option>
@@ -81,17 +82,18 @@
 								<option value="Inactivo">Inactivo</option>
 							</select>
 						</div>
-					</div>
+					</div>-->
+					
 				</div>
 				<div class="card-body pt-0">
 					<table class="table align-middle table-row-dashed fs-6 gy-5 table-hover" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
 						<thead>
 							<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
                                     <th>Perfil</th>
-                                    <th>Descipción</th>                                                                        									
-									<th style="text-align:center;">Opciones</th>
+                                    <th>Descipcion</th>                                                                        									
 									<th>Estado</th>
                                     <th>Status</th>
+                                    <th style="text-align:center;">Opciones</th>
 							</tr>
 						</thead>
 						<tbody class="fw-bold text-gray-600">
@@ -116,6 +118,15 @@
 							<tr>
                                 <td><?php echo $perfil['Perfil']; ?></td>
                                 <td><?php echo $perfil['Descripcion']; ?></td>								
+								<td id="td<?php echo $perfil['Id']; ?>">
+									<div class="<?php echo $xTextColor; ?>"><?php echo $perfil['Estado']; ?></div>
+								</td>								
+                                <td style="text-align:center">
+									<div class="form-check form-check-sm form-check-custom form-check-solid">
+										<input class="form-check-input btnEstado" type="checkbox" id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
+											echo "checked='checked'";} else {'';} ?> onchange="f_Check(<?php echo $xEmprid; ?>,<?php echo $perfil['Id']; ?>)" value="<?php echo $perfil['Id']; ?>" />
+									</div>
+                                </td>
 								<td>
 									<div class="text-center">
 										<div class="btn-group">
@@ -124,16 +135,7 @@
 											</button>
 										</div>
 									</div>
-								</td>
-								<td id="td<?php echo $perfil['Id']; ?>">
-									<div class="<?php echo $xTextColor; ?>"><?php echo $perfil['Estado']; ?></div>
-								</td>								
-                                <td style="text-align:center">
-									<div class="form-check form-check-sm form-check-custom form-check-solid">
-										<input class="form-check-input btnEstado" type="checkbox" id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
-											echo "checked='checked'";} else {'';} ?> onchange="f_Check(<?php echo $yEmprid; ?>,<?php echo $perfil['Id']; ?>)" value="<?php echo $perfil['Id']; ?>" />
-									</div>
-                                </td>                                                           
+								</td>                                
 							</tr>
                             <?php }
                                 ?>                            
@@ -149,7 +151,8 @@
 				_mensaje = $('input#mensaje').val();
 
 				if(_mensaje != ''){
-					mensajesalertify(_mensaje+"..!","S","top-center",5);
+					//mensajesalertify(_mensaje+"..!","S","top-center",5);
+					mensajesweetalert("center","warning",_mensaje,false,1800);  
 				}
 
 				$(document).on("click",".btnEstado",function(e){
@@ -197,15 +200,15 @@
 
 				// var _tdperfil = '<td>' + _perfil + '</td>';
 
-				 var _boton = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + ' onclick="f_Editar(' + _perfid + ')" ' +
-				 			'id="btnEdit' + _perfid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Editar Perfil" >' + 
-				 			'<i class="fa fa-edit"></i></button></div></div></td>';
-				
 				 var _estado = '<td><div class="' + _classes + '">' + _tipo + ' </div>' ;
 
 				 var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
 				 			'<input class="form-check-input btnEstado" type="checkbox" id="chk' + _perfid + '" ' + _checked + ' onchange="f_Check(' +
 				 			_emprid + ',' + _perfid + ')"' + ' value="' + _perfid + '"' + '/></div></td>';
+				 			
+				 var _boton = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + ' onclick="f_Editar(' + _perfid + ')" ' +
+				 			'id="btnEdit' + _perfid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Editar Perfil" >' + 
+				 			'<i class="fa fa-edit"></i></button></div></div></td>';
 
 				// console.log(_tdperfil);
 				// console.log(_boton);
@@ -214,7 +217,7 @@
 
 				TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
 
-				TableData.row(_fila).data([_perfil , _descripcion, _boton, _estado, _btnchk ]).draw();
+				TableData.row(_fila).data([_perfil , _descripcion, _estado, _btnchk, _boton ]).draw();
 				
 				$parametros = {
                         xxIdPerfil: _perfid,

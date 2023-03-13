@@ -1,38 +1,11 @@
 <?php
 	
 
-	require_once("dbcon/config.php");
-	require_once("dbcon/functions.php");
 
-	mysqli_query($con,'SET NAMES utf8');  
-	mysqli_set_charset($con,'utf8');	
-
-	$xServidor = $_SERVER['HTTP_HOST'];
-	$xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
-    $xTerminal = gethostname();
-
-	@session_start();
-
-    if(isset($_SESSION["s_usuario"])){
-        if($_SESSION["s_loged"] != "loged"){
-            header("Location: ./logout.php");
-            exit();
-        }
-    } else{
-        header("Location: ./logout.php");
-        exit();
-    }    
-
-    $yEmprid = $_SESSION["i_emprid"];
-    $yPaisid = $_SESSION["i_paisid"];
-
-
-    $expertperfil = mysqli_query($con, $xSQL);
 
 ?>
 
 <div id="kt_content_container" class="container-xxl">
-    <input type="hidden" id="idempr" value="<?php echo $yEmprid; ?>"  />
 	<div class="card card-flush">
 		<div class="card-toolbar">
 			<button class="btn btn-sm btn-light-primary" id="nuevoParametro">
@@ -254,9 +227,6 @@
     </div>
   </div>
 </div>
-
-
-
 
 
 <script>
