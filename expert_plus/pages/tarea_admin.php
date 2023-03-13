@@ -11,20 +11,7 @@
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
     //$yEmprid = $_SESSION["i_empre_id"];
-
-	@session_start();
-
-    if(isset($_SESSION["s_usuario"])){
-        if($_SESSION["s_loged"] != "loged"){
-            header("Location: ./logout.php");
-            exit();
-        }
-    } else{
-        header("Location: ./logout.php");
-        exit();
-    }    
-
-    $yEmprid = $_SESSION["i_emprid"];
+    $yEmprid = 1;	
 
 	$xSQL = "SELECT tare_id AS Id, tare_nombre AS Tarea, tare_ruta AS Accion, CASE tare_estado WHEN 'A' THEN 'Activo' ";
 	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_tarea` WHERE empr_id=$yEmprid ORDER BY tare_orden";

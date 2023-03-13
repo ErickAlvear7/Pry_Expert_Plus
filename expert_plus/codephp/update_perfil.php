@@ -9,30 +9,28 @@
 	mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
     
-    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());  
-    $xTerminal = gethostname();
-    $data = "ERROR";
+    $respuesta = "ERR";
 
-    if(isset($_POST['xxPerfil']) and isset($_POST['xxEmprid']) and isset($_POST['xxUserid']) and isset($_POST['xxIdPerfil']) ){
-        if(isset($_POST['xxPerfil']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUserid']) <> '' and isset($_POST['xxIdPerfil']) <> ''){    
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxPerfil']) and isset($_POST['xxEmprid']) and isset($_POST['xxIdPerfil']) ){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxPerfil']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxIdPerfil']) <> ''){    
 
-            
-            $yEmprid = $_POST['xxEmprid'];
+            $xPaisid = $_POST['xxPaisid'];
+            $xEmprid = $_POST['xxEmprid'];
             $xPerfil = safe($_POST['xxPerfil']);
             $xIdPerfil =  $_POST['xxIdPerfil'];
-            $yUserid = $_POST['xxUserid']; 
-            $xObservacion = trim(mb_strtoupper(safe($_POST['xxObservacion']), 'UTF-8'));
+            $xObservacion = trim(safe($_POST['xxObservacion']), 'UTF-8');
 
-            $xSql = "UPDATE `expert_perfil` SET perf_descripcion='$xPerfil',perf_observacion='$xObservacion' ";
-            $xSql .= "WHERE empr_id=$yEmprid AND perf_id=$xIdPerfil";
-            if(mysqli_query($con, $xSql)){
-                $data = "OK";
-            }else{
-                $data = "ERROR";
+            $xSQL = "UPDATE `expert_perfil` SET pais_id=$xPaisid,perf_descripcion='$xPerfil',perf_observacion='$xObservacion' ";
+            $xSQL .= "WHERE empr_id=$xEmprid AND perf_id=$xIdPerfil";
+            
+            if(mysqli_query($con, $xSQL)){
+                $respuesta = "OK";
             }
 
-            print json_encode($data, JSON_UNESCAPED_UNICODE);
+            //print json_encode($data, JSON_UNESCAPED_UNICODE);
         }
     }
+    
+    echo $respuesta;
 	
 ?>	

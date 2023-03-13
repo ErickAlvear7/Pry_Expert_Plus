@@ -1,5 +1,10 @@
 <?php
 	
+	//error_reporting(E_ALL);
+    ini_set('display_errors', 0);
+
+    putenv("TZ=America/Guayaquil");
+    date_default_timezone_set('America/Guayaquil');	    	
 
 	require_once("dbcon/config.php");
 	require_once("dbcon/functions.php");
@@ -8,10 +13,9 @@
 	mysqli_set_charset($con,'utf8');	
 
 	$xServidor = $_SERVER['HTTP_HOST'];
-	$xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
-    $xTerminal = gethostname();
-
-	@session_start();
+	$page = isset($_GET['page']) ? $_GET['page'] : "index";
+	
+    @session_start();
 
     if(isset($_SESSION["s_usuario"])){
         if($_SESSION["s_loged"] != "loged"){
@@ -23,19 +27,19 @@
         exit();
     }    
 
-
-    $yEmprid = $_SESSION["i_emprid"];
-
+    $xPaisid = $_SESSION["i_paisid"];
+    $xEmprid = $_SESSION["i_emprid"];
+    $xUsuaid = $_SESSION["i_usuaid"];
 
     $xSQL = "SELECT usua_id AS Idusuario, CONCAT(usua_nombres,' ',usua_apellidos) AS Nombres, usua_login AS Log, CASE usua_estado WHEN 'A' THEN 'Activo' ";
-	$xSQL .= "ELSE 'Inactivo' END AS Estado, usua_caducapass AS CaducaPass FROM `expert_usuarios`";
-	$expertusuario = mysqli_query($con, $xSQL);
+	$xSQL .= "ELSE 'Inactivo' END AS Estado, usua_caducapass AS CaducaPass FROM `expert_usuarios` WHERE pais_id=$xPaisid AND empr_id=$xEmprid ";
+	$all_usuarios = mysqli_query($con, $xSQL);
 
-	$xSQL = "SELECT p.perf_descripcion AS Descripcion,p.perf_id AS Codigo FROM `expert_perfil` p ";
-	$xSQL .= " WHERE empr_id= $yEmprid AND perf_estado = 'A' ";
+	$xSQL = "SELECT perf_descripcion AS Descripcion, perf_id AS Codigo FROM `expert_perfil` ";
+	$xSQL .= " WHERE pais_id=$xPaisid AND empr_id= $xEmprid AND perf_estado = 'A' ";
 	$xSQL .= " UNION SELECT '  --Seleccione Perfil--  ',0";
 	$xSQL .= " ORDER BY Codigo ";
-    $expertperfil = mysqli_query($con, $xSQL);
+    $all_perfil = mysqli_query($con, $xSQL);
 
 ?>
 
@@ -93,7 +97,7 @@
 				<tbody class="fw-bold text-gray-600">
 					<?php 
 					
-					foreach($expertusuario as $usu){
+					foreach($all_usuarios as $usu){
 						$idusuario = $usu['Idusuario'];
 						$estado = $usu['Estado'];
 						$usuario = $usu['Nombres'];
@@ -220,7 +224,7 @@
 							  <div class="col-md-6 fv-row">
 								<label class="d-flex align-items-center fs-6 fw-bold mb-2">
 									<span class="required">Password</span>
-									<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique la contraseña del usuario"></i>
+									<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Ingrese Password..!"></i>
 								</label>
 								<input type="password" class="form-control form-control-solid" id="txtPassword" name="subject" minlength="1" maxlength="100" />
 							  </div>
@@ -228,7 +232,7 @@
 							<div class="d-flex flex-column mb-7 fv-row">
 							    <label class="required fs-6 fw-bold mb-2">Perfil</label>
 								<select id="cboPerfil" aria-label="Seleccione Perfil..." data-control="select2" data-placeholder="Seleccione Perfil..." data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bolder">
-									<?php foreach ($expertperfil as $per) : ?>
+									<?php foreach ($all_perfil as $per) : ?>
 									<option value="<?= $per['Codigo'] ?>"><?= $per['Descripcion'] ?></option>
 									<?php endforeach ?>
 								</select>
@@ -357,28 +361,28 @@
 				//debugger;
 
 				if(_nombre == ''){                        
-					mensajesweetalert("center","warning","ingrese un nombre",false,1800);
+					mensajesweetalert("center","warning","Ingrese Nombre",false,1800);
 					return;
 				}
 
 				if(_apellido == ''){                        
-					mensajesweetalert("center","warning","ingrese un apellido",false,1800);
+					mensajesweetalert("center","warning","Ingrese Apellido",false,1800);
 					return;
 				}
 
 				if(_login == ''){                        
-					mensajesweetalert("center","warning","ingrese un login",false,1800);
+					mensajesweetalert("center","warning","Ingrese Email",false,1800);
 					return;
 				}
 
 				if(_password == ''){                        
-					mensajesweetalert("center","warning","ingrese una contraseña",false,1800);
+					mensajesweetalert("center","warning","Ingrese Password",false,1800);
 					return;
 				}
 
 				
 				if(_perfil == 0){                        
-					mensajesweetalert("center","warning","ingrese un perfil",false,1800);
+					mensajesweetalert("center","warning","Seleccione Perfil",false,1800);
 					return;
 				}
 

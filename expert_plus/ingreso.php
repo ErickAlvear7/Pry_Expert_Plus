@@ -24,7 +24,7 @@
 	$respuesta = '';
 	$mode = 'dark';
 
-	$xSQL = "SELECT * FROM `expert_parametro_paginas` WHERE empr_id=0 AND usua_id=0 AND estado='A'";
+	$xSQL = "SELECT * FROM `expert_parametro_paginas` WHERE pais_id=0 AND empr_id=0 AND usua_id=0 AND estado='A'";
 	$all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));	
 
 	if(mysqli_num_rows($all_datos)>0) {
@@ -42,7 +42,7 @@
 
 			$xSQL = " SELECT usu.usua_id AS UsuarioId, usu.pais_id AS PaisId, usu.empr_id AS EmprID, usu.usua_login AS NombreLogin, ";
 			$xSQL .= " CONCAT(usu.usua_nombres,' ',usu.usua_apellidos) AS NombreUsuario, per.perf_id AS PerfilId, per.perf_descripcion AS PerfilName FROM `expert_usuarios` usu ";
-			$xSQL .= " INNER JOIN `expert_perfil` per ON usu.perf_id=per.perf_id WHERE usu.usua_login='$xUsuario' AND usua_password='$xnewPassword' ";
+			$xSQL .= " INNER JOIN `expert_perfil` per ON usu.perf_id=per.perf_id WHERE usu.usua_login='$xUsuario' AND usua_password='$xnewPassword' AND usu.usua_estado='A' AND per.perf_estado='A' ";
 		
 			$login = mysqli_query($con, $xSQL);
 			$rowcount = mysqli_num_rows($login);
@@ -139,7 +139,7 @@
 			<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(assets/media/illustrations/sketchy-1/<?php if($mode == 'dark'){ echo '14.png'; }else{ echo '14-dark.png'; } ?>">
 				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 					<div class="imagen">
-					   <img alt="Logo" src="assets/media/logos/LogoPresta.png" class="h-40px" />
+					   <img alt="Logo" src="assets/media/logos/LogoPresta.png" class="h-100px w-350px" />
 					</div>
 					<div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
 						<form class="form w-100" method="post" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="" action="">
@@ -153,11 +153,13 @@
 								<input class="form-control form-control-lg form-control-solid" type="text" id="email" name="email" autocomplete="off" />
 							</div>
 							<div class="fv-row mb-10">
+							    <label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
+								<input class="form-control form-control-lg form-control-solid" type="password" id="password" name="password" autocomplete="off" />
 								<div class="d-flex flex-stack mb-2">
-									<label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
+									
 									<a href="recuperarpass.php" class="link-primary fs-6 fw-bolder">Olvido el Password ?</a>
 								</div>
-								<input class="form-control form-control-lg form-control-solid" type="password" id="password" name="password" autocomplete="off" />
+								
 							</div>
 							<div class="text-center">
 								<button type="submit" id="kt_sign_in_submit" name="login" class="btn btn-lg btn-primary w-100 mb-5">
@@ -213,8 +215,9 @@
                     $("#password").val(''); 
 					
                 }else{
-                    window.location.href = "index.php";
-					//$.redirect('index.php'); 
+                    //window.location.href = "index.php";
+                    $(location).attr('href', 'http://localhost:8080/proyecto-expert+/expert_plus/?page=index');
+					//$.redirect('?page=index'); 
                 }
 
 			});

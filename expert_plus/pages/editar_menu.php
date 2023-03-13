@@ -15,22 +15,13 @@
     //$xServidor = $_SERVER['HTTP_HOST'];
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
-    @session_start();
-
-    if(isset($_SESSION["s_usuario"])){
-        if($_SESSION["s_loged"] != "loged"){
-            header("Location: ./logout.php");
-            exit();
-        }
-    } else{
-        header("Location: ./logout.php");
-        exit();
-    }    
-
-	$yUsuaid = $_SESSION["i_usuaid"];
-    $yPaisid = $_SESSION["i_paisid"];
-    $yEmprid = $_SESSION["i_emprid"];
-
+	//$yUsuaid = $_SESSION["i_usuaid"];	
+	//$yPaisid = $_SESSION["i_paisid"];	
+    //$yEmprid = $_SESSION["i_empre_id"];
+    
+	$yEmprid = 1;	
+	$yPaisid = 1;
+	$yUsuaid = 1;
 
     $idmenu = $_POST['idmenu'];
 
@@ -112,7 +103,7 @@
                     <div class="row fv-row mb-7">
                         <div class="col-md-2  text-md-end">
                             <label class="fs-6 fw-bold form-label mt-3">
-                                <span>Descripción</span>
+                                <span>Descripcion</span>
                                 <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripción del Menu"></i>
                             </label>
                         </div>

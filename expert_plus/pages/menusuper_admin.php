@@ -1,39 +1,29 @@
 
 <?php
+	//error_reporting(E_ALL);
+    ini_set('display_errors', 0);
+
+    putenv("TZ=America/Guayaquil");
+    date_default_timezone_set('America/Guayaquil');	    
+
 	$page = isset($_GET['page']) ? $_GET['page'] : "index";
 
-	require_once("dbcon/config.php");
-	require_once("dbcon/functions.php");
+	require_once("./dbcon/config.php");
+	require_once("./dbcon/functions.php");
 
 	mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
 
-	$xServidor = $_SERVER['HTTP_HOST'];
-    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
-
-	@session_start();
-
-    if(isset($_SESSION["s_usuario"])){
-        if($_SESSION["s_loged"] != "loged"){
-            header("Location: ./logout.php");
-            exit();
-        }
-    } else{
-        header("Location: ./logout.php");
-        exit();
-    }    
-
-	$yUsuaid = $_SESSION["i_usuaid"];
-    $yPaisid = $_SESSION["i_paisid"];
-    $yEmprid = $_SESSION["i_emprid"];
-
+	$xUsuaid = $_SESSION["i_usuaid"];	
+	$xPaisid = $_SESSION["i_paisid"];	
+    $xEmprid = $_SESSION["i_emprid"];
 
 	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
     
-
 	$xSQL = "SELECT menu_id AS Idmenu, empr_id AS Empid, menu_descripcion AS Menu, menu_observacion AS Observacion, CASE menu_estado WHEN 'A' THEN 'Activo' ";
 	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_menu`";
-	$expertmenu = mysqli_query($con, $xSQL);
+	$all_menu = mysqli_query($con, $xSQL);
+	
 ?>	
 		<!--begin::Container-->
 		<div id="kt_content_container" class="container-xxl">
@@ -157,17 +147,17 @@
 							<thead>
 								<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
 									<th style="display:none;">Idmenu</th>
-									<th style="width: 30px;">Menu</th>
-									<th style="width: 30px;">Descripcion</th>
-									<th style="width: 30px;">Estado</th>
-									<th style="width: 30px; text-align:center;">Opciones</th>
-									<th style="width: 10px;">Status</th>
+									<th>Menu</th>
+									<th>Descripcion</th>
+									<th>Estado</th>
+									<th>Status</th>
+									<th style="text-align:center;">Opciones</th>
 								</tr>
 							</thead>
 							<tbody class="fw-bold text-gray-600">
 								<?php 
 								
-									foreach($expertmenu as $menu) { 
+									foreach($all_menu as $menu) { 
 										$xMenu = $menu['Menu'];
 								?>
 
@@ -195,7 +185,15 @@
 									<td><?php echo $menu['Menu']; ?></td>
 									<td><?php echo $menu['Observacion']; ?></td>
 									<td>
-									<div class="<?php  echo $xTextColor; ?>"><?php echo $menu['Estado']; ?></div>
+									    <div class="<?php  echo $xTextColor; ?>"><?php echo $menu['Estado']; ?></div>
+									</td>
+									<td>
+										<div class="text-center">
+											<div class="form-check form-check-sm form-check-custom form-check-solid">
+													<input class="form-check-input btnEstado" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $menu['Idmenu']; ?>" <?php if ($menu['Estado'] == 'Activo') {
+													echo "checked";} else {'';} ?> value="<?php echo $menu['Idmenu']; ?>"  onchange="f_Check(<?php echo $xEmprid; ?>,<?php echo $menu['Idmenu']; ?>)" />
+											</div>
+										</div>
 									</td>
 									<td>
 										<div class="text-center">
@@ -203,14 +201,6 @@
 												<button <?php echo $xDisabledEdit ?> onclick="f_Editar(<?php echo $menu['Idmenu']; ?>)" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Perfil'>
 													<i class='fa fa-edit'></i>
 												</button>																															 
-											</div>
-										</div>
-									</td>
-									<td>
-										<div class="text-center">
-											<div class="form-check form-check-sm form-check-custom form-check-solid">
-													<input class="form-check-input btnEstado" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $menu['Idmenu']; ?>" <?php if ($menu['Estado'] == 'Activo') {
-															echo "checked";} else {'';} ?> value="<?php echo $menu['Idmenu']; ?>"  onchange="f_Check(<?php echo $yEmprid; ?>,<?php echo $menu['Idmenu']; ?>)" />
 											</div>
 										</div>
 									</td>
@@ -266,19 +256,19 @@
 				}
 
 				var _lblEstado = '<td><div class="' + _class + '">' + _tipo + ' </div>';
-
-				var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + ' onclick="f_Editar(' +  _menuid + ')"' +
-							'id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Editar Perfil">' +
-							'<i class="fa fa-edit"></i></button></div></div></td>';
-
+				
 				var _btnchk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
 							'<input class="form-check-input btnEstado" type="checkbox" ' +  _tipo  +  ' id="chk' + _menuid + '"' +
 							' ' + _checked + ' value="' + _menuid + '" onchange="f_Check(' +_emprid  + ',' + _menuid + ')"/>' +
 							'</div></div></td>';
 				
+				var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + ' onclick="f_Editar(' +  _menuid + ')"' +
+							'id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Editar Perfil">' +
+							'<i class="fa fa-edit"></i></button></div></div></td>';
+
 				TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
 
-				TableData.row(_fila).data([_menuid,_menu,_desc,_lblEstado,_btnEdit,_btnchk ]).draw();
+				TableData.row(_fila).data([_menuid, _menu, _desc, _lblEstado, _btnchk, _btnEdit ]).draw();
 
 				$parametros = {
 					xxMenuId: _menuid,

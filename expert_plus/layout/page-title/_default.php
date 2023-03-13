@@ -9,22 +9,22 @@
 		$title = 'Inicio';
 		$descripcion = 'Tablero de Control - DASHBOARD';
 	}else if($page == 'seg_menuadmin'){
-		$title = 'REGISTRO DE MENU';
+		$title = 'Administrar Menú';
 		$descripcion = 'Menú de Opciones';
 	}else if($page == 'seg_perfiladmin'){
 		$title = 'Administrar Perfil';
 		$descripcion = 'Registrar Perfil (Opciones de menú y submenu para el perfil)';
 	}else if($page == 'addmenu'){
-		$title = 'Crear Menu';
+		$title = 'Nuevo Menu';
 		$descripcion = 'Ingrese Datos para crear opción menú';
 	}else if($page == 'addperfil'){
-		$title = 'Crear Perfil';
+		$title = 'Nuevo Perfil';
 		$descripcion = 'Ingrese Datos para crear opción perfil';
 	}else if($page == 'editperfil'){
-		$title = 'EDITAR PERFIL';
+		$title = 'Editar Perfil';
 		$descripcion = 'Edición Datos del Perfil';
 	}else if($page =='editmenu'){
-		$title = 'EDITAR MENU';
+		$title = 'Editar menu';
 		$descripcion = 'Edición Datos del Menu';
 	}else if($page=='seg_usuarioadmin'){
         $title = 'Administrar Usuarios';
@@ -47,6 +47,12 @@
 	}else if($page == 'param_generales'){
 		$title = 'Parametros del Sistema';
 		$descripcion = 'Registro de Parametros';
+	}else if($page == 'addsuperperfil'){
+		$title = 'Nuevo Perfil';
+		$descripcion = 'Ingrese Datos para crear opción perfil';
+	}else if($page == 'editsuperperfil'){
+		$title = 'Editar Perfil';
+		$descripcion = 'Editar Datos del Pefil';
 	}
 
 ?>	

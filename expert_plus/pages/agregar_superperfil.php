@@ -7,46 +7,47 @@
     putenv("TZ=America/Guayaquil");
     date_default_timezone_set('America/Guayaquil');
 
-	require_once("dbcon/config.php");
-	require_once("dbcon/functions.php");
+	require_once("./dbcon/config.php");
+	require_once("./dbcon/functions.php");
 
 	mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	    
 
-    //$xServidor = $_SERVER['HTTP_HOST'];    
-    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());    
-
     @session_start();
-
-    //$yEmprid = $_SESSION["i_empreid"];
-    //$yUserid = $_SESSION["i_userid"];
-    $yEmprid = 1;
-    $yPerfid = 1;
-    $yUserid = 1;    
-    $xDisabledEdit = "";
     
-    /*if(isset($_SESSION["s_usuario"])){
-        if($_SESSION["s_login"] != "loged"){
+    if(isset($_SESSION["s_usuario"])){
+        if($_SESSION["s_loged"] != "loged"){
             header("Location: ./logout.php");
             exit();
         }
     } else{
         header("Location: ./logout.php");
         exit();
-    }*/
+    }    
 
-    $xSql = "SELECT mta.meta_id AS MentId,men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'NO' AS Ckeck,";
-    $xSql .= "men.menu_orden AS OrdenMenu,tar.tare_orden AS OrdenTarea FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id ";
-    $xSql .= "INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id WHERE men.empr_id=$yEmprid AND men.menu_estado= 'A' AND men.menu_id != 200001 AND tar.tare_superadmin=0 AND tar.tare_estado= 'A'AND mta.meta_id NOT IN ";
-    $xSql .= "(SELECT pmt.meta_id FROM `expert_perfil_menu_tarea` pmt WHERE pmt.perf_id=$yPerfid AND pmt.empr_id= $yEmprid )"; 
-    $xSql .= "UNION SELECT ";
-    $xSql .= "mta.meta_id AS MentId,men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'SI' AS Ckeck,men.menu_orden AS OrdenMenu,";
-    $xSql .= "tar.tare_orden AS OrdenTarea FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id ";
-    $xSql .= "INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id INNER JOIN expert_perfil_menu_tarea pmt ON mta.meta_id=pmt.meta_id ";
-    $xSql .= " WHERE pmt.empr_id=$yEmprid AND pmt.perf_id=$yPerfid AND men.menu_estado='A' AND men.menu_id != 200001 AND tar.tare_superadmin=0 AND tar.tare_estado='A' ";
-    $xSql .= "ORDER BY OrdenMenu,OrdenTarea";
+    $xPaisid = $_SESSION["i_paisid"];
+    $xEmprid = $_SESSION["i_emprid"];
+    $xUsuaid = $_SESSION["i_usuaid"];
+    $xPerfid = $_SESSION["i_perfilid"];
 
-    $all_perfiles = mysqli_query($con, $xSql);
+    $xSQL = "SELECT pais_id AS IdPais, pais_nombre AS Pais, pais_flag AS Bandera FROM `expert_pais` ";
+	$xSQL .= " ORDER BY IdPais ";
+    $all_pais = mysqli_query($con, $xSQL);
+
+    $xSQL = "SELECT mta.meta_id AS MentId,men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'NO' AS Ckeck,";
+    $xSQL .= "men.menu_orden AS OrdenMenu,tar.tare_orden AS OrdenTarea FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id ";
+    $xSQL .= "INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id WHERE men.empr_id=$xEmprid AND men.menu_estado= 'A' AND men.menu_id != 200001 AND tar.tare_superadmin=0 AND tar.tare_estado= 'A'AND mta.meta_id NOT IN ";
+    $xSQL .= "(SELECT pmt.meta_id FROM `expert_perfil_menu_tarea` pmt WHERE pmt.perf_id=$xPerfid AND pmt.empr_id= $xEmprid )"; 
+    $xSQL .= "UNION SELECT ";
+    $xSQL .= "mta.meta_id AS MentId,men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'SI' AS Ckeck,men.menu_orden AS OrdenMenu,";
+    $xSQL .= "tar.tare_orden AS OrdenTarea FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id ";
+    $xSQL .= "INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id INNER JOIN expert_perfil_menu_tarea pmt ON mta.meta_id=pmt.meta_id ";
+    $xSQL .= " WHERE pmt.empr_id=$xEmprid AND pmt.perf_id=$xPerfid AND men.menu_estado='A' AND men.menu_id != 200001 AND tar.tare_superadmin=0 AND tar.tare_estado='A' ";
+    $xSQL .= "ORDER BY OrdenMenu,OrdenTarea";
+    
+    //file_put_contents('log_seguimiento_agregarsuperprefil.txt', $xSql . "\n\n", FILE_APPEND);    
+    
+    $all_perfiles = mysqli_query($con, $xSQL);
 	
 ?>	
 
@@ -86,13 +87,34 @@
                         </div>
                                     <div class="card-header"> 
                                         <div class="card-toolbar">
-                                            <button type="button" id="btnGuardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $yUserid; ?>)"><i class="las la-save"></i>Guardar</button>
+                                            <button type="button" id="btnGuardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-save"></i>Guardar</button>
                                         </div>
                                     </div>                              
                         
                             <div class="tab-content" id="myTabContent">                                                                            
                                 <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel"> 
-                                        <div class="card-body pt-0">													
+                                        <div class="card-body pt-0">
+                                            		
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-3 text-md-end">
+                                                    <label class="fs-6 fw-bold form-label mt-3">
+                                                        <span class="required">Pais</span>
+                                                    </label>
+                                                </div>
+                                                    
+                                                <div class="col-md-6">
+                                                    <select id="cboPais" name="cboPais" data-placeholder="Seleccione Pais" class="form-select form-select-solid fw-bolder">
+                                                        <option value="0">--Seleccione Pais--</option>
+                                                        <?php foreach ($all_pais as $pais) : 
+                                                            $flag = ' data-kt-select2-country=' . '"assets/media/flags/' . $pais['Bandera'] . '"';
+                                                        ?>
+                                                            <option value="<?php echo $pais['IdPais']; ?>"<?php echo $flag; ?>><?php echo $pais['Pais']; ?></option>
+                                                        <?php endforeach ?>						
+                                                    </select>
+                                                </div>
+                                                
+                                            </div>
+                                        
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-3 text-md-end">
                                                     <label class="fs-6 fw-bold form-label mt-3">
@@ -100,10 +122,11 @@
                                                         <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Nombre del Perfil"></i>
                                                     </label>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-6">
                                                     <input type="text" class="form-control form-control-solid" name="txtPerfil" id="txtPerfil" maxlength="150" placeholder="Nombre del Perfil" value="" />
                                                 </div>
                                             </div>
+                                            
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-3 text-md-end">
                                                     <label class="fs-6 fw-bold form-label mt-3">
@@ -111,8 +134,8 @@
                                                         <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripción del Perfil"></i>
                                                     </label>
                                                 </div>
-                                                <div class="col-md-9">
-                                                    <textarea class="form-control form-control-solid text-uppercase" name="txtDescripcion" id="txtDescripcion" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                                                <div class="col-md-6">
+                                                    <textarea class="form-control form-control-solid" name="txtDescripcion" id="txtDescripcion" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
                                                 </div>                                                          
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -217,51 +240,51 @@
                         }else{
                             $("#"+_div).removeClass("badge badge-light-primary");
                         }                        
-                        //_tarea = $(this).closest("tr").find('td:eq(2)').text();                         
+                        //_tarea = $(this).closest("tr").find('td:eq(2)').text();     
                     });
                     
-                    // $('#btnGuardar').click(function(){
-                    //     _perfil = $.trim($("#txtPerfil").val());
-                    //     _observacion = $.trim($("#txtDescripcion").val());
-                    //     _estado = "Activo";
-
-                    //     if(_perfil == '')
-                    //     {       
-                    //         //mensajesalertify("Ingrese Nombre del Perfil..!!","W","top-right",3);  
-                    //         mensajesweetalert("center-start","warning","Ingrese Nombre del Perfil..!",false,1800);  
-                    //         return;
-                    //     }
-
-                    //     var i = 0;
-
-                    //     $("input[type=checkbox]:checked").map(function(){
-                    //         if($(this).val() != 'on'){
-                    //             _result[i] = $(this).val();
-                    //             i++;
-                    //         }
-                    //     });
-
-                    //     if(i == 0)
-                    //     {                        
-                    //         mensajesweetalert("center-start","warning","Seleccione al menos un opción Menu/Tareal",false,1800);
-                    //         return;
-                    //     }
-
-                    //     $parametros = {
-
-                    //     }
-
-                    // });                     
-
-
+                    var optionFormat = function(item) {
+                        if ( !item.id ) {
+                            return item.text;
+                        }
+    
+                        var span = document.createElement('span');
+                        var imgUrl = item.element.getAttribute('data-kt-select2-country');
+                        var template = '';
+    
+                        if(item.id != 0){
+    
+                            template += '<img src="' + imgUrl + '" class="rounded-circle h-20px me-2" alt="image"/>';
+                        }
+    
+                        template += item.text;
+    
+                        span.innerHTML = template;			
+    
+                        return $(span);
+                    }
+    
+                    $('#cboPais').select2({
+                        templateSelection: optionFormat,
+                        templateResult: optionFormat
+                    });                      
+                    
                 }); 
 
-                function f_Guardar(_emprid, _userid){
-                    _perfil = $.trim($("#txtPerfil").val());
-                    _observacion = $.trim($("#txtDescripcion").val());
-                    _estado = "A";
-                    _result=[];
+                function f_Guardar(_emprid, _usuaid){
+                    
+                    var _paisid = "<?php echo $xPaisid; ?> ";
+                    var _perfil = $.trim($("#txtPerfil").val());
+                    var _observacion = $.trim($("#txtDescripcion").val());
+                    var _savepaisid = $("#cboPais").val();
+                    var _estado = "A";
+                    var _result=[];
 
+                    if(_savepaisid == 0){
+                        mensajesweetalert("center","warning","Seleccione Pais..!",false,1800);  
+                        return;
+                    }
+                    
                     if(_perfil == '')
                     {       
                         mensajesweetalert("center","warning","Ingrese Nombre del Perfil..!",false,1800);  
@@ -269,27 +292,6 @@
                     }
 
                     var _contar = 0;
-
-                    
-                    /*$("input[type=checkbox]:checked").map(function(){
-                        if($(this).val() == 'on'){
-                            _result[i] = $(this).val();
-                            i++;
-                        }
-                    });*/
-
-                    /*var tbl = document.getElementById('kt_ecommerce_report_shipping_table');
-                    var rCount = tbl.rows.length;
-                    var cCount = 1;
-                    var allArray = [];
-                    for (var i = 1; i <rCount; i++){
-                        var rowArray = [];
-                        for (var j = 0; j <cCount; j++){                            
-                            rowArray.push(tbl.rows[i].cells[j].children[0].value);
-                        }
-                        allArray.push(rowArray);
-                    }
-                    console.log(allArray);    */             
 
                     var grid = document.getElementById("kt_ecommerce_report_shipping_table");
                     var checkBoxes = grid.getElementsByTagName("input");
@@ -301,49 +303,55 @@
                         }
                     }
 
-                    //debugger;
-
-                    //console.log( _result);
-
                     if(_contar == 0){                        
-                        mensajesweetalert("center","warning","Seleccione al menos un opción Menu/Tarea",false,1800);
+                        mensajesweetalert("center","warning","Seleccione al menos una opcion Opciones/Perfil",false,1800);
                         return;
                     }
 
                     $parametros = {
+                        xxPaisid: _savepaisid,
                         xxPerfil: _perfil,
                         xxEmprid: _emprid
                     }      
                     
                     var xrespuesta = $.post("codephp/consultar_perfil.php", $parametros);
                     xrespuesta.done(function(response) {
-                        console.log(response);
+                        //console.log(response);
                         if(response == 0){
 
                             $datosperfil = {
+                                xxPaisid: _savepaisid,
                                 xxPerfil: _perfil,
                                 xxEmprid: _emprid,
-                                xxUserid: _userid,
+                                xxUsuaid: _usuaid,
                                 xxObservacion: _observacion,
                                 xxEstado: _estado,
                                 xxResult: _result
                             }
+                            
+                            $.post("codephp/grabar_perfil.php", $datosperfil, function(response){
 
-                            $.ajax({
-                                url: "codephp/grabar_perfil.php",
-                                type: "POST",
-                                dataType: "json",
-                                data: $datosperfil,          
-                                success: function(data){ 
-                                    console.log(data);
-                                    if(data == 'OK'){
-                                        $.redirect('?page=seg_perfiladmin', {'mensaje': 'Guardado con Exito..!'}); 
-                                    }                                                                         
-                                },
-                                error: function (error){
-                                    console.log(error);
-                                }                            
-                            }); 
+                               if(response.trim() == 'OK'){
+                                   $.redirect('?page=supperfil&menuid=0', {'mensaje': 'Guardado con Exito..!'}); 
+                                   _detalle = 'Nuevo perfil creado desde super admin';
+                               }else{
+                                   _detalle = 'Error al grabar perfil desde super admin ';
+                               }
+                               
+                               /**PARA CREAR REGISTRO DE LOGS */
+                                $parametros = {
+                                    xxPaisid: _paisid,
+                                    xxEmprid: _emprid,
+                                    xxUsuaid: _usuaid,
+                                    xxDetalle: _detalle,
+                                }					
+    
+                                $.post("codephp/new_log.php", $parametros, function(response){
+                                    //console.log(response);
+                                });                                
+                                
+                            });
+                            
                         }else{
                             mensajesweetalert("center","warning","Nombre del Perfil ya Existe..!",false,1800);
                         }

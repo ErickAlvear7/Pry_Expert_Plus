@@ -52,6 +52,10 @@
 		include __DIR__ . '/../pages/usuariosuper_admin.php';
 	}else if($page == 'param_generales'){
 		include __DIR__ . '/../pages/parametro_admin.php';
+	}else if($page == 'addsuperperfil'){
+		include __DIR__ . '/../pages/agregar_superperfil.php';
+	}else if($page == 'editsuperperfil'){
+		include __DIR__ . '/../pages/editar_superperfil.php';			
 	}else{
 		include '_content.php';
 	}
