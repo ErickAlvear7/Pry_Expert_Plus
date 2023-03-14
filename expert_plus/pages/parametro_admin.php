@@ -28,6 +28,12 @@
 
     $xPaisid = $_SESSION["i_paisid"];
     $xEmprid = $_SESSION["i_emprid"];
+    $xUsuaid = $_SESSION["i_usuaid"];
+
+    $xSQL = "SELECT paca_id AS Idpaca,paca_nombre AS Parametro,paca_descripcion AS Descrip, ";
+    $xSQL .= "CASE paca_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
+    $xSQL .= "FROM `expert_parametro_cabecera` WHERE empr_id=$xEmprid AND pais_id=$xPaisid";
+    $all_param = mysqli_query($con, $xSQL);
 
 ?>
 
@@ -81,18 +87,36 @@
 					</tr>
 				</thead>
 				<tbody class="fw-bold text-gray-600">
-					
+					<?php 
+                       foreach($all_param as $paca){
+
+                        $xParaid = $paca['Idpaca'];
+                        $xParam = $paca['Parametro'];
+                        $xDesc = $paca['Descrip'];
+                        $xEstado = $paca['Estado'];
+                    ?>
+                    <?php 
+                       $xCheking = '';
+
+                       if($xEstado == 'Activo'){
+                            $xCheking = 'checked="checked"';
+                            $xTextColor = "badge badge-light-primary";
+                        }else{
+                            $xTextColor = "badge badge-light-danger";
+                        }
+                    
+                    ?>
 					<tr>
-					    <td style="display:none;"></td>
-						<td></td>
-						<td></td>
+					    <td style="display:none;"><?php echo $xParaid ?></td>
+						<td><?php echo $xParam ?></td>
+						<td><?php echo $xDesc ?></td>
 						<td>
-                           <div class=""></div>
+                           <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado ?></div>
                         </td>
                         <td>
                             <div class="text-center">
 								<div class="form-check form-check-sm form-check-custom form-check-solid">
-									<input class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="" value=""/>
+									<input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="" value=""/>
 								</div>
 							</div>
 						</td>
@@ -106,6 +130,7 @@
 							</div>
 						</td>
 					</tr>
+                    <?php } ?>  
 				</tbody>
 			</table>
 		</div>
@@ -191,14 +216,14 @@
                                         <span class="required">Detalle</span>
                                         <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nombre del detalle"></i>
                                         </label>
-                                        <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="5" maxlength="100" placeholder="nombre del detalle" value="" />                       
+                                        <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />                       
                                    </div>
                                       <div class="col-md-3 fv-row">
                                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span class="required">Valor Texto</span>
                                         <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
                                         </label>
-                                        <input type="text" class="form-control form-control-solid" id="txtValorV" name="txtValorV" minlength="5" maxlength="100" placeholder="valor texto" value="" />                       
+                                        <input type="text" class="form-control form-control-solid" id="txtValorV" name="txtValorV" minlength="1" maxlength="100" placeholder="valor texto" value="" />                       
                                    </div>
                                      <div class="col-md-3 fv-row">
                                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
@@ -241,7 +266,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" id="btnGuardar" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" class="btn btn-primary">Guardar</button>
+            <button type="button" id="btnGuardar" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">Guardar</button>
         </div>
       </div>
     </div>
@@ -251,9 +276,11 @@
 
 <script>
 
-    var _estado, _detalle,_valorI,_result = [];
+   var _estado, _detalle,_valorI,_result = [],_count =0,_idpais,_idempr,_idusua;
 
    $(document).ready(function(){
+
+ 
 
        //abrir-modal-nuevo-parametro
        $("#nuevoParametro").click(function(){
@@ -283,7 +310,6 @@
 
        var _agregarDet = 'add';
        var _continuar = true;
-       var _count =0;
        var _output;
 
         if($.trim($('#txtDetalle').val()).length == 0)
@@ -351,7 +377,7 @@
           
 
             if(_continuar){
-                _count = _count ++;
+                _count = _count + 1;
 
                 _output = '<tr id="row_' + _count + '">';
                 _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';                
@@ -391,7 +417,7 @@
    
    //Guardar parametro-detalle
 
-   function f_Guardar(_idpais,_idempr){
+   function f_Guardar(_idpais,_idempr,_idusua){
 
       var _parametro = $.trim($("#txtNombrePara").val());
       var _descripcion = $.trim($("#txtDesc").val());
@@ -406,31 +432,51 @@
 
       //debugger;
 
-   
-				$parametros ={
-					xxPaisId: _idpais,
+                $datosParam ={
+                    xxPaisId: _idpais,
 					xxEmprId: _idempr,
-                    xxParametro: _parametro,
-                    xxDescripcion: _descripcion,
-                    xxEstado: _estado,
-                    xxResultado: _result
-				}
+                    xxParametro: _parametro
+                }
 
-				$.ajax({
-					url: "codephp/agregar_parametro.php",
-					type: "POST",
-					dataType: "json",
-					data: $parametros,          
-					success: function(data){ 
-						//console.log(data);
-						if(data == 'OK'){
-							mensajesweetalert("center","success","password actualizado con exito..!",false,1800);
-						}                                                                         
-					},
-					error: function (error){
-						console.log(error);
-					}                            
-				}); 
+
+                var xrespuesta = $.post("codephp/consultar_parametro.php", $datosParam);
+                xrespuesta.done(function(response){
+                    if(response == 0){
+
+                        $parametros ={
+                            xxPaisId: _idpais,
+                            xxEmprId: _idempr,
+                            xxUsuaId: _idusua,
+                            xxParametro: _parametro,
+                            xxDescripcion: _descripcion,
+                            xxEstado: _estado,
+                            xxResultado: _result
+                        }
+
+                        var xresponse = $.post("codephp/agregar_parametro.php", $parametros);
+                        xresponse.done(function(response){
+                        //debugger;
+                            if(response == 'OK')
+                            {
+                            				
+
+                                                     
+                            }else{
+                                console.log(response);
+                            }
+
+                        });
+
+
+
+                    }else{
+
+                        mensajesweetalert("center","warning","Nombre del Parametro ya Existe..!",false,1800);
+                    }
+
+                });
+
+			
    
 
 
