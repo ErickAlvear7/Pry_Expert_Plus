@@ -278,10 +278,7 @@
 
    var _estado, _detalle,_valorI,_result = [],_count =0,_idpais,_idempr,_idusua;
 
-   $(document).ready(function(){
-
- 
-
+    $(document).ready(function(){
        //abrir-modal-nuevo-parametro
        $("#nuevoParametro").click(function(){
 
@@ -293,21 +290,16 @@
         
 
             $("#modal_parametro").modal("show");
+            $('#modal_parametro').modal('handleUpdate')
 
 
-        });
-
-
-       
-   });
+        });  
+    });
 
   //Agregar detalle
 
-   $('#btnAgregar').click(function(){
-
-    //debugger;
-
-
+    $('#btnAgregar').click(function(){
+      //debugger;
        var _agregarDet = 'add';
        var _continuar = true;
        var _output;
@@ -374,7 +366,6 @@
                 }
             });
 
-          
 
             if(_continuar){
                 _count = _count + 1;
@@ -402,8 +393,6 @@
 
                 _result.push(_objeto);
 
-                //console.log(_result);
-
                 $("#txtDetalle").val("");
                 $("#txtValorV").val("");
                 $("#txtValorI").val("");
@@ -411,13 +400,12 @@
             }
 
         }
-
-   });
+    });
 
    
    //Guardar parametro-detalle
 
-   function f_Guardar(_idpais,_idempr,_idusua){
+    function f_Guardar(_idpais,_idempr,_idusua){
 
       var _parametro = $.trim($("#txtNombrePara").val());
       var _descripcion = $.trim($("#txtDesc").val());
@@ -427,6 +415,11 @@
       if(_parametro == '')
       {                        
         mensajesweetalert("center","warning","Ingrese Nombre del Parametro..!!",false,1800);
+        return;
+      }
+
+      if(_count == 0){
+        mensajesweetalert("center","warning","Ingrese al menos un Detalle..!!",false,1800);
         return;
       }
 
@@ -453,19 +446,48 @@
                             xxResultado: _result
                         }
 
-                        var xresponse = $.post("codephp/agregar_parametro.php", $parametros);
-                        xresponse.done(function(response){
-                        //debugger;
-                            if(response == 'OK')
-                            {
-                            				
+                        $.ajax({
+							url: "codephp/grabar_parametro.php",
+							type: "POST",
+							dataType: "json",
+							data: $parametros,          
+							success: function(response){ 
+								if(response != 0){
 
-                                                     
-                            }else{
-                                console.log(response);
-                            }
+									_paraid = response;										
+									_paramom = _parametro;
+                                    _paradesc = _descripcion;
 
-                        });
+									var _estado = '<td><div class="badge badge-light-primary">Activo</div></td>';
+
+
+									var _btnChk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                                                   '<input class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="" value=""/>' +
+                                                   '</div></div></td>';
+												
+
+                                    var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Parametro" >' + 
+				 						            '<i class="fa fa-edit"></i></button></div></div></td>';            
+												
+									TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+
+									TableData.column(0).visible(0);
+										
+									
+										TableData.row.add([_paraid, _paramom, _paradesc, _estado, _btnChk, _btnEdit]).draw();
+									
+									
+
+									$("#modal_parametro").modal("hide");									
+
+								}                                                                         
+							},
+							error: function (error){
+								console.log(error);
+							}                            
+						});
+
+                       
 
 
 
@@ -475,13 +497,31 @@
                     }
 
                 });
+    }
 
-			
-   
+    //Eliminar Detalle
 
+    $(document).on("click",".btnDelete",function(){
+        row_id = $(this).attr("id");
+        _detalle = $('#txtDetalle' + row_id + '').val();
 
-    //alert();
-   }
+        FunRemoveItemFromArr(_result, _detalle);
+        $('#row_' + row_id + '').remove();
+        _count--;
+
+    });
+    function FunRemoveItemFromArr(arr, deta)
+    {
+        $.each(arr,function(i,item){
+            if(item.arrydetalle == deta)
+            {
+                arr.splice(i, 1);
+                return false;
+            }else{
+                continuar = true;
+            }
+        });        
+    };
 
 
 
@@ -489,7 +529,9 @@
 
    $("#modal_parametro").draggable({
         handle: ".modal-header"
-    }); 
+    });
+    
+ 
 
   
 

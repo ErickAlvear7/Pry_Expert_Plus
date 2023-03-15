@@ -49,12 +49,10 @@
           
         }
 
-         $resultado = "OK";
-
      
        
     }
 
-    echo $resultado;
+    echo $last_id;
 
 ?>
