@@ -55,7 +55,9 @@
 	}else if($page == 'addsuperperfil'){
 		include __DIR__ . '/../pages/agregar_superperfil.php';
 	}else if($page == 'editsuperperfil'){
-		include __DIR__ . '/../pages/editar_superperfil.php';			
+		include __DIR__ . '/../pages/editar_superperfil.php';
+	}else if($page == 'editparametro'){
+		include __DIR__ . '/../pages/editar_parametro.php';			
 	}else{
 		include '_content.php';
 	}

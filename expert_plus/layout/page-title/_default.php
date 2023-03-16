@@ -53,7 +53,10 @@
 	}else if($page == 'editsuperperfil'){
 		$title = 'Editar Perfil';
 		$descripcion = 'Editar Datos del Pefil';
-	}
+	}else if($page == 'editparametro'){
+	$title = 'Editar Parametro';
+	$descripcion = 'Editar Datos del Parametro';
+}
 
 ?>	
 

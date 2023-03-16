@@ -116,14 +116,14 @@
                         <td>
                             <div class="text-center">
 								<div class="form-check form-check-sm form-check-custom form-check-solid">
-									<input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="" value=""/>
+									<input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xParaid; ?>" value=""/>
 								</div>
 							</div>
 						</td>
 						<td>
                             <div class="text-center">
 								<div class="btn-group">
-									<button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Parametro'>
+									<button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(<?php echo $xParaid;?>)"  title='Editar Parametro'>
 										<i class='fa fa-edit'></i>
 									</button>												 
 								</div>
@@ -454,19 +454,20 @@
 							success: function(response){ 
 								if(response != 0){
 
-									_paraid = response;										
+									_pacaid = response;										
 									_paramom = _parametro;
                                     _paradesc = _descripcion;
+                                    _checked = "checked='checked'";
 
 									var _estado = '<td><div class="badge badge-light-primary">Activo</div></td>';
 
 
 									var _btnChk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                                   '<input class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="" value=""/>' +
+                                                   '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _pacaid + '" value=""/>' +
                                                    '</div></div></td>';
 												
 
-                                    var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Parametro" >' + 
+                                    var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(' + _pacaid + ')" title="Editar Parametro" >' + 
 				 						            '<i class="fa fa-edit"></i></button></div></div></td>';            
 												
 									TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
@@ -474,7 +475,7 @@
 									TableData.column(0).visible(0);
 										
 									
-										TableData.row.add([_paraid, _paramom, _paradesc, _estado, _btnChk, _btnEdit]).draw();
+										TableData.row.add([_pacaid, _paramom, _paradesc, _estado, _btnChk, _btnEdit]).draw();
 									
 									
 
@@ -522,6 +523,13 @@
             }
         });        
     };
+
+    
+    debugger;
+
+    function f_Editar(_paraid){
+        $.redirect('?page=editparametro', {'idparam': _paraid}); //POR METODO POST
+    }
 
 
 
