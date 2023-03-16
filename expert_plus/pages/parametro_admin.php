@@ -525,7 +525,7 @@
     };
 
     
-    debugger;
+    //debugger;
 
     function f_Editar(_paraid){
         $.redirect('?page=editparametro', {'idparam': _paraid}); //POR METODO POST

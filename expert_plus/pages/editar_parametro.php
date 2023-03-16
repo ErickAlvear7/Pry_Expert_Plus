@@ -33,13 +33,18 @@
     $xUsuaid = $_SESSION["i_usuaid"];
 
     $xSQL = "SELECT paca_nombre AS Nombre, paca_descripcion AS Descri, paca_estado AS Estado FROM `expert_parametro_cabecera` WHERE paca_id = $idpaca ";
-    $all_datos = mysqli_query($con, $xSQL);
-    foreach($all_datos as $paca){
+    $xSQL .= "AND empr_id = $xEmprid ";
+    $all_paca = mysqli_query($con, $xSQL);
+    foreach($all_paca as $paca){
 
         $xNomPaca = $paca['Nombre'];
         $xDescPaca = $paca['Descri'];
 
     }
+
+    $xSQL = "SELECT pade_id AS Idpade,pade_orden AS Orden, pade_nombre AS Detalle, pade_valorV AS ValorV, pade_valorI AS ValorI,";
+    $xSQL .= "pade_estado AS Estado FROM `expert_parametro_detalle` WHERE paca_id = $idpaca ";
+    $all_pade = mysqli_query($con, $xSQL);
     
 
  
@@ -153,37 +158,56 @@
                                     <th class="min-w-125px">Detalle</th>
                                     <th class="min-w-125px">Valor Texto</th>
                                     <th class="min-w-125px">Valor entero</th>
+                                    <th class="min-w-125px">Estado</th>
                                     <th class="min-w-125px" style="text-align: center;">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody class="fw-bold text-gray-600">
-                                <tr id="row_">
+                                <?php 
+                                  foreach($all_pade as $pade){
+
+                                    $xPadeId = $pade['Idpade'];
+                                    $xPadeNom = $pade['Detalle'];
+                                    $xPadeValorV = $pade['ValorV'];
+                                    $xPadeValorI = $pade['ValorI'];
+                                    $xPadeEstado = $pade['Estado'];
+                                ?>
+                                <?php 
+                                    $xCheking = '';
+
+                                    if($xPadeEstado == 'A'){
+                                        $xCheking = 'checked="checked"';
+                                       
+                                    }
+                                    
+                                    ?>
+                                <tr id="row_<?php echo  $xPadeId; ?>">
                                     <td style="display: none;">
-                                        <input type="hidden" name="hidden_orden[]" id="orden" value="" />
+                                        <?php echo  $xPadeId; ?>
                                     </td>               
-                                    <td>
-                                        <input type="hidden" name="hidden_detalle[]" id="txtDetalle" value="" />
-                                    </td>
-                                    <td>
-                                        <input type="hidden" name="hidden_valorv[]" id="txtValorV" value="" />
-                                    </td>
-                                    <td>
-                                            <input type="hidden" name="hidden_valori[]" id="txtValorI" value="" />
-                                    </td>
+                                    <td><?php echo $xPadeNom; ?></td>
+                                    <td><?php echo $xPadeValorV; ?></td>
+                                    <td><?php echo $xPadeValorI; ?></td>
+                                    <td style="text-align:center">
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input <?php $xCheking; ?>  class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $xPadeId; ?>" 
+                                                     onchange="f_Pade(<?php echo $xPadeId; ?>, <?php echo $idpaca; ?>)" />
+                                        </div>
+                                    </td> 
                                     <td>
                                         <div class="text-center">
                                             <div class="btn-group">
-                                                <button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="">
+                                                <button type="button" id="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
-                                                <button type="button" name="btnEdit" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEdit" id="">
+                                                <button type="button" id="btnEdit" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEdit" id="">
                                                     <i class="fa fa-edit"></i>
                                                 </button>	 
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
-
+                                <?php }?>
                             </tbody>
                         </table>
                     </div>     
@@ -196,8 +220,12 @@
 
 
 <script>
+    var _idpaca,_idpade;
 
+    function f_Pade(_idpaca,_idpade){
+        alert('aki');
 
+    }
     
  
 
