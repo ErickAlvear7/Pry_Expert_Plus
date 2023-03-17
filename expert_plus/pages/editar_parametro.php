@@ -190,7 +190,7 @@
                                     <td><?php echo $xPadeValorI; ?></td>
                                     <td style="text-align:center">
                                         <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input <?php $xCheking; ?>  class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $xPadeId; ?>" 
+                                            <input <?php echo $xCheking; ?>  class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $xPadeId; ?>" 
                                                      onchange="f_Pade(<?php echo $xPadeId; ?>, <?php echo $idpaca; ?>)" />
                                         </div>
                                     </td> 
@@ -200,7 +200,7 @@
                                                 <button type="button" id="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
-                                                <button type="button" id="btnEdit" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEdit" id="">
+                                                <button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">
                                                     <i class="fa fa-edit"></i>
                                                 </button>	 
                                             </div>
@@ -216,6 +216,42 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="kt_modal_new_card" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Card</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <div class="d-flex flex-column mb-7 fv-row">
+                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                        <span class="required">Name On Card</span>
+                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
+                    </label>
+                    <input type="text" class="form-control form-control-solid" placeholder="" name="card_name" value="Max Doe" />
+                </div>
+                <div class="d-flex flex-column mb-7 fv-row">
+                    <label class="required fs-6 fw-bold form-label mb-2">Card Number</label>
+                    <div class="position-relative">
+                    <input type="text" class="form-control form-control-solid" placeholder="" name="card_name" value="Max Doe" />
+                    </div>
+                </div>
+                <div class="text-center pt-15">
+                    <button type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Discard</button>
+                    <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -226,6 +262,14 @@
         alert('aki');
 
     }
+
+    $(document).on("click",".btnEditar",function(){
+
+       
+
+        $("#kt_modal_new_card").modal("show");
+
+    });
     
  
 

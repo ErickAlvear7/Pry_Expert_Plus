@@ -436,14 +436,17 @@
                 xrespuesta.done(function(response){
                     if(response == 0){
 
+                        debugger;
+
                         $parametros ={
                             xxPaisId: _idpais,
-                            xxEmprId: _idempr,
                             xxUsuaId: _idusua,
+                            xxEmprId: _idempr,
                             xxParametro: _parametro,
-                            xxDescripcion: _descripcion,
+                            xxResultado: _result,
                             xxEstado: _estado,
-                            xxResultado: _result
+                            xxDescripcion: _descripcion
+                         
                         }
 
                         $.ajax({
