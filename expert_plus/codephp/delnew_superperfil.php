@@ -21,7 +21,7 @@
             $xTipo = $_POST['xxTipo'];
             
             if($xTipo == 'Del'){
-                $xSQL = "UPDATE `expert_perfil_menu_tarea` SET meta_estado='I' WHERE empr_id=$xEmprid AND meta_id=$xIdMeta AND perf_id=$xIdPerfil";
+                $xSQL = "DELETE FROM `expert_perfil_menu_tarea` WHERE empr_id=$xEmprid AND meta_id=$xIdMeta AND perf_id=$xIdPerfil";
             }elseif($xTipo == 'Add'){
                 $xSQL = "INSERT INTO `expert_perfil_menu_tarea`(empr_id,meta_id,perf_id,meta_estado) ";
                 $xSQL .= "VALUES($xEmprid,$xIdMeta,$xIdPerfil,'A')";    

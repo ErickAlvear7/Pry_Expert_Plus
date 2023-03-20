@@ -6,6 +6,7 @@
 	date_default_timezone_set('America/Guayaquil');	
 
 	require_once("./dbcon/config.php");
+	require_once("./dbcon/functions.php");
 
 	$log_file = "error_conexion";
 
@@ -21,7 +22,7 @@
 	$_SESSION["s_login"] = null;
 	$_SESSION["s_namehost"] = gethostname();
 
-	$respuesta = '';
+	$respuesta = 'ERR';
 	$mode = 'dark';
 
 	$xSQL = "SELECT * FROM `expert_parametro_paginas` WHERE pais_id=0 AND empr_id=0 AND usua_id=0 AND estado='A'";
@@ -36,35 +37,29 @@
 	if(isset($_POST['usuario']) and isset($_POST['password'])){
 		if(isset($_POST['usuario']) <> '' and isset($_POST['password']) <> ''){
               
-			$xUsuario = $_POST['usuario'];
-			$xPassword = $_POST['password'];
+			$xUsuario = safe($_POST['usuario']);
+			$xPassword = safe($_POST['password']);
 			$xnewPassword = md5($xPassword);
 
 			$xSQL = " SELECT usu.usua_id AS UsuarioId, usu.pais_id AS PaisId, usu.empr_id AS EmprID, usu.usua_login AS NombreLogin, ";
 			$xSQL .= " CONCAT(usu.usua_nombres,' ',usu.usua_apellidos) AS NombreUsuario, per.perf_id AS PerfilId, per.perf_descripcion AS PerfilName FROM `expert_usuarios` usu ";
 			$xSQL .= " INNER JOIN `expert_perfil` per ON usu.perf_id=per.perf_id WHERE usu.usua_login='$xUsuario' AND usua_password='$xnewPassword' AND usu.usua_estado='A' AND per.perf_estado='A' ";
-		
-			$login = mysqli_query($con, $xSQL);
-			$rowcount = mysqli_num_rows($login);
-		
-			if($rowcount > 0){
-			   
-				$row= mysqli_fetch_row($login);
-		
-				$_SESSION["s_loged"] = "loged";
-				$_SESSION["i_usuaid"] = $row[0];
-				$_SESSION["i_paisid"] = $row[1];
-				$_SESSION["i_emprid"] = $row[2];
-				$_SESSION["s_login"] = $row[3];
-				$_SESSION["s_usuario"] = $row[4];
-				$_SESSION["i_perfilid"] = $row[5];
-				$_SESSION["s_perfdesc"] = $row[6];
+			$all_ingreso = mysqli_query($con, $xSQL);
 
-				$respuesta  = 'ok';
-
-		
+			if(mysqli_num_rows($all_ingreso) > 0){
+				foreach ($all_ingreso as $ingreso){
+					$_SESSION["s_loged"] = "loged";
+					$_SESSION["i_usuaid"] = $ingreso['UsuarioId'];
+					$_SESSION["i_paisid"] = $ingreso['PaisId'];
+					$_SESSION["i_emprid"] = $ingreso['EmprID'];
+					$_SESSION["s_login"] = $ingreso['NombreLogin'];
+					$_SESSION["s_usuario"] = $ingreso['NombreUsuario'];
+					$_SESSION["i_perfilid"] = $ingreso['PerfilId'];
+					$_SESSION["s_perfdesc"] = $ingreso['PerfilName'];
+				}
+				$respuesta  = 'OK';
+	
 			}else{
-		
 				$_SESSION["s_loged"] = "";
 				$_SESSION["s_usuario"] = null;
 				$_SESSION["i_usuaid"] = null;
@@ -73,11 +68,22 @@
 				$_SESSION["i_emprid"] = null;
 				$_SESSION["s_perfdesc"] = null;
 				$_SESSION["s_login"] = null;
-
-				$respuesta  = 'error';
-		
 			}
+
+		
+			// $login = mysqli_query($con, $xSQL);
+			// $rowcount = mysqli_num_rows($login);
+		
+			// if($rowcount > 0){
+			   
+			// 	$row= mysqli_fetch_row($login);
+		
+			// }else{
+			// 	$respuesta  = 'error';
+		
+			// }
 		}
+
 		echo $respuesta;
 		exit();
 	}
@@ -208,7 +214,7 @@
 
 		   $.post("ingreso.php", {usuario:_usuario, password:_password} , function(response){
 
-			   if(response == 'error'){
+			   if(response == 'ERR'){
                     
 					mensajesweetalert("center","warning","Usuario y/o Password incorrecto!",false,1800);             
                     $("#email").val('');

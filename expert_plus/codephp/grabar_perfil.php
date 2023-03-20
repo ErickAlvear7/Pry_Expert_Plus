@@ -21,7 +21,7 @@
             $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
             $xPerfil = safe($_POST['xxPerfil']); 
-            $xUsuaid = $_POST['xxUserid']; 
+            $xUsuaid = $_POST['xxUsuaid']; 
             $xResult = $_POST['xxResult']; 
             $xObservacion = trim(safe($_POST['xxObservacion']), 'UTF-8');
             $xEstado =  $_POST['xxEstado'];

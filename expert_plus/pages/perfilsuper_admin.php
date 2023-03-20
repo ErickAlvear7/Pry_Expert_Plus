@@ -211,7 +211,7 @@
                                     <td style="text-align:center">
                                         <div class="form-check form-check-sm form-check-custom form-check-solid">
                                             <input class="form-check-input btnEstado" type="checkbox" id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
-                                                echo "checked='checked'";} else {'';} ?> onchange="f_Check(<?php echo $xEmprid; ?>,<?php echo $perfil['Id']; ?>)" value="<?php echo $perfil['Id']; ?>" />
+                                                echo "checked='checked'";} else {'';} ?> onchange="f_Check(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $perfil['Id']; ?>)" value="<?php echo $perfil['Id']; ?>" />
                                         </div>
                                     </td>     
                                     
@@ -258,7 +258,7 @@
 				$.redirect('?page=editsuperperfil&menuid=0', {'idperfil': _perfid}); //POR METODO POST
 			}
 
-			function f_Check(_emprid, _perfid){
+			function f_Check(_paisid, _emprid, _perfid){
 				//let _div = "div_" + _perfid;              
 				let _check = $("#chk" + _perfid).is(":checked");
 				let _btn = "btnEdit" + _perfid;
@@ -304,13 +304,14 @@
 				TableData.row(_fila).data([_perfil , _descripcion, _pais, _estado, _btnchk, _boton ]).draw();
 				
 				$parametros = {
-                        xxIdPerfil: _perfid,
-                        xxIdMeta: 0,
-                        xxEmprid: _emprid,
-                        xxTipo: _tipo
-                    }				
+					xxPaisid: _paisid,
+					xxIdPerfil: _perfid,
+					xxIdMeta: 0,
+					xxEmprid: _emprid,
+					xxTipo: _tipo
+				}				
 				
-				var xrespuesta = $.post("codephp/delnew_perfil.php", $parametros);
+				var xrespuesta = $.post("codephp/delnew_superperfil.php", $parametros);
 				xrespuesta.done(function(response){
 					//console.log(response);
 				});				

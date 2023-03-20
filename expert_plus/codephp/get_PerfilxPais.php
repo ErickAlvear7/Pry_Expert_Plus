@@ -13,11 +13,11 @@
     
     $options = '<option value="0">--Seleccione Perfil--</opcion>';
 
-    if(isset($_POST['xxPais']) and isset($_POST['xxEmprid']) ){
-        if(isset($_POST['xxPais']) <> '' and isset($_POST['xxEmprid']) <> ''){ 
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) ){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> ''){ 
 
             $xEmprid = $_POST['xxEmprid'];
-            $xPaisid = $_POST['xxPais'];            
+            $xPaisid = $_POST['xxPaisid'];            
 
         	$xSQL = "SELECT p.perf_descripcion AS Descripcion,p.perf_id AS Codigo FROM `expert_perfil` p ";
         	$xSQL .= " WHERE empr_id=$xEmprid AND pais_id=$xPaisid AND perf_estado='A' ";

@@ -5,7 +5,10 @@
 
     putenv("TZ=America/Guayaquil");
     date_default_timezone_set('America/Guayaquil');	
-
+    
+    $page = isset($_GET['page']) ? $_GET['page'] : "index";
+    
+    //file_put_contents('log_seguimiento.txt', $page . "\n\n", FILE_APPEND);
 
 	@session_start();
 
@@ -19,16 +22,16 @@
         exit();
     }
 
-	$yUsuaid = $_SESSION["i_usuaid"];	
-    $yPaisid = $_SESSION["i_paisid"];	
-    $yEmprid = $_SESSION["i_emprid"];	
+	$xUsuaid = $_SESSION["i_usuaid"];	
+    $xPaisid = $_SESSION["i_paisid"];	
+    $xEmprid = $_SESSION["i_emprid"];	
 
 	$mode = 'dark';
 	require_once("./dbcon/config.php");
-
+	
 	$log_file = "error_conexion";
 
-	$xSQL = "SELECT * FROM `expert_parametro_paginas` WHERE empr_id=$yEmprid AND usua_id=$yUsuaid AND estado='A'";
+	$xSQL = "SELECT * FROM `expert_parametro_paginas` WHERE empr_id=$xEmprid AND usua_id=$xUsuaid AND estado='A'";
 	$all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));	
 
 	if(mysqli_num_rows($all_datos)>0) {
@@ -36,6 +39,7 @@
 			$mode = $datos['index_content'];
 		}
 	}	
+	
 ?>
 
 
@@ -147,3 +151,10 @@ License: For each use you must have a valid license purchased only from above li
 	</body>
 	<!--end::Body-->
 </html>
+
+
+    <script>
+        $(document).ready(function(){
+            
+        });
+    </script>

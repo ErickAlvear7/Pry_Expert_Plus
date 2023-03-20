@@ -36,7 +36,7 @@
             $xSQL ="INSERT INTO `expert_usuarios` (pais_id,empr_id,perf_id,usua_nombres,usua_apellidos,usua_login,usua_password,usua_estado, ";
             $xSQL .= "usua_contador,usua_caducapass,usua_fechacaduca,usua_cambiarpass,usua_estadologin,usua_terminallogin,usua_usuariocreacion, ";
             $xSQL .= "usua_fechacreacion,usua_terminalcreacion)";
-            $xSQL .="VALUES ($xPaisid,$xEmprid,$xPerfilid,'$xNombre','$xApellido','$xLogin','$xPass','A',0,'$xCaducaPass','{$xFechaCaduca}', ";
+            $xSQL .="VALUES ($xPaisid,$xEmprid,$xPerfilid,'$xNombre','$xApellido',LOWER('$xLogin'),'$xPass','A',0,'$xCaducaPass','{$xFechaCaduca}', ";
             $xSQL .= "'$xCambiarPass', '','',$xUsuaid,'{$xFecha}','$xTerminal') ";
             
             if(mysqli_query($con, $xSQL)){

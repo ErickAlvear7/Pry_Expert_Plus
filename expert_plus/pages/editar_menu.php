@@ -13,24 +13,30 @@
     mysqli_set_charset($con,'utf8');	
 
     //$xServidor = $_SERVER['HTTP_HOST'];
-    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
-	//$yUsuaid = $_SESSION["i_usuaid"];	
-	//$yPaisid = $_SESSION["i_paisid"];	
-    //$yEmprid = $_SESSION["i_empre_id"];
-    
-	$yEmprid = 1;	
-	$yPaisid = 1;
-	$yUsuaid = 1;
+    @session_start();
+
+    if(isset($_SESSION["s_usuario"])){
+        if($_SESSION["s_loged"] != "loged"){
+            header("Location: ./logout.php");
+            exit();
+        }
+    } else{
+        header("Location: ./logout.php");
+        exit();
+    }
 
     $idmenu = $_POST['idmenu'];
 
+	$xUsuaid = $_SESSION["i_usuaid"];
+    $xPaisid = $_SESSION["i_paisid"];
+    $xEmprid = $_SESSION["i_emprid"];
 
     $xSQL = "SELECT menu_descripcion AS Menu, menu_observacion AS Observacion, CASE menu_estado WHEN 'A' THEN 'Activo' ";
-    $xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_menu` WHERE menu_id=$idmenu AND empr_id=$yEmprid ";
-    $expertmenu = mysqli_query($con, $xSQL);
+    $xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_menu` WHERE menu_id=$idmenu AND empr_id=$xEmprid ";
+    $all_menu = mysqli_query($con, $xSQL);
 
-    foreach($expertmenu as $menu){
+    foreach($all_menu as $menu){
         $xMenu = $menu['Menu'];
         $xObservacion = $menu['Observacion'];
     }
@@ -40,7 +46,7 @@
     $xSQL .="met.menu_id=$idmenu AND tar.empr_id=$yEmprid AND tar.tare_superadmin=0 UNION SELECT tar.tare_id AS TareaId, 'NO' as Ckeck, tar.tare_nombre AS Tarea, tar.tare_ruta AS Ruta, CASE ";
     $xSQL .="tar.tare_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, 50000 AS Orden FROM `expert_tarea` tar WHERE tar.tare_id NOT IN(SELECT ";
     $xSQL .="met.tare_id FROM `expert_menu_tarea` met WHERE met.menu_id=$idmenu AND met.empr_id=$yEmprid) AND tar.empr_id=$yEmprid AND tar.tare_superadmin=0  ORDER BY Orden; ";
-    $expertarea = mysqli_query($con, $xSQL);
+    $all_tarea = mysqli_query($con, $xSQL);
 
 ?>
 
@@ -159,7 +165,7 @@
                                 </thead>
                                <tbody class="fw-bold text-gray-600">
                                     <?php
-                                        foreach ($expertarea as $tareas){    
+                                        foreach ($all_tarea as $tareas){    
                                             $tareaid = $tareas['TareaId'];
                                     ?>
                                         <?php

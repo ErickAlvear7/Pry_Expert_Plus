@@ -12,6 +12,10 @@
 	
 	$page = isset($_GET['page']) ? $_GET['page'] : 'index';
 	$menuid = isset($_GET['menuid']) ? $_GET['menuid'] : '200001';
+
+	if($page == 'addperfil' || $page == 'editperfil'){
+		$page = 'seg_perfiladmin';
+	}
 	
 	
 	@session_start();
@@ -26,8 +30,9 @@
         exit();
     }
 
-	$yUsuaid = $_SESSION["i_usuaid"];	
-	$yPaisid = $_SESSION["i_paisid"];	
+	$xPaisid = $_SESSION["i_paisid"];	
+	$xUsuaid = $_SESSION["i_usuaid"];	
+	$xPerfilid = $_SESSION["i_perfilid"];
 	$xPerfilName = $_SESSION["s_perfdesc"];
 
 	$xIcono = "";
@@ -40,33 +45,13 @@
     mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
 
-	/*$xSql = "SELECT (SELECT mpa.mepa_id FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS CodigoMenuPadre,";
-	$xSql .= "(SELECT mpa.mepa_descripcion FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS MenuPadre," ;
-	$xSql .= "(SELECT mpa.mepa_icono FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS IcoMenuPadre,";
-	$xSql .= "men.menu_id AS MenuId,men.menu_descripcion AS Menu,men.menu_icono AS Icono,tar.tare_nombre AS SubMenu,tar.tare_ruta AS Pagina ";
-	$xSql .= "FROM `expert_usuarios` usu, `expert_perfil` per, `expert_perfil_menu_tarea` pmt, `expert_menu` men,`expert_menu_tarea` mnt, `expert_tarea` tar ";
-	$xSql .= "WHERE usu.perf_id = per.perf_id AND per.perf_id = pmt.perf_id AND pmt.meta_id = mnt.meta_id AND mnt.menu_id = men.menu_id AND ";
-	$xSql .= "mnt.tare_id = tar.tare_id AND men.menu_estado='A' AND tar.tare_estado='A' AND USU.usua_id=" . $yUsuaCodigo . " AND men.mepa_id>0 ";
-	$xSql .= "ORDER BY men.menu_orden,mnt.meta_orden";
-
-	$all_menupadre = mysqli_query($con, $xSql);*/
-
-	// $xSql = "SELECT (SELECT mpa.mepa_id FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS CodigoMenuPadre,";
-	// $xSql .= "(SELECT mpa.mepa_descripcion FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS MenuPadre," ;
-	// $xSql .= "(SELECT mpa.mepa_icono FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS IcoMenuPadre,";
-	// $xSql .= "men.menu_id AS MenuId,men.menu_descripcion AS Menu,men.menu_icono AS Icono,tar.tare_nombre AS SubMenu,tar.tare_ruta AS Pagina ";
-	// $xSql .= "FROM `expert_usuarios` usu, `expert_perfil` per, `expert_perfil_menu_tarea` pmt, `expert_menu` men,`expert_menu_tarea` mnt, `expert_tarea` tar ";
-	// $xSql .= "WHERE usu.perf_id = per.perf_id AND per.perf_id = pmt.perf_id AND pmt.meta_id = mnt.meta_id AND mnt.menu_id = men.menu_id AND ";
-	// $xSql .= "mnt.tare_id = tar.tare_id AND men.menu_estado='A' AND tar.tare_estado='A' AND USU.usua_id=" . $yUsuaCodigo;
-	// $xSql .= " ORDER BY men.menu_orden,mnt.meta_orden";
-
-	$xSql = "SELECT distinct (SELECT mpa.mepa_id FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS CodigoMenuPadre,";
-	$xSql .= "(SELECT mpa.mepa_descripcion FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS MenuPadre," ;
-	$xSql .= "men.menu_id AS MenuId,men.menu_descripcion AS Menu FROM `expert_usuarios` usu, `expert_perfil_menu_tarea` pmt, `expert_menu_tarea` mta, `expert_menu` men ";
-	$xSql .= "WHERE usu.pais_id=$yPaisid AND usu.perf_id=pmt.perf_id AND pmt.meta_id=mta.meta_id AND mta.menu_id=men.menu_id ";
-	$xSql .= "AND men.menu_estado='A' AND usu.usua_id=$yUsuaid ORDER BY men.menu_orden";
+	$xSQL = "SELECT distinct (SELECT mpa.mepa_id FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS CodigoMenuPadre,";
+	$xSQL .= "(SELECT mpa.mepa_descripcion FROM `expert_menu_padre` mpa WHERE mpa.mepa_id=men.mepa_id) AS MenuPadre," ;
+	$xSQL .= "men.menu_id AS MenuId,men.menu_descripcion AS Menu FROM `expert_usuarios` usu, `expert_perfil_menu_tarea` pmt, `expert_menu_tarea` mta, `expert_menu` men ";
+	$xSQL .= "WHERE usu.pais_id=$xPaisid AND usu.perf_id=pmt.perf_id AND pmt.meta_id=mta.meta_id AND mta.menu_id=men.menu_id AND pmt.meta_estado='A' ";
+	$xSQL .= "AND men.menu_estado='A' AND usu.usua_id=$xUsuaid AND usu.perf_id=$xPerfilid ORDER BY men.menu_orden";
 	
-	$all_menu = mysqli_query($con, $xSql);
+	$all_menu = mysqli_query($con, $xSQL);
 
 
 ?>
@@ -81,16 +66,15 @@
 								if ($menurow["CodigoMenuPadre"] == null){
 									if ($tempmenu != $menurow["MenuId"]){
 										$xIcono = '';
-										$xSql = "SELECT * FROM `expert_iconos_menu` WHERE menu_id=" . $menurow["MenuId"];
-										$dataicono = mysqli_query($con, $xSql);
+										$xSQL = "SELECT * FROM `expert_iconos_menu` WHERE menu_id=" . $menurow["MenuId"];
+										$dataicono = mysqli_query($con, $xSQL);
 
 										foreach ($dataicono as $data){
 											$xIcono = $data["icono"];
 										}
 
 										if($menuid  == $menurow["MenuId"]){
-											$xActiveHere = 'here show';
-											file_put_contents('log_seguimiento.txt', $xActiveHere . "\n\n", FILE_APPEND);
+											$xActiveHere = 'here show';											
 										}else{
 											$xActiveHere = '';
 										}
@@ -110,13 +94,11 @@
 											echo "</span>";
 											echo "<div class='menu-sub menu-sub-accordion menu-active-bg'>";
 												
-												$xSql = "SELECT mnt.menu_id AS MenuId,tar.tare_nombre AS SubMenu,tar.tare_ruta AS Pagina ";
-												$xSql .= "FROM `expert_menu_tarea` mnt, `expert_tarea` tar ";
-												$xSql .= "WHERE mnt.menu_id=" . $menurow["MenuId"] . " AND mnt.tare_id=tar.tare_id ";
-												$xSql .= "AND tar.tare_estado='A' ORDER BY tar.tare_orden";
-
-												$all_submenu = mysqli_query($con, $xSql);
-
+												$xSQL = "SELECT mnt.menu_id AS MenuId,tar.tare_nombre AS SubMenu,tar.tare_ruta AS Pagina ";
+												$xSQL .= "FROM `expert_menu_tarea` mnt, `expert_perfil_menu_tarea` pmt, `expert_tarea` tar ";
+												$xSQL .= "WHERE mnt.menu_id=" . $menurow["MenuId"] . " AND pmt.meta_id=mnt.meta_id AND pmt.perf_id=$xPerfilid AND mnt.tare_id=tar.tare_id ";
+												$xSQL .= "AND tar.tare_estado='A' AND pmt.meta_estado='A' ORDER BY tar.tare_orden";
+												$all_submenu = mysqli_query($con, $xSQL);
 
 												foreach ($all_submenu as $submenu){
 													$xPagina = $submenu["Pagina"];
@@ -146,7 +128,7 @@
 							?>
 
 						<?php
-							if($xPerfilName == 'Super Administrador' and $yPaisid == -1 ) { ?>
+							if($xPerfilName == 'Super Administrador' and $xPerfilid == 1 ) { ?>
 
 								<div data-kt-menu-trigger="click" class="menu-item <?php if($menuid == '0'){echo 'here show';} ?>  menu-accordion mb-1">
 									<span class="menu-link">

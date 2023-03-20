@@ -16,16 +16,15 @@
     //$xServidor = $_SERVER['HTTP_HOST'];
     
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
-    //$xFecha = strftime("%Y-%m-%d %H:%M:%S", time()); 
-    $xDisabledEdit = "";
-
+    $menuid = $_GET['menuid'] ;
+    
     $idperfil = $_POST['idperfil'];
 
     @session_start();
 
-	$yUsuaid = $_SESSION["i_usuaid"];
-    $yPaisid = $_SESSION["i_paisid"];
-    $yEmprid = $_SESSION["i_emprid"];    
+	$xUsuaid = $_SESSION["i_usuaid"];
+    $xPaisid = $_SESSION["i_paisid"];
+    $xEmprid = $_SESSION["i_emprid"];    
     
     @session_start();
 
@@ -39,25 +38,35 @@
         exit();
     }
     
-    $xSql = "SELECT per.perf_descripcion AS Perfil,per.perf_observacion AS Observacion, CASE per.perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
-    $xSql .= "FROM `expert_perfil` per WHERE perf_id=$idperfil AND empr_id=$yEmprid";
-    $all_datos = mysqli_query($con, $xSql);
+    $xSQL = "SELECT per.perf_descripcion AS Perfil,per.perf_observacion AS Observacion, CASE per.perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
+    $xSQL .= "FROM `expert_perfil` per WHERE perf_id=$idperfil AND empr_id=$xEmprid";
+    $all_datos = mysqli_query($con, $xSQL);
     foreach ($all_datos as $datperfil){
         $xPerfil = $datperfil["Perfil"];
         $xObservacion = $datperfil["Observacion"];
         $xEstado = $datperfil["Estado"];
     }    
 
-    $xSql = "SELECT mta.meta_id AS MentId,men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'NO' AS Ckeck,";
-	$xSql .= "men.menu_orden AS OrdenMenu,tar.tare_orden AS OrdenTarea FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id ";
-    $xSql .= "INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id WHERE men.empr_id=$yEmprid AND men.menu_estado='A' AND tar.tare_estado='A' AND mta.meta_id NOT IN ";
-	$xSql .= "(SELECT pmt.meta_id FROM `expert_perfil_menu_tarea` pmt WHERE pmt.perf_id=$idperfil AND pmt.empr_id=1) UNION SELECT mta.meta_id AS MentId,";
-	$xSql .= "men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'SI' AS Ckeck,men.menu_orden AS OrdenMenu,tar.tare_orden AS OrdenTarea ";
-	$xSql .= "FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id ";
-    $xSql .= "INNER JOIN `expert_perfil_menu_tarea` pmt ON mta.meta_id=pmt.meta_id WHERE pmt.empr_id=$yEmprid AND pmt.perf_id=$idperfil AND men.menu_estado= 'A' AND tar.tare_estado= 'A' ";
-    $xSql .= "ORDER BY OrdenMenu,OrdenTarea;";
+    /*$xSQL = "SELECT mta.meta_id AS MentId,men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'NO' AS Ckeck,";
+	$xSQL .= "men.menu_orden AS OrdenMenu,tar.tare_orden AS OrdenTarea FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id ";
+    $xSQL .= "INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id WHERE men.empr_id=$xEmprid AND men.menu_estado='A' AND tar.tare_estado='A' AND mta.meta_id NOT IN ";
+	$xSQL .= "(SELECT pmt.meta_id FROM `expert_perfil_menu_tarea` pmt WHERE pmt.perf_id=$idperfil AND pmt.empr_id=1) UNION SELECT mta.meta_id AS MentId,";
+	$xSQL .= "men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'SI' AS Ckeck,men.menu_orden AS OrdenMenu,tar.tare_orden AS OrdenTarea ";
+	$xSQL .= "FROM `expert_menu` men INNER JOIN `expert_menu_tarea` mta ON men.menu_id=mta.menu_id INNER JOIN `expert_tarea` tar ON mta.tare_id=tar.tare_id ";
+    $xSQL .= "INNER JOIN `expert_perfil_menu_tarea` pmt ON mta.meta_id=pmt.meta_id WHERE pmt.empr_id=$xEmprid AND pmt.perf_id=$idperfil AND men.menu_estado= 'A' AND tar.tare_estado= 'A' ";
+    $xSQL .= "ORDER BY OrdenMenu,OrdenTarea;";*/
 
-    $all_perfiles = mysqli_query($con, $xSql);
+    $xSQL = "SELECT mta.meta_id AS MentId,men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'NO' AS Ckeck,men.menu_orden AS OrdenMenu,tar.tare_orden AS OrdenTarea ";
+    $xSQL .= "FROM `expert_menu` men, `expert_menu_tarea` mta, `expert_perfil_menu_tarea` pmt, `expert_tarea` tar ";
+    $xSQL .= "WHERE men.menu_id=mta.menu_id AND mta.meta_id=pmt.meta_id AND pmt.perf_id=$idperfil AND mta.tare_id=tar.tare_id "; 
+    $xSQL .= "AND men.empr_id=$xEmprid AND men.menu_estado='A' AND tar.tare_estado='A' ";
+    $xSQL .= "AND mta.meta_id NOT IN (SELECT pmt.meta_id FROM `expert_perfil_menu_tarea` pmt WHERE pmt.perf_id=$idperfil AND pmt.meta_estado='A' AND pmt.empr_id=$xEmprid) ";
+    $xSQL .= "UNION SELECT mta.meta_id AS MentId,men.menu_descripcion AS Menu,tar.tare_nombre AS Tarea,'Activo' AS Estado,'SI' AS Ckeck,men.menu_orden AS OrdenMenu,tar.tare_orden AS OrdenTarea ";
+    $xSQL .= "FROM `expert_menu` men, `expert_menu_tarea` mta, `expert_perfil_menu_tarea` pmt, `expert_tarea` tar ";
+    $xSQL .= "WHERE men.menu_id=mta.menu_id AND mta.meta_id=pmt.meta_id AND pmt.perf_id=$idperfil AND mta.tare_id=tar.tare_id ";
+    $xSQL .= "AND men.empr_id=$xEmprid AND men.menu_estado='A' AND tar.tare_estado='A' AND pmt.meta_estado='A' ORDER BY OrdenMenu,OrdenTarea ";    
+
+    $all_perfiles = mysqli_query($con, $xSQL);
 	
 ?>	
 
@@ -100,7 +109,7 @@
                                 <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel"> 
                                         <div class="card-header"> 
                                             <div class="card-toolbar">
-                                                <button type="button" id="btnGuardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $idperfil; ?>,<?php echo $yUsuaid; ?>)"><i class="las la-save"></i>Guardar</button>
+                                                <button type="button" id="btnGuardar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $idperfil; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-save"></i>Guardar</button>
                                             </div>
                                         </div>
 
@@ -200,7 +209,7 @@
                                                         <td style="text-align:center">
                                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                                 <input class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $perfil['MentId']; ?>" <?php if ($perfil['Ckeck'] == 'SI') {
-                                                                     echo "checked='checked'"; } ?> onchange="f_Perfil(<?php echo $idperfil; ?>, <?php echo $perfil['MentId']; ?>, <?php echo $yEmprid; ?>)" />
+                                                                     echo "checked='checked'"; } ?> onchange="f_Perfil(<?php echo $xPaisid; ?>, <?php echo $idperfil; ?>, <?php echo $perfil['MentId']; ?>, <?php echo $xEmprid; ?>)" />
                                                             </div>
                                                         </td>       
 
@@ -258,7 +267,7 @@
                 //     }                    
                 // }
 
-                function f_Perfil(_idperfil, _idmeta, _emprid){
+                function f_Perfil(_paisid,_idperfil, _idmeta, _emprid){
                     let _check = $("#chk" + _idmeta).is(":checked");
                     let _tipo = "";
 
@@ -269,6 +278,7 @@
                     }
 
                     $parametros = {
+                        xxPaisid: _paisid,
                         xxIdPerfil: _idperfil,
                         xxIdMeta: _idmeta,
                         xxEmprid: _emprid,
@@ -277,13 +287,14 @@
 
                     var xrespuesta = $.post("codephp/delnew_perfil.php", $parametros);
                     xrespuesta.done(function(response){
-                        console.log(response);
+                        //console.log(response);
 
                     });
 
                 }
 
-                function f_Guardar(_emprid, _idperfil, _userid){
+                function f_Guardar(_paisid, _emprid, _idperfil, _userid){
+                    
                     _perfil = $.trim($("#txtPerfil").val());
                     _observacion = $.trim($("#txtDescripcion").val());
 
@@ -294,7 +305,6 @@
                     }
 
                     var _contar = 0;
-                    var _continuar = true;
 
                     var grid = document.getElementById("kt_ecommerce_report_shipping_table");
                     var checkBoxes = grid.getElementsByTagName("input");
@@ -312,6 +322,7 @@
                     if(_perfil != _nameoldperfil){
 
                         $parametros = {
+                            xxPaisid: _paisid,
                             xxPerfil: _perfil,
                             xxEmprid: _emprid
                         }      
@@ -319,43 +330,62 @@
                         var xrespuesta = $.post("codephp/consultar_perfil.php", $parametros);
                         xrespuesta.done(function(response){
                             if(response == 0){
-                                _continuar = true;
+
+                                $datosperfil = {
+                                    xxPaisid: _paisid,
+                                    xxPerfil: _perfil,
+                                    xxEmprid: _emprid,
+                                    xxIdPerfil: _idperfil,
+                                    xxUserid: _userid,
+                                    xxObservacion: _observacion
+                                }
+
+                                $.post("codephp/update_perfil.php", $datosperfil, function(response){
+                                    
+                                    if(response.trim() == 'OK'){
+                                       $.redirect('?page=seg_perfiladmin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito..!'}); 
+                                       _detalle = 'Perfil actualizado con exito';
+                                    }else{
+                                       _detalle = 'Error al actualizar perfil';
+                                    }
+                                   
+                                   /**PARA CREAR REGISTRO DE LOGS */
+                                    $parametros = {
+                                        xxPaisid: _paisid,
+                                        xxEmprid: _emprid,
+                                        xxUsuaid: _usuaid,
+                                        xxDetalle: _detalle,
+                                    }					
+        
+                                    $.post("codephp/new_log.php", $parametros, function(response){
+                                        //console.log(response);
+                                    });                                
+                                    
+                                });                                 
+
+                                // $.ajax({
+                                //     url: "codephp/update_perfil.php",
+                                //     type: "POST",
+                                //     dataType: "json",
+                                //     data: $datosperfil,          
+                                //     success: function(data){ 
+                                //         console.log(data);
+                                //         if(data == 'OK'){
+                                //             $.redirect('?page=seg_perfiladmin', {'mensaje': 'Guardado con Exito..!'}); 
+                                //         }                                                                         
+                                //     },
+                                //     error: function (error){
+                                //         console.log(error);
+                                //     }
+                                // }); 
+
                             }else{
                                 mensajesweetalert("center","warning","Nombre del Perfil ya Existe..!",false,1800);
                                 _continuar = false;
                                 return false;
                             }
                         });
-
-                    }
-
-                    if(_continuar){
-    
-                        $datosperfil = {
-                            xxPerfil: _perfil,
-                            xxEmprid: _emprid,
-                            xxIdPerfil: _idperfil,
-                            xxUserid: _userid,
-                            xxObservacion: _observacion
-                        }
-
-                        $.ajax({
-                            url: "codephp/update_perfil.php",
-                            type: "POST",
-                            dataType: "json",
-                            data: $datosperfil,          
-                            success: function(data){ 
-                                console.log(data);
-                                if(data == 'OK'){
-                                    $.redirect('?page=seg_perfiladmin', {'mensaje': 'Guardado con Exito..!'}); 
-                                }                                                                         
-                            },
-                            error: function (error){
-                                console.log(error);
-                            }
-                        }); 
                     }
                 }
-
 
             </script> 

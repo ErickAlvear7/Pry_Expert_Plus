@@ -306,16 +306,7 @@
 									</div>
 									<div id="kt_ecommerce_report_shipping_export" class="d-none"></div>
 								</div>
-								<div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-									<div class="w-150px">
-										<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Estado" data-kt-ecommerce-order-filter="status">
-											<option></option>
-											<option value="all">Todos</option>
-											<option value="Activo">Activo</option>
-											<option value="Inactivo">Inactivo</option>
-										</select>
-									</div>
-								</div>
+
 							</div>
 							<div class="card-body pt-0">
 								<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
@@ -329,7 +320,7 @@
 											<th style="text-align:center;">Opciones</th>
 										</tr>
 									</thead>
-									<tbody class="fw-bold text-gray-600">
+									<tbody class="fw-bold text-gray-600" id="tbody">
 										<?php 
 										
 										foreach($all_tareas as $tareas) { ?>
@@ -721,12 +712,13 @@
 
 				if(_mensaje != ''){
 					//mensajesweetalert("center","success",_mensaje+"..!",false,1800);
-					mensajesalertify(_mensaje+"..!","S","top-center",5);
+					mensajesalertify(_mensaje +"..!", "S", "top-center",5);
 				}
 
 				$("#btnNuevo").click(function(){
 					$("#modal-tarea").modal("show");
 					$(".modal-title").text("Nueva Tarea");
+					$("#btnSave").text("Grabar");
 					$("#frm_datos").trigger("reset");
 					_addmod = 'add';
 					_idtarea = 0;
@@ -756,7 +748,8 @@
 					var _usuaid = "<?php echo $yUsuaid; ?>"
 					var _tarea = $.trim($("#txtTarea").val());
 					var _ruta = $.trim($("#txtRuta").val());
-					var _buscar = 'SI';
+					 _buscar = 'SI';
+					_respuesta = 'OK';
 
 					if(_tarea == ''){                        
 						mensajesweetalert("center","warning","Ingrese Tarea",false,1800);
@@ -774,36 +767,170 @@
 						}else{
 							_buscar = 'NO';
 						}
+						
+						_ulr = "codephp/update_tarea.php";
+					}else{
+						_ulr = "codephp/new_tarea.php";
 					}
+
+					
+					$datosTarea = {
+						xxEmprid: _emprid,
+						xxUsuaid: _usuaid,
+						xxTareaId: _idtarea,
+						xxTarea: _tarea,
+						xxRuta: _ruta
+					}	
+
 					
 					if(_buscar == 'SI'){
 						var xrespuesta = $.post("codephp/consultar_tarea.php", { xxTarea: _tarea, xxEmprid: _emprid });
 						xrespuesta.done(function(response){							
-							if(response == '0'){
-								funGrabar(_paisid,_emprid,_usuaid,_tarea,_ruta);
+							if(response == 0){
+
+								$.post(_ulr, $datosTarea , function(data){
+
+									var _tareaid = data;
+
+									if(_tareaid != 0){
+										var _estado = '<td><div class="badge badge-light-primary">Activo</div>' ;
+
+										var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+											'<input class="form-check-input btnEstado" type="checkbox" checked id="chk' + _tareaid + ' value="' + _tareaid + '" onchange="f_UpdateEstado(' + _tareaid + ',' + _emprid + ')"' + '/></div></td>';								
+
+										var _btnedit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar' + _tareaid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Tarea" >' + 
+											'<i class="fa fa-edit"></i></button></div></div></td>';
+
+										TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+
+										if(_addmod == 'add'){
+											//TableData.column(0).visible(0);
+											TableData.row.add([_tareaid, _tarea, _ruta, _estado, _btnchk, _btnedit]).draw();
+											
+											/*var tbl = document.getElementById("tbody");
+											tbl.innerHTML += '<tr><td style="display:none;">' + _tareaid + '</td>' + 
+															'<td>' + _tarea + '</td>' + '<td>' + _ruta + '</td>' + _estado + _btnchk + _btnedit;*/
+
+											_detalle = 'Crear Nueva Tarea';
+											_mensaje = 'Grabado con Exito';
+										}
+										else{
+											TableData.row(_fila).data([_tareaid, _tarea, _ruta, _estado, _btnchk, _btnedit]).draw();
+											_detalle = 'Modificar Tarea';
+											_mensaje = 'Actualizado con Exito';
+										} 
+									}else{
+										//console.log('Error encontrado en sentecia SQL');
+										_detalle = 'Error encontrado en sentecia SQL';
+										_respuesta = 'ERR';
+									}
+
+									/**PARA CREAR REGISTRO DE LOGS */
+									/*$parametros = {
+										xxPaisid: _paisid,
+										xxEmprid: _emprid,
+										xxUsuaid: _usuaid,
+										xxDetalle: _detalle,
+									}					
+
+									$.post("codephp/new_log.php", $parametros, function(response){
+									});*/ 
+
+									if(_respuesta == 'OK'){
+										mensajesweetalert("center", "success", _mensaje, false, 1800);
+										
+										if(_addmod == 'add'){
+											$.redirect('?page=suptarea&menuid=0'); 
+										}else{
+											$("#modal-tarea").modal("hide");
+										}
+									}
+
+								});	
+
+								//funGrabar(_paisid,_emprid,_usuaid,_tarea,_ruta);
 							}else{								
 								mensajesweetalert("center","warning","Tarea ya Existe..!",false,1800);
 							}
 						});						
 					}else{
-						funGrabar(_paisid,_emprid,_usuaid,_tarea,_ruta);
+
+						$.post(_ulr, $datosTarea , function(data){
+
+							var _tareaid = data;
+
+							if(_tareaid != 0){
+								var _estado = '<td><div class="badge badge-light-primary">Activo</div>' ;
+
+								var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+									'<input class="form-check-input btnEstado" type="checkbox" checked id="chk' + _tareaid + ' value="' + _tareaid + '" onchange="f_UpdateEstado(' + _tareaid + ',' + _emprid + ')"' + '/></div></td>';								
+
+								var _btnedit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar' + _tareaid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Tarea" >' + 
+									'<i class="fa fa-edit"></i></button></div></div></td>';
+
+								TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+
+								if(_addmod == 'add'){
+									//TableData.column(0).visible(0);
+									TableData.row.add([_tareaid, _tarea, _ruta, _estado, _btnchk, _btnedit]).draw();
+
+									_detalle = 'Crear Nueva Tarea';
+									_mensaje = 'Grabado con Exito';
+								}
+								else{
+									TableData.row(_fila).data([_tareaid, _tarea, _ruta, _estado, _btnchk, _btnedit]).draw();
+									_detalle = 'Modificar Tarea';
+									_mensaje = 'Actualizado con Exito';
+								} 
+							}else{
+								//console.log('Error encontrado en sentecia SQL');
+								_detalle = 'Error encontrado en sentecia SQL';
+								_respuesta = 'ERR';
+							}
+
+
+							/**PARA CREAR REGISTRO DE LOGS */
+							/*$parametros = {
+								xxPaisid: _paisid,
+								xxEmprid: _emprid,
+								xxUsuaid: _usuaid,
+								xxDetalle: _detalle,
+							}					
+
+							$.post("codephp/new_log.php", $parametros, function(response){
+							});*/ 
+
+							if(_respuesta == 'OK'){
+								mensajesweetalert("center", "success", _mensaje, false, 1800);
+								
+								if(_addmod == 'add'){
+									$.redirect('?page=suptarea&menuid=0'); 
+								}else{
+									$("#modal-tarea").modal("hide");	
+								}																			
+							}							
+
+						});	
+
+						//funGrabar(_paisid, _emprid, _usuaid, _tarea, _ruta);
 					}
 				});
 
-				$(document).on("click",".btnEstado",function(e){
+			});
+
+			$(document).on("click",".btnEstado",function(e){
+					//debugger;
 					_fila = $(this).closest("tr");
 					_tarea = $(this).closest("tr").find('td:eq(1)').text();  
 					_ruta = $(this).closest("tr").find('td:eq(2)').text(); 					
-				});
-				
-			});
+			});			
 
 			function f_UpdateEstado(_tareaid, _emprid){
 
 				var _paisid = "<?php echo $yPaisid; ?>"
 				var _emprid = "<?php echo $xEmprid; ?>"
 				var _usuaid = "<?php echo $yUsuaid; ?>"
-				
+
 				let _check = $("#chk" + _tareaid).is(":checked");
 				let _checked = "";
 				let _disabled = "";
@@ -823,18 +950,18 @@
 
 				var _lblEstado = '<td><div class="' + _class + '">' + _estado + ' </div>';
 
-				var _btnedit = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + 
-							'id="btnEditar"' +_tareaid + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Tarea">' +
-							'<i class="fa fa-edit"></i></button></div></div></td>';
-
 				var _btnchk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
 							'<input class="form-check-input btnEstado" type="checkbox" ' + ' id="chk' + _tareaid + '"' +
 							' ' + _checked + ' value="' + _tareaid + '" onchange="f_UpdateEstado(' +_tareaid  + ',' + _emprid + ')"/>' +
 							'</div></div></td>';
 
+				var _btnedit = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + 
+							' id="btnEditar' + _tareaid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Tarea">' +
+							'<i class="fa fa-edit"></i></button></div></div></td>';
+
 				TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
 
-				TableData.row(_fila).data([_tareaid, _tarea, _ruta, _lblEstado, _btnedit, _btnchk]).draw();
+				TableData.row(_fila).data([_tareaid, _tarea, _ruta, _lblEstado, _btnchk, _btnedit]).draw();			
 
 				$parametros = {
 					xxEmprid: _emprid,
@@ -857,116 +984,6 @@
 
 				});
 			}			
-
-			function funGrabar(_paisid,_emprid,_usuaid,_tarea,_ruta){
-
-				var _respuesta = 'OK';
-
-				if(_addmod == 'add'){
-					_ulr = "codephp/new_tarea.php";
-				}else{
-					_ulr = "codephp/update_tarea.php";
-				}
-				
-				$parametros = {
-					xxEmprid: _emprid,
-					xxUsuaid: _usuaid,
-					xxTareaId: _idtarea,
-					xxTarea: _tarea,
-					xxRuta: _ruta
-				}				
-
-				$.post(_ulr, $parametros , function(data){
-
-					var _tareaid = data;
-
-					if(_tareaid != 0){
-						var _estado = '<td><div class="badge badge-light-primary">Activo</div>' ;
-
-						var _btnedit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar' + _tareaid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Tarea" >' + 
-							'<i class="fa fa-edit"></i></button></div></div></td>';
-
-						var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-									'<input class="form-check-input btnEstado" type="checkbox" id="chk' + _tareaid + '" checked onchange="f_Check(' +
-									_emprid + ',' + _tareaid + ')"' + ' value="' + _tareaid + '" onclick="f_UpdateEstado(' + _tareaid + ',' + _emprid + ')"' + '/></div></td>';	
-									
-						TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
-
-						TableData.column(0).visible(0);
-							
-						if(_addmod == 'add'){
-							TableData.row.add([_tareaid, _tarea, _ruta, _estado, _btnedit, _btnchk]).draw();
-							_detalle = 'Crear Nueva Tarea';
-						}
-						else{
-							TableData.row(_fila).data([_tareaid, _tarea, _ruta, _estado, _btnedit, _btnchk]).draw();
-							_detalle = 'Modificar Tarea';
-						} 
-					}else{
-						//console.log('Error encontrado en sentecia SQL');
-						_detalle = 'Error encontrado en sentecia SQL';
-						_respuesta = 'ERR';
-					}
-
-					$("#modal-tarea").modal("hide");
-
-					if(_respuesta == 'OK'){
-						mensajesweetalert("center","success","Grabado con Exito..!",false,1800);
-					}
-					
-					/**PARA CREAR REGISTRO DE LOGS */
-					$parametros = {
-						xxPaisid: _paisid,
-						xxEmprid: _emprid,
-						xxUsuaid: _usuaid,
-						xxDetalle: _detalle,
-					}					
-
-                    $.post("codephp/new_log.php", $parametros, function(response){
-                        //console.log(response);
-                    }); 
-
-				});	
-
-				// $.ajax({
-				// 	url: _ulr,
-				// 	type: "POST",
-				// 	dataType: "json",
-				// 	data: $parametros,          
-				// 	success: function(data){ 
-				// 		if(data != 0){
-
-				// 			_tareaid = data;										
-
-				// 			var _estado = '<td><div class="badge badge-light-primary">Activo</div>' ;
-
-				// 			var _btnedit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar' + _tareaid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Tarea" >' + 
-				// 				'<i class="fa fa-edit"></i></button></div></div></td>';
-
-				// 			var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-				// 						'<input class="form-check-input btnEstado" type="checkbox" id="chk' + _tareaid + '" checked onchange="f_Check(' +
-				// 						_emprid + ',' + _tareaid + ')"' + ' value="' + _tareaid + '"' + '/></div></td>';	
-										
-				// 			TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
-
-				// 			TableData.column(0).visible(0);
-								
-				// 			if(_addmod == 'add'){
-				// 				TableData.row.add([_tareaid, _tarea, _ruta, _estado, _btnedit, _btnchk]).draw();
-				// 			}
-				// 			else{
-				// 				TableData.row(_fila).data([_tareaid, _tarea, _ruta, _estado, _btnedit, _btnchk]).draw();
-				// 			} 
-
-				// 			$("#modal-tarea").modal("hide");									
-
-				// 		}                                                                         
-				// 	},
-				// 	error: function (error){
-				// 		console.log(error);
-				// 	}                            
-				// });				
-			}
 
 			$("#modal-tarea").draggable({
 					handle: ".modal-header"
