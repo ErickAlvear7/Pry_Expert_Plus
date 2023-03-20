@@ -34,7 +34,7 @@
 	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
 
     $xSQL = "SELECT per.perf_id AS Id,per.perf_descripcion AS Perfil,per.perf_observacion AS Descripcion,CASE per.perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, (SELECT pai.pais_nombre FROM `expert_pais` pai WHERE pai.pais_id=per.pais_id) AS Pais ";
-    $xSQL .= "FROM `expert_perfil` per WHERE per.empr_id=$xEmprid";
+    $xSQL .= "FROM `expert_perfil` per WHERE per.empr_id=$xEmprid AND per.pais_id>0 ";
 
     $all_perfiles = mysqli_query($con, $xSQL);
     foreach ($all_perfiles as $perfil){
