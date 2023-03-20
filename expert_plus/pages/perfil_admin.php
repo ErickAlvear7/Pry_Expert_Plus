@@ -102,10 +102,15 @@
                             <?php
                             
 								$xDisabledEdit = '';
+								$xDisabledChk = '';
 
                                 if ($perfil['Estado'] == 'Inactivo') {
                                     $xDisabledEdit = 'disabled';
                                 }
+
+								if($perfil['Perfil'] == 'Administrador'){
+									$xDisabledChk = 'disabled';
+								}
 
 								if($perfil['Estado'] == 'Activo'){
 									$xTextColor = 'badge badge-light-primary';
@@ -121,7 +126,7 @@
 								</td>								
                                 <td style="text-align:center">
 									<div class="form-check form-check-sm form-check-custom form-check-solid">
-										<input class="form-check-input btnEstado" type="checkbox" id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
+										<input class="form-check-input btnEstado" type="checkbox" <?php echo $xDisabledChk; ?> id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
 											echo "checked='checked'";} else {'';} ?> onchange="f_Check(<?php echo $xEmprid; ?>,<?php echo $perfil['Id']; ?>)" value="<?php echo $perfil['Id']; ?>" />
 									</div>
                                 </td>

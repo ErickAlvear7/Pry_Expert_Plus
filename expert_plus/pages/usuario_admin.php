@@ -115,7 +115,7 @@
 							$xTextColor = "badge badge-light-danger";
 						}
 
-						if($perfil == 'Administrador'){
+						if($perfil == 'Administrador' and $usuario == 'Administrador Sistema'){
 							$chkEstado = 'disabled';
 							$xDisabledEdit = 'disabled';
 							$xDisabledReset = 'disabled';
@@ -685,9 +685,9 @@
 		//resetaer password
 		function f_ResetPass(_usuaid, _emprid){
 
-			$parametros ={
-				xxUsuId: _usuaid,
-				xxEmprId: _emprid
+			$parametros = {
+				xxUsuaid: _usuaid,
+				xxEmprid: _emprid
 			}
 
 			$.post("codephp/reset_password.php", $parametros, function(response){
