@@ -53,11 +53,8 @@ var KTUsersList = function () {
             "info": false,
             'order': [],
             "pageLength": 10,
-            "lengthChange": false,
-            'columnDefs': [
-                { orderable: false, targets: 0 }, // Disable ordering on column 0 (checkbox)
-                { orderable: false, targets: 6 }, // Disable ordering on column 6 (actions)                
-            ]
+            "lengthChange": false
+            
         });
 
         // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
@@ -282,9 +279,9 @@ var KTUsersList = function () {
 
         // Toggle toolbars
         if (checkedState) {
-            selectedCount.innerHTML = count;
-            toolbarBase.classList.add('d-none');
-            toolbarSelected.classList.remove('d-none');
+            // selectedCount.innerHTML = count;
+            // toolbarBase.classList.add('d-none');
+            // toolbarSelected.classList.remove('d-none');
         } else {
             toolbarBase.classList.remove('d-none');
             toolbarSelected.classList.add('d-none');

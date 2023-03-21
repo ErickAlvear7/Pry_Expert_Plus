@@ -1,4 +1,3 @@
-
 <?php
 	//error_reporting(E_ALL);
     ini_set('display_errors', 0);
@@ -186,23 +185,23 @@
                                     $estado = $usu['Estado'];
                                     $usuario = $usu['Nombres'];
                                 ?>
-                                <?php 
+                                    <?php 
 
-                                    $cheking = '';
-                                    $chkEstado = '';
-                                    $xDisabledEdit = '';
-                                    $xDisabledReset = '';
+                                        $cheking = '';
+                                        $chkEstado = '';
+                                        $xDisabledEdit = '';
+                                        $xDisabledReset = '';
 
-                                    if($estado == 'Activo'){
-                                        $cheking = 'checked="checked"';
-                                        $xTextColor = "badge badge-light-primary";
-                                    }else{
-                                        $xTextColor = "badge badge-light-danger";
-                                        $xDisabledEdit = 'disabled';
-                                        $xDisabledReset = 'disabled';
-                                    }
+                                        if($estado == 'Activo'){
+                                            $cheking = 'checked="checked"';
+                                            $xTextColor = "badge badge-light-primary";
+                                        }else{
+                                            $xTextColor = "badge badge-light-danger";
+                                            $xDisabledEdit = 'disabled';
+                                            $xDisabledReset = 'disabled';
+                                        }
 
-                                ?>
+                                    ?>
                                 <tr>
                                     <td style="display:none;"><?php echo $usu['Idusuario'] ?></td>
                                     <td><?php echo $usu['Nombres']; ?></td>
