@@ -128,11 +128,15 @@ License: For each use you must have a valid license purchased only from above li
 
 		<script>var hostUrl = "assets/";</script>
 
+		<!--PARA TODAS LAS PAGINAS-->
 		<script src="assets/plugins/global/plugins.bundle.js"></script>
 		<script src="assets/js/scripts.bundle.js"></script>
 
 		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 		<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+
+        <script src="assets/js/custom/apps/user-management/users/list/table.js"></script>
+		
         <script src="assets/js/custom/apps/ecommerce/customers/listing/listing.js"></script>
 		<script src="assets/js/custom/apps/contacts/edit-contact.js"></script>
 		<script src="assets/js/custom/apps/ecommerce/reports/shipping/shipping.js"></script>
@@ -142,19 +146,20 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="assets/js/custom/intro.js"></script>
 		<script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script>
 		<script src="assets/js/custom/utilities/modals/users-search.js"></script>
+
+		<!--JS ADICIONALES-->
 		<script src="assets/sweetalert2/js/sweetalert2.min.js"></script>
 		<script src="assets/alertify/js/alertify.min.js"></script>
-		<script src="assets/redirect/js/redirect.js"></script>
-		
+		<script src="assets/redirect/js/redirect.js"></script>		
 		<script src="assets/js/funciones.js"></script>
 
+		<?php if($page == 'supusuario') { ?>
+
+			<script src="assets/js/custom/apps/user-management/users/list/add.js"></script>
+		
+		<?php } ?>
+		
 	</body>
 	<!--end::Body-->
 </html>
 
-
-    <script>
-        $(document).ready(function(){
-            
-        });
-    </script>
