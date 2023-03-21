@@ -436,7 +436,7 @@
                 xrespuesta.done(function(response){
                     if(response == 0){
 
-                        debugger;
+                        //debugger;
 
                         $parametros ={
                             xxPaisId: _idpais,

@@ -258,6 +258,105 @@
 <script>
     var _idpaca,_idpade;
 
+    $(document).ready(function(){
+
+   
+
+
+    });
+
+    $('#btnAgregar').click(function(){
+
+        var _estado = 'A';
+        var _pacaid = '<?php echo $idpaca; ?>'
+
+        if($.trim($('#txtDetalle').val()).length == 0)
+        {           
+            mensajesweetalert("center","warning","Ingrese Detalle",false,1800);
+            return false;
+        }
+
+        if($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0 )
+        {    
+            mensajesweetalert("center","warning","Ingrese Valor Texto o Valor Entero..!",false,1800);        
+            return false;
+        }
+
+        if($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0 )
+        {    
+            mensajesweetalert("center","warning","Ingrese Solo Valor Texto o Valor Entero..!",false,1800);         
+            return false;
+        }
+
+        var _detalle = $.trim($('#txtDetalle').val());
+        var _valorV =  $.trim($('#txtValorV').val());
+
+        if($.trim($('#txtValorI').val()).length == 0){
+            var _valorI = 0;
+        }else{
+            _valorI = $.trim($('#txtValorI').val());
+        }
+
+                 $datosDetalle ={
+                    xxPacaId: _pacaid,
+                    xxDetalle: _detalle,
+                    xxValorV: _valorV
+                }
+
+                var xrespuesta = $.post("codephp/consultar_detalle.php", $datosDetalle);
+                xrespuesta.done(function(response){
+                    if(response == 0){
+
+                       // debugger;
+
+                        $parametros ={
+                            xxPacaId: _pacaid,
+                            xxDetalle: _detalle,
+                            xxValorV: _valorV,
+                            xxValorI: _valorI,
+                            xxEstado: _estado
+                         
+                        }
+
+                        $.ajax({
+							url: "codephp/grabar_detalle.php",
+							type: "POST",
+							dataType: "json",
+							data: $parametros,          
+							success: function(response){ 
+								if(response != 0){
+
+								           
+                                    _padeid = response;
+                                    _padenom = _detalle;
+                                    _padev = _valorV;
+                                    _padei = _valorI;
+                                    _checked = "checked='checked'";
+									
+							
+
+								}                                                                         
+							},
+							error: function (error){
+								console.log(error);
+							}                            
+						});
+
+                       
+
+
+
+                    }else{
+
+                        mensajesweetalert("center","warning","Nombre Detalle ya Existe y/o Valor Texto..!",false,1800);
+                    }
+
+                });
+        
+    });
+
+
+
     function f_Pade(_idpaca,_idpade){
         alert('aki');
 
