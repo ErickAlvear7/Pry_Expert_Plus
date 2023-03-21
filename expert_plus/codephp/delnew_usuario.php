@@ -11,17 +11,17 @@
     
     $xresultado = "ERR";  
 
-    if(isset($_POST['xxUsuId']) and isset($_POST['xxEmpr']) and isset($_POST['xxEstado']) ){
-        if(isset($_POST['xxUsuId']) <> '' and isset($_POST['xxEmpr']) <> '' and isset($_POST['xxEstado']) <> ''){  
+    if(isset($_POST['xxUsuaid']) and isset($_POST['xxEmprid']) and isset($_POST['xxEstado']) ){
+        if(isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxEstado']) <> ''){  
             
-            $yUsuId = $_POST['xxUsuId'];
-            $yEmprId = $_POST['xxEmpr'];
+            $xUsuaid = $_POST['xxUsuaid'];
+            $xEmprid = $_POST['xxEmprid'];
             $xEstado = $_POST['xxEstado'];
 
             if($xEstado == 'Activo'){
-                $xSql = "UPDATE `expert_usuarios` SET usua_estado='A' WHERE empr_id=$yEmprId AND usua_id=$yUsuId";
+                $xSql = "UPDATE `expert_usuarios` SET usua_estado='A' WHERE empr_id=$xEmprid AND usua_id=$xUsuaid";
             }else if($xEstado == 'Inactivo'){
-                $xSql = "UPDATE `expert_usuarios` SET usua_estado='I' WHERE empr_id=$yEmprId AND usua_id=$yUsuId";
+                $xSql = "UPDATE `expert_usuarios` SET usua_estado='I' WHERE empr_id=$xEmprid AND usua_id=$xUsuaid";
             }
 
             if(mysqli_query($con, $xSql)){

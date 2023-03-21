@@ -16,8 +16,6 @@
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
     $menuid = $_GET['menuid'] ;
     
-    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());    
-
     @session_start();
 
     if(isset($_SESSION["s_usuario"])){
@@ -30,9 +28,9 @@
         exit();
     }
 
-	$xUsuaid = $_SESSION["i_usuaid"];
     $xPaisid = $_SESSION["i_paisid"];
-    $xEmprid = $_SESSION["i_emprid"];
+    $xEmprid = $_SESSION["i_emprid"];	
+	$xUsuaid = $_SESSION["i_usuaid"];
     
 	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
     
@@ -104,10 +102,15 @@
                             <?php
                             
 								$xDisabledEdit = '';
+								$xDisabledChk = '';
 
                                 if ($perfil['Estado'] == 'Inactivo') {
                                     $xDisabledEdit = 'disabled';
                                 }
+
+								if($perfil['Perfil'] == 'Administrador'){
+									$xDisabledChk = 'disabled';
+								}
 
 								if($perfil['Estado'] == 'Activo'){
 									$xTextColor = 'badge badge-light-primary';
@@ -123,7 +126,7 @@
 								</td>								
                                 <td style="text-align:center">
 									<div class="form-check form-check-sm form-check-custom form-check-solid">
-										<input class="form-check-input btnEstado" type="checkbox" id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
+										<input class="form-check-input btnEstado" type="checkbox" <?php echo $xDisabledChk; ?> id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
 											echo "checked='checked'";} else {'';} ?> onchange="f_Check(<?php echo $xEmprid; ?>,<?php echo $perfil['Id']; ?>)" value="<?php echo $perfil['Id']; ?>" />
 									</div>
                                 </td>
@@ -166,7 +169,7 @@
 			});
 
 			function f_Editar(_perfid){
-				$.redirect('?page=editperfil', {'idperfil': _perfid}); //POR METODO POST
+				$.redirect('?page=editperfil&menuid=<?php echo $menuid; ?>', {'idperfil': _perfid}); //POR METODO POST
 			}
 
 			function f_Check(_emprid, _perfid){
@@ -177,9 +180,6 @@
 				let _checked = "";
 				let _disabled = "";
 				let _classes = "badge badge-light-primary";
-
-				//alert(_perfil);
-				//alert(_descripcion);
 
 				if(_check){
 					//$("#"+_div).removeClass("badge badge-light-danger");
@@ -198,8 +198,6 @@
 					_classes = "badge badge-light-danger";
 				}
 
-				// var _tdperfil = '<td>' + _perfil + '</td>';
-
 				 var _estado = '<td><div class="' + _classes + '">' + _tipo + ' </div>' ;
 
 				 var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
@@ -209,11 +207,6 @@
 				 var _boton = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + ' onclick="f_Editar(' + _perfid + ')" ' +
 				 			'id="btnEdit' + _perfid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Editar Perfil" >' + 
 				 			'<i class="fa fa-edit"></i></button></div></div></td>';
-
-				// console.log(_tdperfil);
-				// console.log(_boton);
-				// console.log(_estado);
-				// console.log(_btnchk);
 
 				TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
 

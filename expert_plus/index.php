@@ -5,7 +5,10 @@
 
     putenv("TZ=America/Guayaquil");
     date_default_timezone_set('America/Guayaquil');	
-
+    
+    $page = isset($_GET['page']) ? $_GET['page'] : "index";
+    
+    //file_put_contents('log_seguimiento.txt', $page . "\n\n", FILE_APPEND);
 
 	@session_start();
 
@@ -19,16 +22,16 @@
         exit();
     }
 
-	$yUsuaid = $_SESSION["i_usuaid"];	
-    $yPaisid = $_SESSION["i_paisid"];	
-    $yEmprid = $_SESSION["i_emprid"];	
+	$xUsuaid = $_SESSION["i_usuaid"];	
+    $xPaisid = $_SESSION["i_paisid"];	
+    $xEmprid = $_SESSION["i_emprid"];	
 
 	$mode = 'dark';
 	require_once("./dbcon/config.php");
-
+	
 	$log_file = "error_conexion";
 
-	$xSQL = "SELECT * FROM `expert_parametro_paginas` WHERE empr_id=$yEmprid AND usua_id=$yUsuaid AND estado='A'";
+	$xSQL = "SELECT * FROM `expert_parametro_paginas` WHERE empr_id=$xEmprid AND usua_id=$xUsuaid AND estado='A'";
 	$all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));	
 
 	if(mysqli_num_rows($all_datos)>0) {
@@ -36,6 +39,7 @@
 			$mode = $datos['index_content'];
 		}
 	}	
+	
 ?>
 
 
@@ -124,11 +128,15 @@ License: For each use you must have a valid license purchased only from above li
 
 		<script>var hostUrl = "assets/";</script>
 
+		<!--PARA TODAS LAS PAGINAS-->
 		<script src="assets/plugins/global/plugins.bundle.js"></script>
 		<script src="assets/js/scripts.bundle.js"></script>
 
 		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 		<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+
+        <script src="assets/js/custom/apps/user-management/users/list/table.js"></script>
+		
         <script src="assets/js/custom/apps/ecommerce/customers/listing/listing.js"></script>
 		<script src="assets/js/custom/apps/contacts/edit-contact.js"></script>
 		<script src="assets/js/custom/apps/ecommerce/reports/shipping/shipping.js"></script>
@@ -138,12 +146,20 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="assets/js/custom/intro.js"></script>
 		<script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script>
 		<script src="assets/js/custom/utilities/modals/users-search.js"></script>
+
+		<!--JS ADICIONALES-->
 		<script src="assets/sweetalert2/js/sweetalert2.min.js"></script>
 		<script src="assets/alertify/js/alertify.min.js"></script>
-		<script src="assets/redirect/js/redirect.js"></script>
-		
+		<script src="assets/redirect/js/redirect.js"></script>		
 		<script src="assets/js/funciones.js"></script>
 
+		<?php if($page == 'supusuario') { ?>
+
+			<script src="assets/js/custom/apps/user-management/users/list/add.js"></script>
+		
+		<?php } ?>
+		
 	</body>
 	<!--end::Body-->
 </html>
+

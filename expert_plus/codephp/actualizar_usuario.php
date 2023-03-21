@@ -26,7 +26,7 @@
             $xCambiarPass = $_POST['xxCambiarPass'];
 
             $xSQL = "UPDATE `expert_usuarios` SET perf_id=$xPerfilid,pais_id=$xPaisid,usua_nombres='$xNombre',usua_apellidos='$xApellido',";
-            $xSQL .= "usua_login='$xLogin',usua_caducapass='$xCaducaPass',usua_fechacaduca='{$xFechaCaduca}',usua_cambiarpass='$xCambiarPass' WHERE usua_id=$xUsuaid ";
+            $xSQL .= "usua_login=LOWER('$xLogin'),usua_caducapass='$xCaducaPass',usua_fechacaduca='{$xFechaCaduca}',usua_cambiarpass='$xCambiarPass' WHERE usua_id=$xUsuaid ";
             mysqli_query($con, $xSQL);
             
         }

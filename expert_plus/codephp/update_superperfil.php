@@ -20,8 +20,8 @@
             $xIdPerfil =  $_POST['xxIdPerfil'];
             $xObservacion = trim(safe($_POST['xxObservacion']), 'UTF-8');
 
-            $xSQL = "UPDATE `expert_perfil` SET perf_descripcion='$xPerfil',perf_observacion='$xObservacion' ";
-            $xSQL .= "WHERE pais_id=$xPaisid,empr_id=$xEmprid AND perf_id=$xIdPerfil";
+            $xSQL = "UPDATE `expert_perfil` SET pais_id=$xPaisid,perf_descripcion='$xPerfil',perf_observacion='$xObservacion' ";
+            $xSQL .= "WHERE empr_id=$xEmprid AND perf_id=$xIdPerfil";
             
             if(mysqli_query($con, $xSQL)){
                 $respuesta = "OK";

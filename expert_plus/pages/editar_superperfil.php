@@ -227,7 +227,7 @@
                                                         <td style="text-align:center">
                                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                                 <input class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $perfil['MentId']; ?>" <?php if ($perfil['Ckeck'] == 'SI') {
-                                                                     echo "checked='checked'"; } ?> onchange="f_Perfil(<?php echo $idperfil; ?>, <?php echo $perfil['MentId']; ?>, <?php echo $xEmprid; ?>)" />
+                                                                     echo "checked='checked'"; } ?> onchange="f_Perfil(<?php echo $xIdPais; ?>,<?php echo $idperfil; ?>, <?php echo $perfil['MentId']; ?>, <?php echo $xEmprid; ?>)" />
                                                             </div>
                                                         </td>       
 
@@ -255,7 +255,7 @@
                 $(document).ready(function(){
 
                     _nameoldperfil = $.trim($("#txtPerfil").val());
-                    _idpais = "<?php echo $xIdPais; ?>";
+                    _paisid = "<?php echo $xIdPais; ?>";
                     
                     var optionFormat = function(item) {
                         if ( !item.id ) {
@@ -284,7 +284,7 @@
                     });                     
                     
                     
-                    $('#cboPais').val(_idpais).change();
+                    $('#cboPais').val(_paisid).change();
 
                     if($("#chkEstado").is(":checked")){
                         _estado = "A";
@@ -315,7 +315,7 @@
                 //     }                    
                 // }
 
-                function f_Perfil(_idperfil, _idmeta, _emprid){
+                function f_Perfil(_idpais, _idperfil, _idmeta, _emprid){
                     let _check = $("#chk" + _idmeta).is(":checked");
                     let _tipo = "";
 
@@ -326,13 +326,14 @@
                     }
 
                     $parametros = {
+                        xxPaisid: _idpais,
                         xxIdPerfil: _idperfil,
                         xxIdMeta: _idmeta,
                         xxEmprid: _emprid,
                         xxTipo: _tipo                    
                     }
 
-                    var xrespuesta = $.post("codephp/delnew_perfil.php", $parametros);
+                    var xrespuesta = $.post("codephp/delnew_superperfil.php", $parametros);
                     xrespuesta.done(function(response){
                         //console.log(response);
                     });
@@ -341,11 +342,10 @@
 
                 function f_Guardar(_emprid, _idperfil, _usuaid){
                     
-                    var _paisid = "<?php echo $xPaisid; ?> ";
+                    var _paisid = "<?php echo $xPaisid; ?>";
                     var _savepaisid = $("#cboPais").val();
                     var _perfil = $.trim($("#txtPerfil").val());
                     var _observacion = $.trim($("#txtDescripcion").val());
-                    
                     
                     if(_savepaisid == 0){
                         mensajesweetalert("center","warning","Seleccione Pais..!",false,1800);  
@@ -358,7 +358,7 @@
                         return;
                     }
 
-                    if(_perfil != _nameoldperfil || _idpais != _savepaisid){
+                    if(_perfil != _nameoldperfil || _paisid != _savepaisid){
 
                         $parametros = {
                             xxPaisid: _savepaisid,
@@ -379,7 +379,7 @@
                                     xxObservacion: _observacion
                                 }
                                 
-                                $.post("codephp/update_perfil.php", $datosperfil, function(response){
+                                $.post("codephp/update_superperfil.php", $datosperfil, function(response){
                                     
                                     if(response.trim() == 'OK'){
                                        $.redirect('?page=supperfil&menuid=0', {'mensaje': 'Actualizado con Exito..!'}); 
@@ -417,7 +417,7 @@
                             xxObservacion: _observacion
                         }
                         
-                        $.post("codephp/update_perfil.php", $datosperfil, function(response){
+                        $.post("codephp/update_superperfil.php", $datosperfil, function(response){
                             
                             if(response.trim() == 'OK'){
                                $.redirect('?page=supperfil&menuid=0', {'mensaje': 'Actualizado con Exito..!'}); 

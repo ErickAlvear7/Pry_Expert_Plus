@@ -1,4 +1,3 @@
-
 <?php
 	//error_reporting(E_ALL);
     ini_set('display_errors', 0);
@@ -43,7 +42,7 @@
     $all_pais = mysqli_query($con, $xSQL);
 
 	$xSQL = "SELECT p.perf_descripcion AS Descripcion,p.perf_id AS Codigo FROM `expert_perfil` p ";
-	$xSQL .= " WHERE empr_id=$xEmprid AND perf_estado='A' AND pais_id=$xPaisid";
+	$xSQL .= " WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND perf_estado='A' ";
 	$xSQL .= " ORDER BY Codigo ";
     $all_perfil = mysqli_query($con, $xSQL);
 ?>	
@@ -153,7 +152,7 @@
                             </div>
                             <div id="kt_ecommerce_report_shipping_export" class="d-none"></div>
                         </div>
-                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                        <!--<div class="card-toolbar flex-row-fluid justify-content-end gap-5">
                             <div class="w-150px">
                                 <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Estado" data-kt-ecommerce-order-filter="status">
                                     <option></option>
@@ -162,7 +161,7 @@
                                     <option value="Inactivo">Inactivo</option>
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="card-body pt-0">
                         <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
@@ -186,23 +185,23 @@
                                     $estado = $usu['Estado'];
                                     $usuario = $usu['Nombres'];
                                 ?>
-                                <?php 
+                                    <?php 
 
-                                    $cheking = '';
-                                    $chkEstado = '';
-                                    $xDisabledEdit = '';
-                                    $xDisabledReset = '';
+                                        $cheking = '';
+                                        $chkEstado = '';
+                                        $xDisabledEdit = '';
+                                        $xDisabledReset = '';
 
-                                    if($estado == 'Activo'){
-                                        $cheking = 'checked="checked"';
-                                        $xTextColor = "badge badge-light-primary";
-                                    }else{
-                                        $xTextColor = "badge badge-light-danger";
-                                        $xDisabledEdit = 'disabled';
-                                        $xDisabledReset = 'disabled';
-                                    }
+                                        if($estado == 'Activo'){
+                                            $cheking = 'checked="checked"';
+                                            $xTextColor = "badge badge-light-primary";
+                                        }else{
+                                            $xTextColor = "badge badge-light-danger";
+                                            $xDisabledEdit = 'disabled';
+                                            $xDisabledReset = 'disabled';
+                                        }
 
-                                ?>
+                                    ?>
                                 <tr>
                                     <td style="display:none;"><?php echo $usu['Idusuario'] ?></td>
                                     <td><?php echo $usu['Nombres']; ?></td>
@@ -272,7 +271,6 @@
                                     </span>
                                 </div>
                                 <div id="kt_modal_add_customer_billing_info" class="collapse show">
-                                    <!-- <input class="form-control form-control-solid" type="hidden" id="txtUserid" name="txtUserid" value="0" /> -->
                                     <div class="row g-9 mb-7">
                                         <div class="col-md-6 fv-row">
                                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
@@ -296,7 +294,7 @@
                                                 <span class="required">Email</span>
                                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nick del usuario"></i>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid" id="txtLogin" name="txtLogin" minlength="1" maxlength="100"  placeholder=""  />
+                                            <input type="email" class="form-control form-control-solid text-lowercase" id="txtLogin" name="txtLogin" minlength="1" maxlength="100"  placeholder=""  />
                                         </div>
                                         <div class="col-md-6 fv-row">
                                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
@@ -433,11 +431,12 @@
                     _cambiarPass = 'NO';
                     _idusu = 0;
                     _cboPerfil = 0;
+                    _cboPais = 0;
                     
                     $("#frm_datos").trigger("reset");
                     $("#kt_modal_add_customer").modal("show");
                     $(".modal-title").text("Nuevo Usuario");
-                    $("#btnSave").text("Guardar");
+                    $("#btnSave").text("Grabar");
                     $("#chkCaducaPass").prop("checked", false);
                     $("#lblCaducaPass").text("NO");
                     $("#chkCamPass").prop("checked", false);
@@ -488,6 +487,7 @@
                     
                     _idusu = _data[0];
                     _loginold = _data[2];
+                    _paisname = _data[5];
                     _addmod = 'mod';                     
 
                     $parametros = {
@@ -547,11 +547,9 @@
                     
                     $(".modal-title").text("Editar Usuario");				
                     $("#btnSave").text("Modificar");
-                    $("#frm_datos").trigger("reset");
-                    //$("#txtUserid").val(_idusu);
+                    //$("#frm_datos").trigger("reset");
                     $('#txtPassword').prop('readonly', true);
-                    $("#cboPerfil").val(2).change();
-                    
+                    //$("#cboPerfil").val(2).change();                    
                     $("#kt_modal_add_customer").modal("show");
 
                 });                
@@ -573,7 +571,7 @@
                     _paisname = $("#cboPais option:selected").text();
                     _fechacaduca = $.trim($("#txtFechacaduca").val());
                     _buscar = 'SI';
-                    _continuar = 'SI';
+                    //_continuar = 'SI';
                     _respuesta = 'OK';
 
                     if(_nombre == ''){                        
@@ -585,6 +583,13 @@
                         mensajesweetalert("center","warning","Ingrese Login/Email",false,1800);
                         return;
                     }
+                    
+                    var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+                    if (regex.test(_login.trim())){
+                    }else{
+                        mensajesweetalert("center","warning","Login/Email incorrecto",false,1800);
+                        return;
+                    }                    
 
                     if(_password == ''){                        
                         mensajesweetalert("center","warning","Ingrese Password",false,1800);
@@ -602,7 +607,7 @@
                     }
                     
                     if(_addmod == 'mod'){
-                        if(_loginold != _login || _cboPais !=_paisid ){
+                        if(_loginold.toLowerCase() != _login.toLowerCase()){
                             _buscar = 'SI';
                         }else{
                             _buscar = 'NO';
@@ -620,7 +625,7 @@
                             xxCambiarPass: _cambiarPass,
                             xxFecha: _fechacaduca
                         }	
-                        _ulr = "codephp/actualizar_usuario.php";                        
+                        _ulr = "codephp/actualizar_usuario.php";
                     }else{
                         $datosUser = {
                             xxUsuaid: _usuaid,
@@ -638,8 +643,6 @@
                         _ulr = "codephp/grabar_usuarios.php";                        
                     }
                     
-                    debugger;
-
                     if(_buscar == 'SI'){
                         var xrespuesta = $.post("codephp/consultar_usuarios.php", {xxLogin: _login});
                         xrespuesta.done(function(response){
@@ -655,24 +658,23 @@
                                         var _estado = '<td><div class="badge badge-light-primary">Activo</div>' ;
                                         
                                         var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                                    '<input class="form-check-input btnEstado" type="checkbox" id="chk' + _userid + '" checked onchange="f_Check(' +
+                                                    '<input class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _userid + '" checked onchange="f_Check(' +
                                                     _emprid + ',' + _userid + ')"' + ' value="' + _userid + '"' + '/></div></td>';	
-                                        
+
                                         var _btnopc = '<td><div class="text-center"><div class="btn-group"><button id="btnReset' + _userid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Resetear Perfil" >' + 
                                                         '<i class="fa fa-key"></i></button><button id="btnEditar' + _userid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Usuario" >' + 
                                                         '<i class="fa fa-edit"></i></button></div></div></td>';
         
                                         TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
         
-                                        TableData.column(0).visible(0);
-                                            
                                         if(_addmod == 'add'){
-                                            TableData.row.add([_userid, _usuario, _login, _estado, _btnchk, _paisname, _btnopc ]).draw();
+                                            //TableData.column(0).visible(0);
+                                            TableData.row.add([_userid, _usuario, _login.toLowerCase(), _estado, _btnchk, _paisname, _btnopc ]).draw();
                                             _detalle = 'Nuevo usuario creado desde superadmin';
                                             _mensaje = 'Grabado con Exito';
                                         }
                                         else{
-                                            TableData.row(_fila).data([_userid, _usuario, _login, _estado, _btnchk, _paisname, _btnopc ]).draw();
+                                            TableData.row(_fila).data([_userid, _usuario, _login.toLowerCase(), _estado, _btnchk, _paisname, _btnopc ]).draw();
                                             _detalle = 'Actualizar usuario desde superadmin';
                                             _mensaje = 'Actualizado con Exito';
                                         } 
@@ -681,25 +683,30 @@
         						        _respuesta = 'ERR';                                
                                     }
         
-                                    if(_respuesta == 'OK'){
-                                        mensajesweetalert("center","success","Grabado con Exito..!",false,1800);
-                                        $("#kt_modal_add_customer").modal("hide");	
-                                    } 
-                                    
                                     /**PARA CREAR REGISTRO DE LOGS */
-                                    $parametros = {
-                                        xxPaisid: _savepaisid,
-                                        xxEmprid: _emprid,
-                                        xxUsuaid: _usuaid,
-                                        xxDetalle: _detalle,
-                                    }					
+                                    // $parametros = {
+                                    //     xxPaisid: _savepaisid,
+                                    //     xxEmprid: _emprid,
+                                    //     xxUsuaid: _usuaid,
+                                    //     xxDetalle: _detalle,
+                                    // }					
         
-                                    $.post("codephp/new_log.php", $parametros, function(response){
-                                        //console.log(response);
-                                    }); 
+                                    // $.post("codephp/new_log.php", $parametros, function(response){
+                                    // }); 
+
+									if(_respuesta == 'OK'){
+										mensajesweetalert("center", "success", _mensaje, false, 1800);
+										
+										if(_addmod == 'add'){
+											$.redirect('?page=supusuario&menuid=0'); 
+										}else{
+											$("#kt_modal_add_customer").modal("hide");
+										}
+									}
+
                                 });                                   
                             }else{
-                                mensajesweetalert("center","warning","Nombre del Usuario ya Existe..!",false,1800);
+                                mensajesweetalert("center","warning","Login/Email ya existe..!",false,1800);
                                 return;
                             }
                         });
@@ -713,18 +720,17 @@
                                 var _estado = '<td><div class="badge badge-light-primary">Activo</div>' ;
                                 
                                 var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                            '<input class="form-check-input btnEstado" type="checkbox" id="chk' + _userid + '" checked onchange="f_Check(' +
+                                            '<input class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _userid + '" checked onchange="f_Check(' +
                                             _emprid + ',' + _userid + ')"' + ' value="' + _userid + '"' + '/></div></td>';	
-                                
+
                                 var _btnopc = '<td><div class="text-center"><div class="btn-group"><button id="btnReset' + _userid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Resetear Perfil" >' + 
                                                 '<i class="fa fa-key"></i></button><button id="btnEditar' + _userid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Usuario" >' + 
                                                 '<i class="fa fa-edit"></i></button></div></div></td>';
 
                                 TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
 
-                                TableData.column(0).visible(0);
-                                    
                                 if(_addmod == 'add'){
+                                    //TableData.column(0).visible(0);
                                     TableData.row.add([_userid, _usuario, _login, _estado, _btnchk, _paisname, _btnopc ]).draw();
                                     _detalle = 'Nuevo usuario creado desde superadmin';
                                     _mensaje = 'Grabado con Exito';
@@ -739,22 +745,27 @@
 						        _respuesta = 'ERR';                                
                             }
 
-                            if(_respuesta == 'OK'){
-                                mensajesweetalert("center", "success", _mensaje, false, 1800);
-                                $("#kt_modal_add_customer").modal("hide");	
-                            } 
-                            
                             /**PARA CREAR REGISTRO DE LOGS */
-                            $parametros = {
-                                xxPaisid: _savepaisid,
-                                xxEmprid: _emprid,
-                                xxUsuaid: _usuaid,
-                                xxDetalle: _detalle,
-                            }					
+                            // $parametros = {
+                            //     xxPaisid: _savepaisid,
+                            //     xxEmprid: _emprid,
+                            //     xxUsuaid: _usuaid,
+                            //     xxDetalle: _detalle,
+                            // }					
 
-                            $.post("codephp/new_log.php", $parametros, function(response){
-                                //console.log(response);
-                            }); 
+                            // $.post("codephp/new_log.php", $parametros, function(response){
+                            // }); 
+
+                            if(_respuesta == 'OK'){
+                                mensajesweetalert("center", "success", _mensanoje, false, 1800);
+                                
+                                if(_addmod == 'add'){
+                                    $.redirect('?page=supusuario&menuid=0'); 
+                                }else{
+                                    $("#kt_modal_add_customer").modal("hide");
+                                }
+                            }
+
                         });                          
                     }
 
@@ -764,10 +775,13 @@
             //cambiar estado y desactivar botones en linea
 
             $(document).on("click",".btnEstado",function(e){
+                
+                debugger;
                 _fila = $(this).closest("tr");
                 _usuario = $(this).closest("tr").find('td:eq(1)').text();
                 _login = $(this).closest("tr").find('td:eq(2)').text();
-                _pais =   $(this).closest("tr").find('td:eq(5)').text();
+                _paisname = $(this).closest("tr").find('td:eq(5)').text();
+                
             });
 
             //cambiar estado y desactivar botones en linea
@@ -780,7 +794,9 @@
                 let _checked = "";
                 let _disabled = "";
                 let _class = "badge badge-light-primary";
-        
+
+                //alert(_paisname);
+                
                 if(_check){
                     _estado = "Activo";
                     _disabled = "";
@@ -794,7 +810,7 @@
                 var _lblEstado = '<td><div class="' + _class + '">' + _estado + ' </div>';
     
                 var _btnchk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                            '<input ' + _checked + 'class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chk' + _userid + '"' +
+                            '<input ' + _checked + 'class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _userid + '"' +
                             'onchange="f_Check(' +_emprid  + ',' + _userid + ')"' + 'value="' + _userid + '"' + '/></div></div></td>';
 
                 var _btnopc = '<td><div class="text-center"><div class="btn-group"><button ' +  _disabled +  ' id="btnReset"' +
@@ -802,18 +818,16 @@
                                 '<i class="fa fa-key"></i></button><button ' +  _disabled +  ' id="btnEditar' + _userid + '"' +		
                                 'class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Usuario">' +
                                 '<i class="fa fa-edit"></i></button></div></div></td>';	
-
-                var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button ' +  _disabled +  ' id="btnEditar' + _userid + '"' +
-                                'class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Usuario">' +
-                                '<i class="fa fa-edit"></i></button></div></div></td>';		  
                 
                 TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+
+                //TableData.column(0).visible(0);
     
-                TableData.row(_fila).data([_userid, _usuario, _login, _lblEstado, _btnchk, _pais, _btnopc ]).draw();
+                TableData.row(_fila).data([_userid, _usuario, _login, _lblEstado, _btnchk, _paisname, _btnopc ]).draw();
     
                 $parametros = {
-                    xxUsuId: _userid,
-                    xxEmpr: _emprid,
+                    xxUsuaid: _userid,
+                    xxEmprid: _emprid,
                     xxEstado: _estado
                 }	
     
@@ -830,16 +844,16 @@
 
             //resetaer password
 
-            function f_ResetPass(_idusu,_idempr){
+            function f_ResetPass(_usuaid, _emprid){
 
                 $parametros={
-                    xxUsuId: _idusu,
-                    xxEmprId: _idempr
+                    xxUsuaid: _usuaid,
+                    xxEmprid: _emprid
                 }
 
                 $.post("codephp/reset_password.php", $parametros, function(response){
 
-                    if(response == 'OK'){
+                    if(response.trim() == 'OK'){
                         mensajesweetalert("center","success","Password Resetado con exito..!",false,1800);
                     }
 
@@ -866,7 +880,7 @@
                 var _emprid = "<?php echo $xEmprid; ?>";
                 var _paisid = obj.options[obj.selectedIndex].value;
                 
-                var xresponse = $.post("codephp/get_PerfilxPais.php", { xxPais: _paisid, xxEmprid: _emprid});
+                var xresponse = $.post("codephp/get_PerfilxPais.php", { xxPaisid: _paisid, xxEmprid: _emprid});
                 
                 xresponse.done(function(respuesta){
                     
