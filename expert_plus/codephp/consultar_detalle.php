@@ -20,6 +20,7 @@
             $xValorV = $_POST['xxValorV'];          
 
             $xSQL = "SELECT * FROM `expert_parametro_detalle` pade WHERE pade.pade_nombre='$xDetalle'";
+            $xSQL .= "INNER JOIN `expert_parametro_cabecera pac` ON pac.paca_id=pade.paca_id AND pac.pais_id=$xPaisid ";
             $xSQL .= " OR pade.pade_valorV = '$xValorV' AND pade.pade_estado = 'A'";
             $all_detalle = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
             $xRow = mysqli_num_rows($all_detalle);
