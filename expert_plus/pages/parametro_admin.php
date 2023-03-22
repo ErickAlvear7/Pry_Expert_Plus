@@ -376,10 +376,10 @@
                 //console.log(_output);
 
                   _objeto = {
-                    arryid : _count,
-                    arrydetalle : _detalle,
-                    arryvalorv : _valorV,
-                    arryvalori : _valorI,
+                    arrydetalle: _detalle,
+                    arryvalorv: _valorV,
+                    arryvalori: _valorI,
+                    arryorden: _count
                 }
 
                 _result.push(_objeto);
@@ -401,7 +401,6 @@
       var _parametro = $.trim($("#txtNombrePara").val());
       var _descripcion = $.trim($("#txtDesc").val());
 
-      //console.log(_idempr);
 
       if(_parametro == '')
       {                        
@@ -414,7 +413,6 @@
         return;
       }
 
-      //debugger;
 
                 $datosParam ={
                     xxPaisId: _idpais,
@@ -470,6 +468,19 @@
 										
 									
 										TableData.row.add([_pacaid, _paramom, _paradesc, _estado, _btnChk, _btnEdit]).draw();
+
+                                        
+                                        // _output = '<tr id="row_' + _count + '">';
+                                        // _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';                
+                                        // _output += '<td>' + _detalle + ' <input type="hidden" name="hidden_detalle[]" id="txtDetalle' + _count + '" value="' + _detalle + '" /></td>';
+                                        // _output += '<td>' + _valorV + ' <input type="hidden" name="hidden_valorv[]" id="txtValorV' +_count + '" value="' + _valorV + '" /></td>';
+                                        // _output += '<td>' + _valorI + ' <input type="hidden" name="hidden_valori[]" id="txtValorI' + _count + '" value="' + _valorI + '" /></td>';
+                                        // _output += '<td><div class="text-center"><div class="btn-group">';
+                                        // _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
+                                        // _output += '</tr>';
+
+
+                                        // $('#kt_ecommerce_report_shipping_table').append(_output);
 									
 									
 
