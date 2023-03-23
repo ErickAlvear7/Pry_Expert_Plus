@@ -364,9 +364,6 @@
                                     $("#txtValorV").val("");
                                     $("#txtValorI").val("");
 
-									
-							
-
 								}                                                                         
 							},
 							error: function (error){

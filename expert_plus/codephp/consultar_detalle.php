@@ -22,17 +22,26 @@
             $xValori = $_POST['xxValorI']; 
 
             if($xValorv != ''){
-                $xSQL = " SELECT * FROM `expert_parametro_detalle` pade INNER JOIN `expert_parametro_cabecera` pac ";
-                $xSQL .= "ON pac.paca_id=pade.paca_id  WHERE pac.pais_id= $xPaisid AND pade.pade_nombre='$xDetalle' OR pade.pade_valorV='$xValorv ' ";
-                $all_detalle = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
-                $xRow = mysqli_num_rows($all_detalle);
 
-            $xSQL = "SELECT * FROM `expert_parametro_detalle` pade WHERE pade.pade_nombre='$xDetalle'";
-            $xSQL .= " OR pade.pade_valorV = '$xValorV' AND pade.pade_estado = 'A'";
-            $all_detalle = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
-            $xRow = mysqli_num_rows($all_detalle);
-        }
+                $xSQL = " SELECT * FROM `expert_parametro_detalle` pade ";
+                $xSQL .= "INNER JOIN `expert_parametro_cabecera` pac ON pac.paca_id=pade.paca_id ";
+                $xSQL .= " WHERE  pac.pais_id=$xPaisid AND pade.pade_nombre='$xDetalle' OR pade.pade_valorV='$xValorv' ";
+                $all_det = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
+                $xRow = mysqli_num_rows($all_det);
+
+            }else if( $xValori != 0){
+
+                $xSQL = " SELECT * FROM `expert_parametro_detalle` pade ";
+                $xSQL .= "INNER JOIN `expert_parametro_cabecera` pac ON pac.paca_id=pade.paca_id ";
+                $xSQL .= " WHERE  pac.pais_id=$xPaisid AND pade.pade_nombre='$xDetalle' OR pade.pade_valorI=$xValori ";
+                $all_det = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
+                $xRow = mysqli_num_rows($all_det);
+
+            }
+       
     }
+
+}
     
     echo $xRow;
 
