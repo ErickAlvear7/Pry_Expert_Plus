@@ -365,8 +365,6 @@
                                                 <input class="form-control form-control-solid ps-12" id="txtFechacaduca" name="txtFechacaduca" placeholder="Seleccione Fecha.." value="<?php echo date('Y-m-d',strtotime($xFechaActual)); ?> " />
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>

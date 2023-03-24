@@ -20,24 +20,38 @@
     if(isset($_POST['xxPaisid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxEmprid']) and isset($_POST['xxNombre']) and isset($_POST['xxApellido']) and isset($_POST['xxLogin']) and isset($_POST['xxPerfilid']) ){
         if(isset($_POST['xxEmprid']) <> '' and isset($_POST['xxNombre']) <> '' and isset($_POST['xxApellido']) <> ''){
 
-            $xEmprid = $_POST['xxEmprid'];
+            $xPaisid =  $_POST['xxPaisid'];
             $xUsuaid = $_POST['xxUsuaid'];
+            $xEmprid = $_POST['xxEmprid'];
             $xNombre = safe($_POST['xxNombre']);
             $xApellido = safe($_POST['xxApellido']);
             $xLogin = safe($_POST['xxLogin']); 
             $xPasword = safe($_POST['xxPassword']);
             $xPass = md5('$xPasword'); 
-            $xPaisid =  $_POST['xxPaisid'];
             $xPerfilid =  $_POST['xxPerfilid'];
             $xCaducaPass =  $_POST['xxCaducaPass'];
             $xFechaCaduca =  $_POST['xxFecha'];
             $xCambiarPass = $_POST['xxCambiarPass'];
 
-            $xSQL ="INSERT INTO `expert_usuarios` (pais_id,empr_id,perf_id,usua_nombres,usua_apellidos,usua_login,usua_password,usua_estado, ";
-            $xSQL .= "usua_contador,usua_caducapass,usua_fechacaduca,usua_cambiarpass,usua_estadologin,usua_terminallogin,usua_usuariocreacion, ";
-            $xSQL .= "usua_fechacreacion,usua_terminalcreacion)";
-            $xSQL .="VALUES ($xPaisid,$xEmprid,$xPerfilid,'$xNombre','$xApellido',LOWER('$xLogin'),'$xPass','A',0,'$xCaducaPass','{$xFechaCaduca}', ";
-            $xSQL .= "'$xCambiarPass', '','',$xUsuaid,'{$xFecha}','$xTerminal') ";
+            $xFile = (isset($_FILES['xxFile']["name"])) ? $_FILES['xxFile']["name"] : '';
+            $xPath = "../img/";
+
+            $xFechafile = new DateTime();
+            $xNombreFile = ($xFile != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFile"]["name"] : "";            
+
+            if($xFile != ''){
+                $xTmpFile = $_FILES["xxFile"]["tmp_name"];
+
+                if($xTmpFile != ""){
+                    move_uploaded_file($xTmpFile,$xPath.$xNombreFile);
+                }
+            }            
+         
+            $xSQL ="INSERT INTO `expert_usuarios` (pais_id,empr_id,perf_id,usua_nombres,usua_apellidos,usua_login,usua_password,";
+            $xSQL .= "usua_caducapass,usua_fechacaduca,usua_cambiarpass,usua_avatarlogin,usua_usuariocreacion,";
+            $xSQL .= "usua_fechacreacion,usua_terminalcreacion) ";
+            $xSQL .="VALUES ($xPaisid,$xEmprid,$xPerfilid,'$xNombre','$xApellido',LOWER('$xLogin'),'$xPass','$xCaducaPass','{$xFechaCaduca}', ";
+            $xSQL .= "'$xCambiarPass', '$xNombreFile',$xUsuaid,'{$xFecha}','$xTerminal') ";
             
             if(mysqli_query($con, $xSQL)){
 
