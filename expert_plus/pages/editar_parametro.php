@@ -127,21 +127,21 @@
                                 <span class="required">Detalle</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nombre del detalle"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />                       
+                                <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="50" placeholder="nombre del detalle" value="" />                       
                             </div>
                                 <div class="col-md-3 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <span class="required">Valor Texto</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" id="txtValorV" name="txtValorV" minlength="1" maxlength="100" placeholder="valor texto" value="" />                       
+                                <input type="text" class="form-control form-control-solid" id="txtValorV" name="txtValorV" minlength="1" maxlength="50" placeholder="valor texto" value="" />                       
                             </div>
                                 <div class="col-md-3 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <span class="required">Valor Entero</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valores enteros"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="5" maxlength="100" placeholder="valor entero" value="" />                       
+                                <input type="text" class="form-control form-control-solid" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="5" maxlength="50" placeholder="valor entero" value="" />                       
                             </div>
                             <div class="col-md-2 fv-row">
                                 <button class="btn btn-sm btn-light-primary" id="btnAgregar">
@@ -161,11 +161,11 @@
                             <thead>
                                 <tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
                                     <th style="display:none;">Id</th>
-                                    <th class="min-w-125px">Detalle</th>
-                                    <th class="min-w-125px">Valor Texto</th>
-                                    <th class="min-w-125px">Valor entero</th>
-                                    <th class="min-w-125px">Estado</th>
-                                    <th class="min-w-125px" style="text-align: center;">Opciones</th>
+                                    <th>Detalle</th>
+                                    <th>Valor Texto</th>
+                                    <th>Valor entero</th>
+                                    <th>Estado</th>
+                                    <th style="text-align: center;">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody class="fw-bold text-gray-600">
@@ -202,13 +202,13 @@
                                     </td> 
                                     <td>
                                         <div class="text-center">
-                                            <div class="btn-group">
+                                            <div class="btn-group">	
                                                 <button type="button" id="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                                 <button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">
                                                     <i class="fa fa-edit"></i>
-                                                </button>	 
+                                                </button> 
                                             </div>
                                         </div>
                                     </td>
@@ -222,42 +222,51 @@
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="kt_modal_new_card" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Add New Card</h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+<div class="modal fade" id="modal_detalle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered mw-550px">
+    <div class="modal-content">
+        <div class="modal-header" id="parametro_header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar Detalle</h5>
+            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                <span class="svg-icon svg-icon-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                    </svg>
+                </span>
             </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                        <span class="required">Name On Card</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
-                    </label>
-                    <input type="text" class="form-control form-control-solid" placeholder="" name="card_name" value="Max Doe" />
-                </div>
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <label class="required fs-6 fw-bold form-label mb-2">Card Number</label>
-                    <div class="position-relative">
-                    <input type="text" class="form-control form-control-solid" placeholder="" name="card_name" value="Max Doe" />
-                    </div>
-                </div>
-                <div class="text-center pt-15">
-                    <button type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Discard</button>
-                    <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary"></button>
-                </div>
+        </div>
+        <div class="modal-body py-10 px-lg-17">
+            <div class="d-flex flex-column mb-7 fv-row">
+                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                    <span class="required">Detalle</span>
+                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
+                </label>
+                <input type="text" class="form-control form-control-solid" id="txtDetalleEdit" name="txtDetalleEdit"  minlength="2" maxlength="50" />
+            </div>
+            <div class="d-flex flex-column mb-7 fv-row">
+                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                    <span class="required">Valor Texto</span>
+                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
+                </label>
+                <input type="text" class="form-control form-control-solid" id="txtValorVedit" name="txtValorVedit" minlength="1" maxlength="50" />
+            </div>
+            <div class="d-flex flex-column mb-7 fv-row">
+                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                    <span class="required">Valor Entero</span>
+                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
+                </label>
+                <input type="text" class="form-control form-control-solid" id="txtValorIedit" name="txtValorIedit" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="5" maxlength="50" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btnGuardar" onclick="f_Guardar()" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>
+  </div>
 </div>
+
 
 
 
@@ -392,11 +401,56 @@
     }
 
     $(document).on("click",".btnEditar",function(){
+        $("#modal_detalle input").val("");
+
+        var _idpaca = '<?php echo $idpaca; ?>';
+        _fila = $(this).closest("tr");
+        var _data = $('#tblDetalle').dataTable().fnGetData(_fila);
+        var _idpade = _data[0];
+
+                $parametros = {
+					xxPadeid: _idpade,
+					xxPacaid: _idpaca
+				}
+
+                $.ajax({
+					url: "codephp/editar_detalles.php",
+					type: "POST",
+					dataType: "json",
+					data: $parametros,          
+					success: function(data){ 
+                     //console.log(data);
+                        var _nombre = data[0]['Nombre'];
+                        var _valorv = data[0]['ValorT'];
+                        var _valori = data[0]['ValorI'];
+
+                     
+
+
+
+                        $("#txtDetalleEdit").val(_nombre);
+                        $("#txtValorVedit").val(_valorv);
+                        $("#txtValorIedit").val(_valori);
+
+			
+						                                                                      
+					},
+					error: function (error){
+						console.log(error);
+					}                            
+				}); 
 
        
+       
 
-        $("#kt_modal_new_card").modal("show");
+              $("#modal_detalle").modal("show");
 
+    });
+
+      //Desplazar-modal
+
+   $("#modal_detalle").draggable({
+        handle: ".modal-header"
     });
     
  
