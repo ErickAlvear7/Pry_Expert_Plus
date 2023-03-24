@@ -45,6 +45,12 @@
     $xSQL = "SELECT pade_id AS Idpade,pade_orden AS Orden, pade_nombre AS Detalle, pade_valorV AS ValorV, pade_valorI AS ValorI,";
     $xSQL .= "pade_estado AS Estado FROM `expert_parametro_detalle` WHERE paca_id = $idpaca ";
     $all_pade = mysqli_query($con, $xSQL);
+
+    $xSQL = "SELECT  pade_orden AS Orden FROM `expert_parametro_detalle` ORDER BY pade_orden DESC LIMIT 1 ";
+    $orden = mysqli_query($con, $xSQL);
+    foreach($orden as $ord){
+        $xOrdenDet = $ord['Orden'];
+    }
     
 
  
@@ -190,7 +196,7 @@
                                     <td><?php echo $xPadeValorI; ?></td>
                                     <td style="text-align:center">
                                         <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input <?php echo $xCheking; ?>  class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $xPadeId; ?>" 
+                                            <input <?php echo $xCheking; ?>  class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xPadeId; ?>" 
                                                      onchange="f_Pade(<?php echo $xPadeId; ?>, <?php echo $idpaca; ?>)" />
                                         </div>
                                     </td> 
@@ -268,7 +274,10 @@
     $('#btnAgregar').click(function(){
 
         var _estado = 'A';
-        var _pacaid = '<?php echo $idpaca; ?>'
+        var _pacaid = '<?php echo $idpaca; ?>';
+        var _paisid = '<?php echo  $xPaisid; ?>';
+        var _ordendet = '<?php echo  $xOrdenDet; ?>';
+       
 
         if($.trim($('#txtDetalle').val()).length == 0)
         {           
@@ -290,6 +299,7 @@
 
         var _detalle = $.trim($('#txtDetalle').val());
         var _valorV =  $.trim($('#txtValorV').val());
+        _ordendet++;
 
         if($.trim($('#txtValorI').val()).length == 0){
             var _valorI = 0;
@@ -299,8 +309,10 @@
 
                  $datosDetalle ={
                     xxPacaId: _pacaid,
+                    xxPaisId: _paisid,
                     xxDetalle: _detalle,
-                    xxValorV: _valorV
+                    xxValorV: _valorV,
+                    xxValorI: _valorI
                 }
 
                 var xrespuesta = $.post("codephp/consultar_detalle.php", $datosDetalle);
@@ -314,7 +326,8 @@
                             xxDetalle: _detalle,
                             xxValorV: _valorV,
                             xxValorI: _valorI,
-                            xxEstado: _estado
+                            xxEstado: _estado,
+                            xxOrden: _ordendet
                          
                         }
 
@@ -332,8 +345,24 @@
                                     _padev = _valorV;
                                     _padei = _valorI;
                                     _checked = "checked='checked'";
-									
-							
+
+                                    var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                                                   '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '"' +
+                                                   '</div></td>';
+                                    
+                                    var _btnGrup = '<td><div class="text-center"><div class="btn-group"><button type="button" id="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="">' +
+                                                   '<i class="fa fa-trash"></i></button><button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
+                                                   '<i class="fa fa-edit"></i></button></div></div></td>';
+                                    
+
+                                    TableData = $('#tblDetalle').DataTable();  
+                                    TableData.column(0).visible(0);
+
+                                    TableData.row.add([_padeid, _padenom, _padev, _padei, _btnChk,_btnGrup]).draw();
+
+                                    $("#txtDetalle").val("");
+                                    $("#txtValorV").val("");
+                                    $("#txtValorI").val("");
 
 								}                                                                         
 							},
@@ -348,7 +377,7 @@
 
                     }else{
 
-                        mensajesweetalert("center","warning","Nombre Detalle ya Existe y/o Valor Texto..!",false,1800);
+                        mensajesweetalert("center","warning","Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!",false,1800);
                     }
 
                 });

@@ -16,7 +16,7 @@
     if(isset($_POST['xxPaisId']) and isset($_POST['xxUsuaId']) and isset($_POST['xxEmprId']) and isset($_POST['xxParametro']) and isset($_POST['xxResultado'])
               and isset($_POST['xxEstado']) and isset($_POST['xxDescripcion'])){
 
-        $xEmprid = $_POST['xxEmprid'];
+        $xEmprid = $_POST['xxEmprId'];
         $xPaisid = $_POST['xxPaisId'];
         $xUsuaid = $_POST['xxUsuaId'];
         $xParametro = safe($_POST['xxParametro']);
@@ -27,7 +27,7 @@
 
         $xSQL = "INSERT INTO `expert_parametro_cabecera` (pais_id,empr_id,paca_nombre,paca_descripcion,paca_estado, ";
         $xSQL .= "fechacreacion,usuariocreacion,terminalcreacion) ";
-        $xSQL .= "VALUES ($xPaisid,1,'$xParametro','$xDescricpion','$xEstado','{$xFecha}',$xUsuaid,'$xTerminal')";
+        $xSQL .= "VALUES ($xPaisid,$xEmprid,'$xParametro','$xDescricpion','$xEstado','{$xFecha}',$xUsuaid,'$xTerminal')";
 
 
         if(mysqli_query($con, $xSQL)){
@@ -41,10 +41,11 @@
             $xNomdet = $drfila['arrydetalle'];
             $xvalorV = $drfila['arryvalorv'];
             $xvalorI = $drfila['arryvalori'];
+            $xorden =  $drfila['arryorden'];
           
             $xSQL = "INSERT INTO `expert_parametro_detalle` (paca_id,pade_orden,pade_nombre,pade_valorV, ";
             $xSQL .= "pade_valorI,pade_estado) ";
-            $xSQL .= "VALUES ($last_id,0,'$xNomdet','$xvalorV',$xvalorI,'A')";
+            $xSQL .= "VALUES ($last_id,$xorden,'$xNomdet','$xvalorV',$xvalorI,'A')";
             mysqli_query($con, $xSQL);
           
         }
