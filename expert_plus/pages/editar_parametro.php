@@ -260,7 +260,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" id="btnGuardar" onclick="f_Guardar()" class="btn btn-primary">Guardar</button>
+                <button type="button" id="btnGuardar" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>
@@ -271,7 +271,7 @@
 
 
 <script>
-    var _idpaca,_idpade;
+    var _idpaca,_idpade,_paisid;
 
     $(document).ready(function(){
 
@@ -284,7 +284,7 @@
 
         var _estado = 'A';
         var _pacaid = '<?php echo $idpaca; ?>';
-        var _paisid = '<?php echo  $xPaisid; ?>';
+        _paisid = '<?php echo  $xPaisid; ?>';
         var _ordendet = '<?php echo  $xOrdenDet; ?>';
        
 
@@ -400,13 +400,15 @@
 
     }
 
+    //Editar Detalle Modal
+
     $(document).on("click",".btnEditar",function(){
         $("#modal_detalle input").val("");
 
-        var _idpaca = '<?php echo $idpaca; ?>';
+        _idpaca = '<?php echo $idpaca; ?>';
         _fila = $(this).closest("tr");
         var _data = $('#tblDetalle').dataTable().fnGetData(_fila);
-        var _idpade = _data[0];
+         _idpade = _data[0];
 
                 $parametros = {
 					xxPadeid: _idpade,
@@ -444,6 +446,111 @@
        
 
               $("#modal_detalle").modal("show");
+
+    });
+
+    //Guardar Editar
+
+    $('#btnGuardar').click(function(e){
+     
+       var _padeid = _idpade;
+       var _pacaid =   _idpaca
+
+       var _nombre = $.trim($("#txtDetalleEdit").val());
+       var _valorV = $.trim($("#txtValorVedit").val());
+       var _valorI = $.trim($('#txtValorI').val());
+
+       if($.trim($('#txtDetalleEdit').val()).length == 0)
+        {           
+            mensajesweetalert("center","warning","Ingrese Detalle",false,1800);
+            return false;
+        }
+
+        if($.trim($('#txtValorVedit').val()).length == 0 && $.trim($('#txtValorIedit').val()).length == 0 )
+        {    
+            mensajesweetalert("center","warning","Ingrese Valor Texto o Valor Entero..!",false,1800);        
+            return false;
+        }
+
+        if($.trim($('#txtValorVedit').val()).length > 0 && $.trim($('#txtValorIedit').val()).length > 0 )
+        {    
+            mensajesweetalert("center","warning","Ingrese Solo Valor Texto o Valor Entero..!",false,1800);         
+            return false;
+        }
+
+
+        if($.trim($('#txtValorIedit').val()).length == 0){
+            var _valorI = 0;
+        }else{
+            _valorI = $.trim($('#txtValorIedit').val());
+        }
+
+                 $datosDetalle ={
+                    xxPacaId: _pacaid,
+                    xxPaisId: _paisid,
+                    xxDetalle: _nombre,
+                    xxValorV: _valorV,
+                    xxValorI: _valorI
+                }
+
+                var xrespuesta = $.post("codephp/consultar_detalle.php", $datosDetalle);
+                xrespuesta.done(function(response){
+                    if(response == 0){
+
+                       // debugger;
+
+                        $parametros ={
+                            xxPacaId: _pacaid,
+                            xxPadeId: _padeid,
+                            xxDetalle: _nombre,
+                            xxValorV: _valorV,
+                            xxValorI: _valorI,
+                        }
+                        
+                        
+                        var xresponse = $.post("codephp/update_detalle.php", $parametros);
+                        xresponse.done(function(response){    
+
+                            if(response.trim() == 'OK'){
+
+                                    _padeid = _padeid
+                                    _padenom = _nombre;
+                                    _padev = _valorV;
+                                    _padei = _valorI;
+                                    _checked = "checked='checked'";
+
+                                    var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                                                   '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '"' +
+                                                   '</div></td>';
+                                    
+                                    var _btnGrup = '<td><div class="text-center"><div class="btn-group"><button type="button" id="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="">' +
+                                                   '<i class="fa fa-trash"></i></button><button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
+                                                   '<i class="fa fa-edit"></i></button></div></div></td>';
+
+                                    TableData = $('#tblDetalle').DataTable();  
+                                    TableData.column(0).visible(0);
+
+                                    TableData.row(_fila).data([_padeid, _padenom, _padev, _padei, _btnChk, _btnGrup ]).draw();
+
+                                    $("#modal_detalle").modal("hide");
+               
+                          
+                            }
+                                
+                            
+
+                        }); 
+               
+
+                    }else{
+
+                        mensajesweetalert("center","warning","Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!",false,1800);
+                    }
+
+                });
+   
+    
+     
 
     });
 
