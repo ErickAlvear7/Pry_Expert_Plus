@@ -455,6 +455,7 @@
      
        var _padeid = _idpade;
        var _pacaid =   _idpaca
+       _paisid = '<?php echo  $xPaisid; ?>';
 
        var _nombre = $.trim($("#txtDetalleEdit").val());
        var _valorV = $.trim($("#txtValorVedit").val());
