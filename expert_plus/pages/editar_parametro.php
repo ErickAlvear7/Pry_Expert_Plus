@@ -198,6 +198,10 @@
                                             $xCheking = 'checked="checked"';
                                         
                                         }
+                                        if($xPadeValorI == 0){
+                                            $xPadeValorI = '';
+                                        
+                                        }
                                         
                                         ?>
                                     <tr id="row_<?php echo  $xPadeId; ?>">
