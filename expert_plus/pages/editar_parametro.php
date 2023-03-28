@@ -30,7 +30,7 @@
 
     $xPaisid = $_SESSION["i_paisid"];
     $xEmprid = $_SESSION["i_emprid"];
-    $xUsuaid = $_SESSION["i_usuaid"];
+ 
 
     $xSQL = "SELECT paca_nombre AS Nombre, paca_descripcion AS Descri, paca_estado AS Estado FROM `expert_parametro_cabecera` WHERE paca_id = $idpaca ";
     $xSQL .= "AND empr_id = $xEmprid ";
@@ -104,7 +104,7 @@
                                     <span class="required">Parametro</span>
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nombre del usuario"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" id="txtNombrePara" name="txtNombrePara" minlength="5" maxlength="100" value="<?php echo $xNomPaca; ?>" />
+                                <input type="text" class="form-control form-control-solid" id="txtParaEdit" name="txtParaEdit" minlength="5" maxlength="100" value="<?php echo $xNomPaca; ?>" />
                             </div>
                         </div>
                         <div class="row g-9 mb-7">
@@ -113,9 +113,12 @@
                                     <span class="required">Descripcion</span>
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique una descripcion"></i>
                                 </label>
-                                <textarea class="form-control form-control-solid" name="txtDesc" id="txtDesc" maxlength="150" onkeydown="return (event.keyCode!=13);"><?php echo $xDescPaca; ?></textarea>
+                                <textarea class="form-control form-control-solid" name="txtDescEdit" id="txtDescEdit" maxlength="150" onkeydown="return (event.keyCode!=13);"><?php echo $xDescPaca; ?></textarea>
                             </div>
                         </div>
+                        <div class="card-toolbar d-flex align-self-end">
+                           <button type="button" id="btnGuardarEdit" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $idpaca; ?>)" class="btn btn-primary">Guardar</button>
+                        </div>	
                     </div>
                 </div>
                 <div class="tab-pane fade" id="kt_ecommerce_settings_store" role="tabpanel">
@@ -156,66 +159,77 @@
                             </div>
                         </div>
                         <br/>
+                        <div class="d-flex align-items-center position-relative my-1">
+                            <span class="svg-icon svg-icon-1 position-absolute ms-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                    <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <input type="text" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Dato" />
+                        </div>
                         <hr class="bg-primary border-2 border-top border-primary">
-                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="tblDetalle" style="width: 100%;">
-                            <thead>
-                                <tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
-                                    <th style="display:none;">Id</th>
-                                    <th>Detalle</th>
-                                    <th>Valor Texto</th>
-                                    <th>Valor entero</th>
-                                    <th>Estado</th>
-                                    <th style="text-align: center;">Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody class="fw-bold text-gray-600">
-                                <?php 
-                                  foreach($all_pade as $pade){
+                        <div class="mh-375px scroll-y me-n7 pe-7">
+                            <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
+                                <thead>
+                                    <tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
+                                        <th style="display:none;">Id</th>
+                                        <th>Detalle</th>
+                                        <th>Valor Texto</th>
+                                        <th>Valor entero</th>
+                                        <th>Estado</th>
+                                        <th style="text-align: center;">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="fw-bold text-gray-600">
+                                    <?php 
+                                    foreach($all_pade as $pade){
 
-                                    $xPadeId = $pade['Idpade'];
-                                    $xPadeNom = $pade['Detalle'];
-                                    $xPadeValorV = $pade['ValorV'];
-                                    $xPadeValorI = $pade['ValorI'];
-                                    $xPadeEstado = $pade['Estado'];
-                                ?>
-                                <?php 
-                                    $xCheking = '';
-
-                                    if($xPadeEstado == 'A'){
-                                        $xCheking = 'checked="checked"';
-                                       
-                                    }
-                                    
+                                        $xPadeId = $pade['Idpade'];
+                                        $xPadeNom = $pade['Detalle'];
+                                        $xPadeValorV = $pade['ValorV'];
+                                        $xPadeValorI = $pade['ValorI'];
+                                        $xPadeEstado = $pade['Estado'];
                                     ?>
-                                <tr id="row_<?php echo  $xPadeId; ?>">
-                                    <td style="display: none;">
-                                        <?php echo  $xPadeId; ?>
-                                    </td>               
-                                    <td><?php echo $xPadeNom; ?></td>
-                                    <td><?php echo $xPadeValorV; ?></td>
-                                    <td><?php echo $xPadeValorI; ?></td>
-                                    <td style="text-align:center">
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input <?php echo $xCheking; ?>  class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xPadeId; ?>" 
-                                                     onchange="f_Pade(<?php echo $xPadeId; ?>, <?php echo $idpaca; ?>)" />
-                                        </div>
-                                    </td> 
-                                    <td>
-                                        <div class="text-center">
-                                            <div class="btn-group">	
-                                                <button type="button" id="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                                <button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">
-                                                    <i class="fa fa-edit"></i>
-                                                </button> 
+                                    <?php 
+                                        $xCheking = '';
+
+                                        if($xPadeEstado == 'A'){
+                                            $xCheking = 'checked="checked"';
+                                        
+                                        }
+                                        
+                                        ?>
+                                    <tr id="row_<?php echo  $xPadeId; ?>">
+                                        <td style="display: none;">
+                                            <?php echo  $xPadeId; ?>
+                                        </td>               
+                                        <td><?php echo $xPadeNom; ?></td>
+                                        <td><?php echo $xPadeValorV; ?></td>
+                                        <td><?php echo $xPadeValorI; ?></td>
+                                        <td style="text-align:center">
+                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                <input <?php echo $xCheking; ?>  class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xPadeId; ?>" 
+                                                        onchange="f_Pade(<?php echo $xPadeId; ?>, <?php echo $idpaca; ?>)" />
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <?php }?>
-                            </tbody>
-                        </table>
+                                        </td> 
+                                        <td>
+                                            <div class="text-center">
+                                                <div class="btn-group">	
+                                                    <button type="button" id="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                    <button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button> 
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php }?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>     
                 </div>
             </div>
@@ -364,7 +378,7 @@
                                                    '<i class="fa fa-edit"></i></button></div></div></td>';
                                     
 
-                                    TableData = $('#tblDetalle').DataTable();  
+                                    TableData = $('#kt_ecommerce_report_shipping_table').DataTable();  
                                     TableData.column(0).visible(0);
 
                                     TableData.row.add([_padeid, _padenom, _padev, _padei, _btnChk,_btnGrup]).draw();
@@ -407,7 +421,7 @@
 
         _idpaca = '<?php echo $idpaca; ?>';
         _fila = $(this).closest("tr");
-        var _data = $('#tblDetalle').dataTable().fnGetData(_fila);
+        var _data = $('#kt_ecommerce_report_shipping_table').dataTable().fnGetData(_fila);
          _idpade = _data[0];
 
                 $parametros = {
@@ -449,7 +463,7 @@
 
     });
 
-    //Guardar Editar
+    //Guardar Editar Detalle
 
     $('#btnGuardar').click(function(e){
      
@@ -528,7 +542,7 @@
                                                    '<i class="fa fa-trash"></i></button><button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
                                                    '<i class="fa fa-edit"></i></button></div></div></td>';
 
-                                    TableData = $('#tblDetalle').DataTable();  
+                                    TableData = $('#kt_ecommerce_report_shipping_table').DataTable();  
                                     TableData.column(0).visible(0);
 
                                     TableData.row(_fila).data([_padeid, _padenom, _padev, _padei, _btnChk, _btnGrup ]).draw();
@@ -545,7 +559,7 @@
 
                     }else{
 
-                        mensajesweetalert("center","warning","Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!",false,1800);
+                        mensajesweetalert("center","warning","Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!",false,2800);
                     }
 
                 });
@@ -554,6 +568,70 @@
      
 
     });
+
+    //Guardar Editar Paramentro
+
+    
+    function f_Guardar(_idpais,_idempr,_idpaca){
+
+      var _parametro = $.trim($("#txtParaEdit").val());
+      var _descripcion = $.trim($("#txtDescEdit").val());
+
+      
+      if(_parametro == '')
+      {                        
+        mensajesweetalert("center","warning","Ingrese Nombre del Parametro..!!",false,1800);
+        return;
+      }
+
+                $datosParam ={
+                    xxPaisId: _idpais,
+					xxEmprId: _idempr,
+                    xxParametro: _parametro
+                }
+
+                var xrespuesta = $.post("codephp/consultar_parametro.php", $datosParam);
+                xrespuesta.done(function(response){
+                    if(response == 0){
+
+                       console.log(response);
+
+                        $parametros ={
+                            xxPacaId: _idpaca,
+                            xxEmprId: _idempr,
+                            xxPaisId: _idpais,
+                            xxParametro: _parametro,
+                            xxDescripcion: _descripcion
+                          
+                        }
+                        
+                        
+                        var xresponse = $.post("codephp/update_parametro.php", $parametros);
+                        xresponse.done(function(response){   
+                            
+                            console.log(response);
+
+                            if(response.trim() == 'OK'){
+
+                                   
+               
+                          
+                            }
+                                
+                            
+
+                        }); 
+               
+
+                    }else{
+
+                        mensajesweetalert("center","warning","Nombre del Parametro ya Existe..!",false,1800);
+                    }
+
+                });
+
+
+    }
 
       //Desplazar-modal
 
