@@ -22,7 +22,7 @@
         $xParametro = safe($_POST['xxParametro']);
         $xDescricpion = safe($_POST['xxDescripcion']);
         $xEstado = safe($_POST['xxEstado']);
-        $xResult = ($_POST['xxResultado']);
+        $xResult = $_POST['xxResultado'];
 
 
         $xSQL = "INSERT INTO `expert_parametro_cabecera` (pais_id,empr_id,paca_nombre,paca_descripcion,paca_estado, ";

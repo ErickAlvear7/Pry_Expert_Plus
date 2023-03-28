@@ -65,7 +65,7 @@
 		    </div>                       
         </div>
 		<div class="card-body pt-0">
-			<table class="table align-middle table-row-dashed fs-6 gy-5" id=" " style="width: 100%;">
+			<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
 				<thead>
 					<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
 					    <th style="display:none;">Id</th>
@@ -80,15 +80,15 @@
 					<?php 
                        foreach($all_param as $paca){
 
-                        $xParaid = $paca['Idpaca'];
-                        $xParam = $paca['Parametro'];
-                        $xDesc = $paca['Descrip'];
-                        $xEstado = $paca['Estado'];
+                        $xPacaId = $paca['Idpaca'];
+                        $xPacaNombre = $paca['Parametro'];
+                        $xPacaDesc = $paca['Descrip'];
+                        $xPacaEstado = $paca['Estado'];
                     ?>
                     <?php 
                        $xCheking = '';
 
-                       if($xEstado == 'Activo'){
+                       if($xPacaEstado == 'Activo'){
                             $xCheking = 'checked="checked"';
                             $xTextColor = "badge badge-light-primary";
                         }else{
@@ -97,23 +97,23 @@
                     
                     ?>
 					<tr>
-					    <td style="display:none;"><?php echo $xParaid ?></td>
-						<td><?php echo $xParam ?></td>
-						<td><?php echo $xDesc ?></td>
+					    <td style="display:none;"><?php echo $xPacaId ?></td>
+						<td><?php echo $xPacaNombre; ?></td>
+						<td><?php echo $xPacaDesc; ?></td>
 						<td>
-                           <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado ?></div>
+                           <div class="<?php echo $xTextColor; ?>"><?php echo $xPacaEstado ?></div>
                         </td>
                         <td>
                             <div class="text-center">
 								<div class="form-check form-check-sm form-check-custom form-check-solid">
-									<input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xParaid; ?>" value=""/>
+									<input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xPacaId; ?>" value=""/>
 								</div>
 							</div>
 						</td>
 						<td>
                             <div class="text-center">
 								<div class="btn-group">
-									<button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(<?php echo $xParaid;?>)"  title='Editar Parametro'>
+									<button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(<?php echo $xPacaId;?>)"  title='Editar Parametro'>
 										<i class='fa fa-edit'></i>
 									</button>												 
 								</div>
@@ -182,16 +182,16 @@
                                     <div class="col-md-12 fv-row">
                                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                             <span class="required">Parametro</span>
-                                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nombre del usuario"></i>
+                                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nombre del parametro"></i>
                                         </label>
-                                        <input type="text" class="form-control form-control-solid" id="txtNombrePara" name="txtNombrePara" minlength="5" maxlength="100" placeholder="Ingrese Nombre" value="" />
+                                        <input type="text" class="form-control form-control-solid" id="txtNombrePara" name="txtNombrePara" minlength="5" maxlength="100" placeholder="Ingrese Nombre del Parametro" value="" />
                                     </div>
                                 </div>
                                 <div class="row g-9 mb-7">
                                     <div class="col-md-12 fv-row">
                                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                             <span class="required">Descripcion</span>
-                                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique una descripcion"></i>
+                                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique una descripcion del parametro"></i>
                                         </label>
                                         <textarea class="form-control form-control-solid" name="txtDesc" id="txtDesc" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
                                     </div>
@@ -270,6 +270,7 @@
    var _estado, _detalle,_valorI,_result = [],_count =0,_idpais,_idempr,_idusua;
 
     $(document).ready(function(){
+
        //abrir-modal-nuevo-parametro
        $("#nuevoParametro").click(function(){
 
@@ -287,7 +288,7 @@
         });  
     });
 
-  //Agregar detalle
+  //Agregar detalle del paametro
 
     $('#btnAgregar').click(function(){
       //debugger;
@@ -297,19 +298,19 @@
 
         if($.trim($('#txtDetalle').val()).length == 0)
         {           
-            mensajesweetalert("center","warning","Ingrese Detalle",false,1800);
+            mensajesweetalert("center","warning","Ingrese Detalle",false,1900);
             return false;
         }
 
         if($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0 )
         {    
-            mensajesweetalert("center","warning","Ingrese Valor Texto o Valor Entero..!",false,1800);        
+            mensajesweetalert("center","warning","Ingrese Valor Texto o Valor Entero..!",false,1900);        
             return false;
         }
 
         if($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0 )
         {    
-            mensajesweetalert("center","warning","Ingrese Solo Valor Texto o Valor Entero..!",false,1800);         
+            mensajesweetalert("center","warning","Ingrese Solo Valor Texto o Valor Entero..!",false,1900);         
             return false;
         }
 
@@ -327,7 +328,7 @@
             $.each(_result,function(i,item){
                 if(item.arrydetalle.toUpperCase() == _detalle.toUpperCase())
                 {                  
-                    mensajesweetalert("center","warning","Nombre del Detalle ya Existe..!",false,1800);                    
+                    mensajesweetalert("center","warning","Nombre del Detalle ya Existe..!",false,1900);                    
                     _continuar = false;
                     return false;
                 }else{
@@ -336,7 +337,7 @@
                         {
                             if(item.arryvalorv.toUpperCase() == _valorV.toUpperCase())
                             {                               
-                                mensajesweetalert("center","warning","Valor Texto de Parámetro ya Existe..!","W","top-right",false,1800);    
+                                mensajesweetalert("center","warning","Valor Texto de Parámetro ya Existe..!",false,1900);    
                                 _continuar = false;
                                 return false;
                             }else{
@@ -346,7 +347,7 @@
                         {
                             if(item.arryvalori == _valorI)
                             {                               
-                                mensajesweetalert("center","warning","Valor Entero de Parámetro ya Existe..!","W","top-right",false,1800); 
+                                mensajesweetalert("center","warning","Valor Entero de Parámetro ya Existe..!",false,1900); 
                                 _continuar = false;
                                 return false;
                             }else{
@@ -404,12 +405,12 @@
 
       if(_parametro == '')
       {                        
-        mensajesweetalert("center","warning","Ingrese Nombre del Parametro..!!",false,1800);
+        mensajesweetalert("center","warning","Ingrese Nombre del Parametro..!!",false,1900);
         return;
       }
 
       if(_count == 0){
-        mensajesweetalert("center","warning","Ingrese al menos un Detalle..!!",false,1800);
+        mensajesweetalert("center","warning","Ingrese al menos un Detalle..!!",false,1900);
         return;
       }
 
@@ -420,10 +421,28 @@
                     xxParametro: _parametro
                 }
 
+                $datosDetalle ={
+                    xxResultado: _result,
+                }
+
 
                 var xrespuesta = $.post("codephp/consultar_parametro.php", $datosParam);
                 xrespuesta.done(function(response){
                     if(response == 0){
+
+                        var xrespuesta = $.post("codephp/consultar_admindetalle.php", $datosDetalle);
+                        xrespuesta.done(function(response){
+
+                            if(response == 0){
+
+
+                            }
+
+
+                        });
+
+
+
 
                         //debugger;
 
@@ -469,22 +488,10 @@
 									
 										TableData.row.add([_pacaid, _paramom, _paradesc, _estado, _btnChk, _btnEdit]).draw();
 
-                                        
-                                        // _output = '<tr id="row_' + _count + '">';
-                                        // _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';                
-                                        // _output += '<td>' + _detalle + ' <input type="hidden" name="hidden_detalle[]" id="txtDetalle' + _count + '" value="' + _detalle + '" /></td>';
-                                        // _output += '<td>' + _valorV + ' <input type="hidden" name="hidden_valorv[]" id="txtValorV' +_count + '" value="' + _valorV + '" /></td>';
-                                        // _output += '<td>' + _valorI + ' <input type="hidden" name="hidden_valori[]" id="txtValorI' + _count + '" value="' + _valorI + '" /></td>';
-                                        // _output += '<td><div class="text-center"><div class="btn-group">';
-                                        // _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
-                                        // _output += '</tr>';
 
-
-                                        // $('#kt_ecommerce_report_shipping_table').append(_output);
-									
-									
-
-									$("#modal_parametro").modal("hide");									
+									$("#modal_parametro").modal("hide");
+                                    
+                                    // $.redirect('?page=supusuario&menuid=0'); 
 
 								}                                                                         
 							},
@@ -499,7 +506,7 @@
 
                     }else{
 
-                        mensajesweetalert("center","warning","Nombre del Parametro ya Existe..!",false,1800);
+                        mensajesweetalert("center","warning","Nombre del Parametro ya Existe..!",false,1900);
                     }
 
                 });
