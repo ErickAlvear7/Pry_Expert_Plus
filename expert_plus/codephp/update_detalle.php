@@ -1,0 +1,37 @@
+<?php
+
+    //error_reporting(E_ALL);
+    ini_set('display_errors', 0);
+
+    require_once("../dbcon/config.php");
+    require_once("../dbcon/functions.php");
+
+    mysqli_query($con,'SET NAMES utf8');  
+    mysqli_set_charset($con,'utf8');	
+
+
+    $respuesta = "ERR";
+
+    if(isset($_POST['xxPacaId']) and isset($_POST['xxDetalle']) and isset($_POST['xxValorV']) and isset($_POST['xxValorI'])
+          and isset($_POST['xxPadeId'])){
+
+        $xPacaid = $_POST['xxPacaId'];
+        $xPadeid = $_POST['xxPadeId'];
+        $xDetalle = safe($_POST['xxDetalle']);
+        $xValorV = safe($_POST['xxValorV']);
+        $xValorI = safe($_POST['xxValorI']);
+      
+
+
+        $xSQL = "UPDATE `expert_parametro_detalle` SET pade_nombre = '$xDetalle', pade_valorV = '$xValorV', pade_valorI =  $xValorI ";
+        $xSQL .= "WHERE paca_id = $xPacaid AND pade_id = $xPadeid ";
+        mysqli_query($con, $xSQL);
+    
+        $respuesta = "OK";
+     
+       
+    }
+
+    echo $respuesta;
+
+?>
