@@ -18,15 +18,41 @@
             $xUsuaid = $_POST['xxUsuaid'];
             $xNombre = safe($_POST['xxNombre']);
             $xApellido = safe($_POST['xxApellido']);
-            $xLogin = safe($_POST['xxLogin']); 
+            $xLogin = safe($_POST['xxLogin']);  
             $xPaisid =  $_POST['xxPaisid'];
             $xPerfilid =  $_POST['xxPerfilid'];
             $xCaducaPass =  $_POST['xxCaducaPass'];
             $xFechaCaduca =  $_POST['xxFecha'];
             $xCambiarPass = $_POST['xxCambiarPass'];
+            $xCambiarAvatar = $_POST['xxCambiarAvatar'];
+            $xAvatar = $_POST['xxAvatar'];
+
+            if($xCambiarAvatar == 'SI'){
+                $xFile = (isset($_FILES['xxFile']["name"])) ? $_FILES['xxFile']["name"] : '';
+
+                $xPath = "../img/";            
+
+                $xFechafile = new DateTime();
+                $xNombreFile = ($xFile != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFile"]["name"] : "";            
+    
+                if($xFile != ''){
+                    $xTmpFile = $_FILES["xxFile"]["tmp_name"];
+    
+                    if($xTmpFile != ""){
+                        move_uploaded_file($xTmpFile,$xPath.$xNombreFile);
+                    }
+                }
+
+                if(file_exists($xPath . $xAvatar)){
+                    unlink($xPath . $xAvatar);
+                }
+
+            }else{
+                $xNombreFile = $xAvatar;
+            }
 
             $xSQL = "UPDATE `expert_usuarios` SET perf_id=$xPerfilid,pais_id=$xPaisid,usua_nombres='$xNombre',usua_apellidos='$xApellido',";
-            $xSQL .= "usua_login=LOWER('$xLogin'),usua_caducapass='$xCaducaPass',usua_fechacaduca='{$xFechaCaduca}',usua_cambiarpass='$xCambiarPass' WHERE usua_id=$xUsuaid ";
+            $xSQL .= "usua_login=LOWER('$xLogin'),usua_caducapass='$xCaducaPass',usua_fechacaduca='{$xFechaCaduca}',usua_cambiarpass='$xCambiarPass',usua_avatarlogin='$xNombreFile' WHERE usua_id=$xUsuaid ";
             mysqli_query($con, $xSQL);
             
         }

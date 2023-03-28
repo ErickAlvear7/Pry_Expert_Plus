@@ -41,11 +41,11 @@ var KTUsersList = function () {
             const realDate = moment().subtract(timeCount, timeFormat).format();
 
             // Insert real date to last login attribute
-            dateRow[3].setAttribute('data-order', realDate);
+            //dateRow[3].setAttribute('data-order', realDate);
 
             // Set real date for joined column
             const joinedDate = moment(dateRow[5].innerHTML, "DD MMM YYYY, LT").format(); // select date from 5th column in table
-            dateRow[5].setAttribute('data-order', joinedDate);
+           // dateRow[5].setAttribute('data-order', joinedDate);
         });
 
         // Init datatable --- more info on datatables: https://datatables.net/manual/
