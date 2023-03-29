@@ -423,6 +423,7 @@
 
                 $datosDetalle ={
                     xxResultado: _result,
+                    xxPaisId: _idpais
                 }
 
 
@@ -435,73 +436,71 @@
 
                             if(response == 0){
 
+                                
+                                //debugger;
+
+                                $parametros ={
+                                    xxPaisId: _idpais,
+                                    xxUsuaId: _idusua,
+                                    xxEmprId: _idempr,
+                                    xxParametro: _parametro,
+                                    xxResultado: _result,
+                                    xxEstado: _estado,
+                                    xxDescripcion: _descripcion
+                                
+                                }
+
+                                $.ajax({
+                                    url: "codephp/grabar_parametro.php",
+                                    type: "POST",
+                                    dataType: "json",
+                                    data: $parametros,          
+                                    success: function(response){ 
+                                        if(response != 0){
+
+                                            _pacaid = response;										
+                                            _paramom = _parametro;
+                                            _paradesc = _descripcion;
+                                            _checked = "checked='checked'";
+
+                                            var _estado = '<td><div class="badge badge-light-primary">Activo</div></td>';
+
+
+                                            var _btnChk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                                                        '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _pacaid + '" value=""/>' +
+                                                        '</div></div></td>';
+                                                        
+
+                                            var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(' + _pacaid + ')" title="Editar Parametro" >' + 
+                                                            '<i class="fa fa-edit"></i></button></div></div></td>';            
+                                                        
+                                            TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+
+                                            TableData.column(0).visible(0);
+                                                
+                                            
+                                                TableData.row.add([_pacaid, _paramom, _paradesc, _estado, _btnChk, _btnEdit]).draw();
+
+
+                                            $("#modal_parametro").modal("hide");
+                                            
+                                            // $.redirect('?page=supusuario&menuid=0'); 
+
+                                        }                                                                         
+                                    },
+                                    error: function (error){
+                                        console.log(error);
+                                    }                            
+                                });
+
+
+                            }else{
+
+                                mensajesweetalert("center","warning","Nombre del Detalle y/o Valor Texto ya existe..!",false,1900);
 
                             }
 
-
                         });
-
-
-
-
-                        //debugger;
-
-                        $parametros ={
-                            xxPaisId: _idpais,
-                            xxUsuaId: _idusua,
-                            xxEmprId: _idempr,
-                            xxParametro: _parametro,
-                            xxResultado: _result,
-                            xxEstado: _estado,
-                            xxDescripcion: _descripcion
-                         
-                        }
-
-                        $.ajax({
-							url: "codephp/grabar_parametro.php",
-							type: "POST",
-							dataType: "json",
-							data: $parametros,          
-							success: function(response){ 
-								if(response != 0){
-
-									_pacaid = response;										
-									_paramom = _parametro;
-                                    _paradesc = _descripcion;
-                                    _checked = "checked='checked'";
-
-									var _estado = '<td><div class="badge badge-light-primary">Activo</div></td>';
-
-
-									var _btnChk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                                   '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _pacaid + '" value=""/>' +
-                                                   '</div></div></td>';
-												
-
-                                    var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(' + _pacaid + ')" title="Editar Parametro" >' + 
-				 						            '<i class="fa fa-edit"></i></button></div></div></td>';            
-												
-									TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
-
-									TableData.column(0).visible(0);
-										
-									
-										TableData.row.add([_pacaid, _paramom, _paradesc, _estado, _btnChk, _btnEdit]).draw();
-
-
-									$("#modal_parametro").modal("hide");
-                                    
-                                    // $.redirect('?page=supusuario&menuid=0'); 
-
-								}                                                                         
-							},
-							error: function (error){
-								console.log(error);
-							}                            
-						});
-
-                       
-
 
 
                     }else{
@@ -512,7 +511,7 @@
                 });
     }
 
-    //Eliminar Detalle
+    //Eliminar Detalle en linea
 
     $(document).on("click",".btnDelete",function(){
         row_id = $(this).attr("id");
