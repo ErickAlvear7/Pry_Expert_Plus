@@ -21,8 +21,11 @@
         $xValorI = safe($_POST['xxValorI']);
         $xEstado = safe($_POST['xxEstado']);
         $xOrden = $_POST['xxOrden'];
-      
 
+        if($xValorI == 0){
+            $xValorI = '';
+        }
+      
 
         $xSQL = "INSERT INTO `expert_parametro_detalle` (paca_id,pade_orden,pade_nombre, ";
         $xSQL .= "pade_valorV,pade_valorI,pade_estado) ";
