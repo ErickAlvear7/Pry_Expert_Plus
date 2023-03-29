@@ -130,7 +130,7 @@
                                 <span class="required">Detalle</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nombre del detalle"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="50" placeholder="nombre del detalle" value="" />                       
+                                <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />                       
                             </div>
                                 <div class="col-md-3 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
@@ -144,7 +144,7 @@
                                 <span class="required">Valor Entero</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valores enteros"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="5" maxlength="50" placeholder="valor entero" value="" />                       
+                                <input type="text" class="form-control form-control-solid" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" placeholder="valor entero" value="" />                       
                             </div>
                             <div class="col-md-2 fv-row">
                                 <button class="btn btn-sm btn-light-primary" id="btnAgregar">
@@ -220,10 +220,10 @@
                                         <td>
                                             <div class="text-center">
                                                 <div class="btn-group">	
-                                                    <button type="button" id="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="">
+                                                    <button type="button" id="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
-                                                    <button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">
+                                                    <button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Detalle'>
                                                         <i class="fa fa-edit"></i>
                                                     </button> 
                                                 </div>
@@ -258,23 +258,23 @@
             <div class="d-flex flex-column mb-7 fv-row">
                 <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                     <span class="required">Detalle</span>
-                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
+                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="nombre del detalle"></i>
                 </label>
-                <input type="text" class="form-control form-control-solid" id="txtDetalleEdit" name="txtDetalleEdit"  minlength="2" maxlength="50" />
+                <input type="text" class="form-control form-control-solid" id="txtDetalleEdit" name="txtDetalleEdit"  minlength="2" maxlength="100" />
             </div>
             <div class="d-flex flex-column mb-7 fv-row">
                 <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                     <span class="required">Valor Texto</span>
-                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
+                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
                 </label>
                 <input type="text" class="form-control form-control-solid" id="txtValorVedit" name="txtValorVedit" minlength="1" maxlength="50" />
             </div>
             <div class="d-flex flex-column mb-7 fv-row">
                 <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                     <span class="required">Valor Entero</span>
-                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a card holder's name"></i>
+                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valores enteros"></i>
                 </label>
-                <input type="text" class="form-control form-control-solid" id="txtValorIedit" name="txtValorIedit" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="5" maxlength="50" />
+                <input type="text" class="form-control form-control-solid" id="txtValorIedit" name="txtValorIedit" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" />
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -308,24 +308,28 @@
 
         if($.trim($('#txtDetalle').val()).length == 0)
         {           
-            mensajesweetalert("center","warning","Ingrese Detalle",false,1800);
+            mensajesweetalert("center","warning","Ingrese Detalle",false,1900);
             return false;
+          
         }
 
         if($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0 )
         {    
-            mensajesweetalert("center","warning","Ingrese Valor Texto o Valor Entero..!",false,1800);        
+            mensajesweetalert("center","warning","Ingrese Valor Texto o Valor Entero..!",false,1900);        
             return false;
+            
         }
 
         if($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0 )
         {    
-            mensajesweetalert("center","warning","Ingrese Solo Valor Texto o Valor Entero..!",false,1800);         
+            mensajesweetalert("center","warning","Ingrese Solo Valor Texto o Valor Entero..!",false,1900);         
             return false;
+       
         }
 
         var _detalle = $.trim($('#txtDetalle').val());
         var _valorV =  $.trim($('#txtValorV').val());
+
         _ordendet++;
 
         if($.trim($('#txtValorI').val()).length == 0){
@@ -333,6 +337,8 @@
         }else{
             _valorI = $.trim($('#txtValorI').val());
         }
+
+
 
                  $datosDetalle ={
                     xxPacaId: _pacaid,
