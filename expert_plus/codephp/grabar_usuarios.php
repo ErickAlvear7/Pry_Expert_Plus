@@ -48,7 +48,7 @@
                     move_uploaded_file($xTmpFile,$xPath.$xNombreFile);
                 }
             }else{
-                $xNombreFile = "man.png";
+                $xNombreFile = "default.png";
             }            
          
             $xSQL ="INSERT INTO `expert_usuarios` (pais_id,empr_id,perf_id,usua_nombres,usua_apellidos,usua_login,usua_password,";

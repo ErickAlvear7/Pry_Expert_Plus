@@ -132,7 +132,7 @@
 				</div>
 
 				<div class="card-body pt-0">
-					<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
+					<table class="table align-middle table-row-dashed fs-6 gy-5 table-hover" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
 						<thead>
 							<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
 								<th style="display:none;">Idmenu</th>
@@ -173,21 +173,21 @@
 								<td style="display:none;"><?php echo $menu['Idmenu']; ?></td>
 								<td><?php echo $menu['Menu']; ?></td>
 								<td><?php echo $menu['Observacion']; ?></td>
-								<td>
+								<td id="td_<?php echo $menu['Idmenu']; ?>">
 									<div class="<?php  echo $xTextColor; ?>"><?php echo $menu['Estado']; ?></div>
 								</td>
 								<td>
 									<div class="text-center">
 										<div class="form-check form-check-sm form-check-custom form-check-solid">
 												<input class="form-check-input btnEstado" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $menu['Idmenu']; ?>" <?php if ($menu['Estado'] == 'Activo') {
-												echo "checked";} else {'';} ?> value="<?php echo $menu['Idmenu']; ?>"  onchange="f_Check(<?php echo $xEmprid; ?>,<?php echo $menu['Idmenu']; ?>)" />
+												echo "checked";} else {'';} ?> value="<?php echo $menu['Idmenu']; ?>"  onchange="f_UpdateEstado(<?php echo $xEmprid; ?>,<?php echo $menu['Idmenu']; ?>)" />
 										</div>
 									</div>
 								</td>
 								<td>
 									<div class="text-center">
 										<div class="btn-group">
-											<button <?php echo $xDisabledEdit ?> onclick="f_Editar(<?php echo $menu['Idmenu']; ?>)" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Perfil'>
+											<button <?php echo $xDisabledEdit ?> onclick="f_Editar(<?php echo $menu['Idmenu']; ?>)" id="btnEditar_<?php echo $menu['Idmenu']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Menu'>
 												<i class='fa fa-edit'></i>
 											</button>																															 
 										</div>
@@ -209,7 +209,7 @@
 
 				if(_mensaje != ''){
 					//mensajesalertify(_mensaje+"..!","S","top-center",5);
-					mensajesweetalert("center","warning",_mensaje,false,1800);
+					mensajesweetalert("center", "warning", _mensaje, false, 1800);
 				}
 			});
 
@@ -225,43 +225,30 @@
 					_desc = $(this).closest("tr").find('td:eq(2)').text(); 
 			});
 
-			function f_Check(_emprid, _menuid){
+			function f_UpdateEstado(_emprid, _menuid){
 
 				let _check = $("#chk" + _menuid).is(":checked");
-				let _checked = "";
-				let _disabled = "";
 				let _class = "badge badge-light-primary";
+                let _td = "td_" + _menuid;
+                let _btnedit = "btnEditar_" + _menuid;						
 
 				if(_check){
-					_tipo = "Activo";
-					_disabled = "";
-					_checked = "checked='checked'";
+					_estado = "Activo";
 					_class = "badge badge-light-primary";
+					$('#'+_btnedit).prop("disabled",false);
 				}else{
-					_tipo = "Inactivo";
-					_disabled = "disabled";
+					_estado = "Inactivo";
 					_class = "badge badge-light-danger";
+					$('#'+_btnedit).prop("disabled",true);
 				}
 
-				var _lblEstado = '<td><div class="' + _class + '">' + _tipo + ' </div>';
-				
-				var _btnchk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-							'<input class="form-check-input btnEstado" type="checkbox" ' +  _tipo  +  ' id="chk' + _menuid + '"' +
-							' ' + _checked + ' value="' + _menuid + '" onchange="f_Check(' +_emprid  + ',' + _menuid + ')"/>' +
-							'</div></div></td>';
-				
-				var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + ' onclick="f_Editar(' +  _menuid + ')"' +
-							'id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Editar Perfil">' +
-							'<i class="fa fa-edit"></i></button></div></div></td>';
-
-				TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
-
-				TableData.row(_fila).data([_menuid, _menu, _desc, _lblEstado, _btnchk, _btnEdit ]).draw();
+                var _changetd = document.getElementById(_td);
+                _changetd.innerHTML = '<td><div class="' + _class + '">' + _estado + ' </div>';						
 
 				$parametros = {
 					xxMenuId: _menuid,
-					xxEmpr: _emprid,
-					xxTipo: _tipo
+					xxEmprid: _emprid,
+					xxEstado: _estado
 				}	
 
 				$.post("codephp/estado_menu.php", $parametros, function(response){

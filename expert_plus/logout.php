@@ -26,6 +26,9 @@
 	$_SESSION["s_login"] = "";  
     unset($_SESSION["s_usuario"]);
 
+    $_SESSION["s_avatar"] = "";
+    unset($_SESSION["s_avatar"]);
+
     @session_unset();
     @session_destroy();
     @session_write_close();

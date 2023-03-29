@@ -34,17 +34,17 @@
     $xFechaActual = strftime('%Y-%m-%d', time());
     $mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
 
-    $xSQL = "SELECT usua_id AS Idusuario, CONCAT(usua_nombres,' ',usua_apellidos) AS Nombres, usua_login AS Email, CASE usua_estado WHEN 'A' THEN 'Activo' ";
-	$xSQL .= "ELSE 'Inactivo' END AS Estado, usua_caducapass AS CaducaPass, usua_avatarlogin AS LogoUser, (SELECT per.perf_descripcion FROM `expert_perfil` per WHERE per.perf_id=usu.perf_id) AS Perfil, (SELECT pais_nombre AS Pais FROM `expert_pais` pai WHERE pai.pais_id=usu.pais_id) AS Pais FROM `expert_usuarios` usu WHERE usu.perf_id>1";
+    $xSQL = "SELECT usu.usua_id AS Idusuario, CONCAT(usu.usua_nombres,' ',usu.usua_apellidos) AS Nombres, usu.usua_login AS Email, CASE usu.usua_estado WHEN 'A' THEN 'Activo' ";
+	$xSQL .= "ELSE 'Inactivo' END AS Estado, usu.usua_caducapass AS CaducaPass, usua_avatarlogin AS LogoUser, (SELECT per.perf_descripcion FROM `expert_perfil` per WHERE per.perf_id=usu.perf_id) AS Perfil, (SELECT pais_nombre AS Pais FROM `expert_pais` pai WHERE pai.pais_id=usu.pais_id) AS Pais FROM `expert_usuarios` usu WHERE usu.perf_id>1";
 	$all_usuarios = mysqli_query($con, $xSQL);
 
     $xSQL = "SELECT pais_id AS IdPais, pais_nombre AS Pais, pais_flag AS Bandera FROM `expert_pais` ";
 	$xSQL .= " ORDER BY IdPais ";
     $all_pais = mysqli_query($con, $xSQL);
 
-	$xSQL = "SELECT p.perf_descripcion AS Descripcion,p.perf_id AS Codigo, p.perf_observacion AS Observacion FROM `expert_perfil` p ";
-	$xSQL .= " WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND perf_estado='A' ";
-	$xSQL .= " ORDER BY Codigo ";
+	$xSQL = "SELECT perf_descripcion AS Descripcion,perf_id AS Codigo,perf_observacion AS Observacion FROM `expert_perfil` ";
+	$xSQL .= "WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND perf_estado='A' ";
+	$xSQL .= "ORDER BY Codigo ";
     $all_perfil = mysqli_query($con, $xSQL);
 ?>	        
  
@@ -216,8 +216,8 @@
                                             <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
                                                 <div class="fv-row mb-7">
                                                     <label class="d-block fw-bold fs-6 mb-5">Avatar</label>
-                                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('img/man.png')">
-                                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url(img/man.png);" id="imgfile"></div>
+                                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('img/default.png')">
+                                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url(img/default.png);" id="imgfile"></div>
                                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar Avatar">
                                                             <i class="bi bi-pencil-fill fs-7"></i>
                                                             <input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
@@ -359,7 +359,7 @@
                
                 <div class="card-body py-4">
                     <!--begin::Table-->
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5 table-hover" id="kt_table_users" style="width: 100%;">
                         <thead>
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                 <th style="display:none;">Id</th>
@@ -385,7 +385,7 @@
                                     $avatar = trim($usu['LogoUser']);
                                     $perfil = trim($usu['Perfil']);
                                     if($avatar == ''){
-                                        $avatar = 'man.png';
+                                        $avatar = 'default.png';
                                     }
                                 ?>
                                     <?php 
@@ -405,7 +405,7 @@
                                         }
 
                                     ?>
-                                    <tr id="row_<?php echo $idusuario; ?>">
+                                    <tr>
                                         <td style="display:none;"><?php echo $idusuario; ?></td>
                                         <td style="display:none;"><?php echo $login; ?></td>
                                         <td class="d-flex align-items-center">
@@ -434,7 +434,7 @@
                                             <div class="text-center">
                                                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                     <input <?php echo $cheking; ?> class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $idusuario; ?>" 
-                                                        onchange="f_Check(<?php echo $xEmprid; ?>,<?php echo $usu['Idusuario']; ?>)" value="<?php echo $idusuario; ?>"/>
+                                                        onchange="f_UpdateEstado(<?php echo $xEmprid; ?>,<?php echo $usu['Idusuario']; ?>)" value="<?php echo $idusuario; ?>"/>
                                                 </div>
                                             </div>
                                         </td> 													
@@ -479,7 +479,7 @@
 
                 Inputmask({
                     "mask" : "9999-99-99"
-                }).mask("#txtFechacaduca");	                
+                }).mask("#txtFechacaduca");
 
                 var optionFormat = function(item) {
                     if ( !item.id ) {
@@ -523,10 +523,10 @@
                     _avatar = '';
 
                     //$("#kt_modal_add_user_form").trigger("reset");     
-                    document.getElementById('imgfile').style.backgroundImage="url(img/man.png)";
+                    document.getElementById('imgfile').style.backgroundImage="url(img/default.png)";
                     $("#kt_modal_add_user").modal("show");
                     $(".modal-title").text("Nuevo Usuario");
-                    $("#btnSave").text("Guardar");
+                    $("#btnSave").text("Grabar");
                     $("#chkCaducaPass").prop("checked", false);
                     $("#lblCaducaPass").text("NO");
                     $("#chkCamPass").prop("checked", false);
@@ -601,7 +601,7 @@
                             _caduca = data[0]['CaducaPass'];
                             _fechaCaduca = data[0]['FechaCaduca'];
                             _cambiarPass = data[0]['CambiarPass'];
-                            _avatar = data[0]['Avatar'];
+                            _avatar = data[0]['Avatar'] == '' ? 'default.png' : data[0]['Avatar'];
                             
                             //let _rdboption = 'rdboption_' + _cboPerfil;
 
@@ -817,7 +817,7 @@
 
                         $.ajax({
                             url: _ulr,
-                            type: "post",                
+                            type: "post",
                             data: form_data,
                             processData: false,
                             contentType: false,
@@ -892,7 +892,7 @@
 
             //cambiar estado y desactivar botones en linea
 
-            function f_Check(_emprid, _userid){
+            function f_UpdateEstado(_emprid, _userid){
                 
                 let _check = $("#chk" + _userid).is(":checked");
                 let _checked = "";
@@ -913,7 +913,7 @@
                     _disabled = "disabled";
                     _class = "badge badge-light-danger";
                     $('#'+_btnreset).prop("disabled",true);
-                    $('#'+_btnedit).prop("disabled",true);                    
+                    $('#'+_btnedit).prop("disabled",true);
                 }
     
                 var _changetd = document.getElementById(_td);

@@ -4,12 +4,17 @@
 
 	$xUserName = $_SESSION["s_usuario"];
 	$xLoginName = $_SESSION["s_login"];
-	$yPerfilid = $_SESSION["i_perfilid"];
-	$yEmprid = $_SESSION["i_emprid"];
-	$yUsuaid = $_SESSION["i_usuaid"];
-	$yPaisid = $_SESSION["i_paisid"];
+	$xPerfilid = $_SESSION["i_perfilid"];
+	$xEmprid = $_SESSION["i_emprid"];
+	$xUsuaid = $_SESSION["i_usuaid"];
+	$xPaisid = $_SESSION["i_paisid"];
+	$xAvatar = $_SESSION["s_avatar"];
 
-	$xSql = "SELECT * FROM `expert_parametro_paginas` WHERE empr_id=$yEmprid AND usua_id=$yUsuaid ";
+	if(strlen($xAvatar) < 5){
+		$xAvatar = "default.png";
+	}
+
+	$xSql = "SELECT * FROM `expert_parametro_paginas` WHERE empr_id=$xEmprid AND usua_id=$xUsuaid ";
 	$all_paginas = mysqli_query($con, $xSql);
 
 	foreach ($all_paginas as $pagina) {
@@ -25,7 +30,7 @@
 					<div class="menu-content d-flex align-items-center px-3">
 						<!--begin::Avatar-->
 						<div class="symbol symbol-50px me-5">
-							<img alt="Logo" src="assets/media/avatars/300-1.jpg" />
+							<img alt="Logo" src="img/<?php echo $xAvatar; ?>" />
 						</div>
 						<!--end::Avatar-->
 						<!--begin::Username-->
@@ -176,18 +181,12 @@
 										
 			<script>
 
-				$(document).ready(function(){
-
-					
-
-				});
-
 				function f_ChangeMode(obj){
 
 					let _check = $("#chkMode").is(":checked");
-					let _emprid = "<?php echo $yEmprid; ?>";
-					let _usuaid = "<?php echo $yUsuaid; ?>";
-					let _paisid = "<?php echo $yPaisid; ?>";
+					let _emprid = "<?php echo $xEmprid; ?>";
+					let _usuaid = "<?php echo $xUsuaid; ?>";
+					let _paisid = "<?php echo $xPaisid; ?>";
 
 					if(_check){
 						document.getElementById("tipoMode").innerHTML  = "<span class='form-check-label text-gray-600 fs-7' id='tipoMode'>Ligth Mode</span>";
@@ -206,9 +205,9 @@
 					}
 
 					$.post("codephp/update_darklightmode.php", $parametros , function(response){
-						console.log(response);
+						//console.log(response);
 
-						if(response == 'OK'){
+						if(response.trim() == 'OK'){
 
                             /**PARA CREAR REGISTRO DE LOGS */
                             $parametros = {

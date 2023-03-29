@@ -11,17 +11,17 @@
     
     $respuesta = "ERR";
 
-    if(isset($_POST['xxPaisid']) and isset($_POST['xxPerfil']) and isset($_POST['xxEmprid']) and isset($_POST['xxIdPerfil']) ){
-        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxPerfil']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxIdPerfil']) <> ''){    
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxPerfil']) and isset($_POST['xxEmprid']) and isset($_POST['xxPerfilid']) ){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxPerfil']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxPerfilid']) <> ''){    
 
             $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
-            $xPerfil = safe($_POST['xxPerfil']);
-            $xIdPerfil =  $_POST['xxIdPerfil'];
+            $xPerfilid =  $_POST['xxPerfilid'];
+            $xPerfil = safe($_POST['xxPerfil']);            
             $xObservacion = trim(safe($_POST['xxObservacion']), 'UTF-8');
 
             $xSQL = "UPDATE `expert_perfil` SET perf_descripcion='$xPerfil',perf_observacion='$xObservacion' ";
-            $xSQL .= "WHERE pais_id=$xPaisid,empr_id=$xEmprid AND perf_id=$xIdPerfil";
+            $xSQL .= "WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND perf_id=$xPerfilid ";
             
             if(mysqli_query($con, $xSQL)){
                 $respuesta = "OK";

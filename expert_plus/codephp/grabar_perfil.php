@@ -33,8 +33,8 @@
                 $id = mysqli_insert_id($con);
 
                 foreach($xResult as $drfila){
-                    $xSQL = "INSERT INTO `expert_perfil_menu_tarea`(empr_id,meta_id,perf_id,meta_estado) ";
-                    $xSQL .= "VALUES($xEmprid,$drfila,$id,'A')";
+                    $xSQL = "INSERT INTO `expert_perfil_menu_tarea`(empr_id,meta_id,perf_id,pais_id,meta_estado) ";
+                    $xSQL .= "VALUES($xEmprid,$drfila,$id,$xPaisid,'A')";
                     mysqli_query($con, $xSQL);
                 }
 

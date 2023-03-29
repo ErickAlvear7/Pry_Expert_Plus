@@ -21,10 +21,10 @@
             $xTipo = $_POST['xxTipo'];
             
             if($xTipo == 'Del'){
-                $xSQL = "UPDATE `expert_perfil_menu_tarea` SET meta_estado='I' WHERE empr_id=$xEmprid AND meta_id=$xIdMeta AND perf_id=$xIdPerfil";
+                $xSQL = "UPDATE `expert_perfil_menu_tarea` SET meta_estado='I' WHERE empr_id=$xEmprid AND meta_id=$xIdMeta AND perf_id=$xIdPerfil AND pais_id=$xPaisid ";
             }elseif($xTipo == 'Add'){
-                $xSQL = "INSERT INTO `expert_perfil_menu_tarea`(empr_id,meta_id,perf_id,meta_estado) ";
-                $xSQL .= "VALUES($xEmprid,$xIdMeta,$xIdPerfil,'A')";    
+                $xSQL = "INSERT INTO `expert_perfil_menu_tarea`(empr_id,meta_id,perf_id,pais_id,meta_estado) ";
+                $xSQL .= "VALUES($xEmprid,$xIdMeta,$xIdPerfil,$xPaisid,'A')";    
             }elseif($xTipo == 'Activo'){
                 $xSQL = "UPDATE `expert_perfil` SET perf_estado='A' WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND perf_id=$xIdPerfil";
             }elseif($xTipo == 'Inactivo'){
@@ -32,7 +32,7 @@
             }
 
             if(mysqli_query($con, $xSQL)){
-                $xrespuesta="OK";
+                $xrespuesta = "OK";
             }
         }
     }
