@@ -26,14 +26,14 @@
         exit();
     }
 
-    $idmenu = $_POST['idmenu'];
+    $xIdMenu = $_POST['idmenu'];
 
 	$xUsuaid = $_SESSION["i_usuaid"];
     $xPaisid = $_SESSION["i_paisid"];
     $xEmprid = $_SESSION["i_emprid"];
 
     $xSQL = "SELECT menu_descripcion AS Menu, menu_observacion AS Observacion, CASE menu_estado WHEN 'A' THEN 'Activo' ";
-    $xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_menu` WHERE menu_id=$idmenu AND empr_id=$xEmprid ";
+    $xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_menu` WHERE menu_id=$xIdMenu AND empr_id=$xEmprid ";
     $all_menu = mysqli_query($con, $xSQL);
 
     foreach($all_menu as $menu){
@@ -42,20 +42,19 @@
     }
 
     $xSQL="SELECT tar.tare_id AS TareaId, 'SI' as Ckeck, tar.tare_nombre AS Tarea, tar.tare_ruta AS Ruta, CASE tar.tare_estado WHEN 'A' THEN 'Activo' ELSE ";
-    $xSQL .="'Inactivo' END AS Estado, met.meta_orden AS Orden FROM `expert_tarea` tar INNER JOIN `expert_menu_tarea` met ON tar.tare_id=met.tare_id WHERE ";
-    $xSQL .="met.menu_id=$idmenu AND tar.empr_id=$yEmprid AND tar.tare_superadmin=0 UNION SELECT tar.tare_id AS TareaId, 'NO' as Ckeck, tar.tare_nombre AS Tarea, tar.tare_ruta AS Ruta, CASE ";
+    $xSQL .="'Inactivo' END AS Estado, met.meta_orden AS Orden FROM `expert_tarea` tar, `expert_menu_tarea` met WHERE tar.tare_id=met.tare_id AND ";
+    $xSQL .="met.menu_id=$xIdMenu AND tar.empr_id=$xEmprid AND tar.tare_superadmin=0 UNION SELECT tar.tare_id AS TareaId, 'NO' as Ckeck, tar.tare_nombre AS Tarea, tar.tare_ruta AS Ruta, CASE ";
     $xSQL .="tar.tare_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, 50000 AS Orden FROM `expert_tarea` tar WHERE tar.tare_id NOT IN(SELECT ";
-    $xSQL .="met.tare_id FROM `expert_menu_tarea` met WHERE met.menu_id=$idmenu AND met.empr_id=$yEmprid) AND tar.empr_id=$yEmprid AND tar.tare_superadmin=0  ORDER BY Orden; ";
+    $xSQL .="met.tare_id FROM `expert_menu_tarea` met WHERE met.menu_id=$xIdMenu AND met.empr_id=$xEmprid) AND tar.empr_id=$xEmprid AND tar.tare_superadmin=0  ORDER BY Orden; ";
     $all_tarea = mysqli_query($con, $xSQL);
+
+    //file_put_contents('log_seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
 
 ?>
 
 <div id="kt_content_container" class="container-xxl">
-   <div class="card card-flush">
-        <!-- <div class="card-toolbar d-flex align-self-end">
-            <a href="?page=seg_menuadmin" class="btn btn-light-primary"><i class="las la-arrow-left"></i>Regresar</a>
-        </div>	 -->
-        <div class="card-header">
+   <div class="card">
+        <div class="card-header border-0 pt-6">
             <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
                 <li class="nav-item">
                     <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_settings_general">											
@@ -85,40 +84,45 @@
                 </li>
             </ul>
         </div>
+
         <div class="tab-content" id="myTabContent">
             <input type="hidden" id="menuold" value="<?php echo $xMenu ?>">
             <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
-                <div class="card-header"> 
-                    <div class="card-toolbar">
-                        <button type="button" name="editar" id="editar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $yEmprid; ?>,<?php echo $yUsuaid; ?>)"><i class="las la-save"></i>Guardar</button>
-                    </div>
-                </div> 
-                <div class="card-body">
-                    <div class="row fv-row mb-7">
-                        <div class="col-md-2 text-md-end">
-                            <label class="fs-6 fw-bold form-label mt-3">
-                                <span class="required">Menu</span>
-                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Nombre del Menu"></i>
-                            </label>
+                <div class="card">
+                    <div class="card-header border-0 pt-6"> 
+                        <div class="card-title">
+                        </div>                        
+                        <div class="card-toolbar">
+                            <button type="button" name="editar" id="editar" class="btn btn-light-primary" onclick="f_Guardar(<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>,<?php echo $xIdMenu; ?>,'<?php echo $xMenu; ?>')"><i class="las la-save"></i>Grabar</button>
                         </div>
-                        <div class="col-md-9">
-                            <input type="hidden" class="form-control form-control-solid" name="txtIdMenu" id="txtIdMenu" value="<?php  echo $idmenu; ?>" />
-                            <input type="text" class="form-control form-control-solid" name="txtMenu" id="txtMenu" maxlength="150" value="<?php  echo $xMenu; ?>" />
+                    </div> 
+                    <div class="card-body pt-0">
+                        <div class="row fv-row mb-7">
+                            <div class="col-md-3 text-md-end">
+                                <label class="fs-6 fw-bold form-label mt-3">
+                                    <span class="required">Menu</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Nombre del Menu"></i>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control form-control-solid" name="txtMenu" id="txtMenu" maxlength="150" value="<?php  echo $xMenu; ?>" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="row fv-row mb-7">
-                        <div class="col-md-2  text-md-end">
-                            <label class="fs-6 fw-bold form-label mt-3">
-                                <span>Descripcion</span>
-                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripción del Menu"></i>
-                            </label>
+                        <div class="row fv-row mb-7">
+                            <div class="col-md-3  text-md-end">
+                                <label class="fs-6 fw-bold form-label mt-3">
+                                    <span>Descripcion</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripción del Menu"></i>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <textarea class="form-control form-control-solid" name="txtDescripcion" id="txtDescripcion" maxlength="200" onkeydown="return (event.keyCode!=13);" value="<?php echo $xObservacion; ?>"><?php echo $xObservacion; ?></textarea>
+                            </div>                                                          
                         </div>
-                        <div class="col-md-9">
-                            <textarea class="form-control form-control-solid" name="txtDescripcion" id="txtDescripcion" maxlength="200" onkeydown="return (event.keyCode!=13);" value="<?php echo $xObservacion; ?>"><?php echo $xObservacion; ?></textarea>
-                        </div>                                                          
                     </div>
                 </div>
             </div>
+
             <div class="tab-pane fade" id="kt_ecommerce_settings_store" role="tabpanel">
                 <div class="card">
                     <div class="card-header border-0 pt-6">                
@@ -133,32 +137,15 @@
                                 <input type="text" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Dato" />
                             </div>
                         </div>
-                        <div class="card-toolbar">
-                            <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                                <div class="w-150px me-3">
-                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Estado" data-kt-ecommerce-order-filter="status">
-                                        <option></option>
-                                        <option value="all">Todos</option>
-                                        <option value="Activo">Activo</option>
-                                        <option value="Inactivo">Inactivo</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
-                                <div class="fw-bolder me-5">
-                                <span class="me-2" data-kt-customer-table-select="selected_count"></span>Selected</div>
-                                <button type="button" class="btn btn-danger" data-kt-customer-table-select="delete_selected">Delete Selected</button>
-                            </div>
-                        </div>
-                                            
                     </div>
+
                     <div class="row d-flex justify-content-center">
                         <div class="card-body pt-0 ">
                             <table class="table align-middle table-row-dashed fs-6 gy-5 table-hover" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
                             <thead>
-                                    <tr class="text-start text-gray-400 fw-bolder fs-7 gs-0">
-                                        <th>Seleccionar</th>
+                                    <tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
                                         <th style="display:none;">IdTarea</th>
+                                        <th>Seleccionar</th>                                        
                                         <th>SubMenu</th>
                                         <th>Estado</th>
                                     </tr>
@@ -184,24 +171,22 @@
                                                 $xTextColorEst = "";
                                             }
                                         ?>     
-                                    <tr>
-                                        <td style="text-align: center;" >
-                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $tareas['TareaId']; ?>" <?php echo $Checked; ?> onclick="f_SelectSubMenu(<?php echo $tareaid; ?>,<?php echo $idmenu; ?>,<?php echo $yEmprid; ?>)"/>
-                                            </div>
-                                        </td>
-
-                                        <td style="display:none;"><?php echo $tareas['TareaId']; ?></td>
-                                        
-                                        <td>
-                                            <div id="div_<?php echo $tareas['TareaId']; ?>" class="<?php  echo $xTextColorSub; ?>" >
-                                               <?php echo $tareas['Tarea']; ?>
-                                             </div>
-                                        </td>
-                                        <td>
-                                           <div  id="est_<?php echo $tareas['TareaId']; ?>" class="<?php echo $xTextColorEst; ?>"><?php echo $tareas['Estado']; ?></div>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td style="display:none;"><?php echo $tareaid; ?></td>
+                                            <td style="text-align: center;" >
+                                                <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                    <input class="form-check-input chkTarea" type="checkbox" id="chk<?php echo $tareaid; ?>" <?php echo $Checked; ?> onclick="f_SelectSubMenu(<?php echo $tareaid; ?>,<?php echo $xIdMenu; ?>,<?php echo $xEmprid; ?>)"/>
+                                                </div>
+                                            </td>                                        
+                                            <td>
+                                                <div id="div_<?php echo $tareaid; ?>" class="<?php  echo $xTextColorSub; ?>" >
+                                                    <?php echo $tareas['Tarea']; ?>
+                                                </div>
+                                            </td>
+                                            <td>
+                                            <div  id="est_<?php echo $tareaid; ?>" class="<?php echo $xTextColorEst; ?>"><?php echo $tareas['Estado']; ?></div>
+                                            </td>
+                                        </tr>
                                     <?php } ?>    
                                 </tbody>
                             </table>
@@ -223,9 +208,9 @@
                 let _div = "div_" + _id;              
                 let _check = $("#chk" + _id).is(":checked");
                 if(_check){
-                    $("#"+_div).addClass("badge badge-light-primary");
+                    $("#"+_div).addClass("badge badge-light-success");
                 }else{
-                    $("#"+_div).removeClass("badge badge-light-primary");
+                    $("#"+_div).removeClass("badge badge-light-success");
                 }                        
             });
         }); 
@@ -254,15 +239,13 @@
 
         }
 
-        function f_Guardar(_emprid, _usuaid){
+        function f_Guardar(_emprid, _usuaid, _idmenu, _menuold){
 
-            var _paisid = "<?php echo $yPaisid; ?>"
-            var _idmenu = $('#txtIdMenu').val();
+            var _paisid = "<?php echo $xPaisid; ?>"
             var _menu = $.trim($("#txtMenu").val());
             var _observacion = $.trim($("#txtDescripcion").val());
             var _buscar = 'NO';
-            var _menuold = $.trim($("#menuold").val());
-    
+
             if(_menu == '')
             {       
                 mensajesweetalert("center","warning","Ingrese Nombre del Menu..!",false,1800);  
@@ -281,10 +264,10 @@
             if(_buscar == 'SI'){                
                 var xresponse = $.post("codephp/consultar_menu.php", $parametros);
                 xresponse.done(function(response){
-                    if(response == '0'){
+                    if(response.trim() == '0'){
                         funGrabar(_paisid,_emprid,_usuaid,_idmenu,_menu,_observacion);                        
                     }else{
-                        mensajesweetalert("center","warning","Menú ya Existe..!",false,1800);
+                        mensajesweetalert("center", "warning", "Menú ya Existe..!", false, 1800);
                     }
                 }); 
             }else{
@@ -318,7 +301,7 @@
 
                     $.redirect('?page=supmenu&menuid=0', {'mensaje': 'Actualizado con Exito..!'});                             
                 }else{
-                    console.log(response);
+                    //console.log(response);
                 }
 
             }); 

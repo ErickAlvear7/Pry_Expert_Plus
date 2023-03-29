@@ -43,10 +43,11 @@
                     }
                 }
 
-                if(file_exists($xPath . $xAvatar)){
-                    unlink($xPath . $xAvatar);
+                if($xAvatar != 'default.png'){
+                    if(file_exists($xPath . $xAvatar)){
+                        unlink($xPath . $xAvatar);
+                    }
                 }
-
             }else{
                 $xNombreFile = $xAvatar;
             }

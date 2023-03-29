@@ -14,7 +14,7 @@
 
     //$xServidor = $_SERVER['HTTP_HOST'];
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
-    $menuid = $_GET['menuid'] ;
+    $menuid = $_GET['menuid'];
     
     @session_start();
 
@@ -34,8 +34,8 @@
     
 	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
     
-    $xSQL = "SELECT per.perf_id AS Id,per.perf_descripcion AS Perfil,per.perf_observacion AS Descripcion,CASE per.perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
-    $xSQL .= "FROM `expert_perfil` per WHERE per.pais_id=$xPaisid AND per.empr_id=$xEmprid";
+    $xSQL = "SELECT perf_id AS Id, perf_descripcion AS Perfil, perf_observacion AS Descripcion,CASE perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
+    $xSQL .= "FROM `expert_perfil` WHERE pais_id=$xPaisid AND empr_id=$xEmprid";
 
     $all_perfiles = mysqli_query($con, $xSQL);
     foreach ($all_perfiles as $perfil){
@@ -45,19 +45,23 @@
 ?>				
 					
 		<div id="kt_content_container" class="container-xxl">
-			<input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
-			<div class="card card-flush">
-				<div class="card-toolbar">
-					<a href="?page=addperfil&menuid=<?php echo $menuid; ?>" class="btn btn-sm btn-light-primary">
-						<span class="svg-icon svg-icon-2">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
-								<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
-							</svg>
-						</span>
-					Nuevo Perfil</a>
-				</div>					
-				<div class="card-header align-items-center py-5 gap-2 gap-md-5">					
+
+			<div class="card mb-5 mb-xxl-8">
+				<div class="card-body pt-9 pb-0">
+					<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
+						<li class="nav-item mt-2">
+							<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="?page=seg_perfiladmin&menuid=<?php echo $menuid; ?>">Perfil</a>
+						</li>
+						<li class="nav-item mt-2">
+							<a class="nav-link text-active-primary ms-0 me-10 py-5" href="?page=seg_usuarioadmin&menuid=<?php echo $menuid; ?>">Usuarios</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="card">
+				<input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
+				<div class="card-header border-0 pt-6">
 					<div class="card-title">					
 						<div class="d-flex align-items-center position-relative my-1">
 							<span class="svg-icon svg-icon-1 position-absolute ms-4">
@@ -68,21 +72,20 @@
 							</span>
 							<input type="text" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Dato" />
 						</div>
-						<div id="kt_ecommerce_report_shipping_export" class="d-none"></div>
 					</div>
-					
-					<!--<div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-						<div class="w-150px">
-							<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Estado" data-kt-ecommerce-order-filter="status">
-								<option></option>
-								<option value="all">Todos</option>
-								<option value="Activo">Activo</option>
-								<option value="Inactivo">Inactivo</option>
-							</select>
-						</div>
-					</div>-->
-					
+
+					<div class="card-toolbar">
+						<a href="?page=addperfil&menuid=<?php echo $menuid; ?>" class="btn btn-primary">
+							<span class="svg-icon svg-icon-2">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
+									<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
+								</svg>
+							</span>
+						Nuevo Perfil</a>
+					</div>
 				</div>
+
 				<div class="card-body pt-0">
 					<table class="table align-middle table-row-dashed fs-6 gy-5 table-hover" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
 						<thead>
@@ -118,28 +121,28 @@
 									$xTextColor = 'badge badge-light-danger';
 								}
                             ?>
-							<tr>
-                                <td><?php echo $perfil['Perfil']; ?></td>
-                                <td><?php echo $perfil['Descripcion']; ?></td>								
-								<td id="td<?php echo $perfil['Id']; ?>">
-									<div class="<?php echo $xTextColor; ?>"><?php echo $perfil['Estado']; ?></div>
-								</td>								
-                                <td style="text-align:center">
-									<div class="form-check form-check-sm form-check-custom form-check-solid">
-										<input class="form-check-input btnEstado" type="checkbox" <?php echo $xDisabledChk; ?> id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
-											echo "checked='checked'";} else {'';} ?> onchange="f_Check(<?php echo $xEmprid; ?>,<?php echo $perfil['Id']; ?>)" value="<?php echo $perfil['Id']; ?>" />
-									</div>
-                                </td>
-								<td>
-									<div class="text-center">
-										<div class="btn-group">
-											<button <?php echo $xDisabledEdit ?> onclick="f_Editar(<?php echo $perfil['Id']; ?>)" id="btnEdit<?php echo $perfil['Id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Perfil'>
-												<i class='fa fa-edit'></i>
-											</button>
+								<tr>
+									<td><?php echo $perfil['Perfil']; ?></td>
+									<td><?php echo $perfil['Descripcion']; ?></td>								
+									<td id="td_<?php echo $perfil['Id']; ?>">
+										<div class="<?php echo $xTextColor; ?>"><?php echo $perfil['Estado']; ?></div>
+									</td>								
+									<td style="text-align:center">
+										<div class="form-check form-check-sm form-check-custom form-check-solid">
+											<input class="form-check-input btnEstado" type="checkbox" <?php echo $xDisabledChk; ?> id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
+												echo "checked='checked'";} else {'';} ?> onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $perfil['Id']; ?>)" value="<?php echo $perfil['Id']; ?>" />
 										</div>
-									</div>
-								</td>                                
-							</tr>
+									</td>
+									<td>
+										<div class="text-center">
+											<div class="btn-group">
+												<button <?php echo $xDisabledEdit ?> onclick="f_Editar(<?php echo $perfil['Id']; ?>)" id="btnEditar_<?php echo $perfil['Id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Perfil'>
+													<i class='fa fa-edit'></i>
+												</button>
+											</div>
+										</div>
+									</td>                                
+								</tr>
                             <?php }
                                 ?>                            
 						</tbody>
@@ -162,7 +165,6 @@
 					_fila = $(this).closest("tr");
 					_perfil = $(this).closest("tr").find('td:eq(0)').text(); 
 					_descripcion = $(this).closest("tr").find('td:eq(1)').text(); 
-        			console.log(_fila);
 				});
 
 
@@ -172,51 +174,31 @@
 				$.redirect('?page=editperfil&menuid=<?php echo $menuid; ?>', {'idperfil': _perfid}); //POR METODO POST
 			}
 
-			function f_Check(_emprid, _perfid){
-				//let _div = "div_" + _perfid;              
+			function f_UpdateEstado(_paisid, _emprid, _perfid){
+				
 				let _check = $("#chk" + _perfid).is(":checked");
-				let _btn = "btnEdit" + _perfid;
-				let _td = "td" + _perfid;
-				let _checked = "";
-				let _disabled = "";
-				let _classes = "badge badge-light-primary";
+                let _td = "td_" + _perfid;
+                let _btnedit = "btnEditar_" + _perfid;	
 
 				if(_check){
-					//$("#"+_div).removeClass("badge badge-light-danger");
-					//$("#"+_div).addClass("badge badge-light-primary");
-					//document.getElementById(_btn).disabled = false;
-					//document.getElementById(_td).innerHTML  = "<div class='badge badge-light-primary'>Activo</div>";
-					_tipo = "Activo";
-					_checked = "checked='checked'";
+					_estado = "Activo";
+					_class = "badge badge-light-primary";
+					$('#'+_btnedit).prop("disabled",false);
 				}else{
-					//$("#"+_div).removeClass("badge badge-light-primary");
-					//$("#"+_div).addClass("badge badge-light-danger");
-					//document.getElementById(_btn).disabled = true;
-					//document.getElementById(_td).innerHTML  = "<div class='badge badge-light-danger'>Inactivo</div>";
-					_tipo = "Inactivo";
-					_disabled = "disabled";
-					_classes = "badge badge-light-danger";
+					_estado = "Inactivo";
+					_class = "badge badge-light-danger";
+					$('#'+_btnedit).prop("disabled",true);
 				}
 
-				 var _estado = '<td><div class="' + _classes + '">' + _tipo + ' </div>' ;
-
-				 var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-				 			'<input class="form-check-input btnEstado" type="checkbox" id="chk' + _perfid + '" ' + _checked + ' onchange="f_Check(' +
-				 			_emprid + ',' + _perfid + ')"' + ' value="' + _perfid + '"' + '/></div></td>';
-				 			
-				 var _boton = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + ' onclick="f_Editar(' + _perfid + ')" ' +
-				 			'id="btnEdit' + _perfid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Editar Perfil" >' + 
-				 			'<i class="fa fa-edit"></i></button></div></div></td>';
-
-				TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
-
-				TableData.row(_fila).data([_perfil , _descripcion, _estado, _btnchk, _boton ]).draw();
+                var _changetd = document.getElementById(_td);
+                _changetd.innerHTML = '<td><div class="' + _class + '">' + _estado + ' </div>';					
 				
 				$parametros = {
+						xxPaisid: _paisid,
                         xxIdPerfil: _perfid,
                         xxIdMeta: 0,
                         xxEmprid: _emprid,
-                        xxTipo: _tipo
+                        xxTipo: _estado
                     }				
 				
 				var xrespuesta = $.post("codephp/delnew_perfil.php", $parametros);

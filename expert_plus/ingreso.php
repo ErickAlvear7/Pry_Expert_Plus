@@ -20,6 +20,7 @@
 	$_SESSION["i_emprid"] = null;
 	$_SESSION["s_perfdesc"] = null;
 	$_SESSION["s_login"] = null;
+	$_SESSION["s_avatar"] = null;
 	$_SESSION["s_namehost"] = gethostname();
 
 	$respuesta = 'ERR';
@@ -41,9 +42,11 @@
 			$xPassword = safe($_POST['password']);
 			$xnewPassword = md5($xPassword);
 
-			$xSQL = " SELECT usu.usua_id AS UsuarioId, usu.pais_id AS PaisId, usu.empr_id AS EmprID, usu.usua_login AS NombreLogin, ";
+			$xSQL = " SELECT usu.usua_id AS UsuarioId, usu.pais_id AS PaisId, usu.empr_id AS EmprID, usu.usua_login AS NombreLogin, usu.usua_avatarlogin AS Avatar,";
 			$xSQL .= " CONCAT(usu.usua_nombres,' ',usu.usua_apellidos) AS NombreUsuario, per.perf_id AS PerfilId, per.perf_descripcion AS PerfilName FROM `expert_usuarios` usu ";
-			$xSQL .= " INNER JOIN `expert_perfil` per ON usu.perf_id=per.perf_id WHERE usu.usua_login='$xUsuario' AND usua_password='$xnewPassword' AND usu.usua_estado='A' AND per.perf_estado='A' ";
+			$xSQL .= " INNER JOIN `expert_perfil` per ON usu.perf_id=per.perf_id WHERE usu.usua_login='$xUsuario' AND usu.usua_password='$xnewPassword' AND usu.usua_estado='A' AND per.perf_estado='A' ";
+			
+			//file_put_contents('log_seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
 			$all_ingreso = mysqli_query($con, $xSQL);
 
 			if(mysqli_num_rows($all_ingreso) > 0){
@@ -56,6 +59,7 @@
 					$_SESSION["s_usuario"] = $ingreso['NombreUsuario'];
 					$_SESSION["i_perfilid"] = $ingreso['PerfilId'];
 					$_SESSION["s_perfdesc"] = $ingreso['PerfilName'];
+					$_SESSION["s_avatar"] = $ingreso['Avatar'];
 				}
 				$respuesta  = 'OK';
 	
@@ -68,6 +72,7 @@
 				$_SESSION["i_emprid"] = null;
 				$_SESSION["s_perfdesc"] = null;
 				$_SESSION["s_login"] = null;
+				$_SESSION["s_avatar"] = null;
 			}
 
 		

@@ -151,12 +151,12 @@
 					<table class="table align-middle table-row-dashed fs-6 gy-5 table-hover" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
 						<thead>
 							<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
-									<th>Perfil</th>
-									<th>Descipcion</th>                                                                        									
-									<th>Pais</th>
-									<th>Estado</th>
-									<th>Status</th>
-									<th style="text-align:center;">Opciones</th>
+								<th>Perfil</th>
+								<th>Descipcion</th>                                                                        									
+								<th>Pais</th>
+								<th>Estado</th>
+								<th>Status</th>
+								<th style="text-align:center;">Opciones</th>
 							</tr>
 						</thead>
 						<tbody class="fw-bold text-gray-600">
@@ -193,21 +193,21 @@
 								<td><?php echo $perfil['Descripcion']; ?></td>								
 								<td><?php echo $perfil['Pais']; ?></td>
 								
-								<td id="td<?php echo $perfil['Id']; ?>">
+								<td id="td_<?php echo $perfil['Id']; ?>">
 									<div class="<?php echo $xTextColor; ?>"><?php echo $perfil['Estado']; ?></div>
 								</td>                                    
 
 								<td style="text-align:center">
 									<div class="form-check form-check-sm form-check-custom form-check-solid">
 										<input class="form-check-input btnEstado" type="checkbox" id="chk<?php echo $perfil['Id']; ?>" <?php if ($perfil['Estado'] == 'Activo') {
-											echo "checked='checked'";} else {'';} ?> onchange="f_Check(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $perfil['Id']; ?>)" value="<?php echo $perfil['Id']; ?>" />
+											echo "checked='checked'";} else {'';} ?> onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $perfil['Id']; ?>)" value="<?php echo $perfil['Id']; ?>" />
 									</div>
 								</td>     
 								
 								<td>
 									<div class="text-center">
 										<div class="btn-group">
-											<button <?php echo $xDisabledEdit ?> onclick="f_Editar(<?php echo $perfil['Id']; ?>)" id="btnEdit<?php echo $perfil['Id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Perfil'>
+											<button <?php echo $xDisabledEdit ?> onclick="f_Editar(<?php echo $perfil['Id']; ?>)" id="btnEditar_<?php echo $perfil['Id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Editar Perfil'>
 												<i class='fa fa-edit'></i>
 											</button>
 										</div>
@@ -233,70 +233,43 @@
 					mensajesweetalert("center","warning",_mensaje,false,1800);
 				}
 
-				$(document).on("click",".btnEstado",function(e){
-					_fila = $(this).closest("tr");
-					_perfil = $(this).closest("tr").find('td:eq(0)').text(); 
-					_descripcion = $(this).closest("tr").find('td:eq(1)').text(); 
-					_pais = $(this).closest("tr").find('td:eq(2)').text(); 
-        			//console.log(_fila);
-				});
+				// $(document).on("click",".btnEstado",function(e){
+				// 	_fila = $(this).closest("tr");
+				// 	_perfil = $(this).closest("tr").find('td:eq(0)').text(); 
+				// 	_descripcion = $(this).closest("tr").find('td:eq(1)').text(); 
+				// 	_pais = $(this).closest("tr").find('td:eq(2)').text(); 
+        		// 	//console.log(_fila);
+				// });
 			});
 
 			function f_Editar(_perfid){
 				$.redirect('?page=editsuperperfil&menuid=0', {'idperfil': _perfid}); //POR METODO POST
 			}
 
-			function f_Check(_paisid, _emprid, _perfid){
-				//let _div = "div_" + _perfid;              
+			function f_UpdateEstado(_paisid, _emprid, _perfid){				
 				let _check = $("#chk" + _perfid).is(":checked");
-				let _btn = "btnEdit" + _perfid;
-				let _td = "td" + _perfid;
-				let _checked = "";
-				let _disabled = "";
-				let _classes = "badge badge-light-primary";
-
-				//alert(_perfil);
-				//alert(_descripcion);
+                let _td = "td_" + _perfid;
+                let _btnedit = "btnEditar_" + _perfid;	
 
 				if(_check){
-					//$("#"+_div).removeClass("badge badge-light-danger");
-					//$("#"+_div).addClass("badge badge-light-primary");
-					//document.getElementById(_btn).disabled = false;
-					//document.getElementById(_td).innerHTML  = "<div class='badge badge-light-primary'>Activo</div>";
-					_tipo = "Activo";
-					_checked = "checked='checked'";
+					_estado = "Activo";
+					_class = "badge badge-light-primary";
+					$('#'+_btnedit).prop("disabled",false);
 				}else{
-					//$("#"+_div).removeClass("badge badge-light-primary");
-					//$("#"+_div).addClass("badge badge-light-danger");
-					//document.getElementById(_btn).disabled = true;
-					//document.getElementById(_td).innerHTML  = "<div class='badge badge-light-danger'>Inactivo</div>";
-					_tipo = "Inactivo";
-					_disabled = "disabled";
-					_classes = "badge badge-light-danger";
+					_estado = "Inactivo";
+					_class = "badge badge-light-danger";
+					$('#'+_btnedit).prop("disabled",true);
 				}
 
-				// var _tdperfil = '<td>' + _perfil + '</td>';
-
-				 var _estado = '<td><div class="' + _classes + '">' + _tipo + ' </div>' ;
-
-				 var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-				 			'<input class="form-check-input btnEstado" type="checkbox" id="chk' + _perfid + '" ' + _checked + ' onchange="f_Check(' +
-				 			_emprid + ',' + _perfid + ')"' + ' value="' + _perfid + '"' + '/></div></td>';
-				 			
-				 var _boton = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + ' onclick="f_Editar(' + _perfid + ')" ' +
-				 			'id="btnEdit' + _perfid + '"' + ' class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Editar Perfil" >' + 
-				 			'<i class="fa fa-edit"></i></button></div></div></td>';
-				 			
-				TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
-
-				TableData.row(_fila).data([_perfil , _descripcion, _pais, _estado, _btnchk, _boton ]).draw();
+                var _changetd = document.getElementById(_td);
+                _changetd.innerHTML = '<td><div class="' + _class + '">' + _estado + ' </div>';	
 				
 				$parametros = {
 					xxPaisid: _paisid,
 					xxIdPerfil: _perfid,
 					xxIdMeta: 0,
 					xxEmprid: _emprid,
-					xxTipo: _tipo
+					xxTipo: _estado
 				}				
 				
 				var xrespuesta = $.post("codephp/delnew_superperfil.php", $parametros);

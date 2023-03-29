@@ -1,4 +1,14 @@
-								
+<?php
+
+	@session_start();
+
+	$xAvatar = $_SESSION["s_avatar"];
+
+	if(strlen($xAvatar) < 5){
+		$xAvatar = "default.png";
+	}	
+
+?>
 								<!--begin::Toolbar wrapper-->
 								<div class="d-flex align-items-stretch flex-shrink-0">
 									<!--begin::Search-->
@@ -97,7 +107,7 @@
 									<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 										<!--begin::Menu wrapper-->
 										<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-											<img src="assets/media/avatars/300-1.jpg" alt="user" />
+											<img src="img/<?php echo $xAvatar; ?>" alt="user" />
 										</div>
 
 <?php include 'partials/menus/_user-account-menu.php' ?>

@@ -32,6 +32,7 @@
 	$xUsuaid = $_SESSION["i_usuaid"];
     $xPaisid = $_SESSION["i_paisid"];
     $xEmprid = $_SESSION["i_emprid"];
+	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
 
 	$xSQL = "SELECT tare_id AS Id, tare_nombre AS Tarea, tare_ruta AS Accion, CASE tare_estado WHEN 'A' THEN 'Activo' ";
 	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_tarea` WHERE empr_id=$xEmprid ORDER BY tare_orden";
@@ -148,7 +149,7 @@
 				</div>
 
 				<div class="card-body pt-0">
-					<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
+					<table class="table align-middle table-row-dashed fs-6 gy-5 table-hover" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
 						<thead>
 							<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
 								<th style="display:none;">IdTarea</th>
@@ -188,7 +189,7 @@
 									<td style="display:none;"><?php echo $tareas['Id']; ?></td>
 									<td><?php echo $tareas['Tarea']; ?></td>
 									<td><?php echo $tareas['Accion']; ?></td>
-									<td>
+									<td id="td_<?php echo $tareas['Id']; ?>">
 										<div class="<?php  echo $xTextColor; ?>"><?php echo $tareas['Estado']; ?></div>
 									</td>
 									<td>
@@ -202,7 +203,7 @@
 									<td>
 										<div class="text-center">
 											<div class="btn-group">
-												<button <?php echo $xDisabledEdit ?> id="btnEditar<?php echo $tareas['Id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Tarea'>
+												<button <?php echo $xDisabledEdit ?> id="btnEditar_<?php echo $tareas['Id']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Tarea'>
 													<i class='fa fa-edit'></i>
 												</button>																															 
 											</div>
@@ -269,8 +270,7 @@
 				_mensaje = $('input#mensaje').val();
 
 				if(_mensaje != ''){
-					//mensajesweetalert("center","success",_mensaje+"..!",false,1800);
-					mensajesalertify(_mensaje +"..!", "S", "top-center",5);
+					mensajesweetalert("center", "success", _mensaje + "..!", false, 1800);
 				}
 
 				$("#btnNuevo").click(function(){
@@ -331,7 +331,6 @@
 						_ulr = "codephp/new_tarea.php";
 					}
 
-					
 					$datosTarea = {
 						xxEmprid: _emprid,
 						xxUsuaid: _usuaid,
@@ -340,7 +339,6 @@
 						xxRuta: _ruta
 					}	
 
-					
 					if(_buscar == 'SI'){
 						var xrespuesta = $.post("codephp/consultar_tarea.php", { xxTarea: _tarea, xxEmprid: _emprid });
 						xrespuesta.done(function(response){							
@@ -351,40 +349,40 @@
 									var _tareaid = data;
 
 									if(_tareaid != 0){
-										var _estado = '<td><div class="badge badge-light-primary">Activo</div>' ;
+										// var _estado = '<td><div class="badge badge-light-primary">Activo</div>' ;
 
-										var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-											'<input class="form-check-input btnEstado" type="checkbox" checked id="chk' + _tareaid + ' value="' + _tareaid + '" onchange="f_UpdateEstado(' + _tareaid + ',' + _emprid + ')"' + '/></div></td>';								
+										// var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+										// 	'<input class="form-check-input btnEstado" type="checkbox" checked id="chk' + _tareaid + ' value="' + _tareaid + '" onchange="f_UpdateEstado(' + _tareaid + ',' + _emprid + ')"' + '/></div></td>';								
 
-										var _btnedit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar' + _tareaid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Tarea" >' + 
-											'<i class="fa fa-edit"></i></button></div></div></td>';
+										// var _btnedit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar' + _tareaid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Tarea" >' + 
+										// 	'<i class="fa fa-edit"></i></button></div></div></td>';
 
-										TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+										//TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
 
 										if(_addmod == 'add'){
 											//TableData.column(0).visible(0);
-											TableData.row.add([_tareaid, _tarea, _ruta, _estado, _btnchk, _btnedit]).draw();
+											//TableData.row.add([_tareaid, _tarea, _ruta, _estado, _btnchk, _btnedit]).draw();
 											
 											/*var tbl = document.getElementById("tbody");
 											tbl.innerHTML += '<tr><td style="display:none;">' + _tareaid + '</td>' + 
 															'<td>' + _tarea + '</td>' + '<td>' + _ruta + '</td>' + _estado + _btnchk + _btnedit;*/
 
-											_detalle = 'Crear Nueva Tarea';
+											_detalle = 'Nueva tarea creada desde superadmin';
 											_mensaje = 'Grabado con Exito';
 										}
 										else{
-											TableData.row(_fila).data([_tareaid, _tarea, _ruta, _estado, _btnchk, _btnedit]).draw();
-											_detalle = 'Modificar Tarea';
+											//TableData.row(_fila).data([_tareaid, _tarea, _ruta, _estado, _btnchk, _btnedit]).draw();
+											_detalle = 'Actualizar tarea desde superadmin';
 											_mensaje = 'Actualizado con Exito';
 										} 
 									}else{
 										//console.log('Error encontrado en sentecia SQL');
-										_detalle = 'Error encontrado en sentecia SQL';
+										_detalle = 'Error encontrado en sentecia SQL desde superadmin';
 										_respuesta = 'ERR';
 									}
 
 									/**PARA CREAR REGISTRO DE LOGS */
-									/*$parametros = {
+									$parametros = {
 										xxPaisid: _paisid,
 										xxEmprid: _emprid,
 										xxUsuaid: _usuaid,
@@ -392,16 +390,10 @@
 									}					
 
 									$.post("codephp/new_log.php", $parametros, function(response){
-									});*/ 
+									});
 
 									if(_respuesta == 'OK'){
-										mensajesweetalert("center", "success", _mensaje, false, 1800);
-										
-										if(_addmod == 'add'){
-											$.redirect('?page=suptarea&menuid=0'); 
-										}else{
-											$("#modal-tarea").modal("hide");
-										}
+										$.redirect('?page=suptarea&menuid=0', {'mensaje': _mensaje}); //POR METODO POST
 									}
 
 								});	
@@ -418,37 +410,23 @@
 							var _tareaid = data;
 
 							if(_tareaid != 0){
-								var _estado = '<td><div class="badge badge-light-primary">Activo</div>' ;
-
-								var _btnchk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-									'<input class="form-check-input btnEstado" type="checkbox" checked id="chk' + _tareaid + ' value="' + _tareaid + '" onchange="f_UpdateEstado(' + _tareaid + ',' + _emprid + ')"' + '/></div></td>';								
-
-								var _btnedit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar' + _tareaid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Tarea" >' + 
-									'<i class="fa fa-edit"></i></button></div></div></td>';
-
-								TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
 
 								if(_addmod == 'add'){
-									//TableData.column(0).visible(0);
-									TableData.row.add([_tareaid, _tarea, _ruta, _estado, _btnchk, _btnedit]).draw();
-
-									_detalle = 'Crear Nueva Tarea';
+									_detalle = 'Nueva tarea creada desde superadmin';
 									_mensaje = 'Grabado con Exito';
 								}
 								else{
-									TableData.row(_fila).data([_tareaid, _tarea, _ruta, _estado, _btnchk, _btnedit]).draw();
-									_detalle = 'Modificar Tarea';
+									_detalle = 'Actualizar tarea desde superadmin';
 									_mensaje = 'Actualizado con Exito';
 								} 
 							}else{
-								//console.log('Error encontrado en sentecia SQL');
-								_detalle = 'Error encontrado en sentecia SQL';
+								_detalle = 'Error encontrado en sentecia SQL desde superadmin';
 								_respuesta = 'ERR';
 							}
 
 
 							/**PARA CREAR REGISTRO DE LOGS */
-							/*$parametros = {
+							$parametros = {
 								xxPaisid: _paisid,
 								xxEmprid: _emprid,
 								xxUsuaid: _usuaid,
@@ -456,28 +434,19 @@
 							}					
 
 							$.post("codephp/new_log.php", $parametros, function(response){
-							});*/ 
+							});
 
 							if(_respuesta == 'OK'){
-								mensajesweetalert("center", "success", _mensaje, false, 1800);
-								
-								if(_addmod == 'add'){
-									$.redirect('?page=suptarea&menuid=0'); 
-								}else{
-									$("#modal-tarea").modal("hide");	
-								}																			
+								$.redirect('?page=suptarea&menuid=0', {'mensaje': _mensaje}); //POR METODO POST																	
 							}							
 
 						});	
-
-						//funGrabar(_paisid, _emprid, _usuaid, _tarea, _ruta);
 					}
 				});
 
 			});
 
 			$(document).on("click",".btnEstado",function(e){
-					//debugger;
 					_fila = $(this).closest("tr");
 					_tarea = $(this).closest("tr").find('td:eq(1)').text();  
 					_ruta = $(this).closest("tr").find('td:eq(2)').text(); 					
@@ -494,32 +463,39 @@
 				let _disabled = "";
 				let _class = "badge badge-light-primary";
 				let _estado = "";
+                let _td = "td_" + _tareaid;
+                let _btnedit = "btnEditar_" + _tareaid;				
 
 				if(_check){
 					_estado = "Activo";
-					_disabled = "";
+					//_disabled = "";
 					_checked = "checked='checked'";
 					_class = "badge badge-light-primary";
+                    $('#'+_btnedit).prop("disabled",false);
 				}else{
 					_estado = "Inactivo";
-					_disabled = "disabled";
+					//_disabled = "disabled";
 					_class = "badge badge-light-danger";
+					$('#'+_btnedit).prop("disabled",true);
 				}
 
-				var _lblEstado = '<td><div class="' + _class + '">' + _estado + ' </div>';
+                var _changetd = document.getElementById(_td);
+                _changetd.innerHTML = '<td><div class="' + _class + '">' + _estado + ' </div>';				
 
-				var _btnchk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-							'<input class="form-check-input btnEstado" type="checkbox" ' + ' id="chk' + _tareaid + '"' +
-							' ' + _checked + ' value="' + _tareaid + '" onchange="f_UpdateEstado(' +_tareaid  + ',' + _emprid + ')"/>' +
-							'</div></div></td>';
+				// var _lblEstado = '<td><div class="' + _class + '">' + _estado + ' </div>';
 
-				var _btnedit = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + 
-							' id="btnEditar' + _tareaid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Tarea">' +
-							'<i class="fa fa-edit"></i></button></div></div></td>';
+				// var _btnchk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+				// 			'<input class="form-check-input btnEstado" type="checkbox" ' + ' id="chk' + _tareaid + '"' +
+				// 			' ' + _checked + ' value="' + _tareaid + '" onchange="f_UpdateEstado(' +_tareaid  + ',' + _emprid + ')"/>' +
+				// 			'</div></div></td>';
 
-				TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+				// var _btnedit = '<td><div class="text-center"><div class="btn-group"><button ' + _disabled + 
+				// 			' id="btnEditar' + _tareaid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Tarea">' +
+				// 			'<i class="fa fa-edit"></i></button></div></div></td>';
 
-				TableData.row(_fila).data([_tareaid, _tarea, _ruta, _lblEstado, _btnchk, _btnedit]).draw();			
+				// TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+
+				// TableData.row(_fila).data([_tareaid, _tarea, _ruta, _lblEstado, _btnchk, _btnedit]).draw();			
 
 				$parametros = {
 					xxEmprid: _emprid,
@@ -528,17 +504,6 @@
 				}
 
 				$.post("codephp/update_estado_tarea.php", $parametros , function(data){
-
-					// $parametros = {
-					// 	xxPaisid: _paisid,
-					// 	xxEmprid: _emprid,
-					// 	xxUsuaid: _usuaid,
-					// 	xxDetalle: 'Cambio Estado Tarea',
-					// }					
-
-					// var xrespuesta = $.post("codephp/new_log.php", $parametros);						
-					// 	xrespuesta.done(function(response) {
-					// });	
 
 				});
 			}			
