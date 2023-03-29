@@ -12,10 +12,9 @@
     $log_file = "err_consulta";
     $xRow = 0;  
 
-    if(isset($_POST['xxPacaId']) and isset($_POST['xxDetalle']) and isset($_POST['xxValorV']) and isset($_POST['xxValorI']) and isset($_POST['xxPaisId']) ){
-        if(isset($_POST['xxPacaId']) <> '' and isset($_POST['xxDetalle']) <> '' and isset($_POST['xxValorV']) <> '' and isset($_POST['xxValorI']) <> '' and isset($_POST['xxPaisId']) <> ''){ 
+    if(isset($_POST['xxDetalle']) and isset($_POST['xxValorV']) and isset($_POST['xxValorI']) and isset($_POST['xxPaisId']) ){
+        if(isset($_POST['xxDetalle']) <> '' and isset($_POST['xxValorV']) <> '' and isset($_POST['xxValorI']) <> '' and isset($_POST['xxPaisId']) <> ''){ 
 
-            $xPacaid = $_POST['xxPacaId'];
             $xPaisid = $_POST['xxPaisId'];
             $xDetalle= $_POST['xxDetalle'];
             $xValorv = $_POST['xxValorV']; 

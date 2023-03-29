@@ -275,7 +275,13 @@
        $("#nuevoParametro").click(function(){
 
           $("#modal_parametro").find("input,textarea").val("");
-           _result = [];
+        
+
+           _result.splice(0,_result.length);
+
+        // while(a.length > 0) {
+        //         a.pop();
+        //     }
            _estado = 'A';
 
 
@@ -295,6 +301,8 @@
        var _agregarDet = 'add';
        var _continuar = true;
        var _output;
+
+       var _idpais = '<?php echo $xPaisid; ?>';
 
         if($.trim($('#txtDetalle').val()).length == 0)
         {           
@@ -324,72 +332,94 @@
         }
 
         if(_agregarDet == 'add'){
+                
+                $datosDet ={
+                    xxPaisId: _idpais,
+					xxDetalle: _detalle,
+                    xxValorV: _valorV,
+                    xxValorI: _valorI
+                }
 
-            $.each(_result,function(i,item){
-                if(item.arrydetalle.toUpperCase() == _detalle.toUpperCase())
-                {                  
-                    mensajesweetalert("center","warning","Nombre del Detalle ya Existe..!",false,1900);                    
-                    _continuar = false;
-                    return false;
-                }else{
-                    $.each(_result,function(i,item){
-                        if(_valorI == 0)
-                        {
-                            if(item.arryvalorv.toUpperCase() == _valorV.toUpperCase())
-                            {                               
-                                mensajesweetalert("center","warning","Valor Texto de Parámetro ya Existe..!",false,1900);    
-                                _continuar = false;
-                                return false;
+                    var xrespuesta = $.post("codephp/consultar_detalle.php", $datosDet);
+                        xrespuesta.done(function(response){
+
+                            if(response == 0){
+
+
+                                $.each(_result,function(i,item){
+                                    if(item.arrydetalle.toUpperCase() == _detalle.toUpperCase())
+                                    {                  
+                                        mensajesweetalert("center","warning","Nombre del Detalle ya Existe..!",false,1900);                    
+                                        _continuar = false;
+                                        return false;
+                                    }else{
+                                        $.each(_result,function(i,item){
+                                            if(_valorI == 0)
+                                            {
+                                                if(item.arryvalorv.toUpperCase() == _valorV.toUpperCase())
+                                                {                               
+                                                    mensajesweetalert("center","warning","Valor Texto de Parámetro ya Existe..!",false,1900);    
+                                                    _continuar = false;
+                                                    return false;
+                                                }else{
+                                                    _continuar = true;
+                                                }
+                                            }else
+                                            {
+                                                if(item.arryvalori == _valorI)
+                                                {                               
+                                                    mensajesweetalert("center","warning","Valor Entero de Parámetro ya Existe..!",false,1900); 
+                                                    _continuar = false;
+                                                    return false;
+                                                }else{
+                                                    _continuar = true;
+                                                }                            
+                                            }
+                                        });
+                                    }
+                                });
+
+                                if(_continuar){
+                                    _count = _count + 1;
+
+                                    _output = '<tr id="row_' + _count + '">';
+                                    _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';                
+                                    _output += '<td>' + _detalle + ' <input type="hidden" name="hidden_detalle[]" id="txtDetalle' + _count + '" value="' + _detalle + '" /></td>';
+                                    _output += '<td>' + _valorV + ' <input type="hidden" name="hidden_valorv[]" id="txtValorV' +_count + '" value="' + _valorV + '" /></td>';
+                                    _output += '<td>' + _valorI + ' <input type="hidden" name="hidden_valori[]" id="txtValorI' + _count + '" value="' + _valorI + '" /></td>';
+                                    _output += '<td><div class="text-center"><div class="btn-group">';
+                                    _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
+                                    _output += '</tr>';
+
+
+                                    $('#tblDetalle').append(_output);
+
+                                    //console.log(_output);
+
+                                    _objeto = {
+                                        arrydetalle: _detalle,
+                                        arryvalorv: _valorV,
+                                        arryvalori: _valorI,
+                                        arryorden: _count
+                                    }
+
+                                    _result.push(_objeto);
+
+                                    $("#txtDetalle").val("");
+                                    $("#txtValorV").val("");
+                                    $("#txtValorI").val("");
+
+                                }
+
+
+
                             }else{
-                                _continuar = true;
+
+                                mensajesweetalert("center","warning","Nombre del Detalle y/o Valor Texto ya existe..!",false,1900);
                             }
-                        }else
-                        {
-                            if(item.arryvalori == _valorI)
-                            {                               
-                                mensajesweetalert("center","warning","Valor Entero de Parámetro ya Existe..!",false,1900); 
-                                _continuar = false;
-                                return false;
-                            }else{
-                                _continuar = true;
-                            }                            
-                        }
-                    });
-                }
-            });
 
-
-            if(_continuar){
-                _count = _count + 1;
-
-                _output = '<tr id="row_' + _count + '">';
-                _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';                
-                _output += '<td>' + _detalle + ' <input type="hidden" name="hidden_detalle[]" id="txtDetalle' + _count + '" value="' + _detalle + '" /></td>';
-                _output += '<td>' + _valorV + ' <input type="hidden" name="hidden_valorv[]" id="txtValorV' +_count + '" value="' + _valorV + '" /></td>';
-                _output += '<td>' + _valorI + ' <input type="hidden" name="hidden_valori[]" id="txtValorI' + _count + '" value="' + _valorI + '" /></td>';
-                _output += '<td><div class="text-center"><div class="btn-group">';
-                _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
-                _output += '</tr>';
-
-
-                $('#tblDetalle').append(_output);
-
-                //console.log(_output);
-
-                  _objeto = {
-                    arrydetalle: _detalle,
-                    arryvalorv: _valorV,
-                    arryvalori: _valorI,
-                    arryorden: _count
-                }
-
-                _result.push(_objeto);
-
-                $("#txtDetalle").val("");
-                $("#txtValorV").val("");
-                $("#txtValorI").val("");
-
-            }
+                        });
+    
 
         }
     });
@@ -421,86 +451,66 @@
                     xxParametro: _parametro
                 }
 
-                $datosDetalle ={
-                    xxResultado: _result,
-                    xxPaisId: _idpais
-                }
-
 
                 var xrespuesta = $.post("codephp/consultar_parametro.php", $datosParam);
                 xrespuesta.done(function(response){
                     if(response == 0){
+                              
+                        //debugger;
 
-                        var xrespuesta = $.post("codephp/consultar_admindetalle.php", $datosDetalle);
-                        xrespuesta.done(function(response){
+                        $parametros ={
+                            xxPaisId: _idpais,
+                            xxUsuaId: _idusua,
+                            xxEmprId: _idempr,
+                            xxParametro: _parametro,
+                            xxResultado: _result,
+                            xxEstado: _estado,
+                            xxDescripcion: _descripcion
+                        
+                        }
 
-                            if(response == 0){
+                        $.ajax({
+                            url: "codephp/grabar_parametro.php",
+                            type: "POST",
+                            dataType: "json",
+                            data: $parametros,          
+                            success: function(response){ 
+                                if(response != 0){
 
-                                
-                                //debugger;
+                                    _pacaid = response;										
+                                    _paramom = _parametro;
+                                    _paradesc = _descripcion;
+                                    _checked = "checked='checked'";
 
-                                $parametros ={
-                                    xxPaisId: _idpais,
-                                    xxUsuaId: _idusua,
-                                    xxEmprId: _idempr,
-                                    xxParametro: _parametro,
-                                    xxResultado: _result,
-                                    xxEstado: _estado,
-                                    xxDescripcion: _descripcion
-                                
-                                }
-
-                                $.ajax({
-                                    url: "codephp/grabar_parametro.php",
-                                    type: "POST",
-                                    dataType: "json",
-                                    data: $parametros,          
-                                    success: function(response){ 
-                                        if(response != 0){
-
-                                            _pacaid = response;										
-                                            _paramom = _parametro;
-                                            _paradesc = _descripcion;
-                                            _checked = "checked='checked'";
-
-                                            var _estado = '<td><div class="badge badge-light-primary">Activo</div></td>';
+                                    var _estado = '<td><div class="badge badge-light-primary">Activo</div></td>';
 
 
-                                            var _btnChk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                                        '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _pacaid + '" value=""/>' +
-                                                        '</div></div></td>';
-                                                        
-
-                                            var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(' + _pacaid + ')" title="Editar Parametro" >' + 
-                                                            '<i class="fa fa-edit"></i></button></div></div></td>';            
-                                                        
-                                            TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
-
-                                            TableData.column(0).visible(0);
+                                    var _btnChk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                                                '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _pacaid + '" value=""/>' +
+                                                '</div></div></td>';
                                                 
-                                            
-                                                TableData.row.add([_pacaid, _paramom, _paradesc, _estado, _btnChk, _btnEdit]).draw();
+
+                                    var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(' + _pacaid + ')" title="Editar Parametro" >' + 
+                                                    '<i class="fa fa-edit"></i></button></div></div></td>';            
+                                                
+                                    TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+
+                                    TableData.column(0).visible(0);
+                                        
+                                    
+                                        TableData.row.add([_pacaid, _paramom, _paradesc, _estado, _btnChk, _btnEdit]).draw();
 
 
-                                            $("#modal_parametro").modal("hide");
-                                            
-                                            // $.redirect('?page=supusuario&menuid=0'); 
+                                    $("#modal_parametro").modal("hide");
+                                    
+                                    // $.redirect('?page=supusuario&menuid=0'); 
 
-                                        }                                                                         
-                                    },
-                                    error: function (error){
-                                        console.log(error);
-                                    }                            
-                                });
-
-
-                            }else{
-
-                                mensajesweetalert("center","warning","Nombre del Detalle y/o Valor Texto ya existe..!",false,1900);
-
-                            }
-
-                        });
+                                }                                                                         
+                            },
+                            error: function (error){
+                                console.log(error);
+                            }                            
+                        }); 
 
 
                     }else{

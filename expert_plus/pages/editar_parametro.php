@@ -511,7 +511,6 @@
         }
 
                  $datosDetalle ={
-                    xxPacaId: _pacaid,
                     xxPaisId: _paisid,
                     xxDetalle: _nombre,
                     xxValorV: _valorV,
