@@ -127,8 +127,8 @@
                                 <div class="row fv-row mb-7">
                                     <div class="col-md-3 text-md-end">
                                         <label class="fs-6 fw-bold form-label mt-3">
-                                            <span>Descripción</span>
-                                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripción del Perfil"></i>
+                                            <span>Descripcion</span>
+                                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripcion del Perfil"></i>
                                         </label>
                                     </div>
                                     <div class="col-md-6">
@@ -139,7 +139,7 @@
                                 <div class="row fv-row mb-7">
                                     <div class="col-md-3 text-md-end">
                                         <label class="fs-6 fw-bold form-label mt-3">
-                                            <span>Parámetros</span>
+                                            <span>Parametros</span>
                                         </label>
                                     </div>
 

@@ -95,8 +95,8 @@
                         <div class="row fv-row mb-7">
                             <div class="col-md-3  text-md-end">
                                 <label class="fs-6 fw-bold form-label mt-3">
-                                    <span>Descripción</span>
-                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripción del Perfil"></i>
+                                    <span>Descripcion</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripcion del Perfil"></i>
                                 </label>
                             </div>
                             <div class="col-md-6">
@@ -138,7 +138,7 @@
                             </thead>
                              <tbody class="fw-bold text-gray-600">
                                 <?php foreach($all_menu as $submenu){
-                                        $xIdSub =  $menu['Idtarea'];
+                                        $xIdSub =  $submenu['Idtarea'];
                                     ?>
                                     <?php 
                                         if($submenu['Estado'] == 'Activo'){
@@ -220,7 +220,7 @@
             }
 
             if(_contar == 0){                        
-                mensajesweetalert("center","warning","Seleccione al menos un opción para el SubMenu",false,1800);
+                mensajesweetalert("center","warning","Seleccione al menos un opcion para el SubMenu",false,1800);
                 return;
             }
 
@@ -238,21 +238,20 @@
                         xxMenu: _menu,
                         xxObserva: _observacion,
                         xxEmprid: _emprid,
-                        xxUserid: _usuaid,
+                        xxUsuaid: _usuaid,
                         xxEstado: _estado,
                         xxResult: _result
                     }
 
                     var xresponse = $.post("codephp/grabar_menu_tarea.php", $datosMenu);
                     xresponse.done(function(response){
-                        debugger;
                         if(response == 'OK'){
                             /**PARA CREAR REGISTRO DE LOGS */
                             $parametros = {
                                 xxPaisid: _paisid,
                                 xxEmprid: _emprid,
                                 xxUsuaid: _usuaid,
-                                xxDetalle: 'Crear Nuevo Menú',
+                                xxDetalle: 'Crear Nuevo Menu',
                             }					
 
                             $.post("codephp/new_log.php", $parametros, function(response){
