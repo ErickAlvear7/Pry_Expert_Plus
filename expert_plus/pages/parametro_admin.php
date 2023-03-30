@@ -103,7 +103,7 @@
 					    <td style="display:none;"><?php echo $xPacaId ?></td>
 						<td><?php echo $xPacaNombre; ?></td>
 						<td><?php echo $xPacaDesc; ?></td>
-						<td id="td_<?php echo $xPacaId;?> ">
+						<td id="td_<?php echo $xPacaId;?>">
                            <div class="<?php echo $xTextColor; ?>"><?php echo $xPacaEstado ?></div>
                         </td>
                         <td>
@@ -278,7 +278,7 @@
         _mensaje = $('input#mensaje').val();
 
 			if(_mensaje != ''){
-				mensajesweetalert("center","warning",_mensaje,false,1800);  
+				mensajesweetalert("center","success",_mensaje,false,1900);  
 			}
 			
 
@@ -426,7 +426,7 @@
 
                             }else{
 
-                                mensajesweetalert("center","warning","Nombre del Detalle y/o Valor Texto ya existe..!",false,1900);
+                                mensajesweetalert("center","warning","Nombre del Detalle y/o Valor Texto u Entero ya existe..!",false,1900);
                             }
 
                         });
@@ -565,7 +565,6 @@
 
     //cambiar estado y desactivar botones en linea
 
- 
     function f_UpdateEstado(_pacaid, _paisid,_emprid){
 
         debugger;
@@ -604,7 +603,6 @@
 			});	
 
              
-        //alert(_td);
 
     }
 

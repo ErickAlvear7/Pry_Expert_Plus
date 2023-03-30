@@ -46,7 +46,7 @@
     $xSQL .= "pade_estado AS Estado FROM `expert_parametro_detalle` WHERE paca_id = $idpaca ";
     $all_pade = mysqli_query($con, $xSQL);
 
-    $xSQL = "SELECT  pade_orden AS Orden FROM `expert_parametro_detalle` ORDER BY pade_orden DESC LIMIT 1 ";
+    $xSQL = "SELECT  pade_orden AS Orden FROM `expert_parametro_detalle`WHERE paca_id = $idpaca ORDER BY pade_orden DESC LIMIT 1 ";
     $orden = mysqli_query($con, $xSQL);
     foreach($orden as $ord){
         $xOrdenDet = $ord['Orden'];
@@ -220,9 +220,6 @@
                                         <td>
                                             <div class="text-center">
                                                 <div class="btn-group">	
-                                                    <button type="button" id="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
                                                     <button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Detalle'>
                                                         <i class="fa fa-edit"></i>
                                                     </button> 
@@ -341,7 +338,6 @@
 
 
                  $datosDetalle ={
-                    xxPacaId: _pacaid,
                     xxPaisId: _paisid,
                     xxDetalle: _detalle,
                     xxValorV: _valorV,
@@ -383,8 +379,8 @@
                                                    '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '"' +
                                                    '</div></td>';
                                     
-                                    var _btnGrup = '<td><div class="text-center"><div class="btn-group"><button type="button" id="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="">' +
-                                                   '<i class="fa fa-trash"></i></button><button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
+                                    var _btnGrup = '<td><div class="text-center"><div class="btn-group">' +
+                                                   '<button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
                                                    '<i class="fa fa-edit"></i></button></div></div></td>';
                                     
 
@@ -396,6 +392,8 @@
                                     $("#txtDetalle").val("");
                                     $("#txtValorV").val("");
                                     $("#txtValorI").val("");
+
+                                    // $.redirect('?page=editparametro', {}); //POR METODO POST
 
 								}                                                                         
 							},
