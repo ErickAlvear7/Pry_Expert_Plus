@@ -90,12 +90,14 @@
                     ?>
                     <?php 
                        $xCheking = '';
+                       $xDisabledEdit = '';
 
                        if($xPacaEstado == 'Activo'){
                             $xCheking = 'checked="checked"';
                             $xTextColor = "badge badge-light-primary";
                         }else{
                             $xTextColor = "badge badge-light-danger";
+                            $xDisabledEdit = 'disabled';
                         }
                     
                     ?>
@@ -117,7 +119,7 @@
 						<td>
                             <div class="text-center">
 								<div class="btn-group">
-									<button id="btnEditar_<?php echo $xPacaId;?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(<?php echo $xPacaId;?>)"  title='Editar Parametro'>
+									<button id="btnEditar_<?php echo $xPacaId;?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(<?php echo $xPacaId;?>)" <?php echo $xDisabledEdit;?>  title='Editar Parametro'>
 										<i class='fa fa-edit'></i>
 									</button>												 
 								</div>
@@ -556,8 +558,7 @@
         });        
     };
 
-    
-    //debugger;
+
 
     function f_Editar(_paraid){
         $.redirect('?page=editparametro', {'idparam': _paraid}); //POR METODO POST
@@ -567,7 +568,6 @@
 
     function f_UpdateEstado(_pacaid, _paisid,_emprid){
 
-        debugger;
 
         let _check = $("#chk" + _pacaid).is(":checked");
         let _checked = "";
@@ -600,9 +600,7 @@
 
             var xrespuesta = $.post("codephp/delnew_parametro.php", $parametros);
 			xrespuesta.done(function(response){
-			});	
-
-             
+			});	     
 
     }
 

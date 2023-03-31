@@ -53,8 +53,6 @@
     }
     
 
- 
-
 ?>
 
 <div id="kt_content_container" class="container-xxl">
@@ -102,7 +100,7 @@
                             <div class="col-md-12 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                     <span class="required">Parametro</span>
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nombre del usuario"></i>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="nombre del parametro"></i>
                                 </label>
                                 <input type="text" class="form-control form-control-solid" id="txtParaEdit" name="txtParaEdit" minlength="5" maxlength="100" value="<?php echo $xNomPaca; ?>" />
                             </div>
@@ -111,7 +109,7 @@
                             <div class="col-md-12 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                     <span class="required">Descripcion</span>
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique una descripcion"></i>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="descripcion del parametro"></i>
                                 </label>
                                 <textarea class="form-control form-control-solid" name="txtDescEdit" id="txtDescEdit" maxlength="150" onkeydown="return (event.keyCode!=13);"><?php echo $xDescPaca; ?></textarea>
                             </div>
@@ -193,20 +191,24 @@
                                     ?>
                                     <?php 
                                         $xCheking = '';
+                                        $xDisabledEdit = '';
 
                                         if($xPadeEstado == 'A'){
                                             $xCheking = 'checked="checked"';
                                         
+                                        }else{
+                                            $xDisabledEdit = 'disabled';
                                         }
+
                                         if($xPadeValorI == 0){
                                             $xPadeValorI = '';
                                         
                                         }
                                         
                                         ?>
-                                    <tr id="row_<?php echo  $xPadeId; ?>">
+                                    <tr id="row_<?php echo $xPadeId; ?>">
                                         <td style="display: none;">
-                                            <?php echo  $xPadeId; ?>
+                                            <?php echo $xPadeId; ?>
                                         </td>               
                                         <td><?php echo $xPadeNom; ?></td>
                                         <td><?php echo $xPadeValorV; ?></td>
@@ -214,13 +216,13 @@
                                         <td style="text-align:center">
                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                 <input <?php echo $xCheking; ?>  class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xPadeId; ?>" 
-                                                        onchange="f_Pade(<?php echo $xPadeId; ?>, <?php echo $idpaca; ?>)" />
+                                                   onchange="f_UpdateEstado(<?php echo $xPadeId;?>)" value="<?php echo $xPadeId;?>" />
                                             </div>
                                         </td> 
                                         <td>
                                             <div class="text-center">
                                                 <div class="btn-group">	
-                                                    <button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Detalle'>
+                                                    <button type="button" id="btnEditar_<?php echo $xPadeId;?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit;?> title='Editar Detalle'>
                                                         <i class="fa fa-edit"></i>
                                                     </button> 
                                                 </div>
@@ -274,15 +276,13 @@
                 <input type="text" class="form-control form-control-solid" id="txtValorIedit" name="txtValorIedit" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" />
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" id="btnGuardar" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnGuardar" class="btn btn-primary">Grabar</button>
             </div>
         </div>
     </div>
   </div>
 </div>
-
-
 
 
 <script>
@@ -334,8 +334,6 @@
         }else{
             _valorI = $.trim($('#txtValorI').val());
         }
-
-
 
                  $datosDetalle ={
                     xxPaisId: _paisid,
@@ -402,10 +400,6 @@
 							}                            
 						});
 
-                       
-
-
-
                     }else{
 
                         mensajesweetalert("center","warning","Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!",false,1800);
@@ -416,11 +410,6 @@
     });
 
 
-
-    function f_Pade(_idpaca,_idpade){
-        alert('aki');
-
-    }
 
     //Editar Detalle Modal
 
@@ -448,14 +437,10 @@
                         var _valorv = data[0]['ValorT'];
                         var _valori = data[0]['ValorI'];
 
-                     
-
-
 
                         $("#txtDetalleEdit").val(_nombre);
                         $("#txtValorVedit").val(_valorv);
                         $("#txtValorIedit").val(_valori);
-
 			
 						                                                                      
 					},
@@ -463,9 +448,6 @@
 						console.log(error);
 					}                            
 				}); 
-
-       
-       
 
               $("#modal_detalle").modal("show");
 
@@ -545,8 +527,8 @@
                                                    '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '"' +
                                                    '</div></td>';
                                     
-                                    var _btnGrup = '<td><div class="text-center"><div class="btn-group"><button type="button" id="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="">' +
-                                                   '<i class="fa fa-trash"></i></button><button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
+                                    var _btnGrup = '<td><div class="text-center"><div class="btn-group">' +
+                                                   '<button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
                                                    '<i class="fa fa-edit"></i></button></div></div></td>';
 
                                     TableData = $('#kt_ecommerce_report_shipping_table').DataTable();  
@@ -601,7 +583,6 @@
                 xrespuesta.done(function(response){
                     if(response == 0){
 
-                       console.log(response);
 
                         $parametros ={
                             xxPacaId: _idpaca,
@@ -614,15 +595,11 @@
                         
                         
                         var xresponse = $.post("codephp/update_parametro.php", $parametros);
-                        xresponse.done(function(response){   
-                            
-                            console.log(response);
+                        xresponse.done(function(response){            
 
                             if(response.trim() == 'OK'){
 
-                                   
-               
-                          
+                
                             }
                                 
                             
@@ -637,6 +614,38 @@
 
                 });
 
+
+    }
+
+    
+     //cambiar estado y desactivar botones en linea
+    function f_UpdateEstado(_padeid){
+
+        let _check = $("#chk" + _padeid).is(":checked");
+        let _checked = "";
+        let _disabled = "";
+        let _btnedit = "btnEditar_" + _padeid;
+
+        if(_check){
+            _estado = "Activo";
+            _disabled = "";
+            _checked = "checked='checked'";
+            $('#'+_btnedit).prop("disabled",false);                    
+        }else{                    
+            _estado = "Inactivo";
+            _disabled = "disabled";
+            $('#'+_btnedit).prop("disabled",true);
+        }
+
+
+            $parametros = {
+                xxPadeid: _padeid,
+                xxEstado: _estado
+            }
+
+            var xrespuesta = $.post("codephp/delnew_detalle.php", $parametros);
+            xrespuesta.done(function(response){
+            });	     
 
     }
 

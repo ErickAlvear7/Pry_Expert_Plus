@@ -12,15 +12,15 @@
 
     $respuesta = "ERR";
 
-    if(isset($_POST['xxPacaId']) and isset($_POST['xxDetalle']) and isset($_POST['xxValorV']) and isset($_POST['xxValorI'])
-          and isset($_POST['xxPadeId'])){
+    if(isset($_POST['xxPacaId']) and isset($_POST['xxPadeId']) and isset($_POST['xxDetalle']) and isset($_POST['xxValorV'])
+          and isset($_POST['xxValorI'])){
 
         $xPacaid = $_POST['xxPacaId'];
         $xPadeid = $_POST['xxPadeId'];
         $xDetalle = safe($_POST['xxDetalle']);
         $xValorV = safe($_POST['xxValorV']);
         $xValorI = safe($_POST['xxValorI']);
-      
+
 
 
         $xSQL = "UPDATE `expert_parametro_detalle` SET pade_nombre = '$xDetalle', pade_valorV = '$xValorV', pade_valorI =  $xValorI ";
