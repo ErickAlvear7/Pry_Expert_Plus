@@ -482,6 +482,8 @@
        var _valovold = $.trim($("#txtValortexto").val());
        var _valoriold = $.trim($("#txtValorentero").val());
 
+       debugger;
+
        if($.trim($('#txtValorIedit').val()).length == 0){
             var _valorI = 0;
         }else{
@@ -495,14 +497,20 @@
         }        
 
         if(_nombreold != _nombre){
+            _consultar = 'SI';
+        }
+
+        if(_valorV != ''){
             if(_valorV != _valovold){
                 _consultar = 'SI';
             }
-            if(_valorI != _valoriold){
-                _consultar = 'SI';
-            }
-            _consultar = 'SI';
         }
+
+        if(_valorI != '0'){
+            if(_valorI != _valoriold){
+                _consultar = 'SI'; 
+            }
+        }        
 
        if($.trim($('#txtDetalleEdit').val()).length == 0)
         {           
@@ -521,9 +529,6 @@
             mensajesweetalert("center","warning","Ingrese Solo Valor Texto o Valor Entero..!",false,1800);         
             return false;
         }
-
-
-
 
         $datosDetalle ={
             xxPaisId: _paisid,
