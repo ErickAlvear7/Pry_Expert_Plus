@@ -13,6 +13,9 @@
 
     $xServidor = $_SERVER['HTTP_HOST'];
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
+
+    $menuid = $_GET['menuid'];
+    $mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
     
     @session_start();
 
@@ -38,7 +41,7 @@
 ?>
 
 <div id="kt_content_container" class="container-xxl">
-
+    <input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
     <div class="card">
         <div class="card-header border-0 pt-6">
             <div class="card-title">
@@ -87,12 +90,14 @@
                     ?>
                     <?php 
                        $xCheking = '';
+                       $xDisabledEdit = '';
 
                        if($xPacaEstado == 'Activo'){
                             $xCheking = 'checked="checked"';
                             $xTextColor = "badge badge-light-primary";
                         }else{
                             $xTextColor = "badge badge-light-danger";
+                            $xDisabledEdit = 'disabled';
                         }
                     
                     ?>
@@ -100,20 +105,21 @@
 					    <td style="display:none;"><?php echo $xPacaId ?></td>
 						<td><?php echo $xPacaNombre; ?></td>
 						<td><?php echo $xPacaDesc; ?></td>
-						<td>
+						<td id="td_<?php echo $xPacaId;?>">
                            <div class="<?php echo $xTextColor; ?>"><?php echo $xPacaEstado ?></div>
                         </td>
                         <td>
                             <div class="text-center">
 								<div class="form-check form-check-sm form-check-custom form-check-solid">
-									<input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xPacaId; ?>" value=""/>
+									<input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xPacaId; ?>" 
+                                       onchange="f_UpdateEstado(<?php echo $xPacaId;?>,<?php echo $xPaisid;?>,<?php echo $xEmprid;?>)" value="<?php echo $xPacaId;?>"/>
 								</div>
 							</div>
 						</td>
 						<td>
                             <div class="text-center">
 								<div class="btn-group">
-									<button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(<?php echo $xPacaId;?>)"  title='Editar Parametro'>
+									<button id="btnEditar_<?php echo $xPacaId;?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(<?php echo $xPacaId;?>)" <?php echo $xDisabledEdit;?>  title='Editar Parametro'>
 										<i class='fa fa-edit'></i>
 									</button>												 
 								</div>
@@ -256,8 +262,8 @@
                 </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" id="btnGuardar" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" id="btnGuardar" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">Grabar</button>
         </div>
       </div>
     </div>
@@ -270,6 +276,13 @@
    var _estado, _detalle,_valorI,_result = [],_count =0,_idpais,_idempr,_idusua;
 
     $(document).ready(function(){
+
+        _mensaje = $('input#mensaje').val();
+
+			if(_mensaje != ''){
+				mensajesweetalert("center","success",_mensaje,false,1900);  
+			}
+			
 
        //abrir-modal-nuevo-parametro
        $("#nuevoParametro").click(function(){
@@ -415,7 +428,7 @@
 
                             }else{
 
-                                mensajesweetalert("center","warning","Nombre del Detalle y/o Valor Texto ya existe..!",false,1900);
+                                mensajesweetalert("center","warning","Nombre del Detalle y/o Valor Texto u Entero ya existe..!",false,1900);
                             }
 
                         });
@@ -499,11 +512,11 @@
                                         
                                     
                                         TableData.row.add([_pacaid, _paramom, _paradesc, _estado, _btnChk, _btnEdit]).draw();
-
-
+                                        _mensaje = 'Grabado con Exito';
+                                         
                                     $("#modal_parametro").modal("hide");
                                     
-                                    // $.redirect('?page=supusuario&menuid=0'); 
+                                    $.redirect('?page=param_generales&menuid=<?php echo $menuid; ?>', {'mensaje': _mensaje}); //POR METODO POST
 
                                 }                                                                         
                             },
@@ -545,11 +558,50 @@
         });        
     };
 
-    
-    //debugger;
+
 
     function f_Editar(_paraid){
         $.redirect('?page=editparametro', {'idparam': _paraid}); //POR METODO POST
+    }
+
+    //cambiar estado y desactivar botones en linea
+
+    function f_UpdateEstado(_pacaid, _paisid,_emprid){
+
+
+        let _check = $("#chk" + _pacaid).is(":checked");
+        let _checked = "";
+		let _disabled = "";
+        let _class = "badge badge-light-primary";
+        let _td = "td_" + _pacaid;
+        let _btnedit = "btnEditar_" + _pacaid;
+
+        if(_check){
+            _estado = "Activo";
+            _disabled = "";
+            _checked = "checked='checked'";
+            $('#'+_btnedit).prop("disabled",false);                    
+        }else{                    
+            _estado = "Inactivo";
+            _disabled = "disabled";
+            _class = "badge badge-light-danger";
+            $('#'+_btnedit).prop("disabled",true);
+        }
+
+            var cambiar = document.getElementById(_td);
+              cambiar.innerHTML = '<td><div class="' + _class + '">' + _estado + ' </div>';
+
+            $parametros = {
+				xxPacaid: _pacaid,
+                xxPaisid: _paisid,
+				xxEmprid: _emprid,
+				xxEstado: _estado
+			}
+
+            var xrespuesta = $.post("codephp/delnew_parametro.php", $parametros);
+			xrespuesta.done(function(response){
+			});	     
+
     }
 
 
