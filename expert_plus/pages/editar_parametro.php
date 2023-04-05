@@ -441,8 +441,6 @@
                         var _valorv = data[0]['ValorT'];
                         var _valori = data[0]['ValorI'];
 
-                        debugger;
-
                         $("#txtDetalleEdit").val(_nombre);
                         $("#txtValorVedit").val(_valorv);
                         $("#txtValorIedit").val(_valori);
@@ -484,8 +482,17 @@
        var _valovold = $.trim($("#txtValortexto").val());
        var _valoriold = $.trim($("#txtValorentero").val());
 
-       
-       debugger;
+       if($.trim($('#txtValorIedit').val()).length == 0){
+            var _valorI = 0;
+        }else{
+            _valorI = $.trim($('#txtValorIedit').val());
+        }
+        
+        if($.trim($('#txtValorentero').val()).length == 0){
+            var _valoriold = 0;
+        }else{
+            _valoriold = $.trim($('#txtValorentero').val());
+        }        
 
         if(_nombreold != _nombre){
             if(_valorV != _valovold){
@@ -496,14 +503,6 @@
             }
             _consultar = 'SI';
         }
-
-
-    
-
-     
-
-        
-
 
        if($.trim($('#txtDetalleEdit').val()).length == 0)
         {           
@@ -524,21 +523,20 @@
         }
 
 
-        if($.trim($('#txtValorIedit').val()).length == 0){
-            var _valorI = 0;
-        }else{
-            _valorI = $.trim($('#txtValorIedit').val());
-        }
+
 
         $datosDetalle ={
             xxPaisId: _paisid,
             xxDetalle: _nombre,
             xxValorV: _valorV,
-            xxValorI: _valorI
+            xxValorI: _valorI,
+            xxDetalleold: _nombreold,
+            xxValorVold: _valovold,
+            xxValorIold: _valoriold               
         }
 
         if(_consultar == 'SI'){
-            var xrespuesta = $.post("codephp/consultar_detalle.php", $datosDetalle);
+            var xrespuesta = $.post("codephp/consultar_detalledit.php", $datosDetalle);
             xrespuesta.done(function(response){
                 if(response.trim() == 0){
 
@@ -547,7 +545,7 @@
                         xxPadeId: _padeid,
                         xxDetalle: _nombre,
                         xxValorV: _valorV,
-                        xxValorI: _valorI,
+                        xxValorI: _valorI                    
                     }
                     
                     var xresponse = $.post("codephp/update_detalle.php", $parametros);
