@@ -36,18 +36,13 @@
     
     $xSQL = "SELECT perf_id AS Id, perf_descripcion AS Perfil, perf_observacion AS Descripcion,CASE perf_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, ";
     $xSQL .= "perf_detalle1,perf_detalle2,perf_detalle3,perf_detalle4,perf_detalle5 FROM `expert_perfil` WHERE pais_id=$xPaisid AND empr_id=$xEmprid";
-
     $all_perfiles = mysqli_query($con, $xSQL);
-
-    // foreach ($all_perfiles as $perfil){
-    //     $xName = $perfil["Perfil"];
-    // }
 	
 ?>	
 
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-            <!--begin::Row-->
+            <input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-5 g-xl-9">
 
                 <?php 
@@ -106,7 +101,7 @@
                                 <div class="card-footer flex-wrap pt-0">
                                     <a href="../../demo1/dist/apps/user-management/roles/view.html" class="btn btn-light btn-active-primary my-1 me-2">Ver Perfil</a>
                                     <!-- <button type="button" class="btn btn-light btn-active-light-primary my-1" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role-<?php echo $perfil['Id']; ?>">Editar Perfil</button> -->
-                                    <button type="button" class="btn btn-light btn-active-light-primary my-1" onclick="f_Editar(<?php echo $perfil['Id']; ?>,'<?php echo $xNamePerfil; ?>')">Editar Perfil</button>
+                                    <button type="button" class="btn btn-light btn-active-light-primary my-1" onclick="f_Editar(<?php echo $perfil['Id']; ?>,'<?php echo $xNamePerfil; ?>','<?php echo $perfil['Descripcion']; ?>')">Editar Perfil</button>
                                 </div> 
                             </div>
                         </div>
@@ -168,6 +163,12 @@
                                                     </label>
                                                     <input class="form-control form-control-solid" name="txtPerfil" id="txtPerfil" maxlength="150" placeholder="Ingrese nombre del perfil" />
                                                 </div>
+                                                <div class="fv-row mb-10">
+                                                    <label class="fs-5 fw-bolder form-label mb-2">
+                                                        <span>Observacion</span>
+                                                    </label>
+                                                    <input class="form-control form-control-solid" name="txtObservacion" id="txtObservacion" maxlength="150" placeholder="Breve descripcion..." />
+                                                </div>                                                
                                                 <div class="fv-row">
                                                     <label class="fs-5 fw-bolder form-label mb-2">Accesos Permitidos</label>
                                                     <div class="table-responsive">
@@ -295,6 +296,12 @@
                                                     </label>
                                                     <input class="form-control form-control-solid" name="txtPerfiledit" id="txtPerfiledit" maxlength="150" placeholder="Ingrese nombre del perfil" />
                                                 </div>
+                                                <div class="fv-row mb-10">
+                                                    <label class="fs-5 fw-bolder form-label mb-2">
+                                                        <span>Observacion</span>
+                                                    </label>
+                                                    <input class="form-control form-control-solid" name="txtObservacionedit" id="txtObservacionedit" maxlength="150" placeholder="Breve descripcion..." />
+                                                </div>                                                    
                                                 <div class="fv-row">
                                                     <label class="fs-5 fw-bolder form-label mb-2">Accesos Permitidos</label>
                                                     <div class="table-responsive">
@@ -372,11 +379,15 @@
         <script>
             $(document).ready(function(){
 
+				_mensaje = $('input#mensaje').val();
+
+				if(_mensaje != ''){
+					//mensajesalertify(_mensaje+"..!","S","top-center",5);
+					mensajesweetalert("center", "warning", _mensaje, false, 1800);  
+				}
+
 				$("#btnNuevo").click(function(){
 
-                    // var _emprid = "<?php echo $xEmprid; ?>";
-                    // var _paisid = "<?php echo $xPaisid; ?>";
-                    // var _output = '';
                     _addmod = 'add';
                     _perfilid = 0;
 
@@ -387,7 +398,7 @@
             });
 
 
-            function f_Editar(_perfilid, _perfilname){
+            function f_Editar(_perfilid, _perfilname, _descripcion){
 
                 var _emprid = "<?php echo $xEmprid; ?>";
                 var _paisid = "<?php echo $xPaisid; ?>";                
@@ -401,13 +412,6 @@
 
                 document.getElementById("tbodyPermisos").innerHTML = '';
 
-                // _mytbody.innerHTML = '<tr><td class="text-gray-800">Acceso Administrador' +
-                //         '<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Conceder Permisos de Administrador"></i></td>' +
-                //         '<td><label class="form-check form-check-custom form-check-solid me-9">' +
-                //         '<input class="form-check-input" type="checkbox" value="" id="kt_roles_select_all" />' +
-                //         '<span class="form-check-label" for="kt_roles_select_all">Todos</span>' +
-                //         '</label></td></tr>';
-
                 var xresponse = $.post("codephp/get_DatosPerfil.php",{ xxPaisid: _paisid, xxEmprid: _emprid, xxPerfilid: _perfilid })
 
                 xresponse.done(function(respuesta){
@@ -420,6 +424,12 @@
                         _detalle3 =  arraydatos[i].Detalle3;
                         _detalle4 =  arraydatos[i].Detalle4;
                         _detalle5 =  arraydatos[i].Detalle5;                 
+
+                        $("#txtDetalleedit1").val(_detalle1);
+                        $("#txtDetalleedit2").val(_detalle2);
+                        $("#txtDetalleedit3").val(_detalle3);
+                        $("#txtDetalleedit4").val(_detalle4);
+                        $("#txtDetalleedit5").val(_detalle5);                        
                     });
                 });
 
@@ -459,11 +469,7 @@
                     $('[href="#tabeditperfil"]').tab('show'); 
                     $("#kt_modal_update_role").modal("show");
                     $("#txtPerfiledit").val(_perfilname);
-                    $("#txtDetalleedit1").val(_detalle1);
-                    $("#txtDetalleedit2").val(_detalle2);
-                    $("#txtDetalleedit3").val(_detalle3);
-                    $("#txtDetalleedit4").val(_detalle4);
-                    $("#txtDetalleedit5").val(_detalle5);
+                    $("#txtObservacionedit").val(_descripcion);
 
                 });   
             }
@@ -497,6 +503,12 @@
             function f_Grabar(_paisid, _emprid, _usuaid){
 
                 _perfil = $.trim($("#txtPerfil").val());
+                _observacion = $.trim($("#txtObservacion").val());
+                _detalle1 = $.trim($("#txtDetalle1").val());
+                _detalle2 = $.trim($("#txtDetalle2").val());
+                _detalle3 = $.trim($("#txtDetalle3").val());
+                _detalle4 = $.trim($("#txtDetalle4").val());
+                _detalle5 = $.trim($("#txtDetalle5").val());
                 _estado = "A";
                 _result=[];
 
@@ -531,8 +543,8 @@
 
                 var xrespuesta = $.post("codephp/consultar_perfil.php", $parametros);
                 xrespuesta.done(function(response) {
-                    //console.log(response);
-                    if(response == 0){
+
+                    if(response.trim() == 0){
 
                         $datosperfil = {
                             xxPaisid: _paisid,
@@ -540,6 +552,11 @@
                             xxEmprid: _emprid,
                             xxUsuaid: _usuaid,
                             xxObservacion: _observacion,
+                            xxDetalle1: _detalle1,
+                            xxDetalle2: _detalle2,
+                            xxDetalle3: _detalle3,
+                            xxDetalle4: _detalle4,
+                            xxDetalle5: _detalle5,
                             xxEstado: _estado,
                             xxResult: _result
                         }
@@ -547,7 +564,7 @@
                         $.post("codephp/grabar_perfil.php", $datosperfil, function(response){
 
                             if(response.trim() == 'OK'){
-                                $.redirect('?page=seg_perfiladmin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Guardado con Exito..!'}); 
+                                $.redirect('?page=seg_perfiladmin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Perfil Creado Correctamente..!'}); 
                                 _detalle = 'Nuevo perfil creado';
                             }else{
                                 _detalle = 'Error al grabar perfil';
@@ -568,7 +585,7 @@
                         });
 
                     }else{
-                        mensajesweetalert("center","warning","Nombre del Perfil ya Existe..!",false,1800);
+                        mensajesweetalert("center", "warning", "Nombre del Perfil ya Existe..!", false, 1800);
                     }
                 });
 
@@ -577,19 +594,19 @@
             function f_GrabarEditar(_paisid, _emprid, _usuaid){
 
                 var _perfil = $.trim($("#txtPerfiledit").val());
+                var _observacion = $.trim($("#txtObservacionedit").val());
                 
                 var _detalle1 = $.trim($("#txtDetalleedit1").val());
                 var _detalle2 = $.trim($("#txtDetalleedit2").val());
                 var _detalle3 = $.trim($("#txtDetalleedit3").val());
                 var _detalle4 = $.trim($("#txtDetalleedit4").val());
                 var _detalle5 = $.trim($("#txtDetalleedit5").val());
-
-                var _estado = "A";
+                
                 var _result=[];
 
                 if(_perfil == '')
                 {       
-                    mensajesweetalert("center","warning","Ingrese Nombre del Perfil..!",false,1800);  
+                    mensajesweetalert("center", "warning", "Ingrese Nombre del Perfil..!", false, 1800);  
                     return;
                 }
 
@@ -603,7 +620,7 @@
                     var xrespuesta = $.post("codephp/consultar_perfil.php", $parametros);
                     xrespuesta.done(function(response) {
                         //console.log(response);
-                        if(response == 0){
+                        if(response.trim() == 0){
 
                             $datosperfil = {
                                 xxPaisid: _paisid,
@@ -614,7 +631,8 @@
                                 xxDetalle2: _detalle2,
                                 xxDetalle3: _detalle3,
                                 xxDetalle4: _detalle4,
-                                xxDetalle5: _detalle5
+                                xxDetalle5: _detalle5,
+                                xxObservacion: _observacion
                             }
 
                             $.post("codephp/update_perfil.php", $datosperfil, function(response){
@@ -654,7 +672,8 @@
                         xxDetalle2: _detalle2,
                         xxDetalle3: _detalle3,
                         xxDetalle4: _detalle4,
-                        xxDetalle5: _detalle5
+                        xxDetalle5: _detalle5,
+                        xxObservacion: _observacion
                     }
 
                     $.post("codephp/update_perfil.php", $datosperfil, function(response){

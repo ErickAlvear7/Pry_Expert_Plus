@@ -15,6 +15,7 @@
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
 
     $idpaca = $_POST['idparam'];
+    $menuid = $_GET['menuid'];
     
     @session_start();
 
@@ -100,7 +101,7 @@
                             <div class="col-md-12 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                     <span class="required">Parametro</span>
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="nombre del parametro"></i>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Nombre del parametro"></i>
                                 </label>
                                 <input type="text" class="form-control form-control-solid" id="txtParaEdit" name="txtParaEdit" minlength="5" maxlength="100" value="<?php echo $xNomPaca; ?>" />
                             </div>
@@ -109,7 +110,7 @@
                             <div class="col-md-12 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                     <span class="required">Descripcion</span>
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="descripcion del parametro"></i>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Descripcion del parametro"></i>
                                 </label>
                                 <textarea class="form-control form-control-solid" name="txtDescEdit" id="txtDescEdit" maxlength="150" onkeydown="return (event.keyCode!=13);"><?php echo $xDescPaca; ?></textarea>
                             </div>
@@ -126,7 +127,7 @@
                             <div class="col-md-4 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <span class="required">Detalle</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nombre del detalle"></i>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del detalle"></i>
                                 </label>
                                 <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />                       
                             </div>
@@ -257,7 +258,7 @@
             <div class="d-flex flex-column mb-7 fv-row">
                 <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                     <span class="required">Detalle</span>
-                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="nombre del detalle"></i>
+                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Nombre del detalle"></i>
                 </label>
                 <input type="text" class="form-control form-control-solid" id="txtDetalleEdit" name="txtDetalleEdit"  minlength="2" maxlength="100" />
             </div>
@@ -279,6 +280,9 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 <button type="button" id="btnGuardar" class="btn btn-primary">Grabar</button>
             </div>
+            <input type="text" id="txtDetalleold" name="txtDetalleold" />
+            <input type="text" id="txtValortexto" name="txtDetalleold" />
+            <input type="text" id="txtValorentero" name="txtValorentero" />
         </div>
     </div>
   </div>
@@ -289,10 +293,7 @@
     var _idpaca,_idpade,_paisid;
 
     $(document).ready(function(){
-
-   
-
-
+        _parametroold = $('#txtParaEdit').val();
     });
 
     $('#btnAgregar').click(function(){
@@ -302,12 +303,10 @@
         _paisid = '<?php echo  $xPaisid; ?>';
         var _ordendet = '<?php echo  $xOrdenDet; ?>';
        
-
         if($.trim($('#txtDetalle').val()).length == 0)
         {           
             mensajesweetalert("center","warning","Ingrese Detalle",false,1900);
-            return false;
-          
+            return false;          
         }
 
         if($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0 )
@@ -409,8 +408,6 @@
         
     });
 
-
-
     //Editar Detalle Modal
 
     $(document).on("click",".btnEditar",function(){
@@ -437,11 +434,13 @@
                         var _valorv = data[0]['ValorT'];
                         var _valori = data[0]['ValorI'];
 
-
                         $("#txtDetalleEdit").val(_nombre);
                         $("#txtValorVedit").val(_valorv);
                         $("#txtValorIedit").val(_valori);
-			
+
+                        $("#txtDetalleold").val(_nombre);
+                        $("#txtValortexto").val(_valorv);
+                        $("#txtValorentero").val(_valori);
 						                                                                      
 					},
 					error: function (error){
@@ -460,10 +459,26 @@
        var _padeid = _idpade;
        var _pacaid =   _idpaca
        _paisid = '<?php echo  $xPaisid; ?>';
+       var _consultar = 'NO';
 
        var _nombre = $.trim($("#txtDetalleEdit").val());
        var _valorV = $.trim($("#txtValorVedit").val());
        var _valorI = $.trim($('#txtValorI').val());
+
+       var _nombreold = $.trim($("#txtDetalleold").val());
+       var _valovold = $.trim($("#txtValortexto").val());
+       var _valoriold = $.trim($("#txtValorentero").val());
+
+        if(_nombreold != _nombre){
+            if(_valorV != _valovold){
+                _consultar = 'SI';
+            }
+            if(_valorI != _valoriold){
+                _consultar = 'SI';
+            }
+            _consultar = 'SI';
+        }
+
 
        if($.trim($('#txtDetalleEdit').val()).length == 0)
         {           
@@ -490,72 +505,97 @@
             _valorI = $.trim($('#txtValorIedit').val());
         }
 
-                 $datosDetalle ={
-                    xxPaisId: _paisid,
-                    xxDetalle: _nombre,
-                    xxValorV: _valorV,
-                    xxValorI: _valorI
+        $datosDetalle ={
+            xxPaisId: _paisid,
+            xxDetalle: _nombre,
+            xxValorV: _valorV,
+            xxValorI: _valorI
+        }
+
+        if(_consultar == 'SI'){
+            var xrespuesta = $.post("codephp/consultar_detalle.php", $datosDetalle);
+            xrespuesta.done(function(response){
+                if(response.trim() == 0){
+
+                    $parametros ={
+                        xxPacaId: _pacaid,
+                        xxPadeId: _padeid,
+                        xxDetalle: _nombre,
+                        xxValorV: _valorV,
+                        xxValorI: _valorI,
+                    }
+                    
+                    var xresponse = $.post("codephp/update_detalle.php", $parametros);
+                    xresponse.done(function(response){    
+
+                        if(response.trim() == 'OK'){
+
+                            _padeid = _padeid
+                            _padenom = _nombre;
+                            _padev = _valorV;
+                            _padei = _valorI;
+                            _checked = "checked='checked'";
+
+                            var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                                            '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '"' +
+                                            '</div></td>';
+                            
+                            var _btnGrup = '<td><div class="text-center"><div class="btn-group">' +
+                                            '<button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
+                                            '<i class="fa fa-edit"></i></button></div></div></td>';
+
+                            TableData = $('#kt_ecommerce_report_shipping_table').DataTable();  
+                            TableData.column(0).visible(0);
+
+                            TableData.row(_fila).data([_padeid, _padenom, _padev, _padei, _btnChk, _btnGrup ]).draw();
+
+                            $("#modal_detalle").modal("hide");
+                        }
+                    }); 
+            
+                }else{
+
+                    mensajesweetalert("center","warning","Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!",false,2800);
                 }
 
-                var xrespuesta = $.post("codephp/consultar_detalle.php", $datosDetalle);
-                xrespuesta.done(function(response){
-                    if(response == 0){
+            });
+        }else{
+            $parametros ={
+                xxPacaId: _pacaid,
+                xxPadeId: _padeid,
+                xxDetalle: _nombre,
+                xxValorV: _valorV,
+                xxValorI: _valorI,
+            }
+            
+            var xresponse = $.post("codephp/update_detalle.php", $parametros);
+            xresponse.done(function(response){    
 
-                       // debugger;
+                if(response.trim() == 'OK'){
 
-                        $parametros ={
-                            xxPacaId: _pacaid,
-                            xxPadeId: _padeid,
-                            xxDetalle: _nombre,
-                            xxValorV: _valorV,
-                            xxValorI: _valorI,
-                        }
-                        
-                        
-                        var xresponse = $.post("codephp/update_detalle.php", $parametros);
-                        xresponse.done(function(response){    
+                    _padeid = _padeid
+                    _padenom = _nombre;
+                    _padev = _valorV;
+                    _padei = _valorI;
+                    _checked = "checked='checked'";
 
-                            if(response.trim() == 'OK'){
+                    var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                                    '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '"' +
+                                    '</div></td>';
+                    
+                    var _btnGrup = '<td><div class="text-center"><div class="btn-group">' +
+                                    '<button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
+                                    '<i class="fa fa-edit"></i></button></div></div></td>';
 
-                                    _padeid = _padeid
-                                    _padenom = _nombre;
-                                    _padev = _valorV;
-                                    _padei = _valorI;
-                                    _checked = "checked='checked'";
+                    TableData = $('#kt_ecommerce_report_shipping_table').DataTable();  
+                    TableData.column(0).visible(0);
 
-                                    var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                                   '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '"' +
-                                                   '</div></td>';
-                                    
-                                    var _btnGrup = '<td><div class="text-center"><div class="btn-group">' +
-                                                   '<button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
-                                                   '<i class="fa fa-edit"></i></button></div></div></td>';
+                    TableData.row(_fila).data([_padeid, _padenom, _padev, _padei, _btnChk, _btnGrup ]).draw();
 
-                                    TableData = $('#kt_ecommerce_report_shipping_table').DataTable();  
-                                    TableData.column(0).visible(0);
-
-                                    TableData.row(_fila).data([_padeid, _padenom, _padev, _padei, _btnChk, _btnGrup ]).draw();
-
-                                    $("#modal_detalle").modal("hide");
-               
-                          
-                            }
-                                
-                            
-
-                        }); 
-               
-
-                    }else{
-
-                        mensajesweetalert("center","warning","Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!",false,2800);
-                    }
-
-                });
-   
-    
-     
-
+                    $("#modal_detalle").modal("hide");
+                }
+            });             
+        }
     });
 
     //Guardar Editar Paramentro
@@ -563,58 +603,65 @@
     
     function f_Guardar(_idpais,_idempr,_idpaca){
 
-      var _parametro = $.trim($("#txtParaEdit").val());
-      var _descripcion = $.trim($("#txtDescEdit").val());
+        var _parametro = $.trim($("#txtParaEdit").val());
+        var _descripcion = $.trim($("#txtDescEdit").val());
 
-      
-      if(_parametro == '')
-      {                        
-        mensajesweetalert("center","warning","Ingrese Nombre del Parametro..!!",false,1800);
-        return;
-      }
+        if(_parametro == ''){                        
+            mensajesweetalert("center","warning","Ingrese Nombre del Parametro..!!",false,1800);
+            return;
+        }
 
-                $datosParam ={
-                    xxPaisId: _idpais,
-					xxEmprId: _idempr,
-                    xxParametro: _parametro
+        $datosParam ={
+            xxPaisId: _idpais,
+            xxEmprId: _idempr,
+            xxParametro: _parametro
+        }
+        
+        if(_parametroold != _parametro){
+            var xrespuesta = $.post("codephp/consultar_parametro.php", $datosParam);
+            xrespuesta.done(function(response){
+                if(response.trim() == 0){
+
+                    $parametros ={
+                        xxPacaId: _idpaca,
+                        xxEmprId: _idempr,
+                        xxPaisId: _idpais,
+                        xxParametro: _parametro,
+                        xxDescripcion: _descripcion 
+                    }
+                    
+                    var xresponse = $.post("codephp/update_parametro.php", $parametros);
+                    xresponse.done(function(response){            
+
+                        if(response.trim() == 'OK'){
+                            $.redirect('?page=param_generales&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito'}); //POR METODO POST            
+                        }
+
+                    }); 
+                }else{
+                    mensajesweetalert("center","warning","Nombre del Parametro ya Existe..!",false,1800);
                 }
 
-                var xrespuesta = $.post("codephp/consultar_parametro.php", $datosParam);
-                xrespuesta.done(function(response){
-                    if(response == 0){
-
-
-                        $parametros ={
-                            xxPacaId: _idpaca,
-                            xxEmprId: _idempr,
-                            xxPaisId: _idpais,
-                            xxParametro: _parametro,
-                            xxDescripcion: _descripcion
-                          
-                        }
-                        
-                        
-                        var xresponse = $.post("codephp/update_parametro.php", $parametros);
-                        xresponse.done(function(response){            
-
-                            if(response.trim() == 'OK'){
-
+            });
+        }else{
+            $parametros ={
+                xxPacaId: _idpaca,
+                xxEmprId: _idempr,
+                xxPaisId: _idpais,
+                xxParametro: _parametro,
+                xxDescripcion: _descripcion
                 
-                            }
-                                
-                            
+            }
+            
+            var xresponse = $.post("codephp/update_parametro.php", $parametros);
+            xresponse.done(function(response){            
 
-                        }); 
-               
+                if(response.trim() == 'OK'){
+                    $.redirect('?page=param_generales&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito'}); //POR METODO POST            
+                }
 
-                    }else{
-
-                        mensajesweetalert("center","warning","Nombre del Parametro ya Existe..!",false,1800);
-                    }
-
-                });
-
-
+            });
+        }
     }
 
     

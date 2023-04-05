@@ -24,10 +24,15 @@
             $xUsuaid = $_POST['xxUsuaid']; 
             $xResult = $_POST['xxResult']; 
             $xObservacion = trim(safe($_POST['xxObservacion']), 'UTF-8');
+            $xDetalle1 = trim(safe($_POST['xxDetalle1']), 'UTF-8');
+            $xDetalle2 = trim(safe($_POST['xxDetalle2']), 'UTF-8');
+            $xDetalle3 = trim(safe($_POST['xxDetalle3']), 'UTF-8');
+            $xDetalle4 = trim(safe($_POST['xxDetalle4']), 'UTF-8');
+            $xDetalle5 = trim(safe($_POST['xxDetalle5']), 'UTF-8');
             $xEstado =  $_POST['xxEstado'];
 
-            $xSQL = "INSERT INTO `expert_perfil`(pais_id,empr_id,perf_descripcion,perf_observacion,perf_estado,perf_fechacreacion,perf_usuariocreacion,perf_terminalcreacion) ";
-            $xSQL .= "VALUES($xPaisid,$xEmprid,'$xPerfil','$xObservacion','$xEstado','{$xFecha}',$xUsuaid,'$xTerminal')";
+            $xSQL = "INSERT INTO `expert_perfil`(pais_id,empr_id,perf_descripcion,perf_observacion,perf_estado,perf_detalle1,perf_detalle2,perf_detalle3,perf_detalle4,perf_detalle5,perf_fechacreacion,perf_usuariocreacion,perf_terminalcreacion) ";
+            $xSQL .= "VALUES($xPaisid,$xEmprid,'$xPerfil','$xObservacion','$xEstado','$xDetalle1','$xDetalle2','$xDetalle3','$xDetalle4','$xDetalle5','{$xFecha}',$xUsuaid,'$xTerminal')";
             if(mysqli_query($con, $xSQL)){
 
                 $id = mysqli_insert_id($con);

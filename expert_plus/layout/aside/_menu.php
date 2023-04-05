@@ -16,7 +16,10 @@
 	if($page == 'addperfil' || $page == 'editperfil'){
 		$page = 'seg_perfiladmin';
 	}
-	
+
+	if($page == 'editparametro'){
+		$page = 'param_generales';
+	}	
 	
 	@session_start();
 

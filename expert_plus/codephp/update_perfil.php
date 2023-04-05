@@ -23,6 +23,7 @@
             $xDetalle3 = trim(safe($_POST['xxDetalle3']), 'UTF-8');
             $xDetalle4 = trim(safe($_POST['xxDetalle4']), 'UTF-8');
             $xDetalle5 = trim(safe($_POST['xxDetalle5']), 'UTF-8');
+            $xObservacion = trim(safe($_POST['xxObservacion']), 'UTF-8');
 
             $xSQL = "UPDATE `expert_perfil` SET perf_descripcion='$xPerfil',perf_observacion='$xObservacion',perf_detalle1='$xDetalle1',";
             $xSQL .= "perf_detalle2='$xDetalle2',perf_detalle3='$xDetalle3',perf_detalle4='$xDetalle4',perf_detalle5='$xDetalle5' ";

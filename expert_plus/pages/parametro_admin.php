@@ -458,80 +458,80 @@
       }
 
 
-                $datosParam ={
+        $datosParam ={
+            xxPaisId: _idpais,
+            xxEmprId: _idempr,
+            xxParametro: _parametro
+        }
+
+
+        var xrespuesta = $.post("codephp/consultar_parametro.php", $datosParam);
+        xrespuesta.done(function(response){
+            if(response == 0){
+                        
+                //debugger;
+
+                $parametros ={
                     xxPaisId: _idpais,
-					xxEmprId: _idempr,
-                    xxParametro: _parametro
+                    xxUsuaId: _idusua,
+                    xxEmprId: _idempr,
+                    xxParametro: _parametro,
+                    xxResultado: _result,
+                    xxEstado: _estado,
+                    xxDescripcion: _descripcion
+                
                 }
 
+                $.ajax({
+                    url: "codephp/grabar_parametro.php",
+                    type: "POST",
+                    dataType: "json",
+                    data: $parametros,          
+                    success: function(response){ 
+                        if(response != 0){
 
-                var xrespuesta = $.post("codephp/consultar_parametro.php", $datosParam);
-                xrespuesta.done(function(response){
-                    if(response == 0){
-                              
-                        //debugger;
+                            _pacaid = response;										
+                            _paramom = _parametro;
+                            _paradesc = _descripcion;
+                            _checked = "checked='checked'";
 
-                        $parametros ={
-                            xxPaisId: _idpais,
-                            xxUsuaId: _idusua,
-                            xxEmprId: _idempr,
-                            xxParametro: _parametro,
-                            xxResultado: _result,
-                            xxEstado: _estado,
-                            xxDescripcion: _descripcion
-                        
-                        }
-
-                        $.ajax({
-                            url: "codephp/grabar_parametro.php",
-                            type: "POST",
-                            dataType: "json",
-                            data: $parametros,          
-                            success: function(response){ 
-                                if(response != 0){
-
-                                    _pacaid = response;										
-                                    _paramom = _parametro;
-                                    _paradesc = _descripcion;
-                                    _checked = "checked='checked'";
-
-                                    var _estado = '<td><div class="badge badge-light-primary">Activo</div></td>';
+                            var _estado = '<td><div class="badge badge-light-primary">Activo</div></td>';
 
 
-                                    var _btnChk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                                '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _pacaid + '" value=""/>' +
-                                                '</div></div></td>';
-                                                
-
-                                    var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(' + _pacaid + ')" title="Editar Parametro" >' + 
-                                                    '<i class="fa fa-edit"></i></button></div></div></td>';            
-                                                
-                                    TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
-
-                                    TableData.column(0).visible(0);
+                            var _btnChk = '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                                        '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _pacaid + '" value=""/>' +
+                                        '</div></div></td>';
                                         
+
+                            var _btnEdit = '<td><div class="text-center"><div class="btn-group"><button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(' + _pacaid + ')" title="Editar Parametro" >' + 
+                                            '<i class="fa fa-edit"></i></button></div></div></td>';            
+                                        
+                            TableData = $('#kt_ecommerce_report_shipping_table').DataTable();
+
+                            TableData.column(0).visible(0);
+                                
+                            
+                                TableData.row.add([_pacaid, _paramom, _paradesc, _estado, _btnChk, _btnEdit]).draw();
+                                _mensaje = 'Grabado con Exito';
                                     
-                                        TableData.row.add([_pacaid, _paramom, _paradesc, _estado, _btnChk, _btnEdit]).draw();
-                                        _mensaje = 'Grabado con Exito';
-                                         
-                                    $("#modal_parametro").modal("hide");
-                                    
-                                    $.redirect('?page=param_generales&menuid=<?php echo $menuid; ?>', {'mensaje': _mensaje}); //POR METODO POST
+                            $("#modal_parametro").modal("hide");
+                            
+                            $.redirect('?page=param_generales&menuid=<?php echo $menuid; ?>', {'mensaje': _mensaje}); //POR METODO POST
 
-                                }                                                                         
-                            },
-                            error: function (error){
-                                console.log(error);
-                            }                            
-                        }); 
+                        }                                                                         
+                    },
+                    error: function (error){
+                        console.log(error);
+                    }                            
+                }); 
 
 
-                    }else{
+            }else{
 
-                        mensajesweetalert("center","warning","Nombre del Parametro ya Existe..!",false,1900);
-                    }
+                mensajesweetalert("center","warning","Nombre del Parametro ya Existe..!",false,1900);
+            }
 
-                });
+        });
     }
 
     //Eliminar Detalle en linea
@@ -558,10 +558,8 @@
         });        
     };
 
-
-
     function f_Editar(_paraid){
-        $.redirect('?page=editparametro', {'idparam': _paraid}); //POR METODO POST
+        $.redirect('?page=editparametro&menuid=<?php echo $menuid; ?>', {'idparam': _paraid}); //POR METODO POST
     }
 
     //cambiar estado y desactivar botones en linea
@@ -604,18 +602,10 @@
 
     }
 
-
-
    //Desplazar-modal
 
    $("#modal_parametro").draggable({
         handle: ".modal-header"
-    });
-    
- 
-
-  
-
-
+    });    
 
 </script> 	
