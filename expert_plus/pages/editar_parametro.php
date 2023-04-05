@@ -58,9 +58,6 @@
 
 <div id="kt_content_container" class="container-xxl">
 	<div class="card card-flush">
-        <div class="card-toolbar d-flex align-self-end">
-            <a href="?page=param_generales" class="btn btn-light-primary"><i class="las la-arrow-left"></i>Regresar</a>
-        </div>	
 		<div class="card-body pt-0">
             <br/>
             <div class="card-header">
@@ -77,7 +74,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_settings_store">
-                            <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm004.svg-->
                             <span class="svg-icon svg-icon-2 me-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path opacity="0.3" d="M18 10V20C18 20.6 18.4 21 19 21C19.6 21 20 20.6 20 20V10H18Z" fill="currentColor" />
@@ -93,6 +89,13 @@
                         Detalle</a>
                     </li>
                 </ul>
+                <a href="?page=param_generales" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
+                    <span class="svg-icon svg-icon-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                </a>
             </div>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel"> 
@@ -280,9 +283,9 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 <button type="button" id="btnGuardar" class="btn btn-primary">Grabar</button>
             </div>
-            <input type="text" id="txtDetalleold" name="txtDetalleold" />
-            <input type="text" id="txtValortexto" name="txtDetalleold" />
-            <input type="text" id="txtValorentero" name="txtValorentero" />
+            <input type="hidden" id="txtDetalleold" name="txtDetalleold" />
+            <input type="hidden" id="txtValortexto" name="txtDetalleold" />
+            <input type="hidden" id="txtValorentero" name="txtValorentero" />
         </div>
     </div>
   </div>
@@ -412,6 +415,8 @@
 
     $(document).on("click",".btnEditar",function(){
         $("#modal_detalle input").val("");
+        $("#txtValorVedit").prop("disabled",false);
+        $("#txtValorIedit").prop("disabled",false);      
 
         _idpaca = '<?php echo $idpaca; ?>';
         _fila = $(this).closest("tr");
@@ -429,10 +434,14 @@
 					dataType: "json",
 					data: $parametros,          
 					success: function(data){ 
+
+                     
                      //console.log(data);
                         var _nombre = data[0]['Nombre'];
                         var _valorv = data[0]['ValorT'];
                         var _valori = data[0]['ValorI'];
+
+                        debugger;
 
                         $("#txtDetalleEdit").val(_nombre);
                         $("#txtValorVedit").val(_valorv);
@@ -441,7 +450,13 @@
                         $("#txtDetalleold").val(_nombre);
                         $("#txtValortexto").val(_valorv);
                         $("#txtValorentero").val(_valori);
-						                                                                      
+						                                   
+                        if(_valorv == ''){
+                            $("#txtValorVedit").prop("disabled",true);   
+                        }
+                        if(_valori == ''){
+                            $("#txtValorIedit").prop("disabled",true);   
+                        }
 					},
 					error: function (error){
 						console.log(error);
@@ -469,6 +484,9 @@
        var _valovold = $.trim($("#txtValortexto").val());
        var _valoriold = $.trim($("#txtValorentero").val());
 
+       
+       debugger;
+
         if(_nombreold != _nombre){
             if(_valorV != _valovold){
                 _consultar = 'SI';
@@ -478,6 +496,13 @@
             }
             _consultar = 'SI';
         }
+
+
+    
+
+     
+
+        
 
 
        if($.trim($('#txtDetalleEdit').val()).length == 0)
