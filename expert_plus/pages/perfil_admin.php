@@ -100,7 +100,7 @@
 						<tbody class="fw-bold text-gray-600">
                             <?php
 
-                                foreach ($all_perfiles as $perfil){    
+                                foreach ($all_perfiles as $perfil){
                             ?>
                             <?php
                             

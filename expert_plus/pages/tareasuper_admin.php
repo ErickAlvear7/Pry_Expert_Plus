@@ -512,4 +512,4 @@
 					handle: ".modal-header"
 			}); 			
 
-		</script> 			
+		</script>

@@ -10,11 +10,11 @@
 	$xServidor = $_SERVER['HTTP_HOST'];
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
-    //$yEmprid = $_SESSION["i_empre_id"];
-    $yEmprid = 1;	
+    //$xEmprid = $_SESSION["i_empre_id"];
+    $xEmprid = 1;	
 
 	$xSQL = "SELECT tare_id AS Id, tare_nombre AS Tarea, tare_ruta AS Accion, CASE tare_estado WHEN 'A' THEN 'Activo' ";
-	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_tarea` WHERE empr_id=$yEmprid ORDER BY tare_orden";
+	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_tarea` WHERE empr_id=$xEmprid ORDER BY tare_orden";
 	$all_tareas = mysqli_query($con, $xSQL);
 ?>				
 					

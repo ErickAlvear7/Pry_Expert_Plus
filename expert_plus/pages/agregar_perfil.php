@@ -158,7 +158,7 @@
                                     </div>
                                 </div>
                                 <div class="card-toolbar">
-                                <button type="button" id="btnGuardar" class="btn btn-primary" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-save"></i>Grabar</button>
+                                    <button type="button" id="btnGuardar" class="btn btn-primary" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-save"></i>Grabar</button>
                                 </div>  
                             </div>
                                                  

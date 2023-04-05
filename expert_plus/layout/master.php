@@ -29,7 +29,7 @@
 	}else if($page == 'seg_menuadmin'){
 		include __DIR__ . '/../pages/menu_admin.php';
 	}else if ($page == 'seg_perfiladmin'){
-		include __DIR__ . '/../pages/perfil_admin.php';
+		include __DIR__ . '/../pages/perfillist_admin.php';
 	}else if($page == 'addmenu'){
 		include __DIR__ . '/../pages/agregar_menu.php';
 	}else if($page == 'addperfil'){

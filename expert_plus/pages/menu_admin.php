@@ -10,7 +10,7 @@
 	$xServidor = $_SERVER['HTTP_HOST'];
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
-	$yEmprid = 1;
+	$xEmprid = 1;
 
 	$xSQL = "SELECT menu_id AS Idmenu, empr_id AS Empid, menu_descripcion AS Menu, menu_observacion AS Observacion, CASE menu_estado WHEN 'A' THEN 'Activo' ";
 	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_menu`";
@@ -111,7 +111,7 @@
 							<div class="text-center">
 								<div class="form-check form-check-sm form-check-custom form-check-solid">
 										<input class="form-check-input btnEstado" type="checkbox" <?php echo $chkEstado; ?> id="chk<?php echo $menu['Idmenu']; ?>" <?php if ($menu['Estado'] == 'Activo') {
-												echo "checked";} else {'';} ?> value="<?php echo $menu['Idmenu']; ?>"  onchange="f_Check(<?php echo $yEmprid; ?>,<?php echo $menu['Idmenu']; ?>)" />
+												echo "checked";} else {'';} ?> value="<?php echo $menu['Idmenu']; ?>"  onchange="f_Check(<?php echo $xEmprid; ?>,<?php echo $menu['Idmenu']; ?>)" />
 								</div>
 							</div>
 						</td>

@@ -136,7 +136,7 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
 
         <script src="assets/js/custom/apps/user-management/users/list/table.js"></script>
-		
+
         <script src="assets/js/custom/apps/ecommerce/customers/listing/listing.js"></script>
 		<script src="assets/js/custom/apps/contacts/edit-contact.js"></script>
 		<script src="assets/js/custom/apps/ecommerce/reports/shipping/shipping.js"></script>
@@ -158,6 +158,13 @@ License: For each use you must have a valid license purchased only from above li
 			<script src="assets/js/custom/apps/user-management/users/list/add.js"></script>
 		
 		<?php } ?>
+
+		<?php if($page == 'seg_perfiladmin') { ?>
+
+			<script src="assets/js/custom/apps/user-management/roles/list/add.js"></script>
+			<script src="assets/js/custom/apps/user-management/roles/list/update-role.js"></script>     	
+
+		<?php } ?>		
 		
 	</body>
 	<!--end::Body-->

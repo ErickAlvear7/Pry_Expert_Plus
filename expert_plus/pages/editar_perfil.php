@@ -250,7 +250,7 @@
                         xxIdPerfil: _idperfil,
                         xxIdMeta: _idmeta,
                         xxEmprid: _emprid,
-                        xxTipo: _tipo                    
+                        xxTipo: _tipo
                     }
 
                     var xrespuesta = $.post("codephp/delnew_perfil.php", $parametros);
