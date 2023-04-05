@@ -482,8 +482,6 @@
        var _valovold = $.trim($("#txtValortexto").val());
        var _valoriold = $.trim($("#txtValorentero").val());
 
-       debugger;
-
        if($.trim($('#txtValorIedit').val()).length == 0){
             var _valorI = 0;
         }else{
@@ -627,8 +625,6 @@
     });
 
     //Guardar Editar Paramentro
-
-    
     function f_Guardar(_idpais,_idempr,_idpaca){
 
         var _parametro = $.trim($("#txtParaEdit").val());
