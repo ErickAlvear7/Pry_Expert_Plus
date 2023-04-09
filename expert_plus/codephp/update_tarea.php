@@ -11,21 +11,22 @@
     mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
 
-    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());  
+    if(isset($_POST['xxEmprid']) and isset($_POST['xxTareaId']) and isset($_POST['xxTarea']) and isset($_POST['xxPagina']) and isset($_POST['xxRuta']) ){
+        if(isset($_POST['xxEmprid']) <> '' and isset($_POST['xxTareaId']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxTarea']) <> '' and isset($_POST['xxPagina']) <> '' and isset($_POST['xxRuta']) <> ''){
 
-    if(isset($_POST['xxEmprid']) and isset($_POST['xxTareaId']) and isset($_POST['xxTarea']) and isset($_POST['xxTarea']) and isset($_POST['xxRuta']) ){
-        if(isset($_POST['xxEmprid']) <> '' and isset($_POST['xxTareaId']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxTarea']) <> '' and isset($_POST['xxRuta']) <> ''){
-
-            $yEmprid = $_POST['xxEmprid'];
-            $yTareaid = $_POST['xxTareaId'];
-            $xTarea = $_POST['xxTarea'];
+            $xEmprid = $_POST['xxEmprid'];
+            $xTareaid = $_POST['xxTareaId'];
+            $xTarea = safe($_POST['xxTarea']);
+            $xPagina = safe($_POST['xxPagina']);
             $xRuta = safe($_POST['xxRuta']);
+            $xTitulo = safe($_POST['xxTitulo']);
+            $xDescripcion = safe($_POST['xxDescripcion']);
 
-            $xSQL ="UPDATE `expert_tarea` SET tare_nombre='$xTarea',tare_ruta='$xRuta' WHERE tare_id=$yTareaid AND empr_id=$yEmprid";
+            $xSQL ="UPDATE `expert_tarea` SET tare_nombre='$xTarea',tare_pagina='$xPagina',tare_ruta='$xRuta',tare_titulo='$xTitulo',tare_descripcion='$xDescripcion' WHERE tare_id=$xTareaid AND empr_id=$xEmprid";
             mysqli_query($con, $xSQL);
 
             //print json_encode($xTareaid, JSON_UNESCAPED_UNICODE);
-            echo $yTareaid;
+            echo $xTareaid;
         }
     }
     

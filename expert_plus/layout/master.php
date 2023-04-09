@@ -1,5 +1,10 @@
 <?php
 	$page = isset($_GET['page']) ? $_GET['page'] : 'index';
+
+	session_start();
+
+    $xPaisid = $_SESSION["i_paisid"];
+    $xEmprid = $_SESSION["i_emprid"];	
 ?>
 
 		<!--begin::Main-->
@@ -24,44 +29,46 @@
 						<div class="post d-flex flex-column-fluid" id="kt_post">
 
 <?php 
-	if($page == 'index'){
-		include '_content.php';
-	}else if($page == 'seg_menuadmin'){
-		include __DIR__ . '/../pages/menu_admin.php';
-	}else if ($page == 'seg_perfiladmin'){
-		include __DIR__ . '/../pages/perfillist_admin.php';
-	}else if($page == 'addmenu'){
-		include __DIR__ . '/../pages/agregar_menu.php';
-	}else if($page == 'addperfil'){
-		include __DIR__ . '/../pages/agregar_perfil.php';
-	}else if($page == 'editperfil'){
-			include __DIR__ . '/../pages/editar_perfil.php';
-	}else if($page == 'editmenu'){
-		include __DIR__ . '/../pages/editar_menu.php';						
-	}else if($page == 'seg_usuarioadmin'){
-		include __DIR__ . '/../pages/usuario_admin.php';
-	}else if($page == 'seg_tareadmin'){
-		include __DIR__ . '/../pages/tarea_admin.php';
-	}else if($page == 'suptarea'){
-		include __DIR__ . '/../pages/tareasuper_admin.php';
-	}else if($page == 'supmenu'){
-		include __DIR__ . '/../pages/menusuper_admin.php';
-	}else if($page == 'supperfil'){
-		include __DIR__ . '/../pages/perfilsuper_admin.php';		
-	}else if($page == 'supusuario'){
-		include __DIR__ . '/../pages/usersuper_admin.php';
-	}else if($page == 'param_generales'){
-		include __DIR__ . '/../pages/parametro_admin.php';
-	}else if($page == 'addsuperperfil'){
-		include __DIR__ . '/../pages/agregar_superperfil.php';
-	}else if($page == 'editsuperperfil'){
-		include __DIR__ . '/../pages/editar_superperfil.php';
-	}else if($page == 'editparametro'){
-		include __DIR__ . '/../pages/editar_parametro.php';			
-	}else{
-		include '_content.php';
+
+	require_once("dbcon/config.php");
+	require_once("dbcon/functions.php");
+
+	mysqli_query($con,'SET NAMES utf8');  
+	mysqli_set_charset($con,'utf8');
+
+	$xRuta = '_content.php';
+
+	if($page == 'supperfil'){
+		$xRuta = '/../pages/perfilsuper_admin.php';
+	}
+
+	if($page == 'addsuperperfil'){
+		$xRuta = '/../pages/agregar_superperfil.php';
 	}
 	
+	if($page == 'editsuperperfil'){		
+		$xRuta = '/../pages/editar_superperfil.php';
+	}
+	
+	if($page == 'supusuario'){
+		$xRuta = '/../pages/usersuper_admin.php';
+	}	
+	
+	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";
+	$all_tareas = mysqli_query($con, $xSQL);	
+    foreach($all_tareas as $tareas){
+        $xRuta = $tareas['tare_ruta'];
+    }	
+
+	if($page == 'index'){
+		include '_content.php';
+	}else{
+		if($xRuta == '_content.php'){
+			include '_content.php';
+		}else{
+			include __DIR__ . $xRuta;
+		}
+	}
 ?>
 
 						</div>

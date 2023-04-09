@@ -2,61 +2,31 @@
 
 	$page = isset($_GET['page']) ? $_GET['page'] : "index";
 
-	$title = 'Dashboard';
-	$descripcion = 'Sistema Control de Agendamientos';
+	require_once("dbcon/config.php");
+	require_once("dbcon/functions.php");
 
-	if($page == 'index'){
-		$title = 'Inicio';
-		$descripcion = 'Tablero de Control - DASHBOARD';
-	}else if($page == 'seg_menuadmin'){
-		$title = 'Administrar Menú';
-		$descripcion = 'Menú de Opciones';
-	}else if($page == 'seg_perfiladmin'){
-		$title = 'Administrar Perfil';
-		$descripcion = 'Registrar Perfil (Opciones de menú y submenu para el perfil)';
-	}else if($page == 'addmenu'){
-		$title = 'Nuevo Menu';
-		$descripcion = 'Ingrese Datos para crear opción menú';
-	}else if($page == 'addperfil'){
-		$title = 'Nuevo Perfil';
-		$descripcion = 'Ingrese Datos para crear opción perfil';
-	}else if($page == 'editperfil'){
-		$title = 'Editar Perfil';
-		$descripcion = 'Edición Datos del Perfil';
-	}else if($page =='editmenu'){
-		$title = 'Editar menu';
-		$descripcion = 'Edición Datos del Menu';
-	}else if($page=='seg_usuarioadmin'){
+	mysqli_query($con,'SET NAMES utf8');  
+	mysqli_set_charset($con,'utf8');
+
+	$$title = 'Inicio';
+	$descripcion = 'Tablero de Control - DASHBOARD';
+
+	if($page == 'supperfil' || $page == 'addsuperperfil' || $page == 'editsuperperfil'){
+        $title = 'Administrar Perfil';
+		$descripcion = 'Crear/Modificar Datos del Perfil';
+	}
+	
+	if($page == 'supusuario'){
         $title = 'Administrar Usuarios';
-		$descripcion = 'Datos del Usuario';
-	}else if($page == 'seg_tareadmin'){
-        $title = 'Administrar Tareas';
-		$descripcion = 'Registro de Tareas';
-	}else if($page == 'suptarea'){
-		$title = 'Administrar Tareas';
-		$descripcion = 'Registro de Tareas';
-	}else if($page == 'supmenu'){
-		$title = 'Administrar Menu';
-		$descripcion = 'Registro Opciones de Menú';
-	}else if($page == 'supperfil'){
-		$title = 'Administrar Perfil';
-		$descripcion = 'Registro Opciones de Perfil';
-	}else if($page == 'supusuario'){
-		$title = 'Administrar Usuarios';
-		$descripcion = 'Registro Opciones de Usuarios';
-	}else if($page == 'param_generales'){
-		$title = 'Parametros del Sistema';
-		$descripcion = 'Registro de Parametros';
-	}else if($page == 'addsuperperfil'){
-		$title = 'Nuevo Perfil';
-		$descripcion = 'Ingrese Datos para crear opción perfil';
-	}else if($page == 'editsuperperfil'){
-		$title = 'Editar Perfil';
-		$descripcion = 'Editar Datos del Pefil';
-	}else if($page == 'editparametro'){
-	$title = 'Editar Parametro';
-	$descripcion = 'Editar Datos del Parametro';
-}
+		$descripcion = 'Crear/Modificar Usuarios del Sistema';;
+	}	
+
+	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";
+	$all_tareas = mysqli_query($con, $xSQL);	
+    foreach($all_tareas as $tareas){
+        $title = $tareas['tare_titulo'];
+		$descripcion = $tareas['tare_descripcion'];
+    }		
 
 ?>	
 

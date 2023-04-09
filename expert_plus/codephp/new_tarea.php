@@ -14,25 +14,28 @@
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());  
     $xTerminal = gethostname();
     $last_id = 0;
-    $yOrden = 0;
+    $xOrden = 0;
 
-    if(isset($_POST['xxEmprid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxTarea']) and isset($_POST['xxRuta']) ){
-        if(isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxTarea']) <> '' and isset($_POST['xxRuta']) <> ''){
+    if(isset($_POST['xxEmprid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxTarea']) and isset($_POST['xxPagina']) and isset($_POST['xxRuta']) ){
+        if(isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxPagina']) <> '' and isset($_POST['xxTarea']) <> '' and isset($_POST['xxRuta']) <> ''){
 
-            $yEmprid = $_POST['xxEmprid'];
-            $yUsuaid = $_POST['xxUsuaid'];
-            $xTarea = $_POST['xxTarea'];
+            $xEmprid = $_POST['xxEmprid'];
+            $xUsuaid = $_POST['xxUsuaid'];
+            $xTarea = safe($_POST['xxTarea']);
+            $xPagina = safe($_POST['xxPagina']);
             $xRuta = safe($_POST['xxRuta']);
+            $xTitulo = safe($_POST['xxTitulo']);
+            $xDescripcion = safe($_POST['xxDescripcion']);
 
-            $xSQL = "SELECT tare_orden+1 AS Orden FROM `expert_tarea` WHERE empr_id=$yEmprid ORDER BY tare_orden DESC LIMIT 1";
+            $xSQL = "SELECT tare_orden+1 AS Orden FROM `expert_tarea` WHERE empr_id=$xEmprid ORDER BY tare_orden DESC LIMIT 1";
             $all_orden = mysqli_query($con, $xSQL);
             foreach($all_orden as $orden){
-                $yOrden = $orden['Orden'];
+                $xOrden = $orden['Orden'];
             }
 
-            $xSQL ="INSERT INTO `expert_tarea` (empr_id,tare_nombre,tare_ruta,tare_estado,tare_orden,fechacreacion, ";
+            $xSQL ="INSERT INTO `expert_tarea` (empr_id,tare_nombre,tare_pagina,tare_ruta,tare_titulo,tare_descripcion,tare_estado,tare_orden,fechacreacion, ";
             $xSQL .= "usuariocreacion,terminalcreacion)";
-            $xSQL .="VALUES ($yEmprid,'$xTarea','$xRuta','A',$yOrden,'{$xFecha}',$yUsuaid,'$xTerminal') ";
+            $xSQL .="VALUES ($xEmprid,'$xTarea','$xPagina','$xRuta','$xTitulo','$xDescripcion','A',$xOrden,'{$xFecha}',$xUsuaid,'$xTerminal') ";
             if(mysqli_query($con, $xSQL)){
                 $last_id = mysqli_insert_id($con);
             }

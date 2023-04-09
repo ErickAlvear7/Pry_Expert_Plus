@@ -97,7 +97,7 @@
 											echo "</span>";
 											echo "<div class='menu-sub menu-sub-accordion menu-active-bg'>";
 												
-												$xSQL = "SELECT mnt.menu_id AS MenuId,tar.tare_nombre AS SubMenu,tar.tare_ruta AS Pagina ";
+												$xSQL = "SELECT mnt.menu_id AS MenuId,tar.tare_nombre AS SubMenu,tar.tare_pagina AS Pagina ";
 												$xSQL .= "FROM `expert_menu_tarea` mnt, `expert_perfil_menu_tarea` pmt, `expert_tarea` tar ";
 												$xSQL .= "WHERE mnt.menu_id=" . $menurow["MenuId"] . " AND pmt.meta_id=mnt.meta_id AND pmt.perf_id=$xPerfilid AND mnt.tare_id=tar.tare_id ";
 												$xSQL .= "AND tar.tare_estado='A' AND pmt.meta_estado='A' ORDER BY tar.tare_orden";

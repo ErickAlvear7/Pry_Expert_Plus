@@ -14,8 +14,8 @@
 	mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
 
-	$xServidor = $_SERVER['HTTP_HOST'];
-    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
+	//$xServidor = $_SERVER['HTTP_HOST'];
+    //$xFecha = strftime("%Y-%m-%d %H:%M:%S", time());
 
 	session_start();
 
@@ -34,7 +34,7 @@
     $xEmprid = $_SESSION["i_emprid"];
 	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
 
-	$xSQL = "SELECT tare_id AS Id, tare_nombre AS Tarea, tare_ruta AS Accion, CASE tare_estado WHEN 'A' THEN 'Activo' ";
+	$xSQL = "SELECT tare_id AS Id, tare_nombre AS Tarea, tare_pagina AS Pagina, tare_ruta AS Ruta, tare_titulo AS Titulo, tare_descripcion AS Descripcion, CASE tare_estado WHEN 'A' THEN 'Activo' ";
 	$xSQL .= "ELSE 'Inactivo' END AS Estado FROM `expert_tarea` WHERE empr_id=$xEmprid ORDER BY tare_orden";
 	$all_tareas = mysqli_query($con, $xSQL);
 ?>	
@@ -154,7 +154,10 @@
 							<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
 								<th style="display:none;">IdTarea</th>
 								<th>Tarea</th>
-								<th>Accion</th>
+								<th>Pagina</th>
+								<th>Ruta</th>
+								<th>Titulo</th>
+								<th>Descripcion</th>
 								<th>Estado</th>
 								<th>Status</th>
 								<th style="text-align:center;">Opciones</th>
@@ -188,7 +191,10 @@
 								<tr>
 									<td style="display:none;"><?php echo $tareas['Id']; ?></td>
 									<td><?php echo $tareas['Tarea']; ?></td>
-									<td><?php echo $tareas['Accion']; ?></td>
+									<td><?php echo $tareas['Pagina']; ?></td>
+									<td><?php echo $tareas['Ruta']; ?></td>
+									<td><?php echo $tareas['Titulo']; ?></td>
+									<td><?php echo $tareas['Descripcion']; ?></td>
 									<td id="td_<?php echo $tareas['Id']; ?>">
 										<div class="<?php  echo $xTextColor; ?>"><?php echo $tareas['Estado']; ?></div>
 									</td>
@@ -245,9 +251,26 @@
 								</div>
 								
 								<div class="d-flex flex-column mb-5 fv-row">
-									<label class="required fs-5 fw-bold mb-2">Accion/Ruta</label>
-									<input class="form-control form-control-solid" id="txtRuta" name="txtRuta" maxlength="150" placeholder="Ingrese Ruta" />
+									<label class="required fs-5 fw-bold mb-2">Pagina</label>
+									<input class="form-control form-control-solid" id="txtPagina" name="txtPagina" maxlength="150" placeholder="Ingrese Nombre de la pagina" />
 								</div>
+
+								<div class="d-flex flex-column mb-5 fv-row">
+									<label class="required fs-5 fw-bold mb-2">Ruta</label>
+									<input class="form-control form-control-solid" id="txtRuta" name="txtRuta" maxlength="100" placeholder="/../pages/nombre_pagina.php" />
+								</div>
+
+								<div class="d-flex flex-column mb-5 fv-row">
+									<label class="fs-5 fw-bold mb-2">Titulo</label>
+									<input class="form-control form-control-solid" id="txtTitulo" name="txtTitulo" maxlength="150" placeholder="Ingrese Titulo" />
+								</div>
+
+								<div class="d-flex flex-column mb-5 fv-row">
+									<label class="fs-5 fw-bold mb-2">Descripcion</label>
+									<input class="form-control form-control-solid" id="txtDescripcion" name="txtDescripcion" maxlength="150" placeholder="Ingrese Descripcion" />
+								</div>
+
+
 							</div>
 						</div>
 
@@ -288,15 +311,19 @@
 					_data = $('#kt_ecommerce_report_shipping_table').dataTable().fnGetData(_fila);
 					_idtarea = _data[0];					
 					_tareaold = _data[1];
+					_paginaold = _data[2];
 					_addmod = 'mod';
 
 					$(".modal-title").text("Editar Tarea");				
 					$("#btnSave").text("Modificar");
 					$("#frm_datos").trigger("reset");
 					$("#modal-tarea").modal("show");
-					$("#txtTarea").val(_data[1]);
-					$("#txtRuta").val(_data[2]);					
-				
+					$("#txtTarea").val(_data[1]);					
+					$("#txtPagina").val(_data[2]);
+					$("#txtRuta").val(_data[3]);
+					$("#txtTitulo").val(_data[4]);
+					$("#txtDescripcion").val(_data[5]);
+
 				});				
 
 				$('#btnSave').click(function(e){
@@ -305,7 +332,10 @@
 					var _emprid = "<?php echo $xEmprid; ?>"
 					var _usuaid = "<?php echo $yUsuaid; ?>"
 					var _tarea = $.trim($("#txtTarea").val());
+					var _pagina = $.trim($("#txtPagina").val());
 					var _ruta = $.trim($("#txtRuta").val());
+					var _titulo = $.trim($("#txtTitulo").val());
+					var _descripcion = $.trim($("#txtDescripcion").val());
 					 _buscar = 'SI';
 					_respuesta = 'OK';
 
@@ -314,13 +344,24 @@
 						return;
 					}
 
-					if(_ruta == ''){                        
-						mensajesweetalert("center","warning","Ingrese Accion/Ruta",false,1800);
+					if(_pagina == ''){
+						mensajesweetalert("center","warning","Ingrese Pagina",false,1800);
+						return;
+					}					
+
+					if(_ruta == ''){
+						mensajesweetalert("center","warning","Ingrese Ruta",false,1800);
 						return;
 					}
 
 					if(_addmod == 'mod'){
 						if(_tareaold != _tarea){
+							_buscar = 'SI';
+						}else{
+							_buscar = 'NO';
+						}
+
+						if(_paginaold != _pagina){
 							_buscar = 'SI';
 						}else{
 							_buscar = 'NO';
@@ -336,11 +377,14 @@
 						xxUsuaid: _usuaid,
 						xxTareaId: _idtarea,
 						xxTarea: _tarea,
-						xxRuta: _ruta
+						xxPagina: _pagina,
+						xxRuta: _ruta,
+						xxTitulo: _titulo,
+						xxDescripcion: _descripcion  
 					}	
 
 					if(_buscar == 'SI'){
-						var xrespuesta = $.post("codephp/consultar_tarea.php", { xxTarea: _tarea, xxEmprid: _emprid });
+						var xrespuesta = $.post("codephp/consultar_tarea.php", { xxEmprid: _emprid, xxTarea: _tarea, xxPagina: _pagina });
 						xrespuesta.done(function(response){							
 							if(response == 0){
 
