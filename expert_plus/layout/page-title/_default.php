@@ -15,6 +15,11 @@
         $title = 'Administrar Perfil';
 		$descripcion = 'Crear/Modificar Datos del Perfil';
 	}
+
+	if($page == 'addmenu' || $page == 'editmenu'){
+        $title = 'Administrar Menu';
+		$descripcion = 'Crear/Modificar Datos del Menu';
+	}	
 	
 	if($page == 'supusuario'){
         $title = 'Administrar Usuarios';

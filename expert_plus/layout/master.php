@@ -42,6 +42,14 @@
 		$xRuta = '/../pages/perfilsuper_admin.php';
 	}
 
+	if($page == 'addmenu'){
+		$xRuta = '/../pages/agregar_menu.php';
+	}
+	
+	if($page == 'editmenu'){
+		$xRuta = '/../pages/editar_menu.php';
+	}	
+
 	if($page == 'addsuperperfil'){
 		$xRuta = '/../pages/agregar_superperfil.php';
 	}
