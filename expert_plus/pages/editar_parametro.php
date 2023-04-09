@@ -89,7 +89,7 @@
                         Detalle</a>
                     </li>
                 </ul>
-                <a href="?page=param_generales" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
+                <a href="?page=param_generales&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
                     <span class="svg-icon svg-icon-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
@@ -394,6 +394,7 @@
                                     $("#txtValorI").val("");
 
                                     // $.redirect('?page=editparametro', {}); //POR METODO POST
+                                    // $.redirect('?page=editparametro', {}); //POR METODO POST
 
 								}                                                                         
 							},
@@ -441,6 +442,7 @@
                         var _valorv = data[0]['ValorT'];
                         var _valori = data[0]['ValorI'];
 
+
                         $("#txtDetalleEdit").val(_nombre);
                         $("#txtValorVedit").val(_valorv);
                         $("#txtValorIedit").val(_valori);
@@ -448,6 +450,8 @@
                         $("#txtDetalleold").val(_nombre);
                         $("#txtValortexto").val(_valorv);
                         $("#txtValorentero").val(_valori);
+
+                   
 						                                   
                         if(_valorv == ''){
                             $("#txtValorVedit").prop("disabled",true);   
@@ -455,6 +459,7 @@
                         if(_valori == ''){
                             $("#txtValorIedit").prop("disabled",true);   
                         }
+
 					},
 					error: function (error){
 						console.log(error);
@@ -560,6 +565,10 @@
                             _padenom = _nombre;
                             _padev = _valorV;
                             _padei = _valorI;
+
+                            if(_padei == 0){
+                                _padei = '';
+                            }
                             _checked = "checked='checked'";
 
                             var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
