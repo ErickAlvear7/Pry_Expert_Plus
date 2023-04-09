@@ -42,7 +42,7 @@
 	$xSQL = "SELECT perf_descripcion AS Descripcion, perf_id AS Codigo,perf_observacion AS Observacion FROM `expert_perfil` ";
 	$xSQL .= " WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND perf_estado='A' ";
 	$xSQL .= " ORDER BY Codigo ";
-	file_put_contents('log_segumiento.txt', $xSQL . "\n\n", FILE_APPEND);
+	//file_put_contents('log_seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
     $all_perfil = mysqli_query($con, $xSQL);
 
 ?>
