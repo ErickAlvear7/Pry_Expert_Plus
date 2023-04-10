@@ -23,8 +23,13 @@
 	
 	if($page == 'supusuario'){
         $title = 'Administrar Usuarios';
-		$descripcion = 'Crear/Modificar Usuarios del Sistema';;
-	}	
+		$descripcion = 'Crear/Modificar Usuarios del Sistema';
+	}
+	
+	if($page == 'editparametro'){
+        $title = 'Administrar Parametros';
+		$descripcion = 'Modificar Parametros del Sistema';
+	}		
 
 	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";
 	$all_tareas = mysqli_query($con, $xSQL);	

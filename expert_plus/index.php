@@ -135,11 +135,16 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 		<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
 
+		<!--begin::Page USUARIOS-->
         <script src="assets/js/custom/apps/user-management/users/list/table.js"></script>
 
         <script src="assets/js/custom/apps/ecommerce/customers/listing/listing.js"></script>
 		<script src="assets/js/custom/apps/contacts/edit-contact.js"></script>
 		<script src="assets/js/custom/apps/ecommerce/reports/shipping/shipping.js"></script>
+
+		<!--begin::Page PRESTADORAS-->
+		<script src="assets/js/custom/apps/ecommerce/catalog/products.js"></script>
+
 		<script src="assets/js/widgets.bundle.js"></script>
 		<script src="assets/js/custom/widgets.js"></script>
 		<script src="assets/js/custom/apps/chat/chat.js"></script>		

@@ -297,6 +297,7 @@
 
     $(document).ready(function(){
         _parametroold = $('#txtParaEdit').val();
+
     });
 
     $('#btnAgregar').click(function(){
@@ -393,8 +394,7 @@
                                     $("#txtValorV").val("");
                                     $("#txtValorI").val("");
 
-                                    // $.redirect('?page=editparametro', {}); //POR METODO POST
-                                    // $.redirect('?page=editparametro', {}); //POR METODO POST
+                                    $.redirect('?page=editparametro&menuid=<?php echo $menuid; ?>', {idparam: <?php echo $idpaca; ?>}); //POR METODO POST
 
 								}                                                                         
 							},
