@@ -404,7 +404,7 @@
 
                                     $('#tblDetalle').append(_output);
 
-                                    //console.log(_output);
+                                    console.log(_output);
 
                                     _objeto = {
                                         arrydetalle: _detalle,

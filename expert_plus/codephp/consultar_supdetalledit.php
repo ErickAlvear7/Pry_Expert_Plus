@@ -32,7 +32,7 @@
 
             if($xValorv != ''){
                 if(strtoupper($xValorv) != strtoupper($xValorvold)){
-                    $xSQL = " SELECT * FROM `expert_superparametro_detalle` pade, ``expert_superparametro_cabecera` pac  ";
+                    $xSQL = " SELECT * FROM `expert_superparametro_detalle` pade, `expert_superparametro_cabecera` pac  ";
                     $xSQL .= " WHERE pac.paca_id=pade.paca_id AND pade.pade_valorV='$xValorv' ";
                     $all_det = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
                     $xRow = mysqli_num_rows($all_det);                    

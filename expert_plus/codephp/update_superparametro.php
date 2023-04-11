@@ -20,7 +20,7 @@
       
 
 
-        $xSQL = "UPDATE `expert_parametro_cabecera` SET paca_nombre = '$xParametro', paca_descripcion = '$xDesc' ";
+        $xSQL = "UPDATE `expert_superparametro_cabecera` SET paca_nombre = '$xParametro', paca_descripcion = '$xDesc' ";
         $xSQL .= "WHERE paca_id = $xPacaid ";
         mysqli_query($con, $xSQL);
     
