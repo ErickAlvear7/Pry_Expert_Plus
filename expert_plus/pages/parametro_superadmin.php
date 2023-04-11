@@ -509,7 +509,7 @@
                                     
                             $("#modal_parametro").modal("hide");
                             
-                            $.redirect('?page=param_generales&menuid=<?php echo $menuid; ?>', {'mensaje': _mensaje}); //POR METODO POST
+                            $.redirect('?page=param_sistema&menuid=<?php echo $menuid; ?>', {'mensaje': _mensaje}); //POR METODO POST
 
                         }                                                                         
                     },
@@ -552,7 +552,7 @@
     };
 
     function f_Editar(_paraid){
-        $.redirect('?page=editparametro&menuid=<?php echo $menuid; ?>', {'idparam': _paraid}); //POR METODO POST
+        $.redirect('?page=editsuperparametro&menuid=<?php echo $menuid; ?>', {'idparam': _paraid}); //POR METODO POST
     }
 
     //cambiar estado y desactivar botones en linea

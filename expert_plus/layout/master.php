@@ -64,7 +64,10 @@
 
 	if($page == 'editparametro'){
 		$xRuta = '/../pages/editar_parametro.php';
-	}		
+	}
+	if($page == 'editsuperparametro'){
+		$xRuta = '/../pages/editar_superparametro.php';
+	}			
 	
 	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";
 	$all_tareas = mysqli_query($con, $xSQL);	
