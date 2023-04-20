@@ -34,17 +34,20 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
+    $xSQL = "SELECT DISTINCT provincia AS Descripcion FROM `provincia_ciudad` ";
+	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
+    $all_provincia = mysqli_query($con, $xSQL);
+
 
 ?>
 
-    <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-            <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/catalog/products.html">
+            <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row">
                 <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
                     <div class="card card-flush py-4">
                         <div class="card-header">
                             <div class="card-title">
-                                <h2>Logo Prestador</h2>
+                                <h2>Logo Cabeza</h2>
                             </div>
                         </div>
                         <div class="card-body text-center pt-0">
@@ -65,32 +68,30 @@
                             <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                         </div>
                     </div>
-
-                    <!-- <div class="card card-flush py-4">
+                    <div class="card card-flush py-4">
                         <div class="card-header">
                             <div class="card-title">
-                                <h2>Status</h2>
-                            </div>
-                            <div class="card-toolbar">
-                                <div class="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_product_status"></div>
+                                <h2>Logo Pie</h2>
                             </div>
                         </div>
-                        <div class="card-body pt-s0">
-                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
-                                <option></option>
-                                <option value="published" selected="selected">Published</option>
-                                <option value="draft">Draft</option>
-                                <option value="scheduled">Scheduled</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
-                            <div class="text-muted fs-7">Set the product status.</div>
-                            <div class="d-none mt-10">
-                                <label for="kt_ecommerce_add_product_status_datepicker" class="form-label">Select publishing date and time</label>
-                                <input class="form-control" id="kt_ecommerce_add_product_status_datepicker" placeholder="Pick date &amp; time" />
+                        <div class="card-body text-center pt-0">
+                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                                <div class="image-input-wrapper w-150px h-150px"></div>
+                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
+                                    <i class="bi bi-pencil-fill fs-7"></i>
+                                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                    <input type="hidden" name="avatar_remove" />
+                                </label>
+                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
+                                    <i class="bi bi-x fs-2"></i>
+                                </span>
+                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remover Logo">
+                                    <i class="bi bi-x fs-2"></i>
+                                </span>
                             </div>
+                            <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                         </div>
-                    </div> -->
-
+                    </div>
                     <div class="card card-flush py-4">
                         <div class="card-header">
                             <div class="card-title">
@@ -134,7 +135,7 @@
                                 <div class="card card-flush py-4">
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <h2>Datos Prestador</h2>
+                                            <h2>Datos Cliente</h2>
                                         </div>
                                     </div>
                                     <div class="card-body pt-0">
@@ -143,16 +144,19 @@
                                                 <div class="fv-row mb-7">
                                                     <label class="fs-6 fw-bold form-label mt-3">
                                                         <span class="required">Provincia</span>
-                                                        <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's email."></i> -->
                                                     </label>
-                                             
+                                                    <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2" >
+                                                        <option></option>
+                                                        <?php foreach ($all_provincia as $prov) : ?>
+                                                            <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
+                                                        <?php endforeach ?>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="fv-row mb-7">
                                                     <label class="fs-6 fw-bold form-label mt-3">
                                                         <span class="required">Ciudad</span>
-                                                        <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's phone number (optional)."></i> -->
                                                     </label>
                                                     <select name="cboCiudad" id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2">
                                                         <option></option>
@@ -160,37 +164,16 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="mb-5 fv-row">
-                                            <label class="required form-label">Prestador</label>
-                                            <input type="text" name="txtPrestador" id="txtPrestador" class="form-control mb-2 text-uppercase" maxlength="150" placeholder="Nombre del Prestador" value="" />
-                                            <div class="text-muted fs-7">El Prestador puede ser Clinica/Centro Medico/Estudio/Consultorio</div>
-                                        </div>   
-                                        
-                                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                            <div class="col">
-                                                <div class="fv-row mb-7">
-                                                    <label class="fs-6 fw-bold form-label mt-3">
-                                                        <span class="required">Sector</span>
-                                                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ubicacion geografica del prestador"></i>
-                                                    </label>
-                                                                                                
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="fv-row mb-7">
-                                                    <label class="fs-6 fw-bold form-label mt-3">
-                                                        <span class="required">Tipo Prestador</span>
-                                                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Definicion del prestador"></i>
-                                                    </label>
-                                                                                   
-                                                </div>
-                                            </div>
-                                        </div>                                        
+                                            <label class="required form-label">Cliente</label>
+                                            <input type="text" name="txtCliente" id="txtCliente" class="form-control mb-2" maxlength="150" placeholder="Ingrese Nombre" value="" />
+                                        </div>
+                                        <div class="mb-5 fv-row">
+                                            <label class="required form-label">Descripcion</label>
+                                            <textarea class="form-control mb-2" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                                        </div>                                 
                                     </div>
-                                   
                                 </div>
-
                                 <div class="card pt-4 mb-6 mb-xl-9">
                                     <div class="card-header border-0">
                                         <div class="card-title">
@@ -551,6 +534,37 @@
 
         <script>
             $(document).ready(function(){
+
+                $('#cboProvincia').change(function(){
+                        
+                    var _paisid = "<?php echo $xPaisid; ?>";
+                    var _emprid = "<?php echo $xEmprid; ?>";                
+                    _cboid = $(this).val(); //obtener el id seleccionado
+                    
+                    $("#cboCiudad").empty();
+                    //$("#cboCiudad").append('<option value=0>--Seleccione Ciudad--</option>');
+
+                    var _parametros = {
+                        xxPaisId: _paisid,
+                        xxEmprId: _emprid,
+                        xxComboId: _cboid,
+                        xxOpcion: 0
+                    }
+
+                    var _respuesta = $.post("codephp/cargar_combos.php", _parametros);
+                    _respuesta.done(function(response) {
+                        //document.getElementById("city").className = "form-control";
+                        $("#cboCiudad").html(response);
+                        
+                    });
+                    _respuesta.fail(function() {
+                        //mensajesalertify('Error al cargar listado de ciudades','E','top-right',10);
+                    });
+                    _respuesta.always(function() {
+                        //alert("ajax complete");
+                    });                
+    
+                });
 
                     
 

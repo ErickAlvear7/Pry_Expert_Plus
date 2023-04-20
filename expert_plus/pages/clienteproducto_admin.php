@@ -70,12 +70,13 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
+               <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                            <th style="display:none;">Id</th>
-                            <th>Cliente</th>
-                            <th>Descripcion</th>
+                            <th>Ciudad</th>
+                            <th>Prestadora</th>
+                            <th>Especialidad</th>
+                            <th>Medicos</th>
                             <th>Estado</th>
                             <th>Status</th>
                             <th>Opciones</th>
@@ -83,25 +84,59 @@
                     </thead>
                     <tbody class="fw-bold text-gray-600">
                         <tr>
-                            <td style="display:none;"> </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="ms-5">
+                                        <!-- <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bolder" data-kt-ecommerce-product-filter="product_name">Product 1</a> -->
+                                        <span class="fw-bolder">Guayaquil</span>
+                                    </div>
+                                </div>
+                            </td>
+
                             <td class="d-flex align-items-center">
                                 <a href="?page=modprestadora&menuid=" class="symbol symbol-50px">
                                     <span class="symbol-label" style="background-image:url(assets/media//logos/companyname.png);"></span>
                                 </a>
-                          
+                                <span class="fw-bolder">ASISTANET SUR</span>
                             </td>
-                            <td></td>
+
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="rating-label checked">
+                                        <span class="svg-icon svg-icon-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="rating-label">
+                                        <span class="svg-icon svg-icon-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+
                             <td data-order="Activo">
-                                <div class="badge badge-light-success"></div>
+                                <div class="badge badge-light-success">Activo</div>
                             </td>
+
                             <td>
                                 <div>
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input  class="form-check-input h-20px w-20px border-primary"  type="checkbox" id="chk" 
-                                            onchange="f_UpdateEstado()" value=""/>
+                                        <input <?php echo $cheking; ?> class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $idusuario; ?>" 
+                                            onchange="f_UpdateEstado(<?php echo $xEmprid; ?>,<?php echo $usu['Idusuario']; ?>)" value="<?php echo $idusuario; ?>"/>
                                     </div>
                                 </div>
                             </td> 
+
                             <td>
                                 <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Opciones
                                     <span class="svg-icon svg-icon-5 m-0">
@@ -120,6 +155,7 @@
                                 </div>
                             </td>
                         </tr>
+
                     </tbody>
                 </table>
             </div>
