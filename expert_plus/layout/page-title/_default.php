@@ -39,6 +39,11 @@
 	if($page == 'editsuperparametro'){
         $title = 'Administrar Parametros';
     	$descripcion = 'Modificar Parametros del Sistema';
+	}
+	
+	if($page == 'addclienteprod'){
+        $title = 'Administrar Cliente';
+    	$descripcion = 'Crear Nuevo Cliente & Producto';
 	}	
 
 	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";
