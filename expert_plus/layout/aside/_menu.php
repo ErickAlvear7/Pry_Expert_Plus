@@ -19,7 +19,11 @@
 
 	if($page == 'editparametro'){
 		$page = 'param_generales';
-	}	
+	}
+	
+	if($page == 'addprestador'){
+		$page = 'prestador_admin';
+	}
 	
 	@session_start();
 

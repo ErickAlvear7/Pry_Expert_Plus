@@ -32,3 +32,29 @@ function mensajesweetalert(_position, _icon, _title, _showconfirbutton, _timer){
         timer: _timer
       })
 }
+
+function mensajetoastr(_position, _tipo, _title, _mensaje, _timer, _closebutton, _progress){
+    
+    toastr[_tipo](_mensaje, _title);
+
+    toastr.options = {
+        "closeButton": _closebutton,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": _progress,
+        "positionClass": _position,
+        "preventDuplicates": true,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "500",
+        "timeOut": _timer,
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+    
+
+}

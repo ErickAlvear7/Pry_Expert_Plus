@@ -144,7 +144,7 @@ License: For each use you must have a valid license purchased only from above li
 
 		<!--begin::Page PRESTADORAS-->
 		<script src="assets/js/custom/apps/ecommerce/catalog/products.js"></script>
-
+		
 		<script src="assets/js/widgets.bundle.js"></script>
 		<script src="assets/js/custom/widgets.js"></script>
 		<script src="assets/js/custom/apps/chat/chat.js"></script>		

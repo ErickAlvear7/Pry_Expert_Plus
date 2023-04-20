@@ -344,7 +344,7 @@
                                             <div class="text-center pt-15">
                                                 <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
                                                 <button type="button" class="btn btn-primary" id="btnSave">
-                                                    <span class="indicator-label">Guardar</span>
+                                                    <span class="indicator-label">Grabar</span>
                                                     <span class="indicator-progress">Espere un momento...
                                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                                 </button>
@@ -468,9 +468,9 @@
 
 				_mensaje = $('input#mensaje').val();
 
-				if(_mensaje != ''){
-					//mensajesalertify(_mensaje+"..!","S","top-center",5);
-					mensajesweetalert("center","warning",_mensaje,false,1800);  
+				if(_mensaje != ''){					
+                    mensajesalertify(_mensaje, "S", "top-center", 5);
+					//mensajesweetalert("center","warning",_mensaje,false,1800);  
 				}                
 
                 $("#txtFechacaduca").flatpickr({
@@ -580,7 +580,7 @@
                     //_paisname = _data[3];
                     _addmod = 'mod';                     
 
-                    $parametros = {
+                    _parametros = {
                         xxEmprid: _emprid,
                         xxIdUsuario: _idusu
                     }
@@ -589,7 +589,7 @@
                         url: "codephp/editar_usuarios.php",
                         type: "POST",
                         dataType: "json",
-                        data: $parametros,          
+                        data: _parametros,          
                         success: function(data){ 
 
                             var _nombres = data[0]['Nombres'];
@@ -658,7 +658,7 @@
                     var _apellido = $.trim($("#txtApellido").val());
                     var _login = $.trim($("#txtLogin").val());
                     var _password = $.trim($("#txtPassword").val());
-                    var _paisid = $('#cboPais').val();                    
+                    var _paisid = $('#cboPais').val();
                     var _perfilid = $("input[type='radio'][name='rdbperfil']:checked").val();
                     var _selecc = 'NO';
                     //var _perfilname = $("#cboPerfil option:selected").text();
@@ -785,14 +785,14 @@
                                         }
 
                                         /**PARA CREAR REGISTRO DE LOGS */
-                                        $parametros = {
+                                        _parametros = {
                                             xxPaisid: _savepaisid,
                                             xxEmprid: _emprid,
                                             xxUsuaid: _usuaid,
                                             xxDetalle: _detalle,
                                         }					
             
-                                        $.post("codephp/new_log.php", $parametros, function(response){
+                                        $.post("codephp/new_log.php", _parametros, function(response){
                                         });                                         
 
                                         if(_respuesta == 'OK'){
@@ -843,14 +843,14 @@
                                 }
 
                                 // /**PARA CREAR REGISTRO DE LOGS */
-                                $parametros = {
+                                _parametros = {
                                     xxPaisid: _savepaisid,
                                     xxEmprid: _emprid,
                                     xxUsuaid: _usuaid,
                                     xxDetalle: _detalle,
                                 }					
 
-                                $.post("codephp/new_log.php", $parametros, function(response){
+                                $.post("codephp/new_log.php", _parametros, function(response){
                                 });                                         
 
                                 if(_respuesta == 'OK'){
@@ -919,13 +919,13 @@
                 var _changetd = document.getElementById(_td);
                 _changetd.innerHTML = '<td><div class="' + _class + '">' + _estado + ' </div>';
 
-                $parametros = {
+                _parametros = {
                     xxUsuaid: _userid,
                     xxEmprid: _emprid,
                     xxEstado: _estado
                 }	
     
-                var xrespuesta = $.post("codephp/delnew_usuario.php", $parametros);
+                var xrespuesta = $.post("codephp/delnew_usuario.php", _parametros);
                 xrespuesta.done(function(response){
                 });	
             }
@@ -938,12 +938,12 @@
             //resetaer password
             function f_ResetPass(_usuaid, _emprid){
 
-                $parametros={
+                _parametros={
                     xxUsuaid: _usuaid,
                     xxEmprid: _emprid
                 }
 
-                $.post("codephp/reset_password.php", $parametros, function(response){
+                $.post("codephp/reset_password.php", _parametros, function(response){
 
                     if(response.trim() == 'OK'){
                         mensajesweetalert("center","success","Password Resetado con exito..!",false,1800);
