@@ -3,7 +3,7 @@
 function mensajesalertify(_mensaje, _tipo, _position, _tiempo){
     alertify.set('notifier','position', _position);
     switch(_tipo){
-       case "S": //SUCCESS
+       case "S": //SUCCESS //POSITION (top-center)
             alertify.success(_mensaje , _tiempo , function(){console.log('dismissed');});
            break; 
        case  "W":

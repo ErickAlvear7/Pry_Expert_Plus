@@ -3,6 +3,9 @@
     //error_reporting(E_ALL);
     ini_set('display_errors', 0);
 
+    putenv("TZ=America/Guayaquil");
+    date_default_timezone_set('America/Guayaquil');    
+
     require_once("../dbcon/config.php");
     require_once("../dbcon/functions.php");
 
@@ -31,9 +34,7 @@
 
 
         if(mysqli_query($con, $xSQL)){
-
-            $last_id = mysqli_insert_id($con);
-            
+            $last_id = mysqli_insert_id($con);            
         }
 
         foreach($xResult as $drfila){
@@ -49,9 +50,6 @@
             mysqli_query($con, $xSQL);
           
         }
-
-     
-       
     }
 
     echo $last_id;

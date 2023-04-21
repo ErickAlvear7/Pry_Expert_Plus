@@ -378,10 +378,10 @@
                                             <select name="cboEspecialidad" id="cboEspecialidad" aria-label="Seleccione Especialidad" data-control="select2" data-placeholder="Seleccione Especialidad" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2">
                                                 <option></option>
                                                 <?php 
-                                                $xSQL = "SELECT espe_id AS Codigo,espe_nombre AS Descripcion FROM `expert_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND espe_estado='A' ";
+                                                $xSQL = "SELECT espe_id AS Codigo,espe_nombre AS NombreEspe FROM `expert_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND espe_estado='A' ";
                                                 $all_datos =  mysqli_query($con, $xSQL);
                                                 foreach ($all_datos as $datos){ ?>
-                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['NombreEspe'] ?></option>
                                                 <?php } ?>                                                        
                                             </select>                                             
                                         </div>
@@ -595,12 +595,13 @@
         <script>
             $(document).ready(function(){
 
+                var _paisid = "<?php echo $xPaisid; ?>";
+                var _emprid = "<?php echo $xEmprid; ?>";
+                var _usuaid = "<?php echo $xUsuaid; ?>";
+
                 $('#cboProvincia').change(function(){
                         
-                    var _paisid = "<?php echo $xPaisid; ?>";
-                    var _emprid = "<?php echo $xEmprid; ?>";                
                     _cboid = $(this).val(); //obtener el id seleccionado
-                    
                     $("#cboCiudad").empty();
                     //$("#cboCiudad").append('<option value=0>--Seleccione Ciudad--</option>');
 
@@ -626,6 +627,18 @@
 
                 });
 
+                $( "#txtPvp" ).blur(function() {
+                    this.value = parseFloat(this.value).toFixed(2);
+                });
+
+                $( "#txtCosto" ).blur(function() {
+                    this.value = parseFloat(this.value).toFixed(2);
+                });  
+                
+                $( "#txtPvpNew" ).blur(function() {
+                    this.value = parseFloat(this.value).toFixed(2);
+                });                 
+
                 $("#btnNuevaEspe").click(function(){
                     
                     $("#modal-new-especialidad").find("input,textarea").val("");
@@ -637,8 +650,45 @@
                 }); 
 
                 $('#btnSaveNew').click(function(e){
-                    var _provid = $('#cboCiudad').val();
-                    alert(_provid);
+
+                    var _cbotipoespe = $('#cboTipoEspe').val();
+                    var _especialidad = $.trim($("#txtEspecialidad").val());
+                    var _descripcion = $.trim($("#txtDescripcion").val());
+                    var _pvpnew = $("#txtPvpNew").val();
+
+                    if(_cbotipoespe == '0'){
+                        mensajesalertify('Seleccion Tipo Especialidad', 'W', 'top-center', 5);
+                        return;
+                    }
+
+                    if(_especialidad == ''){
+                        mensajesalertify('Ingrese Especialidad', 'W', 'top-center', 5);
+                        return;
+                    }
+
+                    if(_pvpnew == ''){
+                        _pvpnew = '0.00';
+                    }
+                    var _parametros = {
+                        xxPaisId: _paisid,
+                        xxEmprId: _emprid,
+                        xxUsuaId: _usuaid,
+                        xxEspecialidad: _especialidad,
+                        xxDescripcion: _descripcion,
+                        xxTipoEspe: _cbotipoespe,
+                        xxPrecio: _pvpnew
+                    }                    
+
+                    var xrespuesta = $.post("codephp/grabar_especialidad.php", _parametros);
+                    xrespuesta.done(function(response){
+                        if(response.trim() != 'ERR'){
+                            mensajesalertify('Especialidad Agregada', 'S', 'top-center', 5);
+                            $("#cboEspecialidad").empty();
+                            $("#cboEspecialidad").html(response);
+                            $("#modal-new-especialidad").modal("hide");
+                        }
+                    });
+
                 });                
 
                 $('#btnSave').click(function(e){
@@ -646,14 +696,6 @@
                     alert(_provid);
                 });
 
-                $( "#txtPvp" ).blur(function() {
-                    this.value = parseFloat(this.value).toFixed(2);
-                });
-
-                $( "#txtCosto" ).blur(function() {
-                    this.value = parseFloat(this.value).toFixed(2);
-                });                 
-                
                 $('#btnAgregar').click(function(e){
 
                     var _cboespe = $('#cboEspecialidad').val();
@@ -671,13 +713,8 @@
             }            
 
             //Desplazar-modal
-
-           
-
             $("#modal-new-especialidad").draggable({
                 handle: ".modal-header"
             });             
-
-
 
         </script>

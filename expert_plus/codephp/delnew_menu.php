@@ -9,8 +9,6 @@
 	mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
     
-    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time()); 
-    $xTerminal = gethostname();
     $xData = "";  
 
     if(isset($_POST['xxIdTarea']) and isset($_POST['xxIdMenu']) ){
