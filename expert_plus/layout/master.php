@@ -72,7 +72,11 @@
 	
 	if($page == 'addprestador'){
 		$xRuta = '/../pages/agregar_prestador.php';
-	}		
+	}
+	
+	if($page == 'addclienteprod'){
+		$xRuta = '/../pages/agregar_clienteproducto.php';
+	}	
 	
 	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";
 	$all_tareas = mysqli_query($con, $xSQL);	
