@@ -126,7 +126,7 @@
                             <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">Datos Generales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Especialidad Prestador</a>
+                            <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Productos</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -326,27 +326,51 @@
                                 <div class="card card-flush py-4">
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <h2>Datos Especialidad</h2>
+                                            <h2>Producto</h2>
                                         </div>
                                     </div>
                                     <div class="card-body pt-0">
-                                        <div class="mb-10 fv-row">
-                                            <label class="required form-label">Especialidad</label>
-                                                                              
+                                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                                           <div class="col">
+                                                <label class="required form-label">Producto</label>
+                                                <input type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
+                                           </div>
+                                           <div class="col">
+                                                <label class="required form-label">Descripcion</label>
+                                                <textarea class="form-control mb-2" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                                           </div>
                                         </div>
-                                        <div class="mb-10 fv-row">
-
-                                            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                                <div class="col">
-                                                    <label class="required form-label">Pvp</label>
-                                                    <input type="number" name="txtPvp" id="txtPvp" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                                </div>
-                                                <div class="col">
-                                                    <label class="required form-label">Costo Red</label>
-                                                    <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                                </div>
+                                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                                            <div class="col">
+                                                <label class="required form-label">Costo</label>
+                                                <input type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="0000" value="" />
+                                            </div>
+                                            <div class="col">
+                                                <label class="required form-label">Grupo</label>
+                                                <select name="cboGrupo" id="cboGrupo" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2" >
+                                                    <option></option>
+                                                </select>
                                             </div>
                                         </div>
+                                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                                           <div class="col">
+                                                <label class="required form-label">Asistencia Mes</label>
+                                                <input type="text" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" maxlength="150" placeholder="1" value="" />
+                                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                                    <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" />
+                                                    <span class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>
+                                                </label> 
+                                           </div>
+                                           <div class="col">
+                                                <label class="required form-label">Asistencia Anual</label>
+                                                <input type="text" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" maxlength="150" placeholder="1" value="" />
+                                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                                    <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" />
+                                                    <span class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>
+                                                </label> 
+                                           </div>
+                                        </div>
+                                        </br>
                                         <div class="form-group mt-5">
                                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
                                                 <span class="svg-icon svg-icon-2">
@@ -355,7 +379,7 @@
                                                         <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
                                                     </svg>
                                                 </span>
-                                            Agregar Especialidad
+                                            Agregar Producto
                                             </button>
                                         </div>                                        
                                     </div>
@@ -364,7 +388,7 @@
                                 <div class="card card-flush py-4">
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <h2>Especialidades Asignadas</h2>
+                                            <h2>Productos Asignados</h2>
                                         </div>
                                     </div>
                                     <div class="card-body pt-0">
@@ -381,79 +405,21 @@
                                             <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table">
                                                 <thead>
                                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                        <th>Especialidad</th>
-                                                        <th>Pvp</th>
+                                                        <th style="display:none;">Id</th>
+                                                        <th>Grupo</th>
+                                                        <th>Producto</th>
                                                         <th>Costo</th>
+                                                        <th>Estado</th>
+                                                        <th>Gerencial</th>
                                                         <th>Opciones</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="fw-bold text-gray-600">
                                                 </tbody>
-                                                <!--end::Table body-->
                                             </table>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- <div class="card card-flush py-4">
-                                    <div class="card-header">
-                                        <div class="card-title">
-                                            <h2>Shipping</h2>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pt-0">
-                                        <div class="fv-row">
-                                            <div class="form-check form-check-custom form-check-solid mb-2">
-                                                <input class="form-check-input" type="checkbox" id="kt_ecommerce_add_product_shipping_checkbox" value="1" />
-                                                <label class="form-check-label">This is a physical product</label>
-                                            </div>
-                                            <div class="text-muted fs-7">Set if the product is a physical or digital item. Physical products may require shipping.</div>
-                                        </div>
-                                        <div id="kt_ecommerce_add_product_shipping" class="d-none mt-10">
-                                            <div class="mb-10 fv-row">
-                                                <label class="form-label">Weight</label>
-                                                <input type="text" name="weight" class="form-control mb-2" placeholder="Product weight" value="" />
-                                                <div class="text-muted fs-7">Set a product weight in kilograms (kg).</div>
-                                            </div>
-                                            <div class="fv-row">
-                                                <label class="form-label">Dimension</label>
-                                                <div class="d-flex flex-wrap flex-sm-nowrap gap-3">
-                                                    <input type="number" name="width" class="form-control mb-2" placeholder="Width (w)" value="" />
-                                                    <input type="number" name="height" class="form-control mb-2" placeholder="Height (h)" value="" />
-                                                    <input type="number" name="length" class="form-control mb-2" placeholder="Lengtn (l)" value="" />
-                                                </div>
-                                                <div class="text-muted fs-7">Enter the product dimensions in centimeters (cm).</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card card-flush py-4">
-                                    <div class="card-header">
-                                        <div class="card-title">
-                                            <h2>Meta Options</h2>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pt-0">
-                                        <div class="mb-10">
-                                            <label class="form-label">Meta Tag Title</label>
-                                            <input type="text" class="form-control mb-2" name="meta_title" placeholder="Meta tag name" />
-                                            <div class="text-muted fs-7">Set a meta tag title. Recommended to be simple and precise keywords.</div>
-                                        </div>
-                                        <div class="mb-10">
-                                            <label class="form-label">Meta Tag Description</label>
-                                            <div id="kt_ecommerce_add_product_meta_description" name="kt_ecommerce_add_product_meta_description" class="min-h-100px mb-2"></div>
-                                            <div class="text-muted fs-7">Set a meta tag description to the product for increased SEO ranking.</div>
-                                        </div>
-                                        <div>
-                                            <label class="form-label">Meta Tag Keywords</label>
-                                            <input id="kt_ecommerce_add_product_meta_keywords" name="kt_ecommerce_add_product_meta_keywords" class="form-control mb-2" />
-                                            <div class="text-muted fs-7">Set a list of keywords that the product is related to. Separate the keywords by adding a comma
-                                            <code>,</code>between each keyword.</div>
-                                        </div>
-                                    </div>
-                                </div> -->
-
                             </div>
                         </div>
                     </div>
