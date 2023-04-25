@@ -121,14 +121,21 @@
                     </div>
                 </div>
                 <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
-                    <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n2">
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">Datos Generales</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Productos</a>
-                        </li>
-                    </ul>
+                        <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n2">
+                            <li class="nav-item">
+                                <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">Datos Generales</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Productos</a>
+                            </li>
+                            <a href="?page=admin_clienteproducto&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
+                                <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
                             <div class="d-flex flex-column gap-7 gap-lg-10">
@@ -166,7 +173,7 @@
                                         </div>
                                         <div class="mb-5 fv-row">
                                             <label class="required form-label">Cliente</label>
-                                            <input type="text" name="txtCliente" id="txtCliente" class="form-control mb-2" maxlength="150" placeholder="Ingrese Nombre" value="" />
+                                            <input type="text" name="txtCliente" id="txtCliente" class="form-control mb-2" minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="" />
                                         </div>
                                         <div class="mb-5 fv-row">
                                             <label class="required form-label">Descripcion</label>
@@ -250,25 +257,25 @@
                                                     </div>
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                                     </div> 
                                                     <div class="col">
-                                                        <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                                     </div>                                                        
                                                 </div>
                                                 <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="0999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                                     </div>
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                                     </div> 
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                                     </div>
                                                 </div>                                                
                                             </div>
@@ -298,21 +305,13 @@
                                                     <div class="fv-row w-100 flex-md-root">
                                                         <label class="form-label">Email 1</label>
                                                         <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" />
-                                                    </div>
-                                                    <label class="form-check form-switch form-check-custom form-check-solid">
-                                                        <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" />
-                                                        <span class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>
-                                                    </label>                                                    
+                                                    </div>                                                 
                                                 </div>
                                                 <div class="d-flex flex-wrap gap-5">
                                                     <div class="fv-row w-100 flex-md-root">
                                                         <label class="form-label">Email 2</label>
-                                                        <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" />
+                                                        <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="" class="form-control mb-2 text-lowercase" value="" />
                                                     </div>
-                                                    <label class="form-check form-switch form-check-custom form-check-solid">
-                                                        <input class="form-check-input" name="chkEnviar2" id="chkEnviar2" type="checkbox" />
-                                                        <span class="form-check-label fw-bold text-muted" for="chkEnviar2">No Enviar</span>
-                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -402,21 +401,23 @@
                                                 </span>
                                                 <input type="text" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Dato" />
                                             </div>
-                                            <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table">
-                                                <thead>
-                                                    <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                        <th style="display:none;">Id</th>
-                                                        <th>Grupo</th>
-                                                        <th>Producto</th>
-                                                        <th>Costo</th>
-                                                        <th>Estado</th>
-                                                        <th>Gerencial</th>
-                                                        <th>Opciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="fw-bold text-gray-600">
-                                                </tbody>
-                                            </table>
+                                            <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
+                                                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table">
+                                                    <thead>
+                                                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                            <th style="display:none;">Id</th>
+                                                            <th>Grupo</th>
+                                                            <th>Producto</th>
+                                                            <th>Costo</th>
+                                                            <th>Estado</th>
+                                                            <th>Gerencial</th>
+                                                            <th>Opciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="fw-bold text-gray-600">
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -424,11 +425,8 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancelar</a>
-                        <button type="button" id="btnSave" class="btn btn-primary">
+                        <button type="button" id="btnGrabar" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">
                             <span class="indicator-label">Grabar</span>
-                            <span class="indicator-progress">Espere un momento...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                         </button>
                     </div>
                 </div>
@@ -506,6 +504,8 @@
                     var _paisid = "<?php echo $xPaisid; ?>";
                     var _emprid = "<?php echo $xEmprid; ?>";                
                     _cboid = $(this).val(); //obtener el id seleccionado
+
+                
                     
                     $("#cboCiudad").empty();
                     //$("#cboCiudad").append('<option value=0>--Seleccione Ciudad--</option>');
@@ -535,6 +535,60 @@
                     
 
             });
+
+
+            //Agregar Productos
+
+            $('#btnAgregar').click(function(){
+
+                var _emprid = "<?php echo $xEmprid; ?>";  
+
+                 //alert(_emprid);
+
+            });
+
+
+             
+            // Guardar Cliente & Producto
+            function f_Guardar(_idpais,_idempr,_iduser){
+
+                var _cboProv = $('#cboProvincia').val();
+                var _cboIdProv = $('#cboCiudad').val();
+                var _cliente = $.trim($("#txtCliente").val());
+                var _desc = $.trim($("#txtDesc").val()); 
+                var _direc = $.trim($("#txtDireccion").val()); 
+                var _url = $.trim($("#txtUrl").val()); 
+                var _tel1 = $.trim($("#txtFono1").val()); 
+                var _tel2 = $.trim($("#txtFono2").val()); 
+                var _tel3 = $.trim($("#txtFono3").val()); 
+                var _cel1 = $.trim($("#txtCelular1").val()); 
+                var _cel2 = $.trim($("#txtCelular2").val()); 
+                var _cel3 = $.trim($("#txtCelular3").val()); 
+                var _email1 = $.trim($("#txtEmail1").val()); 
+                var _email2 = $.trim($("#txtEmail2").val()); 
+
+                if(_cboProv == ''){
+                    mensajesalertify("Seleccione Provincia..!!","W","top-center",3);
+                }
+
+                if(_cboIdProv == 0){
+                    mensajesalertify("Seleccione Ciudad..!!","W","top-center",3);
+                }
+
+                if(_cliente == ''){
+                    mensajesalertify("Ingrese Nombre del Cliente..!!","W","top-center",3);
+                }
+
+               
+
+
+              
+            
+
+
+                //alert(_cliente);
+
+            }
 
              
 
