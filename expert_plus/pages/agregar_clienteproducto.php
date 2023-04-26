@@ -336,13 +336,13 @@
                                            </div>
                                            <div class="col">
                                                 <label class="required form-label">Descripcion</label>
-                                                <textarea class="form-control mb-2" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                                                <textarea class="form-control mb-2" name="txtDescripcion" id="txtDescripcion" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
                                            </div>
                                         </div>
                                         <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                             <div class="col">
                                                 <label class="required form-label">Costo</label>
-                                                <input type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="0000" value="" />
+                                                <input type="text" name="txtCosto" id="txtCosto" class="form-control mb-2" maxlength="10" placeholder="0000" value="" />
                                             </div>
                                             <div class="col">
                                                 <label class="required form-label">Grupo</label>
@@ -357,7 +357,7 @@
                                                 <input type="text" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" maxlength="150" placeholder="1" value="" />
                                                 <label class="form-check form-switch form-check-custom form-check-solid">
                                                     <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" />
-                                                    <span class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>
+                                                    <span class="form-check-label fw-bold text-muted" for="chkEnviar1">Cobertura</span>
                                                 </label> 
                                            </div>
                                            <div class="col">
@@ -365,7 +365,7 @@
                                                 <input type="text" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" maxlength="150" placeholder="1" value="" />
                                                 <label class="form-check form-switch form-check-custom form-check-solid">
                                                     <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" />
-                                                    <span class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>
+                                                    <span class="form-check-label fw-bold text-muted" for="chkEnviar1">Sistema</span>
                                                 </label> 
                                            </div>
                                         </div>
@@ -402,7 +402,7 @@
                                                 <input type="text" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Dato" />
                                             </div>
                                             <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
-                                                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table">
+                                                <table class="table align-middle table-row-dashed fs-6 gy-5" id="tblProducto">
                                                     <thead>
                                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                                             <th style="display:none;">Id</th>
@@ -497,6 +497,9 @@
         </div>
 
         <script>
+
+            var _result = [],_count =0
+
             $(document).ready(function(){
 
                 $('#cboProvincia').change(function(){
@@ -541,9 +544,107 @@
 
             $('#btnAgregar').click(function(){
 
-                var _emprid = "<?php echo $xEmprid; ?>";  
+                var _agregarPro = 'add';
+                var _estado = 'A';
+                var _continuar = true;
+                var _output;
 
-                 //alert(_emprid);
+                var _emprid = "<?php echo $xEmprid; ?>";
+                var _producto = $.trim($("#txtProducto").val());
+                var _descripcion = $.trim($("#txtDescripcion").val());
+                var _valor = $.trim($("#txtCosto").val());
+                var _costo = parseFloat(_valor);
+                var _grupo = 'FAMILIA PROTEGIDA';
+
+               
+                if(_producto == ''){
+                    mensajesalertify("Ingrese Producto..!!","W","top-center",3);
+                    return false;
+                }
+
+                if(_valor == ''){
+                    mensajesalertify("Ingrese Costo..!!","W","top-center",3);
+                    return false;
+                }
+
+                if(_agregarPro == 'add'){
+                     
+                        $datosPro = {
+                            xxEmprid: _emprid,
+                            xxProducto: _producto
+                        }
+
+                        var xrespuesta = $.post("codephp/consultar_producto.php", $datosPro);
+                        xrespuesta.done(function(response){
+
+                            if(response == 0){
+
+                                $.each(_result,function(i,item){
+
+                                    if(item.arryproducto.toUpperCase() == _producto.toUpperCase()){
+                                        mensajesalertify("Producto ya Existe..!!","E","top-right",3);
+                                        _continuar = false;
+                                        return false;
+                                    }else{
+                                        _continuar = true;
+                                    }
+
+                                });
+
+
+                                if(_continuar){
+
+                                    _checked = "checked='checked'";
+                                    _count = _count + 1;
+
+                                    _output = '<tr id="row_' + _count + '">';
+                                    _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';
+                                    _output += '<td>' + _grupo + ' <input type="hidden" name="hidden_grupo[]" id="txtGrupo' + _count + '" value="' + _grupo + '" /></td>';
+                                    _output += '<td>' + _producto + ' <input type="hidden" name="hidden_producto[]" id="txtProducto' + _count + '" value="' + _producto + '" /></td>';
+                                    _output += '<td>' + _costo + ' <input type="hidden" name="hidden_costo[]" id="txtCosto' + _count + '" value="' + _costo + '" /></td>';
+                                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                                               '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _count + '" value=""/>' +
+                                               '</div></div></td>';
+                                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                                               '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstadoGe" type="checkbox" id="chk' + _count + '" value=""/>' +
+                                               '</div></div></td>';
+                                    _output += '<td><div class="text-center"><div class="btn-group">';
+                                    _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
+                                    _output += '</tr>';
+
+                                    $('#tblProducto').append(_output);
+
+                                       //console.log(_output);
+                                     
+                                    _objeto = {
+                                        arryproducto: _producto,
+                                        arrydescripcion: _descripcion,
+                                        arrycosto: _costo,
+                                        arrygrupo: _grupo,
+                                        arryestado: _estado
+                                    }
+
+                                    _result.push(_objeto);
+
+                                    $("#txtProducto").val("");
+                                    $("#txtDescripcion").val("");
+                                    $("#txtCosto").val("");
+
+                                }
+
+                                
+                            }
+
+                        });
+
+
+                }
+
+
+                  
+
+                 //alert(_numero);
+                 //console.log(typeof _numero);
 
             });
 
@@ -569,14 +670,17 @@
 
                 if(_cboProv == ''){
                     mensajesalertify("Seleccione Provincia..!!","W","top-center",3);
+                    return false;
                 }
 
                 if(_cboIdProv == 0){
                     mensajesalertify("Seleccione Ciudad..!!","W","top-center",3);
+                    return false;
                 }
 
                 if(_cliente == ''){
                     mensajesalertify("Ingrese Nombre del Cliente..!!","W","top-center",3);
+                    return false;
                 }
 
                
