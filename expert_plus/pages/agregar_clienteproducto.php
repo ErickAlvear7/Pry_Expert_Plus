@@ -558,12 +558,12 @@
 
                
                 if(_producto == ''){
-                    mensajesalertify("Ingrese Producto..!!","W","top-center",3);
+                    mensajesalertify("Ingrese Producto..!!","W","top-right",3);
                     return false;
                 }
 
                 if(_valor == ''){
-                    mensajesalertify("Ingrese Costo..!!","W","top-center",3);
+                    mensajesalertify("Ingrese Costo..!!","W","top-right",3);
                     return false;
                 }
 
@@ -669,19 +669,42 @@
                 var _email2 = $.trim($("#txtEmail2").val()); 
 
                 if(_cboProv == ''){
-                    mensajesalertify("Seleccione Provincia..!!","W","top-center",3);
+                    mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
                     return false;
                 }
 
                 if(_cboIdProv == 0){
-                    mensajesalertify("Seleccione Ciudad..!!","W","top-center",3);
+                    mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
                     return false;
                 }
 
                 if(_cliente == ''){
-                    mensajesalertify("Ingrese Nombre del Cliente..!!","W","top-center",3);
+                    mensajesalertify("Ingrese Nombre del Cliente..!!","W","top-right",3);
                     return false;
                 }
+
+                if(_count == 0){
+                    mensajesalertify("Ingrese al menos un Producto..!!","W","top-right",3);
+                    return false;
+                }
+
+                         $datosCliente = {
+                            xxPaisId: _idpais,
+                            xxEmprId: _idempr,
+                            xxCliente: _cliente
+                         }
+
+                         var xrespuesta = $.post("codephp/consultar_cliente.php", $datosCliente);
+                         xrespuesta.done(function(response){
+
+                            if(response == 0){
+                                   
+
+
+                            }
+
+
+                         });
 
                
 
