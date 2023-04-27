@@ -6,7 +6,9 @@
    	//file_put_contents('log_seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
 
     putenv("TZ=America/Guayaquil");
-    date_default_timezone_set('America/Guayaquil');	    	
+    date_default_timezone_set('America/Guayaquil');	  
+    
+    $xFechaActual = strftime('%Y-%m-%d', time());
 
 	require_once("dbcon/config.php");
 	require_once("dbcon/functions.php");
@@ -55,7 +57,7 @@
                                 <div class="image-input-wrapper w-150px h-150px"></div>
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
                                     <i class="bi bi-pencil-fill fs-7"></i>
-                                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                    <input type="file" name="avatar" id="imgCab" accept=".png, .jpg, .jpeg" />
                                     <input type="hidden" name="avatar_remove" />
                                 </label>
                                 <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
@@ -79,7 +81,7 @@
                                 <div class="image-input-wrapper w-150px h-150px"></div>
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
                                     <i class="bi bi-pencil-fill fs-7"></i>
-                                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                    <input type="file" name="avatar" id="imgPie" accept=".png, .jpg, .jpeg" />
                                     <input type="hidden" name="avatar_remove" />
                                 </label>
                                 <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
@@ -342,7 +344,7 @@
                                         <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                             <div class="col">
                                                 <label class="required form-label">Costo</label>
-                                                <input type="text" name="txtCosto" id="txtCosto" class="form-control mb-2" maxlength="10" placeholder="0000" value="" />
+                                                <input type="text" name="txtCosto" id="txtCosto" class="form-control mb-2" maxlength="10" placeholder="0000" value="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                             </div>
                                             <div class="col">
                                                 <label class="required form-label">Grupo</label>
@@ -392,15 +394,6 @@
                                     </div>
                                     <div class="card-body pt-0">
                                         <div class="d-flex flex-column gap-10">
-                                            <div class="d-flex align-items-center position-relative mb-n7">
-                                                <span class="svg-icon svg-icon-1 position-absolute ms-4">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
-                                                        <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
-                                                <input type="text" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Dato" />
-                                            </div>
                                             <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
                                                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="tblProducto">
                                                     <thead>
@@ -667,6 +660,21 @@
                 var _cel3 = $.trim($("#txtCelular3").val()); 
                 var _email1 = $.trim($("#txtEmail1").val()); 
                 var _email2 = $.trim($("#txtEmail2").val()); 
+                var _imgCab = '';
+                
+                //Imagen Cabecera
+                var _imgcab = document.getElementById("imgCab");
+                var _fileCab = _imgcab.files[0];
+                var _fullPathcab = document.getElementById("imgCab").value;
+                var _ext = _fullPathcab.substring(_fullPathcab.length - 4);
+                _ext = _ext.toLowerCase();
+                
+                    if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
+                        mensajesalertify("El archivo seleccionado no es una Imagen..!","E","top-right",3);
+                        return;
+                    }
+
+                //console.log(_fileCab);
 
                 if(_cboProv == ''){
                     mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
@@ -687,6 +695,81 @@
                     mensajesalertify("Ingrese al menos un Producto..!!","W","top-right",3);
                     return false;
                 }
+
+                if(_tel1 != ''){
+                    var regex = /^[09][0-9]{1,7}$/;
+                    if(regex.test(_tel1.trim())){
+                    }else{
+                        mensajesalertify("Celular 1 Incorrecto..!!","E","top-right",3);
+                        return false;
+                    }
+                }
+
+                if(_tel2 != ''){
+                    var regex = /^[09][0-9]{1,7}$/;
+                    if(regex.test(_tel2.trim())){
+                    }else{
+                        mensajesalertify("Celular 1 Incorrecto..!!","E","top-right",3);
+                        return false;
+                    }
+                }
+
+                if(_tel3 != ''){
+                    var regex = /^[09][0-9]{1,7}$/;
+                    if(regex.test(_tel3.trim())){
+                    }else{
+                        mensajesalertify("Celular 1 Incorrecto..!!","E","top-right",3);
+                        return false;
+                    }
+                }
+
+                if(_cel1 != ''){
+                    var regex = /^[09][0-9]{1,7}$/;
+                    if(regex.test(_tel1.trim())){
+                    }else{
+                        mensajesalertify("Celular 1 Incorrecto..!!","E","top-right",3);
+                        return false;
+                    }
+                }
+
+                
+                if(_cel2 != ''){
+                    var regex = /^[09][0-9]{1,7}$/;
+                    if(regex.test(_cel2.trim())){
+                    }else{
+                        mensajesalertify("Celular 1 Incorrecto..!!","E","top-right",3);
+                        return false;
+                    }
+                }
+
+                
+                if(_cel3 != ''){
+                    var regex = /^[09][0-9]{1,7}$/;
+                    if(regex.test(_cel3.trim())){
+                    }else{
+                        mensajesalertify("Celular 1 Incorrecto..!!","E","top-right",3);
+                        return false;
+                    }
+                }
+                
+                if(_email1 != ''){
+                    var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+                    if (regex.test(_email1.trim())){
+                    }else{
+                        mensajesalertify("Email Incorrecto..!!","E","top-right",3);
+                        return false;
+                    }  
+                }
+
+                if(_email2 != ''){
+                    var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+                    if (regex.test(_email2.trim())){
+                    }else{
+                        mensajesalertify("Email Incorrecto..!!","E","top-right",3);
+                        return false;
+                    }  
+                }
+              
 
                          $datosCliente = {
                             xxPaisId: _idpais,
@@ -716,6 +799,30 @@
                 //alert(_cliente);
 
             }
+
+            //Eliminar Detalle en linea
+
+            $(document).on("click",".btnDelete",function(){
+                row_id = $(this).attr("id");
+                _producto = $('#txtProducto' + row_id + '').val();
+
+                FunRemoveItemFromArr(_result, _producto);
+                $('#row_' + row_id + '').remove();
+                _count--;
+
+            });
+            function FunRemoveItemFromArr(arr, deta)
+            {
+                $.each(arr,function(i,item){
+                    if(item.arryproducto == deta)
+                    {
+                        arr.splice(i, 1);
+                        return false;
+                    }else{
+                        continuar = true;
+                    }
+                });        
+            };
 
              
 
