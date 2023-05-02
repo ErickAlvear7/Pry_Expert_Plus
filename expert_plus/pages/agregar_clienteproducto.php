@@ -101,24 +101,15 @@
                             </div>
                         </div>
                         <div class="card-body pt-0">
-                            <button type="button" id="btnNuevaEspe" class="btn btn-light-primary btn-sm mb-10">
+                            <button type="button" id="btnNewGrupo" class="btn btn-light-primary btn-sm mb-10">
                                 <span class="svg-icon svg-icon-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
                                         <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
                                     </svg>
                                 </span>                                                                
-                                Nueva Especialidad
-                            </button>                           
-                            <button type="button" id="btnNuevoTipo" class="btn btn-light-primary btn-sm mb-10">
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>                                                                
-                                Nuevo Tipo Prestador
-                            </button>                             
+                                Nuevo Grupo
+                            </button>                                                      
                         </div>
                     </div>
                 </div>
@@ -356,17 +347,17 @@
                                         <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                            <div class="col">
                                                 <label class="required form-label">Asistencia Mes</label>
-                                                <input type="text" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" maxlength="150" placeholder="1" value="" />
+                                                <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" value="1" />
                                                 <label class="form-check form-switch form-check-custom form-check-solid">
-                                                    <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" />
+                                                    <input class="form-check-input" name="chkAsisMes" id="chkEnviar1" type="checkbox" />
                                                     <span class="form-check-label fw-bold text-muted" for="chkEnviar1">Cobertura</span>
                                                 </label> 
                                            </div>
                                            <div class="col">
                                                 <label class="required form-label">Asistencia Anual</label>
-                                                <input type="text" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" maxlength="150" placeholder="1" value="" />
+                                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" placeholder="1" value="" />
                                                 <label class="form-check form-switch form-check-custom form-check-solid">
-                                                    <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" />
+                                                    <input class="form-check-input" name="chkAsisAnu" id="chkEnviar1" type="checkbox" />
                                                     <span class="form-check-label fw-bold text-muted" for="chkEnviar1">Sistema</span>
                                                 </label> 
                                            </div>
@@ -426,7 +417,7 @@
             </form>
         </div>
 
-        <div class="modal fade" id="modal-new-especialidad" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -442,17 +433,6 @@
                     </div>
                     <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                         <form id="kt_modal_new_card_form" class="form">
-                            <div class="row mb-10">
-                                <div class="col-md-12 fv-row">
-                                    <label class="required fs-6 fw-bold form-label mb-2">Tipo Especialidad</label>
-                                    <div class="row fv-row">
-                                        <div class="col-12">
-                                 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="d-flex flex-column mb-7 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                     <span class="required">Especialidad</span>
@@ -466,16 +446,8 @@
                                     <span>Descripcion</span>
                                 </label>
                                 <textarea class="form-control mb-2" name="txtDescripcion" id="txtDescripcion" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
-                            </div>  
-                            
-                            <div class="d-flex flex-column mb-7 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                    <span>Precio (PVP)</span>
-                                </label>
-                                <input type="number" name="txtPvpNew" id="txtPvpNew" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                            </div>                            
-
-                            <div class="text-center pt-15">
+                            </div>                         
+                            <div class="d-flex justify-content-end pt-15">
                                 <button type="reset" data-bs-dismiss="modal" class="btn btn-secondary">Cerrar</button>
                                 <button type="button" id="btnSaveNew" class="btn btn-primary">
                                     <span class="indicator-label">Grabar</span>
@@ -528,9 +500,21 @@
     
                 });
 
+                // Modal nuevo grupo
+
+                $("#btnNewGrupo").click(function(){
+
+                    $("#modal_new_grupo").modal("show");
+                });
+
                     
 
             });
+
+              //desplazar ventana modal
+            $("#modal_new_grupo").draggable({
+                handle: ".modal-header"
+            }); 
 
 
             //Agregar Productos
@@ -659,21 +643,31 @@
                 var _cel2 = $.trim($("#txtCelular2").val()); 
                 var _cel3 = $.trim($("#txtCelular3").val()); 
                 var _email1 = $.trim($("#txtEmail1").val()); 
-                var _email2 = $.trim($("#txtEmail2").val()); 
-                var _imgCab = '';
+                var _email2 = $.trim($("#txtEmail2").val());
+                var _estado = 'A'; 
+                var _ext = '';
                 
                 //Imagen Cabecera
-                var _imgcab = document.getElementById("imgCab");
-                var _fileCab = _imgcab.files[0];
-                var _fullPathcab = document.getElementById("imgCab").value;
-                var _ext = _fullPathcab.substring(_fullPathcab.length - 4);
-                _ext = _ext.toLowerCase();
-                
-                    if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
-                        mensajesalertify("El archivo seleccionado no es una Imagen..!","E","top-right",3);
-                        return;
-                    }
 
+                //  if(_ext.trim() == '.png' && _ext.trim() == '.jpg' && _ext.trim() == '.jpeg'){
+                //      var _selecc = 'SI';
+                //  }  
+                
+                //if(_selecc == 'SI'){
+
+                    var _imgcab = document.getElementById("imgCab");
+                    var _fileCab = _imgcab.files[0];
+                    var _fullPathcab = document.getElementById("imgCab").value;
+                    var _ext = _fullPathcab.substring(_fullPathcab.length - 4);
+                    _ext = _ext.toLowerCase();
+                       
+                //}
+            
+                if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
+                    mensajesalertify("El archivo seleccionado no es una Imagen..!","W","top-right",3);
+                    return;
+                }
+                
                 //console.log(_fileCab);
 
                 if(_cboProv == ''){
@@ -781,8 +775,54 @@
                          xrespuesta.done(function(response){
 
                             if(response == 0){
-                                   
 
+                                var form_data = new FormData();            
+                                form_data.append('xxPaisid', _idpais);
+                                form_data.append('xxEmprid', _idempr);
+                                form_data.append('xxUsuaid', _iduser);
+                                form_data.append('xxProv', _cboIdProv);
+                                form_data.append('xxCliente', _cliente);
+                                form_data.append('xxDescrip', _desc);
+                                form_data.append('xxDirec', _direc);
+                                form_data.append('xxUrl', _url);
+                                form_data.append('xxTel1', _tel1);
+                                form_data.append('xxTel2', _tel2);
+                                form_data.append('xxTel3', _tel3);
+                                form_data.append('xxCel1', _cel1);
+                                form_data.append('xxCel2', _cel2);
+                                form_data.append('xxCel3', _cel3);
+                                form_data.append('xxEmail1', _email1);
+                                form_data.append('xxEmail2', _email2);
+                                form_data.append('xxEstado', _estado);
+                                form_data.append('xxFileCab', _fileCab);
+                                form_data.append('xxResult', JSON.stringify(_result));
+
+
+                                $.ajax({
+
+                                    url: "codephp/grabar_clienteprod.php",
+                                    type: "post",                
+                                    data: form_data,
+                                    processData: false,
+                                    contentType: false,
+                                    dataType: "json",
+                                    success: function(response){
+
+
+
+                                    },
+                                    error: function (error) {
+                                        console.log(error);
+                                    }
+
+                                     
+
+                                });
+                         
+
+                            }else{
+                                mensajesalertify("Cliente ya Existe..!!","E","top-right",3);
+                                return false;
 
                             }
 

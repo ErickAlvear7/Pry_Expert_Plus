@@ -16,7 +16,7 @@
         if(isset($_POST['xxPaisId']) <> '' and isset($_POST['xxEmprId']) <> '' and isset($_POST['xxCliente']) <> ''){ 
             
             $xPaisid = $_POST['xxPaisId'];
-            $xEmprid = $_POST['xxEmprid'];
+            $xEmprid = $_POST['xxEmprId'];
             $xCliente= safe($_POST['xxCliente']);
 
          
