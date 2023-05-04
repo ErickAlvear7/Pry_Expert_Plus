@@ -349,16 +349,16 @@
                                                 <label class="required form-label">Asistencia Mes</label>
                                                 <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" value="1" />
                                                 <label class="form-check form-switch form-check-custom form-check-solid">
-                                                    <input class="form-check-input" name="chkAsisMes" id="chkEnviar1" type="checkbox" />
-                                                    <span class="form-check-label fw-bold text-muted" for="chkEnviar1">Cobertura</span>
+                                                    <input class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
+                                                    <span class="form-check-label fw-bold text-muted" id="lblCobertura" for="chkEnviar1">Cobertura NO</span>
                                                 </label> 
                                            </div>
                                            <div class="col">
                                                 <label class="required form-label">Asistencia Anual</label>
                                                 <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" placeholder="1" value="" />
                                                 <label class="form-check form-switch form-check-custom form-check-solid">
-                                                    <input class="form-check-input" name="chkAsisAnu" id="chkEnviar1" type="checkbox" />
-                                                    <span class="form-check-label fw-bold text-muted" for="chkEnviar1">Sistema</span>
+                                                    <input class="form-check-input" name="chkSistema" id="chkSistema" type="checkbox" />
+                                                    <span class="form-check-label fw-bold text-muted" id="lblSistema" for="chkEnviar1">Sistema NO</span>
                                                 </label> 
                                            </div>
                                         </div>
@@ -463,7 +463,7 @@
 
         <script>
 
-            var _result = [],_count =0
+            var _result = [],_count =0;
 
             $(document).ready(function(){
 
@@ -516,6 +516,39 @@
                 handle: ".modal-header"
             }); 
 
+                //check Productos
+
+			    $(document).on("click","#chkCobertura",function(){
+
+                    var _cobertura = "NO";
+
+                    if($("#chkCobertura").is(":checked")){
+                        _cobertura = "SI";
+                        $("#lblCobertura").text("Cobertura SI");
+                    }else{
+                        _cobertura = "NO";
+                        $("#lblCobertura").text("Cobertura NO");
+
+                    }    
+
+                    });
+
+                    $(document).on("click","#chkSistema",function(){
+
+                    var _sistema = "NO";
+
+                    if($("#chkSistema").is(":checked")){
+                        _sistema = "SI";
+                        $("#lblSistema").text("Sistema SI");
+                    }else{
+                        _sistema = "NO";
+                        $("#lblSistema").text("Sistema NO");
+
+                    }
+
+                });
+
+
 
             //Agregar Productos
 
@@ -527,11 +560,14 @@
                 var _output;
 
                 var _emprid = "<?php echo $xEmprid; ?>";
+                var _paisid = "<?php echo $xPaisid; ?>";
                 var _producto = $.trim($("#txtProducto").val());
                 var _descripcion = $.trim($("#txtDescripcion").val());
-                var _valor = $.trim($("#txtCosto").val());
-                var _costo = parseFloat(_valor);
+                var _costo = $.trim($("#txtCosto").val());
                 var _grupo = 'FAMILIA PROTEGIDA';
+                var _aistemes = $('#txtAsisMes').val();
+                var _aistanu = $('#txtAsisAnu').val();
+                
 
                
                 if(_producto == ''){
@@ -598,6 +634,10 @@
                                         arrydescripcion: _descripcion,
                                         arrycosto: _costo,
                                         arrygrupo: _grupo,
+                                        arrycober: _cobertura,
+                                        arrysist: _sistema,
+                                        arryasismes: _aistemes,
+                                        arryasisanu: _aistanu,
                                         arryestado: _estado
                                     }
 
@@ -624,6 +664,8 @@
                  //console.log(typeof _numero);
 
             });
+
+         
 
 
              
@@ -795,7 +837,6 @@
                                 form_data.append('xxEmail2', _email2);
                                 form_data.append('xxEstado', _estado);
                                 form_data.append('xxFileCab', _fileCab);
-                                form_data.append('xxResult', JSON.stringify(_result));
 
 
                                 $.ajax({
@@ -806,7 +847,19 @@
                                     processData: false,
                                     contentType: false,
                                     dataType: "json",
-                                    success: function(response){
+                                    success: function(dataid){
+
+                                        if(dataid != 0){
+                                            var xrespuesta = $.post("codephp/grabar_productoclie.php", { xxPaisid: _idpais, xxEmprid: _idempr, xxClieid: dataid, xxResult: _result });
+                                             xrespuesta.done(function(response){
+                                                     
+                                                if(response == 'OK'){
+                                        
+                                                }
+
+                                             });
+
+                                        }
 
 
 

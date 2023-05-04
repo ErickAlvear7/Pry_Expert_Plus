@@ -18,7 +18,7 @@
     $respuesta = "ERR";
     $last_id = 0;
 
-    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxProv']) and isset($_POST['xxCliente']) and isset($_POST['xxResult'])){
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxProv']) and isset($_POST['xxCliente'])){
         if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxProv']) <> '' and isset($_POST['xxCliente']) <> '' and isset($_POST['xxResult']) <> ''){
 
             $xPaisid =  $_POST['xxPaisid'];
@@ -38,7 +38,6 @@
             $xEmail1 = safe($_POST['xxEmail1']);
             $xEmail2 = safe($_POST['xxEmail2']);
             $xEstado = safe($_POST['xxEstado']);
-            $xResult = $_POST['xxResult'];
 
             $xFile = (isset($_FILES['xxFileCab']["name"])) ? $_FILES['xxFileCab']["name"] : '';
             $xPath = "../img/";
@@ -58,7 +57,7 @@
             
             $xSQL = "INSERT INTO `expert_cliente` (pais_id,empr_id,prov_id,clie_nombre,clie_descripcion,clie_direccion, ";
             $xSQL .= "clie_url,clie_tel1,clie_tel2,clie_tel3,clie_cel1,clie_cel2,clie_cel3,clie_email1,clie_email2, ";
-            $xSQL .= "clie_imgcab,clie_imgpie,clie_estado,clie_usuariocreacion,clie_fechacreacion,clie_terminalcreacion ) ";
+            $xSQL .= "clie_imgcab,clie_imgpie,clie_estado,usuariocreacion,fechacreacion,terminalcreacion ) ";
             $xSQL .= "VALUES($xPaisid,$xEmprid,$xProvid,'$xCliente',' $xDesc','$xDirec','$xUrl',' $xTel1',' $xTel2', ";
             $xSQL .= "'$xTel3','$xCel1','$xCel2','$xCel3','$xEmail1','$xEmail2','$xNombreFile','','$xEstado',$xUsuaid, ";
             $xSQL .= "'{$xFecha}','$xTerminal') ";
@@ -66,26 +65,11 @@
             if(mysqli_query($con, $xSQL)){
 
                 $last_id = mysqli_insert_id($con);
-
-
-                foreach($xResult as $drfila){
-
-                    $xProducto = $drfila['arryproducto'];
-                    $xDescripcion = $drfila['arrydescripcion'];
-                    $xCosto = $drfila['arrycosto'];
-                    $xGrupo = $drfila['arrygrupo'];
-                    $xEstado = $drfila['arryestado'];
                 
-                    $xSQL = "INSERT INTO `expert_productos` (clie_id,prod_nombre,prod_descripcion,prod_costo,prod_grupo,prod_estado, ";
-                    $xSQL .= "VALUES($last_id,'$xProducto',' $xDescripcion',$xCosto,'$xGrupo','$xEstado')";
-                    mysqli_query($con, $xSQL); 
-                    
-                    $respuesta = "OK";
-                }
             }
 
         }
     }
 
-    echo $respuesta;
+    echo $last_id;
 ?>
