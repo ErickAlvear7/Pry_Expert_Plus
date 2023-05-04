@@ -732,61 +732,6 @@
                     return false;
                 }
 
-                if(_tel1 != ''){
-                    var regex = /^[09][0-9]{1,7}$/;
-                    if(regex.test(_tel1.trim())){
-                    }else{
-                        mensajesalertify("Celular 1 Incorrecto..!!","E","top-right",3);
-                        return false;
-                    }
-                }
-
-                if(_tel2 != ''){
-                    var regex = /^[09][0-9]{1,7}$/;
-                    if(regex.test(_tel2.trim())){
-                    }else{
-                        mensajesalertify("Celular 1 Incorrecto..!!","E","top-right",3);
-                        return false;
-                    }
-                }
-
-                if(_tel3 != ''){
-                    var regex = /^[09][0-9]{1,7}$/;
-                    if(regex.test(_tel3.trim())){
-                    }else{
-                        mensajesalertify("Celular 1 Incorrecto..!!","E","top-right",3);
-                        return false;
-                    }
-                }
-
-                if(_cel1 != ''){
-                    var regex = /^[09][0-9]{1,7}$/;
-                    if(regex.test(_tel1.trim())){
-                    }else{
-                        mensajesalertify("Celular 1 Incorrecto..!!","E","top-right",3);
-                        return false;
-                    }
-                }
-
-                
-                if(_cel2 != ''){
-                    var regex = /^[09][0-9]{1,7}$/;
-                    if(regex.test(_cel2.trim())){
-                    }else{
-                        mensajesalertify("Celular 1 Incorrecto..!!","E","top-right",3);
-                        return false;
-                    }
-                }
-
-                
-                if(_cel3 != ''){
-                    var regex = /^[09][0-9]{1,7}$/;
-                    if(regex.test(_cel3.trim())){
-                    }else{
-                        mensajesalertify("Celular 1 Incorrecto..!!","E","top-right",3);
-                        return false;
-                    }
-                }
                 
                 if(_email1 != ''){
                     var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
