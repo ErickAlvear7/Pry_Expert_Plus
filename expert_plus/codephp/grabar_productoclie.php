@@ -18,8 +18,8 @@
     if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxClieid']) and isset($_POST['xxResult'])){
         if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxClieid']) <> '' and isset($_POST['xxResult']) <> ''){
 
-            $xPaisid = $_POST['xxPaisId'];
-            $xEmprid = $_POST['xxEmprId'];
+            $xPaisid = $_POST['xxPaisid'];
+            $xEmprid = $_POST['xxEmprid'];
             $xClieid = $_POST['xxClieid'];
             $xResult = $_POST['xxResult'];
 

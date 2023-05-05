@@ -14,6 +14,8 @@
 
 	//$xServidor = $_SERVER['HTTP_HOST'];
 	$page = isset($_GET['page']) ? $_GET['page'] : "index";
+    $mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
+    
 	$menuid = $_GET['menuid'];
 	
     @session_start();
@@ -30,7 +32,11 @@
 
     $xUsuaid = $_SESSION["i_usuaid"];
 
+    $xSQL = "SELECT clie_id AS IdCliente, clie_nombre AS Cliente, clie_descripcion AS Descrip, CASE clie_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
+    $xSQL .="FROM `expert_cliente` ";
+    $all_clie = mysqli_query($con, $xSQL);
 
+    
 
 ?>
 
@@ -74,13 +80,21 @@
 					</tr>
 				</thead>
 				<tbody class="fw-bold text-gray-600">
+                    <?php foreach($all_clie as $clie){ 
+                        
+                        $xClieId = $clie['IdCliente'];
+                        $xCliente = $clie['Cliente'];
+                        $xDescrip = $clie['Descrip'];
+                        $xEstado = $clie['Estado'];
+                        
+                    ?>
 			
 					<tr>
-					    <td style="display:none;"></td>
-						<td></td>
-						<td></td>
+					    <td style="display:none;"><?php echo $xClieId; ?></td>
+						<td><?php echo $xCliente; ?></td>
+						<td><?php echo $xDescrip; ?></td>
 						<td id="td_">
-                           <div class=""></div>
+                           <div class=""><?php echo $xEstado; ?></div>
                         </td>
                         <td>
                             <div class="text-center">
@@ -100,7 +114,7 @@
 							</div>
 						</td>
 					</tr>
-
+                    <?php } ?> 
 				</tbody>
 			</table>
 		</div>
@@ -111,19 +125,16 @@
 
         $(document).ready(function(){
 
+            _mensaje = $('input#mensaje').val();
+
+            if(_mensaje != ''){
+                mensajesweetalert("center","success",_mensaje,false,1900);  
+            }
+
         });	
 
-        function f_Eliminar(){
-            alert('Eliminar');
-        }
+      
 
     </script>
 
-    <style>
-        .btn-disabled,
-        .btn-disabled[disabled] {
-        opacity: .4;
-        cursor: default !important;
-        pointer-events: none;
-        }        
-    </style>
+   

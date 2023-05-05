@@ -49,7 +49,7 @@
                     <div class="card card-flush py-4">
                         <div class="card-header">
                             <div class="card-title">
-                                <h2>Logo Cabeza</h2>
+                                <h2>Logo Cabecera</h2>
                             </div>
                         </div>
                         <div class="card-body text-center pt-0">
@@ -355,7 +355,7 @@
                                            </div>
                                            <div class="col">
                                                 <label class="required form-label">Asistencia Anual</label>
-                                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" placeholder="1" value="" />
+                                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" placeholder="1" value="1" />
                                                 <label class="form-check form-switch form-check-custom form-check-solid">
                                                     <input class="form-check-input" name="chkSistema" id="chkSistema" type="checkbox" />
                                                     <span class="form-check-label fw-bold text-muted" id="lblSistema" for="chkEnviar1">Sistema NO</span>
@@ -463,7 +463,7 @@
 
         <script>
 
-            var _result = [],_count =0;
+            var _result = [],_count =0,_cobertura = "NO",_sistema = "NO";
 
             $(document).ready(function(){
 
@@ -518,35 +518,35 @@
 
                 //check Productos
 
-			    $(document).on("click","#chkCobertura",function(){
+            $(document).on("click","#chkCobertura",function(){
 
-                    var _cobertura = "NO";
+                _cobertura = "NO";
 
-                    if($("#chkCobertura").is(":checked")){
-                        _cobertura = "SI";
-                        $("#lblCobertura").text("Cobertura SI");
-                    }else{
-                        _cobertura = "NO";
-                        $("#lblCobertura").text("Cobertura NO");
+                if($("#chkCobertura").is(":checked")){
+                    _cobertura = "SI";
+                    $("#lblCobertura").text("Cobertura SI");
+                }else{
+                    _cobertura = "NO";
+                    $("#lblCobertura").text("Cobertura NO");
 
-                    }    
+                }    
 
-                    });
+            });
 
-                    $(document).on("click","#chkSistema",function(){
+            $(document).on("click","#chkSistema",function(){
 
-                    var _sistema = "NO";
+                   _sistema = "NO";
 
-                    if($("#chkSistema").is(":checked")){
-                        _sistema = "SI";
-                        $("#lblSistema").text("Sistema SI");
-                    }else{
-                        _sistema = "NO";
-                        $("#lblSistema").text("Sistema NO");
+                if($("#chkSistema").is(":checked")){
+                    _sistema = "SI";
+                    $("#lblSistema").text("Sistema SI");
+                }else{
+                    _sistema = "NO";
+                    $("#lblSistema").text("Sistema NO");
 
-                    }
+                }
 
-                });
+            });
 
 
 
@@ -565,8 +565,8 @@
                 var _descripcion = $.trim($("#txtDescripcion").val());
                 var _costo = $.trim($("#txtCosto").val());
                 var _grupo = 'FAMILIA PROTEGIDA';
-                var _aistemes = $('#txtAsisMes').val();
-                var _aistanu = $('#txtAsisAnu').val();
+                var _asistemes = $('#txtAsisMes').val();
+                var _asistanu = $('#txtAsisAnu').val();
                 
 
                
@@ -575,7 +575,7 @@
                     return false;
                 }
 
-                if(_valor == ''){
+                if(_costo == ''){
                     mensajesalertify("Ingrese Costo..!!","W","top-right",3);
                     return false;
                 }
@@ -636,8 +636,8 @@
                                         arrygrupo: _grupo,
                                         arrycober: _cobertura,
                                         arrysist: _sistema,
-                                        arryasismes: _aistemes,
-                                        arryasisanu: _aistanu,
+                                        arryasismes: _asistemes,
+                                        arryasisanu: _asistanu,
                                         arryestado: _estado
                                     }
 
@@ -648,26 +648,15 @@
                                     $("#txtCosto").val("");
 
                                 }
-
                                 
                             }
 
                         });
-
-
                 }
-
-
-                  
-
-                 //alert(_numero);
-                 //console.log(typeof _numero);
 
             });
 
          
-
-
              
             // Guardar Cliente & Producto
             function f_Guardar(_idpais,_idempr,_iduser){
@@ -710,7 +699,6 @@
                     return;
                 }
                 
-                //console.log(_fileCab);
 
                 if(_cboProv == ''){
                     mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
@@ -799,6 +787,8 @@
                                              xrespuesta.done(function(response){
                                                      
                                                 if(response == 'OK'){
+
+                                                    $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
                                         
                                                 }
 
@@ -826,15 +816,6 @@
 
 
                          });
-
-               
-
-
-              
-            
-
-
-                //alert(_cliente);
 
             }
 

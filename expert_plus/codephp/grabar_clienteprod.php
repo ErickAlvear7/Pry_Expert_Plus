@@ -19,7 +19,7 @@
     $last_id = 0;
 
     if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxProv']) and isset($_POST['xxCliente'])){
-        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxProv']) <> '' and isset($_POST['xxCliente']) <> '' and isset($_POST['xxResult']) <> ''){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxProv']) <> '' and isset($_POST['xxCliente']) <> ''){
 
             $xPaisid =  $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
@@ -40,7 +40,7 @@
             $xEstado = safe($_POST['xxEstado']);
 
             $xFile = (isset($_FILES['xxFileCab']["name"])) ? $_FILES['xxFileCab']["name"] : '';
-            $xPath = "../img/";
+            $xPath = "../Cliente/";
 
             $xFechafile = new DateTime();
             $xNombreFile = ($xFile != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFileCab"]["name"] : "";  
