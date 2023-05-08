@@ -686,11 +686,21 @@
                 
                 //if(_selecc == 'SI'){
 
+                     //Imagen Cabecera
+
                     var _imgcab = document.getElementById("imgCab");
                     var _fileCab = _imgcab.files[0];
                     var _fullPathcab = document.getElementById("imgCab").value;
                     var _ext = _fullPathcab.substring(_fullPathcab.length - 4);
                     _ext = _ext.toLowerCase();
+
+                      //Imagen Pie
+
+                    var _imgpie = document.getElementById("imgPie");
+                    var _filePie = _imgpie.files[0];
+                    var _fullPathpie = document.getElementById("imgPie").value;
+                    var _extp = _fullPathpie.substring(_fullPathpie.length - 4);
+                    _extp = _extp.toLowerCase();
                        
                 //}
             
@@ -770,6 +780,7 @@
                                 form_data.append('xxEmail2', _email2);
                                 form_data.append('xxEstado', _estado);
                                 form_data.append('xxFileCab', _fileCab);
+                                form_data.append('xxFilePie', _filePie);
 
 
                                 $.ajax({

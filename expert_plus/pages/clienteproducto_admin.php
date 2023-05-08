@@ -75,6 +75,7 @@
 						<th class="min-w-125px">Cliente</th>
 						<th class="min-w-125px">Descripcion</th>
 						<th class="min-w-125px">Estado</th>
+                        <th class="min-w-125px">Logo</th>
 						<th class="min-w-125px">Status</th>
                         <th class="min-w-125px" style="text-align: center;">Opciones</th>
 					</tr>
@@ -82,24 +83,43 @@
 				<tbody class="fw-bold text-gray-600">
                     <?php foreach($all_clie as $clie){ 
                         
-                        $xClieId = $clie['IdCliente'];
+                        $xClieid = $clie['IdCliente'];
                         $xCliente = $clie['Cliente'];
                         $xDescrip = $clie['Descrip'];
                         $xEstado = $clie['Estado'];
                         
                     ?>
+                     <?php 
+                       $xCheking = '';
+                       $xDisabledEdit = '';
+
+                       if($xEstado == 'Activo'){
+                            $xCheking = 'checked="checked"';
+                            $xTextColor = "badge badge-light-primary";
+                        }else{
+                            $xTextColor = "badge badge-light-danger";
+                            $xDisabledEdit = 'disabled';
+                        }
+                    
+                    ?>
 			
 					<tr>
-					    <td style="display:none;"><?php echo $xClieId; ?></td>
+					    <td style="display:none;"><?php echo $xClieid; ?></td>
 						<td><?php echo $xCliente; ?></td>
 						<td><?php echo $xDescrip; ?></td>
-						<td id="td_">
-                           <div class=""><?php echo $xEstado; ?></div>
+						<td id="td_<?php echo $xClieid; ?>">
+                           <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
+                        </td>
+                        <td class="d-flex align-items-center">
+                            <a href="?page=modprestadora&menuid=" class="symbol symbol-50px">
+                                <span class="symbol-label" style="background-image:url(Cliente/1683307394_ford-gt-atras_3840x2160_xtrafondos.com.jpg);"></span>
+                            </a>
+                            <span class="fw-bolder"></span>
                         </td>
                         <td>
                             <div class="text-center">
 								<div class="form-check form-check-sm form-check-custom form-check-solid">
-									<input  class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk" 
+									<input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk" 
                                        onchange="f_UpdateEstado()" value=""/>
 								</div>
 							</div>
