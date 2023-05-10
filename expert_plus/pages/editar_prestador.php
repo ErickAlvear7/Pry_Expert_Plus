@@ -1194,7 +1194,7 @@
                                                 _detalle = 'Nuevo Prestador Agregado Correctamente';
                                                 _respuesta = 'OK'; 
                                             }else{
-                                                _detalle = 'Error creación de especialidades';
+                                                _detalle = 'Error creaci贸n de especialidades';
                                                 _respuesta = 'ERR';                                
                                             }
 
@@ -1211,12 +1211,12 @@
                                         });    
                                       
                                     }else{
-                                        _detalle = 'Error creación nuevo prestador';
+                                        _detalle = 'Error creaci贸n nuevo prestador';
                                         _respuesta = 'ERR';                                
                                     }
 
                                     if(_respuesta == 'OK'){
-                                        $.redirect('?page=prestador_admin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
+                                        $.redirect('?page=prestador_admin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con 脡xito..!'}); //POR METODO POST
                                     }
                                 },
                                 error: function (error) {

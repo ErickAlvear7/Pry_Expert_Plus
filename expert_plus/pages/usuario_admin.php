@@ -263,7 +263,7 @@
 										<div class="text-center pt-15">
 											<button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
 											<button type="button" class="btn btn-primary" id="btnSave">
-												<span class="indicator-label">Guardar</span>
+												<span class="indicator-label">Grabar</span>
 												<span class="indicator-progress">Espere un momento...
 												<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 											</button>
