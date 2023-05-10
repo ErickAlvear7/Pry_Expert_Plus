@@ -127,7 +127,7 @@
 						<td>
                             <div class="text-center">
 								<div class="btn-group">
-									<button id="btnEditar_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="" title='Editar Producto'>
+									<button id="btnEditar" onclick="f_Editar(<?php echo $xClieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="" title='Editar Cliente'>
 										<i class='fa fa-edit'></i>
 									</button>												 
 								</div>
@@ -152,6 +152,11 @@
             }
 
         });	
+
+
+        function f_Editar(_clieid){
+          $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {'idclie': _clieid}); //POR METODO POST
+        }
 
       
 
