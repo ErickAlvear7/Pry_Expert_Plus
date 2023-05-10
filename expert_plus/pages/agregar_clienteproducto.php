@@ -54,18 +54,18 @@
                         </div>
                         <div class="card-body text-center pt-0">
                             <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
-                                <div class="image-input-wrapper w-150px h-150px"></div>
+                                <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfileCab"></div>
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
                                     <i class="bi bi-pencil-fill fs-7"></i>
-                                    <input type="file" name="avatar" id="imgCab" accept=".png, .jpg, .jpeg" />
+                                    <input type="file" name="avatar" id="logoCab" accept=".png, .jpg, .jpeg" />
                                     <input type="hidden" name="avatar_remove" />
                                 </label>
                                 <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
                                     <i class="bi bi-x fs-2"></i>
                                 </span>
-                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remover Logo">
+                                <!-- <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remover Logo">
                                     <i class="bi bi-x fs-2"></i>
-                                </span>
+                                </span> -->
                             </div>
                             <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                         </div>
@@ -78,18 +78,18 @@
                         </div>
                         <div class="card-body text-center pt-0">
                             <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
-                                <div class="image-input-wrapper w-150px h-150px"></div>
+                                <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfilePie"></div>
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
                                     <i class="bi bi-pencil-fill fs-7"></i>
-                                    <input type="file" name="avatar" id="imgPie" accept=".png, .jpg, .jpeg" />
+                                    <input type="file" name="avatar" id="logoPie" accept=".png, .jpg, .jpeg" />
                                     <input type="hidden" name="avatar_remove" />
                                 </label>
                                 <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
                                     <i class="bi bi-x fs-2"></i>
                                 </span>
-                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remover Logo">
+                                <!-- <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remover Logo">
                                     <i class="bi bi-x fs-2"></i>
-                                </span>
+                                </span> -->
                             </div>
                             <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                         </div>
@@ -322,15 +322,13 @@
                                         </div>
                                     </div>
                                     <div class="card-body pt-0">
-                                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                           <div class="col">
-                                                <label class="required form-label">Producto</label>
-                                                <input type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
-                                           </div>
-                                           <div class="col">
-                                                <label class="required form-label">Descripcion</label>
-                                                <textarea class="form-control mb-2" name="txtDescripcion" id="txtDescripcion" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
-                                           </div>
+                                        <div class="mb-5 fv-row">
+                                            <label class="required form-label">Producto</label>
+                                            <input type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
+                                        </div>
+                                        <div class="mb-5 fv-row">
+                                            <label class="form-label">Descripcion</label>
+                                            <textarea class="form-control mb-2" name="txtDescripcion" id="txtDescripcion" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
                                         </div>
                                         <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                             <div class="col">
@@ -393,8 +391,6 @@
                                                             <th>Grupo</th>
                                                             <th>Producto</th>
                                                             <th>Costo</th>
-                                                            <th>Estado</th>
-                                                            <th>Gerencial</th>
                                                             <th>Opciones</th>
                                                         </tr>
                                                     </thead>
@@ -556,6 +552,7 @@
 
                 var _agregarPro = 'add';
                 var _estado = 'A';
+                var _gerencial = 'NO';
                 var _continuar = true;
                 var _output;
 
@@ -615,12 +612,12 @@
                                     _output += '<td>' + _grupo + ' <input type="hidden" name="hidden_grupo[]" id="txtGrupo' + _count + '" value="' + _grupo + '" /></td>';
                                     _output += '<td>' + _producto + ' <input type="hidden" name="hidden_producto[]" id="txtProducto' + _count + '" value="' + _producto + '" /></td>';
                                     _output += '<td>' + _costo + ' <input type="hidden" name="hidden_costo[]" id="txtCosto' + _count + '" value="' + _costo + '" /></td>';
-                                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                               '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _count + '" value=""/>' +
-                                               '</div></div></td>';
-                                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                               '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstadoGe" type="checkbox" id="chk' + _count + '" value=""/>' +
-                                               '</div></div></td>';
+                                    // _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                                    //            '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _count + '" value=""/>' +
+                                    //            '</div></div></td>';
+                                    // _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                                    //            '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstadoGe" type="checkbox" id="chk' + _count + '" value=""/>' +
+                                    //            '</div></div></td>';
                                     _output += '<td><div class="text-center"><div class="btn-group">';
                                     _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
                                     _output += '</tr>';
@@ -638,7 +635,8 @@
                                         arrysist: _sistema,
                                         arryasismes: _asistemes,
                                         arryasisanu: _asistanu,
-                                        arryestado: _estado
+                                        arryestado: _estado,
+                                        arrygerencial: _gerencial
                                     }
 
                                     _result.push(_objeto);
@@ -676,38 +674,51 @@
                 var _email1 = $.trim($("#txtEmail1").val()); 
                 var _email2 = $.trim($("#txtEmail2").val());
                 var _estado = 'A'; 
-                var _ext = '';
                 
-                //Imagen Cabecera
 
-                //  if(_ext.trim() == '.png' && _ext.trim() == '.jpg' && _ext.trim() == '.jpeg'){
-                //      var _selecc = 'SI';
-                //  }  
-                
-                //if(_selecc == 'SI'){
+                      //Imagen Cabecera
 
-                     //Imagen Cabecera
+                    var _imgfileCab = document.getElementById("imgfileCab").style.backgroundImage;
+                    var _urlimgCab = _imgfileCab.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+                    var _posCab = _urlimgCab.trim().indexOf('.');
+                    var _extCab = _urlimgCab.trim().substr(_posCab, 5);
 
-                    var _imgcab = document.getElementById("imgCab");
-                    var _fileCab = _imgcab.files[0];
-                    var _fullPathcab = document.getElementById("imgCab").value;
-                    var _ext = _fullPathcab.substring(_fullPathcab.length - 4);
-                    _ext = _ext.toLowerCase();
+                    if(_extCab.trim() != '.svg'){
+                        var _imgCab = document.getElementById("logoCab");
+                        var _fileCab = _imgCab.files[0];
+                        var _fullPathCab = document.getElementById('logoCab').value;
+                        _extCab = _fullPathCab.substring(_fullPathCab.length - 4);
+                        _extCab = _extCab.toLowerCase();
+
+                        if(_extCab.trim() != '.png' && _extCab.trim() != '.jpg' && _extCab.trim() != 'jpeg'){
+                            mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
+                            return;
+                        }   
+                        
+                    }
 
                       //Imagen Pie
 
-                    var _imgpie = document.getElementById("imgPie");
-                    var _filePie = _imgpie.files[0];
-                    var _fullPathpie = document.getElementById("imgPie").value;
-                    var _extp = _fullPathpie.substring(_fullPathpie.length - 4);
-                    _extp = _extp.toLowerCase();
+                    var _imgfilePie = document.getElementById("imgfilePie").style.backgroundImage;
+                    var _urlimgPie = _imgfilePie.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+                    var _posPie = _urlimgPie.trim().indexOf('.');
+                    var _extPie = _urlimgPie.trim().substr(_posPie, 5);
+
+                    if(_extPie.trim() != '.svg'){
+                        var _imgPie = document.getElementById("logoPie");
+                        var _filePie = _imgPie.files[0];
+                        var _fullPathPie = document.getElementById('logoPie').value;
+                        _extPie = _fullPathPie.substring(_fullPathPie.length - 4);
+                        _extPie = _extPie.toLowerCase();
+
+                        if(_extPie.trim() != '.png' && _extPie.trim() != '.jpg' && _extPie.trim() != 'jpeg'){
+                            mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
+                            return;
+                        }   
+                        
+                    }
+
                        
-                //}
-            
-                if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
-                    mensajesalertify("El archivo seleccionado no es una Imagen..!","W","top-right",3);
-                    return;
-                }
                 
 
                 if(_cboProv == ''){

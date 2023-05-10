@@ -29,17 +29,18 @@
                 $xProducto = $drfila['arryproducto'];
                 $xDesc = $drfila['arrydescripcion'];
                 $xCosto = $drfila['arrycosto'];
-                $xGrupo =  $drfila['arrygrupo'];
-                $xCober =  $drfila['arrycober'];
+                $xGrupo = $drfila['arrygrupo'];
+                $xCober = $drfila['arrycober'];
                 $xSist =  $drfila['arrysist'];
-                $xAsismes =  $drfila['arryasismes'];
-                $xAsisanu =  $drfila['arryasisanu'];
+                $xAsismes = $drfila['arryasismes'];
+                $xAsisanu = $drfila['arryasisanu'];
                 $xEstado =  $drfila['arryestado'];
+                $xGerencial = $drfila['arrygerencial'];
             
                 $xSQL = "INSERT INTO `expert_productos` (clie_id,pais_id,empr_id,prod_nombre,prod_descripcion,prod_costo,prod_grupo, ";
-                $xSQL .= "prod_asistmes,prod_asistanu,prod_cobertura,prod_sistema,prod_estado) ";
+                $xSQL .= "prod_asistmes,prod_asistanu,prod_cobertura,prod_sistema,prod_gerencial,prod_estado) ";
                 $xSQL .= "VALUES ($xClieid,$xPaisid,$xEmprid,'$xProducto','$xDesc','$xCosto','$xGrupo',$xAsismes,$xAsisanu,'$xCober', ";
-                $xSQL .= "'$xSist','$xEstado' )";
+                $xSQL .= "'$xSist','$xGerencial','$xEstado' )";
                 mysqli_query($con, $xSQL);
             
             }
