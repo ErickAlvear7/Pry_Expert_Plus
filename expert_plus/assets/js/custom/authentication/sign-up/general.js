@@ -18,34 +18,34 @@ var KTSignupGeneral = function() {
 					'first-name': {
 						validators: {
 							notEmpty: {
-								message: 'ingrese nombre'
+								message: 'Ingrese Nombre'
 							}
 						}
                     },
                     'last-name': {
 						validators: {
 							notEmpty: {
-								message: 'ingrese apellido'
+								message: 'Ingrese Apellido'
 							}
 						}
 					},
 					'email': {
                         validators: {
 							notEmpty: {
-								message: 'ingrese email'
+								message: 'Ingrese E-mail'
 							},
                             emailAddress: {
-								message: 'email ingresado es incorrecto'
+								message: 'Email ingresado es Incorrecto'
 							}
 						}
 					},
                     'password': {
                         validators: {
                             notEmpty: {
-                                message: 'ingrese password'
+                                message: 'Ingrese Password'
                             },
                             callback: {
-                                message: 'Please enter valid password',
+                                message: 'Ingrese Password Correcto',
                                 callback: function(input) {
                                     if (input.value.length > 0) {
                                         return validatePassword();
@@ -63,14 +63,14 @@ var KTSignupGeneral = function() {
                                 compare: function() {
                                     return form.querySelector('[name="password"]').value;
                                 },
-                                message: 'La contraseña y su confirmación no son lo mismo.'
+                                message: 'La contraseña y su confirmación no son iguales.'
                             }
                         }
                     },
                     'toc': {
                         validators: {
                             notEmpty: {
-                                message: 'You must accept the terms and conditions'
+                                message: 'Usted debe Aceptar terminos y condiciones'
                             }
                         }
                     }

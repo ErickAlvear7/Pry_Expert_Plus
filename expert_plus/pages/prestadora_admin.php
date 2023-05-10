@@ -45,10 +45,15 @@
 	//file_put_contents('log_seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
     $all_perfil = mysqli_query($con, $xSQL);
 
+    $xSQL = "SELECT (SELECT prv.ciudad FROM `provincia_ciudad` prv WHERE prv.prov_id=pre.prov_id) AS Ciudad,pre.pres_nombre AS Prestadora,";
+    $xSQL .= "(SELECT pde.pade_nombre FROM `expert_parametro_detalle` pde, `expert_parametro_cabecera` pca WHERE pde.paca_id=pca.paca_id AND pca.paca_nombre='Tipo Sector' AND pde.pade_valorv=pre.pres_sector) AS Sector,(SELECT pde.pade_nombre FROM `expert_parametro_detalle` pde, `expert_parametro_cabecera` pca WHERE pde.paca_id=pca.paca_id AND pca.paca_nombre='Tipo Prestador' AND pde.pade_valorv=pre.pres_tipoprestador) AS TipoPrestador,pre.pres_logo AS Logo,pre.pres_estado AS Estado,pre.pres_id AS Id FROM `expert_prestadora` pre ";
+    $all_prestador = mysqli_query($con, $xSQL);
+
 ?>
 
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
+        <input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
         <div class="card card-flush">
             <div class="card-header align-items-center py-5 gap-2 gap-md-5">
                 <div class="card-title">
@@ -90,87 +95,106 @@
                     <thead>
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                             <th>Ciudad</th>
-                            <th>Prestadora</th>
-                            <th>Especialidad</th>
-                            <th>Medicos</th>
+                            <th>Prestador</th>
+                            <th>Sector</th>
+                            <th>Tipo Prestador</th>
                             <th>Estado</th>
                             <th>Status</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody class="fw-bold text-gray-600">
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="ms-5">
-                                        <!-- <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bolder" data-kt-ecommerce-product-filter="product_name">Product 1</a> -->
-                                        <span class="fw-bolder">Guayaquil</span>
-                                    </div>
-                                </div>
-                            </td>
+                        <?php 
+                                        
+                            foreach($all_prestador as $presta){
+                                $xId = $presta['Id'];
+                                $xCiudad = trim($presta['Ciudad']);
+                                $xPrestador = trim($presta['Prestadora']);
+                                $xSector = trim($presta['Sector']);
+                                $xTipoPresta = trim($presta['TipoPrestador']);
+                                $xLogo = trim($presta['Logo']);
+                                $xEstado = trim($presta['Estado']);
+                                if($xLogo == ''){
+                                    $xLogo = 'companyname.png';
+                                }
+                            ?>
+                                <?php 
 
-                            <td class="d-flex align-items-center">
-                                <a href="?page=modprestadora&menuid=" class="symbol symbol-50px">
-                                    <span class="symbol-label" style="background-image:url(assets/media//logos/companyname.png);"></span>
-                                </a>
-                                <span class="fw-bolder">ASISTANET SUR</span>
-                            </td>
+                                    $chkEstado = '';
+                                    $xDisabledEdit = '';
 
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="rating-label checked">
-                                        <span class="svg-icon svg-icon-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
+                                    if($xEstado == 'A'){
+                                        $xEstado = 'Activo';
+                                        $chkEstado = 'checked="checked"';
+                                        $xTextColor = "badge badge-light-primary";
+                                    }else{
+                                        $xEstado = 'Inactivo';
+                                        $xTextColor = "badge badge-light-danger";
+                                        $xDisabledEdit = 'disabled';
+                                    }
 
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="rating-label">
-                                        <span class="svg-icon svg-icon-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
+                                ?>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-5">
+                                                <span class="fw-bolder"><?php echo $xCiudad; ?></span>
+                                            </div>
+                                        </div>
+                                    </td>
 
-                            <td data-order="Activo">
-                                <div class="badge badge-light-success">Activo</div>
-                            </td>
+                                    <td class="d-flex align-items-center">
+                                        <a href="#" class="symbol symbol-50px">
+                                            <span class="symbol-label" style="background-image:url(logos/<?php echo $xLogo; ?>);"></span>
+                                        </a>
+                                        <span class="fw-bolder"><?php echo $xPrestador; ?></span>
+                                    </td>
 
-                            <td>
-                                <div>
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input <?php echo $cheking; ?> class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $idusuario; ?>" 
-                                            onchange="f_UpdateEstado(<?php echo $xEmprid; ?>,<?php echo $usu['Idusuario']; ?>)" value="<?php echo $idusuario; ?>"/>
-                                    </div>
-                                </div>
-                            </td> 
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-5">
+                                                <span class="fw-bolder"><?php echo $xSector; ?></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-5">
+                                                <span class="fw-bolder"><?php echo $xTipoPresta; ?></span>
+                                            </div>
+                                        </div>
+                                    </td>                                    
 
-                            <td>
-                                <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Opciones
-                                    <span class="svg-icon svg-icon-5 m-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </a>
-                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                    <div class="menu-item px-3">
-                                        <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="menu-link px-3">Editar</a>
-                                    </div>
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link px-3"  onclick="return false;" data-kt-ecommerce-product-filter="delete_row">Eliminar</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                                    <td id="td_<?php echo $xId; ?>">
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-5">
+                                                <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
+                                    <td>
+                                        <div class="text-center">
+                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                <input class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $xId; ?>" 
+                                                    onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>)" value="<?php echo $xId; ?>"/>
+                                            </div>
+                                        </div>
+                                    </td> 													
+
+                                    <td class="text-end">
+                                        <div class="text-center">
+                                            <div class="btn-group">
+                                                <button id="btnEditar_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Prestador' onclick="f_Editar(<?php echo $xId; ?>)">
+                                                    <i class='fa fa-edit'></i>
+                                                </button>	                                                
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
+                                </tr>
+                        <?php } ?>
 
                     </tbody>
                 </table>
@@ -182,11 +206,53 @@
 
         $(document).ready(function(){
 
+            _mensaje = $('input#mensaje').val();
+
+            if(_mensaje != ''){					
+                mensajesalertify(_mensaje, "S", "top-center", 3);
+            }
         });	
 
-        function f_Eliminar(){
-            alert('Eliminar');
+        function f_UpdateEstado(_paisid, _emprid, _presid){
+                
+                let _usuaid = "<?php echo $xUsuaid; ?>";
+                let _check = $("#chk" + _presid).is(":checked");
+                let _checked = "";
+                let _class = "badge badge-light-primary";
+                let _td = "td_" + _presid;
+                let _btnedit = "btnEditar_" + _presid;
+
+                if(_check){
+                    _estado = "Activo";
+                    _checked = "checked='checked'";
+                    $('#'+_btnedit).prop("disabled",false);
+                }else{                    
+                    _estado = "Inactivo";
+                    _class = "badge badge-light-danger";
+                    $('#'+_btnedit).prop("disabled",true);
+                }
+    
+                var _changetd = document.getElementById(_td);
+                _changetd.innerHTML = '<div class="d-flex align-items-center"><div class="ms-5"><div class="' + _class + '">' + _estado + ' </div></div>';
+
+                _parametros = {
+                    xxPaisid: _paisid,
+                    xxEmprId: _emprid,
+                    xxUsuaid: _usuaid,
+                    xxPresid: _presid,
+                    xxEstado: _estado
+                }	
+    
+                var xrespuesta = $.post("codephp/update_estadoprestador.php", _parametros);
+                xrespuesta.done(function(response){
+                });	
         }
+
+        function f_Editar(_id){
+            //$.redirect('?page=modprestador&menuid=<?php echo $menuid; ?>&id=' + _id); //POR METODO GET
+            //location.href='?page=modprestador&menuid=<?php echo $menuid; ?>&id=' + _id; //POR METODO GET
+            $.redirect('?page=modprestador&menuid=<?php echo $menuid; ?>', {'id': _id}); //POR METODO POST
+        }        
 
     </script>
 

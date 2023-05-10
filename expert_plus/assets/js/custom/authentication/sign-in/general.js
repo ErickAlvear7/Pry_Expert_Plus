@@ -17,17 +17,17 @@ var KTSigninGeneral = function() {
 					'email': {
                         validators: {
 							notEmpty: {
-								message: 'Email address is required'
+								message: 'E-mail es requerido'
 							},
                             emailAddress: {
-								message: 'The value is not a valid email address'
+								message: 'E-mail ingresado no es correcto'
 							}
 						}
 					},
                     'password': {
                         validators: {
                             notEmpty: {
-                                message: 'The password is required'
+                                message: 'Password es requerido'
                             }
                         }
                     } 

@@ -32,12 +32,9 @@
                 $xSQL .= " WHERE pade.pade_nombre='$xDetalle' OR pade.pade_valorI=$xValori ";
                 $all_det = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
                 $xRow = mysqli_num_rows($all_det);
-
-            }
-       
+            }       
+        }
     }
-
-}
     
     echo $xRow;
 

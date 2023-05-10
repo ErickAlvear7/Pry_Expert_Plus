@@ -24,8 +24,6 @@
                 $respuesta = "OK";
             }
         }
-
-
     }
 
     echo $respuesta;

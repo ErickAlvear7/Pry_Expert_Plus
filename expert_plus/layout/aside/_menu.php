@@ -21,7 +21,7 @@
 		$page = 'param_generales';
 	}
 	
-	if($page == 'addprestador'){
+	if($page == 'addprestador' || $page == 'modprestador'){
 		$page = 'prestador_admin';
 	}
 	

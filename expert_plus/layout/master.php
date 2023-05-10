@@ -76,6 +76,10 @@
 	
 	if($page == 'addclienteprod'){
 		$xRuta = '/../pages/agregar_clienteproducto.php';
+	}
+	
+	if($page == 'modprestador'){
+		$xRuta = '/../pages/editar_prestador.php';
 	}	
 	
 	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";

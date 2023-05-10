@@ -289,7 +289,6 @@
 
           $("#modal_parametro").find("input,textarea").val("");
         
-
            _result.splice(0,_result.length);
 
         // while(a.length > 0) {
@@ -297,12 +296,8 @@
         //     }
            _estado = 'A';
 
-
-        
-
             $("#modal_parametro").modal("show");
             $('#modal_parametro').modal('handleUpdate')
-
 
         });  
     });
@@ -346,94 +341,82 @@
 
         if(_agregarDet == 'add'){
                 
-                $datosDet ={
-                    xxPaisId: _idpais,
-					xxDetalle: _detalle,
-                    xxValorV: _valorV,
-                    xxValorI: _valorI
-                }
+            $datosDet ={
+                xxPaisId: _idpais,
+                xxDetalle: _detalle,
+                xxValorV: _valorV,
+                xxValorI: _valorI
+            }
 
-                    var xrespuesta = $.post("codephp/consultar_detalle.php", $datosDet);
-                        xrespuesta.done(function(response){
+            var xrespuesta = $.post("codephp/consultar_detalle.php", $datosDet);
+            xrespuesta.done(function(response){
 
-                            if(response == 0){
+                if(response.trim() == 0){
 
-
-                                $.each(_result,function(i,item){
-                                    if(item.arrydetalle.toUpperCase() == _detalle.toUpperCase())
-                                    {                  
-                                        mensajesweetalert("center","warning","Nombre del Detalle ya Existe..!",false,1900);                    
+                    $.each(_result,function(i,item){
+                        if(item.arrydetalle.toUpperCase() == _detalle.toUpperCase())
+                        {                  
+                            mensajesweetalert("center","warning","Nombre del Detalle ya Existe..!",false,1900);                    
+                            _continuar = false;
+                            return false;
+                        }else{
+                            $.each(_result,function(i,item){
+                                if(_valorI == 0)
+                                {
+                                    if(item.arryvalorv.toUpperCase() == _valorV.toUpperCase())
+                                    {                               
+                                        mensajesweetalert("center","warning","Valor Texto de Parámetro ya Existe..!",false,1900);    
                                         _continuar = false;
                                         return false;
                                     }else{
-                                        $.each(_result,function(i,item){
-                                            if(_valorI == 0)
-                                            {
-                                                if(item.arryvalorv.toUpperCase() == _valorV.toUpperCase())
-                                                {                               
-                                                    mensajesweetalert("center","warning","Valor Texto de Parámetro ya Existe..!",false,1900);    
-                                                    _continuar = false;
-                                                    return false;
-                                                }else{
-                                                    _continuar = true;
-                                                }
-                                            }else
-                                            {
-                                                if(item.arryvalori == _valorI)
-                                                {                               
-                                                    mensajesweetalert("center","warning","Valor Entero de Parámetro ya Existe..!",false,1900); 
-                                                    _continuar = false;
-                                                    return false;
-                                                }else{
-                                                    _continuar = true;
-                                                }                            
-                                            }
-                                        });
+                                        _continuar = true;
                                     }
-                                });
-
-                                if(_continuar){
-                                    _count = _count + 1;
-
-                                    _output = '<tr id="row_' + _count + '">';
-                                    _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';                
-                                    _output += '<td>' + _detalle + ' <input type="hidden" name="hidden_detalle[]" id="txtDetalle' + _count + '" value="' + _detalle + '" /></td>';
-                                    _output += '<td>' + _valorV + ' <input type="hidden" name="hidden_valorv[]" id="txtValorV' +_count + '" value="' + _valorV + '" /></td>';
-                                    _output += '<td>' + _valorI + ' <input type="hidden" name="hidden_valori[]" id="txtValorI' + _count + '" value="' + _valorI + '" /></td>';
-                                    _output += '<td><div class="text-center"><div class="btn-group">';
-                                    _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
-                                    _output += '</tr>';
-
-
-                                    $('#tblDetalle').append(_output);
-
-                                    //console.log(_output);
-
-                                    _objeto = {
-                                        arrydetalle: _detalle,
-                                        arryvalorv: _valorV,
-                                        arryvalori: _valorI,
-                                        arryorden: _count
-                                    }
-
-                                    _result.push(_objeto);
-
-                                    $("#txtDetalle").val("");
-                                    $("#txtValorV").val("");
-                                    $("#txtValorI").val("");
-
+                                }else
+                                {
+                                    if(item.arryvalori == _valorI)
+                                    {                               
+                                        mensajesweetalert("center","warning","Valor Entero de Parámetro ya Existe..!",false,1900); 
+                                        _continuar = false;
+                                        return false;
+                                    }else{
+                                        _continuar = true;
+                                    }                            
                                 }
+                            });
+                        }
+                    });
 
+                    if(_continuar){
+                        _count = _count + 1;
 
+                        _output = '<tr id="row_' + _count + '">';
+                        _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';                
+                        _output += '<td>' + _detalle + ' <input type="hidden" name="hidden_detalle[]" id="txtDetalle' + _count + '" value="' + _detalle + '" /></td>';
+                        _output += '<td>' + _valorV + ' <input type="hidden" name="hidden_valorv[]" id="txtValorV' +_count + '" value="' + _valorV + '" /></td>';
+                        _output += '<td>' + _valorI + ' <input type="hidden" name="hidden_valori[]" id="txtValorI' + _count + '" value="' + _valorI + '" /></td>';
+                        _output += '<td><div class="text-center"><div class="btn-group">';
+                        _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
+                        _output += '</tr>';
 
-                            }else{
+                        $('#tblDetalle').append(_output);
 
-                                mensajesweetalert("center","warning","Nombre del Detalle y/o Valor Texto u Entero ya existe..!",false,1900);
-                            }
+                        _objeto = {
+                            arrydetalle: _detalle,
+                            arryvalorv: _valorV,
+                            arryvalori: _valorI,
+                            arryorden: _count
+                        }
 
-                        });
-    
+                        _result.push(_objeto);
 
+                        $("#txtDetalle").val("");
+                        $("#txtValorV").val("");
+                        $("#txtValorI").val("");
+                    }
+                }else{
+                    mensajesweetalert("center","warning","Nombre del Detalle y/o Valor Texto u Entero ya existe..!",false,1900);
+                }
+            });
         }
     });
 

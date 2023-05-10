@@ -22,20 +22,15 @@
         $xEstado = safe($_POST['xxEstado']);
         $xOrden = $_POST['xxOrden'];
 
-
         $xSQL = "INSERT INTO `expert_parametro_detalle` (paca_id,pade_orden,pade_nombre, ";
         $xSQL .= "pade_valorV,pade_valorI,pade_estado) ";
         $xSQL .= "VALUES ($xPacaid,$xOrden,'$xDetalle','$xValorV','$xValorI','$xEstado')";
-
 
         if(mysqli_query($con, $xSQL)){
 
             $last_id = mysqli_insert_id($con);
             
         }
-
-     
-       
     }
 
     echo $last_id;

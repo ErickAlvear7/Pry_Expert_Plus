@@ -9,7 +9,6 @@
     mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
 
-
     $respuesta = "ERR";
 
     if(isset($_POST['xxPacaId']) and isset($_POST['xxPadeId']) and isset($_POST['xxDetalle']) and isset($_POST['xxValorV'])
@@ -21,15 +20,11 @@
         $xValorV = safe($_POST['xxValorV']);
         $xValorI = safe($_POST['xxValorI']);
 
-
-
         $xSQL = "UPDATE `expert_superparametro_detalle` SET pade_nombre = '$xDetalle', pade_valorV = '$xValorV', pade_valorI =  $xValorI ";
         $xSQL .= "WHERE paca_id = $xPacaid AND pade_id = $xPadeid ";
         mysqli_query($con, $xSQL);
     
         $respuesta = "OK";
-     
-       
     }
 
     echo $respuesta;

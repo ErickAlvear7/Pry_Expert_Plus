@@ -223,6 +223,9 @@
                                                             <input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
                                                             <input type="hidden" name="avatar_remove" />
                                                         </label>
+                                                        <!-- <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
+														    <i class="bi bi-x fs-2"></i>
+													    </span>	                                                                                                     -->
                                                     </div>
                                                     <div class="form-text">Archivos permitidos: png, jpg, jpeg.</div>
                                                 </div>
@@ -390,13 +393,12 @@
                                 ?>
                                     <?php 
 
-                                        $cheking = '';
                                         $chkEstado = '';
                                         $xDisabledEdit = '';
                                         $xDisabledReset = '';
 
                                         if($estado == 'Activo'){
-                                            $cheking = 'checked="checked"';
+                                            $chkEstado = 'checked="checked"';
                                             $xTextColor = "badge badge-light-primary";
                                         }else{
                                             $xTextColor = "badge badge-light-danger";
@@ -433,7 +435,7 @@
                                         <td>
                                             <div class="text-center">
                                                 <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                    <input <?php echo $cheking; ?> class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $idusuario; ?>" 
+                                                    <input class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $idusuario; ?>" 
                                                         onchange="f_UpdateEstado(<?php echo $xEmprid; ?>,<?php echo $usu['Idusuario']; ?>)" value="<?php echo $idusuario; ?>"/>
                                                 </div>
                                             </div>
@@ -447,7 +449,7 @@
                                                     </button>		
                                                     <button id="btnEditar_<?php echo $idusuario; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Usuario'>
                                                         <i class='fa fa-edit'></i>
-                                                    </button>	                                                
+                                                    </button>
                                                 </div>
                                             </div>
                                         </td>
@@ -680,8 +682,8 @@
                         _ext = _ext.toLowerCase();   
                     }
 
-                    if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
-                        mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
+                    if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
+                        mensajesalertify("El archivo seleccionado no es una Imagen", "W", "top-center", 3);
                         return;
                     }
 
@@ -692,34 +694,34 @@
                     _respuesta = 'OK';
 
                     if(_nombre == ''){                        
-                        mensajesweetalert("center","warning","Ingrese Nombre de Usuario",false,1800);
+                        mensajesalertify("Ingrese Nombre de Usuario", "W", "top-center", 3);
                         return;
                     }
 
                     if(_login == ''){                        
-                        mensajesweetalert("center","warning","Ingrese Login/Email",false,1800);
+                        mensajesalertify("Ingrese Login/Email", "W", "top-center", 3);
                         return;
                     }
                     
                     var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
                     if (regex.test(_login.trim())){
                     }else{
-                        mensajesweetalert("center","warning","Login/Email incorrecto",false,1800);
+                        mensajesalertify("Login/Email incorrecto", "W", "top-center", 3);
                         return;
                     }                    
 
                     if(_password == ''){                        
-                        mensajesweetalert("center","warning","Ingrese Password",false,1800);
+                        mensajesalertify("Ingrese Password", "W", "top-center", 3);
                         return;
                     }
 
                     if(_paisid == '0'){                        
-                        mensajesweetalert("center","warning","Seleccione Pais",false,1800);
+                        mensajesalertify("Seleccione Pais", "W", "top-center", 3);
                         return;
                     }
                     
                     if(_perfilid == '0'){                        
-                        mensajesweetalert("center","warning","Seleccione Perfil",false,1800);
+                        mensajesalertify("Seleccione Perfil", "W", "top-center", 3);
                         return;
                     }
                     
@@ -734,7 +736,7 @@
                         _ulr = "codephp/grabar_usuarios.php";    
                     }
 
-                    form_data = new FormData();            
+                    form_data = new FormData();
                     form_data.append('xxPaisid', _paisid);
                     form_data.append('xxUsuaid', _idusu == 0 ? _usuaid : _idusu);
                     form_data.append('xxEmprid', _emprid);
@@ -809,7 +811,7 @@
                                 });   
 
                             }else{
-                                mensajesweetalert("center","warning","Login/Email ya existe..!",false,1800);
+                                mensajesweetalert("center", "warning", "Login/Email ya existe..!", false, 1800);
                                 return;
                             }
                         });
@@ -871,7 +873,7 @@
                 var sizeByte = obj.files[0].size;
                 var siezekiloByte = parseInt(sizeByte / 1024);
                 if(siezekiloByte > numzise){
-                  alert('El tamaño supera el limite permitido, Debe ser máximo de ' + Math.round(numzise/1024,2) + ' MB');
+                  mensajesweetalert("center", "warning", "El tamaño supera el limite permitido, Debe ser máximo de..! " + Math.round(numzise/1024,2) + ' MB', false, 1800);
                   $(obj).val('');
                   return false; 
                 }else{
@@ -917,7 +919,7 @@
                 }
     
                 var _changetd = document.getElementById(_td);
-                _changetd.innerHTML = '<td><div class="' + _class + '">' + _estado + ' </div>';
+                _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
 
                 _parametros = {
                     xxUsuaid: _userid,
@@ -946,7 +948,7 @@
                 $.post("codephp/reset_password.php", _parametros, function(response){
 
                     if(response.trim() == 'OK'){
-                        mensajesweetalert("center","success","Password Resetado con exito..!",false,1800);
+                        mensajesweetalert("center", "success", "Password Resetado con exito..!", false, 1800);
                     }
 
                 });                 

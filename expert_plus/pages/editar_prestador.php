@@ -17,7 +17,14 @@
 	//$xServidor = $_SERVER['HTTP_HOST'];
 	$page = isset($_GET['page']) ? $_GET['page'] : "index";
 	$menuid = $_GET['menuid'];
-	
+
+    if(!isset($_POST['id'])){
+        header("Location: ./logout.php");
+        exit();
+    }
+
+    $xPresid = $_POST['id'];
+
     @session_start();
 
     if(isset($_SESSION["s_usuario"])){
@@ -38,10 +45,45 @@
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
     $all_provincia = mysqli_query($con, $xSQL);
 
+    $xSQL = "SELECT * FROM `expert_prestadora` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pres_id=$xPresid ";
+    $all_prestador = mysqli_query($con, $xSQL);
+    foreach ($all_prestador as $presta){
+        $xProvid = $presta['prov_id'];
+        $xNombre = $presta['pres_nombre'];
+        $xSector = $presta['pres_sector'];
+        $xTipoPresta = $presta['pres_tipoprestador'];
+        $xDireccion = $presta['pres_direccion'];
+        $xUrl = $presta['pres_url'];
+        $xFono1 = $presta['pres_fono1'];
+        $xFono2 = $presta['pres_fono2'];
+        $xFono3 = $presta['pres_fono3'];
+        $xCelu1 = $presta['pres_celular1'];
+        $xCelu2 = $presta['pres_celular2'];
+        $xCelu3 = $presta['pres_celular3'];
+        $xEmail1 = $presta['pres_email1'];
+        $xEnviar1 = $presta['pres_enviar1'];
+        $xEmail2 = $presta['pres_email2'];
+        $xEnviar2 = $presta['pres_enviar2'];
+        $xLogo = $presta['pres_logo'];
+    }
+
+	$xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND prov_id=$xProvid ";
+    $cbo_provincia = mysqli_query($con, $xSQL);    
+    foreach ($cbo_provincia as $prov){
+        $xCboProv = $prov['provincia'];
+    }
+
+	$xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND provincia='$xCboProv' ";
+    $cbo_ciudad = mysqli_query($con, $xSQL);    
+
     $xSQL = "SELECT pde.pade_nombre AS Nombre, pde.pade_valorV AS Valor, CASE pde.pade_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado FROM `expert_parametro_detalle` pde, `expert_parametro_cabecera` pca ";
     $xSQL .= "WHERE pde.paca_id=pca.paca_id AND pca.paca_nombre='Tipo Prestador' AND pca.paca_estado='A' AND pais_id=$xPaisid AND empr_id=$xEmprid ";
     $xSQL .= "ORDER BY pde.pade_orden ";
     $all_tipopresta = mysqli_query($con, $xSQL);
+
+    $xSQL = "SELECT * FROM `expert_prestadora_especialidad` xpe, `expert_especialidad` esp  WHERE xpe.espe_id=esp.espe_id AND xpe.pais_id=$xPaisid AND xpe.empr_id=$xEmprid AND xpe.pres_id=$xPresid ";
+    $all_especialidad = mysqli_query($con, $xSQL);
+
 
 ?>
 
@@ -66,38 +108,10 @@
                                 <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
                                     <i class="bi bi-x fs-2"></i>
                                 </span>
-                                <!-- <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remover Logo">
-                                    <i class="bi bi-x fs-2"></i>
-                                </span> -->
                             </div>
                             <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                         </div>
                     </div>
-
-                    <!-- <div class="card card-flush py-4">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <h2>Status</h2>
-                            </div>
-                            <div class="card-toolbar">
-                                <div class="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_product_status"></div>
-                            </div>
-                        </div>
-                        <div class="card-body pt-s0">
-                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
-                                <option></option>
-                                <option value="published" selected="selected">Published</option>
-                                <option value="draft">Draft</option>
-                                <option value="scheduled">Scheduled</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
-                            <div class="text-muted fs-7">Set the product status.</div>
-                            <div class="d-none mt-10">
-                                <label for="kt_ecommerce_add_product_status_datepicker" class="form-label">Select publishing date and time</label>
-                                <input class="form-control" id="kt_ecommerce_add_product_status_datepicker" placeholder="Pick date &amp; time" />
-                            </div>
-                        </div>
-                    </div> -->
 
                     <div class="card card-flush py-4">
                         <div class="card-header">
@@ -115,15 +129,6 @@
                                 </span>                                                                
                                 Nueva Especialidad
                             </button>                           
-                            <!-- <button type="button" id="btnNuevoTipo" class="btn btn-light-primary btn-sm mb-10">
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>                                                                
-                                Nuevo Tipo Prestador
-                            </button>                              -->
                         </div>
                     </div>
                 </div>
@@ -151,7 +156,6 @@
                                                 <div class="fv-row mb-7">
                                                     <label class="fs-6 fw-bold form-label mt-3">
                                                         <span class="required">Provincia</span>
-                                                        <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's email."></i> -->
                                                     </label>
                                                     <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2" >
                                                         <option></option>
@@ -165,10 +169,12 @@
                                                 <div class="fv-row mb-7">
                                                     <label class="fs-6 fw-bold form-label mt-3">
                                                         <span class="required">Ciudad</span>
-                                                        <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's phone number (optional)."></i> -->
                                                     </label>
                                                     <select name="cboCiudad" id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2">
                                                         <option></option>
+                                                        <?php foreach ($cbo_ciudad as $ciudad) : ?>
+                                                            <option value="<?php echo $ciudad['prov_id'] ?>"><?php echo mb_strtoupper($ciudad['ciudad']) ?></option>
+                                                        <?php endforeach ?>                                                        
                                                     </select>                                                      
                                                 </div>
                                             </div>
@@ -176,7 +182,7 @@
 
                                         <div class="mb-5 fv-row">
                                             <label class="required form-label">Prestador</label>
-                                            <input type="text" name="txtPrestador" id="txtPrestador" class="form-control mb-2 text-uppercase" maxlength="150" placeholder="Nombre del Prestador" value="" />
+                                            <input type="text" name="txtPrestador" id="txtPrestador" class="form-control mb-2 text-uppercase" maxlength="150" placeholder="Nombre del Prestador" value="<?php echo $xNombre; ?> " />
                                             <div class="text-muted fs-7">El Prestador puede ser Clinica/Centro Medico/Estudio/Consultorio/Otros..</div>
                                         </div>   
                                         
@@ -255,7 +261,7 @@
                                                                 <div class="required fs-6 fw-bold mt-2 mb-3">Direccion:</div>
                                                             </div>
                                                             <div class="col-xl-10 fv-row">
-                                                                <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"></textarea>
+                                                                <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDireccion; ?> </textarea>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-8">
@@ -263,7 +269,7 @@
                                                                 <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
                                                             </div>
                                                             <div class="col-xl-10 fv-row">
-                                                                <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" placeHolder="https://wwww.dominio.com" />
+                                                                <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" placeHolder="https://wwww.dominio.com" value="<?php echo $xUrl; ?>" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -294,29 +300,29 @@
                                                 <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono1; ?>" />
                                                     </div>
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono2; ?>" />
                                                     </div> 
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono3; ?>" />
                                                     </div>                                                        
                                                 </div>
                                                 <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu1; ?>" />
                                                     </div>
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu2; ?>" />
                                                     </div> 
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu3; ?>" />
                                                     </div>
                                                 </div>                                                
                                             </div>
@@ -345,11 +351,11 @@
                                                 <div class="d-flex flex-wrap gap-5">
                                                     <div class="fv-row w-100 flex-md-root">
                                                         <label class="form-label">Email 1</label>
-                                                        <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" />
+                                                        <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="<?php echo $xEmail1; ?>" />
                                                     </div>
                                                     <label class="form-check form-switch form-check-custom form-check-solid">
-                                                        <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" />
-                                                        <span id="spanEnv1" class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>
+                                                        <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" <?php if($xEmail1 != '') { echo 'checked'; } ?> />
+                                                        <span id="spanEnv1" class="form-check-label fw-bold text-muted" for="chkEnviar1"> <?php if($xEmail1 != '') { echo 'Si Enviar'; }else { echo 'No Enviar'; } ?> </span>
                                                     </label>                                                    
                                                 </div>
                                                 <div class="d-flex flex-wrap gap-5">
@@ -367,6 +373,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="d-flex justify-content-end">
+                                <a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancelar</a>
+                                <button type="button" id="btnSave" class="btn btn-primary">
+                                    <span class="indicator-label">Grabar</span>
+                                    <span class="indicator-progress">Espere un momento...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                </button>
+                            </div>                            
                         </div>
 
                         <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
@@ -432,85 +446,99 @@
                                                         <th>Especialidad</th>
                                                         <th>Pvp</th>
                                                         <th>Costo</th>
+                                                        <th>Estado</th>
+                                                        <th>Status</th>
                                                         <th>Opciones</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="fw-bold text-gray-600">
+
+                                                    <?php 
+                                            
+                                                        foreach($all_especialidad as $especi){
+                                                            $xId = $especi['pree_id'];
+                                                            $xEspecialidad = trim($especi['espe_nombre']);
+                                                            $xPvp = trim($especi['pree_pvp']);
+                                                            $xCosto = trim($especi['pree_costo']);
+                                                            $xEstado = trim($especi['pree_estado']);
+                                                        ?>
+                                                            <?php 
+                            
+                                                                $chkEstado = '';
+                                                                $xDisabledEdit = '';
+                            
+                                                                if($xEstado == 'A'){
+                                                                    $xEstado = 'Activo';
+                                                                    $chkEstado = 'checked="checked"';
+                                                                    $xTextColor = "badge badge-light-primary";
+                                                                }else{
+                                                                    $xEstado = 'Inactivo';
+                                                                    $xTextColor = "badge badge-light-danger";
+                                                                    $xDisabledEdit = 'disabled';
+                                                                }
+                            
+                                                            ?>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="ms-5">
+                                                                            <span class="fw-bolder"><?php echo $xEspecialidad; ?></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                            
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="ms-5">
+                                                                            <span class="fw-bolder"><?php echo $xPvp; ?></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="ms-5">
+                                                                            <span class="fw-bolder"><?php echo $xCosto; ?></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>                                    
+                            
+                                                                <td id="td_<?php echo $xId; ?>">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="ms-5">
+                                                                            <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                
+                                                                <td>
+                                                                    <div class="text-center">
+                                                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                                            <input class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $xId; ?>" 
+                                                                                onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>)" value="<?php echo $xId; ?>"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </td> 													
+                            
+                                                                <td class="">
+                                                                    <div class="">
+                                                                        <div class="btn-group">
+                                                                            <button id="btnEditar_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Prestador' onclick="f_Editar(<?php echo $xId; ?>)">
+                                                                                <i class='fa fa-edit'></i>
+                                                                            </button>	                                                
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                
+                                                            </tr>
+                                                    <?php } ?>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- <div class="card card-flush py-4">
-                                    <div class="card-header">
-                                        <div class="card-title">
-                                            <h2>Shipping</h2>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pt-0">
-                                        <div class="fv-row">
-                                            <div class="form-check form-check-custom form-check-solid mb-2">
-                                                <input class="form-check-input" type="checkbox" id="kt_ecommerce_add_product_shipping_checkbox" value="1" />
-                                                <label class="form-check-label">This is a physical product</label>
-                                            </div>
-                                            <div class="text-muted fs-7">Set if the product is a physical or digital item. Physical products may require shipping.</div>
-                                        </div>
-                                        <div id="kt_ecommerce_add_product_shipping" class="d-none mt-10">
-                                            <div class="mb-10 fv-row">
-                                                <label class="form-label">Weight</label>
-                                                <input type="text" name="weight" class="form-control mb-2" placeholder="Product weight" value="" />
-                                                <div class="text-muted fs-7">Set a product weight in kilograms (kg).</div>
-                                            </div>
-                                            <div class="fv-row">
-                                                <label class="form-label">Dimension</label>
-                                                <div class="d-flex flex-wrap flex-sm-nowrap gap-3">
-                                                    <input type="number" name="width" class="form-control mb-2" placeholder="Width (w)" value="" />
-                                                    <input type="number" name="height" class="form-control mb-2" placeholder="Height (h)" value="" />
-                                                    <input type="number" name="length" class="form-control mb-2" placeholder="Lengtn (l)" value="" />
-                                                </div>
-                                                <div class="text-muted fs-7">Enter the product dimensions in centimeters (cm).</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card card-flush py-4">
-                                    <div class="card-header">
-                                        <div class="card-title">
-                                            <h2>Meta Options</h2>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pt-0">
-                                        <div class="mb-10">
-                                            <label class="form-label">Meta Tag Title</label>
-                                            <input type="text" class="form-control mb-2" name="meta_title" placeholder="Meta tag name" />
-                                            <div class="text-muted fs-7">Set a meta tag title. Recommended to be simple and precise keywords.</div>
-                                        </div>
-                                        <div class="mb-10">
-                                            <label class="form-label">Meta Tag Description</label>
-                                            <div id="kt_ecommerce_add_product_meta_description" name="kt_ecommerce_add_product_meta_description" class="min-h-100px mb-2"></div>
-                                            <div class="text-muted fs-7">Set a meta tag description to the product for increased SEO ranking.</div>
-                                        </div>
-                                        <div>
-                                            <label class="form-label">Meta Tag Keywords</label>
-                                            <input id="kt_ecommerce_add_product_meta_keywords" name="kt_ecommerce_add_product_meta_keywords" class="form-control mb-2" />
-                                            <div class="text-muted fs-7">Set a list of keywords that the product is related to. Separate the keywords by adding a comma
-                                            <code>,</code>between each keyword.</div>
-                                        </div>
-                                    </div>
-                                </div> -->
-
                             </div>
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancelar</a>
-                        <button type="button" id="btnSave" class="btn btn-primary">
-                            <span class="indicator-label">Grabar</span>
-                            <span class="indicator-progress">Espere un momento...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
                     </div>
                 </div>
             </form>
@@ -681,10 +709,21 @@
                 var _paisid = "<?php echo $xPaisid; ?>";
                 var _emprid = "<?php echo $xEmprid; ?>";
                 var _usuaid = "<?php echo $xUsuaid; ?>";
-                _result = [];
-                var _continuar = true;
-                _enviar1 = 'NO';
-                _enviar2 = 'NO';
+                var _logo  = "<?php echo $xLogo; ?>";
+
+                _logo = _logo == '' ? 'companyname.png' : _logo;
+                //_result = [];
+                //var _continuar = true;
+                //_enviar1 = 'NO';
+                //_enviar2 = 'NO';
+                //debugger;
+
+                $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
+                $('#cboCiudad').val(<?php echo $xProvid; ?>).change();
+                $('#cboSector').val("<?php echo $xSector; ?>").change();
+                $('#cboTipo').val("<?php echo $xTipoPresta; ?>").change();
+
+                document.getElementById('imgfile').style.backgroundImage="url(logos/" + _logo + ")";
 
                 $('#cboProvincia').change(function(){
                         

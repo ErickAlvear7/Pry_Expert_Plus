@@ -47,8 +47,8 @@
                     $xRow = mysqli_num_rows($all_det);                    
                 }
             }            
+        }
     }
-}
     
     echo $xRow;
 

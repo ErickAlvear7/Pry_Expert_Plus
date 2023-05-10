@@ -183,6 +183,7 @@
 
 				function f_ChangeMode(obj){
 
+					debugger;
 					let _check = $("#chkMode").is(":checked");
 					let _emprid = "<?php echo $xEmprid; ?>";
 					let _usuaid = "<?php echo $xUsuaid; ?>";
@@ -198,6 +199,7 @@
 					}
 
 					$parametros = {
+						xxPaisid: _paisid,
 						xxEmprid: _emprid,
 						xxUserid: _usuaid,
 						xxMode: _mode,

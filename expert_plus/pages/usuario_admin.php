@@ -153,6 +153,9 @@
 														<input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
 														<input type="hidden" name="avatar_remove" />
 													</label>
+													<!-- <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
+														<i class="bi bi-x fs-2"></i>
+													</span>													 -->
 												</div>
 												<div class="form-text">Archivos permitidos: png, jpg, jpeg.</div>
 											</div>

@@ -33,6 +33,4 @@
     mysqli_close($con);
     
     echo $options;
-    
-
 ?>

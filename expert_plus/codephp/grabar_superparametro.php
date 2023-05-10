@@ -50,9 +50,6 @@
             mysqli_query($con, $xSQL);
           
         }
-
-     
-       
     }
 
     echo $last_id;

@@ -44,6 +44,11 @@
 	if($page == 'addclienteprod'){
         $title = 'Administrar Cliente';
     	$descripcion = 'Crear Nuevo Cliente & Producto';
+	}
+
+	if($page == 'modprestador'){
+        $title = 'Editar Prestador';
+    	$descripcion = 'Listado de Prestadores / Modificar Datos';
 	}	
 
 	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";
