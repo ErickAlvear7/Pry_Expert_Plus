@@ -80,7 +80,7 @@
 				<thead>
 					<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
 					    <th style="display:none;">Id</th>
-						<th class="min-w-125px">Cliente</th>
+						<th>Cliente</th>
                         <th>Descripcion</th>
                         <th>Logo</th>
                         <th>Estado</th>
@@ -169,10 +169,13 @@
 
         });	
 
+         // Redirect boton editar cliente
 
         function f_Editar(_clieid){
           $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {'idclie': _clieid}); //POR METODO POST
         }
+
+        //Update Estado cliente
 
         function f_UpdateEstado(_clieid){
 
@@ -183,11 +186,13 @@
             let _btnedit = "btnEditar_" + _clieid;
 
             if(_check){
+
                 _estado = 'Activo';
                 _checked = "checked='checked'";
                 $('#'+_btnedit).prop("disabled",false);
                 
             }else{
+
                 _estado = 'Inactivo';
                 _class = "badge badge-light-danger";
                 $('#'+_btnedit).prop("disabled",true);
@@ -195,6 +200,14 @@
 
                 var _changetd = document.getElementById(_td);
                     _changetd.innerHTML = '<div class="d-flex align-items-center"><div class="ms-5"><div class="' + _class + '">' + _estado + ' </div></div>';
+
+                    _parametros = {
+                        xxClieid: _clieid,
+                    } 
+                    
+                var xrespuesta = $.post("codephp/update_estadocliente.php", _parametros);
+                xrespuesta.done(function(response){
+                });	
 
         }
 
