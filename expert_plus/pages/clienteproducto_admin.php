@@ -32,7 +32,7 @@
 
     $xUsuaid = $_SESSION["i_usuaid"];
 
-    $xSQL = "SELECT clie_id AS IdCliente, clie_nombre AS Cliente, clie_descripcion AS Descrip, CASE clie_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
+    $xSQL = "SELECT clie_id AS IdCliente, clie_nombre AS Cliente, clie_descripcion AS Descrip,clie_imgcab AS Logo, CASE clie_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
     $xSQL .="FROM `expert_cliente` ";
     $all_clie = mysqli_query($con, $xSQL);
 
@@ -81,11 +81,11 @@
 					<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
 					    <th style="display:none;">Id</th>
 						<th class="min-w-125px">Cliente</th>
-                        <th class="min-w-125px">Descripcion</th>
-                        <th class="min-w-125px">Logo</th>
-                        <th class="min-w-125px">Estado</th>
-						<th class="min-w-125px">Status</th>
-                        <th class="min-w-125px" style="text-align: center;">Opciones</th>
+                        <th>Descripcion</th>
+                        <th>Logo</th>
+                        <th>Estado</th>
+						<th>Status</th>
+                        <th>Opciones</th>
 					</tr>
 				</thead>
 				<tbody class="fw-bold text-gray-600">
@@ -94,7 +94,11 @@
                         $xClieid = $clie['IdCliente'];
                         $xCliente = $clie['Cliente'];
                         $xDesc = $clie['Descrip'];
+                        $xLogo = $clie['Logo'];
                         $xEstado = $clie['Estado'];
+                        if($xLogo == ''){
+                            $xLogo = 'companyname.png';
+                        }
                         
                     ?>
                      <?php 
@@ -117,25 +121,29 @@
                         <td><?php echo $xDesc; ?></td>
                         <td class="d-flex align-items-center">
                             <a href="?page=modprestadora&menuid=" class="symbol symbol-50px">
-                                <span class="symbol-label" style="background-image:url(Cliente/1683307394_ford-gt-atras_3840x2160_xtrafondos.com.jpg);"></span>
+                                <span class="symbol-label" style="background-image:url(Cliente/<?php echo $xLogo; ?>);"></span>
                             </a>
                             <span class="fw-bolder"></span>
                         </td>
 						<td id="td_<?php echo $xClieid; ?>">
-                           <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
+                           <div class="d-flex align-items-center">
+                              <div class="ms-5">
+                                  <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
+                              </div>
+                           </div> 
                         </td>
                         <td>
                             <div class="text-center">
 								<div class="form-check form-check-sm form-check-custom form-check-solid">
-									<input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk" 
-                                       onchange="f_UpdateEstado()" value=""/>
+									<input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xClieid;?>" 
+                                       onchange="f_UpdateEstado(<?php echo $xClieid;?>)" value=""/>
 								</div>
 							</div>
 						</td>
 						<td>
                             <div class="text-center">
 								<div class="btn-group">
-									<button id="btnEditar" onclick="f_Editar(<?php echo $xClieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="" title='Editar Cliente'>
+									<button id="btnEditar_<?php echo $xClieid;?>" onclick="f_Editar(<?php echo $xClieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="" title='Editar Cliente'>
 										<i class='fa fa-edit'></i>
 									</button>												 
 								</div>
@@ -164,6 +172,30 @@
 
         function f_Editar(_clieid){
           $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {'idclie': _clieid}); //POR METODO POST
+        }
+
+        function f_UpdateEstado(_clieid){
+
+            let _check = $("#chk" + _clieid).is(":checked");
+            let _checked = "";
+            let _class = "badge badge-light-primary";
+            let _td = "td_" + _clieid;
+            let _btnedit = "btnEditar_" + _clieid;
+
+            if(_check){
+                _estado = 'Activo';
+                _checked = "checked='checked'";
+                $('#'+_btnedit).prop("disabled",false);
+                
+            }else{
+                _estado = 'Inactivo';
+                _class = "badge badge-light-danger";
+                $('#'+_btnedit).prop("disabled",true);
+            }
+
+                var _changetd = document.getElementById(_td);
+                    _changetd.innerHTML = '<div class="d-flex align-items-center"><div class="ms-5"><div class="' + _class + '">' + _estado + ' </div></div>';
+
         }
 
       

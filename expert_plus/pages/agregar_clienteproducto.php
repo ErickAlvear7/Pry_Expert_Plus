@@ -19,6 +19,7 @@
 	//$xServidor = $_SERVER['HTTP_HOST'];
 	$page = isset($_GET['page']) ? $_GET['page'] : "index";
 	$menuid = $_GET['menuid'];
+  
 	
     @session_start();
 
@@ -39,6 +40,8 @@
     $xSQL = "SELECT DISTINCT provincia AS Descripcion FROM `provincia_ciudad` ";
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
     $all_provincia = mysqli_query($con, $xSQL);
+
+   
 
 
 ?>
@@ -550,6 +553,8 @@
 
             $('#btnAgregar').click(function(){
 
+                debugger;
+
                 var _agregarPro = 'add';
                 var _estado = 'A';
                 var _gerencial = 'NO';
@@ -647,6 +652,9 @@
 
                                 }
                                 
+                            }else{
+                                mensajesalertify("Producto ya existe..!!","W","top-right",3);
+                                return false;
                             }
 
                         });
