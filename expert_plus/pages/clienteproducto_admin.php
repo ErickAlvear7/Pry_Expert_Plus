@@ -28,8 +28,10 @@
     } else{
         header("Location: ./logout.php");
         exit();
-    }    
+    }  
 
+    $xPaisid = $_SESSION["i_paisid"];
+    $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
     $xSQL = "SELECT clie_id AS IdCliente, clie_nombre AS Cliente, clie_descripcion AS Descrip,clie_imgcab AS Logo, CASE clie_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
@@ -136,14 +138,14 @@
                             <div class="text-center">
 								<div class="form-check form-check-sm form-check-custom form-check-solid">
 									<input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xClieid;?>" 
-                                       onchange="f_UpdateEstado(<?php echo $xClieid;?>)" value=""/>
+                                       onchange="f_UpdateEstado(<?php echo $xClieid;?>,<?php echo $xEmprid; ?>)" value=""/>
 								</div>
 							</div>
 						</td>
 						<td>
                             <div class="text-center">
 								<div class="btn-group">
-									<button id="btnEditar_<?php echo $xClieid;?>" onclick="f_Editar(<?php echo $xClieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="" title='Editar Cliente'>
+									<button id="btnEditar_<?php echo $xClieid;?>" onclick="f_Editar(<?php echo $xClieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit;?> title='Editar Cliente'>
 										<i class='fa fa-edit'></i>
 									</button>												 
 								</div>
@@ -177,7 +179,7 @@
 
         //Update Estado cliente
 
-        function f_UpdateEstado(_clieid){
+        function f_UpdateEstado(_clieid, _emprid){
 
             let _check = $("#chk" + _clieid).is(":checked");
             let _checked = "";
@@ -203,6 +205,8 @@
 
                     _parametros = {
                         xxClieid: _clieid,
+                        xxEmprid: _emprid,
+                        xxEstado: _estado
                     } 
                     
                 var xrespuesta = $.post("codephp/update_estadocliente.php", _parametros);

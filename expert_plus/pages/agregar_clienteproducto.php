@@ -41,6 +41,9 @@
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
     $all_provincia = mysqli_query($con, $xSQL);
 
+    $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid ";
+	$all_grupos =  mysqli_query($con, $xSQL);
+
    
 
 
@@ -340,9 +343,13 @@
                                             </div>
                                             <div class="col">
                                                 <label class="required form-label">Grupo</label>
-                                                <select name="cboGrupo" id="cboGrupo" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2" >
-                                                    <option></option>
+                                                <select name="cboGrupo" id="cboGrupo" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
+                                                   <option></option>
+                                                   <?php foreach ($all_grupos as $datos) : ?>
+                                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['NombreGrupo']) ?></option>
+                                                    <?php endforeach ?>
                                                 </select>
+                               
                                             </div>
                                         </div>
                                         <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
@@ -363,7 +370,7 @@
                                                 </label> 
                                            </div>
                                         </div>
-                                        </br>
+                                        <br>
                                         <div class="form-group mt-5">
                                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
                                                 <span class="svg-icon svg-icon-2">
@@ -420,7 +427,7 @@
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2>Nueva Especialidad</h2>
+                        <h2>Nuevo Grupo</h2>
                         <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                             <span class="svg-icon svg-icon-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -431,30 +438,23 @@
                         </div>
                     </div>
                     <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                        <form id="kt_modal_new_card_form" class="form">
-                            <div class="d-flex flex-column mb-7 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                    <span class="required">Especialidad</span>
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre de la especialidad"></i>
-                                </label>
-                                <input type="text" class="form-control mb-2 text-uppercase" maxlength="250" placeholder="Nombre Especialidad" name="txtEspecialidad" id="txtEspecialidad" />
-                            </div>
-
-                            <div class="fv-row mb-15">
-                                <label class="fs-6 fw-bold form-label mb-2">
-                                    <span>Descripcion</span>
-                                </label>
-                                <textarea class="form-control mb-2" name="txtDescripcion" id="txtDescripcion" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
-                            </div>                         
-                            <div class="d-flex justify-content-end pt-15">
-                                <button type="reset" data-bs-dismiss="modal" class="btn btn-secondary">Cerrar</button>
-                                <button type="button" id="btnSaveNew" class="btn btn-primary">
-                                    <span class="indicator-label">Grabar</span>
-                                    <span class="indicator-progress">Espere un momento...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                </button>
-                            </div>
-                        </form>
+                        <div class="d-flex flex-column mb-7 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                <span class="required">Grupo</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
+                            </label>
+                            <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
+                        </div>
+                        <div class="fv-row mb-15">
+                            <label class="fs-6 fw-bold form-label mb-2">
+                                <span>Descripcion</span>
+                            </label>
+                            <textarea class="form-control mb-2" name="txtDescGrupo" id="txtDescGrupo" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                        </div>                         
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">Grabar</button>
                     </div>
                 </div>
             </div>
@@ -553,23 +553,20 @@
 
             $('#btnAgregar').click(function(){
 
-                debugger;
-
                 var _agregarPro = 'add';
                 var _estado = 'A';
                 var _gerencial = 'NO';
                 var _continuar = true;
                 var _output;
-
                 var _emprid = "<?php echo $xEmprid; ?>";
                 var _paisid = "<?php echo $xPaisid; ?>";
                 var _producto = $.trim($("#txtProducto").val());
                 var _descripcion = $.trim($("#txtDescripcion").val());
                 var _costo = $.trim($("#txtCosto").val());
-                var _grupo = 'FAMILIA PROTEGIDA';
+                var _cbogrupo = $('#cboGrupo').val();
+                var _txtGrupo = $('#cboGrupo').find('option:selected').text();
                 var _asistemes = $('#txtAsisMes').val();
                 var _asistanu = $('#txtAsisAnu').val();
-                
 
                
                 if(_producto == ''){
@@ -579,6 +576,11 @@
 
                 if(_costo == ''){
                     mensajesalertify("Ingrese Costo..!!","W","top-right",3);
+                    return false;
+                }
+
+                if(_cbogrupo == 0){
+                    mensajesalertify("Seleccione Grupo..!!","W","top-right",3);
                     return false;
                 }
 
@@ -614,7 +616,7 @@
 
                                     _output = '<tr id="row_' + _count + '">';
                                     _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';
-                                    _output += '<td>' + _grupo + ' <input type="hidden" name="hidden_grupo[]" id="txtGrupo' + _count + '" value="' + _grupo + '" /></td>';
+                                    _output += '<td>' + _txtGrupo + ' <input type="hidden" name="hidden_grupo[]" id="txtGrupo' + _count + '" value="' + _txtGrupo + '" /></td>';
                                     _output += '<td>' + _producto + ' <input type="hidden" name="hidden_producto[]" id="txtProducto' + _count + '" value="' + _producto + '" /></td>';
                                     _output += '<td>' + _costo + ' <input type="hidden" name="hidden_costo[]" id="txtCosto' + _count + '" value="' + _costo + '" /></td>';
                                     // _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
@@ -635,7 +637,7 @@
                                         arryproducto: _producto,
                                         arrydescripcion: _descripcion,
                                         arrycosto: _costo,
-                                        arrygrupo: _grupo,
+                                        arrygrupid: _cbogrupo,
                                         arrycober: _cobertura,
                                         arrysist: _sistema,
                                         arryasismes: _asistemes,
@@ -649,6 +651,7 @@
                                     $("#txtProducto").val("");
                                     $("#txtDescripcion").val("");
                                     $("#txtCosto").val("");
+                                    $("#cboGrupo").val(0).change();   
 
                                 }
                                 
@@ -727,46 +730,45 @@
                     }
 
                        
-                
 
-                if(_cboProv == ''){
-                    mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
-                    return false;
-                }
-
-                if(_cboIdProv == 0){
-                    mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
-                    return false;
-                }
-
-                if(_cliente == ''){
-                    mensajesalertify("Ingrese Nombre del Cliente..!!","W","top-right",3);
-                    return false;
-                }
-
-                if(_count == 0){
-                    mensajesalertify("Ingrese al menos un Producto..!!","W","top-right",3);
-                    return false;
-                }
-
-                
-                if(_email1 != ''){
-                    var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-                    if (regex.test(_email1.trim())){
-                    }else{
-                        mensajesalertify("Email Incorrecto..!!","E","top-right",3);
+                    if(_cboProv == ''){
+                        mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
                         return false;
-                    }  
-                }
+                    }
 
-                if(_email2 != ''){
-                    var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-                    if (regex.test(_email2.trim())){
-                    }else{
-                        mensajesalertify("Email Incorrecto..!!","E","top-right",3);
+                    if(_cboIdProv == 0){
+                        mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
                         return false;
-                    }  
-                }
+                    }
+
+                    if(_cliente == ''){
+                        mensajesalertify("Ingrese Nombre del Cliente..!!","W","top-right",3);
+                        return false;
+                    }
+
+                    if(_count == 0){
+                        mensajesalertify("Ingrese al menos un Producto..!!","W","top-right",3);
+                        return false;
+                    }
+
+                    
+                    if(_email1 != ''){
+                        var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+                        if (regex.test(_email1.trim())){
+                        }else{
+                            mensajesalertify("Email Incorrecto..!!","E","top-right",3);
+                            return false;
+                        }  
+                    }
+
+                    if(_email2 != ''){
+                        var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+                        if (regex.test(_email2.trim())){
+                        }else{
+                            mensajesalertify("Email Incorrecto..!!","E","top-right",3);
+                            return false;
+                        }  
+                    }
               
 
                          $datosCliente = {
@@ -878,9 +880,54 @@
             //Desplazar-modal
 
 
-            $("#modal-new-especialidad").draggable({
+            $("#modal_new_grupo").draggable({
                 handle: ".modal-header"
-            });             
+            }); 
+            
+            //Agregar Grupos
+
+            function f_GuardarGrupo(_paisid,_emprid,_usuaid){
+
+                var _nombreGrupo = $.trim($("#txtGrupo").val());
+                var _descGrupo = $.trim($("#txtDescGrupo").val());
+
+                if(_nombreGrupo == ''){
+                    mensajesalertify("Ingrese Grupo..!!","W","top-right",3);
+                    return false;
+                }
+
+
+                var _parametros = {
+
+                    xxPaisId: _paisid,
+                    xxEmprId: _emprid,
+                    xxUsuaId: _usuaid,
+                    xxGrupo: _nombreGrupo,
+                    xxDesc: _descGrupo
+                }
+
+                var xrespuesta = $.post("codephp/grabar_grupo.php", _parametros);
+                    xrespuesta.done(function(response){
+
+                        if(response.trim() == 'OK'){
+
+                            mensajesalertify('Nuevo Grupo Agregado', 'S', 'top-center', 3); 
+                            
+                            $("#txtGrupo").val("");
+                            $("#txtDescGrupo").val("");     
+                            $("#modal_new_grupo").modal("hide");
+
+                        }else if(response.trim() == 'EXISTE'){
+                            mensajesalertify('Grupo ya Existe', 'W', 'top-right', 3);
+                        }
+
+                    });
+
+                //alert(_usuaid);
+
+            }
+            
+
 
 
 
