@@ -36,8 +36,13 @@
                 $xSQL = "INSERT INTO `expert_grupos`(pais_id,empr_id,grup_nombre,grup_descripcion,usuariocreacion,terminalcreacion,fechacreacion) ";
                 $xSQL .= "VALUES($xPaisid,$xEmprid,'$xGrupo','$xDesc',$xUsuaid,'$xTerminal','{$xFecha}') ";
                 mysqli_query($con, $xSQL); 
-                
-                $resultado = "OK";
+
+                $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND grup_estado='A' ";
+                $all_datos =  mysqli_query($con, $xSQL);
+                $resultado = '<option></option>';
+                foreach ($all_datos as $grupo){ 
+                    $resultado .='<option value="'.$grupo["Codigo"].'">' . $grupo["NombreGrupo"].'</option>';
+                }  
 
             }else{
 

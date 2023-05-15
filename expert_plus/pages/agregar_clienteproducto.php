@@ -44,6 +44,8 @@
     $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid ";
 	$all_grupos =  mysqli_query($con, $xSQL);
 
+    
+
    
 
 
@@ -909,12 +911,14 @@
                 var xrespuesta = $.post("codephp/grabar_grupo.php", _parametros);
                     xrespuesta.done(function(response){
 
-                        if(response.trim() == 'OK'){
+                        if(response.trim() != 'ERR'){
 
                             mensajesalertify('Nuevo Grupo Agregado', 'S', 'top-center', 3); 
                             
                             $("#txtGrupo").val("");
-                            $("#txtDescGrupo").val("");     
+                            $("#txtDescGrupo").val("");
+                            $("#cboGrupo").empty();
+                            $("#cboGrupo").html(response);     
                             $("#modal_new_grupo").modal("hide");
 
                         }else if(response.trim() == 'EXISTE'){

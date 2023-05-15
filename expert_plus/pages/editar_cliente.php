@@ -18,6 +18,7 @@
 
 	//$xServidor = $_SERVER['HTTP_HOST'];
 	$page = isset($_GET['page']) ? $_GET['page'] : "index";
+    $clieid = $_POST['idclie'];
 	$menuid = $_GET['menuid'];
 	
     @session_start();
@@ -36,9 +37,43 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
+    $xSQL = "SELECT * FROM `expert_cliente` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND clie_id=$clieid ";
+    $all_cliente = mysqli_query($con, $xSQL);
+
+    foreach ($all_cliente as $clie){
+
+        $xProvid = $clie['prov_id'];
+        $xCliente = $clie['clie_nombre'];
+        $xDesc = $clie['clie_descripcion'];
+        $xDirec = $clie['clie_direccion'];
+        $xUrl = $clie['clie_url'];
+        $xTel1 = $clie['clie_tel1'];
+        $xTel2 = $clie['clie_tel2'];
+        $xTel3 = $clie['clie_tel3'];
+        $xCel1 = $clie['clie_cel1'];
+        $xCel2 = $clie['clie_cel2'];
+        $xCel3 = $clie['clie_cel3'];
+        $xEmail1 = $clie['clie_email1'];
+        $xEmail2 = $clie['clie_email2'];
+        $xImgc = $clie['clie_imgcab'];
+        $xImgp = $clie['clie_imgpie'];
+
+    }
+
     $xSQL = "SELECT DISTINCT provincia AS Descripcion FROM `provincia_ciudad` ";
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
     $all_provincia = mysqli_query($con, $xSQL);
+
+    $xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND prov_id=$xProvid ";
+    $cbo_provincia = mysqli_query($con, $xSQL);    
+    foreach ($cbo_provincia as $prov){
+        $xCboProv = $prov['provincia'];
+    }
+
+    $xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND provincia='$xCboProv' ";
+    $cbo_ciudad = mysqli_query($con, $xSQL);  
+
+
 
 
 ?>
@@ -53,7 +88,7 @@
                             </div>
                         </div>
                         <div class="card-body text-center pt-0">
-                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(Cliente/<?php echo $xImgc; ?>)">
                                 <div class="image-input-wrapper w-150px h-150px"></div>
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
                                     <i class="bi bi-pencil-fill fs-7"></i>
@@ -77,7 +112,7 @@
                             </div>
                         </div>
                         <div class="card-body text-center pt-0">
-                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(Cliente/<?php echo $xImgp; ?>)">
                                 <div class="image-input-wrapper w-150px h-150px"></div>
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
                                     <i class="bi bi-pencil-fill fs-7"></i>
@@ -160,17 +195,20 @@
                                                     </label>
                                                     <select name="cboCiudad" id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2">
                                                         <option></option>
+                                                        <?php foreach ($cbo_ciudad as $ciudad) : ?>
+                                                            <option value="<?php echo $ciudad['prov_id'] ?>"><?php echo mb_strtoupper($ciudad['ciudad']) ?></option>
+                                                        <?php endforeach ?>  
                                                     </select>                                                      
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="mb-5 fv-row">
                                             <label class="required form-label">Cliente</label>
-                                            <input type="text" name="txtCliente" id="txtCliente" class="form-control mb-2" minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="" />
+                                            <input type="text" name="txtCliente" id="txtCliente" class="form-control mb-2" minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="<?php echo $xCliente; ?>" />
                                         </div>
                                         <div class="mb-5 fv-row">
                                             <label class="required form-label">Descripcion</label>
-                                            <textarea class="form-control mb-2" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                                            <textarea class="form-control mb-2" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"><?php echo $xDesc; ?></textarea>
                                         </div>                                 
                                     </div>
                                 </div>
@@ -207,7 +245,7 @@
                                                                 <div class="required fs-6 fw-bold mt-2 mb-3">Direccion:</div>
                                                             </div>
                                                             <div class="col-xl-10 fv-row">
-                                                                <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"></textarea>
+                                                                <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"><?php echo $xDirec; ?></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-8">
@@ -215,7 +253,7 @@
                                                                 <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
                                                             </div>
                                                             <div class="col-xl-10 fv-row">
-                                                                <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" value="" />
+                                                                <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" value="<?php echo $xUrl; ?>" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -246,29 +284,29 @@
                                                 <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel1; ?>" />
                                                     </div>
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel2; ?>" />
                                                     </div> 
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel3; ?>" />
                                                     </div>                                                        
                                                 </div>
                                                 <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="0999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="0999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCel1; ?>" />
                                                     </div>
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCel2; ?>" />
                                                     </div> 
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCel3; ?>" />
                                                     </div>
                                                 </div>                                                
                                             </div>
@@ -297,13 +335,13 @@
                                                 <div class="d-flex flex-wrap gap-5">
                                                     <div class="fv-row w-100 flex-md-root">
                                                         <label class="form-label">Email 1</label>
-                                                        <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" />
+                                                        <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="<?php echo $xEmail1; ?>" />
                                                     </div>                                                 
                                                 </div>
                                                 <div class="d-flex flex-wrap gap-5">
                                                     <div class="fv-row w-100 flex-md-root">
                                                         <label class="form-label">Email 2</label>
-                                                        <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="" class="form-control mb-2 text-lowercase" value="" />
+                                                        <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" class="form-control mb-2 text-lowercase" value="<?php echo $xEmail2; ?>" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -467,392 +505,10 @@
 
             $(document).ready(function(){
 
-                $('#cboProvincia').change(function(){
-                        
-                    var _paisid = "<?php echo $xPaisid; ?>";
-                    var _emprid = "<?php echo $xEmprid; ?>";                
-                    _cboid = $(this).val(); //obtener el id seleccionado
-
                 
-                    
-                    $("#cboCiudad").empty();
-                    //$("#cboCiudad").append('<option value=0>--Seleccione Ciudad--</option>');
+            });
 
-                    var _parametros = {
-                        xxPaisId: _paisid,
-                        xxEmprId: _emprid,
-                        xxComboId: _cboid,
-                        xxOpcion: 0
-                    }
-
-                    var _respuesta = $.post("codephp/cargar_combos.php", _parametros);
-                    _respuesta.done(function(response) {
-                        //document.getElementById("city").className = "form-control";
-                        $("#cboCiudad").html(response);
-                        
-                    });
-                    _respuesta.fail(function() {
-                        //mensajesalertify('Error al cargar listado de ciudades','E','top-right',10);
-                    });
-                    _respuesta.always(function() {
-                        //alert("ajax complete");
-                    });                
     
-                });
-
-                // Modal nuevo grupo
-
-                $("#btnNewGrupo").click(function(){
-
-                    $("#modal_new_grupo").modal("show");
-                });
-
-                    
-
-            });
-
-              //desplazar ventana modal
-            $("#modal_new_grupo").draggable({
-                handle: ".modal-header"
-            }); 
-
-                //check Productos
-
-            $(document).on("click","#chkCobertura",function(){
-
-                _cobertura = "NO";
-
-                if($("#chkCobertura").is(":checked")){
-                    _cobertura = "SI";
-                    $("#lblCobertura").text("Cobertura SI");
-                }else{
-                    _cobertura = "NO";
-                    $("#lblCobertura").text("Cobertura NO");
-
-                }    
-
-            });
-
-            $(document).on("click","#chkSistema",function(){
-
-                   _sistema = "NO";
-
-                if($("#chkSistema").is(":checked")){
-                    _sistema = "SI";
-                    $("#lblSistema").text("Sistema SI");
-                }else{
-                    _sistema = "NO";
-                    $("#lblSistema").text("Sistema NO");
-
-                }
-
-            });
-
-
-
-            //Agregar Productos
-
-            $('#btnAgregar').click(function(){
-
-                var _agregarPro = 'add';
-                var _estado = 'A';
-                var _continuar = true;
-                var _output;
-
-                var _emprid = "<?php echo $xEmprid; ?>";
-                var _paisid = "<?php echo $xPaisid; ?>";
-                var _producto = $.trim($("#txtProducto").val());
-                var _descripcion = $.trim($("#txtDescripcion").val());
-                var _costo = $.trim($("#txtCosto").val());
-                var _grupo = 'FAMILIA PROTEGIDA';
-                var _asistemes = $('#txtAsisMes').val();
-                var _asistanu = $('#txtAsisAnu').val();
-                
-
-               
-                if(_producto == ''){
-                    mensajesalertify("Ingrese Producto..!!","W","top-right",3);
-                    return false;
-                }
-
-                if(_costo == ''){
-                    mensajesalertify("Ingrese Costo..!!","W","top-right",3);
-                    return false;
-                }
-
-                if(_agregarPro == 'add'){
-                     
-                        $datosPro = {
-                            xxEmprid: _emprid,
-                            xxProducto: _producto
-                        }
-
-                        var xrespuesta = $.post("codephp/consultar_producto.php", $datosPro);
-                        xrespuesta.done(function(response){
-
-                            if(response == 0){
-
-                                $.each(_result,function(i,item){
-
-                                    if(item.arryproducto.toUpperCase() == _producto.toUpperCase()){
-                                        mensajesalertify("Producto ya Existe..!!","E","top-right",3);
-                                        _continuar = false;
-                                        return false;
-                                    }else{
-                                        _continuar = true;
-                                    }
-
-                                });
-
-
-                                if(_continuar){
-
-                                    _checked = "checked='checked'";
-                                    _count = _count + 1;
-
-                                    _output = '<tr id="row_' + _count + '">';
-                                    _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';
-                                    _output += '<td>' + _grupo + ' <input type="hidden" name="hidden_grupo[]" id="txtGrupo' + _count + '" value="' + _grupo + '" /></td>';
-                                    _output += '<td>' + _producto + ' <input type="hidden" name="hidden_producto[]" id="txtProducto' + _count + '" value="' + _producto + '" /></td>';
-                                    _output += '<td>' + _costo + ' <input type="hidden" name="hidden_costo[]" id="txtCosto' + _count + '" value="' + _costo + '" /></td>';
-                                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                               '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _count + '" value=""/>' +
-                                               '</div></div></td>';
-                                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                               '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstadoGe" type="checkbox" id="chk' + _count + '" value=""/>' +
-                                               '</div></div></td>';
-                                    _output += '<td><div class="text-center"><div class="btn-group">';
-                                    _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
-                                    _output += '</tr>';
-
-                                    $('#tblProducto').append(_output);
-
-                                       //console.log(_output);
-                                     
-                                    _objeto = {
-                                        arryproducto: _producto,
-                                        arrydescripcion: _descripcion,
-                                        arrycosto: _costo,
-                                        arrygrupo: _grupo,
-                                        arrycober: _cobertura,
-                                        arrysist: _sistema,
-                                        arryasismes: _asistemes,
-                                        arryasisanu: _asistanu,
-                                        arryestado: _estado
-                                    }
-
-                                    _result.push(_objeto);
-
-                                    $("#txtProducto").val("");
-                                    $("#txtDescripcion").val("");
-                                    $("#txtCosto").val("");
-
-                                }
-                                
-                            }
-
-                        });
-                }
-
-            });
-
-         
-             
-            // Guardar Cliente & Producto
-            function f_Guardar(_idpais,_idempr,_iduser){
-
-                var _cboProv = $('#cboProvincia').val();
-                var _cboIdProv = $('#cboCiudad').val();
-                var _cliente = $.trim($("#txtCliente").val());
-                var _desc = $.trim($("#txtDesc").val()); 
-                var _direc = $.trim($("#txtDireccion").val()); 
-                var _url = $.trim($("#txtUrl").val()); 
-                var _tel1 = $.trim($("#txtFono1").val()); 
-                var _tel2 = $.trim($("#txtFono2").val()); 
-                var _tel3 = $.trim($("#txtFono3").val()); 
-                var _cel1 = $.trim($("#txtCelular1").val()); 
-                var _cel2 = $.trim($("#txtCelular2").val()); 
-                var _cel3 = $.trim($("#txtCelular3").val()); 
-                var _email1 = $.trim($("#txtEmail1").val()); 
-                var _email2 = $.trim($("#txtEmail2").val());
-                var _estado = 'A'; 
-                var _ext = '';
-                
-                //Imagen Cabecera
-
-                //  if(_ext.trim() == '.png' && _ext.trim() == '.jpg' && _ext.trim() == '.jpeg'){
-                //      var _selecc = 'SI';
-                //  }  
-                
-                //if(_selecc == 'SI'){
-
-                     //Imagen Cabecera
-
-                    var _imgcab = document.getElementById("imgCab");
-                    var _fileCab = _imgcab.files[0];
-                    var _fullPathcab = document.getElementById("imgCab").value;
-                    var _ext = _fullPathcab.substring(_fullPathcab.length - 4);
-                    _ext = _ext.toLowerCase();
-
-                      //Imagen Pie
-
-                    var _imgpie = document.getElementById("imgPie");
-                    var _filePie = _imgpie.files[0];
-                    var _fullPathpie = document.getElementById("imgPie").value;
-                    var _extp = _fullPathpie.substring(_fullPathpie.length - 4);
-                    _extp = _extp.toLowerCase();
-                       
-                //}
-            
-                if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
-                    mensajesalertify("El archivo seleccionado no es una Imagen..!","W","top-right",3);
-                    return;
-                }
-                
-
-                if(_cboProv == ''){
-                    mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
-                    return false;
-                }
-
-                if(_cboIdProv == 0){
-                    mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
-                    return false;
-                }
-
-                if(_cliente == ''){
-                    mensajesalertify("Ingrese Nombre del Cliente..!!","W","top-right",3);
-                    return false;
-                }
-
-                if(_count == 0){
-                    mensajesalertify("Ingrese al menos un Producto..!!","W","top-right",3);
-                    return false;
-                }
-
-                
-                if(_email1 != ''){
-                    var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-                    if (regex.test(_email1.trim())){
-                    }else{
-                        mensajesalertify("Email Incorrecto..!!","E","top-right",3);
-                        return false;
-                    }  
-                }
-
-                if(_email2 != ''){
-                    var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-                    if (regex.test(_email2.trim())){
-                    }else{
-                        mensajesalertify("Email Incorrecto..!!","E","top-right",3);
-                        return false;
-                    }  
-                }
-              
-
-                         $datosCliente = {
-                            xxPaisId: _idpais,
-                            xxEmprId: _idempr,
-                            xxCliente: _cliente
-                         }
-
-                         var xrespuesta = $.post("codephp/consultar_cliente.php", $datosCliente);
-                         xrespuesta.done(function(response){
-
-                            if(response == 0){
-
-                                var form_data = new FormData();            
-                                form_data.append('xxPaisid', _idpais);
-                                form_data.append('xxEmprid', _idempr);
-                                form_data.append('xxUsuaid', _iduser);
-                                form_data.append('xxProv', _cboIdProv);
-                                form_data.append('xxCliente', _cliente);
-                                form_data.append('xxDescrip', _desc);
-                                form_data.append('xxDirec', _direc);
-                                form_data.append('xxUrl', _url);
-                                form_data.append('xxTel1', _tel1);
-                                form_data.append('xxTel2', _tel2);
-                                form_data.append('xxTel3', _tel3);
-                                form_data.append('xxCel1', _cel1);
-                                form_data.append('xxCel2', _cel2);
-                                form_data.append('xxCel3', _cel3);
-                                form_data.append('xxEmail1', _email1);
-                                form_data.append('xxEmail2', _email2);
-                                form_data.append('xxEstado', _estado);
-                                form_data.append('xxFileCab', _fileCab);
-                                form_data.append('xxFilePie', _filePie);
-
-
-                                $.ajax({
-
-                                    url: "codephp/grabar_clienteprod.php",
-                                    type: "post",                
-                                    data: form_data,
-                                    processData: false,
-                                    contentType: false,
-                                    dataType: "json",
-                                    success: function(dataid){
-
-                                        if(dataid != 0){
-                                            var xrespuesta = $.post("codephp/grabar_productoclie.php", { xxPaisid: _idpais, xxEmprid: _idempr, xxClieid: dataid, xxResult: _result });
-                                             xrespuesta.done(function(response){
-                                                     
-                                                if(response == 'OK'){
-
-                                                    $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
-                                        
-                                                }
-
-                                             });
-
-                                        }
-
-
-
-                                    },
-                                    error: function (error) {
-                                        console.log(error);
-                                    }
-
-                                     
-
-                                });
-                         
-
-                            }else{
-                                mensajesalertify("Cliente ya Existe..!!","E","top-right",3);
-                                return false;
-
-                            }
-
-
-                         });
-
-            }
-
-            //Eliminar Detalle en linea
-
-            $(document).on("click",".btnDelete",function(){
-                row_id = $(this).attr("id");
-                _producto = $('#txtProducto' + row_id + '').val();
-
-                FunRemoveItemFromArr(_result, _producto);
-                $('#row_' + row_id + '').remove();
-                _count--;
-
-            });
-            function FunRemoveItemFromArr(arr, deta)
-            {
-                $.each(arr,function(i,item){
-                    if(item.arryproducto == deta)
-                    {
-                        arr.splice(i, 1);
-                        return false;
-                    }else{
-                        continuar = true;
-                    }
-                });        
-            };
 
              
 
