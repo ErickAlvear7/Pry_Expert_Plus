@@ -74,6 +74,12 @@
     $cbo_ciudad = mysqli_query($con, $xSQL);  
 
 
+    $xSQL = "SELECT pro.prod_id AS Idprod, pro.prod_nombre AS Producto, pro.prod_descripcion AS Descrip, pro.prod_costo AS Costo, ";
+    $xSQL .="pro.prod_asistmes AS AsisMes, pro.prod_asistanu AS AsisAnu, pro.prod_cobertura AS Cobertura, pro.prod_sistema AS Sistema, ";
+    $xSQL .="pro.prod_gerencial AS Gerencial,pro.prod_estado AS Estado, gru.grup_id AS Idgrup,gru.grup_nombre AS Grupo FROM `expert_productos` pro INNER JOIN ";
+    $xSQL .="`expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.clie_id =$clieid AND pro.pais_id =$xPaisid AND pro.empr_id =$xEmprid ";
+    $all_prod = mysqli_query($con, $xSQL);
+
 
 
 ?>
@@ -437,7 +443,52 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody class="fw-bold text-gray-600">
+                                                        <?php 
+                                                          foreach($all_prod as $prod){
+                                                            $xProdId = $prod['Idprod'];
+                                                            $xProducto = $prod['Producto'];
+                                                            $xDesc = $prod['Descrip'];
+                                                            $xCosto = $prod['Costo'];
+                                                            $xAsisMes = $prod['AsisMes'];
+                                                            $xAsisAnu = $prod['AsisAnu'];
+                                                            $xCober = $prod['Cobertura'];
+                                                            $xSist = $prod['Sistema'];
+                                                            $xGeren = $prod['Gerencial'];
+                                                            $xEstado = $prod['Estado'];
+                                                            $xGrupId = $prod['Idgrup'];
+                                                            $xGrupo = $prod['Grupo'];
+  
+                                                         ?>   
+
+                                                        <tr id="row_<?php echo $xProdid; ?>">
+                                                          <td style="display: none;"><?php echo $xProdid; ?></td>
+                                                          <td id="gru_<?php echo $xGrupId; ?>">
+                                                            <?php echo $xGrupo; ?>
+                                                          </td>
+                                                          <td><?php echo $xProducto; ?></td>
+                                                          <td><?php echo $xCosto; ?></td>
+                                                          <td><?php echo $xEstado; ?></td>
+                                                          <td>
+                                                            <label class="form-check form-switch form-check-custom form-check-solid">
+                                                                <input class="form-check-input" name="chkGerencial" id="chk_<?php echo $xProdid; ?>" type="checkbox" />
+                                                                <span class="form-check-label fw-bold text-muted" id="lbl_<?php echo $xProdid; ?>" for="chkEnviar1"><?php echo $xGeren; ?></span>
+                                                            </label> 
+                                                          </td>
+                                                          <td>
+                                                            <div class="text-center">
+                                                                <div class="btn-group">	
+                                                                    <button type="button" id="btnEditar_<?php echo $xProdid;?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Producto'>
+                                                                        <i class="fa fa-edit"></i>
+                                                                    </button> 
+                                                                </div>
+                                                            </div>
+                                                          </td>
+
+                                                        </tr>
+
+                                                       <?php }?>    
                                                     </tbody>
+                                                 
                                                 </table>
                                             </div>
                                         </div>
@@ -459,7 +510,7 @@
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2>Nueva Especialidad</h2>
+                        <h2>Nuevo Grupo</h2>
                         <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                             <span class="svg-icon svg-icon-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -470,30 +521,23 @@
                         </div>
                     </div>
                     <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                        <form id="kt_modal_new_card_form" class="form">
-                            <div class="d-flex flex-column mb-7 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                    <span class="required">Especialidad</span>
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre de la especialidad"></i>
-                                </label>
-                                <input type="text" class="form-control mb-2 text-uppercase" maxlength="250" placeholder="Nombre Especialidad" name="txtEspecialidad" id="txtEspecialidad" />
-                            </div>
-
-                            <div class="fv-row mb-15">
-                                <label class="fs-6 fw-bold form-label mb-2">
-                                    <span>Descripcion</span>
-                                </label>
-                                <textarea class="form-control mb-2" name="txtDescripcion" id="txtDescripcion" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
-                            </div>                         
-                            <div class="d-flex justify-content-end pt-15">
-                                <button type="reset" data-bs-dismiss="modal" class="btn btn-secondary">Cerrar</button>
-                                <button type="button" id="btnSaveNew" class="btn btn-primary">
-                                    <span class="indicator-label">Grabar</span>
-                                    <span class="indicator-progress">Espere un momento...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                </button>
-                            </div>
-                        </form>
+                        <div class="d-flex flex-column mb-7 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                <span class="required">Grupo</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
+                            </label>
+                            <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
+                        </div>
+                        <div class="fv-row mb-15">
+                            <label class="fs-6 fw-bold form-label mb-2">
+                                <span>Descripcion</span>
+                            </label>
+                            <textarea class="form-control mb-2" name="txtDescGrupo" id="txtDescGrupo" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                        </div>                         
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">Grabar</button>
                     </div>
                 </div>
             </div>
@@ -505,8 +549,22 @@
 
             $(document).ready(function(){
 
+                $("#btnNewGrupo").click(function(){
+
+                   $("#modal_new_grupo").modal("show");
+                });
+
                 
             });
+
+            //Agregar Producto directo a la base
+            $('#btnAgregar').click(function(){
+
+
+
+                //alert('aki');
+            });
+
 
     
 
@@ -517,7 +575,52 @@
 
             $("#modal-new-especialidad").draggable({
                 handle: ".modal-header"
-            });             
+            });
+            
+            function f_GuardarGrupo(_paisid,_emprid,_usuaid){
+
+                var _nombreGrupo = $.trim($("#txtGrupo").val());
+                var _descGrupo = $.trim($("#txtDescGrupo").val());
+
+                if(_nombreGrupo == ''){
+                    mensajesalertify("Ingrese Grupo..!!","W","top-right",3);
+                    return false;
+                }
+
+
+                var _parametros = {
+
+                    xxPaisId: _paisid,
+                    xxEmprId: _emprid,
+                    xxUsuaId: _usuaid,
+                    xxGrupo: _nombreGrupo,
+                    xxDesc: _descGrupo
+                }
+
+                var xrespuesta = $.post("codephp/grabar_grupo.php", _parametros);
+                    xrespuesta.done(function(response){
+
+                        if(response.trim() != 'ERR'){
+
+                            mensajesalertify('Nuevo Grupo Agregado', 'S', 'top-center', 3); 
+                            
+                            $("#txtGrupo").val("");
+                            $("#txtDescGrupo").val("");
+                            $("#cboGrupo").empty();
+                            $("#cboGrupo").html(response);     
+                            $("#modal_new_grupo").modal("hide");
+
+                        }else if(response.trim() == 'EXISTE'){
+                            mensajesalertify('Grupo ya Existe', 'W', 'top-right', 3);
+                        }
+
+                    });
+
+                //alert(_usuaid);
+
+            }
+
+
 
 
 
