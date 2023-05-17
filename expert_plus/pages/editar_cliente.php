@@ -554,6 +554,10 @@
                    $("#modal_new_grupo").modal("show");
                 });
 
+                $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
+                $('#cboCiudad').val(<?php echo $xProvid; ?>).change();
+
+
                 
             });
 
