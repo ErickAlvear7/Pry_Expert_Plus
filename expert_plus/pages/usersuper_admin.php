@@ -670,7 +670,7 @@
                     var _pos = _url.trim().indexOf('.');
                     var _ext = _url.trim().substr(_pos, 5);
 
-                    if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
+                    if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
                         _selecc = 'SI';
                     }                    
 
