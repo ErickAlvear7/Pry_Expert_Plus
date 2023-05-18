@@ -215,37 +215,42 @@
 
         function f_UpdateEstado(_paisid, _emprid, _presid){
                 
-                let _usuaid = "<?php echo $xUsuaid; ?>";
-                let _check = $("#chk" + _presid).is(":checked");
-                let _checked = "";
-                let _class = "badge badge-light-primary";
-                let _td = "td_" + _presid;
-                let _btnedit = "btnEditar_" + _presid;
+            let _usuaid = "<?php echo $xUsuaid; ?>";
+            let _check = $("#chk" + _presid).is(":checked");
+            let _checked = "";
+            let _class = "badge badge-light-primary";
+            let _td = "td_" + _presid;
+            let _btnedit = "btnEditar_" + _presid;
 
-                if(_check){
-                    _estado = "Activo";
-                    _checked = "checked='checked'";
-                    $('#'+_btnedit).prop("disabled",false);
-                }else{                    
-                    _estado = "Inactivo";
-                    _class = "badge badge-light-danger";
-                    $('#'+_btnedit).prop("disabled",true);
+            if(_check){
+                _estado = "Activo";
+                _checked = "checked='checked'";
+                $('#'+_btnedit).prop("disabled",false);
+            }else{                    
+                _estado = "Inactivo";
+                _class = "badge badge-light-danger";
+                $('#'+_btnedit).prop("disabled",true);
+            }
+
+            var _changetd = document.getElementById(_td);
+            _changetd.innerHTML = '<div class="d-flex align-items-center"><div class="ms-5"><div class="' + _class + '">' + _estado + ' </div></div>';
+
+            _parametros = {
+                xxPaisid: _paisid,
+                xxEmprId: _emprid,
+                xxUsuaid: _usuaid,
+                xxPresid: _presid,
+                xxEstado: _estado
+            }	
+
+            var xrespuesta = $.post("codephp/update_estadoprestador.php", _parametros);
+            xrespuesta.done(function(response){
+
+                if(response.trim() == 'OK'){
+                    //$.redirect("?page=prestador_admin&menuid=<?php echo $menuid; ?>");
                 }
-    
-                var _changetd = document.getElementById(_td);
-                _changetd.innerHTML = '<div class="d-flex align-items-center"><div class="ms-5"><div class="' + _class + '">' + _estado + ' </div></div>';
-
-                _parametros = {
-                    xxPaisid: _paisid,
-                    xxEmprId: _emprid,
-                    xxUsuaid: _usuaid,
-                    xxPresid: _presid,
-                    xxEstado: _estado
-                }	
-    
-                var xrespuesta = $.post("codephp/update_estadoprestador.php", _parametros);
-                xrespuesta.done(function(response){
-                });	
+                
+            });	
         }
 
         function f_Editar(_id){

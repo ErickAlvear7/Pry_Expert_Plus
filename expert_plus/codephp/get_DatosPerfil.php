@@ -34,7 +34,7 @@
                     'Detalle2'=> $Detalle2, 
                     'Detalle3'=> $Detalle3,
                     'Detalle4'=> $Detalle4,
-                    'Detalle5'=> $Detalle5 );                 
+                    'Detalle5'=> $Detalle5 ); 
             }
 
             print json_encode($xDatos, JSON_UNESCAPED_UNICODE);

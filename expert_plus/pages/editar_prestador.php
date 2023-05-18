@@ -89,7 +89,7 @@
 
     <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-            <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/catalog/products.html">
+            <div id="formPresta" class="form d-flex flex-column flex-lg-row">
                 <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
                     <div class="card card-flush py-4">
                         <div class="card-header">
@@ -174,8 +174,9 @@
                                                         <option></option>
                                                         <?php foreach ($cbo_ciudad as $ciudad) : ?>
                                                             <option value="<?php echo $ciudad['prov_id'] ?>"><?php echo mb_strtoupper($ciudad['ciudad']) ?></option>
-                                                        <?php endforeach ?>                                                        
-                                                    </select>                                                      
+                                                        <?php endforeach ?>
+                                                    </select> 
+                                                    <input type="hidden" name="txtcbociudad" id="txtcbociudad" class="form-control mb-2" value="<?php echo $xProvid; ?>"  />
                                                 </div>
                                             </div>
                                         </div>
@@ -184,6 +185,7 @@
                                             <label class="required form-label">Prestador</label>
                                             <input type="text" name="txtPrestador" id="txtPrestador" class="form-control mb-2 text-uppercase" maxlength="150" placeholder="Nombre del Prestador" value="<?php echo $xNombre; ?> " />
                                             <div class="text-muted fs-7">El Prestador puede ser Clinica/Centro Medico/Estudio/Consultorio/Otros..</div>
+                                            <input type="hidden" name="txtPrestaant" id="txtPrestaant" class="form-control mb-2" value="<?php echo $xNombre; ?>" />
                                         </div>   
                                         
                                         <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
@@ -374,7 +376,7 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancelar</a>
+                                <!--<a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancelar</a>-->
                                 <button type="button" id="btnSave" class="btn btn-primary">
                                     <span class="indicator-label">Grabar</span>
                                     <span class="indicator-progress">Espere un momento...
@@ -405,7 +407,6 @@
                                             </select>                                             
                                         </div>
                                         <div class="mb-10 fv-row">
-
                                             <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                                 <div class="col">
                                                     <label class="form-label">Pvp</label>
@@ -478,7 +479,7 @@
                                                                 }
                             
                                                             ?>
-                                                            <tr>
+                                                            <tr id="row_<?php echo $xId; ?>">
                                                                 <td>
                                                                     <div class="d-flex align-items-center">
                                                                         <div class="ms-5">
@@ -523,13 +524,12 @@
                                                                 <td class="">
                                                                     <div class="">
                                                                         <div class="btn-group">
-                                                                            <button id="btnEditar_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Prestador' onclick="f_Editar(<?php echo $xId; ?>)">
+                                                                            <button id="btnEditar_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Especialidad Asiganada' >
                                                                                 <i class='fa fa-edit'></i>
                                                                             </button>	                                                
                                                                         </div>
                                                                     </div>
-                                                                </td>
-                                                                
+                                                                </td>                                                                
                                                             </tr>
                                                     <?php } ?>
                                                 </tbody>
@@ -541,7 +541,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
 
         <div class="modal fade" id="modal-new-especialidad" tabindex="-1" aria-hidden="true">
@@ -616,11 +616,11 @@
             </div>
         </div>
 
-        <div class="modal fade" id="modal-new-tipoprestador" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="modal-editar-especialidad" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2>Nuevo Tipo Prestador</h2>
+                        <h2>Editar Especialidad-Asignada</h2>
                         <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                             <span class="svg-icon svg-icon-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -632,66 +632,42 @@
                     </div>
                     <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                         <form id="kt_modal_new_card_form" class="form">
-
-                            <div class="d-flex flex-column mb-7 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                    <span class="required">Tipo Prestador</span>
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre de la especialidad"></i>
-                                </label>
-                                <input type="text" class="form-control mb-2" maxlength="150" placeholder="Tipo Prestador" name="txtTipoPrestador" id="txtTipoPrestador" />
-                            </div>
-
-                            <div class="d-flex flex-column mb-7 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                    <span>Valor</span>
-                                </label>
-                                <input type="text" class="form-control mb-2" maxlength="100" placeholder="ValorV" name="txtValor" id="txtValor" />
-                            </div>
-                            
-                            <div class="d-flex flex-column mb-7 fv-row">
-                                <div class="mb-10">
-                                    <div class="fs-6 fw-bold mb-2">Tipo Prestadores</div>
-                                    <div class="mh-300px scroll-y me-n7 pe-7">
-                                        <table id="tblTipoPrestador" class="table align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
-                                            <thead>
-                                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                    <th>Tipo Prestador</th>
-                                                    <th>Valor</th>
-                                                    <th>Estado</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="fw-bold text-gray-600">
+                            <div class="row mb-10">
+                                <div class="col-md-12 fv-row">
+                                    <label class="required fs-6 fw-bold form-label mb-2">Especialidad</label>
+                                    <div class="row fv-row">
+                                        <div class="col-12">
+                                            <select name="cboEspecialidadEdit" id="cboEspecialidadEdit" aria-label="Seleccione Especialidad" data-control="select2" data-placeholder="Seleccione Especialidad" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2">
+                                                <option></option>
                                                 <?php 
-                                        
-                                                    foreach($all_tipopresta as $presta){
-                                                        $xNombre = $presta['Nombre'];
-                                                        $xValor = $presta['Valor'];
-                                                        $xEstado = $presta['Estado'];
-                                                    ?>
-                                                        <?php                     
-                                                            if($xEstado == 'Activo'){
-                                                                $xTextColor = "badge badge-light-primary";
-                                                            }else{
-                                                                $xTextColor = "badge badge-light-danger";
-                                                            }                    
-                                                        ?>
-                                                        <tr>
-                                                            <td><?php echo $xNombre; ?></td>
-                                                            <td><?php echo $xValor; ?></td>                                                            
-                                                            <td>
-                                                                <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
-                                                            </td>                                                            
-                                                        </tr>
-                                                <?php } ?>                                                  
-                                            </tbody>
-                                        </table>
+                                                $xSQL = "SELECT espe_id AS Codigo,espe_nombre AS NombreEspe FROM `expert_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND espe_estado='A' ";
+                                                $all_datos =  mysqli_query($con, $xSQL);
+                                                foreach ($all_datos as $datos){ ?>
+                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['NombreEspe'] ?></option>
+                                                <?php } ?>                                                        
+                                            </select>  
+                                        </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-10 fv-row">
+                                <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                                    <div class="col">
+                                        <label class="form-label">Pvp</label>
+                                        <input type="number" name="txtPvpEdit" id="txtPvpEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Costo Red</label>
+                                        <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                    </div>
+                                    <input type="hidden" name="txtcboespe" id="txtcboespe" class="form-control mb-2"  />
                                 </div>
                             </div>
 
                             <div class="text-center pt-15">
                                 <button type="reset" data-bs-dismiss="modal" class="btn btn-secondary">Cerrar</button>
-                                <button type="button" id="btnSaveTipo" class="btn btn-primary">
+                                <button type="button" id="btnEditarEspe" class="btn btn-primary" onclick="f_GrabarEspe(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>)">
                                     <span class="indicator-label">Grabar</span>
                                     <span class="indicator-progress">Espere un momento...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -701,7 +677,7 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>     
 
         <script>
             $(document).ready(function(){
@@ -709,19 +685,17 @@
                 var _paisid = "<?php echo $xPaisid; ?>";
                 var _emprid = "<?php echo $xEmprid; ?>";
                 var _usuaid = "<?php echo $xUsuaid; ?>";
-                var _logo  = "<?php echo $xLogo; ?>";
+                var _logo  = "<?php echo $xLogo; ?>";                
 
                 _logo = _logo == '' ? 'companyname.png' : _logo;
-                //_result = [];
-                //var _continuar = true;
-                //_enviar1 = 'NO';
-                //_enviar2 = 'NO';
-                //debugger;
 
                 $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
                 $('#cboCiudad').val(<?php echo $xProvid; ?>).change();
                 $('#cboSector').val("<?php echo $xSector; ?>").change();
                 $('#cboTipo').val("<?php echo $xTipoPresta; ?>").change();
+
+                _enviar1 = "<?php echo $xEnviar1; ?>";
+                _enviar2 = "<?php echo $xEnviar2; ?>";
 
                 document.getElementById('imgfile').style.backgroundImage="url(logos/" + _logo + ")";
 
@@ -923,9 +897,10 @@
                     var _especialidad = $("#cboEspecialidad option:selected").text();
                     var _pvp = $.trim($("#txtPvp").val());
                     var _costo = $.trim($("#txtCosto").val());
+                    var _presid = <?php echo $xPresid; ?>;
 
                     if(_especialidad == ''){
-                        mensajesalertify('Seleccione Especialidad', 'W', 'top-center', 3);
+                        mensajesalertify('Seleccione Especialidad..!', 'W', 'top-center', 3);
                         return;
                     }
 
@@ -935,47 +910,45 @@
 
                     if(_costo == ''){
                         _costo = '0.00';
-                    }                    
+                    }
+                    
+                    var _parametros = {
+                        xxPaisid: _paisid,
+                        xxEmprid: _emprid,
+                        xxUsuaid: _usuaid,
+                        xxPresid: _presid,
+                        xxEspeid: _cboespe,                        
+                        xxPvp: _pvp,
+                        xxCosto: _costo
+                    }
 
-                    $.each(_result,function(i,item){
-                        if(item.arryid.toUpperCase() == _cboespe.toUpperCase())
-                        {                  
-                            mensajesalertify('Especialidad ya esta agregada', 'W', 'top-center', 3);   
-                            $("#cboEspecialidad").val(0).change();
-                            $("#txtPvp").val('0.00');
-                            $("#txtCosto").val('0.00');                            
-                            _continuar = false;
-                            return false;
+                    var xrespuesta = $.post("codephp/consultar_prestaespeci.php", _parametros);
+                    xrespuesta.done(function(response){
+
+                        if(response != 0){
+
+                            _id = response;
+                            _output = '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _especialidad + '</span></div></div></td>';
+                            _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _pvp + '</span></div></div></td>';
+                            _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _costo + '</span></div></div></td>';
+                            _output += '<td id="td_' + _id + '"><div class="d-flex align-items-center"><div class="ms-5"><div class="badge badge-light-primary">Activo</div></div></div></td>';                        
+                            _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
+                            _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _cboespe + '" onchange="f_UpdateEstado(';
+                            _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
+                            _output += '<td class=""><div class=""><div class="btn-group"><button id="btnEditar_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
+                            _output += 'title="Editar Especialidad Asiganada" ><i class="fa fa-edit"></i></button></div></div></td>';
+
+                            $('#tblEspecialidad').append(_output);
+
+                            mensajesalertify('Especialidad Agregada Correctamente..!', 'S', 'top-center', 3);
+                        }else{
+                            mensajesalertify('Especialidad ya está Asignada..!', 'W', 'top-center', 3);
                         }
-                    });
 
-                    if(_continuar){
-                        
-                        //_count = _count + 1;
-                        _output = '<tr id="row_' + _cboespe + '">';
-                        _output += '<td style="display: none;">' + _cboespe + '</td>';                
-                        _output += '<td>' + _especialidad + '</td>';
-                        _output += '<td>' + _pvp + '</td>';
-                        _output += '<td>' + _costo + '</td>';
-                        _output += '<td><div class=""><div class="btn-group">';
-                        _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _cboespe + '"><i class="fa fa-trash"></i></button></div></div></td>';
-                        _output += '</tr>';
-
-                        $('#tblEspecialidad').append(_output);
-
-                        _objeto = {
-                            arryid: _cboespe,
-                            arryespeci: _especialidad,
-                            arrypvp: _pvp,
-                            arrycosto: _costo
-                        }
-
-                        _result.push(_objeto);
                         $("#cboEspecialidad").val(0).change();
                         $("#txtPvp").val('0.00');
-                        $("#txtCosto").val('0.00');
-
-                    }
+                        $("#txtCosto").val('0.00');                        
+                    });
                 });
                 
                 $('#cboEspecialidad').change(function(){                    
@@ -1000,7 +973,9 @@
                 });
 
                 $('#btnSave').click(function(e){
-                   
+
+                   var _presid = "<?php echo $xPresid; ?>";
+                   var _logo = "<?php echo $xLogo; ?>";
                    var _provid = $('#cboProvincia').val();
                    var _ciudid = $('#cboCiudad').val();
                    var _prestador = $.trim($('#txtPrestador').val());
@@ -1016,7 +991,11 @@
                    var _celular3 = $.trim($('#txtCelular3').val());
                    var _email1 =  $.trim($('#txtEmail1').val());
                    var _email2 =  $.trim($('#txtEmail2').val());
-                   var _selecc = 'NO';
+
+                   var _providant = $.trim($('#txtcbociudad').val());
+                   var _prestaant = $.trim($('#txtPrestaant').val());
+
+                   var _cambiarlogo = 'NO';
                    _respuesta = 'OK';
 
                    if(_provid == ''){
@@ -1112,7 +1091,7 @@
                    
                        if (regex.test($('#txtEmail1').val().trim())) {
                        }else{
-                           mensajesalertify("Email1 no es Valido", "W", "top-center", 3);
+                           mensajesalertify("Email1 no es Valido..!", "W", "top-center", 3);
                            return;
                        }
                    }
@@ -1122,39 +1101,41 @@
                    
                        if (regex.test($('#txtEmail2').val().trim())) {
                        }else{
-                           mensajesalertify("Email2 no es Valido", "W", "top-center", 3);
+                           mensajesalertify("Email2 no es Valido..!", "W", "top-center", 3);
                            return;
                        }
                    }
 
-                   if(_result.length == 0){
-                        mensajesalertify("Agregue la menos una Especialidad", "W", "top-center", 3);
-                        return;
-                   }
-                   
+                   debugger;
                     var _imgfile = document.getElementById("imgfile").style.backgroundImage;
                     var _urlimg = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
                     var _pos = _urlimg.trim().indexOf('.');
                     var _ext = _urlimg.trim().substr(_pos, 5);
 
-                    if(_ext.trim() != '.svg'){
+                    if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
                         var _imagen = document.getElementById("imglogo");
                         var _file = _imagen.files[0];
                         var _fullPath = document.getElementById('imglogo').value;
                         _ext = _fullPath.substring(_fullPath.length - 4);
                         _ext = _ext.toLowerCase();   
 
-                        if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
+                        if(_ext.trim() == '.png' || _ext.trim() == '.jpg' || _ext.trim() == 'jpeg'){
+                            _cambiarlogo = 'SI';
+                        }else{
                             mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-center", 3);
                             return;
                         }
                     }
-                                        
-                    form_data = new FormData();
+
+                    form_data = new FormData();                    
                     form_data.append('xxPaisid', _paisid);
                     form_data.append('xxEmprid', _emprid);
+                    form_data.append('xxUsuaid', _usuaid);
+                    form_data.append('xxPresid', _presid);
                     form_data.append('xxProvid', _ciudid);
+                    form_data.append('xxProvidant', _providant);
                     form_data.append('xxPrestador', _prestador);
+                    form_data.append('xxPrestadorant', _prestaant);
                     form_data.append('xxSector', _sector);
                     form_data.append('xxTipo', _tipopresta);
                     form_data.append('xxDireccion', _direccion);
@@ -1170,67 +1151,58 @@
                     form_data.append('xxEmail2', _email2);
                     form_data.append('xxEnviar2', _enviar2);
                     form_data.append('xxFile', _file);
-                    form_data.append('xxUsuaid', _usuaid);
+                    form_data.append('xxCambiarlogo', _cambiarlogo);
+                    form_data.append('xxLogo', _logo);
 
-                    var xrespuesta = $.post("codephp/consultar_prestador.php", { xxPaisid: _paisid, xxEmprid: _emprid, xxProvid: _ciudid, xxPrestador: _prestador });
-                    xrespuesta.done(function(response){
-                        
-                        if(response.trim() == '0'){
-
-                            $.ajax({
-                                url: "codephp/grabar_prestador.php",
-                                type: "post",
-                                data: form_data,
-                                processData: false,
-                                contentType: false,
-                                dataType: "json",
-                                success: function(dataid){   
-                                    if(dataid != 0){
-
-                                        var xrespuesta = $.post("codephp/grabar_prestaespeci.php", { xxPaisid: _paisid, xxEmprid: _emprid, xxUsuaid: _usuaid, xxPresid: dataid, xxResult: _result });
-                                        xrespuesta.done(function(xrespose){
-
-                                            if(xrespose.trim() == 'OK'){
-                                                _detalle = 'Nuevo Prestador Agregado Correctamente';
-                                                _respuesta = 'OK'; 
-                                            }else{
-                                                _detalle = 'Error creaci贸n de especialidades';
-                                                _respuesta = 'ERR';                                
-                                            }
-
-                                            /**PARA CREAR REGISTRO DE LOGS */
-                                            _parametros = {
-                                                xxPaisid: _paisid,
-                                                xxEmprid: _emprid,
-                                                xxUsuaid: _usuaid,
-                                                xxDetalle: _detalle,
-                                            }					
-                
-                                            $.post("codephp/new_log.php", _parametros, function(response){
-                                            });                                              
-                                        });    
-                                      
-                                    }else{
-                                        _detalle = 'Error creaci贸n nuevo prestador';
-                                        _respuesta = 'ERR';                                
-                                    }
-
-                                    if(_respuesta == 'OK'){
-                                        $.redirect('?page=prestador_admin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con 脡xito..!'}); //POR METODO POST
-                                    }
-                                },
-                                error: function (error) {
-                                    console.log(error);
-                                }
-                            });   
-
-                        }else{
-                            mensajesweetalert("center", "warning", "Prestador ya Existe..!", false, 1800);
+                    $.ajax({
+                        url: "codephp/update_prestador.php",
+                        type: "post",
+                        data: form_data,
+                        processData: false,
+                        contentType: false,
+                        dataType: "json",
+                        success: function(response){
+                            console.log(response);
+                            if(response == 'OK'){
+                                $.redirect('?page=prestador_admin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito..!'}); //POR METODO POST
+                            }else{
+                                mensajesalertify("Prestador ya Existe..!", "W", "top-center", 3);
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error);
                         }
-                    });                    
-               });                
+                    });
+               });
 
             });
+
+            $(document).on("click",".btnEditar",function(){
+
+                _rowid = $(this).attr("id");
+                _rowid = _rowid.substring(10);
+
+                var xrespuesta = $.post("codephp/get_datosespecipresta.php", { xxPreeid: _rowid });
+                xrespuesta.done(function(response){
+                    
+                    var _datos = JSON.parse(response);
+
+                    $.each(_datos,function(i,item){
+                        _espeid =  _datos[i].Espeid;
+                        _pvp =  _datos[i].Pvp;
+                        _costo =  _datos[i].Costo;
+
+                        $('#cboEspecialidadEdit').val(_espeid).change();
+                        $('#txtPvpEdit').val(_pvp);
+                        $('#txtCostoEdit').val(_costo);
+                        $('#txtcboespe').val(_espeid);
+
+                        $("#modal-editar-especialidad").modal("show");
+
+                    });                    
+                });
+
+            });	            
 
             function setTwoNumberDecimal(event) {
                 this.value = parseFloat(this.value).toFixed(2);
@@ -1251,10 +1223,97 @@
 
                 $('#row_' + row_id + '').remove();
 
-            });            
+            });
+
+            function f_UpdateEstado(_paisid, _emprid, _preeid){
+                
+                let _usuaid = "<?php echo $xUsuaid; ?>";
+                let _check = $("#chk" + _preeid).is(":checked");
+                let _checked = "";
+                let _class = "badge badge-light-primary";
+                let _td = "td_" + _preeid;
+                let _btnedit = "btnEditar_" + _preeid;
+    
+                if(_check){
+                    _estado = "Activo";
+                    _checked = "checked='checked'";
+                    $('#'+_btnedit).prop("disabled",false);
+                }else{                    
+                    _estado = "Inactivo";
+                    _class = "badge badge-light-danger";
+                    $('#'+_btnedit).prop("disabled",true);
+                }
+    
+                var _changetd = document.getElementById(_td);
+                _changetd.innerHTML = '<div class="d-flex align-items-center"><div class="ms-5"><div class="' + _class + '">' + _estado + ' </div></div>';
+    
+                var _parametros = {
+                    xxPaisid: _paisid,
+                    xxEmprId: _emprid,
+                    xxUsuaid: _usuaid,
+                    xxPreeid: _preeid,
+                    xxEstado: _estado
+                }	
+    
+                var xrespuesta = $.post("codephp/update_estadoespecipresta.php", _parametros);
+                    xrespuesta.done(function(response){
+
+                });	
+            }            
+            
+            function f_GrabarEspe(_paisid, _emprid){
+
+                _usuaid = "<?php echo $xUsuaid; ?>";
+                _presid = "<?php echo $xPresid; ?>";
+
+                _cboespeci = $('#cboEspecialidadEdit').val();
+                _pvp = $('#txtPvpEdit').val();
+                _costo = $('#txtCostoEdit').val();
+                _espeid = $('#txtcboespe').val();
+                _especialidad = $("#cboEspecialidadEdit option:selected").text();
+
+                var _parametros = {
+                    xxPaisid: _paisid,
+                    xxEmprId: _emprid,
+                    xxUsuaid: _usuaid,
+                    xxPresid: _presid,
+                    xxEspeid: _cboespeci,
+                    xxEspeidant: _espeid,
+                    xxPvp: _pvp,
+                    xxCosto: _costo
+                }
+
+                var xrespuesta = $.post("codephp/grabar_editarprestaespeci.php", _parametros);
+                xrespuesta.done(function(response){
+
+                    if(response.trim() == 'OK'){
+                        _output = '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _especialidad + '</span></div></div></td>';
+                        _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _pvp + '</span></div></div></td>';
+                        _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _costo + '</span></div></div></td>';
+                        _output += '<td id="td_' + _rowid + '"><div class="d-flex align-items-center"><div class="ms-5"><div class="badge badge-light-primary">Activo</div></div></div></td>';                        
+                        _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
+                        _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _rowid + '" onchange="f_UpdateEstado(';
+                        _output += _paisid + ',' + _emprid + ',' + _rowid + ')" value="' + _rowid + '"/></div></div></td>';
+                        _output += '<td class=""><div class=""><div class="btn-group"><button id="btnEditar_' + _rowid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
+                        _output += 'title="Editar Especialidad Asiganada" ><i class="fa fa-edit"></i></button></div></div></td>';
+        
+                        $('#row_' + _rowid + '').html(_output);
+                    }else{
+                        mensajesalertify("Especialidad ya está asignada..!", "W", "top-center", 3);
+                    }
+
+                });	                
+
+                $("#modal-editar-especialidad").modal("hide");
+
+            }
 
             //Desplazar-modal
             $("#modal-new-especialidad").draggable({
+                handle: ".modal-header"
+            }); 
+            
+            $("#modal-editar-especialidad").draggable({
                 handle: ".modal-header"
             });             
 
