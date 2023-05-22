@@ -418,9 +418,15 @@
                                         </div>                                        
                                     </div>
                                 </div>
+                                <div class="card card-flush">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                           <h2>Productos Asignados</h2> 
+                                        </div>
+                                    </div>    
+                                </div>
                                 <div class="card card-flush py-4">
                                     <div class="card-header">
-                                        <!-- <h2>Productos Asignados</h2> -->
                                         <div class="card-title">
                                             <div class="d-flex align-items-center position-relative my-1">
                                                 <span class="svg-icon svg-icon-1 position-absolute ms-4">
@@ -445,19 +451,19 @@
                                     </div>
                                     <div class="card-body pt-0">
                                         <div class="d-flex flex-column gap-10">
-                                            <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
-                                                <thead>
-                                                    <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                        <th style="display:none;">Id</th>
-                                                        <th>Grupo</th>
-                                                        <th>Producto</th>
-                                                        <th>Costo</th>
-                                                        <th>Estado</th>
-                                                        <th>Status</th>
-                                                        <th style="text-align: center;">Opciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
+                                            <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
+                                                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
+                                                    <thead>
+                                                        <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                            <th style="display:none;">Id</th>
+                                                            <th>Grupo</th>
+                                                            <th>Producto</th>
+                                                            <th>Costo</th>
+                                                            <th>Estado</th>
+                                                            <th>Status</th>
+                                                            <th style="text-align: center;">Opciones</th>
+                                                        </tr>
+                                                    </thead>
                                                     <tbody class="fw-bold text-gray-600">
                                                         <?php 
                                                             foreach($all_prod as $prod){
@@ -503,25 +509,25 @@
                                                             </td>
                                                             <td>
                                                                 <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                    <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xProdId;?>" 
+                                                                    <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xProdId; ?>" 
                                                                     onchange="f_UpdateEstado(<?php echo $xProdId;?>,<?php echo $xEmprid; ?>)" value=""/>
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                            <div class="text-center">
-                                                                <div class="btn-group">	
-                                                                    <button type="button" id="btnEditar_<?php echo $xProdid;?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Producto'>
-                                                                        <i class="fa fa-edit"></i>
-                                                                    </button> 
+                                                                <div class="text-center">
+                                                                    <div class="btn-group">	
+                                                                        <button type="button" id="btnEditar_<?php echo $xProdId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Producto'>
+                                                                            <i class="fa fa-edit"></i>
+                                                                        </button> 
+                                                                    </div>
                                                                 </div>
-                                                            </div>
                                                             </td>
                                                         </tr>
 
                                                         <?php }?>    
                                                     </tbody>
-                                                </div>    
-                                            </table>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -537,7 +543,7 @@
             </form>
         </div>
 
-        <div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="modal_producto" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -654,6 +660,58 @@
                 //alert(_usuaid);
 
             }
+
+            //Update estado Producto
+
+            function f_UpdateEstado(_prodid, _emprid){
+
+                let _check= $('#chk'+_prodid).is(':checked');
+                let _checked = "";
+                let _class = "badge badge-light-primary";
+                let _td = "td_" + _prodid;
+                let _btnedit = "btnEditar_" + _prodid;
+                let _estado;
+
+                if(_check){
+
+                    _estado = 'Activo';
+                    _checked = "checked='checked'";
+                    $('#'+_btnedit).prop("disabled",false);
+
+                }else{
+                    _estado = 'Inactivo';
+                    _class = "badge badge-light-danger";
+                    $('#'+_btnedit).prop("disabled",true);  
+                }
+
+                var _changetd = document.getElementById(_td);
+                _changetd.innerHTML = '<div class="' + _class + '">'+_estado+'</div>';
+
+                    _parametros = {
+                        xxProid: _prodid,
+                        xxEmprid: _emprid,
+                        xxEstado: _estado
+                    } 
+                    var xrespuesta = $.post("codephp/update_estadoproducto.php", _parametros);
+                    xrespuesta.done(function(response){
+                    });	
+
+
+                //alert(_changetd);
+
+            }
+
+            //editar producto ventana modal
+            $(document).on("click",".btnEditar",function(){
+            
+                _rowid = $(this).attr("id");
+                _rowid = _rowid.substring(10);
+
+                
+                console.log(_rowid);
+
+                $("#modal_producto").modal("show");
+            });
 
 
 
