@@ -21,7 +21,7 @@
 
         	$xSQL = "SELECT epr.espe_id AS Espeid,epr.pree_pvp AS Pvp,epr.pree_costo AS Costo,esp.espe_nombre AS Especialidad FROM `expert_prestadora_especialidad` epr, `expert_especialidad` esp ";
         	$xSQL .= " WHERE epr.espe_id=esp.espe_id AND epr.pree_id=$xPreeid ";
-            $all_datos = mysqli_query($con, $xSQL) or die (error_log(mysql_error($con), 3, $log_file)) ;
+            $all_datos = mysqli_query($con, $xSQL) or die (error_log(mysql_error($con), 3, $log_file));
             foreach($all_datos as $datos){
 
                 $xEspeid = $datos["Espeid"];
