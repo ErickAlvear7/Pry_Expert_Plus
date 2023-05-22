@@ -87,7 +87,7 @@
                         <th>Logo</th>
                         <th>Estado</th>
 						<th>Status</th>
-                        <th>Opciones</th>
+                        <th style="text-align: center;">Opciones</th>
 					</tr>
 				</thead>
 				<tbody class="fw-bold text-gray-600">
@@ -128,19 +128,15 @@
                             <span class="fw-bolder"></span>
                         </td>
 						<td id="td_<?php echo $xClieid; ?>">
-                           <div class="d-flex align-items-center">
-                              <div class="ms-5">
-                                  <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
-                              </div>
-                           </div> 
+                            <div class="<?php echo $xTextColor; ?>">
+                                <?php echo $xEstado; ?>
+                            </div>
                         </td>
                         <td>
-                            <div class="text-center">
-								<div class="form-check form-check-sm form-check-custom form-check-solid">
-									<input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xClieid;?>" 
-                                       onchange="f_UpdateEstado(<?php echo $xClieid;?>,<?php echo $xEmprid; ?>)" value=""/>
-								</div>
-							</div>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xClieid;?>" 
+                                    onchange="f_UpdateEstado(<?php echo $xClieid;?>,<?php echo $xEmprid; ?>)" value=""/>
+                            </div>
 						</td>
 						<td>
                             <div class="text-center">
@@ -201,7 +197,7 @@
             }
 
                 var _changetd = document.getElementById(_td);
-                    _changetd.innerHTML = '<div class="d-flex align-items-center"><div class="ms-5"><div class="' + _class + '">' + _estado + ' </div></div>';
+                    _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
 
                     _parametros = {
                         xxClieid: _clieid,

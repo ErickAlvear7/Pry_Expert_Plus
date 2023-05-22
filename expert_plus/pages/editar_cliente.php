@@ -76,7 +76,7 @@
 
     $xSQL = "SELECT pro.prod_id AS Idprod, pro.prod_nombre AS Producto, pro.prod_descripcion AS Descrip, pro.prod_costo AS Costo, ";
     $xSQL .="pro.prod_asistmes AS AsisMes, pro.prod_asistanu AS AsisAnu, pro.prod_cobertura AS Cobertura, pro.prod_sistema AS Sistema, ";
-    $xSQL .="pro.prod_gerencial AS Gerencial,pro.prod_estado AS Estado, gru.grup_id AS Idgrup,gru.grup_nombre AS Grupo FROM `expert_productos` pro INNER JOIN ";
+    $xSQL .="pro.prod_gerencial AS Gerencial,CASE pro.prod_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, gru.grup_id AS Idgrup,gru.grup_nombre AS Grupo FROM `expert_productos` pro INNER JOIN ";
     $xSQL .="`expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.clie_id =$clieid AND pro.pais_id =$xPaisid AND pro.empr_id =$xEmprid ";
     $all_prod = mysqli_query($con, $xSQL);
 
@@ -366,15 +366,13 @@
                                         </div>
                                     </div>
                                     <div class="card-body pt-0">
-                                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                           <div class="col">
-                                                <label class="required form-label">Producto</label>
-                                                <input type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
-                                           </div>
-                                           <div class="col">
-                                                <label class="required form-label">Descripcion</label>
-                                                <textarea class="form-control mb-2" name="txtDescripcion" id="txtDescripcion" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
-                                           </div>
+                                        <div class="mb-5 fv-row">
+                                            <label class="required form-label">Producto</label>
+                                            <input type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
+                                        </div>
+                                        <div class="mb-5 fv-row">
+                                            <label class="required form-label">Descripcion</label>
+                                            <textarea class="form-control mb-2" name="txtDescripcion" id="txtDescripcion" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
                                         </div>
                                         <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                             <div class="col">
@@ -420,31 +418,49 @@
                                         </div>                                        
                                     </div>
                                 </div>
-
                                 <div class="card card-flush py-4">
                                     <div class="card-header">
+                                        <!-- <h2>Productos Asignados</h2> -->
                                         <div class="card-title">
-                                            <h2>Productos Asignados</h2>
+                                            <div class="d-flex align-items-center position-relative my-1">
+                                                <span class="svg-icon svg-icon-1 position-absolute ms-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                                        <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+                                                    </svg>
+                                                </span>
+                                                <input type="text" data-kt-ecommerce-product-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Datos" />
+                                            </div>
                                         </div>
+                                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                                            <div class="w-100 mw-150px">
+                                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Estado" data-kt-ecommerce-product-filter="status">                                    
+                                                    <option></option>
+                                                    <option value="all">Todos</option>
+                                                    <option value="Activo">Activo</option>
+                                                    <option value="Inactivo">Inactivo</option>
+                                                </select>
+                                            </div>
+                                        </div> 
                                     </div>
                                     <div class="card-body pt-0">
                                         <div class="d-flex flex-column gap-10">
-                                            <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
-                                                <table class="table align-middle table-row-dashed fs-6 gy-5" id="tblProducto">
-                                                    <thead>
-                                                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                            <th style="display:none;">Id</th>
-                                                            <th>Grupo</th>
-                                                            <th>Producto</th>
-                                                            <th>Costo</th>
-                                                            <th>Estado</th>
-                                                            <th>Gerencial</th>
-                                                            <th>Opciones</th>
-                                                        </tr>
-                                                    </thead>
+                                            <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
+                                                <thead>
+                                                    <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                        <th style="display:none;">Id</th>
+                                                        <th>Grupo</th>
+                                                        <th>Producto</th>
+                                                        <th>Costo</th>
+                                                        <th>Estado</th>
+                                                        <th>Status</th>
+                                                        <th style="text-align: center;">Opciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
                                                     <tbody class="fw-bold text-gray-600">
                                                         <?php 
-                                                          foreach($all_prod as $prod){
+                                                            foreach($all_prod as $prod){
                                                             $xProdId = $prod['Idprod'];
                                                             $xProducto = $prod['Producto'];
                                                             $xDesc = $prod['Descrip'];
@@ -457,24 +473,41 @@
                                                             $xEstado = $prod['Estado'];
                                                             $xGrupId = $prod['Idgrup'];
                                                             $xGrupo = $prod['Grupo'];
-  
-                                                         ?>   
+
+                                                            ?>  
+                                                            <?php 
+
+                                                                $xCheking = '';
+                                                                $xDisabledEdit = '';
+
+                                                                if($xEstado == 'Activo'){
+                                                                    $xCheking = 'checked="checked"';
+                                                                    $xTextColor = "badge badge-light-primary";
+                                                                }else{
+                                                                    $xTextColor = "badge badge-light-danger";
+                                                                    $xDisabledEdit = 'disabled';
+                                                                }
+                                                            ?>
 
                                                         <tr id="row_<?php echo $xProdid; ?>">
-                                                          <td style="display: none;"><?php echo $xProdid; ?></td>
-                                                          <td id="gru_<?php echo $xGrupId; ?>">
-                                                            <?php echo $xGrupo; ?>
-                                                          </td>
-                                                          <td><?php echo $xProducto; ?></td>
-                                                          <td><?php echo $xCosto; ?></td>
-                                                          <td><?php echo $xEstado; ?></td>
-                                                          <td>
-                                                            <label class="form-check form-switch form-check-custom form-check-solid">
-                                                                <input class="form-check-input" name="chkGerencial" id="chk_<?php echo $xProdid; ?>" type="checkbox" />
-                                                                <span class="form-check-label fw-bold text-muted" id="lbl_<?php echo $xProdid; ?>" for="chkEnviar1"><?php echo $xGeren; ?></span>
-                                                            </label> 
-                                                          </td>
-                                                          <td>
+                                                            <td style="display: none;"><?php echo $xProdid; ?></td>
+                                                            <td id="gru_<?php echo $xGrupId; ?>">
+                                                                <?php echo $xGrupo; ?>
+                                                            </td>
+                                                            <td><?php echo $xProducto; ?></td>
+                                                            <td><?php echo $xCosto; ?></td>
+                                                            <td id="td_<?php echo $xProdId; ?>">   
+                                                                <div class="<?php echo $xTextColor; ?>">
+                                                                    <?php echo $xEstado; ?>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                                    <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xProdId;?>" 
+                                                                    onchange="f_UpdateEstado(<?php echo $xProdId;?>,<?php echo $xEmprid; ?>)" value=""/>
+                                                                </div>
+                                                            </td>
+                                                            <td>
                                                             <div class="text-center">
                                                                 <div class="btn-group">	
                                                                     <button type="button" id="btnEditar_<?php echo $xProdid;?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Producto'>
@@ -482,15 +515,13 @@
                                                                     </button> 
                                                                 </div>
                                                             </div>
-                                                          </td>
-
+                                                            </td>
                                                         </tr>
 
-                                                       <?php }?>    
+                                                        <?php }?>    
                                                     </tbody>
-                                                 
-                                                </table>
-                                            </div>
+                                                </div>    
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
