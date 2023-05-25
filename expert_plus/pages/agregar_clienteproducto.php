@@ -223,7 +223,7 @@
                                                                 <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
                                                             </div>
                                                             <div class="col-xl-10 fv-row">
-                                                                <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" value="" />
+                                                                <input type="url" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" value="" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -341,7 +341,7 @@
                                         <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                             <div class="col">
                                                 <label class="required form-label">Costo</label>
-                                                <input type="text" name="txtCosto" id="txtCosto" class="form-control mb-2" maxlength="10" placeholder="0000" value="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                                <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                             </div>
                                             <div class="col">
                                                 <label class="required form-label">Grupo</label>
@@ -365,7 +365,7 @@
                                            </div>
                                            <div class="col">
                                                 <label class="required form-label">Asistencia Anual</label>
-                                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" placeholder="1" value="1" />
+                                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" value="1" />
                                                 <label class="form-check form-switch form-check-custom form-check-solid">
                                                     <input class="form-check-input" name="chkSistema" id="chkSistema" type="checkbox" />
                                                     <span class="form-check-label fw-bold text-muted" id="lblSistema" for="chkEnviar1">Sistema NO</span>
@@ -508,6 +508,10 @@
                     $("#modal_new_grupo").modal("show");
                 });
 
+                $( "#txtCosto" ).blur(function() {
+                    this.value = parseFloat(this.value).toFixed(2);
+                });  
+
                     
 
             });
@@ -549,6 +553,20 @@
 
             });
 
+            //Input number change valor rangos
+
+            document.getElementById("txtAsisMes").addEventListener("change", function() {
+                let v = parseInt(this.value);
+                if (v < 1) this.value = 1;
+                if (v > 12) this.value = 12;
+            });
+
+            document.getElementById("txtAsisAnu").addEventListener("change", function() {
+                let v = parseInt(this.value);
+                if (v < 1) this.value = 1;
+                if (v > 3) this.value = 3;
+            });
+
 
 
             //Agregar Productos
@@ -556,7 +574,6 @@
             $('#btnAgregar').click(function(){
 
                 var _agregarPro = 'add';
-                var _estado = 'A';
                 var _gerencial = 'NO';
                 var _continuar = true;
                 var _output;
@@ -570,6 +587,7 @@
                 var _asistemes = $('#txtAsisMes').val();
                 var _asistanu = $('#txtAsisAnu').val();
 
+            
                
                 if(_producto == ''){
                     mensajesalertify("Ingrese Producto..!!","W","top-right",3);
@@ -644,7 +662,6 @@
                                         arrysist: _sistema,
                                         arryasismes: _asistemes,
                                         arryasisanu: _asistanu,
-                                        arryestado: _estado,
                                         arrygerencial: _gerencial
                                     }
 
@@ -652,8 +669,12 @@
 
                                     $("#txtProducto").val("");
                                     $("#txtDescripcion").val("");
-                                    $("#txtCosto").val("");
-                                    $("#cboGrupo").val(0).change();   
+                                    $("#txtCosto").val("0.00");
+                                    $("#cboGrupo").val(0).change();
+                                    $("#txtAsisMes").val("1");
+                                    $("#txtAsisAnu").val("1");
+                                    document.getElementById("chkCobertura").checked = false;
+                                    document.getElementById("chkSistema").checked = false;    
 
                                 }
                                 
