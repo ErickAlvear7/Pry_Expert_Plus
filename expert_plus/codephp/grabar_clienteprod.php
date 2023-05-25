@@ -37,7 +37,6 @@
             $xCel3 = $_POST['xxCel3'];
             $xEmail1 = safe($_POST['xxEmail1']);
             $xEmail2 = safe($_POST['xxEmail2']);
-            $xEstado = safe($_POST['xxEstado']);
 
             $xFile = (isset($_FILES['xxFileCab']["name"])) ? $_FILES['xxFileCab']["name"] : '';
             $xFilepie = (isset($_FILES['xxFilePie']["name"])) ? $_FILES['xxFilePie']["name"] : '';
@@ -74,7 +73,7 @@
             $xSQL .= "clie_url,clie_tel1,clie_tel2,clie_tel3,clie_cel1,clie_cel2,clie_cel3,clie_email1,clie_email2, ";
             $xSQL .= "clie_imgcab,clie_imgpie,clie_estado,usuariocreacion,fechacreacion,terminalcreacion ) ";
             $xSQL .= "VALUES($xPaisid,$xEmprid,$xProvid,'$xCliente',' $xDesc','$xDirec','$xUrl',' $xTel1',' $xTel2', ";
-            $xSQL .= "'$xTel3','$xCel1','$xCel2','$xCel3','$xEmail1','$xEmail2','$xNombreFile','$xNombreFilePie','$xEstado',$xUsuaid, ";
+            $xSQL .= "'$xTel3','$xCel1','$xCel2','$xCel3','$xEmail1','$xEmail2','$xNombreFile','$xNombreFilePie','',$xUsuaid, ";
             $xSQL .= "'{$xFecha}','$xTerminal') ";
 
             if(mysqli_query($con, $xSQL)){

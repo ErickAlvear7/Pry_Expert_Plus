@@ -553,7 +553,7 @@
 
             });
 
-            //Input number change valor rangos
+            //Input type number change valor rangos
 
             document.getElementById("txtAsisMes").addEventListener("change", function() {
                 let v = parseInt(this.value);
@@ -707,7 +707,6 @@
                 var _cel3 = $.trim($("#txtCelular3").val()); 
                 var _email1 = $.trim($("#txtEmail1").val()); 
                 var _email2 = $.trim($("#txtEmail2").val());
-                var _estado = 'A'; 
                 
 
                       //Imagen Cabecera
@@ -752,7 +751,6 @@
                         
                     }
 
-                       
 
                     if(_cboProv == ''){
                         mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
@@ -822,7 +820,6 @@
                                 form_data.append('xxCel3', _cel3);
                                 form_data.append('xxEmail1', _email1);
                                 form_data.append('xxEmail2', _email2);
-                                form_data.append('xxEstado', _estado);
                                 form_data.append('xxFileCab', _fileCab);
                                 form_data.append('xxFilePie', _filePie);
 

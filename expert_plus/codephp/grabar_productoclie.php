@@ -37,9 +37,9 @@
                 $xGerencial = $drfila['arrygerencial'];
             
                 $xSQL = "INSERT INTO `expert_productos` (clie_id,grup_id,pais_id,empr_id,prod_nombre,prod_descripcion,prod_costo, ";
-                $xSQL .= "prod_asistmes,prod_asistanu,prod_cobertura,prod_sistema,prod_gerencial) ";
+                $xSQL .= "prod_asistmes,prod_asistanu,prod_cobertura,prod_sistema,prod_gerencial,prod_estado) ";
                 $xSQL .= "VALUES ($xClieid,$xGrupid,$xPaisid,$xEmprid,'$xProducto','$xDesc','$xCosto',$xAsismes,$xAsisanu,'$xCober', ";
-                $xSQL .= "'$xSist','$xGerencial')";
+                $xSQL .= "'$xSist','$xGerencial','')";
                 mysqli_query($con, $xSQL);
             
             }
