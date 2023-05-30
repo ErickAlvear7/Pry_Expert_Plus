@@ -390,6 +390,7 @@
                                            <div class="col">
                                                 <label class="required form-label">Asistencia Mes</label>
                                                 <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" value="1" />
+                                                <br>
                                                 <label class="form-check form-switch form-check-custom form-check-solid">
                                                     <input class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
                                                     <span class="form-check-label fw-bold text-muted" id="lblCobertura" for="chkEnviar1">Cobertura NO</span>
@@ -398,6 +399,7 @@
                                            <div class="col">
                                                 <label class="required form-label">Asistencia Anual</label>
                                                 <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" placeholder="1" value="1" />
+                                                <br>
                                                 <label class="form-check form-switch form-check-custom form-check-solid">
                                                     <input class="form-check-input" name="chkSistema" id="chkSistema" type="checkbox" />
                                                     <span class="form-check-label fw-bold text-muted" id="lblSistema" for="chkEnviar1">Sistema NO</span>
@@ -547,7 +549,7 @@
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2>Nuevo Grupo</h2>
+                        <h2>Editar Producto</h2>
                         <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                             <span class="svg-icon svg-icon-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -558,20 +560,67 @@
                         </div>
                     </div>
                     <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                        <div class="d-flex flex-column mb-7 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                <span class="required">Grupo</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
-                            </label>
-                            <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
+                        <div class="mb-5 fv-row">
+                            <label class="required form-label">Producto</label>
+                            <input type="text" name="txtProductoEdit" id="txtProductoEdit" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
                         </div>
-                        <div class="fv-row mb-15">
-                            <label class="fs-6 fw-bold form-label mb-2">
-                                <span>Descripcion</span>
-                            </label>
-                            <textarea class="form-control mb-2" name="txtDescGrupo" id="txtDescGrupo" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
-                        </div>                         
-                    </div>
+                        <div class="mb-5 fv-row">
+                            <label class="required form-label">Descripcion</label>
+                            <textarea class="form-control mb-2" name="txtDescripcionEdit" id="txtDescripcionEdit" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                        </div>
+                        <br>
+                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                            <div class="col">
+                                <label class="required form-label">Costo</label>
+                                <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                            </div>
+                            <div class="col">
+                                <label class="required form-label">Grupo</label>
+                                <select name="cboGrupoEdit" id="cboGrupoEdit" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
+                                    <option></option>
+                                    <?php 
+                                        $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND grup_estado='A' ";
+                                        $all_datos =  mysqli_query($con, $xSQL);
+                                        foreach ($all_datos as $datos){ ?>
+                                            <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['NombreGrupo'] ?></option>
+                                        <?php } ?>  
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                            <div class="col">
+                                <label class="required form-label">Asistencia Mes</label>
+                                <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control mb-2" value="1" />  
+                            </div>
+                            <div class="col">
+                                <label class="required form-label">Asistencia Anual</label>
+                                <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" placeholder="1" value="1" />   
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card card-flush py-4">
+                            <div class="card-header">
+                                <div class="mb-5 fv-row">
+                                    <label class="form-check form-switch form-check-custom form-check-solid">
+                                        <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
+                                        <h5 class="txtcob"> Cobertura NO<</h5>
+                                    </label> 
+                                </div>
+                                <div class="mb-5 fv-row">
+                                    <label class="form-check form-switch form-check-custom form-check-solid">
+                                        <input class="form-check-input" name="chkSistemaEdit" id="chkSistemaEdit" type="checkbox" />
+                                        <h5 class="txtsis"> Sistema NO</h5>
+                                    </label> 
+                                </div>
+                                <div class="mb-5 fv-row">
+                                    <label class="form-check form-switch form-check-custom form-check-solid">
+                                        <input class="form-check-input" name="chkGerencialEdit" id="chkGerencialEdit" type="checkbox" />
+                                        <h5 class="txtger"> Gerencial NO</h5>
+                                    </label> 
+                                </div> 
+                            </div>                      
+                        </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="button" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">Grabar</button>
@@ -603,6 +652,8 @@
                 
             });
 
+            // imput type number
+
             document.getElementById("txtAsisMes").addEventListener("change", function() {
                 let v = parseInt(this.value);
                 if (v < 1) this.value = 1;
@@ -610,6 +661,18 @@
             });
 
             document.getElementById("txtAsisAnu").addEventListener("change", function() {
+                let v = parseInt(this.value);
+                if (v < 1) this.value = 1;
+                if (v > 3) this.value = 3;
+            });
+
+            document.getElementById("txtAsisMesEdit").addEventListener("change", function() {
+                let v = parseInt(this.value);
+                if (v < 1) this.value = 1;
+                if (v > 12) this.value = 12;
+            });
+
+            document.getElementById("txtAsisAnuEdit").addEventListener("change", function() {
                 let v = parseInt(this.value);
                 if (v < 1) this.value = 1;
                 if (v > 3) this.value = 3;
@@ -626,14 +689,14 @@
 
     
 
-             
-
             //Desplazar-modal
 
 
             $("#modal-new-especialidad").draggable({
                 handle: ".modal-header"
             });
+
+            //Guatrdar nuevo grupo
             
             function f_GuardarGrupo(_paisid,_emprid,_usuaid){
 
@@ -719,23 +782,72 @@
             }
 
             //editar producto ventana modal
+
             $(document).on("click",".btnEditar",function(){
             
                 _rowid = $(this).attr("id");
                 _rowid = _rowid.substring(10);
 
-                var xrespuesta = $.post("codephp/get_datosespecipresta.php", { xxProid: _rowid });
+                var xrespuesta = $.post("codephp/get_datosproductos.php", { xxProid: _rowid });
                 xrespuesta.done(function(response){
 
+                    var _datos = JSON.parse(response);
+
+                    //console.log(_datos);
+
+                    $.each(_datos,function(i,item){
+                        _grupid =  _datos[i].Grupid;
+                        _producto =  _datos[i].Nombre;
+                        _desc =  _datos[i].Descr;
+                        _costo =  _datos[i].Costo;
+                        _grupo =  _datos[i].Grupo;
+                        _asistmes =  _datos[i].AsistMes;
+                        _asistanu =  _datos[i].AsistAnu;
+                        _cobertura =  _datos[i].Cob;
+                        _sistema =  _datos[i].Sis;
+                        _gerencial =  _datos[i].Ger;
+
+                        $('#cboGrupoEdit').val(_grupid).change();
+                        $('#txtProductoEdit').val(_producto);
+                        $('#txtDescripcionEdit').val(_desc);
+                        $('#txtCostoEdit').val(_costo);
+                        $('#txtAsisMesEdit').val(_asistmes);
+                        $('#txtAsisAnuEdit').val(_asistanu);
+
+                        if(_cobertura == 'SI'){
+                            $('#chkCoberturaEdit').attr('checked', true);
+                            //$("#lblCobertura").text("Cobertura SI");
+                            //$("#lblCobertura .modal-body").text('Cobertura SI');
+                            $(".txtcob").html("Cobertura SI");
+                        }else{
+                            $('#chkCoberturaEdit').attr('checked', false);
+                            $(".txtcob").html("Cobertura NO");
+                        }
+
+                        if(_sistema == 'SI'){
+                            $('#chkSistemaEdit').attr('checked', true);
+                            $(".txtsis").html("Sistema SI");
+                        }else{
+                            $('#chkSistemaEdit').attr('checked', false);
+                            $(".txtsis").html("Sistema NO");
+                        }
+
+                        if(_gerencial == 'SI'){
+                            $('#chkGerencialEdit').attr('checked', true);
+                            $(".txtger").html("Sistema SI");
+                        }else{
+                            $('#chkGerencialEdit').attr('checked', false);
+                            $(".txtger").html("Gerencial NO");
+                        }
+
+
+
+                        $("#modal_producto").modal("show");
+
+                    });  
 
                 });
 
-
-
-                
-                //console.log(_rowid);
-
-                $("#modal_producto").modal("show");
             });
 
            

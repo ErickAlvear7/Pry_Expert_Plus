@@ -26,16 +26,16 @@
 
             foreach($all_datos as $pro) {
 
-                $xGrupid = $datos["Grupid"];
-                $xProducto = $datos["Nombre"];
-                $xDesc = $datos["Descr"];
-                $xCosto = $datos["Costo"];
-                $xGrupo = $datos["Grupo"];
-                $xAsistMes = $datos["AsistMes"];
-                $xAsistAnu = $datos["AsistAnu"];
-                $xCobertura = $datos["Cob"];
-                $xSistema = $datos["Sis"];
-                $xGerencial = $datos["Ger"];
+                $xGrupid = $pro["Grupid"];
+                $xProducto = $pro["Nombre"];
+                $xDesc = $pro["Descr"];
+                $xCosto = $pro["Costo"];
+                $xGrupo = $pro["Grupo"];
+                $xAsistMes = $pro["AsistMes"];
+                $xAsistAnu = $pro["AsistAnu"];
+                $xCobertura = $pro["Cob"];
+                $xSistema = $pro["Sis"];
+                $xGerencial = $pro["Ger"];
 
                 $xDatos[] = array(
                     'Grupid'=> $xGrupid, 
