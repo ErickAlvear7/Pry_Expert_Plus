@@ -377,7 +377,7 @@
                                         <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                             <div class="col">
                                                 <label class="required form-label">Costo</label>
-                                                <input type="text" name="txtCosto" id="txtCosto" class="form-control mb-2" maxlength="10" placeholder="0000" value="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                                <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                             </div>
                                             <div class="col">
                                                 <label class="required form-label">Grupo</label>
@@ -595,7 +595,24 @@
                 $('#cboCiudad').val(<?php echo $xProvid; ?>).change();
 
 
+                $( "#txtCosto" ).blur(function() {
+                    this.value = parseFloat(this.value).toFixed(2);
+                }); 
+
+
                 
+            });
+
+            document.getElementById("txtAsisMes").addEventListener("change", function() {
+                let v = parseInt(this.value);
+                if (v < 1) this.value = 1;
+                if (v > 12) this.value = 12;
+            });
+
+            document.getElementById("txtAsisAnu").addEventListener("change", function() {
+                let v = parseInt(this.value);
+                if (v < 1) this.value = 1;
+                if (v > 3) this.value = 3;
             });
 
             //Agregar Producto directo a la base
@@ -707,11 +724,23 @@
                 _rowid = $(this).attr("id");
                 _rowid = _rowid.substring(10);
 
+                var xrespuesta = $.post("codephp/get_datosespecipresta.php", { xxProid: _rowid });
+                xrespuesta.done(function(response){
+
+
+                });
+
+
+
                 
-                console.log(_rowid);
+                //console.log(_rowid);
 
                 $("#modal_producto").modal("show");
             });
+
+           
+
+          
 
 
 
