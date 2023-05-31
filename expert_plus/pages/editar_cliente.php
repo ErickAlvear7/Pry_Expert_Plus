@@ -73,6 +73,9 @@
     $xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND provincia='$xCboProv' ";
     $cbo_ciudad = mysqli_query($con, $xSQL);  
 
+    $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid ";
+	$all_grupos =  mysqli_query($con, $xSQL);
+
 
     $xSQL = "SELECT pro.prod_id AS Idprod, pro.prod_nombre AS Producto, pro.prod_descripcion AS Descrip, pro.prod_costo AS Costo, ";
     $xSQL .="pro.prod_asistmes AS AsisMes, pro.prod_asistanu AS AsisAnu, pro.prod_cobertura AS Cobertura, pro.prod_sistema AS Sistema, ";
@@ -142,7 +145,7 @@
                             </div>
                         </div>
                         <div class="card-body pt-0">
-                            <button type="button" id="btnNewGrupo" class="btn btn-light-primary btn-sm mb-10">
+                            <button type="button" id="btnGrupo" class="btn btn-light-primary btn-sm mb-10">
                                 <span class="svg-icon svg-icon-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
@@ -381,8 +384,11 @@
                                             </div>
                                             <div class="col">
                                                 <label class="required form-label">Grupo</label>
-                                                <select name="cboGrupo" id="cboGrupo" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2" >
+                                                <select name="cboGrupo" id="cboGrupo" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
                                                     <option></option>
+                                                    <?php foreach ($all_grupos as $datos) : ?>
+                                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['NombreGrupo']) ?></option>
+                                                    <?php endforeach ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -595,7 +601,7 @@
                             </div>
                             <div class="col">
                                 <label class="required form-label">Asistencia Anual</label>
-                                <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" placeholder="1" value="1" />   
+                                <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" value="1" />   
                             </div>
                         </div>
                         <br>
@@ -623,28 +629,66 @@
                         </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">Grabar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal_grupo" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered mw-650px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Nuevo Grupo</h2>
+                        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                            <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                        <div class="d-flex flex-column mb-7 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                <span class="required">Grupo</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
+                            </label>
+                            <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
+                        </div>
+                        <div class="fv-row mb-15">
+                            <label class="fs-6 fw-bold form-label mb-2">
+                                <span>Descripcion</span>
+                            </label>
+                            <textarea class="form-control mb-2" name="txtDescGrupo" id="txtDescGrupo" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                        </div>                         
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="button" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">Grabar</button>
                     </div>
                 </div>
             </div>
         </div>
 
+
         <script>
 
-            var _result = [],_count =0,_cobertura = "NO",_sistema = "NO";
+            var _cobertura = "NO",_sistema = "NO";
 
             $(document).ready(function(){
 
-                $("#btnNewGrupo").click(function(){
+                $("#btnGrupo").click(function(){
 
-                   $("#modal_new_grupo").modal("show");
+                   $("#modal_grupo").find("input,textarea").val("");
+                   $("#modal_grupo").modal("show");
                 });
 
                 $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
                 $('#cboCiudad').val(<?php echo $xProvid; ?>).change();
 
 
-                $( "#txtCosto" ).blur(function() {
+                $( "#txtCostoEdit" ).blur(function() {
                     this.value = parseFloat(this.value).toFixed(2);
                 }); 
 
@@ -678,12 +722,93 @@
                 if (v > 3) this.value = 3;
             });
 
+            //check agragar producto
+
+            $(document).on("click","#chkCobertura",function(){
+
+                _cobertura = "NO";
+
+                if($("#chkCobertura").is(":checked")){
+                    _cobertura = "SI";
+                    $("#lblCobertura").text("Cobertura SI");
+                }else{
+                    _cobertura = "NO";
+                    $("#lblCobertura").text("Cobertura NO");
+
+                }    
+
+            });
+
+            $(document).on("click","#chkSistema",function(){
+
+                _sistema = "NO";
+
+                if($("#chkSistema").is(":checked")){
+                _sistema = "SI";
+                $("#lblSistema").text("Sistema SI");
+                }else{
+                _sistema = "NO";
+                $("#lblSistema").text("Sistema NO");
+
+                }
+
+            });
+
             //Agregar Producto directo a la base
             $('#btnAgregar').click(function(){
 
+                var _gerencial = 'NO';
+                var _output;
+                var _clieid = "<?php echo $clieid; ?>";
+                var _cbogrupo = $('#cboGrupo').val();
+                var _paisid = "<?php echo $xPaisid; ?>";
+                var _emprid = "<?php echo $xEmprid; ?>";
+                var _producto = $.trim($("#txtProducto").val());
+                var _descripcion = $.trim($("#txtDescripcion").val());
+                var _costo = $.trim($("#txtCosto").val());
+                var _txtGrupo = $('#cboGrupo').find('option:selected').text();
+                var _asistemes = $('#txtAsisMes').val();
+                var _asistanu = $('#txtAsisAnu').val();
+
+            
+               
+                if(_producto == ''){
+                    mensajesalertify("Ingrese Producto..!!","W","top-right",3);
+                    return false;
+                }
+
+                if(_costo == ''){
+                    mensajesalertify("Ingrese Costo..!!","W","top-right",3);
+                    return false;
+                }
+
+                if(_cbogrupo == 0){
+                    mensajesalertify("Seleccione Grupo..!!","W","top-right",3);
+                    return false;
+                }
+
+                var _parametros = {
+                    
+                    xxClieid: _clieid,
+                    xxGrupid: _cbogrupo,
+                    xxEmprid: _emprid,
+                    xxProducto: _producto,
+                    xxDesc: _descripcion,
+                    xxCosto: _costo,
+                    xxAsisMes: _asistemes,
+                    xxAsisAnu: _asistanu,
+                    xxCober: _cobertura,
+                    xxSist: _sistema
+
+                }
+                var xrespuesta = $.post("codephp/consuin_produtoedit.php", _parametros);
+                    xrespuesta.done(function(response){
 
 
-                //alert('aki');
+
+                });
+
+
             });
 
 
@@ -692,7 +817,7 @@
             //Desplazar-modal
 
 
-            $("#modal-new-especialidad").draggable({
+            $("#modal_producto").draggable({
                 handle: ".modal-header"
             });
 
@@ -737,8 +862,6 @@
 
                     });
 
-                //alert(_usuaid);
-
             }
 
             //Update estado Producto
@@ -776,14 +899,12 @@
                     xrespuesta.done(function(response){
                     });	
 
-
-                //alert(_changetd);
-
             }
 
             //editar producto ventana modal
 
             $(document).on("click",".btnEditar",function(){
+                $("#modal_producto").find("input,textarea,checkbox").val("");
             
                 _rowid = $(this).attr("id");
                 _rowid = _rowid.substring(10);
@@ -792,8 +913,6 @@
                 xrespuesta.done(function(response){
 
                     var _datos = JSON.parse(response);
-
-                    //console.log(_datos);
 
                     $.each(_datos,function(i,item){
                         _grupid =  _datos[i].Grupid;
