@@ -505,9 +505,7 @@
 
                                                         <tr id="row_<?php echo $xProdid; ?>">
                                                             <td style="display: none;"><?php echo $xProdid; ?></td>
-                                                            <td id="gru_<?php echo $xGrupId; ?>">
-                                                                <?php echo $xGrupo; ?>
-                                                            </td>
+                                                            <td><?php echo $xGrupo; ?></td>
                                                             <td><?php echo $xProducto; ?></td>
                                                             <td><?php echo $xCosto; ?></td>
                                                             <td id="td_<?php echo $xProdId; ?>">   
@@ -531,7 +529,6 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-
                                                         <?php }?>    
                                                     </tbody>
                                                 </table>
@@ -674,7 +671,7 @@
 
         <script>
 
-            var _cobertura = "NO",_sistema = "NO";
+            var _cobertura = 'NO', _sistema = 'NO';
 
             $(document).ready(function(){
 
@@ -741,7 +738,7 @@
 
             $(document).on("click","#chkSistema",function(){
 
-                _sistema = "NO";
+                 _sistema = "NO";
 
                 if($("#chkSistema").is(":checked")){
                 _sistema = "SI";
@@ -791,6 +788,7 @@
                     
                     xxClieid: _clieid,
                     xxGrupid: _cbogrupo,
+                    xxPaisid: _paisid,
                     xxEmprid: _emprid,
                     xxProducto: _producto,
                     xxDesc: _descripcion,
@@ -798,13 +796,20 @@
                     xxAsisMes: _asistemes,
                     xxAsisAnu: _asistanu,
                     xxCober: _cobertura,
-                    xxSist: _sistema
-
+                    xxSist: _sistema,
+                    xxGeren: _gerencial
                 }
-                var xrespuesta = $.post("codephp/consuin_produtoedit.php", _parametros);
-                    xrespuesta.done(function(response){
+
+                var xrespuesta = $.post("codephp/consuin_produtosedit.php", _parametros);
+                xrespuesta.done(function(response){
+
+                    if(response != 0){
 
 
+                        _id = response;
+
+
+                    }
 
                 });
 
