@@ -34,7 +34,7 @@
             $xRow = mysqli_num_rows($all_datos); 
             
             if($xRow == 0){
-                $xSQL = "INSERT INTO `expert_productos`(clie_id,grup_id,pais_id,empr_id,prod_nombre,pred_descripcion,prod_costo, ";
+                $xSQL = "INSERT INTO `expert_productos`(clie_id,grup_id,pais_id,empr_id,prod_nombre,prod_descripcion,prod_costo, ";
                 $xSQL .="prod_asistmes,prod_asistanu,prod_cobertura,prod_sistema,prod_gerencial ) ";
                 $xSQL .= "VALUES($xClieid,$xGrupid,$xPaisid,$xEmprid,'$xProducto','$xDescrip',$xCosto,$xAsisMes,$xAsisAnu, ";
                 $xSQL .="'$xCobertura','$xSistema',' $xGerencial') ";

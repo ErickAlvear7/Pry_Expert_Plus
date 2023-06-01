@@ -80,7 +80,7 @@
     $xSQL = "SELECT pro.prod_id AS Idprod, pro.prod_nombre AS Producto, pro.prod_descripcion AS Descrip, pro.prod_costo AS Costo, ";
     $xSQL .="pro.prod_asistmes AS AsisMes, pro.prod_asistanu AS AsisAnu, pro.prod_cobertura AS Cobertura, pro.prod_sistema AS Sistema, ";
     $xSQL .="pro.prod_gerencial AS Gerencial,CASE pro.prod_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, gru.grup_id AS Idgrup,gru.grup_nombre AS Grupo FROM `expert_productos` pro INNER JOIN ";
-    $xSQL .="`expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.clie_id =$clieid AND pro.pais_id =$xPaisid AND pro.empr_id =$xEmprid ";
+    $xSQL .="`expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.clie_id =$clieid AND pro.pais_id =$xPaisid AND pro.empr_id =$xEmprid ORDER BY pro.prod_nombre ";
     $all_prod = mysqli_query($con, $xSQL);
 
 
@@ -426,17 +426,11 @@
                                         </div>                                        
                                     </div>
                                 </div>
-                                <div class="card card-flush">
-                                    <div class="card-header">
-                                        <div class="card-title">
-                                           <h2>Productos Asignados</h2> 
-                                        </div>
-                                    </div>    
-                                </div>
                                 <div class="card card-flush py-4">
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <div class="d-flex align-items-center position-relative my-1">
+                                             <h2>Productos Asignados</h2> 
+                                            <!-- <div class="d-flex align-items-center position-relative my-1">
                                                 <span class="svg-icon svg-icon-1 position-absolute ms-4">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                         <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
@@ -444,9 +438,9 @@
                                                     </svg>
                                                 </span>
                                                 <input type="text" data-kt-ecommerce-product-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Datos" />
-                                            </div>
+                                            </div> -->
                                         </div>
-                                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                                        <!-- <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
                                             <div class="w-100 mw-150px">
                                                 <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Estado" data-kt-ecommerce-product-filter="status">                                    
                                                     <option></option>
@@ -455,12 +449,12 @@
                                                     <option value="Inactivo">Inactivo</option>
                                                 </select>
                                             </div>
-                                        </div> 
+                                        </div>  -->
                                     </div>
                                     <div class="card-body pt-0">
                                         <div class="d-flex flex-column gap-10">
                                             <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
-                                                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
+                                                <table class="table align-middle table-row-dashed fs-6 gy-5" id="tblProducto">
                                                     <thead>
                                                         <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                                             <th style="display:none;">Id</th>
@@ -472,6 +466,7 @@
                                                             <th style="text-align: center;">Opciones</th>
                                                         </tr>
                                                     </thead>
+                                                
                                                     <tbody class="fw-bold text-gray-600">
                                                         <?php 
                                                             foreach($all_prod as $prod){
@@ -529,7 +524,7 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <?php }?>    
+                                                        <?php }?> 
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -547,7 +542,6 @@
                 </div>
             </form>
         </div>
-
         <div class="modal fade" id="modal_producto" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
@@ -607,7 +601,8 @@
                                 <div class="mb-5 fv-row">
                                     <label class="form-check form-switch form-check-custom form-check-solid">
                                         <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
-                                        <h5 class="txtcob"> Cobertura NO<</h5>
+                                        <!-- <h5 class="txtcob" id="lblCobertura">Cobertura NO</h5> -->
+                                        <span class="form-check-label fw-bold text-muted" id="lblCoberturaedit" for="chkEnviar1">Cobertura NO</span>
                                     </label> 
                                 </div>
                                 <div class="mb-5 fv-row">
@@ -688,8 +683,6 @@
                 $( "#txtCostoEdit" ).blur(function() {
                     this.value = parseFloat(this.value).toFixed(2);
                 }); 
-
-
                 
             });
 
@@ -733,7 +726,6 @@
                     $("#lblCobertura").text("Cobertura NO");
 
                 }    
-
             });
 
             $(document).on("click","#chkSistema",function(){
@@ -748,7 +740,6 @@
                 $("#lblSistema").text("Sistema NO");
 
                 }
-
             });
 
             //Agregar Producto directo a la base
@@ -767,7 +758,6 @@
                 var _asistemes = $('#txtAsisMes').val();
                 var _asistanu = $('#txtAsisAnu').val();
 
-            
                
                 if(_producto == ''){
                     mensajesalertify("Ingrese Producto..!!","W","top-right",3);
@@ -805,22 +795,43 @@
 
                     if(response != 0){
 
-
                         _id = response;
+                        _output = '<tr id="row_' + _id + '">';
+                        _output +='<td style="display: none;">' + _id + '</td>';
+                        _output +='<td>' +_txtGrupo + '</td>';
+                        _output +='<td>' +_producto + '</td>';
+                        _output +='<td>' +_costo + '</td>';
+                        _output +='<td id="td_'+_id + '"><div class="badge badge-light-primary">Activo</div></td>';
+                        _output +='<td><div class="form-check form-check-sm form-check-custom form-check-solid">';
+                        _output +='<input class="form-check-input h-20px w-20px border-primary btnEstado" checked="checked" type="checkbox" id="chk'+_id +'" ';
+                        _output += 'onchange="f_UpdateEstado('+_id +','+ _emprid + ')" value=""/></div></td>';
+                        _output += '<td><div class="text-center"><div class="btn-group">';
+                        _output +='<button type="button" id="btnEditar_'+_id +'>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto">';
+                        _output +='<i class="fa fa-edit"></i></button></div></div></td></tr>';
 
+                        $('#tblProducto').append(_output);
+                        mensajesalertify('Agregado Correctamente..!', 'S', 'top-center', 3);
+                        console.log(_output);
 
+                    }else{
+                        mensajesalertify('Producto ya está Asignado..!', 'W', 'top-right', 3);
                     }
 
-                });
+                        $("#txtProducto").val("");
+                        $("#txtDescripcion").val("");
+                        $("#txtCosto").val("0.00");
+                        $("#cboGrupo").val(0).change();
+                        $("#txtAsisMes").val("1");
+                        $("#txtAsisAnu").val("1");
+                        document.getElementById("chkCobertura").checked = false;
+                        document.getElementById("chkSistema").checked = false;   
 
+                });
 
             });
 
 
-    
-
             //Desplazar-modal
-
 
             $("#modal_producto").draggable({
                 handle: ".modal-header"
@@ -940,12 +951,15 @@
 
                         if(_cobertura == 'SI'){
                             $('#chkCoberturaEdit').attr('checked', true);
-                            //$("#lblCobertura").text("Cobertura SI");
+                            $("#lblCoberturaedit").text("Cobertura SI");
                             //$("#lblCobertura .modal-body").text('Cobertura SI');
-                            $(".txtcob").html("Cobertura SI");
+                             //$("#lblCobertura").html("Cobertura SI");
+                             //$(".txtcob").html("Cobertura NO");
                         }else{
                             $('#chkCoberturaEdit').attr('checked', false);
-                            $(".txtcob").html("Cobertura NO");
+                            //$("#lblCobertura .modal-body").text('Cobertura NO');
+                            //$(".txtcob").html("Cobertura NO");
+                            $("#lblCoberturaedit").text("Cobertura NO");
                         }
 
                         if(_sistema == 'SI'){
