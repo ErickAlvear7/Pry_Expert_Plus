@@ -535,7 +535,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="button" id="btnGrabar" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">
+                        <button type="button" id="btnGrabar" class="btn btn-primary">
                             <span class="indicator-label">Grabar</span>
                         </button>
                     </div>
@@ -596,84 +596,49 @@
                             </div>
                         </div>
                         <br>
-                        <div class="card card-flush py-4">
-                            <div class="card-header">
-                                <div class="mb-5 fv-row">
-                                    <label class="form-check form-switch form-check-custom form-check-solid">
-                                        <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
-                                        <!-- <h5 class="txtcob" id="lblCobertura">Cobertura NO</h5> -->
-                                        <span class="form-check-label fw-bold text-muted" id="lblCoberturaedit" for="chkEnviar1">Cobertura NO</span>
-                                    </label> 
-                                </div>
-                                <div class="mb-5 fv-row">
-                                    <label class="form-check form-switch form-check-custom form-check-solid">
-                                        <input class="form-check-input" name="chkSistemaEdit" id="chkSistemaEdit" type="checkbox" />
-                                        <h5 class="txtsis"> Sistema NO</h5>
-                                    </label> 
-                                </div>
-                                <div class="mb-5 fv-row">
-                                    <label class="form-check form-switch form-check-custom form-check-solid">
-                                        <input class="form-check-input" name="chkGerencialEdit" id="chkGerencialEdit" type="checkbox" />
-                                        <h5 class="txtger"> Gerencial NO</h5>
-                                    </label> 
-                                </div> 
-                            </div>                      
+                        <br>
+                        <div class="mb-5 fv-row">
+                            <h5 class="txtcob" id="lblCobertura">Cobertura NO</h5>
+                            <label class="form-check form-switch form-check-custom form-check-solid">
+                                <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
+                                    <!-- <h5 class="txtcob" id="lblCobertura">Cobertura NO</h5> -->
+                            </label> 
                         </div>
+                        <div class="mb-5 fv-row">
+                            <h5 class="txtsis"> Sistema NO</h5>
+                            <label class="form-check form-switch form-check-custom form-check-solid">
+                                <input class="form-check-input" name="chkSistemaEdit" id="chkSistemaEdit" type="checkbox" />
+                                <!-- <h5 class="txtsis"> Sistema NO</h5> -->
+                            </label> 
+                        </div>
+                        <div class="mb-5 fv-row">
+                            <h5 class="txtger"> Gerencial NO</h5>
+                            <label class="form-check form-switch form-check-custom form-check-solid">
+                                <input class="form-check-input" name="chkGerencialEdit" id="chkGerencialEdit" type="checkbox" />
+                                <!-- <h5 class="txtger"> Gerencial NO</h5> -->
+                            </label> 
+                        </div> 
+                       
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">Grabar</button>
+                        <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>)" class="btn btn-primary">Grabar</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal_grupo" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered mw-650px">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2>Nuevo Grupo</h2>
-                        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                            <span class="svg-icon svg-icon-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                        <div class="d-flex flex-column mb-7 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                <span class="required">Grupo</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
-                            </label>
-                            <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
-                        </div>
-                        <div class="fv-row mb-15">
-                            <label class="fs-6 fw-bold form-label mb-2">
-                                <span>Descripcion</span>
-                            </label>
-                            <textarea class="form-control mb-2" name="txtDescGrupo" id="txtDescGrupo" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
-                        </div>                         
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">Grabar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+     
+       
 
         <script>
 
-            var _cobertura = 'NO', _sistema = 'NO';
+            var _cobertura = 'NO', _sistema = 'NO',_coberturaedit = 'NO',_sistemaedit = 'NO', _gerencialedit = 'NO';
 
             $(document).ready(function(){
 
                 $("#btnGrupo").click(function(){
 
-                   $("#modal_grupo").find("input,textarea").val("");
-                   $("#modal_grupo").modal("show");
+                   //$("#modal_grupo").find("input,textarea").val("");
+                   $("").modal("show");
                 });
 
                 $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
@@ -742,6 +707,55 @@
                 }
             });
 
+            //Check editar producto-modal
+
+            $(document).on("click","#chkCoberturaEdit",function(){
+
+                _coberturaedit = "NO";
+
+                if($("#chkCoberturaEdit").is(":checked")){
+                    _coberturaedit = "SI";
+                    $(".txtcob").html("Cobertura SI");
+                          
+                }else{
+                    _coberturaedit = "NO";
+                    $(".txtcob").html("Cobertura NO");
+
+                }    
+             });
+             
+            $(document).on("click","#chkSistemaEdit",function(){
+
+                _sistemaedit = "NO";
+
+                if($("#chkSistemaEdit").is(":checked")){
+                    _sistemaedit = "SI";
+                    $(".txtsis").html("Sistema SI");
+                        
+                }else{
+                    _sistemaedit = "NO";
+                    $(".txtsis").html("Sistema NO");
+
+                }    
+            });
+
+            $(document).on("click","#chkGerencialEdit",function(){
+
+                _gerencialedit = "NO";
+
+                if($("#chkGerencialEdit").is(":checked")){
+                    _gerencialedit = "SI";
+                    $(".txtger").html("Gerencial SI");
+                        
+                }else{
+                    _gerencialedit = "NO";
+                    $(".txtger").html("Gerencial NO");
+
+                }    
+            });
+
+
+
             //Agregar Producto directo a la base
             $('#btnAgregar').click(function(){
 
@@ -806,7 +820,7 @@
                         _output +='<input class="form-check-input h-20px w-20px border-primary btnEstado" checked="checked" type="checkbox" id="chk'+_id +'" ';
                         _output += 'onchange="f_UpdateEstado('+_id +','+ _emprid + ')" value=""/></div></td>';
                         _output += '<td><div class="text-center"><div class="btn-group">';
-                        _output +='<button type="button" id="btnEditar_'+_id +'>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto">';
+                        _output +='<button type="button" id="btnEditar_'+_id +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto">';
                         _output +='<i class="fa fa-edit"></i></button></div></div></td></tr>';
 
                         $('#tblProducto').append(_output);
@@ -951,15 +965,14 @@
 
                         if(_cobertura == 'SI'){
                             $('#chkCoberturaEdit').attr('checked', true);
-                            $("#lblCoberturaedit").text("Cobertura SI");
+                        
                             //$("#lblCobertura .modal-body").text('Cobertura SI');
                              //$("#lblCobertura").html("Cobertura SI");
-                             //$(".txtcob").html("Cobertura NO");
+                             $(".txtcob").html("Cobertura SI");
                         }else{
                             $('#chkCoberturaEdit').attr('checked', false);
-                            //$("#lblCobertura .modal-body").text('Cobertura NO');
-                            //$(".txtcob").html("Cobertura NO");
-                            $("#lblCoberturaedit").text("Cobertura NO");
+                            $(".txtcob").html("Cobertura NO");
+                          
                         }
 
                         if(_sistema == 'SI'){
@@ -978,13 +991,30 @@
                             $(".txtger").html("Gerencial NO");
                         }
 
-
-
                         $("#modal_producto").modal("show");
 
                     });  
 
                 });
+
+            });
+
+            //Grabar editar producto
+           
+            
+            function f_EditarProd(_paisid,_emprid){
+               
+                _prodid = _rowid;
+                //alert(_prodid);
+
+            }
+
+            //Grabar editar cliente
+            $('#btnGrabar').click(function(e){
+
+                _clieid = '<?php echo $clieid ?>';
+
+                //alert(_clieid);
 
             });
 

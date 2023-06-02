@@ -424,7 +424,6 @@
                 </div>
             </form>
         </div>
-
         <div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
