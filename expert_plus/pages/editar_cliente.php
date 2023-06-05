@@ -664,13 +664,11 @@
 
         <script>
 
-            
+            var _cobertura = 'NO', _sistema = 'NO',_coberturaedit = 'NO',_sistemaedit = 'NO', _gerencialedit = 'NO';
 
             $(document).ready(function(){
 
-                var _cobertura = 'NO', _sistema = 'NO',_coberturaedit = 'NO',_sistemaedit = 'NO', _gerencialedit = 'NO';
-
-
+              
                 $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
                 $('#cboCiudad').val(<?php echo $xProvid; ?>).change();
 
@@ -746,7 +744,6 @@
 
             $(document).on("click","#chkCoberturaEdit",function(){
 
-                _coberturaedit = "NO";
 
                 if($("#chkCoberturaEdit").is(":checked")){
                     _coberturaedit = "SI";
@@ -971,7 +968,7 @@
 
             }
 
-            //editar producto ventana modal
+            //cargar datos ventana modal para editar producto
 
             $(document).on("click",".btnEditar",function(){
                 $("#modal_producto").find("input,textarea,checkbox").val("");
@@ -1005,9 +1002,6 @@
 
                         if(_cobertura == 'SI'){
                             $('#chkCoberturaEdit').attr('checked', true);
-                        
-                            //$("#lblCobertura .modal-body").text('Cobertura SI');
-                             //$("#lblCobertura").html("Cobertura SI");
                              $(".txtcob").html("Cobertura SI");
                         }else{
                             $('#chkCoberturaEdit').attr('checked', false);
@@ -1031,6 +1025,7 @@
                             $(".txtger").html("Gerencial NO");
                         }
 
+
                         $("#modal_producto").modal("show");
 
                     });  
@@ -1039,12 +1034,79 @@
 
             });
 
-            //Grabar editar producto
+            //Grabar editar producto modal
            
             function f_EditarProd(_paisid,_emprid){
                
                 _prodid = _rowid;
-                //alert(_prodid);
+                _prodedit= $('#txtProductoEdit').val();
+                _descredit = $('#txtDescripcionEdit').val();
+                _costoedit = $('#txtCostoEdit').val();
+                _cbogrupoedit = $('#cboGrupoEdit').val();
+                _txtgrupoedit = $("#cboGrupoEdit option:selected").text();
+                _asismesedit = $('#txtAsisMesEdit').val();
+                _asisanuedit = $('#txtAsisAnuEdit').val();
+                _cobedit = _coberturaedit;
+                _sistedit = _sistemaedit;
+                _gerenedit = _gerencialedit;
+
+
+                if(_prodedit == ''){
+                    mensajesalertify("Ingrese Producto..!!","W","top-right",3);
+                    return false;
+
+                }
+
+                if(_costoedit == ''){
+                    mensajesalertify("Ingrese Costo..!!","W","top-right",3);
+                    return false;
+                }
+
+                var _parametros = {
+                    xxProdid: _prodid,
+                    xxGrupid: _cbogrupoedit,
+                    xxPaisid: _paisid,
+                    xxEmprid: _emprid,
+                    xxProdedit: _prodedit,
+                    xxProdant: _producto,
+                    xxDescr: _descredit,
+                    xxCostoedit: _costoedit,
+                    xxAsisMesedit: _asismesedit,
+                    xxAsisAnuedit: _asisanuedit,
+                    xxCobertura: _cobedit,
+                    xxSistema: _sistedit,
+                    xxGerencial: _gerenedit
+                
+                }
+
+                var xrespuesta = $.post("codephp/grabar_editarproducto.php", _parametros);
+                xrespuesta.done(function(response){
+
+                    if(response.trim() == 'OK'){
+
+                        _output = '<tr id="row_' + _rowid + '">';
+                        _output +='<td style="display: none;">' + _rowid + '</td>';
+                        _output +='<td>' +_txtgrupoedit + '</td>';
+                        _output +='<td>' +_prodedit + '</td>';
+                        _output +='<td>' +_costoedit + '</td>';
+                        _output +='<td id="td_'+_rowid + '"><div class="badge badge-light-primary">Activo</div></td>';
+                        _output +='<td><div class="form-check form-check-sm form-check-custom form-check-solid">';
+                        _output +='<input class="form-check-input h-20px w-20px border-primary btnEstado" checked="checked" type="checkbox" id="chk'+_rowid +'" ';
+                        _output +='onchange="f_UpdateEstado('+_rowid +','+ _emprid + ')" value=""/></div></td>';
+                        _output +='<td><div class="text-center"><div class="btn-group">';
+                        _output +='<button type="button" id="btnEditar_'+_rowid +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto">';
+                        _output +='<i class="fa fa-edit"></i></button></div></div></td></tr>';
+
+                        $('#row_' + _rowid + '').html(_output);
+
+                    }else{
+                        mensajesalertify("Producto ya está asignado..!", "W", "top-right", 3);
+                    }
+
+
+
+                });
+                //alert(_gerenedit);
 
             }
 
