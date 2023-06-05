@@ -46,7 +46,7 @@
             if($xRow == 0){
 
                 $xSQL = "UPDATE `expert_productos` SET grup_id = $xGrupid,prod_nombre='$xProdnew',prod_descripcion='$xDesc',prod_costo=$xCosto, " ;
-                $xSQL .="prod_asistmes=$xAsisMes,prod_asistanu= $xAsisAnu,prod_cobertura='$xCobertura',prod_sistema='$xSistema',prod_gerencial='$xGerencial' ";
+                $xSQL .="prod_asistmes=$xAsisMes,prod_asistanu= $xAsisAnu,prod_cobertura='$xCobertura',prod_sistema='$xSistema',prod_gerencial='$xGerencial' WHERE prod_id = $xProdid ";
                 mysqli_query($con, $xSQL);         
 
                 $xRespuesta = "OK";

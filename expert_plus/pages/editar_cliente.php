@@ -214,6 +214,7 @@
                                         <div class="mb-5 fv-row">
                                             <label class="required form-label">Cliente</label>
                                             <input type="text" name="txtCliente" id="txtCliente" class="form-control mb-2" minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="<?php echo $xCliente; ?>" />
+                                            <input type="hidden" name="txtClieant" id="txtClieant" class="form-control mb-2" value="<?php echo $xCliente; ?>" />
                                         </div>
                                         <div class="mb-5 fv-row">
                                             <label class="required form-label">Descripcion</label>
@@ -654,7 +655,7 @@
                        
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>)" class="btn btn-primary">Grabar</button>
+                        <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>)" class="btn btn-primary">Modificar</button>
                     </div>
                 </div>
             </div>
@@ -668,6 +669,10 @@
 
             $(document).ready(function(){
 
+                var _paisid = "<?php echo $xPaisid; ?>";
+                var _emprid = "<?php echo $xEmprid; ?>";
+                var _usuaid = "<?php echo $xUsuaid; ?>";
+
               
                 $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
                 $('#cboCiudad').val(<?php echo $xProvid; ?>).change();
@@ -680,6 +685,33 @@
                 $("#btnNewGrupo").click(function(){
 
                   $("#modal_new_grupo").modal("show");
+                });
+
+                //Cambiar valor provincia
+
+                $('#cboProvincia').change(function(){
+                        
+                    _cboid = $(this).val(); //obtener el id seleccionado
+                    $("#cboCiudad").empty();
+
+                    var _parametros = {
+                        xxPaisId: _paisid,
+                        xxEmprId: _emprid,
+                        xxComboId: _cboid,
+                        xxOpcion: 0
+                    }
+
+                    var _respuesta = $.post("codephp/cargar_combos.php", _parametros);
+                    _respuesta.done(function(response) {
+                        //document.getElementById("city").className = "form-control";
+                        $("#cboCiudad").html(response);
+                        
+                    });
+                    _respuesta.fail(function() {
+                    });
+                    _respuesta.always(function() {
+                    });                
+    
                 });
 
             });
@@ -888,7 +920,7 @@
             });
 
 
-            //Guatrdar nuevo grupo
+            //Guardar nuevo grupo
             
             function f_GuardarGrupo(_paisid,_emprid,_usuaid){
 
@@ -1038,8 +1070,7 @@
            
             function f_EditarProd(_paisid,_emprid){
 
-                //debugger;
-               
+                var _output;
                 _prodid = _rowid;
                 _prodedit= $('#txtProductoEdit').val();
                 _descredit = $('#txtDescripcionEdit').val();
@@ -1086,7 +1117,7 @@
 
                     if(response.trim() == 'OK'){
 
-                        _output +='<td style="display: none;">' + _rowid + '</td>';
+                        _output ='<td style="display: none;">' + _rowid + '</td>';
                         _output +='<td>' +_txtgrupoedit + '</td>';
                         _output +='<td>' +_prodedit + '</td>';
                         _output +='<td>' +_costoedit + '</td>';
@@ -1096,9 +1127,11 @@
                         _output +='onchange="f_UpdateEstado('+_rowid +','+ _emprid + ')" value=""/></div></td>';
                         _output +='<td><div class="text-center"><div class="btn-group">';
                         _output +='<button type="button" id="btnEditar_'+_rowid +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto">';
-                        _output +='<i class="fa fa-edit"></i></button></div></div></td></tr>';
+                        _output +='<i class="fa fa-edit"></i></button></div></div></td>';
 
                         $('#row_' + _rowid + '').html(_output);
+
+                        console.log(_output);
 
                     }else{
                         mensajesalertify("Producto ya está asignado..!", "W", "top-right", 3);
@@ -1113,9 +1146,39 @@
             //Grabar editar cliente
             $('#btnGrabar').click(function(e){
 
-                _clieid = '<?php echo $clieid ?>';
+                _clieid = '<?php echo $clieid; ?>';
+                _paisid = '<?php echo $xPaisid; ?>';
+                _emprid = '<?php echo $xEmprid; ?>';
 
-                //alert(_clieid);
+                var _cboProv = $('#cboProvincia').val();
+                var _cboCiudad = $('#cboCiudad').val();
+                var _clienew = $.trim($("#txtCliente").val());
+                var _clieant = $.trim($("#txtClieant").val());
+                var _desc = $.trim($("#txtDesc").val()); 
+                var _direc = $.trim($("#txtDireccion").val()); 
+                var _url = $.trim($("#txtUrl").val()); 
+                var _tel1 = $.trim($("#txtFono1").val()); 
+                var _tel2 = $.trim($("#txtFono2").val()); 
+                var _tel3 = $.trim($("#txtFono3").val()); 
+                var _cel1 = $.trim($("#txtCelular1").val()); 
+                var _cel2 = $.trim($("#txtCelular2").val()); 
+                var _cel3 = $.trim($("#txtCelular3").val()); 
+                var _email1 = $.trim($("#txtEmail1").val()); 
+                var _email2 = $.trim($("#txtEmail2").val());
+
+
+
+                if(_clieant == ''){
+                    mensajesalertify("Ingrese Nombre del Cliente..!!","W","top-right",3);
+                    return false;
+                }
+
+                if(_cboCiudad == ''){
+                    mensajesalertify("Seleccione Ciudad..!", "W", "top-right", 3);
+                    return; 
+                }
+
+                //alert(_clienew);
 
             });
 
