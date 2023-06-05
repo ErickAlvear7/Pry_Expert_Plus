@@ -1037,6 +1037,8 @@
             //Grabar editar producto modal
            
             function f_EditarProd(_paisid,_emprid){
+
+                //debugger;
                
                 _prodid = _rowid;
                 _prodedit= $('#txtProductoEdit').val();
@@ -1084,7 +1086,6 @@
 
                     if(response.trim() == 'OK'){
 
-                        _output = '<tr id="row_' + _rowid + '">';
                         _output +='<td style="display: none;">' + _rowid + '</td>';
                         _output +='<td>' +_txtgrupoedit + '</td>';
                         _output +='<td>' +_prodedit + '</td>';
@@ -1103,10 +1104,9 @@
                         mensajesalertify("Producto ya está asignado..!", "W", "top-right", 3);
                     }
 
-
-
                 });
-                //alert(_gerenedit);
+             
+                $("#modal_producto").modal("hide");
 
             }
 

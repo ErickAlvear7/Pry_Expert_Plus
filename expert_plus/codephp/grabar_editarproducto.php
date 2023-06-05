@@ -38,7 +38,7 @@
             
 
             if($xProdnew != $xProdant){
-                $xSQL = "SELECT * FROM `expert_productos` WHERE prod_id = xProdid AND pais_id = $xPaisid AND empr_id = $xEmprid AND prod_nombre = $xProductonew ";
+                $xSQL = "SELECT * FROM `expert_productos` WHERE prod_id = $xProdid AND pais_id = $xPaisid AND empr_id = $xEmprid AND prod_nombre = '$xProdnew' ";
                 $all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
                 $xRow = mysqli_num_rows($all_datos);
             }
