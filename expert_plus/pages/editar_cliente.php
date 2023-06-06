@@ -97,11 +97,11 @@
                             </div>
                         </div>
                         <div class="card-body text-center pt-0">
-                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(Cliente/<?php echo $xImgc; ?>)">
-                                <div class="image-input-wrapper w-150px h-150px"></div>
+                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                                <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfileCab"></div>
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
                                     <i class="bi bi-pencil-fill fs-7"></i>
-                                    <input type="file" name="avatar" id="imgCab" accept=".png, .jpg, .jpeg" />
+                                    <input type="file" name="avatar" id="logoCab" accept=".png, .jpg, .jpeg" />
                                     <input type="hidden" name="avatar_remove" />
                                 </label>
                                 <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
@@ -122,10 +122,10 @@
                         </div>
                         <div class="card-body text-center pt-0">
                             <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(Cliente/<?php echo $xImgp; ?>)">
-                                <div class="image-input-wrapper w-150px h-150px"></div>
+                                <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfilePie"></div>
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
                                     <i class="bi bi-pencil-fill fs-7"></i>
-                                    <input type="file" name="avatar" id="imgPie" accept=".png, .jpg, .jpeg" />
+                                    <input type="file" name="avatar" id="logoPie" accept=".png, .jpg, .jpeg" />
                                     <input type="hidden" name="avatar_remove" />
                                 </label>
                                 <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
@@ -207,7 +207,8 @@
                                                         <?php foreach ($cbo_ciudad as $ciudad) : ?>
                                                             <option value="<?php echo $ciudad['prov_id'] ?>"><?php echo mb_strtoupper($ciudad['ciudad']) ?></option>
                                                         <?php endforeach ?>  
-                                                    </select>                                                      
+                                                    </select>
+                                                    <input type="hidden" name="txtcbociudad" id="txtcbociudad" class="form-control mb-2" value="<?php echo $xProvid; ?>"  />                                                      
                                                 </div>
                                             </div>
                                         </div>
@@ -672,6 +673,11 @@
                 var _paisid = "<?php echo $xPaisid; ?>";
                 var _emprid = "<?php echo $xEmprid; ?>";
                 var _usuaid = "<?php echo $xUsuaid; ?>";
+
+                //Cargar imagen cabecera
+                var _imgCab  = "<?php echo $xImgc; ?>";
+                _imgCab = _imgCab == '' ? 'companyname.png' : _imgCab;
+                document.getElementById('imgfileCab').style.backgroundImage="url(Cliente/" + _imgCab + ")";    
 
               
                 $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
@@ -1146,13 +1152,13 @@
             //Grabar editar cliente
             $('#btnGrabar').click(function(e){
 
-                _clieid = '<?php echo $clieid; ?>';
-                _paisid = '<?php echo $xPaisid; ?>';
-                _emprid = '<?php echo $xEmprid; ?>';
-
+                var _idclie = '<?php echo $clieid; ?>';
+                var _idpais = '<?php echo $xPaisid; ?>';
+                var _idempr = '<?php echo $xEmprid; ?>';
+                var _iduser = '<?php echo $xUsuaid; ?>';
                 var _cboProv = $('#cboProvincia').val();
                 var _cboCiudad = $('#cboCiudad').val();
-                var _clienew = $.trim($("#txtCliente").val());
+                var _cliente = $.trim($("#txtCliente").val());
                 var _clieant = $.trim($("#txtClieant").val());
                 var _desc = $.trim($("#txtDesc").val()); 
                 var _direc = $.trim($("#txtDireccion").val()); 
@@ -1166,6 +1172,9 @@
                 var _email1 = $.trim($("#txtEmail1").val()); 
                 var _email2 = $.trim($("#txtEmail2").val());
 
+                var _providant = $.trim($('#txtcbociudad').val());
+                var _cambiarcab = 'NO';
+                var _cambiarpie = 'SI';
 
 
                 if(_clieant == ''){
@@ -1177,6 +1186,177 @@
                     mensajesalertify("Seleccione Ciudad..!", "W", "top-right", 3);
                     return; 
                 }
+                if(_url != ''){
+                       try{
+                           new URL(_url);
+                       }catch(err){
+                           mensajesalertify("Direccion URL Incorrecta..!", "W", "top-right", 3);
+                           return false;
+                       }
+                   }
+                   
+                   if(_tel1 != '')
+                   {
+                       _valor = document.getElementById("txtFono1").value;
+                       if( !(/^\d{9}$/.test(_valor)) ) {
+                           mensajesalertify("Telefono1 incorrecto..!" ,"W", "top-right", 3); 
+                           return;
+                       }
+                   }
+
+                   if(_tel2 != '')
+                   {
+                       _valor = document.getElementById("txtFono2").value;
+                       if( !(/^\d{9}$/.test(_valor)) ) {
+                           mensajesalertify("Telefono2 incorrecto..!" ,"W", "top-right", 3); 
+                           return;
+                       }
+                   }                    
+
+                   if(_tel3 != '')
+                   {
+                       _valor = document.getElementById("txtFono3").value;
+                       if( !(/^\d{9}$/.test(_valor)) ) {
+                           mensajesalertify("Telefono3 incorrecto..!" ,"W", "top-right", 3); 
+                           return;
+                       }
+                   }  
+                   
+                   if(_cel1 != '')
+                   {
+                       _valor = document.getElementById("txtCelular1").value;
+                       if( !(/^\d{10}$/.test(_valor)) ) {
+                           mensajesalertify("Celular1 incorrecto..!" ,"W", "top-right", 3); 
+                           return;
+                       }
+                   }                     
+                   
+                   if(_cel2 != '')
+                   {
+                       _valor = document.getElementById("txtCelular2").value;
+                       if( !(/^\d{10}$/.test(_valor)) ) {
+                           mensajesalertify("Celular1 incorrecto..!" ,"W", "top-right", 3); 
+                           return;
+                       }
+                   }
+                   
+                   if(_cel3 != '')
+                   {
+                       _valor = document.getElementById("txtCelular3").value;
+                       if( !(/^\d{10}$/.test(_valor)) ) {
+                           mensajesalertify("Celular1 incorrecto..!" ,"W", "top-right", 3); 
+                           return;
+                       }
+                   }                    
+                   
+                   if(_email1 != ''){
+                       var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+                   
+                       if (regex.test($('#txtEmail1').val().trim())) {
+                       }else{
+                           mensajesalertify("Email1 no es Valido..!", "W", "top-center", 3);
+                           return;
+                       }
+                   }
+
+                   if(_email2 != ''){
+                       var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+                   
+                       if (regex.test($('#txtEmail2').val().trim())) {
+                       }else{
+                           mensajesalertify("Email2 no es Valido..!", "W", "top-center", 3);
+                           return;
+                       }
+                    }
+
+                    var _imgfileCab = document.getElementById("imgfileCab").style.backgroundImage;
+                    var _urlimgCab = _imgfileCab.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+                    var _posCab = _urlimgCab.trim().indexOf('.');
+                    var _extCab = _urlimgCab.trim().substr(_posCab, 5);
+
+                    if(_extCab.trim() != '.png' && _extCab.trim() != '.jpg' && _extCab.trim() != 'jpeg'){
+                        var _imgCab = document.getElementById("logoCab");
+                        var _fileCab = _imgCab.files[0];
+                        var _fullPathCab = document.getElementById('logoCab').value;
+                        _extCab = _fullPathCab.substring(_fullPathCab.length - 4);
+                        _extCab = _extCab.toLowerCase();
+
+                        if(_extCab.trim() == '.png' || _extCab.trim() == '.jpg' || _extCab.trim() == 'jpeg'){
+                            _cambiarcab = 'SI';
+                        }else{
+                            mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
+                            return;
+                        } 
+                        
+                    }
+
+                      //Imagen Pie
+
+                    var _imgfilePie = document.getElementById("imgfilePie").style.backgroundImage;
+                    var _urlimgPie = _imgfilePie.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+                    var _posPie = _urlimgPie.trim().indexOf('.');
+                    var _extPie = _urlimgPie.trim().substr(_posPie, 5);
+
+                    if(_extPie.trim() != '.png' && _extPie.trim() != '.jpg' && _extPie.trim() != 'jpeg'){
+                        var _imgPie = document.getElementById("logoPie");
+                        var _filePie = _imgPie.files[0];
+                        var _fullPathPie = document.getElementById('logoPie').value;
+                        _extPie = _fullPathPie.substring(_fullPathPie.length - 4);
+                        _extPie = _extPie.toLowerCase();
+
+                        if(_extPie.trim() == '.png' || _extPie.trim() == '.jpg' || _extPie.trim() == 'jpeg'){
+                            _cambiarpie = 'SI';
+                        }else{
+                            mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-center", 3);
+                            return;
+                        }     
+                        
+                    }
+
+                        var form_data = new FormData();
+                        form_data.append('xxClieid', _idclie);            
+                        form_data.append('xxPaisid', _idpais);
+                        form_data.append('xxEmprid', _idempr);
+                        form_data.append('xxUsuaid', _iduser);
+                        form_data.append('xxProvid', _cboCiudad);
+                        form_data.append('xxProvidant', _providant);
+                        form_data.append('xxCliente', _cliente);
+                        form_data.append('xxClieant', _clieant);
+                        form_data.append('xxDescrip', _desc);
+                        form_data.append('xxDirec', _direc);
+                        form_data.append('xxUrl', _url);
+                        form_data.append('xxFono1', _tel1);
+                        form_data.append('xxFono2', _tel2);
+                        form_data.append('xxFono3', _tel3);
+                        form_data.append('xxCel1', _cel1);
+                        form_data.append('xxCel2', _cel2);
+                        form_data.append('xxCel3', _cel3);
+                        form_data.append('xxEmail1', _email1);
+                        form_data.append('xxEmail2', _email2);
+                        form_data.append('xxFileCab', _fileCab);
+                        form_data.append('xxCambiarcab', _cambiarcab);
+                        form_data.append('xxFilePie', _filePie);
+                        form_data.append('xxCambiarpie', _cambiarpie);
+
+                    $.ajax({
+                        url: "codephp/update_cliente.php",
+                        type: "post",
+                        data: form_data,
+                        processData: false,
+                        contentType: false,
+                        dataType: "json",
+                        success: function(response){
+                            console.log(response);
+                            if(response == 'OK'){
+                                $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito..!'}); //POR METODO POST
+                            }else{
+                                mensajesalertify("Cliente ya Existe..!", "W", "top-right", 3);
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
 
                 //alert(_clienew);
 
