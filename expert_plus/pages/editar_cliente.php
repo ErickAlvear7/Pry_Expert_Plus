@@ -636,19 +636,19 @@
                         </br>
                         </br>
                         <div class="mb-5 fv-row">
-                            <h5 class="txtcob" id="lblCobertura">Cobertura NO</h5>
+                            <h5 class="txtcob" id="lblCobertura"></h5>
                             <label class="form-check form-switch form-check-custom form-check-solid">
-                                <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
+                                <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" onchange="chkedit();" type="checkbox" />
                             </label> 
                         </div>
                         <div class="mb-5 fv-row">
-                            <h5 class="txtsis"> Sistema NO</h5>
+                            <h5 class="txtsis"></h5>
                             <label class="form-check form-switch form-check-custom form-check-solid">
                                 <input class="form-check-input" name="chkSistemaEdit" id="chkSistemaEdit" type="checkbox" />
                             </label> 
                         </div>
                         <div class="mb-5 fv-row">
-                            <h5 class="txtger"> Gerencial NO</h5>
+                            <h5 class="txtger"></h5>
                             <label class="form-check form-switch form-check-custom form-check-solid">
                                 <input class="form-check-input" name="chkGerencialEdit" id="chkGerencialEdit" type="checkbox" />
                             </label> 
@@ -778,51 +778,7 @@
                 }
             });
 
-            //Check editar producto-modal
-
-            $(document).on("click","#chkCoberturaEdit",function(){
-
-
-                if($("#chkCoberturaEdit").is(":checked")){
-                    _coberturaedit = "SI";
-                    $(".txtcob").html("Cobertura SI");
-                          
-                }else{
-                    _coberturaedit = "NO";
-                    $(".txtcob").html("Cobertura NO");
-
-                }    
-             });
-             
-            $(document).on("click","#chkSistemaEdit",function(){
-
-                _sistemaedit = "NO";
-
-                if($("#chkSistemaEdit").is(":checked")){
-                    _sistemaedit = "SI";
-                    $(".txtsis").html("Sistema SI");
-                        
-                }else{
-                    _sistemaedit = "NO";
-                    $(".txtsis").html("Sistema NO");
-
-                }    
-            });
-
-            $(document).on("click","#chkGerencialEdit",function(){
-
-                _gerencialedit = "NO";
-
-                if($("#chkGerencialEdit").is(":checked")){
-                    _gerencialedit = "SI";
-                    $(".txtger").html("Gerencial SI");
-                        
-                }else{
-                    _gerencialedit = "NO";
-                    $(".txtger").html("Gerencial NO");
-
-                }    
-            });
+ 
 
 
 
@@ -1014,8 +970,6 @@
                 _rowid = $(this).attr("id");
                 _rowid = _rowid.substring(10);
 
-                alert(_rowid);
-
                 var xrespuesta = $.post("codephp/get_datosproductos.php", { xxProid: _rowid });
                 xrespuesta.done(function(response){
 
@@ -1050,7 +1004,7 @@
                         }
 
                         if(_sistema == 'SI'){
-                            $('#chkSistemaEdit').attr('checked', true);
+                            $('#chkSistemaEdit').attr('checked', true); 
                             $(".txtsis").html("Sistema SI");
                         }else{
                             $('#chkSistemaEdit').attr('checked', false);
@@ -1065,6 +1019,8 @@
                             $(".txtger").html("Gerencial NO");
                         }
 
+                     
+                         
 
                         $("#modal_producto").modal("show");
 
@@ -1072,6 +1028,78 @@
 
                 });
 
+            });
+
+            function chkedit(){
+             
+              let checked = document.getElementById('chkCoberturaEdit');
+
+                 _cobertura;
+                //  if(checked.checked){
+                //     _cobertura = 'SI';
+                //     $(".txtcob").html("Cobertura SI");
+                //  }else{
+                   
+                //     $(".txtcob").html("Cobertura NO");
+                //  }
+
+                 if($("#chkCoberturaEdit").is(":checked")){
+                 
+                    $(".txtcob").html("Cobertura SI");                   
+                        
+                }else{
+                 
+                    $(".txtcob").html("Cobertura NO");
+
+                } 
+
+
+                 
+            }
+
+                       //Check editar producto-modal
+
+            // $(document).on("click","#chkCoberturaEdit",function(){
+
+            //      if($("#chkCoberturaEdit").is(":checked")){
+            //         _coberturaedit = "SI";
+            //         $(".txtcob").html("Cobertura SI");                   
+                        
+            //     }else{
+            //         _coberturaedit = "NO";
+            //         $(".txtcob").html("Cobertura NO");
+
+            //     }   
+            // });
+
+            $(document).on("click","#chkSistemaEdit",function(){
+
+                if($("#chkSistemaEdit").is(":checked")){
+                    _sistemaedit = "SI";
+                    $(".txtsis").html("Sistema SI");
+
+                        
+                }else{
+                    _sistemaedit = "NO";
+                    $(".txtsis").html("Sistema NO");
+                
+
+                }    
+            });
+
+            $(document).on("click","#chkGerencialEdit",function(){
+
+
+                if($("#chkGerencialEdit").is(":checked")){
+                    _gerencialedit = "SI";
+                    $(".txtger").html("Gerencial SI");
+                
+                        
+                }else{
+                    _gerencialedit = "NO";
+                    $(".txtger").html("Gerencial NO");
+                
+                }    
             });
 
             //Grabar editar producto modal
@@ -1140,7 +1168,7 @@
 
                         $('#row_' + _rowid + '').html(_output);
 
-                        console.log(response);
+                        //console.log(response);
 
                     }else{
                         mensajesalertify("Producto ya está asignado..!", "W", "top-right", 3);
@@ -1149,6 +1177,7 @@
                 });
              
                 $("#modal_producto").modal("hide");
+               
 
             }
 
