@@ -128,7 +128,17 @@
                                     </svg>
                                 </span>                                                                
                                 Nueva Especialidad
-                            </button>                           
+                            </button>   
+                            <div class="separator my-7"></div>      
+                            <a href="../../demo1/dist/apps/contacts/add-contact.html" class="btn btn-primary w-100">
+                                <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M20 14H18V10H20C20.6 10 21 10.4 21 11V13C21 13.6 20.6 14 20 14ZM21 19V17C21 16.4 20.6 16 20 16H18V20H20C20.6 20 21 19.6 21 19ZM21 7V5C21 4.4 20.6 4 20 4H18V8H20C20.6 8 21 7.6 21 7Z" fill="currentColor" />
+                                        <path opacity="0.3" d="M17 22H3C2.4 22 2 21.6 2 21V3C2 2.4 2.4 2 3 2H17C17.6 2 18 2.4 18 3V21C18 21.6 17.6 22 17 22ZM10 7C8.9 7 8 7.9 8 9C8 10.1 8.9 11 10 11C11.1 11 12 10.1 12 9C12 7.9 11.1 7 10 7ZM13.3 16C14 16 14.5 15.3 14.3 14.7C13.7 13.2 12 12 10.1 12C8.10001 12 6.49999 13.1 5.89999 14.7C5.59999 15.3 6.19999 16 7.39999 16H13.3Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                Nuevo Profesional
+                            </a>                                              
                         </div>
                     </div>
                 </div>
@@ -445,102 +455,108 @@
                                             <h2>Especialidades Asignadas</h2>
                                         </div>
                                     </div>
-                                    <div class="card-body pt-0">
+                                    <div class="card-body pt-0" id="kt_contacts_list_body">
                                         <div class="d-flex flex-column gap-10">
-                                            <table id="tblEspecialidad" class="table align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
-                                                <thead>
-                                                    <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                        <th style="display: none;">Id</th>
-                                                        <th>Especialidad</th>
-                                                        <th>Pvp</th>
-                                                        <th>Costo</th>
-                                                        <th>Estado</th>
-                                                        <th>Status</th>
-                                                        <th>Opciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="fw-bold text-gray-600">
+                                            <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
+                                                <table id="tblEspecialidad" class="table align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
+                                                    <thead>
+                                                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                            <th style="display: none;">Id</th>
+                                                            <th>Especialidad</th>
+                                                            <th>Pvp</th>
+                                                            <th>Costo</th>
+                                                            <th>Estado</th>
+                                                            <th>Status</th>
+                                                            <th>Opciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="fw-bold text-gray-600">
 
-                                                    <?php 
-                                            
-                                                        foreach($all_especialidad as $especi){
-                                                            $xId = $especi['pree_id'];
-                                                            $xEspecialidad = trim($especi['espe_nombre']);
-                                                            $xPvp = trim($especi['pree_pvp']);
-                                                            $xCosto = trim($especi['pree_costo']);
-                                                            $xEstado = trim($especi['pree_estado']);
-                                                        ?>
-                                                            <?php 
-                            
-                                                                $chkEstado = '';
-                                                                $xDisabledEdit = '';
-                            
-                                                                if($xEstado == 'A'){
-                                                                    $xEstado = 'Activo';
-                                                                    $chkEstado = 'checked="checked"';
-                                                                    $xTextColor = "badge badge-light-primary";
-                                                                }else{
-                                                                    $xEstado = 'Inactivo';
-                                                                    $xTextColor = "badge badge-light-danger";
-                                                                    $xDisabledEdit = 'disabled';
-                                                                }
-                            
+                                                        <?php 
+                                                
+                                                            foreach($all_especialidad as $especi){
+                                                                $xId = $especi['pree_id'];
+                                                                $xEspecialidad = trim($especi['espe_nombre']);
+                                                                $xPvp = trim($especi['pree_pvp']);
+                                                                $xCosto = trim($especi['pree_costo']);
+                                                                $xEstado = trim($especi['pree_estado']);
                                                             ?>
-                                                            <tr id="row_<?php echo $xId; ?>">
-                                                                <td>
-                                                                    <div class="d-flex align-items-center">
-                                                                        <div class="ms-5">
-                                                                            <span class="fw-bolder"><?php echo $xEspecialidad; ?></span>
+                                                                <?php 
+                                
+                                                                    $chkEstado = '';
+                                                                    $xDisabledEdit = '';
+                                                                    $xDisabledPerson = '';
+                                
+                                                                    if($xEstado == 'A'){
+                                                                        $xEstado = 'Activo';
+                                                                        $chkEstado = 'checked="checked"';
+                                                                        $xTextColor = "badge badge-light-primary";
+                                                                    }else{
+                                                                        $xEstado = 'Inactivo';
+                                                                        $xTextColor = "badge badge-light-danger";
+                                                                        $xDisabledEdit = 'disabled';
+                                                                    }
+                                
+                                                                ?>
+                                                                <tr id="row_<?php echo $xId; ?>">
+                                                                    <td>
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="ms-5">
+                                                                                <span class="fw-bolder"><?php echo $xEspecialidad; ?></span>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                </td>
-                            
-                                                                <td>
-                                                                    <div class="d-flex align-items-center">
-                                                                        <div class="ms-5">
-                                                                            <span class="fw-bolder"><?php echo $xPvp; ?></span>
+                                                                    </td>
+                                
+                                                                    <td>
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="ms-5">
+                                                                                <span class="fw-bolder"><?php echo $xPvp; ?></span>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                </td>
-                                                                
-                                                                <td>
-                                                                    <div class="d-flex align-items-center">
-                                                                        <div class="ms-5">
-                                                                            <span class="fw-bolder"><?php echo $xCosto; ?></span>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="ms-5">
+                                                                                <span class="fw-bolder"><?php echo $xCosto; ?></span>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                </td>                                    
-                            
-                                                                <td id="td_<?php echo $xId; ?>">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <div class="ms-5">
-                                                                            <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
+                                                                    </td>                                    
+                                
+                                                                    <td id="td_<?php echo $xId; ?>">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="ms-5">
+                                                                                <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                </td>
-                                                                
-                                                                <td>
-                                                                    <div class="text-center">
-                                                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                            <input class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $xId; ?>" 
-                                                                                onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>)" value="<?php echo $xId; ?>"/>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="text-center">
+                                                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                                                <input class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $xId; ?>" 
+                                                                                    onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>)" value="<?php echo $xId; ?>"/>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                </td> 													
-                            
-                                                                <td class="">
-                                                                    <div class="">
-                                                                        <div class="btn-group">
-                                                                            <button id="btnEditar_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Especialidad Asiganada' >
-                                                                                <i class='fa fa-edit'></i>
-                                                                            </button>	                                                
+                                                                    </td> 													
+                                
+                                                                    <td class="">
+                                                                        <div class="">
+                                                                            <div class="btn-group">
+                                                                                <button id="btnEditar_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Especialidad Asiganada' >
+                                                                                    <i class='fa fa-edit'></i>
+                                                                                </button>	
+                                                                                <button id="btnPerson_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnPerson" <?php echo $xDisabledPerson; ?> title='Agregar Profesional' >
+                                                                                    <i class="fas fa-user"></i>
+                                                                                </button>	                                                                                                                             
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                </td>                                                                
-                                                            </tr>
-                                                    <?php } ?>
-                                                </tbody>
-                                            </table>
+                                                                    </td>                                                                
+                                                                </tr>
+                                                        <?php } ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -573,7 +589,7 @@
                                     <div class="row fv-row">
                                         <div class="col-12">
                                             <select name="cboTipoEspe" id="cboTipoEspe" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo" data-dropdown-parent="#kt_modal_new_card_form" class="form-select mb-2">
-                                                <option</option>
+                                                <option></option>
                                                 <?php 
                                                 $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid ";
                                                 $xSQL .= "AND pca.paca_nombre='Tipo Especialidad' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
@@ -935,7 +951,8 @@
                         if(response != 0){
 
                             _id = response;
-                            _output = '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _especialidad + '</span></div></div></td>';
+                            _output = '<tr id=row_' + _id + '>';
+                            _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _especialidad + '</span></div></div></td>';
                             _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _pvp + '</span></div></div></td>';
                             _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _costo + '</span></div></div></td>';
                             _output += '<td id="td_' + _id + '"><div class="d-flex align-items-center"><div class="ms-5"><div class="badge badge-light-primary">Activo</div></div></div></td>';                        
@@ -943,7 +960,7 @@
                             _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _cboespe + '" onchange="f_UpdateEstado(';
                             _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
                             _output += '<td class=""><div class=""><div class="btn-group"><button id="btnEditar_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
-                            _output += 'title="Editar Especialidad Asiganada" ><i class="fa fa-edit"></i></button></div></div></td>';
+                            _output += 'title="Editar Especialidad Asiganada" ><i class="fa fa-edit"></i></button></div></div></td></tr>';
 
                             $('#tblEspecialidad').append(_output);
 
@@ -1209,7 +1226,12 @@
                     });                    
                 });
 
-            });	            
+            });	
+            
+            $(document).on("click",".btnPerson",function(){
+                alert('Ir a Agregar Personal');
+
+            });	
 
             function setTwoNumberDecimal(event) {
                 this.value = parseFloat(this.value).toFixed(2);

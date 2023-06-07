@@ -472,7 +472,7 @@
                                                     <tbody class="fw-bold text-gray-600">
                                                         <?php 
                                                             foreach($all_prod as $prod){
-                                                            $xProdId = $prod['Idprod'];
+                                                            $xProdid = $prod['Idprod'];
                                                             $xProducto = $prod['Producto'];
                                                             $xDesc = $prod['Descrip'];
                                                             $xCosto = $prod['Costo'];
@@ -505,21 +505,21 @@
                                                             <td><?php echo $xGrupo; ?></td>
                                                             <td><?php echo $xProducto; ?></td>
                                                             <td><?php echo $xCosto; ?></td>
-                                                            <td id="td_<?php echo $xProdId; ?>">   
+                                                            <td id="td_<?php echo $xProdid; ?>">   
                                                                 <div class="<?php echo $xTextColor; ?>">
                                                                     <?php echo $xEstado; ?>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                    <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xProdId; ?>" 
-                                                                    onchange="f_UpdateEstado(<?php echo $xProdId;?>,<?php echo $xEmprid; ?>)" value=""/>
+                                                                    <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xProdid; ?>" 
+                                                                    onchange="f_UpdateEstado(<?php echo $xProdid;?>,<?php echo $xEmprid; ?>)" value=""/>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="text-center">
                                                                     <div class="btn-group">	
-                                                                        <button type="button" id="btnEditar_<?php echo $xProdId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Producto'>
+                                                                        <button type="button" id="btnEditar_<?php echo $xProdid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Producto'>
                                                                             <i class="fa fa-edit"></i>
                                                                         </button> 
                                                                     </div>
@@ -1014,6 +1014,8 @@
                 _rowid = $(this).attr("id");
                 _rowid = _rowid.substring(10);
 
+                alert(_rowid);
+
                 var xrespuesta = $.post("codephp/get_datosproductos.php", { xxProid: _rowid });
                 xrespuesta.done(function(response){
 
@@ -1076,6 +1078,7 @@
            
             function f_EditarProd(_paisid,_emprid){
 
+                debugger;
                 var _output;
                 _prodid = _rowid;
                 _prodedit= $('#txtProductoEdit').val();
@@ -1137,7 +1140,7 @@
 
                         $('#row_' + _rowid + '').html(_output);
 
-                        console.log(_output);
+                        console.log(response);
 
                     }else{
                         mensajesalertify("Producto ya está asignado..!", "W", "top-right", 3);
@@ -1269,6 +1272,7 @@
                        }
                     }
 
+                    debugger;
                     var _imgfileCab = document.getElementById("imgfileCab").style.backgroundImage;
                     var _urlimgCab = _imgfileCab.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
                     var _posCab = _urlimgCab.trim().indexOf('.');
