@@ -19,13 +19,14 @@
     $xRespuesta = "ERR";
     $xRow = 0;
 
-    if(isset($_POST['xxProdid']) and isset($_POST['xxGrupid']) and isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxProdedit'])){
-        if(isset($_POST['xxProdid']) <> '' and isset($_POST['xxGrupid']) <> '' and isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxProdedit']) <> ''){
+    if(isset($_POST['xxProdid']) and isset($_POST['xxGrupid']) and isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxProdedit'])){
+        if(isset($_POST['xxProdid']) <> '' and isset($_POST['xxGrupid']) <> '' and isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxProdedit']) <> ''){
             
             $xProdid = $_POST['xxProdid'];
             $xGrupid = $_POST['xxGrupid'];
             $xPaisid = $_POST['xxPaisid'];            
             $xEmprid = $_POST['xxEmprid'];
+            $xUsuaid = $_POST['xxUsuaid'];
             $xProdnew = safe($_POST['xxProdedit']);
             $xProdant = $_POST['xxProdant'];
             $xDesc = safe($_POST['xxDescr']);
@@ -47,7 +48,11 @@
 
                 $xSQL = "UPDATE `expert_productos` SET grup_id = $xGrupid,prod_nombre='$xProdnew',prod_descripcion='$xDesc',prod_costo=$xCosto, " ;
                 $xSQL .="prod_asistmes=$xAsisMes,prod_asistanu= $xAsisAnu,prod_cobertura='$xCobertura',prod_sistema='$xSistema',prod_gerencial='$xGerencial' WHERE prod_id = $xProdid ";
-                mysqli_query($con, $xSQL);         
+                mysqli_query($con, $xSQL); 
+                
+                $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
+                $xSQL .= "VALUES('Actualización Producto Asignado',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
+                mysqli_query($con, $xSQL);            
 
                 $xRespuesta = "OK";
             }else{

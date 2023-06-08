@@ -25,7 +25,7 @@
             $xEmprid = $_POST['xxEmprid'];
             $xUsuaid = $_POST['xxUsuaid'];
             $xProvid = $_POST['xxProv'];
-            $xCliente = safe($_POST['xxCliente']);
+            $xCliente = trim(mb_strtoupper(safe($_POST['xxCliente'])));
             $xDesc = safe($_POST['xxDescrip']); 
             $xDirec = safe($_POST['xxDirec']);
             $xUrl = safe($_POST['xxUrl']);

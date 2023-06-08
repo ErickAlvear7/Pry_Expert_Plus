@@ -24,8 +24,8 @@
             $xPaisid= $_POST['xxPaisId'];
             $xEmprid = $_POST['xxEmprId'];
             $xUsuaid = $_POST['xxUsuaId'];
-            $xGrupo = $_POST['xxGrupo'];
-            $xDesc = $_POST['xxDesc'];
+            $xGrupo = trim(mb_strtoupper(safe($_POST['xxGrupo'])));
+            $xDesc = safe($_POST['xxDesc']);
 
             $xSQL = "SELECT * FROM `expert_grupos` gru WHERE gru.pais_id=$xPaisid AND gru.empr_id=$xEmprid AND gru.grup_nombre='$xGrupo' ";
             $all_param = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));

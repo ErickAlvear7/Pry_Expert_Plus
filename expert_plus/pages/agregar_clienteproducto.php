@@ -45,10 +45,6 @@
 	$all_grupos =  mysqli_query($con, $xSQL);
 
     
-
-   
-
-
 ?>
 
         <div id="kt_content_container" class="container-xxl">
@@ -71,9 +67,6 @@
                                 <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
                                     <i class="bi bi-x fs-2"></i>
                                 </span>
-                                <!-- <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remover Logo">
-                                    <i class="bi bi-x fs-2"></i>
-                                </span> -->
                             </div>
                             <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                         </div>
@@ -95,9 +88,6 @@
                                 <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
                                     <i class="bi bi-x fs-2"></i>
                                 </span>
-                                <!-- <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remover Logo">
-                                    <i class="bi bi-x fs-2"></i>
-                                </span> -->
                             </div>
                             <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                         </div>
@@ -177,7 +167,7 @@
                                             <input type="text" name="txtCliente" id="txtCliente" class="form-control mb-2" minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="" />
                                         </div>
                                         <div class="mb-5 fv-row">
-                                            <label class="required form-label">Descripcion</label>
+                                            <label class="form-label">Descripcion</label>
                                             <textarea class="form-control mb-2" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
                                         </div>                                 
                                     </div>
@@ -254,15 +244,15 @@
                                                 <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                                     </div>
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                                     </div> 
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono3" id="txtFono3" maxlength="9" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                                     </div>                                                        
                                                 </div>
                                                 <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
@@ -320,7 +310,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                             <div class="d-flex flex-column gap-7 gap-lg-10">
                                 <div class="card card-flush py-4">
@@ -386,7 +375,6 @@
                                         </div>                                        
                                     </div>
                                 </div>
-
                                 <div class="card card-flush py-4">
                                     <div class="card-header">
                                         <div class="card-title">
@@ -632,18 +620,11 @@
 
                                     _checked = "checked='checked'";
                                     _count = _count + 1;
-
                                     _output = '<tr id="row_' + _count + '">';
                                     _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';
                                     _output += '<td>' + _txtGrupo + ' <input type="hidden" name="hidden_grupo[]" id="txtGrupo' + _count + '" value="' + _txtGrupo + '" /></td>';
                                     _output += '<td>' + _producto + ' <input type="hidden" name="hidden_producto[]" id="txtProducto' + _count + '" value="' + _producto + '" /></td>';
                                     _output += '<td>' + _costo + ' <input type="hidden" name="hidden_costo[]" id="txtCosto' + _count + '" value="' + _costo + '" /></td>';
-                                    // _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                    //            '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _count + '" value=""/>' +
-                                    //            '</div></div></td>';
-                                    // _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                    //            '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstadoGe" type="checkbox" id="chk' + _count + '" value=""/>' +
-                                    //            '</div></div></td>';
                                     _output += '<td><div class="text-center"><div class="btn-group">';
                                     _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
                                     _output += '</tr>';
@@ -771,6 +752,61 @@
                         return false;
                     }
 
+                    if(_tel1 != '')
+                   {
+                       _valor = document.getElementById("txtFono1").value;
+                       if( !(/^\d{9}$/.test(_valor)) ) {
+                           mensajesalertify("Telefono1 incorrecto..!" ,"W", "top-right", 3); 
+                           return;
+                       }
+                   }
+
+                   if(_tel2 != '')
+                   {
+                       _valor = document.getElementById("txtFono2").value;
+                       if( !(/^\d{9}$/.test(_valor)) ) {
+                           mensajesalertify("Telefono2 incorrecto..!" ,"W", "top-right", 3); 
+                           return;
+                       }
+                   }                    
+
+                   if(_tel3 != '')
+                   {
+                       _valor = document.getElementById("txtFono3").value;
+                       if( !(/^\d{9}$/.test(_valor)) ) {
+                           mensajesalertify("Telefono3 incorrecto..!" ,"W", "top-right", 3); 
+                           return;
+                       }
+                   }  
+                   
+                   if(_cel1 != '')
+                   {
+                       _valor = document.getElementById("txtCelular1").value;
+                       if( !(/^\d{10}$/.test(_valor)) ) {
+                           mensajesalertify("Celular1 incorrecto..!" ,"W", "top-right", 3); 
+                           return;
+                       }
+                   }                     
+                   
+                   if(_cel2 != '')
+                   {
+                       _valor = document.getElementById("txtCelular2").value;
+                       if( !(/^\d{10}$/.test(_valor)) ) {
+                           mensajesalertify("Celular1 incorrecto..!" ,"W", "top-right", 3); 
+                           return;
+                       }
+                   }
+                   
+                   if(_cel3 != '')
+                   {
+                       _valor = document.getElementById("txtCelular3").value;
+                       if( !(/^\d{10}$/.test(_valor)) ) {
+                           mensajesalertify("Celular1 incorrecto..!" ,"W", "top-right", 3); 
+                           return;
+                       }
+                   }                    
+                   
+
                     
                     if(_email1 != ''){
                         var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
@@ -834,7 +870,7 @@
                                     success: function(dataid){
 
                                         if(dataid != 0){
-                                            var xrespuesta = $.post("codephp/grabar_productoclie.php", { xxPaisid: _idpais, xxEmprid: _idempr, xxClieid: dataid, xxResult: _result });
+                                            var xrespuesta = $.post("codephp/grabar_productoclie.php", { xxPaisid: _idpais, xxEmprid: _idempr,xxUsuaid: _iduser,xxClieid: dataid, xxResult: _result });
                                              xrespuesta.done(function(response){
                                                      
                                                 if(response == 'OK'){
@@ -847,24 +883,18 @@
 
                                         }
 
-
-
                                     },
                                     error: function (error) {
                                         console.log(error);
-                                    }
-
-                                     
+                                    }                                 
 
                                 });
                          
-
                             }else{
                                 mensajesalertify("Cliente ya Existe..!!","E","top-right",3);
                                 return false;
 
                             }
-
 
                          });
 

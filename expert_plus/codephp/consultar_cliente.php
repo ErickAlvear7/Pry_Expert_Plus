@@ -17,7 +17,7 @@
             
             $xPaisid = $_POST['xxPaisId'];
             $xEmprid = $_POST['xxEmprId'];
-            $xCliente= safe($_POST['xxCliente']);
+            $xCliente= trim(mb_strtoupper(safe($_POST['xxCliente'])));
 
          
             $xSQL = " SELECT * FROM `expert_cliente` clie ";

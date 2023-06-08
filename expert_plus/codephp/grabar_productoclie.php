@@ -10,16 +10,20 @@
     require_once("../dbcon/functions.php");
 
     mysqli_query($con,'SET NAMES utf8');  
-    mysqli_set_charset($con,'utf8');	
+    mysqli_set_charset($con,'utf8');
+    
+    $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());  
+    $xTerminal = gethostname();    
 
  
     $xresultado = "ERR";
 
-    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxClieid']) and isset($_POST['xxResult'])){
-        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxClieid']) <> '' and isset($_POST['xxResult']) <> ''){
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxClieid']) and isset($_POST['xxResult'])){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxClieid']) <> '' and isset($_POST['xxResult']) <> ''){
 
             $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
+            $xUsuaid = $_POST['xxUsuaid'];
             $xClieid = $_POST['xxClieid'];
             $xResult = $_POST['xxResult'];
 
@@ -40,6 +44,10 @@
                 $xSQL .= "prod_asistmes,prod_asistanu,prod_cobertura,prod_sistema,prod_gerencial) ";
                 $xSQL .= "VALUES ($xClieid,$xGrupid,$xPaisid,$xEmprid,'$xProducto','$xDesc','$xCosto',$xAsismes,$xAsisanu,'$xCober', ";
                 $xSQL .= "'$xSist','$xGerencial')";
+                mysqli_query($con, $xSQL);
+
+                $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
+                $xSQL .= "VALUES('Nuevo Producto Asignado',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
                 mysqli_query($con, $xSQL);
             
             }

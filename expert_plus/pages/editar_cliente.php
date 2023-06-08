@@ -121,7 +121,7 @@
                             </div>
                         </div>
                         <div class="card-body text-center pt-0">
-                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(Cliente/<?php echo $xImgp; ?>)">
+                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
                                 <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfilePie"></div>
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
                                     <i class="bi bi-pencil-fill fs-7"></i>
@@ -295,15 +295,15 @@
                                                 <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel1; ?>" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel1; ?>" />
                                                     </div>
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel2; ?>" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel2; ?>" />
                                                     </div> 
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel3; ?>" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel3; ?>" />
                                                     </div>                                                        
                                                 </div>
                                                 <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
@@ -376,7 +376,7 @@
                                             <input type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
                                         </div>
                                         <div class="mb-5 fv-row">
-                                            <label class="required form-label">Descripcion</label>
+                                            <label class="form-label">Descripcion</label>
                                             <textarea class="form-control mb-2" name="txtDescripcion" id="txtDescripcion" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
                                         </div>
                                         <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
@@ -575,7 +575,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">Grabar</button>
+                        <button type="button" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" class="btn btn-primary">Grabar</button>
                     </div>
                 </div>
             </div>
@@ -638,7 +638,7 @@
                         <div class="mb-5 fv-row">
                             <h5 class="txtcob" id="lblCobertura"></h5>
                             <label class="form-check form-switch form-check-custom form-check-solid">
-                                <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" onchange="chkedit();" type="checkbox" />
+                                <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
                             </label> 
                         </div>
                         <div class="mb-5 fv-row">
@@ -656,7 +656,7 @@
                        
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>)" class="btn btn-primary">Modificar</button>
+                        <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-primary">Modificar</button>
                     </div>
                 </div>
             </div>
@@ -666,7 +666,7 @@
 
         <script>
 
-            var _cobertura = 'NO', _sistema = 'NO',_coberturaedit = 'NO',_sistemaedit = 'NO', _gerencialedit = 'NO';
+            var _cobertura = 'NO', _sistema = 'NO';
 
             $(document).ready(function(){
 
@@ -674,10 +674,14 @@
                 var _emprid = "<?php echo $xEmprid; ?>";
                 var _usuaid = "<?php echo $xUsuaid; ?>";
 
-                //Cargar imagen cabecera
+                //Cargar imagen logo cabecera
                 var _imgCab  = "<?php echo $xImgc; ?>";
                 _imgCab = _imgCab == '' ? 'companyname.png' : _imgCab;
-                document.getElementById('imgfileCab').style.backgroundImage="url(Cliente/" + _imgCab + ")";    
+                document.getElementById('imgfileCab').style.backgroundImage="url(Cliente/" + _imgCab + ")"; 
+                  //Cargar imagen logp pie
+                var _imgPie = "<?php echo $xImgp; ?>";
+                _imgPie = _imgPie == '' ? 'companyname.png' : _imgPie;  
+                document.getElementById('imgfilePie').style.backgroundImage="url(Cliente/" + _imgPie + ")"; 
 
               
                 $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
@@ -777,9 +781,6 @@
 
                 }
             });
-
- 
-
 
 
             //Agregar Producto directo a la base
@@ -966,7 +967,9 @@
 
             $(document).on("click",".btnEditar",function(){
                 $("#modal_producto").find("input,textarea,checkbox").val("");
-            
+                //$('input:checkbox').removeAttr('checked');
+                
+
                 _rowid = $(this).attr("id");
                 _rowid = _rowid.substring(10);
 
@@ -974,6 +977,7 @@
                 xrespuesta.done(function(response){
 
                     var _datos = JSON.parse(response);
+
 
                     $.each(_datos,function(i,item){
                         _grupid =  _datos[i].Grupid;
@@ -1013,14 +1017,12 @@
 
                         if(_gerencial == 'SI'){
                             $('#chkGerencialEdit').attr('checked', true);
-                            $(".txtger").html("Sistema SI");
+                            $(".txtger").html("Gerencial SI");
                         }else{
                             $('#chkGerencialEdit').attr('checked', false);
                             $(".txtger").html("Gerencial NO");
                         }
 
-                     
-                         
 
                         $("#modal_producto").modal("show");
 
@@ -1030,59 +1032,35 @@
 
             });
 
-            function chkedit(){
-             
-              let checked = document.getElementById('chkCoberturaEdit');
+    
 
-                 _cobertura;
-                //  if(checked.checked){
-                //     _cobertura = 'SI';
-                //     $(".txtcob").html("Cobertura SI");
-                //  }else{
-                   
-                //     $(".txtcob").html("Cobertura NO");
-                //  }
+            //Check editar producto-modal
+
+            var _cobertura,_sistema,_gerencial
+            
+            $(document).on("click","#chkCoberturaEdit",function(){
 
                  if($("#chkCoberturaEdit").is(":checked")){
-                 
+                    _cobertura = "SI";
                     $(".txtcob").html("Cobertura SI");                   
                         
                 }else{
-                 
+                    _cobertura = "NO";
                     $(".txtcob").html("Cobertura NO");
 
-                } 
-
-
-                 
-            }
-
-                       //Check editar producto-modal
-
-            // $(document).on("click","#chkCoberturaEdit",function(){
-
-            //      if($("#chkCoberturaEdit").is(":checked")){
-            //         _coberturaedit = "SI";
-            //         $(".txtcob").html("Cobertura SI");                   
-                        
-            //     }else{
-            //         _coberturaedit = "NO";
-            //         $(".txtcob").html("Cobertura NO");
-
-            //     }   
-            // });
+                }   
+            });
 
             $(document).on("click","#chkSistemaEdit",function(){
 
                 if($("#chkSistemaEdit").is(":checked")){
-                    _sistemaedit = "SI";
+                    _sistema = "SI";
                     $(".txtsis").html("Sistema SI");
 
                         
                 }else{
-                    _sistemaedit = "NO";
+                    _sistema = "NO";
                     $(".txtsis").html("Sistema NO");
-                
 
                 }    
             });
@@ -1091,12 +1069,12 @@
 
 
                 if($("#chkGerencialEdit").is(":checked")){
-                    _gerencialedit = "SI";
+                    _gerencial = "SI";
                     $(".txtger").html("Gerencial SI");
                 
                         
                 }else{
-                    _gerencialedit = "NO";
+                    _gerencial = "NO";
                     $(".txtger").html("Gerencial NO");
                 
                 }    
@@ -1104,9 +1082,9 @@
 
             //Grabar editar producto modal
            
-            function f_EditarProd(_paisid,_emprid){
+            function f_EditarProd(_paisid,_emprid,_usuaid){
 
-                debugger;
+                //debugger;
                 var _output;
                 _prodid = _rowid;
                 _prodedit= $('#txtProductoEdit').val();
@@ -1116,9 +1094,9 @@
                 _txtgrupoedit = $("#cboGrupoEdit option:selected").text();
                 _asismesedit = $('#txtAsisMesEdit').val();
                 _asisanuedit = $('#txtAsisAnuEdit').val();
-                _cobedit = _coberturaedit;
-                _sistedit = _sistemaedit;
-                _gerenedit = _gerencialedit;
+                _cobedit = _cobertura;
+                _sistedit = _sistema;
+                _gerenedit = _gerencial;
 
 
                 if(_prodedit == ''){
@@ -1137,6 +1115,7 @@
                     xxGrupid: _cbogrupoedit,
                     xxPaisid: _paisid,
                     xxEmprid: _emprid,
+                    xxUsuaid: _usuaid,
                     xxProdedit: _prodedit,
                     xxProdant: _producto,
                     xxDescr: _descredit,
@@ -1177,6 +1156,7 @@
                 });
              
                 $("#modal_producto").modal("hide");
+                
                
 
             }
@@ -1218,14 +1198,14 @@
                     mensajesalertify("Seleccione Ciudad..!", "W", "top-right", 3);
                     return; 
                 }
-                if(_url != ''){
-                       try{
-                           new URL(_url);
-                       }catch(err){
-                           mensajesalertify("Direccion URL Incorrecta..!", "W", "top-right", 3);
-                           return false;
-                       }
-                   }
+                // if(_url != ''){
+                //        try{
+                //            new URL(_url);
+                //        }catch(err){
+                //            mensajesalertify("Direccion URL Incorrecta..!", "W", "top-right", 3);
+                //            return false;
+                //        }
+                //    }
                    
                    if(_tel1 != '')
                    {
@@ -1301,50 +1281,56 @@
                        }
                     }
 
-                    debugger;
-                    var _imgfileCab = document.getElementById("imgfileCab").style.backgroundImage;
-                    var _urlimgCab = _imgfileCab.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-                    var _posCab = _urlimgCab.trim().indexOf('.');
-                    var _extCab = _urlimgCab.trim().substr(_posCab, 5);
+                    //Log Cabecera
 
-                    if(_extCab.trim() != '.png' && _extCab.trim() != '.jpg' && _extCab.trim() != 'jpeg'){
-                        var _imgCab = document.getElementById("logoCab");
-                        var _fileCab = _imgCab.files[0];
-                        var _fullPathCab = document.getElementById('logoCab').value;
-                        _extCab = _fullPathCab.substring(_fullPathCab.length - 4);
-                        _extCab = _extCab.toLowerCase();
+                    var _logocab = document.getElementById("imgfileCab").style.backgroundImage;
+                    var _urlcab = _logocab.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+                    var _poscab = _urlcab.trim().indexOf('.');
+                    var _extcab = _urlcab.trim().substr(_pos, 5);
 
-                        if(_extCab.trim() == '.png' || _extCab.trim() == '.jpg' || _extCab.trim() == 'jpeg'){
-                            _cambiarcab = 'SI';
-                        }else{
-                            mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
-                            return;
-                        } 
-                        
+                    if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != '.jpeg'){
+                        _seleccab = 'SI';
+                    }  
+
+                    if(_seleccab == 'SI'){
+                        var _imagencab = document.getElementById("logoCab");
+                        var _filecab = _imagencab.files[0];
+                        var _fullPathcab = document.getElementById('logoCab').value;
+                        _extcab = _fullPathcab.substring(_fullPathcab.length - 4);
+                        _extcab = _extcab.toLowerCase();   
                     }
 
-                      //Imagen Pie
-
-                    var _imgfilePie = document.getElementById("imgfilePie").style.backgroundImage;
-                    var _urlimgPie = _imgfilePie.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-                    var _posPie = _urlimgPie.trim().indexOf('.');
-                    var _extPie = _urlimgPie.trim().substr(_posPie, 5);
-
-                    if(_extPie.trim() != '.png' && _extPie.trim() != '.jpg' && _extPie.trim() != 'jpeg'){
-                        var _imgPie = document.getElementById("logoPie");
-                        var _filePie = _imgPie.files[0];
-                        var _fullPathPie = document.getElementById('logoPie').value;
-                        _extPie = _fullPathPie.substring(_fullPathPie.length - 4);
-                        _extPie = _extPie.toLowerCase();
-
-                        if(_extPie.trim() == '.png' || _extPie.trim() == '.jpg' || _extPie.trim() == 'jpeg'){
-                            _cambiarpie = 'SI';
-                        }else{
-                            mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-center", 3);
-                            return;
-                        }     
-                        
+                    if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != '.jpeg'){
+                        //mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
+                        mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
+                        return;
                     }
+
+
+                      //Log Pie
+
+                    var _logopie = document.getElementById("imgfilePie").style.backgroundImage;
+                    var _urlpie = _logopie.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+                    var _pospie = _urlpie.trim().indexOf('.');
+                    var _extpie = _urlpie.trim().substr(_pos, 5);
+
+                    if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != '.jpeg'){
+                        _selecpie = 'SI';
+                    }  
+
+                    if(_selecpie == 'SI'){
+                        var _imagenpie = document.getElementById("logoPie");
+                        var _filepie = _imagenpie.files[0];
+                        var _fullPathpie = document.getElementById('logoPie').value;
+                        _extpie = _fullPathpie.substring(_fullPathpie.length - 4);
+                        _extpie = _extpie.toLowerCase();   
+                    }
+
+                    if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != '.jpeg'){
+                        mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
+                        return;
+                    }
+
 
                         var form_data = new FormData();
                         form_data.append('xxClieid', _idclie);            
@@ -1366,10 +1352,10 @@
                         form_data.append('xxCel3', _cel3);
                         form_data.append('xxEmail1', _email1);
                         form_data.append('xxEmail2', _email2);
-                        form_data.append('xxFileCab', _fileCab);
-                        form_data.append('xxCambiarcab', _cambiarcab);
-                        form_data.append('xxFilePie', _filePie);
-                        form_data.append('xxCambiarpie', _cambiarpie);
+                        form_data.append('xxFileCab', _filecab);
+                        form_data.append('xxCambiarcab', _seleccab);
+                        form_data.append('xxFilePie', _filepie);
+                        form_data.append('xxCambiarpie', _selecpie);
 
                     $.ajax({
                         url: "codephp/update_cliente.php",
