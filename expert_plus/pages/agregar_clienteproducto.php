@@ -164,7 +164,7 @@
                                         </div>
                                         <div class="mb-5 fv-row">
                                             <label class="required form-label">Cliente</label>
-                                            <input type="text" name="txtCliente" id="txtCliente" class="form-control mb-2" minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="" />
+                                            <input class="form-control mb-2 text-uppercase" type="text" name="txtCliente" id="txtCliente" class="form-control mb-2" minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="" />
                                         </div>
                                         <div class="mb-5 fv-row">
                                             <label class="form-label">Descripcion</label>
@@ -272,7 +272,6 @@
                                             </div>
                                         </div>
                                         <div class="separator separator-dashed"></div>
-                                        
                                         <div class="py-0" data-kt-customer-payment-method="row">
                                             <div class="py-3 d-flex flex-stack flex-wrap">
                                                 <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_3" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_3">
@@ -295,7 +294,7 @@
                                                 <div class="d-flex flex-wrap gap-5">
                                                     <div class="fv-row w-100 flex-md-root">
                                                         <label class="form-label">Email 1</label>
-                                                        <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" />
+                                                        <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorreo@dominio.com" class="form-control mb-2 text-lowercase" value="" />
                                                     </div>                                                 
                                                 </div>
                                                 <div class="d-flex flex-wrap gap-5">
@@ -345,16 +344,18 @@
                                         </div>
                                         <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                            <div class="col">
-                                                <label class="required form-label">Asistencia Mes</label>
+                                                <label class="form-label">Asistencia Mes</label>
                                                 <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" value="1" />
+                                                <br>
                                                 <label class="form-check form-switch form-check-custom form-check-solid">
                                                     <input class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
                                                     <span class="form-check-label fw-bold text-muted" id="lblCobertura" for="chkEnviar1">Cobertura NO</span>
                                                 </label> 
                                            </div>
                                            <div class="col">
-                                                <label class="required form-label">Asistencia Anual</label>
+                                                <label class="form-label">Asistencia Anual</label>
                                                 <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" value="1" />
+                                                <br>
                                                 <label class="form-check form-switch form-check-custom form-check-solid">
                                                     <input class="form-check-input" name="chkSistema" id="chkSistema" type="checkbox" />
                                                     <span class="form-check-label fw-bold text-muted" id="lblSistema" for="chkEnviar1">Sistema NO</span>
@@ -432,7 +433,7 @@
                                 <span class="required">Grupo</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
                             </label>
-                            <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
+                            <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
                         </div>
                         <div class="fv-row mb-15">
                             <label class="fs-6 fw-bold form-label mb-2">
@@ -475,12 +476,12 @@
 
                     var _respuesta = $.post("codephp/cargar_combos.php", _parametros);
                     _respuesta.done(function(response) {
-                        //document.getElementById("city").className = "form-control";
+                   
                         $("#cboCiudad").html(response);
                         
                     });
                     _respuesta.fail(function() {
-                        //mensajesalertify('Error al cargar listado de ciudades','E','top-right',10);
+                       
                     });
                     _respuesta.always(function() {
                         //alert("ajax complete");
@@ -574,7 +575,6 @@
                 var _asistemes = $('#txtAsisMes').val();
                 var _asistanu = $('#txtAsisAnu').val();
 
-            
                
                 if(_producto == ''){
                     mensajesalertify("Ingrese Producto..!!","W","top-right",3);
@@ -668,7 +668,6 @@
 
             });
 
-         
              
             // Guardar Cliente & Producto
             function f_Guardar(_idpais,_idempr,_iduser){
@@ -955,26 +954,36 @@
                     xxDesc: _descGrupo
                 }
 
-                var xrespuesta = $.post("codephp/grabar_grupo.php", _parametros);
+                var xrespuesta = $.post("codephp/consultar_grupo.php", _parametros);
                     xrespuesta.done(function(response){
+                        if(response.trim() == 'OK'){
 
-                        if(response.trim() != 'ERR'){
+                            var xrespuesta = $.post("codephp/grabar_grupo.php", _parametros);
+                            xrespuesta.done(function(response){
+                                if(response.trim() != 'ERR'){
 
-                            mensajesalertify('Nuevo Grupo Agregado', 'S', 'top-center', 3); 
-                            
+                                    mensajesalertify('Nuevo Grupo Agregado', 'S', 'top-center', 3); 
+                                    
+                                    $("#txtGrupo").val("");
+                                    $("#txtDescGrupo").val("");
+                                    $("#cboGrupo").empty();
+                                    $("#cboGrupo").html(response);     
+                                    $("#modal_new_grupo").modal("hide");
+                             
+                                }
+
+                            });
+
+
+                        }else  if(response.trim() == 'EXISTE'){
+                            mensajesalertify('Grupo ya Existe', 'W', 'top-right', 3);
+
                             $("#txtGrupo").val("");
                             $("#txtDescGrupo").val("");
                             $("#cboGrupo").empty();
-                            $("#cboGrupo").html(response);     
-                            $("#modal_new_grupo").modal("hide");
-
-                        }else if(response.trim() == 'EXISTE'){
-                            mensajesalertify('Grupo ya Existe', 'W', 'top-right', 3);
                         }
 
                     });
-
-                //alert(_usuaid);
 
             }
             

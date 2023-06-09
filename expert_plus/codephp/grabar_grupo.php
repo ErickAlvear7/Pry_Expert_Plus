@@ -27,27 +27,18 @@
             $xGrupo = trim(mb_strtoupper(safe($_POST['xxGrupo'])));
             $xDesc = safe($_POST['xxDesc']);
 
-            $xSQL = "SELECT * FROM `expert_grupos` gru WHERE gru.pais_id=$xPaisid AND gru.empr_id=$xEmprid AND gru.grup_nombre='$xGrupo' ";
-            $all_param = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
-            $xRow = mysqli_num_rows($all_param);
 
-            if($xRow == 0){
+            $xSQL = "INSERT INTO `expert_grupos`(pais_id,empr_id,grup_nombre,grup_descripcion,usuariocreacion,terminalcreacion,fechacreacion) ";
+            $xSQL .= "VALUES($xPaisid,$xEmprid,'$xGrupo','$xDesc',$xUsuaid,'$xTerminal','{$xFecha}') ";
+            mysqli_query($con, $xSQL); 
 
-                $xSQL = "INSERT INTO `expert_grupos`(pais_id,empr_id,grup_nombre,grup_descripcion,usuariocreacion,terminalcreacion,fechacreacion) ";
-                $xSQL .= "VALUES($xPaisid,$xEmprid,'$xGrupo','$xDesc',$xUsuaid,'$xTerminal','{$xFecha}') ";
-                mysqli_query($con, $xSQL); 
-
-                $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND grup_estado='A' ";
-                $all_datos =  mysqli_query($con, $xSQL);
-                $resultado = '<option></option>';
-                foreach ($all_datos as $grupo){ 
-                    $resultado .='<option value="'.$grupo["Codigo"].'">' . $grupo["NombreGrupo"].'</option>';
-                }  
-
-            }else{
-
-                $resultado = "EXISTE";
-            }
+            $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND grup_estado='A' ";
+            $all_datos =  mysqli_query($con, $xSQL);
+            $resultado = '<option></option>';
+            foreach ($all_datos as $grupo){ 
+                $resultado .='<option value="'.$grupo["Codigo"].'">' . $grupo["NombreGrupo"].'</option>';
+            }  
+         
             
         }       
     }
