@@ -168,7 +168,7 @@
                                         </div>
                                         <div class="mb-5 fv-row">
                                             <label class="form-label">Descripcion</label>
-                                            <textarea class="form-control mb-2" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                                            <textarea class="form-control mb-2 text-uppercase" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
                                         </div>                                 
                                     </div>
                                 </div>
@@ -202,7 +202,7 @@
                                                     <div class="flex-equal me-5">
                                                         <div class="row mb-8">
                                                             <div class="col-xl-2">
-                                                                <div class="required fs-6 fw-bold mt-2 mb-3">Direccion:</div>
+                                                                <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
                                                             </div>
                                                             <div class="col-xl-10 fv-row">
                                                                 <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"></textarea>
@@ -213,7 +213,7 @@
                                                                 <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
                                                             </div>
                                                             <div class="col-xl-10 fv-row">
-                                                                <input type="url" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" value="" />
+                                                                <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" value="" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -294,7 +294,7 @@
                                                 <div class="d-flex flex-wrap gap-5">
                                                     <div class="fv-row w-100 flex-md-root">
                                                         <label class="form-label">Email 1</label>
-                                                        <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorreo@dominio.com" class="form-control mb-2 text-lowercase" value="" />
+                                                        <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="correo@dominio.com" class="form-control mb-2 text-lowercase" value="" />
                                                     </div>                                                 
                                                 </div>
                                                 <div class="d-flex flex-wrap gap-5">
@@ -324,7 +324,7 @@
                                         </div>
                                         <div class="mb-5 fv-row">
                                             <label class="form-label">Descripcion</label>
-                                            <textarea class="form-control mb-2" name="txtDescripcion" id="txtDescripcion" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                                            <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
                                         </div>
                                         <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                             <div class="col">
@@ -511,6 +511,8 @@
 
             $(document).on("click","#chkCobertura",function(){
 
+                //debugger;
+
                 _cobertura = "NO";
 
                 if($("#chkCobertura").is(":checked")){
@@ -525,6 +527,8 @@
             });
 
             $(document).on("click","#chkSistema",function(){
+
+                //debugger;
 
                    _sistema = "NO";
 
@@ -559,6 +563,7 @@
 
             $('#btnAgregar').click(function(){
 
+               
                 var _agregarPro = 'add';
                 var _gerencial = 'NO';
                 var _continuar = true;
@@ -653,7 +658,9 @@
                                     $("#txtAsisMes").val("1");
                                     $("#txtAsisAnu").val("1");
                                     document.getElementById("chkCobertura").checked = false;
-                                    document.getElementById("chkSistema").checked = false;    
+                                    $("#lblCobertura").text("Cobertura NO");
+                                    document.getElementById("chkSistema").checked = false;
+                                    $("#lblSistema").text("Sistema NO");    
 
                                 }
                                 
@@ -674,7 +681,7 @@
                 var _cboProv = $('#cboProvincia').val();
                 var _cboIdProv = $('#cboCiudad').val();
                 var _cliente = $.trim($("#txtCliente").val());
-                var _desc = $.trim($("#txtDesc").val()); 
+                var _desc = $.trim($("#txtDesc").val());
                 var _direc = $.trim($("#txtDireccion").val()); 
                 var _url = $.trim($("#txtUrl").val()); 
                 var _tel1 = $.trim($("#txtFono1").val()); 
@@ -750,6 +757,15 @@
                         return false;
                     }
 
+                    if(_url != ''){
+                       try{
+                           new URL(_url);
+                       }catch(err){
+                           mensajesalertify("Direccion URL Incorrecta..!", "W", "top-right", 3);
+                           return false;
+                       }
+                   }
+
                     if(_tel1 != '')
                    {
                        _valor = document.getElementById("txtFono1").value;
@@ -810,7 +826,7 @@
                         var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
                         if (regex.test(_email1.trim())){
                         }else{
-                            mensajesalertify("Email Incorrecto..!!","E","top-right",3);
+                            mensajesalertify("Email 1 Incorrecto..!!","W","top-right",3);
                             return false;
                         }  
                     }
@@ -819,7 +835,7 @@
                         var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
                         if (regex.test(_email2.trim())){
                         }else{
-                            mensajesalertify("Email Incorrecto..!!","E","top-right",3);
+                            mensajesalertify("Email 2 Incorrecto..!!","W","top-right",3);
                             return false;
                         }  
                     }
@@ -889,7 +905,7 @@
                                 });
                          
                             }else{
-                                mensajesalertify("Cliente ya Existe..!!","E","top-right",3);
+                                mensajesalertify("Cliente ya Existe..!!","W","top-right",3);
                                 return false;
 
                             }

@@ -30,8 +30,9 @@
 
             foreach($xResult as $drfila){
 
-                $xProducto = $drfila['arryproducto'];
-                $xDesc = $drfila['arrydescripcion'];
+                $xProducto = safe($drfila['arryproducto']);
+                $xDescrip = safe($drfila['arrydescripcion']);
+                $xDesc = strtoupper($xDescrip);
                 $xCosto = $drfila['arrycosto'];
                 $xGrupid = $drfila['arrygrupid'];
                 $xCober = $drfila['arrycober'];
@@ -46,9 +47,6 @@
                 $xSQL .= "'$xSist','$xGerencial')";
                 mysqli_query($con, $xSQL);
 
-                $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
-                $xSQL .= "VALUES('Nuevo Producto Asignado',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
-                mysqli_query($con, $xSQL);
             
             }
 
