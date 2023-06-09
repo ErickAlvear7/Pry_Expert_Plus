@@ -320,7 +320,7 @@
                                     <div class="card-body pt-0">
                                         <div class="mb-5 fv-row">
                                             <label class="required form-label">Producto</label>
-                                            <input type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
+                                            <input class="form-control mb-2 text-uppercase" type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
                                         </div>
                                         <div class="mb-5 fv-row">
                                             <label class="form-label">Descripcion</label>
@@ -461,11 +461,9 @@
                     var _paisid = "<?php echo $xPaisid; ?>";
                     var _emprid = "<?php echo $xEmprid; ?>";                
                     _cboid = $(this).val(); //obtener el id seleccionado
-
-                
                     
                     $("#cboCiudad").empty();
-                    //$("#cboCiudad").append('<option value=0>--Seleccione Ciudad--</option>');
+        
 
                     var _parametros = {
                         xxPaisId: _paisid,
@@ -568,6 +566,7 @@
                 var _emprid = "<?php echo $xEmprid; ?>";
                 var _paisid = "<?php echo $xPaisid; ?>";
                 var _producto = $.trim($("#txtProducto").val());
+                    _producto = _producto.toUpperCase();
                 var _descripcion = $.trim($("#txtDescripcion").val());
                 var _costo = $.trim($("#txtCosto").val());
                 var _cbogrupo = $('#cboGrupo').val();
@@ -581,7 +580,7 @@
                     return false;
                 }
 
-                if(_costo == ''){
+                if(_costo == 0){
                     mensajesalertify("Ingrese Costo..!!","W","top-right",3);
                     return false;
                 }
@@ -606,7 +605,7 @@
                                 $.each(_result,function(i,item){
 
                                     if(item.arryproducto.toUpperCase() == _producto.toUpperCase()){
-                                        mensajesalertify("Producto ya Existe..!!","E","top-right",3);
+                                        mensajesalertify("Producto ya Existe..!!","W","top-right",3);
                                         _continuar = false;
                                         return false;
                                     }else{
@@ -625,8 +624,8 @@
                                     _output += '<td>' + _txtGrupo + ' <input type="hidden" name="hidden_grupo[]" id="txtGrupo' + _count + '" value="' + _txtGrupo + '" /></td>';
                                     _output += '<td>' + _producto + ' <input type="hidden" name="hidden_producto[]" id="txtProducto' + _count + '" value="' + _producto + '" /></td>';
                                     _output += '<td>' + _costo + ' <input type="hidden" name="hidden_costo[]" id="txtCosto' + _count + '" value="' + _costo + '" /></td>';
-                                    _output += '<td><div class="text-center"><div class="btn-group">';
-                                    _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
+                                    _output += '<td>';
+                                    _output += '<button type="button" title="Eliminar Producto" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></td>';
                                     _output += '</tr>';
 
                                     $('#tblProducto').append(_output);

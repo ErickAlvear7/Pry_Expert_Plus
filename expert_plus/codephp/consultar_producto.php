@@ -16,7 +16,7 @@
         if(isset($_POST['xxEmprid']) <> '' and isset($_POST['xxProducto']) <> ''){ 
 
             $xEmprid = $_POST['xxEmprid'];
-            $xProducto= $_POST['xxProducto'];
+            $xProducto= trim(mb_strtoupper(safe($_POST['xxProducto'])));
 
          
             $xSQL = " SELECT * FROM `expert_productos` prod ";
