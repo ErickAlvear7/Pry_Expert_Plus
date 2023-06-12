@@ -78,7 +78,7 @@
 		<div class="card-body pt-0">
 			<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
 				<thead>
-					<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
+					<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0 text-uppercase">
 					    <th style="display:none;">Id</th>
 						<th>Cliente</th>
                         <th>Descripcion</th>
