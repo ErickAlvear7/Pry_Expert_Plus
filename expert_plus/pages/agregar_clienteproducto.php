@@ -213,7 +213,7 @@
                                                                 <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
                                                             </div>
                                                             <div class="col-xl-10 fv-row">
-                                                                <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" value="" />
+                                                                <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" placeholder="https://misitio.com" value="" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -451,10 +451,11 @@
         </div>
 
         <script>
-
-            var _result = [],_count =0,_cobertura = "NO",_sistema = "NO";
+           
+           var _cobertura = "NO",_sistema = "NO", _count = 0, _result = [];;
 
             $(document).ready(function(){
+
 
                 $('#cboProvincia').change(function(){
                         
@@ -496,7 +497,38 @@
 
                 $( "#txtCosto" ).blur(function() {
                     this.value = parseFloat(this.value).toFixed(2);
-                });  
+
+                });
+                
+                $(document).on("click","#chkCobertura",function(){
+
+                    _cobertura = "NO";
+
+                    if($("#chkCobertura").is(":checked")){
+                        _cobertura = "SI";
+                        $("#lblCobertura").text("Cobertura SI");
+                    }else{
+                        _cobertura = "NO";
+                        $("#lblCobertura").text("Cobertura NO");
+
+                    }    
+
+                });
+
+                $(document).on("click","#chkSistema",function(){
+
+                    _sistema = "NO";
+
+                    if($("#chkSistema").is(":checked")){
+                        _sistema = "SI";
+                        $("#lblSistema").text("Sistema SI");
+                    }else{
+                        _sistema = "NO";
+                        $("#lblSistema").text("Sistema NO");
+
+                    }
+
+                 });
 
                     
 
@@ -509,39 +541,7 @@
 
                 //check Productos
 
-            $(document).on("click","#chkCobertura",function(){
-
-                //debugger;
-
-                _cobertura = "NO";
-
-                if($("#chkCobertura").is(":checked")){
-                    _cobertura = "SI";
-                    $("#lblCobertura").text("Cobertura SI");
-                }else{
-                    _cobertura = "NO";
-                    $("#lblCobertura").text("Cobertura NO");
-
-                }    
-
-            });
-
-            $(document).on("click","#chkSistema",function(){
-
-                //debugger;
-
-                   _sistema = "NO";
-
-                if($("#chkSistema").is(":checked")){
-                    _sistema = "SI";
-                    $("#lblSistema").text("Sistema SI");
-                }else{
-                    _sistema = "NO";
-                    $("#lblSistema").text("Sistema NO");
-
-                }
-
-            });
+           
 
             //Input type number change valor rangos
 
@@ -562,8 +562,7 @@
             //Agregar Productos
 
             $('#btnAgregar').click(function(){
-
-               
+              
                 var _agregarPro = 'add';
                 var _gerencial = 'NO';
                 var _continuar = true;
@@ -590,7 +589,7 @@
                     return false;
                 }
 
-                if(_cbogrupo == 0){
+                if(_txtGrupo == ''){
                     mensajesalertify("Seleccione Grupo..!!","W","top-right",3);
                     return false;
                 }
@@ -635,7 +634,6 @@
 
                                     $('#tblProducto').append(_output);
 
-                                       //console.log(_output);
                                      
                                     _objeto = {
                                         arryproducto: _producto,
@@ -658,8 +656,10 @@
                                     $("#txtAsisMes").val("1");
                                     $("#txtAsisAnu").val("1");
                                     document.getElementById("chkCobertura").checked = false;
+                                    _cobertura = "NO";
                                     $("#lblCobertura").text("Cobertura NO");
                                     document.getElementById("chkSistema").checked = false;
+                                    _sistema = "NO";
                                     $("#lblSistema").text("Sistema NO");    
 
                                 }
@@ -917,8 +917,8 @@
             //Eliminar Detalle en linea
 
             $(document).on("click",".btnDelete",function(){
-                row_id = $(this).attr("id");
-                _producto = $('#txtProducto' + row_id + '').val();
+                var row_id = $(this).attr("id");
+                var _producto = $('#txtProducto' + row_id + '').val();
 
                 FunRemoveItemFromArr(_result, _producto);
                 $('#row_' + row_id + '').remove();
