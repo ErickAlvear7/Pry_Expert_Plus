@@ -38,8 +38,6 @@
     $xSQL .="FROM `expert_cliente` ";
     $all_clie = mysqli_query($con, $xSQL);
 
-    
-
 ?>
 
 <div id="kt_content_container" class="container-xxl">
@@ -155,64 +153,61 @@
 	</div>
 </div>
 
-    <script>
+<script>
 
-        $(document).ready(function(){
+    $(document).ready(function(){
 
-            _mensaje = $('input#mensaje').val();
+        var _mensaje = $('input#mensaje').val();
 
-            if(_mensaje != ''){
-                mensajesalertify(_mensaje,"S","top-center",3); 
-            }
+        if(_mensaje != ''){
+            mensajesalertify(_mensaje,"S","top-center",3); 
+        }
 
+    });	
+
+        // Redirect boton editar cliente
+
+    function f_Editar(_clieid){
+        $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {'idclie': _clieid}); //POR METODO POST
+    }
+
+    //Update Estado cliente
+
+    function f_UpdateEstado(_clieid, _emprid){
+
+        var _check = $("#chk" + _clieid).is(":checked");
+        var _checked = "";
+        var _class = "badge badge-light-primary";
+        var _td = "td_" + _clieid;
+        var _btnedit = "btnEditar_" + _clieid;
+
+        if(_check){
+            var _estado = 'Activo';
+            _checked = "checked='checked'";
+            $('#'+_btnedit).prop("disabled",false);
+            
+        }else{
+            _estado = 'Inactivo';
+            _class = "badge badge-light-danger";
+            $('#'+_btnedit).prop("disabled",true);
+        }
+
+        var _changetd = document.getElementById(_td);
+            _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
+
+            var _parametros = {
+                xxClieid: _clieid,
+                xxEmprid: _emprid,
+                xxEstado: _estado
+            } 
+            
+        var xrespuesta = $.post("codephp/update_estadocliente.php", _parametros);
+            xrespuesta.done(function(response){
         });	
 
-         // Redirect boton editar cliente
+    }
 
-        function f_Editar(_clieid){
-          $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {'idclie': _clieid}); //POR METODO POST
-        }
-
-        //Update Estado cliente
-
-        function f_UpdateEstado(_clieid, _emprid){
-
-            let _check = $("#chk" + _clieid).is(":checked");
-            let _checked = "";
-            let _class = "badge badge-light-primary";
-            let _td = "td_" + _clieid;
-            let _btnedit = "btnEditar_" + _clieid;
-
-            if(_check){
-
-                _estado = 'Activo';
-                _checked = "checked='checked'";
-                $('#'+_btnedit).prop("disabled",false);
-                
-            }else{
-
-                _estado = 'Inactivo';
-                _class = "badge badge-light-danger";
-                $('#'+_btnedit).prop("disabled",true);
-            }
-
-                var _changetd = document.getElementById(_td);
-                    _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
-
-                    _parametros = {
-                        xxClieid: _clieid,
-                        xxEmprid: _emprid,
-                        xxEstado: _estado
-                    } 
-                    
-                var xrespuesta = $.post("codephp/update_estadocliente.php", _parametros);
-                xrespuesta.done(function(response){
-                });	
-
-        }
-
-      
-
-    </script>
+    
+</script>
 
    

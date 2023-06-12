@@ -18,7 +18,6 @@
             $xEmprid = $_POST['xxEmprid'];
             $xProducto= trim(mb_strtoupper(safe($_POST['xxProducto'])));
 
-         
             $xSQL = " SELECT * FROM `expert_productos` prod ";
             $xSQL .= "INNER JOIN `expert_cliente` clie ON clie.clie_id=prod.clie_id ";
             $xSQL .= " WHERE clie.empr_id=$xEmprid AND prod.prod_nombre='$xProducto'";
