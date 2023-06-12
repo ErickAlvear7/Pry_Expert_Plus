@@ -989,13 +989,12 @@
 
                             });
 
-
                         }else  if(response.trim() == 'EXISTE'){
                             mensajesalertify('Grupo ya Existe', 'W', 'top-right', 3);
 
                             $("#txtGrupo").val("");
                             $("#txtDescGrupo").val("");
-                            $("#cboGrupo").empty();
+                           
                         }
 
                     });

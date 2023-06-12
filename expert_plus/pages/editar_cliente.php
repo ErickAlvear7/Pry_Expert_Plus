@@ -967,10 +967,8 @@
 
             $(document).on("click",".btnEditar",function(){
                 $("#modal_producto").find("input,textarea,checkbox").val("");
-                //$('input:checkbox').removeAttr('checked');
-                
-
-                _rowid = $(this).attr("id");
+             
+                var _rowid = $(this).attr("id");
                 _rowid = _rowid.substring(10);
 
                 var xrespuesta = $.post("codephp/get_datosproductos.php", { xxProid: _rowid });
@@ -1084,19 +1082,18 @@
            
             function f_EditarProd(_paisid,_emprid,_usuaid){
 
-                //debugger;
                 var _output;
-                _prodid = _rowid;
-                _prodedit= $('#txtProductoEdit').val();
-                _descredit = $('#txtDescripcionEdit').val();
-                _costoedit = $('#txtCostoEdit').val();
-                _cbogrupoedit = $('#cboGrupoEdit').val();
-                _txtgrupoedit = $("#cboGrupoEdit option:selected").text();
-                _asismesedit = $('#txtAsisMesEdit').val();
-                _asisanuedit = $('#txtAsisAnuEdit').val();
-                _cobedit = _cobertura;
-                _sistedit = _sistema;
-                _gerenedit = _gerencial;
+                var _prodid = _rowid;
+                var _prodedit= $('#txtProductoEdit').val();
+                var _descredit = $('#txtDescripcionEdit').val();
+                var _costoedit = $('#txtCostoEdit').val();
+                var _cbogrupoedit = $('#cboGrupoEdit').val();
+                var _txtgrupoedit = $("#cboGrupoEdit option:selected").text();
+                var _asismesedit = $('#txtAsisMesEdit').val();
+                var _asisanuedit = $('#txtAsisAnuEdit').val();
+                var _cobedit = _cobertura;
+                var _sistedit = _sistema;
+                var _gerenedit = _gerencial;
 
 
                 if(_prodedit == ''){
