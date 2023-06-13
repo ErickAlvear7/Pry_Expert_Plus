@@ -277,32 +277,34 @@
 
     $(document).ready(function(){
 
-        _mensaje = $('input#mensaje').val();
+        //_mensaje = $('input#mensaje').val();
+        _mensaje = "<?php echo $mensaje; ?>";
 
-			if(_mensaje != ''){
-				mensajesweetalert("center","success",_mensaje,false,1900);  
-			}
+        if(_mensaje != ''){
+            //mensajesweetalert("center","success",_mensaje,false,1900);  
+            mensajesalertify(_mensaje, 'S', 'top-center', 5);
+        }
 			
-
        //abrir-modal-nuevo-parametro
-       $("#nuevoParametro").click(function(){
+        $("#nuevoParametro").click(function(){
 
-          $("#modal_parametro").find("input,textarea").val("");
-        
-           _result.splice(0,_result.length);
+            $("#modal_parametro").find("input,textarea").val("");
 
-        // while(a.length > 0) {
-        //         a.pop();
-        //     }
-           _estado = 'A';
+            _result.splice(0,_result.length);
 
+            // while(a.length > 0) {
+            //         a.pop();
+            //     }
+            _estado = 'A';
+
+            $('[href="#kt_ecommerce_settings_general"]').tab('show');
             $("#modal_parametro").modal("show");
             $('#modal_parametro').modal('handleUpdate')
 
         });  
     });
 
-  //Agregar detalle del paametro
+    //Agregar detalle del paametro
 
     $('#btnAgregar').click(function(){
       //debugger;
@@ -314,19 +316,20 @@
 
         if($.trim($('#txtDetalle').val()).length == 0)
         {           
-            mensajesweetalert("center","warning","Ingrese Detalle",false,1900);
+            //mensajesweetalert("center","warning","Ingrese Detalle",false,1900);
+            mensajesalertify('Ingrese Detalle', 'W', 'top-center', 5);
             return false;
         }
 
         if($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0 )
         {    
-            mensajesweetalert("center","warning","Ingrese Valor Texto o Valor Entero..!",false,1900);        
+            mensajesalertify('Ingrese Valor Texto o Valor Entero..!', 'W', 'top-center', 5);
             return false;
         }
 
         if($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0 )
         {    
-            mensajesweetalert("center","warning","Ingrese Solo Valor Texto o Valor Entero..!",false,1900);         
+            mensajesalertify('Ingrese Solo Valor Texto o Valor Entero..!', 'W', 'top-center', 5);
             return false;
         }
 
@@ -356,7 +359,7 @@
                     $.each(_result,function(i,item){
                         if(item.arrydetalle.toUpperCase() == _detalle.toUpperCase())
                         {                  
-                            mensajesweetalert("center","warning","Nombre del Detalle ya Existe..!",false,1900);                    
+                            mensajesalertify('Nombre del Detalle ya Existe..!', 'W', 'top-center', 5);
                             _continuar = false;
                             return false;
                         }else{
@@ -365,7 +368,7 @@
                                 {
                                     if(item.arryvalorv.toUpperCase() == _valorV.toUpperCase())
                                     {                               
-                                        mensajesweetalert("center","warning","Valor Texto de Parámetro ya Existe..!",false,1900);    
+                                        mensajesalertify('Valor Texto de Parámetro ya Existe..!', 'W', 'top-center', 5);
                                         _continuar = false;
                                         return false;
                                     }else{
@@ -375,7 +378,7 @@
                                 {
                                     if(item.arryvalori == _valorI)
                                     {                               
-                                        mensajesweetalert("center","warning","Valor Entero de Parámetro ya Existe..!",false,1900); 
+                                        mensajesalertify('Valor Entero de Parámetro ya Existe..!', 'W', 'top-center', 5);
                                         _continuar = false;
                                         return false;
                                     }else{
@@ -414,7 +417,7 @@
                         $("#txtValorI").val("");
                     }
                 }else{
-                    mensajesweetalert("center","warning","Nombre del Detalle y/o Valor Texto u Entero ya existe..!",false,1900);
+                    mensajesalertify('Nombre del Detalle y/o Valor Texto o Entero ya existe..!', 'W', 'top-center', 5);
                 }
             });
         }
@@ -431,12 +434,12 @@
 
       if(_parametro == '')
       {                        
-        mensajesweetalert("center","warning","Ingrese Nombre del Parametro..!!",false,1900);
+        mensajesalertify('Ingrese Nombre del Parametro..!', 'W', 'top-center', 5);
         return;
       }
 
       if(_count == 0){
-        mensajesweetalert("center","warning","Ingrese al menos un Detalle..!!",false,1900);
+        mensajesalertify('Ingrese al menos un Detalle..!', 'W', 'top-center', 5);
         return;
       }
 
@@ -510,8 +513,7 @@
 
 
             }else{
-
-                mensajesweetalert("center","warning","Nombre del Parametro ya Existe..!",false,1900);
+                mensajesalertify('Nombre del Parametro ya Existe..!', 'W', 'top-center', 5);
             }
 
         });

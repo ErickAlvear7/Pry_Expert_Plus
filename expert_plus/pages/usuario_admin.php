@@ -49,7 +49,7 @@
  	<!--begin::Container-->
 	<div id="kt_content_container" class="container-xxl">
 		<input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
-		<div class="card mb-5 mb-xxl-8">
+		<!-- <div class="card mb-5 mb-xxl-8">
 			<div class="card-body pt-9 pb-0">
 				<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
 					<li class="nav-item mt-2">
@@ -60,7 +60,7 @@
 					</li>
 				</ul>
 			</div>
-		</div>    
+		</div>     -->
 		
 		<div class="card">
 			<div class="card-header border-0 pt-6">
@@ -592,7 +592,7 @@
 				}
 				
 				var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-				if (regex.test(_login.trim())){
+				if(regex.test(_login.trim())){
 				}else{
 					mensajesweetalert("center","warning","Login/Email incorrecto",false,1800);
 					return;
@@ -648,12 +648,12 @@
 
 							$.ajax({
 								url: _ulr,
-								type: "post",                
+								type: "post",
 								data: form_data,
 								processData: false,
 								contentType: false,
 								dataType: "json",
-								success: function(response){   
+								success: function(response){
 
 									var _userid = response;	
 									var _usuario = _nombre + ' ' + _apellido;
@@ -678,7 +678,7 @@
 										xxPaisid: _paisid,
 										xxEmprid: _emprid,
 										xxUsuaid: _usuaid,
-										xxDetalle: _detalle,
+										xxDetalle: _detalle
 									}					
 		
 									$.post("codephp/new_log.php", $parametros, function(response){
@@ -689,14 +689,13 @@
 										// }else{
 										//     $("#kt_modal_add_user").modal("hide");
 										// }
-										$.redirect('?page=seg_usuarioadmin&menuid=<?php echo $menuid; ?>', {'mensaje': _mensaje}); //POR METODO POST
+										$.redirect('?page=seg_usuarioadmin&menuid=<?php echo $menuid; ?>', { 'mensaje': _mensaje } ); //POR METODO POST
 									}                                        
-								},
-								error: function (error) {
+								},								
+								error: function (error){
 									console.log(error);
 								}
-							});   
-
+							});
 						}else{
 							mensajesweetalert("center","warning","Login/Email ya existe..!",false,1800);
 							return;
@@ -721,8 +720,7 @@
 								if(_addmod == 'add'){
 									_detalle = 'Nuevo usuario creado';
 									_mensaje = 'Grabado con Exito';
-								}
-								else{
+								}else{
 									_detalle = 'Actualizar usuario';
 									_mensaje = 'Actualizado con Exito';
 								} 
@@ -752,9 +750,7 @@
 					}); 
 				}
 
-			});
-
-		
+			});	
 		});	
 
 		//cambiar estado y desactivar botones en linea

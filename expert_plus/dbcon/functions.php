@@ -6,8 +6,8 @@
         $valor = str_ireplace("xml","",$valor);
         $valor = str_ireplace("script","",$valor);
         $valor = str_ireplace("java","",$valor);
-        $valor = str_ireplace(" document ","",$valor);
-        $valor = str_ireplace(" document","",$valor);    
+        //$valor = str_ireplace(" document ","",$valor);
+        //$valor = str_ireplace(" document","",$valor);    
         $valor = str_ireplace("SELECT ","",$valor);
         $valor = str_ireplace("COPY ","",$valor);
         $valor = str_ireplace("DELETE","",$valor);

@@ -309,22 +309,20 @@
        
         if($.trim($('#txtDetalle').val()).length == 0)
         {           
-            mensajesweetalert("center","warning","Ingrese Detalle",false,1900);
+            mensajesalertify('Ingrese Detalle..!', 'W', 'top-center', 5);
             return false;          
         }
 
         if($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0 )
         {    
-            mensajesweetalert("center","warning","Ingrese Valor Texto o Valor Entero..!",false,1900);        
+            mensajesalertify('Ingrese Valor Texto o Valor Entero..!', 'W', 'top-center', 5);
             return false;
-            
         }
 
         if($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0 )
         {    
-            mensajesweetalert("center","warning","Ingrese Solo Valor Texto o Valor Entero..!",false,1900);         
-            return false;
-       
+            mensajesalertify('Ingrese Solo Valor Texto o Valor Entero..!', 'W', 'top-center', 5);
+            return false;       
         }
 
         var _detalle = $.trim($('#txtDetalle').val());
@@ -349,16 +347,13 @@
                 xrespuesta.done(function(response){
                     if(response == 0){
 
-                       // debugger;
-
                         $parametros ={
                             xxPacaId: _pacaid,
                             xxDetalle: _detalle,
                             xxValorV: _valorV,
                             xxValorI: _valorI,
                             xxEstado: _estado,
-                            xxOrden: _ordendet
-                         
+                            xxOrden: _ordendet                         
                         }
 
                         $.ajax({
@@ -368,8 +363,6 @@
 							data: $parametros,          
 							success: function(response){ 
 								if(response != 0){
-
-								           
                                     _padeid = response;
                                     _padenom = _detalle;
                                     _padev = _valorV;
@@ -404,8 +397,7 @@
 						});
 
                     }else{
-
-                        mensajesweetalert("center","warning","Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!",false,1800);
+                        mensajesalertify('Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!', 'W', 'top-center', 5);
                     }
 
                 });
@@ -436,12 +428,10 @@
 					data: $parametros,          
 					success: function(data){ 
 
-                     
                      //console.log(data);
                         var _nombre = data[0]['Nombre'];
                         var _valorv = data[0]['ValorT'];
                         var _valori = data[0]['ValorI'];
-
 
                         $("#txtDetalleEdit").val(_nombre);
                         $("#txtValorVedit").val(_valorv);
@@ -450,9 +440,7 @@
                         $("#txtDetalleold").val(_nombre);
                         $("#txtValortexto").val(_valorv);
                         $("#txtValorentero").val(_valori);
-
-                   
-						                                   
+ 
                         if(_valorv == ''){
                             $("#txtValorVedit").prop("disabled",true);   
                         }
@@ -517,19 +505,19 @@
 
        if($.trim($('#txtDetalleEdit').val()).length == 0)
         {           
-            mensajesweetalert("center","warning","Ingrese Detalle",false,1800);
+            mensajesalertify('Ingrese Detalle..!', 'W', 'top-center', 5);
             return false;
         }
 
         if($.trim($('#txtValorVedit').val()).length == 0 && $.trim($('#txtValorIedit').val()).length == 0 )
         {    
-            mensajesweetalert("center","warning","Ingrese Valor Texto o Valor Entero..!",false,1800);        
+            mensajesalertify('Ingrese Valor Texto o Valor Entero..!', 'W', 'top-center', 5);        
             return false;
         }
 
         if($.trim($('#txtValorVedit').val()).length > 0 && $.trim($('#txtValorIedit').val()).length > 0 )
         {    
-            mensajesweetalert("center","warning","Ingrese Solo Valor Texto o Valor Entero..!",false,1800);         
+            mensajesalertify('Ingrese Solo Valor Texto o Valor Entero..!', 'W', 'top-center', 5);
             return false;
         }
 
@@ -589,8 +577,7 @@
                     }); 
             
                 }else{
-
-                    mensajesweetalert("center","warning","Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!",false,2800);
+                    mensajesalertify('Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!', 'W', 'top-center', 5);
                 }
 
             });
@@ -640,22 +627,22 @@
         var _descripcion = $.trim($("#txtDescEdit").val());
 
         if(_parametro == ''){                        
-            mensajesweetalert("center","warning","Ingrese Nombre del Parametro..!!",false,1800);
+            mensajesalertify('Ingrese Nombre del Parametro..!', 'W', 'top-center', 5);
             return;
         }
 
-        $datosParam ={
+        parametros ={
             xxPaisId: _idpais,
             xxEmprId: _idempr,
             xxParametro: _parametro
         }
         
         if(_parametroold != _parametro){
-            var xrespuesta = $.post("codephp/consultar_parametro.php", $datosParam);
+            var xrespuesta = $.post("codephp/consultar_parametro.php", parametros);
             xrespuesta.done(function(response){
-                if(response.trim() == 0){
+                if(response.trim() == '0'){
 
-                    $parametros ={
+                    parametros ={
                         xxPacaId: _idpaca,
                         xxEmprId: _idempr,
                         xxPaisId: _idpais,
@@ -663,36 +650,32 @@
                         xxDescripcion: _descripcion 
                     }
                     
-                    var xresponse = $.post("codephp/update_parametro.php", $parametros);
+                    var xresponse = $.post("codephp/update_parametro.php", parametros);
                     xresponse.done(function(response){            
-
                         if(response.trim() == 'OK'){
                             $.redirect('?page=param_generales&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito'}); //POR METODO POST            
                         }
-
                     }); 
                 }else{
-                    mensajesweetalert("center","warning","Nombre del Parametro ya Existe..!",false,1800);
+                    //mensajesweetalert("center","warning","Nombre del Parametro ya Existe..!",false,1800);
+                    mensajesalertify('Nombre del Parametro ya Existe..!', 'W', 'top-center', 5);
                 }
-
             });
         }else{
-            $parametros ={
+            parametros ={
                 xxPacaId: _idpaca,
                 xxEmprId: _idempr,
                 xxPaisId: _idpais,
                 xxParametro: _parametro,
-                xxDescripcion: _descripcion
-                
+                xxDescripcion: _descripcion                
             }
             
-            var xresponse = $.post("codephp/update_parametro.php", $parametros);
+            var xresponse = $.post("codephp/update_parametro.php", parametros);
             xresponse.done(function(response){            
 
                 if(response.trim() == 'OK'){
                     $.redirect('?page=param_generales&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito'}); //POR METODO POST            
                 }
-
             });
         }
     }
@@ -717,28 +700,18 @@
             $('#'+_btnedit).prop("disabled",true);
         }
 
+        parametros = {
+            xxPadeid: _padeid,
+            xxEstado: _estado
+        }
 
-            $parametros = {
-                xxPadeid: _padeid,
-                xxEstado: _estado
-            }
-
-            var xrespuesta = $.post("codephp/delnew_detalle.php", $parametros);
-            xrespuesta.done(function(response){
-            });	     
-
+        var xrespuesta = $.post("codephp/delnew_detalle.php", parametros);
+        xrespuesta.done(function(response){
+        });	
     }
-
-      //Desplazar-modal
 
    $("#modal_detalle").draggable({
         handle: ".modal-header"
     });
     
- 
-
-  
-
-
-
 </script> 	
