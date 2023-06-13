@@ -17,14 +17,7 @@
 	//$xServidor = $_SERVER['HTTP_HOST'];
 	$page = isset($_GET['page']) ? $_GET['page'] : "index";
 	$menuid = $_GET['menuid'];
-
-    if(!isset($_POST['id'])){
-        header("Location: ./logout.php");
-        exit();
-    }
-
-    $xPresid = $_POST['id'];
-
+	
     @session_start();
 
     if(isset($_SESSION["s_usuario"])){
@@ -45,51 +38,16 @@
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
     $all_provincia = mysqli_query($con, $xSQL);
 
-    $xSQL = "SELECT * FROM `expert_prestadora` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pres_id=$xPresid ";
-    $all_prestador = mysqli_query($con, $xSQL);
-    foreach ($all_prestador as $presta){
-        $xProvid = $presta['prov_id'];
-        $xNombre = $presta['pres_nombre'];
-        $xSector = $presta['pres_sector'];
-        $xTipoPresta = $presta['pres_tipoprestador'];
-        $xDireccion = $presta['pres_direccion'];
-        $xUrl = $presta['pres_url'];
-        $xFono1 = $presta['pres_fono1'];
-        $xFono2 = $presta['pres_fono2'];
-        $xFono3 = $presta['pres_fono3'];
-        $xCelu1 = $presta['pres_celular1'];
-        $xCelu2 = $presta['pres_celular2'];
-        $xCelu3 = $presta['pres_celular3'];
-        $xEmail1 = $presta['pres_email1'];
-        $xEnviar1 = $presta['pres_enviar1'];
-        $xEmail2 = $presta['pres_email2'];
-        $xEnviar2 = $presta['pres_enviar2'];
-        $xLogo = $presta['pres_logo'];
-    }
-
-	$xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND prov_id=$xProvid ";
-    $cbo_provincia = mysqli_query($con, $xSQL);    
-    foreach ($cbo_provincia as $prov){
-        $xCboProv = $prov['provincia'];
-    }
-
-	$xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND provincia='$xCboProv' ";
-    $cbo_ciudad = mysqli_query($con, $xSQL);    
-
     $xSQL = "SELECT pde.pade_nombre AS Nombre, pde.pade_valorV AS Valor, CASE pde.pade_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado FROM `expert_parametro_detalle` pde, `expert_parametro_cabecera` pca ";
     $xSQL .= "WHERE pde.paca_id=pca.paca_id AND pca.paca_nombre='Tipo Prestador' AND pca.paca_estado='A' AND pais_id=$xPaisid AND empr_id=$xEmprid ";
     $xSQL .= "ORDER BY pde.pade_orden ";
     $all_tipopresta = mysqli_query($con, $xSQL);
 
-    $xSQL = "SELECT * FROM `expert_prestadora_especialidad` xpe, `expert_especialidad` esp  WHERE xpe.espe_id=esp.espe_id AND xpe.pais_id=$xPaisid AND xpe.empr_id=$xEmprid AND xpe.pres_id=$xPresid ";
-    $all_especialidad = mysqli_query($con, $xSQL);
-
-
 ?>
 
     <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-            <div id="formPresta" class="form d-flex flex-column flex-lg-row">
+            <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/catalog/products.html">
                 <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
                     <div class="card card-flush py-4">
                         <div class="card-header">
@@ -108,10 +66,38 @@
                                 <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
                                     <i class="bi bi-x fs-2"></i>
                                 </span>
+                                <!-- <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remover Logo">
+                                    <i class="bi bi-x fs-2"></i>
+                                </span> -->
                             </div>
                             <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                         </div>
                     </div>
+
+                    <!-- <div class="card card-flush py-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h2>Status</h2>
+                            </div>
+                            <div class="card-toolbar">
+                                <div class="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_product_status"></div>
+                            </div>
+                        </div>
+                        <div class="card-body pt-s0">
+                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
+                                <option></option>
+                                <option value="published" selected="selected">Published</option>
+                                <option value="draft">Draft</option>
+                                <option value="scheduled">Scheduled</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                            <div class="text-muted fs-7">Set the product status.</div>
+                            <div class="d-none mt-10">
+                                <label for="kt_ecommerce_add_product_status_datepicker" class="form-label">Select publishing date and time</label>
+                                <input class="form-control" id="kt_ecommerce_add_product_status_datepicker" placeholder="Pick date &amp; time" />
+                            </div>
+                        </div>
+                    </div> -->
 
                     <div class="card card-flush py-4">
                         <div class="card-header">
@@ -128,17 +114,16 @@
                                     </svg>
                                 </span>                                                                
                                 Nueva Especialidad
-                            </button>   
-                            <div class="separator my-7"></div>      
-                            <button type="button" id="btnNuevoProfesional" class="btn btn-primary w-100" >
+                            </button>                           
+                            <!-- <button type="button" id="btnNuevoTipo" class="btn btn-light-primary btn-sm mb-10">
                                 <span class="svg-icon svg-icon-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M20 14H18V10H20C20.6 10 21 10.4 21 11V13C21 13.6 20.6 14 20 14ZM21 19V17C21 16.4 20.6 16 20 16H18V20H20C20.6 20 21 19.6 21 19ZM21 7V5C21 4.4 20.6 4 20 4H18V8H20C20.6 8 21 7.6 21 7Z" fill="currentColor" />
-                                        <path opacity="0.3" d="M17 22H3C2.4 22 2 21.6 2 21V3C2 2.4 2.4 2 3 2H17C17.6 2 18 2.4 18 3V21C18 21.6 17.6 22 17 22ZM10 7C8.9 7 8 7.9 8 9C8 10.1 8.9 11 10 11C11.1 11 12 10.1 12 9C12 7.9 11.1 7 10 7ZM13.3 16C14 16 14.5 15.3 14.3 14.7C13.7 13.2 12 12 10.1 12C8.10001 12 6.49999 13.1 5.89999 14.7C5.59999 15.3 6.19999 16 7.39999 16H13.3Z" fill="currentColor" />
+                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
                                     </svg>
-                                </span>
-                                Nuevo Profesional
-                            </button>                                               
+                                </span>                                                                
+                                Nuevo Tipo Prestador
+                            </button>                              -->
                         </div>
                     </div>
                 </div>
@@ -150,13 +135,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Especialidad Prestador</a>
                         </li>
-                        <!-- <a href="?page=prestador_admin&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
+                        <a href="?page=prestador_admin&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
                             <span class="svg-icon svg-icon-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
                                 </svg>
                             </span>
-                        </a> -->
+                        </a>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
@@ -173,6 +158,7 @@
                                                 <div class="fv-row mb-7">
                                                     <label class="fs-6 fw-bold form-label mt-3">
                                                         <span class="required">Provincia</span>
+                                                        <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's email."></i> -->
                                                     </label>
                                                     <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2" >
                                                         <option></option>
@@ -186,23 +172,19 @@
                                                 <div class="fv-row mb-7">
                                                     <label class="fs-6 fw-bold form-label mt-3">
                                                         <span class="required">Ciudad</span>
+                                                        <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's phone number (optional)."></i> -->
                                                     </label>
                                                     <select name="cboCiudad" id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2">
                                                         <option></option>
-                                                        <?php foreach ($cbo_ciudad as $ciudad) : ?>
-                                                            <option value="<?php echo $ciudad['prov_id'] ?>"><?php echo mb_strtoupper($ciudad['ciudad']) ?></option>
-                                                        <?php endforeach ?>
-                                                    </select> 
-                                                    <input type="hidden" name="txtcbociudad" id="txtcbociudad" class="form-control mb-2" value="<?php echo $xProvid; ?>"  />
+                                                    </select>                                                      
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="mb-5 fv-row">
                                             <label class="required form-label">Prestador</label>
-                                            <input type="text" name="txtPrestador" id="txtPrestador" class="form-control mb-2 text-uppercase" maxlength="150" placeholder="Nombre del Prestador" value="<?php echo $xNombre; ?> " />
+                                            <input type="text" name="txtPrestador" id="txtPrestador" class="form-control mb-2 text-uppercase" maxlength="150" placeholder="Nombre del Prestador" value="" />
                                             <div class="text-muted fs-7">El Prestador puede ser Clinica/Centro Medico/Estudio/Consultorio/Otros..</div>
-                                            <input type="hidden" name="txtPrestaant" id="txtPrestaant" class="form-control mb-2" value="<?php echo $xNombre; ?>" />
                                         </div>   
                                         
                                         <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
@@ -280,7 +262,7 @@
                                                                 <div class="required fs-6 fw-bold mt-2 mb-3">Direccion:</div>
                                                             </div>
                                                             <div class="col-xl-10 fv-row">
-                                                                <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDireccion; ?> </textarea>
+                                                                <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-8">
@@ -288,7 +270,7 @@
                                                                 <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
                                                             </div>
                                                             <div class="col-xl-10 fv-row">
-                                                                <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" placeHolder="https://wwww.dominio.com" value="<?php echo $xUrl; ?>" />
+                                                                <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" placeHolder="https://wwww.dominio.com" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -319,29 +301,29 @@
                                                 <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono1; ?>" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                                     </div>
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono2; ?>" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                                     </div> 
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono3; ?>" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                                     </div>                                                        
                                                 </div>
                                                 <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu1; ?>" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                                     </div>
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu2; ?>" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                                     </div> 
                                                     <div class="col">
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
-                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu3; ?>" />
+                                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                                     </div>
                                                 </div>                                                
                                             </div>
@@ -370,11 +352,11 @@
                                                 <div class="d-flex flex-wrap gap-5">
                                                     <div class="fv-row w-100 flex-md-root">
                                                         <label class="form-label">Email 1</label>
-                                                        <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="<?php echo $xEmail1; ?>" />
+                                                        <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" />
                                                     </div>
                                                     <label class="form-check form-switch form-check-custom form-check-solid">
-                                                        <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" <?php if($xEmail1 != '') { echo 'checked'; } ?> />
-                                                        <span id="spanEnv1" class="form-check-label fw-bold text-muted" for="chkEnviar1"> <?php if($xEmail1 != '') { echo 'Si Enviar'; }else { echo 'No Enviar'; } ?> </span>
+                                                        <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" />
+                                                        <span id="spanEnv1" class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>
                                                     </label>                                                    
                                                 </div>
                                                 <div class="d-flex flex-wrap gap-5">
@@ -392,14 +374,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-end">
-                                <!--<a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancelar</a>-->
-                                <button type="button" id="btnSave" class="btn btn-primary">
-                                    <span class="indicator-label">Grabar</span>
-                                    <span class="indicator-progress">Espere un momento...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                </button>
-                            </div>                            
                         </div>
 
                         <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
@@ -424,6 +398,7 @@
                                             </select>                                             
                                         </div>
                                         <div class="mb-10 fv-row">
+
                                             <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                                 <div class="col">
                                                     <label class="form-label">Pvp</label>
@@ -455,116 +430,97 @@
                                             <h2>Especialidades Asignadas</h2>
                                         </div>
                                     </div>
-                                    <div class="card-body pt-0" id="kt_contacts_list_body">
+                                    <div class="card-body pt-0">
                                         <div class="d-flex flex-column gap-10">
-                                            <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
-                                                <table id="tblEspecialidad" class="table align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
-                                                    <thead>
-                                                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                            <th style="display: none;">Id</th>
-                                                            <th>Especialidad</th>
-                                                            <th>Pvp</th>
-                                                            <th>Costo</th>
-                                                            <th>Estado</th>
-                                                            <th>Status</th>
-                                                            <th>Opciones</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="fw-bold text-gray-600">
+                                            <table id="tblEspecialidad" class="table align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
+                                                <thead>
+                                                    <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                        <th style="display: none;">Id</th>
+                                                        <th>Especialidad</th>
+                                                        <th>Pvp</th>
+                                                        <th>Costo</th>
+                                                        <th>Opciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="fw-bold text-gray-600">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                                        <?php 
-                                                
-                                                            foreach($all_especialidad as $especi){
-                                                                $xId = $especi['pree_id'];
-                                                                $xEspecialidad = trim($especi['espe_nombre']);
-                                                                $xPvp = trim($especi['pree_pvp']);
-                                                                $xCosto = trim($especi['pree_costo']);
-                                                                $xEstado = trim($especi['pree_estado']);
-                                                            ?>
-                                                                <?php 
-                                
-                                                                    $chkEstado = '';
-                                                                    $xDisabledEdit = '';
-                                                                    $xDisabledPerson = '';
-                                
-                                                                    if($xEstado == 'A'){
-                                                                        $xEstado = 'Activo';
-                                                                        $chkEstado = 'checked="checked"';
-                                                                        $xTextColor = "badge badge-light-primary";
-                                                                    }else{
-                                                                        $xEstado = 'Inactivo';
-                                                                        $xTextColor = "badge badge-light-danger";
-                                                                        $xDisabledEdit = 'disabled';
-                                                                    }
-                                
-                                                                ?>
-                                                                <tr id="row_<?php echo $xId; ?>">
-                                                                    <td>
-                                                                        <div class="d-flex align-items-center">
-                                                                            <div class="ms-5">
-                                                                                <span class="fw-bolder"><?php echo $xEspecialidad; ?></span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                
-                                                                    <td>
-                                                                        <div class="d-flex align-items-center">
-                                                                            <div class="ms-5">
-                                                                                <span class="fw-bolder"><?php echo $xPvp; ?></span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    
-                                                                    <td>
-                                                                        <div class="d-flex align-items-center">
-                                                                            <div class="ms-5">
-                                                                                <span class="fw-bolder"><?php echo $xCosto; ?></span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>                                    
-                                
-                                                                    <td id="td_<?php echo $xId; ?>">
-                                                                        <div class="d-flex align-items-center">
-                                                                            <div class="ms-5">
-                                                                                <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    
-                                                                    <td>
-                                                                        <div class="text-center">
-                                                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                                <input class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $xId; ?>" 
-                                                                                    onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>)" value="<?php echo $xId; ?>"/>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td> 													
-                                
-                                                                    <td class="">
-                                                                        <div class="">
-                                                                            <div class="btn-group">
-                                                                                <button id="btnEditar_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Especialidad Asiganada' >
-                                                                                    <i class='fa fa-edit'></i>
-                                                                                </button>	
-                                                                                <button id="btnPerson_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnPerson" <?php echo $xDisabledPerson; ?> title='Agregar Profesional' >
-                                                                                    <i class="fas fa-user"></i>
-                                                                                </button>	                                                                                                                             
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>                                                                
-                                                                </tr>
-                                                        <?php } ?>
-                                                    </tbody>
-                                                </table>
+                                <!-- <div class="card card-flush py-4">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h2>Shipping</h2>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="fv-row">
+                                            <div class="form-check form-check-custom form-check-solid mb-2">
+                                                <input class="form-check-input" type="checkbox" id="kt_ecommerce_add_product_shipping_checkbox" value="1" />
+                                                <label class="form-check-label">This is a physical product</label>
+                                            </div>
+                                            <div class="text-muted fs-7">Set if the product is a physical or digital item. Physical products may require shipping.</div>
+                                        </div>
+                                        <div id="kt_ecommerce_add_product_shipping" class="d-none mt-10">
+                                            <div class="mb-10 fv-row">
+                                                <label class="form-label">Weight</label>
+                                                <input type="text" name="weight" class="form-control mb-2" placeholder="Product weight" value="" />
+                                                <div class="text-muted fs-7">Set a product weight in kilograms (kg).</div>
+                                            </div>
+                                            <div class="fv-row">
+                                                <label class="form-label">Dimension</label>
+                                                <div class="d-flex flex-wrap flex-sm-nowrap gap-3">
+                                                    <input type="number" name="width" class="form-control mb-2" placeholder="Width (w)" value="" />
+                                                    <input type="number" name="height" class="form-control mb-2" placeholder="Height (h)" value="" />
+                                                    <input type="number" name="length" class="form-control mb-2" placeholder="Lengtn (l)" value="" />
+                                                </div>
+                                                <div class="text-muted fs-7">Enter the product dimensions in centimeters (cm).</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="card card-flush py-4">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h2>Meta Options</h2>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="mb-10">
+                                            <label class="form-label">Meta Tag Title</label>
+                                            <input type="text" class="form-control mb-2" name="meta_title" placeholder="Meta tag name" />
+                                            <div class="text-muted fs-7">Set a meta tag title. Recommended to be simple and precise keywords.</div>
+                                        </div>
+                                        <div class="mb-10">
+                                            <label class="form-label">Meta Tag Description</label>
+                                            <div id="kt_ecommerce_add_product_meta_description" name="kt_ecommerce_add_product_meta_description" class="min-h-100px mb-2"></div>
+                                            <div class="text-muted fs-7">Set a meta tag description to the product for increased SEO ranking.</div>
+                                        </div>
+                                        <div>
+                                            <label class="form-label">Meta Tag Keywords</label>
+                                            <input id="kt_ecommerce_add_product_meta_keywords" name="kt_ecommerce_add_product_meta_keywords" class="form-control mb-2" />
+                                            <div class="text-muted fs-7">Set a list of keywords that the product is related to. Separate the keywords by adding a comma
+                                            <code>,</code>between each keyword.</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+
                             </div>
                         </div>
                     </div>
+                    <div class="d-flex justify-content-end">
+                        <a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancelar</a>
+                        <button type="button" id="btnSave" class="btn btn-primary">
+                            <span class="indicator-label">Grabar</span>
+                            <span class="indicator-progress">Espere un momento...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
 
         <div class="modal fade" id="modal-new-especialidad" tabindex="-1" aria-hidden="true">
@@ -589,7 +545,7 @@
                                     <div class="row fv-row">
                                         <div class="col-12">
                                             <select name="cboTipoEspe" id="cboTipoEspe" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo" data-dropdown-parent="#kt_modal_new_card_form" class="form-select mb-2">
-                                                <option></option>
+                                                <option</option>
                                                 <?php 
                                                 $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid ";
                                                 $xSQL .= "AND pca.paca_nombre='Tipo Especialidad' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
@@ -627,7 +583,7 @@
 
                             <div class="text-center pt-15">
                                 <button type="reset" data-bs-dismiss="modal" class="btn btn-secondary">Cerrar</button>
-                                <button type="button" id="btnSaveNew" class="btn btn-primary"><i class="las la-save"></i>
+                                <button type="button" id="btnSaveNew" class="btn btn-primary">
                                     <span class="indicator-label">Grabar</span>
                                     <span class="indicator-progress">Espere un momento...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -639,11 +595,11 @@
             </div>
         </div>
 
-        <div class="modal fade" id="modal-editar-especialidad" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="modal-new-tipoprestador" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2>Editar Especialidad-Asignada</h2>
+                        <h2>Nuevo Tipo Prestador</h2>
                         <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                             <span class="svg-icon svg-icon-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -655,215 +611,72 @@
                     </div>
                     <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                         <form id="kt_modal_new_card_form" class="form">
-                            <div class="row mb-10">
-                                <div class="col-md-12 fv-row">
-                                    <label class="required fs-6 fw-bold form-label mb-2">Especialidad</label>
-                                    <div class="row fv-row">
-                                        <div class="col-12">
-                                            <select name="cboEspecialidadEdit" id="cboEspecialidadEdit" aria-label="Seleccione Especialidad" data-control="select2" data-placeholder="Seleccione Especialidad" data-dropdown-parent="#modal-editar-especialidad" class="form-select mb-2">
-                                                <option></option>
-                                                <?php 
-                                                $xSQL = "SELECT espe_id AS Codigo,espe_nombre AS NombreEspe FROM `expert_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND espe_estado='A' ";
-                                                $all_datos =  mysqli_query($con, $xSQL);
-                                                foreach ($all_datos as $datos){ ?>
-                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['NombreEspe'] ?></option>
-                                                <?php } ?>                                                        
-                                            </select>  
-                                        </div>
-                                    </div>
-                                </div>
+
+                            <div class="d-flex flex-column mb-7 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                    <span class="required">Tipo Prestador</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre de la especialidad"></i>
+                                </label>
+                                <input type="text" class="form-control mb-2" maxlength="150" placeholder="Tipo Prestador" name="txtTipoPrestador" id="txtTipoPrestador" />
                             </div>
 
-                            <div class="mb-10 fv-row">
-                                <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                    <div class="col">
-                                        <label class="form-label">Pvp</label>
-                                        <input type="number" name="txtPvpEdit" id="txtPvpEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                            <div class="d-flex flex-column mb-7 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                    <span>Valor</span>
+                                </label>
+                                <input type="text" class="form-control mb-2" maxlength="100" placeholder="ValorV" name="txtValor" id="txtValor" />
+                            </div>
+                            
+                            <div class="d-flex flex-column mb-7 fv-row">
+                                <div class="mb-10">
+                                    <div class="fs-6 fw-bold mb-2">Tipo Prestadores</div>
+                                    <div class="mh-300px scroll-y me-n7 pe-7">
+                                        <table id="tblTipoPrestador" class="table align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
+                                            <thead>
+                                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                    <th>Tipo Prestador</th>
+                                                    <th>Valor</th>
+                                                    <th>Estado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="fw-bold text-gray-600">
+                                                <?php 
+                                        
+                                                    foreach($all_tipopresta as $presta){
+                                                        $xNombre = $presta['Nombre'];
+                                                        $xValor = $presta['Valor'];
+                                                        $xEstado = $presta['Estado'];
+                                                    ?>
+                                                        <?php                     
+                                                            if($xEstado == 'Activo'){
+                                                                $xTextColor = "badge badge-light-primary";
+                                                            }else{
+                                                                $xTextColor = "badge badge-light-danger";
+                                                            }                    
+                                                        ?>
+                                                        <tr>
+                                                            <td><?php echo $xNombre; ?></td>
+                                                            <td><?php echo $xValor; ?></td>                                                            
+                                                            <td>
+                                                                <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
+                                                            </td>                                                            
+                                                        </tr>
+                                                <?php } ?>                                                  
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <div class="col">
-                                        <label class="form-label">Costo Red</label>
-                                        <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                    </div>
-                                    <input type="hidden" name="txtcboespe" id="txtcboespe" class="form-control mb-2"  />
                                 </div>
                             </div>
 
                             <div class="text-center pt-15">
                                 <button type="reset" data-bs-dismiss="modal" class="btn btn-secondary">Cerrar</button>
-                                <button type="button" id="btnEditarEspe" class="btn btn-primary" onclick="f_GrabarEspe(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>)"><i class="las la-save"></i>
+                                <button type="button" id="btnSaveTipo" class="btn btn-primary">
                                     <span class="indicator-label">Grabar</span>
                                     <span class="indicator-progress">Espere un momento...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </button>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
-        <div class="modal fade" id="kt_modal_new_profesional" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered mw-750px">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title">Agregar Profesional</h2>                            
-                        <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">                                
-                            <span class="svg-icon svg-icon-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="modal-body scroll-y mx-lg-5 my-7">
-                        <div class="flex-lg-row-fluid ms-lg-15">
-                            <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
-                                <li class="nav-item">
-                                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#tabDatos">Datos Personales</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tabHorarios">Configurar Horarios</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="tabDatos" role="tabpanel">
-                                    <form id="kt_modal_new_profesional_form" class="form" >
-                                        <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_new_profesional_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_profesional_header" data-kt-scroll-wrappers="#kt_modal_new_profesional_scroll" data-kt-scroll-offset="300px">
-                                            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                                <div class="col">
-                                                    <div class="fv-row mb-7">
-                                                        <label class="fs-6 fw-bold form-label mt-3">
-                                                            <span class="required">Tipo Documento</span>
-                                                            <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's email."></i> -->
-                                                        </label>
-                                                        <?php	
-                                                            $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Documento' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
-                                                            $all_parametro = mysqli_query($con, $xSQL);    
-                                                        ?>
-                                                        <select name="cboTipoDoc" id="cboTipoDoc" aria-label="Seleccione Tipo Documento" data-control="select2" data-placeholder="Seleccione Tipo Documento" data-dropdown-parent="#kt_modal_new_profesional_form" class="form-select mb-2" >
-                                                            <option></option>
-                                                            <?php foreach ($all_parametro as $parametro) : ?>
-                                                                <option value="<?php echo $parametro['Codigo'] ?>"><?php echo $parametro['Descripcion']; ?></option>
-                                                            <?php endforeach ?>
-                                                        </select>
-                                                    </div>
-                                                </div>  
-                                                <div class="col">
-                                                    <div class="fv-row mb-7">
-                                                        <label class="fs-6 fw-bold form-label mt-3">
-                                                            <span class="required">No. Documento</span>
-                                                        </label>   
-                                                        <input type="text" name="txtNumDocumento" id="txtNumDocumento" class="form-control mb-2" maxlength="20" placeholder="Numero Documento"  />                                                     
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                                <div class="col">
-                                                    <div class="fv-row mb-7">
-                                                            <label class="fs-6 fw-bold form-label mt-3">
-                                                                <span class="required">Nombres</span>
-                                                            </label>   
-                                                            <input type="text" name="txtNombres" id="txtNombres" class="form-control mb-2" maxlength="100" placeholder="Nombres"  />
-                                                        </div>
-                                                    </div>  
-                                                <div class="col">
-                                                    <div class="fv-row mb-7">
-                                                        <label class="fs-6 fw-bold form-label mt-3">
-                                                            <span class="required">Apellidos</span>
-                                                        </label>   
-                                                        <input type="text" name="txtApellidos" id="txtApellidos" class="form-control mb-2" maxlength="100" placeholder="Apellidos" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                                <div class="col">
-                                                    <div class="fv-row mb-7">
-                                                        <label class="fs-6 fw-bold form-label mt-3">
-                                                            <span class="required">Genero</span>
-                                                            <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's email."></i> -->
-                                                        </label>
-                                                        <?php	
-                                                            $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Genero' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
-                                                            $all_parametro = mysqli_query($con, $xSQL);    
-                                                        ?>
-                                                        <select name="cboTipoGenero" id="cboTipoGenero" aria-label="Seleccione Tipo Genero" data-control="select2" data-placeholder="Seleccione Tipo Genero" data-dropdown-parent="#kt_modal_new_profesional_form" class="form-select mb-2" >
-                                                            <option></option>
-                                                            <?php foreach ($all_parametro as $parametro) : ?>
-                                                                <option value="<?php echo $parametro['Codigo'] ?>"><?php echo $parametro['Descripcion']; ?></option>
-                                                            <?php endforeach ?>
-                                                        </select>
-                                                    </div>
-                                                </div>  
-                                                <div class="col">
-                                                    <div class="fv-row mb-7">
-                                                        <label class="fs-6 fw-bold form-label mt-3">
-                                                            <span class="required">Tipo Profesion</span>
-                                                        </label>   
-                                                        <?php	
-                                                            $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Profesion' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
-                                                            $all_parametro = mysqli_query($con, $xSQL);    
-                                                        ?>
-                                                        <select name="cboTipoProfesion" id="cboTipoProfesion" aria-label="Seleccione Tipo Genero" data-control="select2" data-placeholder="Seleccione Tipo Genero" data-dropdown-parent="#kt_modal_new_profesional_form" class="form-select mb-2" >
-                                                            <option></option>
-                                                            <?php foreach ($all_parametro as $parametro) : ?>
-                                                                <option value="<?php echo $parametro['Codigo'] ?>"><?php echo $parametro['Descripcion']; ?></option>
-                                                            <?php endforeach ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="tab-pane fade" id="tabHorarios" role="tabpanel">
-                                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_update_role_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_update_role_header" data-kt-scroll-wrappers="#kt_modal_update_role_scroll" data-kt-scroll-offset="300px">
-                                        <div class="fv-row mb-10">
-                                            <label class="fs-5 fw-bolder form-label mb-2">
-                                                <span>Caracteristica 1</span>
-                                            </label>
-                                            <input class="form-control form-control-solid" name="txtDetalleedit1" id="txtDetalleedit1" maxlength="100" placeholder="Permite el control de..." />
-                                        </div>
-                                        <div class="fv-row mb-10">
-                                            <label class="fs-5 fw-bolder form-label mb-2">
-                                                <span>Caracteristica 2</span>
-                                            </label>
-                                            <input class="form-control form-control-solid" name="txtDetalleedit2" id="txtDetalleedit2" maxlength="100" placeholder="Permite el control de..." />
-                                        </div>
-                                        <div class="fv-row mb-10">
-                                            <label class="fs-5 fw-bolder form-label mb-2">
-                                                <span>Caracteristica 3</span>
-                                            </label>
-                                            <input class="form-control form-control-solid" name="txtDetalleedit3" id="txtDetalleedit3" maxlength="100" placeholder="Permite el control de..." />
-                                        </div>
-                                        <div class="fv-row mb-10">
-                                            <label class="fs-5 fw-bolder form-label mb-2">
-                                                <span>Caracteristica 4</span>
-                                            </label>
-                                            <input class="form-control form-control-solid" name="txtDetalleedit4" id="txtDetalleedit4" maxlength="100" placeholder="Permite el control de..." />
-                                        </div>
-                                        <div class="fv-row mb-10">
-                                            <label class="fs-5 fw-bolder form-label mb-2">
-                                                <span>Caracteristica 5</span>
-                                            </label>
-                                            <input class="form-control form-control-solid" name="txtDetalleedit5" id="txtDetalleedit5" maxlength="100" placeholder="Permite el control de..." />
-                                        </div>                                                                                                                                                                                
-                                    </div>
-                                </div>
-                                <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary" id="btnGrabarEdit" class="btn btn-primary" onclick="f_GrabarEditar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-save"></i>
-                                        <span class="indicator-label">Grabar</span>
-                                        <span class="indicator-progress">Por favor espere...
-                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -875,19 +688,10 @@
                 var _paisid = "<?php echo $xPaisid; ?>";
                 var _emprid = "<?php echo $xEmprid; ?>";
                 var _usuaid = "<?php echo $xUsuaid; ?>";
-                var _logo  = "<?php echo $xLogo; ?>";                
-
-                _logo = _logo == '' ? 'companyname.png' : _logo;
-
-                $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
-                $('#cboCiudad').val(<?php echo $xProvid; ?>).change();
-                $('#cboSector').val("<?php echo $xSector; ?>").change();
-                $('#cboTipo').val("<?php echo $xTipoPresta; ?>").change();
-
-                _enviar1 = "<?php echo $xEnviar1; ?>";
-                _enviar2 = "<?php echo $xEnviar2; ?>";
-
-                document.getElementById('imgfile').style.backgroundImage="url(logos/" + _logo + ")";
+                _result = [];
+                var _continuar = true;
+                _enviar1 = 'NO';
+                _enviar2 = 'NO';
 
                 $('#cboProvincia').change(function(){
                         
@@ -940,17 +744,7 @@
                     $("#modal-new-tipoprestador").find("input,textarea").val("");
                     $("#modal-new-tipoprestador").modal("show");
                     $('#modal-new-tipoprestador').modal('handleUpdate');
-                });
-                
-                $("#btnNuevoProfesional").click(function(){
-                    
-                    $('[href="#tabDatos"]').tab('show');
-                    $("#kt_modal_new_profesional").find("input,textarea").val("");
-                    $("#kt_modal_new_profesional").modal("show");
-                    $('#kt_modal_new_profesional').modal('handleUpdate');
-                    //$("#txtPvpNew").val("0.00");
-                    $("#cboTipoDoc").val(0).change();    
-                });                
+                });                 
 
                 $('#btnSaveNew').click(function(e){
 
@@ -1097,10 +891,9 @@
                     var _especialidad = $("#cboEspecialidad option:selected").text();
                     var _pvp = $.trim($("#txtPvp").val());
                     var _costo = $.trim($("#txtCosto").val());
-                    var _presid = <?php echo $xPresid; ?>;
 
                     if(_especialidad == ''){
-                        mensajesalertify('Seleccione Especialidad..!', 'W', 'top-center', 3);
+                        mensajesalertify('Seleccione Especialidad', 'W', 'top-center', 3);
                         return;
                     }
 
@@ -1110,46 +903,47 @@
 
                     if(_costo == ''){
                         _costo = '0.00';
-                    }
-                    
-                    var _parametros = {
-                        xxPaisid: _paisid,
-                        xxEmprid: _emprid,
-                        xxUsuaid: _usuaid,
-                        xxPresid: _presid,
-                        xxEspeid: _cboespe,                        
-                        xxPvp: _pvp,
-                        xxCosto: _costo
-                    }
+                    }                    
 
-                    var xrespuesta = $.post("codephp/consultar_prestaespeci.php", _parametros);
-                    xrespuesta.done(function(response){
+                    $.each(_result,function(i,item){
+                        if(item.arryid.toUpperCase() == _cboespe.toUpperCase())
+                        {                  
+                            mensajesalertify('Especialidad ya esta agregada', 'W', 'top-center', 3);   
+                            $("#cboEspecialidad").val(0).change();
+                            $("#txtPvp").val('0.00');
+                            $("#txtCosto").val('0.00');                            
+                            _continuar = false;
+                            return false;
+                        }
+                    });
 
-                        if(response != 0){
+                    if(_continuar){
+                        
+                        //_count = _count + 1;
+                        _output = '<tr id="row_' + _cboespe + '">';
+                        _output += '<td style="display: none;">' + _cboespe + '</td>';                
+                        _output += '<td>' + _especialidad + '</td>';
+                        _output += '<td>' + _pvp + '</td>';
+                        _output += '<td>' + _costo + '</td>';
+                        _output += '<td><div class=""><div class="btn-group">';
+                        _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _cboespe + '"><i class="fa fa-trash"></i></button></div></div></td>';
+                        _output += '</tr>';
 
-                            _id = response;
-                            _output = '<tr id=row_' + _id + '>';
-                            _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _especialidad + '</span></div></div></td>';
-                            _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _pvp + '</span></div></div></td>';
-                            _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _costo + '</span></div></div></td>';
-                            _output += '<td id="td_' + _id + '"><div class="d-flex align-items-center"><div class="ms-5"><div class="badge badge-light-primary">Activo</div></div></div></td>';                        
-                            _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
-                            _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _cboespe + '" onchange="f_UpdateEstado(';
-                            _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
-                            _output += '<td class=""><div class=""><div class="btn-group"><button id="btnEditar_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
-                            _output += 'title="Editar Especialidad Asiganada" ><i class="fa fa-edit"></i></button></div></div></td></tr>';
+                        $('#tblEspecialidad').append(_output);
 
-                            $('#tblEspecialidad').append(_output);
-
-                            mensajesalertify('Especialidad Agregada Correctamente..!', 'S', 'top-center', 3);
-                        }else{
-                            mensajesalertify('Especialidad ya está Asignada..!', 'W', 'top-center', 3);
+                        _objeto = {
+                            arryid: _cboespe,
+                            arryespeci: _especialidad,
+                            arrypvp: _pvp,
+                            arrycosto: _costo
                         }
 
+                        _result.push(_objeto);
                         $("#cboEspecialidad").val(0).change();
                         $("#txtPvp").val('0.00');
-                        $("#txtCosto").val('0.00');                        
-                    });
+                        $("#txtCosto").val('0.00');
+
+                    }
                 });
                 
                 $('#cboEspecialidad').change(function(){                    
@@ -1174,9 +968,7 @@
                 });
 
                 $('#btnSave').click(function(e){
-
-                   var _presid = "<?php echo $xPresid; ?>";
-                   var _logo = "<?php echo $xLogo; ?>";
+                   
                    var _provid = $('#cboProvincia').val();
                    var _ciudid = $('#cboCiudad').val();
                    var _prestador = $.trim($('#txtPrestador').val());
@@ -1192,11 +984,7 @@
                    var _celular3 = $.trim($('#txtCelular3').val());
                    var _email1 =  $.trim($('#txtEmail1').val());
                    var _email2 =  $.trim($('#txtEmail2').val());
-
-                   var _providant = $.trim($('#txtcbociudad').val());
-                   var _prestaant = $.trim($('#txtPrestaant').val());
-
-                   var _cambiarlogo = 'NO';
+                   var _selecc = 'NO';
                    _respuesta = 'OK';
 
                    if(_provid == ''){
@@ -1292,7 +1080,7 @@
                    
                        if (regex.test($('#txtEmail1').val().trim())) {
                        }else{
-                           mensajesalertify("Email1 no es Valido..!", "W", "top-center", 3);
+                           mensajesalertify("Email1 no es Valido", "W", "top-center", 3);
                            return;
                        }
                    }
@@ -1302,41 +1090,39 @@
                    
                        if (regex.test($('#txtEmail2').val().trim())) {
                        }else{
-                           mensajesalertify("Email2 no es Valido..!", "W", "top-center", 3);
+                           mensajesalertify("Email2 no es Valido", "W", "top-center", 3);
                            return;
                        }
                    }
 
-                   debugger;
+                   if(_result.length == 0){
+                        mensajesalertify("Agregue la menos una Especialidad", "W", "top-center", 3);
+                        return;
+                   }
+                   
                     var _imgfile = document.getElementById("imgfile").style.backgroundImage;
                     var _urlimg = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
                     var _pos = _urlimg.trim().indexOf('.');
                     var _ext = _urlimg.trim().substr(_pos, 5);
 
-                    if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
+                    if(_ext.trim() != '.svg'){
                         var _imagen = document.getElementById("imglogo");
                         var _file = _imagen.files[0];
                         var _fullPath = document.getElementById('imglogo').value;
                         _ext = _fullPath.substring(_fullPath.length - 4);
                         _ext = _ext.toLowerCase();   
 
-                        if(_ext.trim() == '.png' || _ext.trim() == '.jpg' || _ext.trim() == 'jpeg'){
-                            _cambiarlogo = 'SI';
-                        }else{
+                        if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
                             mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-center", 3);
                             return;
                         }
                     }
-
-                    form_data = new FormData();                    
+                                        
+                    form_data = new FormData();
                     form_data.append('xxPaisid', _paisid);
                     form_data.append('xxEmprid', _emprid);
-                    form_data.append('xxUsuaid', _usuaid);
-                    form_data.append('xxPresid', _presid);
                     form_data.append('xxProvid', _ciudid);
-                    form_data.append('xxProvidant', _providant);
                     form_data.append('xxPrestador', _prestador);
-                    form_data.append('xxPrestadorant', _prestaant);
                     form_data.append('xxSector', _sector);
                     form_data.append('xxTipo', _tipopresta);
                     form_data.append('xxDireccion', _direccion);
@@ -1352,63 +1138,67 @@
                     form_data.append('xxEmail2', _email2);
                     form_data.append('xxEnviar2', _enviar2);
                     form_data.append('xxFile', _file);
-                    form_data.append('xxCambiarlogo', _cambiarlogo);
-                    form_data.append('xxLogo', _logo);
+                    form_data.append('xxUsuaid', _usuaid);
 
-                    $.ajax({
-                        url: "codephp/update_prestador.php",
-                        type: "post",
-                        data: form_data,
-                        processData: false,
-                        contentType: false,
-                        dataType: "json",
-                        success: function(response){
-                            console.log(response);
-                            if(response == 'OK'){
-                                $.redirect('?page=prestador_admin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito..!'}); //POR METODO POST
-                            }else{
-                                mensajesalertify("Prestador ya Existe..!", "W", "top-center", 3);
-                            }
-                        },
-                        error: function (error) {
-                            console.log(error);
+                    var xrespuesta = $.post("codephp/consultar_prestador.php", { xxPaisid: _paisid, xxEmprid: _emprid, xxProvid: _ciudid, xxPrestador: _prestador });
+                    xrespuesta.done(function(response){
+                        
+                        if(response.trim() == '0'){
+
+                            $.ajax({
+                                url: "codephp/grabar_prestador.php",
+                                type: "post",
+                                data: form_data,
+                                processData: false,
+                                contentType: false,
+                                dataType: "json",
+                                success: function(dataid){   
+                                    if(dataid != 0){
+
+                                        var xrespuesta = $.post("codephp/grabar_prestaespeci.php", { xxPaisid: _paisid, xxEmprid: _emprid, xxUsuaid: _usuaid, xxPresid: dataid, xxResult: _result });
+                                        xrespuesta.done(function(xrespose){
+
+                                            if(xrespose.trim() == 'OK'){
+                                                _detalle = 'Nuevo Prestador Agregado Correctamente';
+                                                _respuesta = 'OK'; 
+                                            }else{
+                                                _detalle = 'Error creación de especialidades';
+                                                _respuesta = 'ERR';                                
+                                            }
+
+                                            /**PARA CREAR REGISTRO DE LOGS */
+                                            _parametros = {
+                                                xxPaisid: _paisid,
+                                                xxEmprid: _emprid,
+                                                xxUsuaid: _usuaid,
+                                                xxDetalle: _detalle,
+                                            }					
+                
+                                            $.post("codephp/new_log.php", _parametros, function(response){
+                                            });                                              
+                                        });    
+                                      
+                                    }else{
+                                        _detalle = 'Error creación nuevo prestador';
+                                        _respuesta = 'ERR';                                
+                                    }
+
+                                    if(_respuesta == 'OK'){
+                                        $.redirect('?page=prestador_admin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
+                                    }
+                                },
+                                error: function (error) {
+                                    console.log(error);
+                                }
+                            });   
+
+                        }else{
+                            mensajesweetalert("center", "warning", "Prestador ya Existe..!", false, 1800);
                         }
-                    });
-               });
+                    });                    
+               });                
 
             });
-
-            $(document).on("click",".btnEditar",function(){
-
-                _rowid = $(this).attr("id");
-                _rowid = _rowid.substring(10);
-
-                var xrespuesta = $.post("codephp/get_datosespecipresta.php", { xxPreeid: _rowid });
-                xrespuesta.done(function(response){
-                    
-                    var _datos = JSON.parse(response);
-
-                    $.each(_datos,function(i,item){
-                        _espeid =  _datos[i].Espeid;
-                        _pvp =  _datos[i].Pvp;
-                        _costo =  _datos[i].Costo;
-
-                        $('#cboEspecialidadEdit').val(_espeid).change();
-                        $('#txtPvpEdit').val(_pvp);
-                        $('#txtCostoEdit').val(_costo);
-                        $('#txtcboespe').val(_espeid);
-
-                        $("#modal-editar-especialidad").modal("show");
-
-                    });                    
-                });
-
-            });	
-            
-            $(document).on("click",".btnPerson",function(){
-                alert('Ir a Agregar Personal');
-
-            });	
 
             function setTwoNumberDecimal(event) {
                 this.value = parseFloat(this.value).toFixed(2);
@@ -1429,97 +1219,10 @@
 
                 $('#row_' + row_id + '').remove();
 
-            });
-
-            function f_UpdateEstado(_paisid, _emprid, _preeid){
-                
-                let _usuaid = "<?php echo $xUsuaid; ?>";
-                let _check = $("#chk" + _preeid).is(":checked");
-                let _checked = "";
-                let _class = "badge badge-light-primary";
-                let _td = "td_" + _preeid;
-                let _btnedit = "btnEditar_" + _preeid;
-    
-                if(_check){
-                    _estado = "Activo";
-                    _checked = "checked='checked'";
-                    $('#'+_btnedit).prop("disabled",false);
-                }else{                    
-                    _estado = "Inactivo";
-                    _class = "badge badge-light-danger";
-                    $('#'+_btnedit).prop("disabled",true);
-                }
-    
-                var _changetd = document.getElementById(_td);
-                _changetd.innerHTML = '<div class="d-flex align-items-center"><div class="ms-5"><div class="' + _class + '">' + _estado + ' </div></div>';
-    
-                var _parametros = {
-                    xxPaisid: _paisid,
-                    xxEmprId: _emprid,
-                    xxUsuaid: _usuaid,
-                    xxPreeid: _preeid,
-                    xxEstado: _estado
-                }	
-    
-                var xrespuesta = $.post("codephp/update_estadoespecipresta.php", _parametros);
-                    xrespuesta.done(function(response){
-
-                });	
-            }            
-            
-            function f_GrabarEspe(_paisid, _emprid){
-
-                _usuaid = "<?php echo $xUsuaid; ?>";
-                _presid = "<?php echo $xPresid; ?>";
-
-                _cboespeci = $('#cboEspecialidadEdit').val();
-                _pvp = $('#txtPvpEdit').val();
-                _costo = $('#txtCostoEdit').val();
-                _espeid = $('#txtcboespe').val();
-                _especialidad = $("#cboEspecialidadEdit option:selected").text();
-
-                var _parametros = {
-                    xxPaisid: _paisid,
-                    xxEmprId: _emprid,
-                    xxUsuaid: _usuaid,
-                    xxPresid: _presid,
-                    xxEspeid: _cboespeci,
-                    xxEspeidant: _espeid,
-                    xxPvp: _pvp,
-                    xxCosto: _costo
-                }
-
-                var xrespuesta = $.post("codephp/grabar_editarprestaespeci.php", _parametros);
-                xrespuesta.done(function(response){
-
-                    if(response.trim() == 'OK'){
-                        _output = '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _especialidad + '</span></div></div></td>';
-                        _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _pvp + '</span></div></div></td>';
-                        _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _costo + '</span></div></div></td>';
-                        _output += '<td id="td_' + _rowid + '"><div class="d-flex align-items-center"><div class="ms-5"><div class="badge badge-light-primary">Activo</div></div></div></td>';                        
-                        _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
-                        _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _rowid + '" onchange="f_UpdateEstado(';
-                        _output += _paisid + ',' + _emprid + ',' + _rowid + ')" value="' + _rowid + '"/></div></div></td>';
-                        _output += '<td class=""><div class=""><div class="btn-group"><button id="btnEditar_' + _rowid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
-                        _output += 'title="Editar Especialidad Asiganada" ><i class="fa fa-edit"></i></button></div></div></td>';
-        
-                        $('#row_' + _rowid + '').html(_output);
-                    }else{
-                        mensajesalertify("Especialidad ya está asignada..!", "W", "top-center", 3);
-                    }
-
-                });	                
-
-                $("#modal-editar-especialidad").modal("hide");
-
-            }
+            });            
 
             //Desplazar-modal
             $("#modal-new-especialidad").draggable({
-                handle: ".modal-header"
-            }); 
-            
-            $("#modal-editar-especialidad").draggable({
                 handle: ".modal-header"
             });             
 

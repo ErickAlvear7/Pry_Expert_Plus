@@ -17,8 +17,8 @@
         $xPacaid = $_POST['xxPacaId'];
         $xEmprid = $_POST['xxEmprId'];
         $xPaisid = safe($_POST['xxPaisId']);
-        $xParametro = safe($_POST['xxParametro']);
-        $xDesc = safe($_POST['xxDescripcion']);
+        $xParametro = $_POST['xxParametro'];
+        $xDesc = $_POST['xxDescripcion'];
       
         $xSQL = "UPDATE `expert_parametro_cabecera` SET paca_nombre = '$xParametro', paca_descripcion = '$xDesc' ";
         $xSQL .= "WHERE paca_id = $xPacaid AND pais_id = $xPaisid AND empr_id = $xEmprid ";
