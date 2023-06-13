@@ -666,7 +666,7 @@
 
         <script>
 
-            var _cobertura = 'NO', _sistema = 'NO';
+            var _cobertura = 'NO', _sistema = 'NO', _rowid;
 
             $(document).ready(function(){
 
