@@ -414,7 +414,7 @@
                                                 </label> 
                                            </div>
                                         </div>
-                                        </br>
+                                        <br>
                                         <div class="form-group mt-5">
                                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
                                                 <span class="svg-icon svg-icon-2">
@@ -633,10 +633,10 @@
                                 <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" value="1" />   
                             </div>
                         </div>
-                        </br>
-                        </br>
+                        <br>
+                        <br>
                         <div class="mb-5 fv-row">
-                            <h5 class="txtcob" id="lblCobertura"></h5>
+                            <h5 class="txtcob" id="lblCoberturaEdit"></h5>
                             <label class="form-check form-switch form-check-custom form-check-solid">
                                 <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
                             </label> 
@@ -968,7 +968,7 @@
             $(document).on("click",".btnEditar",function(){
                 $("#modal_producto").find("input,textarea,checkbox").val("");
              
-                var _rowid = $(this).attr("id");
+                _rowid = $(this).attr("id");
                 _rowid = _rowid.substring(10);
 
                 var xrespuesta = $.post("codephp/get_datosproductos.php", { xxProid: _rowid });
@@ -996,20 +996,21 @@
                         $('#txtAsisMesEdit').val(_asistmes);
                         $('#txtAsisAnuEdit').val(_asistanu);
 
+                        debugger;
                         if(_cobertura == 'SI'){
-                            $('#chkCoberturaEdit').attr('checked', true);
-                             $(".txtcob").html("Cobertura SI");
+                            $('#chkCoberturaEdit').prop('checked', true);
+                            $("#lblCoberturaEdit").text("Cobertura SI");
                         }else{
-                            $('#chkCoberturaEdit').attr('checked', false);
-                            $(".txtcob").html("Cobertura NO");
+                            $('#chkCoberturaEdit').prop('checked', false);
+                            $("#lblCoberturaEdit").html("Cobertura NO");
                           
                         }
 
                         if(_sistema == 'SI'){
-                            $('#chkSistemaEdit').attr('checked', true); 
+                            $('#chkSistemaEdit').prop('checked', true); 
                             $(".txtsis").html("Sistema SI");
                         }else{
-                            $('#chkSistemaEdit').attr('checked', false);
+                            $('#chkSistemaEdit').prop('checked', false);
                             $(".txtsis").html("Sistema NO");
                         }
 
