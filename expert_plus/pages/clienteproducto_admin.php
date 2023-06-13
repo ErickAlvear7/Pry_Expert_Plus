@@ -106,6 +106,9 @@
                      <?php 
                        $xCheking = '';
                        $xDisabledEdit = '';
+                       $xTarget = '';
+
+                       
                     
 
                        if($xEstado == 'Activo'){
@@ -116,8 +119,11 @@
                             $xDisabledEdit = 'disabled';
                         }
 
-                        if($xUrl == ''){
+                        if($xUrl != ''){
+                            $xTarget =  'target="_blank"' .' '. 'rel="noopener noreferrer"';
+                        }else{
                             $xUrl = '#';
+                            $xTarget = '';
                         }
                     
                     ?>
@@ -125,7 +131,7 @@
 					<tr>
 					    <td class="text-uppercase"><?php echo $xCiudad; ?></td>
                         <td class="d-flex align-items-center">
-                            <a href="<?php echo $xUrl; ?>" class="symbol symbol-50px">
+                            <a href="<?php echo $xUrl; ?>" <?php echo  $xTarget; ?> class="symbol symbol-50px">
                                 <span class="symbol-label" style="background-image:url(logos/<?php echo $xLogo; ?>);"></span>
                             </a>
                             <span class="fw-bolder">&nbsp;<?php echo $xCliente; ?></span>
