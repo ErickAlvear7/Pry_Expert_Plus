@@ -34,8 +34,8 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
-    $xSQL = "SELECT clie_id AS IdCliente, clie_nombre AS Cliente, clie_descripcion AS Descrip,clie_imgcab AS Logo, CASE clie_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
-    $xSQL .="FROM `expert_cliente` ";
+    $xSQL = "SELECT clie.clie_id AS IdCliente, clie.clie_nombre AS Cliente, clie.clie_url AS Urll, clie.clie_descripcion AS Descrip,clie.clie_imgcab AS Logo, CASE clie.clie_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, ";
+    $xSQL .="pro.ciudad AS Ciudad FROM `expert_cliente` clie, `provincia_ciudad` pro WHERE clie.prov_id = pro.prov_id ";
     $all_clie = mysqli_query($con, $xSQL);
 
 ?>
@@ -79,10 +79,10 @@
 			<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
 				<thead>
 					<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0 text-uppercase">
-					    <th style="display:none;">Id</th>
+					    <th>Ciudad</th>
 						<th>Cliente</th>
-                        <th>Descripcion</th>
-                        <th>Logo</th>
+                        <th style="display:none;">Descripcion</th>
+                        <th style="display:none;">Logo</th>
                         <th>Estado</th>
 						<th>Status</th>
                         <th style="text-align: center;">Opciones</th>
@@ -92,7 +92,9 @@
                     <?php foreach($all_clie as $clie){ 
                         
                         $xClieid = $clie['IdCliente'];
+                        $xCiudad = $clie['Ciudad'];
                         $xCliente = $clie['Cliente'];
+                        $xUrl = $clie['Urll'];
                         $xDesc = $clie['Descrip'];
                         $xLogo = $clie['Logo'];
                         $xEstado = $clie['Estado'];
@@ -104,6 +106,7 @@
                      <?php 
                        $xCheking = '';
                        $xDisabledEdit = '';
+                    
 
                        if($xEstado == 'Activo'){
                             $xCheking = 'checked="checked"';
@@ -112,19 +115,23 @@
                             $xTextColor = "badge badge-light-danger";
                             $xDisabledEdit = 'disabled';
                         }
+
+                        if($xUrl == ''){
+                            $xUrl = '#';
+                        }
                     
                     ?>
 			
 					<tr>
-					    <td style="display:none;"><?php echo $xClieid; ?></td>
-						<td><?php echo $xCliente; ?></td>
-                        <td><?php echo $xDesc; ?></td>
+					    <td class="text-uppercase"><?php echo $xCiudad; ?></td>
                         <td class="d-flex align-items-center">
-                            <a href="?page=modprestadora&menuid=" class="symbol symbol-50px">
+                            <a href="<?php echo $xUrl; ?>" class="symbol symbol-50px">
                                 <span class="symbol-label" style="background-image:url(logos/<?php echo $xLogo; ?>);"></span>
                             </a>
-                            <span class="fw-bolder"></span>
+                            <span class="fw-bolder">&nbsp;<?php echo $xCliente; ?></span>
                         </td>
+                        <td style="display:none;"><?php echo $xDesc; ?></td>
+                        <td style="display:none;"></td>
 						<td id="td_<?php echo $xClieid; ?>">
                             <div class="<?php echo $xTextColor; ?>">
                                 <?php echo $xEstado; ?>
