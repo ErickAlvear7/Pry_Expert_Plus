@@ -963,7 +963,7 @@
             if(response.trim() == 'OK'){
 
                 var xrespuesta = $.post("codephp/grabar_grupo.php", _parametros);
-                xrespuesta.done(function(response){
+                    xrespuesta.done(function(response){
                     if(response.trim() != 'ERR'){
 
                         mensajesalertify('Nuevo Grupo Agregado', 'S', 'top-center', 3); 
