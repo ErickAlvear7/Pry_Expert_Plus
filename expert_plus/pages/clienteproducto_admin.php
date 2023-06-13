@@ -121,7 +121,7 @@
                         <td><?php echo $xDesc; ?></td>
                         <td class="d-flex align-items-center">
                             <a href="?page=modprestadora&menuid=" class="symbol symbol-50px">
-                                <span class="symbol-label" style="background-image:url(Cliente/<?php echo $xLogo; ?>);"></span>
+                                <span class="symbol-label" style="background-image:url(logos/<?php echo $xLogo; ?>);"></span>
                             </a>
                             <span class="fw-bolder"></span>
                         </td>
