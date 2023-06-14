@@ -27,7 +27,7 @@
             $xPaisid = $_POST['xxPaisid'];            
             $xEmprid = $_POST['xxEmprid'];
             $xUsuaid = $_POST['xxUsuaid'];
-            $xProdnew = safe($_POST['xxProdedit']);
+            $xProdnew = trim(mb_strtoupper(safe($_POST['xxProdedit'])));
             $xProdant = $_POST['xxProdant'];
             $xDesc = safe($_POST['xxDescr']);
             $xCosto = safe($_POST['xxCostoedit']);
@@ -39,7 +39,7 @@
             
 
             if($xProdnew != $xProdant){
-                $xSQL = "SELECT * FROM `expert_productos` WHERE prod_id = $xProdid AND pais_id = $xPaisid AND empr_id = $xEmprid AND prod_nombre = '$xProdnew' ";
+                $xSQL = "SELECT * FROM `expert_productos` WHERE pais_id = $xPaisid AND empr_id = $xEmprid AND prod_nombre = '$xProdnew' ";
                 $all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
                 $xRow = mysqli_num_rows($all_datos);
             }

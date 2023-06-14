@@ -553,7 +553,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" class="btn btn-primary">Grabar</button>
+                <button type="button" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">Grabar</button>
             </div>
         </div>
     </div>
@@ -848,6 +848,12 @@
 
             }else{
                 mensajesalertify('Producto ya está Asignado..!', 'W', 'top-right', 3);
+                document.getElementById("chkCobertura").checked = false;
+                _cobertura = "NO";
+                $("#lblCobertura").text("Cobertura NO");
+                document.getElementById("chkSistema").checked = false;
+                _sistema = "NO";
+                $("#lblSistema").text("Sistema NO");   
             }
     
 
@@ -871,6 +877,7 @@
     
     function f_GuardarGrupo(_paisid,_emprid,_usuaid){
 
+
         var _nombreGrupo = $.trim($("#txtGrupo").val());
         var _descGrupo = $.trim($("#txtDescGrupo").val());
 
@@ -889,24 +896,35 @@
             xxDesc: _descGrupo
         }
 
-        var xrespuesta = $.post("codephp/grabar_grupo.php", _parametros);
+        var xrespuesta = $.post("codephp/consultar_grupo.php", _parametros);
             xrespuesta.done(function(response){
+            if(response.trim() == 'OK'){
 
-                if(response.trim() != 'ERR'){
+                var xrespuesta = $.post("codephp/grabar_grupo.php", _parametros);
+                    xrespuesta.done(function(response){
+                    if(response.trim() != 'ERR'){
 
-                    mensajesalertify('Nuevo Grupo Agregado', 'S', 'top-center', 3); 
+                        mensajesalertify('Nuevo Grupo Agregado', 'S', 'top-center', 3); 
+                        
+                        $("#txtGrupo").val("");
+                        $("#txtDescGrupo").val("");
+                        $("#cboGrupo").empty();
+                        $("#cboGrupo").html(response);     
+                        $("#modal_new_grupo").modal("hide");
                     
-                    $("#txtGrupo").val("");
-                    $("#txtDescGrupo").val("");
-                    $("#cboGrupo").empty();
-                    $("#cboGrupo").html(response);     
-                    $("#modal_new_grupo").modal("hide");
+                    }
 
-                }else if(response.trim() == 'EXISTE'){
-                    mensajesalertify('Grupo ya Existe', 'W', 'top-right', 3);
-                }
+                });
 
-            });
+            }else  if(response.trim() == 'EXISTE'){
+                mensajesalertify('Grupo ya Existe', 'W', 'top-right', 3);
+
+                $("#txtGrupo").val("");
+                $("#txtDescGrupo").val("");
+                
+            }
+
+        });
 
     }
 
@@ -997,10 +1015,10 @@
                 }
 
                 if(_gerenciedit == 'SI'){
-                    $('#chkGerencialEdit').attr('checked', true);
+                    $('#chkGerencialEdit').prop('checked', true);
                     $(".txtger").html("Gerencial SI");
                 }else{
-                    $('#chkGerencialEdit').attr('checked', false);
+                    $('#chkGerencialEdit').prop('checked', false);
                     $(".txtger").html("Gerencial NO");
                 }
 
@@ -1017,7 +1035,6 @@
 
     //Check editar producto-modal
 
-    
     $(document).on("click","#chkCoberturaEdit",function(){
 
             if($("#chkCoberturaEdit").is(":checked")){
@@ -1064,9 +1081,11 @@
     
     function f_EditarProd(_paisid,_emprid,_usuaid){
 
+        //debugger;
         var _output;
         var _prodid = _rowid;
         var _prodedit= $('#txtProductoEdit').val();
+            _prodedit= _prodedit.toUpperCase();
         var _descredit = $('#txtDescripcionEdit').val();
         var _costoedit = $('#txtCostoEdit').val();
         var _cbogrupoedit = $('#cboGrupoEdit').val();
@@ -1074,7 +1093,7 @@
         var _asismesedit = $('#txtAsisMesEdit').val();
         var _asisanuedit = $('#txtAsisAnuEdit').val();
         var _cobedit = _coberedit;
-        var _sistedit = _sistedit;
+        var _sisedit = _sistedit;
         var _gerenedit = _gerenciedit;
 
 
@@ -1126,17 +1145,15 @@
 
                 $('#row_' + _rowid + '').html(_output);
 
+                $("#modal_producto").modal("hide");
+
                 //console.log(response);
 
             }else{
                 mensajesalertify("Producto ya está asignado..!", "W", "top-right", 3);
             }
 
-        });
-        
-        $("#modal_producto").modal("hide");
-        
-        
+        });   
 
     }
 
