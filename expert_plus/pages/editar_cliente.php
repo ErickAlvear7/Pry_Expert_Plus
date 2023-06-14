@@ -83,8 +83,6 @@
     $xSQL .="`expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.clie_id =$clieid AND pro.pais_id =$xPaisid AND pro.empr_id =$xEmprid ORDER BY pro.prod_nombre ";
     $all_prod = mysqli_query($con, $xSQL);
 
-
-
 ?>
 
 <div id="kt_content_container" class="container-xxl">
@@ -630,8 +628,7 @@
                     <label class="form-check form-switch form-check-custom form-check-solid">
                         <input class="form-check-input" name="chkGerencialEdit" id="chkGerencialEdit" type="checkbox" />
                     </label> 
-                </div> 
-                
+                </div>            
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-primary">Modificar</button>
@@ -639,8 +636,7 @@
         </div>
     </div>
 </div>
-     
-       
+         
 
 <script>
 
@@ -855,7 +851,6 @@
                 _sistema = "NO";
                 $("#lblSistema").text("Sistema NO");   
             }
-    
 
         });
 
@@ -877,7 +872,6 @@
     
     function f_GuardarGrupo(_paisid,_emprid,_usuaid){
 
-
         var _nombreGrupo = $.trim($("#txtGrupo").val());
         var _descGrupo = $.trim($("#txtDescGrupo").val());
 
@@ -885,7 +879,6 @@
             mensajesalertify("Ingrese Grupo..!!","W","top-right",3);
             return false;
         }
-
 
         var _parametros = {
 
@@ -959,15 +952,17 @@
                 xxEmprid: _emprid,
                 xxEstado: _estado
             } 
-            var xrespuesta = $.post("codephp/update_estadoproducto.php", _parametros);
-            xrespuesta.done(function(response){
-            });	
+
+        var xrespuesta = $.post("codephp/update_estadoproducto.php", _parametros);
+        xrespuesta.done(function(response){
+        });	
 
     }
 
     //cargar datos ventana modal para editar producto
 
     $(document).on("click",".btnEditar",function(){
+        
         $("#modal_producto").find("input,textarea,checkbox").val("");
         
         _rowid = $(this).attr("id");
