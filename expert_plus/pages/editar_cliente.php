@@ -214,12 +214,12 @@
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="required form-label">Cliente</label>
-                                    <input type="text" name="txtCliente" id="txtCliente" class="form-control mb-2" minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="<?php echo $xCliente; ?>" />
+                                    <input type="text" name="txtCliente" id="txtCliente" class="form-control mb-2 text-uppercase" minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="<?php echo $xCliente; ?>" />
                                     <input type="hidden" name="txtClieant" id="txtClieant" class="form-control mb-2" value="<?php echo $xCliente; ?>" />
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="required form-label">Descripcion</label>
-                                    <textarea class="form-control mb-2" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"><?php echo $xDesc; ?></textarea>
+                                    <textarea class="form-control mb-2 text-uppercase" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"><?php echo $xDesc; ?></textarea>
                                 </div>                                 
                             </div>
                         </div>
@@ -264,7 +264,7 @@
                                                         <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
                                                     </div>
                                                     <div class="col-xl-10 fv-row">
-                                                        <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" value="<?php echo $xUrl; ?>" />
+                                                        <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" placeholder="https://misitio.com" maxlength="150" value="<?php echo $xUrl; ?>" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -299,11 +299,11 @@
                                             </div>
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel2; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel2; ?>" />
                                             </div> 
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel3; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel3; ?>" />
                                             </div>                                                        
                                         </div>
                                         <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
@@ -313,11 +313,11 @@
                                             </div>
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCel2; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" maxlength="10"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCel2; ?>" />
                                             </div> 
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" maxlength="10" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCel3; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" maxlength="10"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCel3; ?>" />
                                             </div>
                                         </div>                                                
                                     </div>
@@ -644,7 +644,7 @@
 
 <script>
 
-    var _cobertura = 'NO', _sistema = 'NO', _rowid;
+    var _cobertura = 'NO', _sistema = 'NO', _rowid, _seleccab = 'NO', _selecpie = 'NO';
 
     $(document).ready(function(){
 
@@ -655,11 +655,11 @@
         //Cargar imagen logo cabecera
         var _imgCab  = "<?php echo $xImgc; ?>";
         _imgCab = _imgCab == '' ? 'companyname.png' : _imgCab;
-        document.getElementById('imgfileCab').style.backgroundImage="url(Cliente/" + _imgCab + ")"; 
+        document.getElementById('imgfileCab').style.backgroundImage="url(logos/" + _imgCab + ")"; 
             //Cargar imagen logp pie
         var _imgPie = "<?php echo $xImgp; ?>";
         _imgPie = _imgPie == '' ? 'companyname.png' : _imgPie;  
-        document.getElementById('imgfilePie').style.backgroundImage="url(Cliente/" + _imgPie + ")"; 
+        document.getElementById('imgfilePie').style.backgroundImage="url(logos/" + _imgPie + ")"; 
 
         
         $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
@@ -1081,7 +1081,6 @@
     
     function f_EditarProd(_paisid,_emprid,_usuaid){
 
-        //debugger;
         var _output;
         var _prodid = _rowid;
         var _prodedit= $('#txtProductoEdit').val();
@@ -1147,8 +1146,6 @@
 
                 $("#modal_producto").modal("hide");
 
-                //console.log(response);
-
             }else{
                 mensajesalertify("Producto ya está asignado..!", "W", "top-right", 3);
             }
@@ -1166,8 +1163,7 @@
         var _iduser = '<?php echo $xUsuaid; ?>';
         var _cboProv = $('#cboProvincia').val();
         var _cboCiudad = $('#cboCiudad').val();
-        var _cliente = $.trim($("#txtCliente").val());
-        var _clieant = $.trim($("#txtClieant").val());
+        var _cliente = $.trim($("#txtCliente").val()); 
         var _desc = $.trim($("#txtDesc").val()); 
         var _direc = $.trim($("#txtDireccion").val()); 
         var _url = $.trim($("#txtUrl").val()); 
@@ -1181,199 +1177,200 @@
         var _email2 = $.trim($("#txtEmail2").val());
 
         var _providant = $.trim($('#txtcbociudad').val());
-        var _cambiarcab = 'NO';
-        var _cambiarpie = 'SI';
-
-
-        if(_clieant == ''){
-            mensajesalertify("Ingrese Nombre del Cliente..!!","W","top-right",3);
-            return false;
-        }
+        var _clieant = $.trim($("#txtClieant").val());
+      
 
         if(_cboCiudad == ''){
             mensajesalertify("Seleccione Ciudad..!", "W", "top-right", 3);
             return; 
         }
-        // if(_url != ''){
-        //        try{
-        //            new URL(_url);
-        //        }catch(err){
-        //            mensajesalertify("Direccion URL Incorrecta..!", "W", "top-right", 3);
-        //            return false;
-        //        }
-        //    }
-            
-            if(_tel1 != '')
-            {
-                _valor = document.getElementById("txtFono1").value;
-                if( !(/^\d{9}$/.test(_valor)) ) {
-                    mensajesalertify("Telefono1 incorrecto..!" ,"W", "top-right", 3); 
-                    return;
-                }
-            }
 
-            if(_tel2 != '')
-            {
-                _valor = document.getElementById("txtFono2").value;
-                if( !(/^\d{9}$/.test(_valor)) ) {
-                    mensajesalertify("Telefono2 incorrecto..!" ,"W", "top-right", 3); 
-                    return;
-                }
-            }                    
 
-            if(_tel3 != '')
-            {
-                _valor = document.getElementById("txtFono3").value;
-                if( !(/^\d{9}$/.test(_valor)) ) {
-                    mensajesalertify("Telefono3 incorrecto..!" ,"W", "top-right", 3); 
-                    return;
-                }
-            }  
-            
-            if(_cel1 != '')
-            {
-                _valor = document.getElementById("txtCelular1").value;
-                if( !(/^\d{10}$/.test(_valor)) ) {
-                    mensajesalertify("Celular1 incorrecto..!" ,"W", "top-right", 3); 
-                    return;
-                }
-            }                     
-            
-            if(_cel2 != '')
-            {
-                _valor = document.getElementById("txtCelular2").value;
-                if( !(/^\d{10}$/.test(_valor)) ) {
-                    mensajesalertify("Celular1 incorrecto..!" ,"W", "top-right", 3); 
-                    return;
-                }
-            }
-            
-            if(_cel3 != '')
-            {
-                _valor = document.getElementById("txtCelular3").value;
-                if( !(/^\d{10}$/.test(_valor)) ) {
-                    mensajesalertify("Celular1 incorrecto..!" ,"W", "top-right", 3); 
-                    return;
-                }
-            }                    
-            
-            if(_email1 != ''){
-                var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-            
-                if (regex.test($('#txtEmail1').val().trim())) {
-                }else{
-                    mensajesalertify("Email1 no es Valido..!", "W", "top-center", 3);
-                    return;
-                }
-            }
+        if(_cliente == ''){
+            mensajesalertify("Ingrese Nombre del Cliente..!!","W","top-right",3);
+            return false;
+        }
 
-            if(_email2 != ''){
-                var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+    
             
-                if (regex.test($('#txtEmail2').val().trim())) {
-                }else{
-                    mensajesalertify("Email2 no es Valido..!", "W", "top-center", 3);
-                    return;
-                }
+        if(_tel1 != '')
+        {
+            _valor = document.getElementById("txtFono1").value;
+            if( !(/^\d{9}$/.test(_valor)) ) {
+                mensajesalertify("Telefono 1 incorrecto..!" ,"W", "top-right", 3); 
+                return;
             }
+        }
+
+        if(_tel2 != '')
+        {
+            _valor = document.getElementById("txtFono2").value;
+            if( !(/^\d{9}$/.test(_valor)) ) {
+                mensajesalertify("Telefono 2 incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }                    
+
+        if(_tel3 != '')
+        {
+            _valor = document.getElementById("txtFono3").value;
+            if( !(/^\d{9}$/.test(_valor)) ) {
+                mensajesalertify("Telefono 3 incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }  
+        
+        if(_cel1 != '')
+        {
+            _valor = document.getElementById("txtCelular1").value;
+            if( !(/^\d{10}$/.test(_valor)) ) {
+                mensajesalertify("Celular 1 incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }                     
+        
+        if(_cel2 != '')
+        {
+            _valor = document.getElementById("txtCelular2").value;
+            if( !(/^\d{10}$/.test(_valor)) ) {
+                mensajesalertify("Celular 2 incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }
+        
+        if(_cel3 != '')
+        {
+            _valor = document.getElementById("txtCelular3").value;
+            if( !(/^\d{10}$/.test(_valor)) ) {
+                mensajesalertify("Celular 3 incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }
+        
+        if(_url != ''){
+            try{
+                new URL(_url);
+            }catch(err){
+                mensajesalertify("Direccion URL Incorrecta..!", "W", "top-right", 3);
+                return false;
+            }
+        }
+        
+        if(_email1 != ''){
+            var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+        
+            if (regex.test($('#txtEmail1').val().trim())) {
+            }else{
+                mensajesalertify("Email 1 no es Valido..!", "W", "top-right", 3);
+                return;
+            }
+        }
+
+        if(_email2 != ''){
+            var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+        
+            if (regex.test($('#txtEmail2').val().trim())) {
+            }else{
+                mensajesalertify("Email 2 no es Valido..!", "W", "top-right", 3);
+                return;
+            }
+        }
 
             //Log Cabecera
 
-            var _logocab = document.getElementById("imgfileCab").style.backgroundImage;
-            var _urlcab = _logocab.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-            var _poscab = _urlcab.trim().indexOf('.');
-            var _extcab = _urlcab.trim().substr(_pos, 5);
+        var _logocab = document.getElementById("imgfileCab").style.backgroundImage;
+        var _urlcab = _logocab.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+        var _poscab = _urlcab.trim().indexOf('.');
+        var _extcab = _urlcab.trim().substr(_poscab, 5);
 
-            if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != '.jpeg'){
-                _seleccab = 'SI';
-            }  
+        if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != '.jpeg'){
+             _seleccab = 'SI';
+        }  
 
-            if(_seleccab == 'SI'){
-                var _imagencab = document.getElementById("logoCab");
-                var _filecab = _imagencab.files[0];
-                var _fullPathcab = document.getElementById('logoCab').value;
-                _extcab = _fullPathcab.substring(_fullPathcab.length - 4);
-                _extcab = _extcab.toLowerCase();   
-            }
+        if(_seleccab == 'SI'){
+            var _imagencab = document.getElementById("logoCab");
+            var _filecab = _imagencab.files[0];
+            var _fullPathcab = document.getElementById('logoCab').value;
+            _extcab = _fullPathcab.substring(_fullPathcab.length - 4);
+            _extcab = _extcab.toLowerCase();   
+        }
 
-            if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != '.jpeg'){
-                //mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
-                mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
-                return;
-            }
-
-
-                //Log Pie
-
-            var _logopie = document.getElementById("imgfilePie").style.backgroundImage;
-            var _urlpie = _logopie.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-            var _pospie = _urlpie.trim().indexOf('.');
-            var _extpie = _urlpie.trim().substr(_pos, 5);
-
-            if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != '.jpeg'){
-                _selecpie = 'SI';
-            }  
-
-            if(_selecpie == 'SI'){
-                var _imagenpie = document.getElementById("logoPie");
-                var _filepie = _imagenpie.files[0];
-                var _fullPathpie = document.getElementById('logoPie').value;
-                _extpie = _fullPathpie.substring(_fullPathpie.length - 4);
-                _extpie = _extpie.toLowerCase();   
-            }
-
-            if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != '.jpeg'){
-                mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
-                return;
-            }
+        if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != '.jpeg'){
+            //mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
+            mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
+            return;
+        }
 
 
-                var form_data = new FormData();
-                form_data.append('xxClieid', _idclie);            
-                form_data.append('xxPaisid', _idpais);
-                form_data.append('xxEmprid', _idempr);
-                form_data.append('xxUsuaid', _iduser);
-                form_data.append('xxProvid', _cboCiudad);
-                form_data.append('xxProvidant', _providant);
-                form_data.append('xxCliente', _cliente);
-                form_data.append('xxClieant', _clieant);
-                form_data.append('xxDescrip', _desc);
-                form_data.append('xxDirec', _direc);
-                form_data.append('xxUrl', _url);
-                form_data.append('xxFono1', _tel1);
-                form_data.append('xxFono2', _tel2);
-                form_data.append('xxFono3', _tel3);
-                form_data.append('xxCel1', _cel1);
-                form_data.append('xxCel2', _cel2);
-                form_data.append('xxCel3', _cel3);
-                form_data.append('xxEmail1', _email1);
-                form_data.append('xxEmail2', _email2);
-                form_data.append('xxFileCab', _filecab);
-                form_data.append('xxCambiarcab', _seleccab);
-                form_data.append('xxFilePie', _filepie);
-                form_data.append('xxCambiarpie', _selecpie);
+            //Log Pie
 
-            $.ajax({
-                url: "codephp/update_cliente.php",
-                type: "post",
-                data: form_data,
-                processData: false,
-                contentType: false,
-                dataType: "json",
-                success: function(response){
-                    console.log(response);
-                    if(response == 'OK'){
-                        $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito..!'}); //POR METODO POST
-                    }else{
-                        mensajesalertify("Cliente ya Existe..!", "W", "top-right", 3);
-                    }
-                },
-                error: function (error) {
-                    console.log(error);
+        var _logopie = document.getElementById("imgfilePie").style.backgroundImage;
+        var _urlpie = _logopie.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+        var _pospie = _urlpie.trim().indexOf('.');
+        var _extpie = _urlpie.trim().substr(_pospie, 5);
+
+        if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != '.jpeg'){
+             _selecpie = 'SI';
+        }  
+
+        if(_selecpie == 'SI'){
+            var _imagenpie = document.getElementById("logoPie");
+            var _filepie = _imagenpie.files[0];
+            var _fullPathpie = document.getElementById('logoPie').value;
+            _extpie = _fullPathpie.substring(_fullPathpie.length - 4);
+            _extpie = _extpie.toLowerCase();   
+        }
+
+        if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != '.jpeg'){
+            mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
+            return;
+        }
+
+
+        var form_data = new FormData();
+        form_data.append('xxClieid', _idclie);            
+        form_data.append('xxPaisid', _idpais);
+        form_data.append('xxEmprid', _idempr);
+        form_data.append('xxUsuaid', _iduser);
+        form_data.append('xxProvid', _cboCiudad);
+        form_data.append('xxProvidant', _providant);
+        form_data.append('xxCliente', _cliente);
+        form_data.append('xxClieant', _clieant);
+        form_data.append('xxDescrip', _desc);
+        form_data.append('xxDirec', _direc);
+        form_data.append('xxUrl', _url);
+        form_data.append('xxFono1', _tel1);
+        form_data.append('xxFono2', _tel2);
+        form_data.append('xxFono3', _tel3);
+        form_data.append('xxCel1', _cel1);
+        form_data.append('xxCel2', _cel2);
+        form_data.append('xxCel3', _cel3);
+        form_data.append('xxEmail1', _email1);
+        form_data.append('xxEmail2', _email2);
+        form_data.append('xxFileCab', _filecab);
+        form_data.append('xxCambiarcab', _seleccab);
+        form_data.append('xxFilePie', _filepie);
+        form_data.append('xxCambiarpie', _selecpie);
+
+        $.ajax({
+            url: "codephp/update_cliente.php",
+            type: "post",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            success: function(response){
+                console.log(response);
+                if(response == 'OK'){
+                    $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito..!'}); //POR METODO POST
+                }else{
+                    mensajesalertify("Cliente ya Existe..!", "W", "top-right", 3);
                 }
-            });
-
-        //alert(_clienew);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
 
     });
 
