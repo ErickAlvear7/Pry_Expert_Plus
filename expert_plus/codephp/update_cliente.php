@@ -44,11 +44,11 @@
         
 
             $xProvidant = $_POST['xxProvidant'];
-            $xCienteant = trim(mb_strtoupper(safe($_POST['_clieant'])));
+            $xCienteant = trim(mb_strtoupper(safe($_POST['xxClieant'])));
 
             if($xCambiarcab == 'SI'){
                 $xFile = (isset($_FILES['xxFileCab']["name"])) ? $_FILES['xxFileCab']["name"] : '';
-                $xPath = "../Cliente/";
+                $xPath = "../logos/";
 
                 $xFechafile = new DateTime();
                 $xNombreFile = ($xFile != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFileCab"]["name"] : "";  
@@ -70,7 +70,7 @@
             if($xCambiarpie == 'SI'){
 
                 $xFile = (isset($_FILES['xxFilePie']["name"])) ? $_FILES['xxFilePie']["name"] : '';
-                $xPath = "../Cliente/";
+                $xPath = "../logos/";
 
                 $xFechafile = new DateTime();
                 $xNombreFilePie = ($xFilepie != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFilePie"]["name"] : ""; 
@@ -85,7 +85,35 @@
                     $xNombreFilePie = "companyname.png";
                 } 
 
+            }
 
+            if($xProvid != $xProvidant){
+                $xSQL = "SELECT * FROM `expert_cliente` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND clie_nombre='$xCliente' ";
+                $all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
+                $xRow = mysqli_num_rows($all_datos);                
+            }else{
+                if($xCliente != $xCienteant){
+                    $xSQL = "SELECT * FROM `expert_cliente` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND clie_nombre='$xCliente' ";
+                    $all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
+                    $xRow = mysqli_num_rows($all_datos);                       
+                }
+            }
+
+            if($xRow == 0){
+
+                $xSQL = "UPDATE `expert_cliente` SET prov_id=$xProvid,clie_nombre='$xCliente',clie_descripcion ='$xDesc',clie_direccion='$xDireccion', ";
+                $xSQL .= "clie_url='$xUrl',clie_tel1='$xFono1',clie_tel2='$xFono2',clie_tel3='$xFono3',clie_cel1='$xCelular1',clie_cel2='$xCelular2', ";
+                $xSQL .= "clie_cel3='$xCelular3',clie_email1='$xEmail1',clie_email2='$xEmail12',clie_imgcab='$xNombreFile',clie_imgpie='$xNombreFilePie' ";
+                $xSQL .= "WHERE clie_id=$xClieid AND pais_id=$xPaisid ";
+                mysqli_query($con, $xSQL);
+                $xRespuesta = "OK";
+                
+                if(mysqli_query($con, $xSQL)){
+
+                    $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
+                    $xSQL .= "VALUES('Cambio Datos CLiente',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
+                    mysqli_query($con, $xSQL);                
+                }
             }
 
      
