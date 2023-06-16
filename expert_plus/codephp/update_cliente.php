@@ -59,11 +59,10 @@
                     if($xTmpFile != ""){
                         move_uploaded_file($xTmpFile,$xPath.$xNombreFile);
                     }
-                }else{
-                    $xNombreFile = "companyname.png";
-                } 
-    
-                 
+                }
+                
+                $xSQL = "UPDATE `expert_cliente` SET clie_imgcab='$xNombreFile' WHERE clie_id=$xClieid AND pais_id=$xPaisid ";
+                mysqli_query($con, $xSQL);
 
             }
 
@@ -73,7 +72,7 @@
                 $xPath = "../logos/";
 
                 $xFechafile = new DateTime();
-                $xNombreFilePie = ($xFilepie != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFilePie"]["name"] : ""; 
+                $xNombreFilePie = ($xFile != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFilePie"]["name"] : ""; 
 
                 if($xFilepie != ''){
                     $xTmpFile = $_FILES["xxFilePie"]["tmp_name"];
@@ -81,9 +80,10 @@
                     if($xTmpFile != ""){
                         move_uploaded_file($xTmpFile,$xPath.$xNombreFilePie);
                     }
-                }else{
-                    $xNombreFilePie = "companyname.png";
-                } 
+                }
+
+                $xSQL = "UPDATE `expert_cliente` SET clie_imgpie='$xNombreFilePie' WHERE clie_id=$xClieid AND pais_id=$xPaisid ";
+                mysqli_query($con, $xSQL);
 
             }
 
@@ -103,8 +103,7 @@
 
                 $xSQL = "UPDATE `expert_cliente` SET prov_id=$xProvid,clie_nombre='$xCliente',clie_descripcion ='$xDesc',clie_direccion='$xDireccion', ";
                 $xSQL .= "clie_url='$xUrl',clie_tel1='$xFono1',clie_tel2='$xFono2',clie_tel3='$xFono3',clie_cel1='$xCelular1',clie_cel2='$xCelular2', ";
-                $xSQL .= "clie_cel3='$xCelular3',clie_email1='$xEmail1',clie_email2='$xEmail12',clie_imgcab='$xNombreFile',clie_imgpie='$xNombreFilePie' ";
-                $xSQL .= "WHERE clie_id=$xClieid AND pais_id=$xPaisid ";
+                $xSQL .= "clie_cel3='$xCelular3',clie_email1='$xEmail1',clie_email2='$xEmail12' WHERE clie_id=$xClieid AND pais_id=$xPaisid ";
                 mysqli_query($con, $xSQL);
                 $xRespuesta = "OK";
                 
