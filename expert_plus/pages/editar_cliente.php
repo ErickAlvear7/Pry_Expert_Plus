@@ -293,7 +293,7 @@
                                         <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel1; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="029999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel1; ?>" />
                                             </div>
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
@@ -382,7 +382,7 @@
                                     </div>
                                     <div class="col">
                                         <label class="required form-label">Grupo</label>
-                                        <select name="cboGrupo" id="cboGrupo" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
+                                        <select name="cboGrupo" id="cboGrupo" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
                                             <option></option>
                                             <?php foreach ($all_grupos as $datos) : ?>
                                                 <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['NombreGrupo']) ?></option>
@@ -643,6 +643,8 @@
     var _cobertura = 'NO', _sistema = 'NO', _rowid, _seleccab = 'NO', _selecpie = 'NO';
 
     $(document).ready(function(){
+
+        debugger;
 
         var _paisid = "<?php echo $xPaisid; ?>";
         var _emprid = "<?php echo $xEmprid; ?>";
@@ -964,12 +966,14 @@
     $(document).on("click",".btnEditar",function(){
         
         $("#modal_producto").find("input,textarea,checkbox").val("");
+
         
         _rowid = $(this).attr("id");
         _rowid = _rowid.substring(10);
 
         var xrespuesta = $.post("codephp/get_datosproductos.php", { xxProid: _rowid });
         xrespuesta.done(function(response){
+
 
             var _datos = JSON.parse(response);
 
