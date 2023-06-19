@@ -903,7 +903,9 @@
                         $("#txtGrupo").val("");
                         $("#txtDescGrupo").val("");
                         $("#cboGrupo").empty();
-                        $("#cboGrupo").html(response);     
+                        $("#cboGrupo").html(response);
+                        $("#cboGrupoEdit").empty();
+                        $("#cboGrupoEdit").html(response);       
                         $("#modal_new_grupo").modal("hide");
                     
                     }
@@ -1281,8 +1283,7 @@
 
         var _logocab = document.getElementById("imgfileCab").style.backgroundImage;
         var _urlcab = _logocab.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-        var _poscab = _urlcab.trim().indexOf('.');
-        var _extcab = _urlcab.trim().substr(_poscab, 5);
+            _extcab = _urlcab.substring(_urlcab.length - 4);
 
         if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != 'jpeg'){
              _seleccab = 'SI';
@@ -1304,11 +1305,12 @@
 
 
             //Log Pie
+      
 
         var _logopie = document.getElementById("imgfilePie").style.backgroundImage;
         var _urlpie = _logopie.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-        var _pospie = _urlpie.trim().indexOf('.');
-        var _extpie = _urlpie.trim().substr(_pospie, 5);
+        _extpie = _urlpie.substring(_urlcab.length - 4);
+     
 
         if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != 'jpeg'){
              _selecpie = 'SI';
