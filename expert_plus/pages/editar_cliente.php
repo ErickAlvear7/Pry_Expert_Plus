@@ -592,8 +592,8 @@
                             <?php 
                                 $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND grup_estado='A' ";
                                 $all_datos =  mysqli_query($con, $xSQL);
-                                foreach ($all_datos as $datos){ ?>
-                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['NombreGrupo'] ?></option>
+                                foreach ($all_datos as $dato){ ?>
+                                    <option value="<?php echo $dato['Codigo'] ?>"><?php echo $dato['NombreGrupo'] ?></option>
                                 <?php } ?>  
                         </select>
                     </div>
@@ -644,7 +644,6 @@
 
     $(document).ready(function(){
 
-        debugger;
 
         var _paisid = "<?php echo $xPaisid; ?>";
         var _emprid = "<?php echo $xEmprid; ?>";
@@ -964,6 +963,8 @@
     //cargar datos ventana modal para editar producto
 
     $(document).on("click",".btnEditar",function(){
+
+        //debugger
         
         $("#modal_producto").find("input,textarea,checkbox").val("");
 
@@ -1277,12 +1278,13 @@
 
             //Log Cabecera
 
+
         var _logocab = document.getElementById("imgfileCab").style.backgroundImage;
         var _urlcab = _logocab.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
         var _poscab = _urlcab.trim().indexOf('.');
         var _extcab = _urlcab.trim().substr(_poscab, 5);
 
-        if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != '.jpeg'){
+        if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != 'jpeg'){
              _seleccab = 'SI';
         }  
 
@@ -1294,7 +1296,7 @@
             _extcab = _extcab.toLowerCase();   
         }
 
-        if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != '.jpeg'){
+        if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != 'jpeg'){
             //mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
             mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
             return;
@@ -1308,7 +1310,7 @@
         var _pospie = _urlpie.trim().indexOf('.');
         var _extpie = _urlpie.trim().substr(_pospie, 5);
 
-        if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != '.jpeg'){
+        if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != 'jpeg'){
              _selecpie = 'SI';
         }  
 
@@ -1320,7 +1322,7 @@
             _extpie = _extpie.toLowerCase();   
         }
 
-        if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != '.jpeg'){
+        if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != 'jpeg'){
             mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
             return;
         }

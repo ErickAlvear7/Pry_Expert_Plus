@@ -68,11 +68,11 @@
 
             if($xCambiarpie == 'SI'){
 
-                $xFile = (isset($_FILES['xxFilePie']["name"])) ? $_FILES['xxFilePie']["name"] : '';
+                $xFilepie = (isset($_FILES['xxFilePie']["name"])) ? $_FILES['xxFilePie']["name"] : '';
                 $xPath = "../logos/";
 
                 $xFechafile = new DateTime();
-                $xNombreFilePie = ($xFile != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFilePie"]["name"] : ""; 
+                $xNombreFilePie = ($xFilepie != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFilePie"]["name"] : ""; 
 
                 if($xFilepie != ''){
                     $xTmpFile = $_FILES["xxFilePie"]["tmp_name"];

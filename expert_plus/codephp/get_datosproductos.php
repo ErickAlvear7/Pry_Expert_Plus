@@ -21,7 +21,7 @@
 
             $xSQL = "SELECT pro.grup_id AS Grupid, pro.prod_nombre AS Nombre, pro.prod_descripcion AS Descr, pro.prod_costo AS Costo,gru.grup_nombre AS Grupo, ";
             $xSQL .= "pro.prod_asistmes AS AsistMes,pro.prod_asistanu AS AsistAnu,pro.prod_cobertura AS Cob,pro.prod_sistema AS Sis,pro.prod_gerencial AS Ger ";
-            $xSQL .="FROM `expert_productos` pro, `expert_grupos` gru WHERE pro.grup_id = gru.grup_id AND pro.prod_id = $xProid ";
+            $xSQL .="FROM `expert_productos` pro, `expert_grupos` gru,`expert_cliente` clie WHERE pro.grup_id = gru.grup_id AND clie.clie_id = pro.clie_id AND pro.prod_id = $xProid ";
             $all_datos = mysqli_query($con, $xSQL);
 
             foreach($all_datos as $pro) {
