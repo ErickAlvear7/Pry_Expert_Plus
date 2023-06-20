@@ -489,7 +489,7 @@
                                                     <td>
                                                         <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                             <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xProdid; ?>" 
-                                                            onchange="f_UpdateEstado(<?php echo $xProdid;?>,<?php echo $xEmprid; ?>)" value=""/>
+                                                            onchange="f_UpdateEstado(<?php echo $xProdid;?>,<?php echo $xEmprid; ?>,<?php echo $xPaisid; ?>,<?php echo $xUsuaid; ?>)" value=""/>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -926,7 +926,7 @@
 
     //Update estado Producto
 
-    function f_UpdateEstado(_prodid, _emprid){
+    function f_UpdateEstado(_prodid, _emprid, _paisid,_usuaid){
 
         var _check= $('#chk'+_prodid).is(':checked');
         var _checked = "";
@@ -953,6 +953,8 @@
             _parametros = {
                 xxProid: _prodid,
                 xxEmprid: _emprid,
+                xxPaisid: _paisid,
+                xxUsuaid: _usuaid,
                 xxEstado: _estado
             } 
 
@@ -1088,6 +1090,7 @@
         var _prodedit= $('#txtProductoEdit').val();
             _prodedit= _prodedit.toUpperCase();
         var _descredit = $('#txtDescripcionEdit').val();
+            _descredit= _descredit.toUpperCase();
         var _costoedit = $('#txtCostoEdit').val();
         var _cbogrupoedit = $('#cboGrupoEdit').val();
         var _txtgrupoedit = $("#cboGrupoEdit option:selected").text();
@@ -1299,7 +1302,7 @@
 
         if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != 'jpeg'){
             //mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
-            mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
+            mensajesalertify("El archivo seleccionado en cabecera no es una Imagen..!", "W", "top-right", 3);
             return;
         }
 
@@ -1309,7 +1312,7 @@
 
         var _logopie = document.getElementById("imgfilePie").style.backgroundImage;
         var _urlpie = _logopie.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-        _extpie = _urlpie.substring(_urlcab.length - 4);
+        _extpie = _urlpie.substring(_urlpie.length - 4);
      
 
         if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != 'jpeg'){
@@ -1325,7 +1328,7 @@
         }
 
         if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != 'jpeg'){
-            mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
+            mensajesalertify("El archivo seleccionado en pie no es una Imagen..!", "W", "top-right", 3);
             return;
         }
 

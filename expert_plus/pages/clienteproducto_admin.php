@@ -146,7 +146,7 @@
                         <td>
                             <div class="form-check form-check-sm form-check-custom form-check-solid">
                                 <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xClieid;?>" 
-                                    onchange="f_UpdateEstado(<?php echo $xClieid;?>,<?php echo $xEmprid; ?>)" value=""/>
+                                    onchange="f_UpdateEstado(<?php echo $xClieid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPaisid; ?>,<?php echo $xUsuaid; ?>)" value=""/>
                             </div>
 						</td>
 						<td>
@@ -186,7 +186,8 @@
 
     //Update Estado cliente
 
-    function f_UpdateEstado(_clieid, _emprid){
+    function f_UpdateEstado(_clieid, _emprid,_paisid,_usuaid){
+
 
         var _check = $("#chk" + _clieid).is(":checked");
         var _checked = "";
@@ -211,6 +212,8 @@
             var _parametros = {
                 xxClieid: _clieid,
                 xxEmprid: _emprid,
+                xxPaisid: _paisid,
+                xxUsuaid: _usuaid,
                 xxEstado: _estado
             } 
             
