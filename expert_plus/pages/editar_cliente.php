@@ -767,6 +767,7 @@
         var _cbogrupo = $('#cboGrupo').val();
         var _paisid = "<?php echo $xPaisid; ?>";
         var _emprid = "<?php echo $xEmprid; ?>";
+        var _usuaid = "<?php echo $xUsuaid; ?>";
         var _producto = $.trim($("#txtProducto").val());
             _producto = _producto.toUpperCase();
         var _descripcion = $.trim($("#txtDescripcion").val());
@@ -821,7 +822,7 @@
                 _output +='<td id="td_'+_id + '"><div class="badge badge-light-primary">Activo</div></td>';
                 _output +='<td><div class="form-check form-check-sm form-check-custom form-check-solid">';
                 _output +='<input class="form-check-input h-20px w-20px border-primary btnEstado" checked="checked" type="checkbox" id="chk'+_id +'" ';
-                _output +='onchange="f_UpdateEstado('+_id +','+ _emprid + ')" value=""/></div></td>';
+                _output +='onchange="f_UpdateEstado('+_id +','+ _emprid +','+_paisid +','+_usuaid +')" value=""/></div></td>';
                 _output +='<td><div class="text-center"><div class="btn-group">';
                 _output +='<button type="button" id="btnEditar_'+_id +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto">';
                 _output +='<i class="fa fa-edit"></i></button></div></div></td></tr>';
