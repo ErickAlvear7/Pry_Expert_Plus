@@ -1386,7 +1386,7 @@
 
    function f_Titular(_idgrup,_idprod){
         $.redirect('?page=addtitular&menuid=<?php echo $menuid; ?>', {
-          'idcgrup': _idgrup,
+          'idgrup': _idgrup,
           'idprod': _idprod
 		});
     

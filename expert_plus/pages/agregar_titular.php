@@ -20,6 +20,8 @@
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
     $clieid = $_POST['idclie'];
     $menuid = $_GET['menuid'];
+    $prodid = $_POST['idprod'];
+    $grupid = $_POST['idgrup'];
 
     @session_start();
 
