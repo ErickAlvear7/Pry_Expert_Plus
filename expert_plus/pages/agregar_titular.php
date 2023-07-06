@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="card-body text-center pt-0">
-                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="">
+                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
                             <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media//stock/ecommerce/78.gif)"></div>
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                 <i class="bi bi-pencil-fill fs-7"></i>
