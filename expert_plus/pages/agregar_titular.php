@@ -150,10 +150,10 @@
             <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
                 <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n2">
                     <li class="nav-item">
-                        <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">General</a>
+                        <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">Titular</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Advanced</a>
+                        <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Beneficiarios</a>
                     </li>
                     <a href="?page=editcliente&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
                     <span class="svg-icon svg-icon-2">
@@ -169,17 +169,69 @@
                             <div class="card card-flush py-4">
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <h2>General</h2>
+                                        <h2>Datos Titular</h2>
                                     </div>
                                 </div>
                                 <div class="card-body pt-0">
-
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Tipo Documento</label>
+                                            <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                                <option></option>
+                                                <option value="1" selected="selected">Cedula</option>
+                                                <option value="2">Pasaporte</option>
+                                            </select>
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Nro. Documento</label>
+                                            <input type="text" class="form-control mb-2" value="" />
+                                        </div>    
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Primer Nombre</label>
+                                            <input type="text" class="form-control mb-2" value="" placeholder="Ingrese Nombre" />
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Segundo Nombre</label>
+                                            <input type="text" class="form-control mb-2" value="" />
+                                        </div>   
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Primer Apellido</label>
+                                            <input type="text" class="form-control mb-2" value="" placeholder="Ingrese Apellido" />
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Segundo Apellido</label>
+                                            <input type="text" class="form-control mb-2" value="" />
+                                        </div>   
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Genero</label>
+                                            <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                                <option></option>
+                                                <option value="1" selected="selected">Masculino</option>
+                                                <option value="2">Femenino</option>
+                                            </select>
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Estado Civil</label>
+                                            <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                                <option></option>
+                                                <option value="1" selected="selected">Soltero</option>
+                                                <option value="2">Casado</option>
+                                                <option value="2">Viudo</option>
+                                            </select>
+                                        </div>      
+                                    </div>
                                 </div>
                             </div>
                             <div class="card card-flush py-4">
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <h2>Media</h2>
+                                        <h2>Titulares Agregados</h2>
                                     </div>
                                 </div>
                                 <div class="card-body pt-0">
@@ -262,7 +314,7 @@
                             <div class="card card-flush py-4">
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <h2>Advanced</h2>
+                                        <h2>Beneficiarios</h2>
                                     </div>
                                 </div>
                                 <div class="card-body pt-0">
