@@ -226,6 +226,64 @@
                                             </select>
                                         </div>      
                                     </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Fecha Nacimiento</label>
+                                            <input type="date" class="form-control mb-2" value="" />
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Edad</label>
+                                            <input type="text" class="form-control mb-2" value="" />
+                                        </div>  
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Provincia</label>
+                                            <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                                <option></option>
+                                            </select>
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Ciudad</label>
+                                            <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                                <option></option>
+                                            </select>
+                                        </div>  
+                                    </div>
+                                    <div class="mb-10 fv-row">
+                                       <label class="form-label">Direccion</label>
+                                       <textarea class="form-control mb-2" id="" rows="2"></textarea>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Telefono Casa</label>
+                                            <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" />
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Telefono Oficina</label>
+                                            <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9"/>
+                                        </div>  
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Telefono Celular</label>
+                                            <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" />
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="form-control mb-2 col-md-1" value="" placeholder="micorreo@gmail.com" maxlength="10" />
+                                        </div>  
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Inicio Cobertura</label>
+                                            <input type="date" class="form-control mb-2" value="" />
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Fin Cobertura</label>
+                                            <input type="date" class="form-control mb-2" value="" />
+                                        </div>  
+                                    </div>                                                          
                                 </div>
                             </div>
                             <div class="card card-flush py-4">
@@ -306,7 +364,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>    
+                            </div>  
                         </div>
                     </div>
                     <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
@@ -314,7 +372,7 @@
                             <div class="card card-flush py-4">
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <h2>Beneficiarios</h2>
+                                        <h2>Datos Beneficiario</h2>
                                     </div>
                                 </div>
                                 <div class="card-body pt-0">
@@ -324,7 +382,13 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="d-flex justify-content-end">
+                    <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
+                        <span class="indicator-label">Save Changes</span>
+                        <span class="indicator-progress">Please wait...
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    </button>
+                </div>
             </div>
         </form>
     </div>
