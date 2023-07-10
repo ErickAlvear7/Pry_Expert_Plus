@@ -55,10 +55,10 @@ var KTAppEcommerceSalesSaveOrder = function () {
             "scrollY": "400px",
             "scrollCollapse": true,
             "paging": false,
-            "info": false,
-            'columnDefs': [
-                { orderable: false, targets: 0 }, // Disable ordering on column 0 (checkbox)
-            ]
+            "info": false
+            // 'columnDefs': [
+            //     { orderable: false, targets: 0 }, // Disable ordering on column 0 (checkbox)
+            // ]
         });
     }
 
@@ -77,79 +77,79 @@ var KTAppEcommerceSalesSaveOrder = function () {
         const checkbox = document.getElementById('same_as_billing');
 
         // Show/hide shipping form
-        checkbox.addEventListener('change', e => {
-            if (e.target.checked) {
-                element.classList.add('d-none');
-            } else {
-                element.classList.remove('d-none');
-            }
-        });
+        // checkbox.addEventListener('change', e => {
+        //     if (e.target.checked) {
+        //         element.classList.add('d-none');
+        //     } else {
+        //         element.classList.remove('d-none');
+        //     }
+        // });
     }
 
     // Handle product select
     const handleProductSelect = () => {
         // Define variables
-        const checkboxes = table.querySelectorAll('[type="checkbox"]');
+        // const checkboxes = table.querySelectorAll('[type="checkbox"]');
         const target = document.getElementById('kt_ecommerce_edit_order_selected_products');
         const totalPrice = document.getElementById('kt_ecommerce_edit_order_total_price');
 
         // Loop through all checked products
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', e => {
-                // Select parent row element
-                const parent = checkbox.closest('tr');
+        // checkboxes.forEach(checkbox => {
+        //     checkbox.addEventListener('change', e => {
+        //         // Select parent row element
+        //         const parent = checkbox.closest('tr');
                 
-                // Clone parent element as variable
-                const product = parent.querySelector('[data-kt-ecommerce-edit-order-filter="product"]').cloneNode(true);
+        //         // Clone parent element as variable
+        //         const product = parent.querySelector('[data-kt-ecommerce-edit-order-filter="product"]').cloneNode(true);
 
-                // Create inner wrapper
-                const innerWrapper = document.createElement('div');
+        //         // Create inner wrapper
+        //         const innerWrapper = document.createElement('div');
                 
-                // Store inner content
-                const innerContent = product.innerHTML;
+        //         // Store inner content
+        //         const innerContent = product.innerHTML;
 
-                // Add & remove classes on parent wrapper
-                const wrapperClassesAdd = ['col', 'my-2'];
-                const wrapperClassesRemove = ['d-flex', 'align-items-center'];
+        //         // Add & remove classes on parent wrapper
+        //         const wrapperClassesAdd = ['col', 'my-2'];
+        //         const wrapperClassesRemove = ['d-flex', 'align-items-center'];
 
-                // Define additional classes
-                const additionalClasses = ['border', 'border-dashed', 'rounded', 'p-3', 'bg-white'];
+        //         // Define additional classes
+        //         const additionalClasses = ['border', 'border-dashed', 'rounded', 'p-3', 'bg-white'];
 
-                // Update parent wrapper classes
-                product.classList.remove(...wrapperClassesRemove);
-                product.classList.add(...wrapperClassesAdd);
+        //         // Update parent wrapper classes
+        //         product.classList.remove(...wrapperClassesRemove);
+        //         product.classList.add(...wrapperClassesAdd);
 
-                // Remove parent default content
-                product.innerHTML = '';
+        //         // Remove parent default content
+        //         product.innerHTML = '';
 
-                // Update inner wrapper classes
-                innerWrapper.classList.add(...wrapperClassesRemove);
-                innerWrapper.classList.add(...additionalClasses);                
+        //         // Update inner wrapper classes
+        //         innerWrapper.classList.add(...wrapperClassesRemove);
+        //         innerWrapper.classList.add(...additionalClasses);                
 
-                // Apply stored inner content into new inner wrapper
-                innerWrapper.innerHTML = innerContent;
+        //         // Apply stored inner content into new inner wrapper
+        //         innerWrapper.innerHTML = innerContent;
 
-                // Append new inner wrapper to parent wrapper
-                product.appendChild(innerWrapper);
+        //         // Append new inner wrapper to parent wrapper
+        //         product.appendChild(innerWrapper);
 
-                // Get product id
-                const productId = product.getAttribute('data-kt-ecommerce-edit-order-id');
+        //         // Get product id
+        //         const productId = product.getAttribute('data-kt-ecommerce-edit-order-id');
 
-                if (e.target.checked) {
-                    // Add product to selected product wrapper
-                    target.appendChild(product);
-                } else {
-                    // Remove product from selected product wrapper
-                    const selectedProduct = target.querySelector('[data-kt-ecommerce-edit-order-id="' + productId + '"]');
-                    if (selectedProduct) {
-                        target.removeChild(selectedProduct);
-                    }
-                }
+        //         if (e.target.checked) {
+        //             // Add product to selected product wrapper
+        //             target.appendChild(product);
+        //         } else {
+        //             // Remove product from selected product wrapper
+        //             const selectedProduct = target.querySelector('[data-kt-ecommerce-edit-order-id="' + productId + '"]');
+        //             if (selectedProduct) {
+        //                 target.removeChild(selectedProduct);
+        //             }
+        //         }
 
-                // Trigger empty message logic
-                detectEmpty();
-            });
-        });
+        //         // Trigger empty message logic
+        //         detectEmpty();
+        //     });
+        // });
 
         // Handle empty list message
         const detectEmpty = () => {
