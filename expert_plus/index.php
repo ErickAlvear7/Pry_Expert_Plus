@@ -169,7 +169,17 @@ License: For each use you must have a valid license purchased only from above li
 			<script src="assets/js/custom/apps/user-management/roles/list/add.js"></script>
 			<script src="assets/js/custom/apps/user-management/roles/list/update-role.js"></script>     	
 
-		<?php } ?>		
+		<?php } ?>
+
+		<?php if($page == 'addtitular') { ?>
+
+	        
+			<script src="assets/js/custom/apps/ecommerce/sales/save-order.js"></script>
+			
+
+		<?php } ?>
+		
+		
 		
 	</body>
 	<!--end::Body-->
