@@ -190,22 +190,12 @@
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
-                                        <label class="required form-label">Primer Nombre</label>
-                                        <input type="text" class="form-control mb-2" value="" placeholder="Ingrese Nombre" />
+                                        <label class="required form-label">Nombres</label>
+                                        <input type="text" class="form-control mb-2" value="" placeholder="Ingrese Nombres" />
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Segundo Nombre</label>
-                                        <input type="text" class="form-control mb-2" value="" />
-                                    </div>   
-                                </div>
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="required form-label">Primer Apellido</label>
-                                        <input type="text" class="form-control mb-2" value="" placeholder="Ingrese Apellido" />
-                                    </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Segundo Apellido</label>
-                                        <input type="text" class="form-control mb-2" value="" />
+                                        <label class="required form-label">Apellidos</label>
+                                        <input type="text" class="form-control mb-2" value=""  placeholder="Ingrese Apellidos" />
                                     </div>   
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
@@ -229,13 +219,9 @@
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Fecha Nacimiento</label>
+                                        <label class="form-label">Fecha de Nacimiento</label>
                                         <input type="date" class="form-control mb-2" value="" />
                                     </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Edad</label>
-                                        <input type="text" class="form-control mb-2" value="" />
-                                    </div>  
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
@@ -253,7 +239,7 @@
                                 </div>
                                 <div class="mb-10 fv-row">
                                     <label class="form-label">Direccion</label>
-                                    <textarea class="form-control mb-2" id="" rows="2"></textarea>
+                                    <textarea class="form-control mb-2" id="" rows="1"></textarea>
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
@@ -346,9 +332,140 @@
                                 </div>
                             </div>
                             <div class="card-body pt-0">
-
+                                <div class="d-flex flex-wrap gap-5">
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <label class="required form-label">Tipo Documento</label>
+                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                            <option></option>
+                                            <option value="1" selected="selected">Cedula</option>
+                                            <option value="2">Pasaporte</option>
+                                        </select>
+                                    </div>
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <label class="required form-label">Nro. Documento</label>
+                                        <input type="text" class="form-control mb-2" value="" />
+                                    </div>    
+                                </div>
+                                <div class="d-flex flex-wrap gap-5">
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <label class="required form-label">Nombres</label>
+                                        <input type="text" class="form-control mb-2" value="" placeholder="Ingrese Nombres" />
+                                    </div>
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <label class="required form-label">Apellidos</label>
+                                        <input type="text" class="form-control mb-2" value=""  placeholder="Ingrese Apellidos" />
+                                    </div>   
+                                </div>
+                                <div class="d-flex flex-wrap gap-5">
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <label class="required form-label">Genero</label>
+                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                            <option></option>
+                                            <option value="1" selected="selected">Masculino</option>
+                                            <option value="2">Femenino</option>
+                                        </select>
+                                    </div>
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <label class="form-label">Estado Civil</label>
+                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                            <option></option>
+                                            <option value="1" selected="selected">Soltero</option>
+                                            <option value="2">Casado</option>
+                                            <option value="2">Viudo</option>
+                                        </select>
+                                    </div>      
+                                </div>
+                                <div class="d-flex flex-wrap gap-5">
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <label class="required form-label">Provincia</label>
+                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <label class="form-label">Ciudad</label>
+                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                            <option></option>
+                                        </select>
+                                    </div>  
+                                </div>
+                                <div class="mb-10 fv-row">
+                                    <label class="form-label">Direccion</label>
+                                    <textarea class="form-control mb-2" id="" rows="1"></textarea>
+                                </div>
+                                <div class="d-flex flex-wrap gap-5">
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <label class="form-label">Telefono Casa</label>
+                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" />
+                                    </div>
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <label class="form-label">Telefono Oficina</label>
+                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9"/>
+                                    </div>  
+                                </div>
+                                <div class="d-flex flex-wrap gap-5">
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <label class="form-label">Telefono Celular</label>
+                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" />
+                                    </div>
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control mb-2 col-md-1" value="" placeholder="micorreo@gmail.com" maxlength="10" />
+                                    </div>  
+                                </div>
+                                <div class="d-flex flex-wrap gap-5">
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <label class="form-label">Parentesco</label>
+                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <label class="form-label">Fecha de Nacimiento</label>
+                                        <input type="date" class="form-control mb-2" value="" />
+                                    </div> 
+                                </div>
+                                <div class="form-group mt-5">
+                                    <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
+                                        <span class="svg-icon svg-icon-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    Agregar Beneficiario
+                                    </button>
+                                </div>  
                             </div>
-                        </div>    
+                        </div>
+                        <div class="card card-flush py-4">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <h2>Beneficiarios Agregados</h2>
+                                </div>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="d-flex flex-column gap-10">
+                                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="tblProducto">
+                                        <thead>
+                                            <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                <th style="display:none;">Id</th>
+                                                <th>Grupo</th>
+                                                <th>Producto</th>
+                                                <th style="text-align: center;">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="fw-bold text-gray-600">
+                                            <tr>
+                                                <td>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>     
                     </div>
                 </div>
             </div>
