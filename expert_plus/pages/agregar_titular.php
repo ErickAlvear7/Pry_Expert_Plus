@@ -42,72 +42,41 @@
 
 ?>
 <div id="kt_content_container" class="container-xxl">
-    <!--begin::Form-->
     <form id="kt_ecommerce_edit_order_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/sales/listing.html">
-        <!--begin::Aside column-->
         <div class="w-100 flex-lg-row-auto w-lg-300px mb-7 me-7 me-lg-10">
             <div class="card card-flush py-4">
-                <!--begin::Card header-->
                 <div class="card-header">
-                    <!--begin::Card title-->
                     <div class="card-title">
                         <h2>Thumbnail</h2>
-                    </div>
-                    <!--end::Card title-->
+                    </div>    
                 </div>
-                <!--end::Card header-->
-                <!--begin::Card body-->
                 <div class="card-body text-center pt-0">
-                    <!--begin::Image input-->
                     <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
-                        <!--begin::Preview existing avatar-->
                         <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media//stock/ecommerce/78.gif)"></div>
-                        <!--end::Preview existing avatar-->
-                        <!--begin::Label-->
                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
-                            <i class="bi bi-pencil-fill fs-7"></i>
-                            <!--begin::Inputs-->
+                            <i class="bi bi-pencil-fill fs-7"></i>    
                             <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
                             <input type="hidden" name="avatar_remove" />
-                            <!--end::Inputs-->
                         </label>
-                        <!--end::Label-->
-                        <!--begin::Cancel-->
                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
                             <i class="bi bi-x fs-2"></i>
                         </span>
-                        <!--end::Cancel-->
-                        <!--begin::Remove-->
                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
                             <i class="bi bi-x fs-2"></i>
                         </span>
-                        <!--end::Remove-->
                     </div>
-                    <!--end::Image input-->
-                    <!--begin::Description-->
                     <div class="text-muted fs-7">Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
-                    <!--end::Description-->
                 </div>
-                <!--end::Card body-->
             </div>
             <br>
             <div class="card card-flush py-4">
-                <!--begin::Card header-->
                 <div class="card-header">
-                    <!--begin::Card title-->
                     <div class="card-title">
                         <h2>Product Details</h2>
                     </div>
-                    <!--end::Card title-->
                 </div>
-                <!--end::Card header-->
-                <!--begin::Card body-->
                 <div class="card-body pt-0">
-                    <!--begin::Input group-->
-                    <!--begin::Label-->
                     <label class="form-label">Categories</label>
-                    <!--end::Label-->
-                    <!--begin::Select2-->
                     <select class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" multiple="multiple">
                         <option></option>
                         <option value="Computers">Computers</option>
@@ -121,64 +90,35 @@
                         <option value="Wines">Wines</option>
                         <option value="Sandals">Sandals</option>
                     </select>
-                    <!--end::Select2-->
-                    <!--begin::Description-->
                     <div class="text-muted fs-7 mb-7">Add product to a category.</div>
-                    <!--end::Description-->
-                    <!--end::Input group-->
-                    <!--begin::Button-->
                     <a href="../../demo1/dist/apps/ecommerce/catalog/add-category.html" class="btn btn-light-primary btn-sm mb-10">
-                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
                     <span class="svg-icon svg-icon-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
                             <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
                         </svg>
                     </span>
-                    <!--end::Svg Icon-->Create new category</a>
-                    <!--end::Button-->
-                    <!--begin::Input group-->
-                    <!--begin::Label-->
+                    Create new category</a>
                     <label class="form-label d-block">Tags</label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
                     <input id="kt_ecommerce_add_product_tags" name="kt_ecommerce_add_product_tags" class="form-control mb-2" value="new, trending, sale" />
-                    <!--end::Input-->
-                    <!--begin::Description-->
                     <div class="text-muted fs-7">Add tags to a product.</div>
-                    <!--end::Description-->
-                    <!--end::Input group-->
                 </div>
-                <!--end::Card body-->
             </div>
             <br>
             <div class="card card-flush py-4">
-                <!--begin::Card header-->
                 <div class="card-header">
                     <div class="card-title">
                         <h2>Order Details</h2>
                     </div>
                 </div>
-                <!--end::Card header-->
-                <!--begin::Card body-->
                 <div class="card-body pt-0">
                     <div class="d-flex flex-column gap-10">
-                        <!--begin::Input group-->
                         <div class="fv-row">
-                            <!--begin::Label-->
                             <label class="form-label">Order ID</label>
-                            <!--end::Label-->
-                            <!--begin::Auto-generated ID-->
                             <div class="fw-bolder fs-3">#13111</div>
-                            <!--end::Input-->
                         </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
                         <div class="fv-row">
-                            <!--begin::Label-->
                             <label class="required form-label">Payment Method</label>
-                            <!--end::Label-->
-                            <!--begin::Select2-->
                             <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" name="payment_method" id="kt_ecommerce_edit_order_payment">
                                 <option></option>
                                 <option value="cod">Cash on Delivery</option>
@@ -186,18 +126,10 @@
                                 <option value="mastercard">Credit Card (Mastercard)</option>
                                 <option value="paypal">Paypal</option>
                             </select>
-                            <!--end::Select2-->
-                            <!--begin::Description-->
                             <div class="text-muted fs-7">Set the date of the order to process.</div>
-                            <!--end::Description-->
                         </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
                         <div class="fv-row">
-                            <!--begin::Label-->
                             <label class="required form-label">Shipping Method</label>
-                            <!--end::Label-->
-                            <!--begin::Select2-->
                             <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" name="shipping_method" id="kt_ecommerce_edit_order_shipping">
                                 <option></option>
                                 <option value="none">N/A - Virtual Product</option>
@@ -205,33 +137,17 @@
                                 <option value="express">Express Rate</option>
                                 <option value="speed">Speed Overnight Rate</option>
                             </select>
-                            <!--end::Select2-->
-                            <!--begin::Description-->
                             <div class="text-muted fs-7">Set the date of the order to process.</div>
-                            <!--end::Description-->
                         </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
                         <div class="fv-row">
-                            <!--begin::Label-->
                             <label class="required form-label">Order Date</label>
-                            <!--end::Label-->
-                            <!--begin::Editor-->
                             <input id="kt_ecommerce_edit_order_date" name="order_date" placeholder="Select a date" class="form-control mb-2" value="" />
-                            <!--end::Editor-->
-                            <!--begin::Description-->
                             <div class="text-muted fs-7">Set the date of the order to process.</div>
-                            <!--end::Description-->
                         </div>
-                        <!--end::Input group-->
                     </div>
                 </div>
-                <!--end::Card header-->
             </div>
-            <!--end::Order details-->
         </div>
-        <!--end::Aside column-->
-        <!--begin::Main column-->
         <div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">
             <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n2">
                 <li class="nav-item">
@@ -385,67 +301,37 @@
                                             <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->
                                     <input type="text" data-kt-ecommerce-edit-order-filter="search" class="form-control form-control-solid w-100 w-lg-50 ps-14" placeholder="Search Products" />
                                 </div>
                                 <br>
                                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_edit_order_product_table">
-                                    <!--begin::Table head-->
                                     <thead>
                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                            <!-- <th class="w-25px pe-2"></th> -->
                                             <th class="min-w-200px">Product</th>
                                             <th class="min-w-100px text-end pe-5">Qty Remaining</th>
                                         </tr>
                                     </thead>
-                                    <!--end::Table head-->
-                                    <!--begin::Table body-->
                                     <tbody class="fw-bold text-gray-600">
-                                        <!--begin::Table row-->
                                         <tr>
-                                            <!--begin::Checkbox-->
-                                            <!-- <td>
-                                                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                    <input class="form-check-input" type="checkbox" value="1" />
-                                                </div>
-                                            </td> -->
-                                            <!--end::Checkbox-->
-                                            <!--begin::Product=-->
                                             <td>
                                                 <div class="d-flex align-items-center" data-kt-ecommerce-edit-order-filter="product" data-kt-ecommerce-edit-order-id="product_1">
-                                                    <!--begin::Thumbnail-->
                                                     <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
                                                         <span class="symbol-label" style="background-image:url(assets/media//stock/ecommerce/1.gif);"></span>
                                                     </a>
-                                                    <!--end::Thumbnail-->
                                                     <div class="ms-5">
-                                                        <!--begin::Title-->
                                                         <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bolder">Product 1</a>
-                                                        <!--end::Title-->
-                                                        <!--begin::Price-->
                                                         <div class="fw-bold fs-7">Price: $
                                                         <span data-kt-ecommerce-edit-order-filter="price">222.00</span></div>
-                                                        <!--end::Price-->
-                                                        <!--begin::SKU-->
                                                         <div class="text-muted fs-7">SKU: 01731001</div>
-                                                        <!--end::SKU-->
                                                     </div>
                                                 </div>
                                             </td>
-                                            <!--end::Product=-->
-                                            <!--begin::Qty=-->
                                             <td class="text-end pe-5" data-order="0">
                                                 <span class="badge badge-light-danger">Sold out</span>
                                                 <span class="fw-bolder text-danger ms-3">0</span>
                                             </td>
-                                            <!--end::Qty=-->
                                         </tr>
-                                        <!--end::Table row-->
-                                        <!--begin::Table row-->
-                                      
-                                        <!--end::Table row-->
                                     </tbody>
-                                    <!--end::Table body-->
                                 </table>
                             </div>
                         </div>  
@@ -466,23 +352,15 @@
                     </div>
                 </div>
             </div>
-           
-            <!--end::Order details-->
             <div class="d-flex justify-content-end">
-                <!--begin::Button-->
                 <a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_edit_order_cancel" class="btn btn-light me-5">Cancel</a>
-                <!--end::Button-->
-                <!--begin::Button-->
                 <button type="submit" id="kt_ecommerce_edit_order_submit" class="btn btn-primary">
                     <span class="indicator-label">Save Changes</span>
                     <span class="indicator-progress">Please wait...
                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                 </button>
-                <!--end::Button-->
             </div>
         </div>
-        <!--end::Main column-->
     </form>
-    <!--end::Form-->
 </div>
 					
