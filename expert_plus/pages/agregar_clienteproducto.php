@@ -144,7 +144,7 @@
                                                 <span class="required">Provincia</span>
                                             </label>
                                             <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2" >
-                                                <option></option>txtClienttxtEmail1
+                                                <option></option>
                                                 <?php foreach ($all_provincia as $prov) : ?>
                                                     <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
                                                 <?php endforeach ?>

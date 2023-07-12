@@ -39,6 +39,10 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
+    $xSQL = "SELECT DISTINCT provincia AS Descripcion FROM `provincia_ciudad` ";
+	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
+    $all_provincia = mysqli_query($con, $xSQL);
+
 
 ?>
 <div id="kt_content_container" class="container-xxl">
@@ -177,7 +181,7 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Tipo Documento</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
                                             <option></option>
                                             <?php
                                               $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -206,7 +210,7 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Genero</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
                                             <option></option>
                                             <?php
                                                 $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -219,7 +223,7 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Estado Civil</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
                                             <option></option>
                                             <?php
                                                 $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -240,15 +244,18 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Provincia</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
-                                            <option></option>
+                                        <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2" >
+                                                <option></option>
+                                                <?php foreach ($all_provincia as $prov) : ?>
+                                                    <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
+                                                <?php endforeach ?>
                                         </select>
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Ciudad</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
-                                            <option></option>
-                                        </select>
+                                        <select name="cboCiudad" id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2">
+                                                <option></option>
+                                        </select> 
                                     </div>  
                                 </div>
                                 <div class="mb-10 fv-row">
@@ -258,17 +265,17 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Telefono Casa</label>
-                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" />
+                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Telefono Oficina</label>
-                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9"/>
+                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
                                     </div>  
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Telefono Celular</label>
-                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" />
+                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Email</label>
@@ -410,17 +417,17 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Telefono Casa</label>
-                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" />
+                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Telefono Oficina</label>
-                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9"/>
+                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
                                     </div>  
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Telefono Celular</label>
-                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" />
+                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Email</label>
@@ -495,6 +502,41 @@
     </form>
 </div>
 <script>
+
+$(document).ready(function(){
+
+    $('#cboProvincia').change(function(){
+                
+                var _paisid = "<?php echo $xPaisid; ?>";
+                var _emprid = "<?php echo $xEmprid; ?>";                
+                _cboid = $(this).val(); //obtener el id seleccionado
+                
+                $("#cboCiudad").empty();
+    
+    
+                var _parametros = {
+                    xxPaisId: _paisid,
+                    xxEmprId: _emprid,
+                    xxComboId: _cboid,
+                    xxOpcion: 0
+                }
+    
+                var xrespuesta = $.post("codephp/cargar_combos.php", _parametros);
+                    xrespuesta.done(function(response) {
+                
+                    $("#cboCiudad").html(response);
+                    
+                });
+                xrespuesta.fail(function() {
+                    
+                });
+                xrespuesta.always(function() {
+                    
+                });                
+    
+    });
+
+});
 
 
 
