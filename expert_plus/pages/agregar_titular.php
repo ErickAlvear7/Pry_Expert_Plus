@@ -179,8 +179,13 @@
                                         <label class="required form-label">Tipo Documento</label>
                                         <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
                                             <option></option>
-                                            <option value="1" selected="selected">Cedula</option>
-                                            <option value="2">Pasaporte</option>
+                                            <?php
+                                              $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                              $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                              $all_datos =  mysqli_query($con, $xSQL);
+                                            foreach($all_datos as $datos){?>
+                                            <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
+                                            <?php }?>
                                         </select>
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
@@ -203,17 +208,26 @@
                                         <label class="required form-label">Genero</label>
                                         <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
                                             <option></option>
-                                            <option value="1" selected="selected">Masculino</option>
-                                            <option value="2">Femenino</option>
+                                            <?php
+                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Genero' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                                $all_datos =  mysqli_query($con, $xSQL);
+                                                foreach($all_datos as $datos){?>
+                                                <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                            <?php }?> 
                                         </select>
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Estado Civil</label>
                                         <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
                                             <option></option>
-                                            <option value="1" selected="selected">Soltero</option>
-                                            <option value="2">Casado</option>
-                                            <option value="2">Viudo</option>
+                                            <?php
+                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Estado Civil' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
+                                                $all_datos =  mysqli_query($con, $xSQL);
+                                                foreach($all_datos as $datos){?>
+                                                <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                            <?php }?>                   
                                         </select>
                                     </div>      
                                 </div>
@@ -480,4 +494,9 @@
         </div>
     </form>
 </div>
+<script>
+
+
+
+</script>
 					
