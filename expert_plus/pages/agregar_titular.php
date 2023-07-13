@@ -10,6 +10,9 @@
 
     $xFechaActual = strftime('%Y-%m-%d', time());
 
+
+   
+
     require_once("dbcon/config.php");
     require_once("dbcon/functions.php");
 
@@ -184,7 +187,7 @@
                                         <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
                                             <option></option>
                                             <?php
-                                              $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                              $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
                                               $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
                                               $all_datos =  mysqli_query($con, $xSQL);
                                             foreach($all_datos as $datos){?>
@@ -194,7 +197,7 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Nro. Documento</label>
-                                        <input type="text" class="form-control mb-2" value="" />
+                                        <input type="text" class="form-control mb-2" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"  />
                                     </div>    
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
@@ -213,7 +216,7 @@
                                         <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
                                             <option></option>
                                             <?php
-                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
                                                 $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Genero' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
                                                 $all_datos =  mysqli_query($con, $xSQL);
                                                 foreach($all_datos as $datos){?>
@@ -223,10 +226,10 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Estado Civil</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
+                                        <select class="form-select mb-2"  data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
                                             <option></option>
                                             <?php
-                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
                                                 $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Estado Civil' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
                                                 $all_datos =  mysqli_query($con, $xSQL);
                                                 foreach($all_datos as $datos){?>
@@ -364,7 +367,7 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Nro. Documento</label>
-                                        <input type="text" class="form-control mb-2" value="" />
+                                        <input type="text" class="form-control mb-2" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                     </div>    
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
