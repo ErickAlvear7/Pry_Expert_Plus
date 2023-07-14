@@ -192,131 +192,131 @@ var KTAppEcommerceSalesSaveOrder = function () {
     }
 
     // Submit form handler
-    const handleSubmit = () => {
-        // Define variables
-        let validator;
+    // const handleSubmit = () => {
+    //     // Define variables
+    //     let validator;
 
-        // Get elements
-        const form = document.getElementById('kt_ecommerce_edit_order_form');
-        const submitButton = document.getElementById('kt_ecommerce_edit_order_submit');
+    //     // Get elements
+    //     const form = document.getElementById('kt_ecommerce_edit_order_form');
+    //     const submitButton = document.getElementById('kt_ecommerce_edit_order_submit');
 
-        // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
-        validator = FormValidation.formValidation(
-            form,
-            {
-                fields: {
-                    'payment_method': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Payment method is required'
-                            }
-                        }
-                    },
-                    'shipping_method': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Shipping method is required'
-                            }
-                        }
-                    },
-                    'order_date': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Order date is required'
-                            }
-                        }
-                    },
-                    'billing_order_address_1': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Address line 1 is required'
-                            }
-                        }
-                    },
-                    'billing_order_postcode': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Postcode is required'
-                            }
-                        }
-                    },
-                    'billing_order_state': {
-                        validators: {
-                            notEmpty: {
-                                message: 'State is required'
-                            }
-                        }
-                    },
-                    'billing_order_country': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Country is required'
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    trigger: new FormValidation.plugins.Trigger(),
-                    bootstrap: new FormValidation.plugins.Bootstrap5({
-                        rowSelector: '.fv-row',
-                        eleInvalidClass: '',
-                        eleValidClass: ''
-                    })
-                }
-            }
-        );
+    //     // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+    //     validator = FormValidation.formValidation(
+    //         form,
+    //         {
+    //             fields: {
+    //                 'payment_method': {
+    //                     validators: {
+    //                         notEmpty: {
+    //                             message: 'Payment method is required'
+    //                         }
+    //                     }
+    //                 },
+    //                 'shipping_method': {
+    //                     validators: {
+    //                         notEmpty: {
+    //                             message: 'Shipping method is required'
+    //                         }
+    //                     }
+    //                 },
+    //                 'order_date': {
+    //                     validators: {
+    //                         notEmpty: {
+    //                             message: 'Order date is required'
+    //                         }
+    //                     }
+    //                 },
+    //                 'billing_order_address_1': {
+    //                     validators: {
+    //                         notEmpty: {
+    //                             message: 'Address line 1 is required'
+    //                         }
+    //                     }
+    //                 },
+    //                 'billing_order_postcode': {
+    //                     validators: {
+    //                         notEmpty: {
+    //                             message: 'Postcode is required'
+    //                         }
+    //                     }
+    //                 },
+    //                 'billing_order_state': {
+    //                     validators: {
+    //                         notEmpty: {
+    //                             message: 'State is required'
+    //                         }
+    //                     }
+    //                 },
+    //                 'billing_order_country': {
+    //                     validators: {
+    //                         notEmpty: {
+    //                             message: 'Country is required'
+    //                         }
+    //                     }
+    //                 }
+    //             },
+    //             plugins: {
+    //                 trigger: new FormValidation.plugins.Trigger(),
+    //                 bootstrap: new FormValidation.plugins.Bootstrap5({
+    //                     rowSelector: '.fv-row',
+    //                     eleInvalidClass: '',
+    //                     eleValidClass: ''
+    //                 })
+    //             }
+    //         }
+    //     );
 
-        // Handle submit button
-        submitButton.addEventListener('click', e => {
-            e.preventDefault();
+    //     // Handle submit button
+    //     submitButton.addEventListener('click', e => {
+    //         e.preventDefault();
 
-            // Validate form before submit
-            if (validator) {
-                validator.validate().then(function (status) {
-                    console.log('validated!');
+    //         // Validate form before submit
+    //         if (validator) {
+    //             validator.validate().then(function (status) {
+    //                 console.log('validated!');
 
-                    if (status == 'Valid') {
-                        submitButton.setAttribute('data-kt-indicator', 'on');
+    //                 if (status == 'Valid') {
+    //                     submitButton.setAttribute('data-kt-indicator', 'on');
 
-                        // Disable submit button whilst loading
-                        submitButton.disabled = true;
+    //                     // Disable submit button whilst loading
+    //                     submitButton.disabled = true;
 
-                        setTimeout(function () {
-                            submitButton.removeAttribute('data-kt-indicator');
+    //                     setTimeout(function () {
+    //                         submitButton.removeAttribute('data-kt-indicator');
 
-                            Swal.fire({
-                                text: "Form has been successfully submitted!",
-                                icon: "success",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn btn-primary"
-                                }
-                            }).then(function (result) {
-                                if (result.isConfirmed) {
-                                    // Enable submit button after loading
-                                    submitButton.disabled = false;
+    //                         Swal.fire({
+    //                             text: "Form has been successfully submitted!",
+    //                             icon: "success",
+    //                             buttonsStyling: false,
+    //                             confirmButtonText: "Ok, got it!",
+    //                             customClass: {
+    //                                 confirmButton: "btn btn-primary"
+    //                             }
+    //                         }).then(function (result) {
+    //                             if (result.isConfirmed) {
+    //                                 // Enable submit button after loading
+    //                                 submitButton.disabled = false;
 
-                                    // Redirect to customers list page
-                                    window.location = form.getAttribute("data-kt-redirect");
-                                }
-                            });
-                        }, 2000);
-                    } else {
-                        Swal.fire({
-                            html: "Sorry, looks like there are some errors detected, please try again.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        });
-                    }
-                });
-            }
-        })
-    }
+    //                                 // Redirect to customers list page
+    //                                 window.location = form.getAttribute("data-kt-redirect");
+    //                             }
+    //                         });
+    //                     }, 2000);
+    //                 } else {
+    //                     Swal.fire({
+    //                         html: "Sorry, looks like there are some errors detected, please try again.",
+    //                         icon: "error",
+    //                         buttonsStyling: false,
+    //                         confirmButtonText: "Ok, got it!",
+    //                         customClass: {
+    //                             confirmButton: "btn btn-primary"
+    //                         }
+    //                     });
+    //                 }
+    //             });
+    //         }
+    //     })
+    // }
 
 
     // Public methods
@@ -327,7 +327,7 @@ var KTAppEcommerceSalesSaveOrder = function () {
             handleSearchDatatable();
             handleShippingForm();
             handleProductSelect();
-            handleSubmit();
+            // handleSubmit();
         }
     };
 }();
