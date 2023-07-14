@@ -203,11 +203,11 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Nombres</label>
-                                        <input type="text" class="form-control mb-2" value="" placeholder="Ingrese Nombres" />
+                                        <input type="text" id="txtNombre" class="form-control mb-2" value="" maxlength="80" placeholder="Ingrese Nombres" />
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Apellidos</label>
-                                        <input type="text" class="form-control mb-2" value=""  placeholder="Ingrese Apellidos" />
+                                        <input type="text" id="txtApellido" class="form-control mb-2" value="" maxlength="80" placeholder="Ingrese Apellidos" />
                                     </div>   
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
@@ -263,38 +263,38 @@
                                 </div>
                                 <div class="mb-10 fv-row">
                                     <label class="form-label">Direccion</label>
-                                    <textarea class="form-control mb-2" id="" rows="1"></textarea>
+                                    <textarea class="form-control mb-2" id="txtDireccion" maxlength="250" rows="1"></textarea>
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Telefono Casa</label>
-                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                        <input type="text" id="txtTelcasa" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Telefono Oficina</label>
-                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                        <input type="text" id="txtTelofi" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
                                     </div>  
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Telefono Celular</label>
-                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                        <input type="text" id="txtCelular" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Email</label>
-                                        <input type="email" class="form-control mb-2 col-md-1" value="" placeholder="micorreo@gmail.com" maxlength="10" />
+                                        <input type="email" id="txtEmail" class="form-control mb-2 col-md-1" value="" placeholder="micorreo@gmail.com" maxlength="10" />
                                     </div>  
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Inicio Cobertura</label>
-                                        <input type="date" class="form-control mb-2" value="<?php 
+                                        <input type="date" id="txtIniCobertura" class="form-control mb-2" value="<?php 
                                           $dia = date('Y-m-d');
                                           echo date('Y-m-d', strtotime($dia)); ?>" />
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Fin Cobertura</label>
-                                        <input type="date" class="form-control mb-2" value="" />
+                                        <input type="date" id="finCobertura" class="form-control mb-2" value="" />
                                     </div>  
                                 </div>                                                          
                             </div>
@@ -523,11 +523,8 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_edit_order_cancel" class="btn btn-light me-5">Cancel</a>
-                <button type="submit" id="kt_ecommerce_edit_order_submit" class="btn btn-primary">
-                    <span class="indicator-label">Save Changes</span>
-                    <span class="indicator-progress">Please wait...
-                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                <button type="button" id="btnGrabar" onclick="" class="btn btn-primary">
+                    <span class="indicator-label">Grabar</span>
                 </button>
             </div>
         </div>
