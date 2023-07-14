@@ -187,11 +187,11 @@
                                         <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
                                             <option></option>
                                             <?php
-                                              $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                              $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                              $all_datos =  mysqli_query($con, $xSQL);
-                                            foreach($all_datos as $datos){?>
-                                            <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
+                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                                $all_datos =  mysqli_query($con, $xSQL);
+                                                foreach($all_datos as $datos){?>
+                                                <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
                                             <?php }?>
                                         </select>
                                     </div>
@@ -288,7 +288,9 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Inicio Cobertura</label>
-                                        <input type="date" class="form-control mb-2" value="" />
+                                        <input type="date" class="form-control mb-2" value="<?php 
+                                          $dia = date('Y-m-d');
+                                          echo date('Y-m-d', strtotime($dia)); ?>" />
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Fin Cobertura</label>
@@ -359,10 +361,15 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Tipo Documento</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
                                             <option></option>
-                                            <option value="1" selected="selected">Cedula</option>
-                                            <option value="2">Pasaporte</option>
+                                            <?php
+                                              $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                              $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                              $all_datos =  mysqli_query($con, $xSQL);
+                                            foreach($all_datos as $datos){?>
+                                            <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
+                                            <?php }?>
                                         </select>
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
@@ -383,34 +390,49 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Genero</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
                                             <option></option>
-                                            <option value="1" selected="selected">Masculino</option>
-                                            <option value="2">Femenino</option>
+                                            <?php
+                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Genero' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                                $all_datos =  mysqli_query($con, $xSQL);
+                                                foreach($all_datos as $datos){?>
+                                                <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                            <?php }?> 
                                         </select>
+                                    
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Estado Civil</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                        <select class="form-select mb-2"  data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
                                             <option></option>
-                                            <option value="1" selected="selected">Soltero</option>
-                                            <option value="2">Casado</option>
-                                            <option value="2">Viudo</option>
+                                            <?php
+                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Estado Civil' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
+                                                $all_datos =  mysqli_query($con, $xSQL);
+                                                foreach($all_datos as $datos){?>
+                                                <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                            <?php }?>                   
                                         </select>
                                     </div>      
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Provincia</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
-                                            <option></option>
+                                        <select id="cboProvinciaBe" class="form-select mb-2"  data-control="select2" data-hide-search="true" data-placeholder="Seleccione Provincia">
+                                        <!-- <select  id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2" > -->
+                                                <option></option>
+                                                <?php foreach ($all_provincia as $prov) : ?>
+                                                    <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
+                                                <?php endforeach ?>
                                         </select>
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Ciudad</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
-                                            <option></option>
-                                        </select>
+                                        <select id="cboCiudadBe" class="form-select mb-2"  data-control="select2" data-hide-search="true" data-placeholder="Seleccione Ciudad">
+                                        <!-- <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2"> -->
+                                                <option></option>
+                                        </select> 
                                     </div>  
                                 </div>
                                 <div class="mb-10 fv-row">
@@ -440,8 +462,15 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Parentesco</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                        <select class="form-select mb-2"  data-control="select2" data-hide-search="true" data-placeholder="Seleccione Parentesco">
                                             <option></option>
+                                            <?php
+                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Parentesco' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
+                                                $all_datos =  mysqli_query($con, $xSQL);
+                                                foreach($all_datos as $datos){?>
+                                                <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                            <?php }?>                   
                                         </select>
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
@@ -528,6 +557,38 @@ $(document).ready(function(){
                     xrespuesta.done(function(response) {
                 
                     $("#cboCiudad").html(response);
+                    
+                });
+                xrespuesta.fail(function() {
+                    
+                });
+                xrespuesta.always(function() {
+                    
+                });                
+    
+    });
+
+    //Datos Provincia para  Beneficiario
+    $('#cboProvinciaBe').change(function(){
+                
+                var _paisid = "<?php echo $xPaisid; ?>";
+                var _emprid = "<?php echo $xEmprid; ?>";                
+                _cboid = $(this).val(); //obtener el id seleccionado
+                
+                $("#cboCiudadBe").empty();
+    
+    
+                var _parametros = {
+                    xxPaisId: _paisid,
+                    xxEmprId: _emprid,
+                    xxComboId: _cboid,
+                    xxOpcion: 0
+                }
+    
+                var xrespuesta = $.post("codephp/cargar_combos.php", _parametros);
+                    xrespuesta.done(function(response) {
+                
+                    $("#cboCiudadBe").html(response);
                     
                 });
                 xrespuesta.fail(function() {
