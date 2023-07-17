@@ -184,7 +184,7 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Tipo Documento</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
+                                        <select class="form-select mb-2" id="cboDocumento" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
                                             <option></option>
                                             <?php
                                                 $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -197,7 +197,7 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Nro. Documento</label>
-                                        <input type="text" class="form-control mb-2" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"  />
+                                        <input type="text" id="txtDocumento" class="form-control mb-2" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"  />
                                     </div>    
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
@@ -213,7 +213,7 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Genero</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
+                                        <select class="form-select mb-2" id="cboGenero" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
                                             <option></option>
                                             <?php
                                                 $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -226,7 +226,7 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Estado Civil</label>
-                                        <select class="form-select mb-2"  data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
+                                        <select class="form-select mb-2" id="cboEstadoCivil" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
                                             <option></option>
                                             <?php
                                                 $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -241,7 +241,7 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Fecha de Nacimiento</label>
-                                        <input type="date" class="form-control mb-2" value="" />
+                                        <input type="date" id="txtFechaNacimiento" class="form-control mb-2" value="" />
                                     </div>
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
@@ -256,7 +256,7 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Ciudad</label>
-                                        <select name="cboCiudad" id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2">
+                                        <select id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2">
                                                 <option></option>
                                         </select> 
                                     </div>  
@@ -268,11 +268,11 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Telefono Casa</label>
-                                        <input type="text" id="txtTelcasa" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                        <input type="text" id="txtTelCasa" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Telefono Oficina</label>
-                                        <input type="text" id="txtTelofi" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                        <input type="text" id="txtTelOfi" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
                                     </div>  
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
@@ -294,7 +294,7 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Fin Cobertura</label>
-                                        <input type="date" id="finCobertura" class="form-control mb-2" value="" />
+                                        <input type="date" id="txtFinCobertura" class="form-control mb-2" value="" />
                                     </div>  
                                 </div>                                                          
                             </div>
@@ -316,35 +316,58 @@
                                     <input type="text" data-kt-ecommerce-edit-order-filter="search" class="form-control form-control-solid w-100 w-lg-50 ps-14" placeholder="Search Products" />
                                 </div>
                                 <br>
-                                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_edit_order_product_table">
-                                    <thead>
-                                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                            <th class="min-w-200px">Product</th>
-                                            <th class="min-w-100px text-end pe-5">Qty Remaining</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="fw-bold text-gray-600">
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center" data-kt-ecommerce-edit-order-filter="product" data-kt-ecommerce-edit-order-id="product_1">
-                                                    <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
-                                                        <span class="symbol-label" style="background-image:url(assets/media//stock/ecommerce/1.gif);"></span>
-                                                    </a>
-                                                    <div class="ms-5">
-                                                        <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bolder">Product 1</a>
-                                                        <div class="fw-bold fs-7">Price: $
-                                                        <span data-kt-ecommerce-edit-order-filter="price">222.00</span></div>
-                                                        <div class="text-muted fs-7">SKU: 01731001</div>
+                                <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
+                                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_edit_order_product_table">
+                                        <thead>
+                                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                <th>Ciudad</th>
+                                                <th>Nombres</th>
+                                                <th>Estado</th>
+                                                <th>Status</th>
+                                                <th style="text-align: center;">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="fw-bold text-gray-600">
+                                            <tr>
+                                                <td>
+                                                    Quito
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center" data-kt-ecommerce-edit-order-filter="product" data-kt-ecommerce-edit-order-id="product_1">
+                                                        <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
+                                                            <span class="symbol-label" style="background-image:url(assets/media//stock/ecommerce/1.gif);"></span>
+                                                        </a>
+                                                        <div class="ms-5">
+                                                        Erick Alvear
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td class="text-end pe-5" data-order="0">
-                                                <span class="badge badge-light-danger">Sold out</span>
-                                                <span class="fw-bolder text-danger ms-3">0</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                                </td>
+                                                <td id="td_">   
+                                                    <div class="">
+                                                        Activo
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                        <input class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk" value=""/>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-center">
+                                                        <div class="btn-group">	
+                                                            <button type="button" id="btnEditar_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular'>
+                                                                <i class="fa fa-edit"></i>
+                                                            </button> 
+                                                            <button type="button" id="btnTitular" onclick="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar'>
+                                                                <i class="fa fa-user-plus"></i>
+                                                            </button> 
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>  
                     </div>
@@ -531,73 +554,107 @@
     </form>
 </div>
 <script>
+    
+    var _prodid = '<?php echo $prodid; ?>', _grupid = '<?php echo $grupid; ?>', _userid = '<?php echo $xUsuaid; ?>';
 
-$(document).ready(function(){
+    $(document).ready(function(){
+    
+        $('#cboProvincia').change(function(){
+                    
+                    var _paisid = "<?php echo $xPaisid; ?>";
+                    var _emprid = "<?php echo $xEmprid; ?>";                
+                    _cboid = $(this).val(); //obtener el id seleccionado
+                    
+                    $("#cboCiudad").empty();
+         
+                    var _parametros = {
+                        xxPaisId: _paisid,
+                        xxEmprId: _emprid,
+                        xxComboId: _cboid,
+                        xxOpcion: 0
+                    }
+        
+                    var xrespuesta = $.post("codephp/cargar_combos.php", _parametros);
+                        xrespuesta.done(function(response) {
+                    
+                        $("#cboCiudad").html(response);
+                        
+                    });
+                    xrespuesta.fail(function() {
+                        
+                    });
+                    xrespuesta.always(function() {
+                        
+                    });                
+        
+        });
 
-    $('#cboProvincia').change(function(){
-                
-                var _paisid = "<?php echo $xPaisid; ?>";
-                var _emprid = "<?php echo $xEmprid; ?>";                
-                _cboid = $(this).val(); //obtener el id seleccionado
-                
-                $("#cboCiudad").empty();
-    
-    
-                var _parametros = {
-                    xxPaisId: _paisid,
-                    xxEmprId: _emprid,
-                    xxComboId: _cboid,
-                    xxOpcion: 0
-                }
-    
-                var xrespuesta = $.post("codephp/cargar_combos.php", _parametros);
-                    xrespuesta.done(function(response) {
-                
-                    $("#cboCiudad").html(response);
+        //Datos Provincia para  Beneficiario
+        $('#cboProvinciaBe').change(function(){
                     
-                });
-                xrespuesta.fail(function() {
+                    var _paisid = "<?php echo $xPaisid; ?>";
+                    var _emprid = "<?php echo $xEmprid; ?>";                
+                    _cboid = $(this).val(); //obtener el id seleccionado
                     
-                });
-                xrespuesta.always(function() {
+                    $("#cboCiudadBe").empty();
+        
+        
+                    var _parametros = {
+                        xxPaisId: _paisid,
+                        xxEmprId: _emprid,
+                        xxComboId: _cboid,
+                        xxOpcion: 0
+                    }
+        
+                    var xrespuesta = $.post("codephp/cargar_combos.php", _parametros);
+                        xrespuesta.done(function(response) {
                     
-                });                
-    
+                        $("#cboCiudadBe").html(response);
+                        
+                    });
+                    xrespuesta.fail(function() {
+                        
+                    });
+                    xrespuesta.always(function() {
+                        
+                    });                
+        
+        });
+
     });
 
-    //Datos Provincia para  Beneficiario
-    $('#cboProvinciaBe').change(function(){
-                
-                var _paisid = "<?php echo $xPaisid; ?>";
-                var _emprid = "<?php echo $xEmprid; ?>";                
-                _cboid = $(this).val(); //obtener el id seleccionado
-                
-                $("#cboCiudadBe").empty();
-    
-    
-                var _parametros = {
-                    xxPaisId: _paisid,
-                    xxEmprId: _emprid,
-                    xxComboId: _cboid,
-                    xxOpcion: 0
-                }
-    
-                var xrespuesta = $.post("codephp/cargar_combos.php", _parametros);
-                    xrespuesta.done(function(response) {
-                
-                    $("#cboCiudadBe").html(response);
-                    
-                });
-                xrespuesta.fail(function() {
-                    
-                });
-                xrespuesta.always(function() {
-                    
-                });                
-    
-    });
+    //Agregar Persona - Titular 
 
-});
+    $('#btnGrabar').click(function(){
+
+        var _cboDocumento = $('#cboDocumento').val();
+        var _txtDocumento = $('#txtDocumento').val();
+        var _txtNombre = $.trim($("#txtNombre").val()); 
+        var _txtApellido =  $.trim($('#txtApellido').val());
+        var _cboGenero = $('#cboGenero').val();
+        var _cboEstadoCivil = $('#cboEstadoCivil').val();
+        var _fechaNacimiento = $('#txtFechaNacimiento').val();
+        var _cboCiudad = $('#cboCiudad').val();
+        var _txtDireccion =  $.trim($('#txtDireccion').val());
+        var _txtTelCasa = $('#txtTelCasa').val();
+        var _txtTelOfi = $('#txtTelOfi').val();
+        var _txtTelCelular = $('#txtCelular').val();
+        var _txtEmail =  $.trim($('#txtEmail').val());
+        var _fechaIniCobertura = $('#txtIniCobertura').val();
+        var _fechaFinCobertura = $('#txtFinCobertura').val();
+
+
+        if(_cboDocumento == ''){
+            mensajesalertify("Seleccione Tipo Documento..!", "W", "top-right", 3);
+            return; 
+        }
+
+      
+        //var tipo = typeof(_fechaIniCobertura);
+        //alert(tipo);
+        
+
+    });
 
 
 
