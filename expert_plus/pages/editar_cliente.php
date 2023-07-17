@@ -498,7 +498,7 @@
                                                                 <button type="button" id="btnEditar_<?php echo $xProdid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Producto'>
                                                                     <i class="fa fa-edit"></i>
                                                                 </button> 
-                                                                <button type="button" id="btnTitular" onclick="f_Titular(<?php echo $xGrupId;?>,<?php echo $xProdid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Agregar Titular'>
+                                                                <button type="button" id="btnTitular" onclick="f_Titular(<?php echo $xGrupId;?>,<?php echo $xProdid;?>,<?php echo $clieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Agregar Titular'>
                                                                     <i class="fa fa-user"></i>
                                                                 </button> 
                                                             </div>
@@ -1384,10 +1384,11 @@
 
     });
 
-   function f_Titular(_idgrup,_idprod){
+   function f_Titular(_idgrup,_idprod,_idclie){
         $.redirect('?page=addtitular&menuid=<?php echo $menuid; ?>', {
           'idgrup': _idgrup,
-          'idprod': _idprod
+          'idprod': _idprod,
+          'idclie': _idclie
 		});
     
    }
