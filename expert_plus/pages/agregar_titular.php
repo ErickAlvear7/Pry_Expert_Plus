@@ -551,7 +551,7 @@
 <script>
     
     var _prodid = '<?php echo $prodid; ?>', _grupid = '<?php echo $grupid; ?>', _userid = '<?php echo $xUsuaid; ?>',
-        _idclie = '<?php echo $clieid; ?>';
+        _idclie = '<?php echo $clieid; ?>',_result = [];
 
     $(document).ready(function(){
     
@@ -633,9 +633,71 @@
 
     $('#btnAgregar').click(function(){
 
+        var _continuar = true;
+        var _cboDocumentoBe = $('#cboDocumentoBe').val();
+        var _txtDocumentoBe = $('#txtDocumentoBe').val();
+        var _txtNombreBe = $.trim($("#txtNombreBe").val());
+            _txtNombreBe.toUpperCase();
+        var _txtApellidoBe =  $.trim($('#txtApellidoBe').val());
+            _txtApellidoBe.toUpperCase();
+        var _cboGeneroBe = $('#cboGeneroBe').val();
+        var _cboEstadoCivilBe = $('#cboEstadoCivilBe').val(); 
+        var _cboProvinciaBe = $('#cboProvinciaBe').val();
+        var _cboCiudadBe = $('#cboCiudadBe').val();
+        var _txtCiudadBe = $('#cboCiudadBe').find('option:selected').text();
+        var _txtDireccionBe =  $.trim($('#txtDireccionBe').val());
+        var _txtTelCasaBe = $('#txtTelCasaBe').val();
+        var _txtTelOfiBe = $('#txtTelOfiBe').val();
+        var _txtTelCelularBe = $('#txtCelularBe').val();
+        var _txtEmailBe =  $.trim($('#txtEmailBe').val());
+        var _cboParentesco = $('#cboParentesco').val();
+        var _fechaNacimientoBe = $('#txtFechaNacimientoBe').val();
 
+        if(_cboDocumentoBe == ''){
+            mensajesalertify("Seleccione Tipo Documento..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_txtDocumentoBe == ''){
+            mensajesalertify("Ingrese Numero de Documento..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_txtNombreBe == ''){
+            mensajesalertify("Ingrese Nombre..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_txtApellidoBe == ''){
+            mensajesalertify("Ingrese Apellido..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_cboGeneroBe == ''){
+            mensajesalertify("Seleccione Genero..!", "W", "top-right", 3);
+            return; 
+        }
+
+
+        if(_cboProvinciaBe == ''){
+            mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
+            return false;
+        }
+
+        if(_cboCiudadBe == 0){
+            mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
+            return false;
+        }
+
+        if(_cboParentesco == ''){
+            mensajesalertify("Seleccione Parentesco..!", "W", "top-right", 3);
+            return; 
+        }
+        
 
         //alert('hola');
+
+        //console.log(_txtCiudadBe);
 
     });
 

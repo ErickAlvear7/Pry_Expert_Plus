@@ -451,7 +451,7 @@
 
 <script>
     
-    var _cobertura = "NO",_sistema = "NO", _count = 0, _result = [];;
+    var _cobertura = "NO",_sistema = "NO", _count = 0, _result = [];
 
     $(document).ready(function(){
 
@@ -562,7 +562,7 @@
         var _emprid = "<?php echo $xEmprid; ?>";
         var _paisid = "<?php echo $xPaisid; ?>";
         var _producto = $.trim($("#txtProducto").val());
-            _producto = _producto.toUpperCase();
+            _producto.toUpperCase();
         var _descripcion = $.trim($("#txtDescripcion").val());
         var _costo = $.trim($("#txtCosto").val());
         var _cbogrupo = $('#cboGrupo').val();
