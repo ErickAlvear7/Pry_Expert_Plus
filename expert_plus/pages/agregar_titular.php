@@ -55,25 +55,22 @@
             <div class="card card-flush py-4">
                 <div class="card-header">
                     <div class="card-title">
-                        <h2>Thumbnail</h2>
+                        <h2>Titular</h2>
                     </div>    
                 </div>
                 <div class="card-body text-center pt-0">
                     <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
-                        <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media//stock/ecommerce/78.gif)"></div>
-                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                        <div class="image-input-wrapper w-150px h-150px" id="imgAvatar" style="background-image: url(assets/media/svg/avatars/blank.svg);"></div>
+                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar foto">
                             <i class="bi bi-pencil-fill fs-7"></i>    
-                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                            <input type="file" id="imgTitular" accept=".png, .jpg, .jpeg" />
                             <input type="hidden" name="avatar_remove" />
                         </label>
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-                            <i class="bi bi-x fs-2"></i>
-                        </span>
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar foto">
                             <i class="bi bi-x fs-2"></i>
                         </span>
                     </div>
-                    <div class="text-muted fs-7">Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
+                    <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                 </div>
             </div>
             <br>
@@ -173,13 +170,6 @@
                         </span>
                     </button>
                 </div> 
-                <!-- <a href="?page=editcliente&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
-                    <span class="svg-icon svg-icon-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
-                        </svg>
-                    </span>
-                </a>  -->
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
@@ -213,11 +203,11 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Nombres</label>
-                                        <input type="text" id="txtNombre" class="form-control mb-2" value="" maxlength="80" placeholder="Ingrese Nombres" />
+                                        <input type="text" id="txtNombre" class="form-control mb-2" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Apellidos</label>
-                                        <input type="text" id="txtApellido" class="form-control mb-2" value="" maxlength="80" placeholder="Ingrese Apellidos" />
+                                        <input type="text" id="txtApellido" class="form-control mb-2" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
                                     </div>   
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
@@ -273,7 +263,7 @@
                                 </div>
                                 <div class="mb-10 fv-row">
                                     <label class="form-label">Direccion</label>
-                                    <textarea class="form-control mb-2" id="txtDireccion" maxlength="250" rows="1"></textarea>
+                                    <textarea class="form-control mb-2" id="txtDireccion" style="text-transform: uppercase;" maxlength="250" rows="1"></textarea>
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
@@ -394,7 +384,7 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Tipo Documento</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
+                                        <select class="form-select mb-2" id="cboDocumentoBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
                                             <option></option>
                                             <?php
                                               $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -407,23 +397,23 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Nro. Documento</label>
-                                        <input type="text" class="form-control mb-2" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                        <input type="text" class="form-control mb-2" id="txtDocumentoBe" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                     </div>    
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Nombres</label>
-                                        <input type="text" class="form-control mb-2" value="" placeholder="Ingrese Nombres" />
+                                        <input type="text" class="form-control mb-2" id="txtNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Apellidos</label>
-                                        <input type="text" class="form-control mb-2" value=""  placeholder="Ingrese Apellidos" />
+                                        <input type="text" class="form-control mb-2" id="txtApellidoBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
                                     </div>   
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Genero</label>
-                                        <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
+                                        <select class="form-select mb-2" id="cboGeneroBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
                                             <option></option>
                                             <?php
                                                 $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -437,7 +427,7 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Estado Civil</label>
-                                        <select class="form-select mb-2"  data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
+                                        <select class="form-select mb-2" id="cboEstadoCivilBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
                                             <option></option>
                                             <?php
                                                 $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -470,32 +460,32 @@
                                 </div>
                                 <div class="mb-10 fv-row">
                                     <label class="form-label">Direccion</label>
-                                    <textarea class="form-control mb-2" id="" rows="1"></textarea>
+                                    <textarea class="form-control mb-2" id="txtDireccionBe" style="text-transform: uppercase;" rows="1"></textarea>
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Telefono Casa</label>
-                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                        <input type="text" id="txtTelCasaBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Telefono Oficina</label>
-                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                        <input type="text" id="txtTelOfiBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
                                     </div>  
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Telefono Celular</label>
-                                        <input type="text" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                        <input type="text" id="txtCelularBe" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Email</label>
-                                        <input type="email" class="form-control mb-2 col-md-1" value="" placeholder="micorreo@gmail.com" maxlength="10" />
+                                        <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1" value="" placeholder="micorreo@gmail.com" maxlength="10" />
                                     </div>  
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Parentesco</label>
-                                        <select class="form-select mb-2"  data-control="select2" data-hide-search="true" data-placeholder="Seleccione Parentesco">
+                                        <select class="form-select mb-2" id="cboParentesco" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Parentesco">
                                             <option></option>
                                             <?php
                                                 $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -508,7 +498,7 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Fecha de Nacimiento</label>
-                                        <input type="date" class="form-control mb-2" value="" />
+                                        <input type="date" id="txtFechaNacimientoBe" class="form-control mb-2" value="" />
                                     </div> 
                                 </div>
                                 <div class="form-group mt-5">
@@ -532,21 +522,16 @@
                             </div>
                             <div class="card-body pt-0">
                                 <div class="d-flex flex-column gap-10">
-                                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="tblProducto">
+                                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="tblBeneficiario">
                                         <thead>
                                             <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                                 <th style="display:none;">Id</th>
-                                                <th>Grupo</th>
-                                                <th>Producto</th>
+                                                <th>Ciudad</th>
+                                                <th>Nombres</th>
                                                 <th style="text-align: center;">Opciones</th>
                                             </tr>
                                         </thead>
                                         <tbody class="fw-bold text-gray-600">
-                                            <tr>
-                                                <td>
-
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -644,6 +629,16 @@
 
     });
 
+    //Agregar Beneficiario - Titular
+
+    $('#btnAgregar').click(function(){
+
+
+
+        //alert('hola');
+
+    });
+
 
     //Agregar Persona - Titular 
 
@@ -656,6 +651,7 @@
         var _cboGenero = $('#cboGenero').val();
         var _cboEstadoCivil = $('#cboEstadoCivil').val();
         var _fechaNacimiento = $('#txtFechaNacimiento').val();
+        var _cboProvincia = $('#cboProvincia').val();
         var _cboCiudad = $('#cboCiudad').val();
         var _txtDireccion =  $.trim($('#txtDireccion').val());
         var _txtTelCasa = $('#txtTelCasa').val();
@@ -665,11 +661,88 @@
         var _fechaIniCobertura = $('#txtIniCobertura').val();
         var _fechaFinCobertura = $('#txtFinCobertura').val();
 
+        //Imagen Titular
+        var _imgfileTitu = document.getElementById("imgAvatar").style.backgroundImage;
+        var _urlimgTitu = _imgfileTitu.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+        var _posTitu = _urlimgTitu.trim().indexOf('.');
+        var _extTitu = _urlimgTitu.trim().substr(_posTitu, 5);
+
+        if(_extTitu.trim() != '.svg'){
+            var _imgTitu = document.getElementById("imgTitular");
+            var _fileTitu = _imgTitu.files[0];
+            var _fullPathTitu = document.getElementById('imgTitular').value;
+            _extTitu = _fullPathTitu.substring(_fullPathTitu.length - 4);
+            _extTitu = _extTitu.toLowerCase();
+
+            if(_extTitu.trim() != '.png' && _extTitu.trim() != '.jpg' && _extTitu.trim() != 'jpeg'){
+                mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
+                return;
+            }   
+            
+        }
+
 
         if(_cboDocumento == ''){
             mensajesalertify("Seleccione Tipo Documento..!", "W", "top-right", 3);
             return; 
         }
+
+        if(_txtDocumento == ''){
+            mensajesalertify("Ingrese Numero de Documento..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_txtNombre == ''){
+            mensajesalertify("Ingrese Nombre..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_txtApellido == ''){
+            mensajesalertify("Ingrese Apellido..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_cboGenero == ''){
+            mensajesalertify("Seleccione Genero..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_cboEstadoCivil == ''){
+            mensajesalertify("Seleccione Genero..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_cboProvincia == ''){
+            mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
+            return false;
+        }
+
+        if(_cboCiudad == 0){
+            mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
+            return false;
+        }
+
+        var _parametros = {
+            
+            xxDocumento: _cboDocumento,
+         
+        }
+
+        
+        var xrespuesta = $.post("codephp/consultar_cliente.php",_parametros );
+            xrespuesta.done(function(response){
+
+                if(response == 0){
+
+
+                }
+
+
+            });
+
+        
+
+        
 
       
         //var tipo = typeof(_fechaIniCobertura);
