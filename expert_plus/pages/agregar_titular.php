@@ -282,7 +282,7 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Email</label>
-                                        <input type="email" id="txtEmail" class="form-control mb-2 col-md-1" value="" placeholder="micorreo@gmail.com" maxlength="10" />
+                                        <input type="email" id="txtEmail" class="form-control mb-2 col-md-1" value="" placeholder="micorreo@gmail.com" maxlength="80" />
                                     </div>  
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
@@ -624,10 +624,11 @@
     $('#btnRegresar').click(function(){
 
         $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {
-          'idclie': _idclie
-		});
+        'idclie': _idclie
+        });
 
     });
+
 
     //Agregar Beneficiario - Titular
 
@@ -693,7 +694,7 @@
             mensajesalertify("Seleccione Parentesco..!", "W", "top-right", 3);
             return; 
         }
-        
+
 
         //alert('hola');
 
@@ -702,11 +703,16 @@
     });
 
 
-    //Agregar Persona - Titular 
+
+
+        //Agregar Persona - Titular 
 
     $('#btnGrabar').click(function(){
 
+        //debugger;
+        var _usuaid = <?php echo $xUsuaid; ?>;
         var _cboDocumento = $('#cboDocumento').val();
+        //var _cboDocumento = $('#cboDocumento').find('option:selected').text();
         var _txtDocumento = $('#txtDocumento').val();
         var _txtNombre = $.trim($("#txtNombre").val()); 
         var _txtApellido =  $.trim($('#txtApellido').val());
@@ -784,34 +790,83 @@
             return false;
         }
 
+        if(_fechaFinCobertura == ''){
+            mensajesalertify("Seleccione Fecha fin de Cobertura..!", "W", "top-right", 3);
+            return; 
+        }
+
         var _parametros = {
             
-            xxDocumento: _cboDocumento,
-         
+            xxDocumento: _txtDocumento,
+        
         }
 
         
-        var xrespuesta = $.post("codephp/consultar_cliente.php",_parametros );
-            xrespuesta.done(function(response){
+        var xrespuesta = $.post("codephp/consultar_persona.php",_parametros );
+        xrespuesta.done(function(response){
 
-                if(response == 0){
+            if(response == 0){
 
+                var form_data = new FormData();
+                form_data.append('xxUsuaid', _usuaid);            
+                form_data.append('xxTipoDocumento', _cboDocumento);
+                form_data.append('xxDocumento', _txtDocumento);
+                form_data.append('xxNombre', _txtNombre);
+                form_data.append('xxApellido', _txtApellido);
+                form_data.append('xxGenero', _cboGenero);
+                form_data.append('xxEstadoCivil', _cboEstadoCivil);
+                form_data.append('xxFechaNacimiento', _fechaNacimiento);
+                form_data.append('xxCiudadId', _cboCiudad);
+                form_data.append('xxDireccion', _txtDireccion);
+                form_data.append('xxTelCasa', _txtTelCasa);
+                form_data.append('xxTelOfi', _txtTelOfi);
+                form_data.append('xxCelular', _txtTelCelular);
+                form_data.append('xxEmail', _txtEmail);
+                form_data.append('xxFechaIniCobertura', _fechaIniCobertura);
+                form_data.append('xxFechaFinCobertura', _fechaFinCobertura);
+                form_data.append('xxImgTitu', _fileTitu);
 
-                }
+                $.ajax({
+                url: "codephp/grabar_personatitular.php",
+                type: "post",                
+                data: form_data,
+                processData: false,
+                contentType: false,
+                dataType: "json",
+                success: function(dataid){
 
+                    if(dataid != 0){
+                        var xrespuesta = $.post("codephp/grabar_beneficiario.php", { xxPaisid: _idpais, xxEmprid: _idempr,xxUsuaid: _iduser,xxClieid: dataid, xxResult: _result });
+                            xrespuesta.done(function(response){
+                                    
+                            if(response == 'OK'){
+
+                                $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
+                    
+                            }
+
+                        });
+
+                    }
+
+                },
+                error: function (error) {
+                    console.log(error);
+                }                                 
 
             });
 
-        
+            }else{
+                mensajesalertify("Titular ya Existe..!!","W","top-right",3);
+                return false;
 
-        
+            }
 
-      
-        //var tipo = typeof(_fechaIniCobertura);
-        //alert(tipo);
-        
+        });   
 
     });
+
+
 
 
 
