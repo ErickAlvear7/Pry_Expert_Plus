@@ -19,10 +19,12 @@
     $last_id_persona = 0;
     $last_id_titular = 0;
 
-    if(isset($_POST['xxUsuaid']) and isset($_POST['xxTipoDocumento']) and isset($_POST['xxDocumento']) and isset($_POST['xxNombre']) and isset($_POST['xxApellido']) and isset($_POST['xxGenero'])){
-        if(isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxTipoDocumento']) <> '' and isset($_POST['xxDocumento']) <> '' and isset($_POST['xxNombre']) <> '' and isset($_POST['xxApellido']) <> '' and isset($_POST['xxGenero']) <> ''){
+    if(isset($_POST['xxUsuaid']) and isset($_POST['xxProdid']) and isset($_POST['xxGrupid']) and isset($_POST['xxTipoDocumento']) and isset($_POST['xxDocumento']) and isset($_POST['xxNombre']) and isset($_POST['xxApellido']) and isset($_POST['xxGenero'])){
+        if(isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxProdid']) <> '' and isset($_POST['xxGrupid']) <> '' and isset($_POST['xxTipoDocumento']) <> '' and isset($_POST['xxDocumento']) <> '' and isset($_POST['xxNombre']) <> '' and isset($_POST['xxApellido']) <> '' and isset($_POST['xxGenero']) <> ''){
             
             $xUsuaid = $_POST['xxUsuaid'];
+            $xProdid = $_POST['xxProdid'];
+            $xGrupid = $_POST['xxGrupid'];
             $xTipoDocumento =  $_POST['xxTipoDocumento'];
             $xDocumento = $_POST['xxDocumento'];
             $xNombre = trim(mb_strtoupper(safe($_POST['xxNombre'])));
@@ -58,15 +60,25 @@
 
             
             $xSQL = "INSERT INTO `expert_persona` (pers_tipoidentificacion,pers_numerodocumento,pers_nombres,pers_apellidos,pers_imagen,pers_genero, ";
-            $xSQL .= "pers_estadocivil,pers_fechanacimiento,pers_ciudad,pers_direccion,pers_telefonocasa,pers_telefonoficina ";
-            $xSQL .= "pers_celular,pers_email,pers_estado,fechacreacion,usuariocreacion,terminalcreacion ) ";
-            $xSQL .= "VALUES('$xTipoDocumento','$xDocumento',$xNombre,'$xApellido','$xFile','$xGenero','$xEstadoCivil','{$xFechaNacimiento}',$xCiudadId, ";
-            $xSQL .= "'$xDireccion','$xTelCasa','$xTelOfi','$xCelular','$xEmail1','$xEmail','$xFecha',$xUsuaid,'$xTerminal' ";
+            $xSQL .= "pers_estadocivil,pers_fechanacimiento,pers_ciudad,pers_direccion,pers_telefonocasa,pers_telefonoficina, ";
+            $xSQL .= "pers_celular,pers_email,fechacreacion,usuariocreacion,terminalcreacion ) ";
+            $xSQL .= "VALUES('$xTipoDocumento','$xDocumento','$xNombre','$xApellido','$xNombreFile','$xGenero','$xEstadoCivil','{$xFechaNacimiento}',$xCiudadId, ";
+            $xSQL .= "'$xDireccion','$xTelCasa','$xTelOfi','$xCelular','$xEmail','{$xFecha}',$xUsuaid,'$xTerminal') ";
           
-            if(mysqli_query($con, $xSQL)){ $last_id_persona = mysqli_insert_id($con);  }
+            if(mysqli_query($con, $xSQL)){ 
+                $last_id_persona = mysqli_insert_id($con);  
+            }
+
+            $xSQL ="INSERT INTO `expert_titular` (pers_id,prod_id,grup_id,titu_fechainiciocobertura,titu_fechafincobertura, ";
+            $xSQL .="fechacreacion,usuariocreacion,terminalcreacion) ";
+            $xSQL .="VALUES($last_id_persona,$xProdid,$xGrupid,'{$xFechaIniCobertura}','{$xFechaFinCobertura}','{$xFecha}',$xUsuaid,'$xTerminal' )";
+
+            if(mysqli_query($con, $xSQL)){ 
+                $last_id_titular = mysqli_insert_id($con);  
+            }
 
         }
     }
 
-    echo $last_id;
+    echo $last_id_titular;
 ?>

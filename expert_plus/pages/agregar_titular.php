@@ -282,7 +282,7 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Email</label>
-                                        <input type="email" id="txtEmail" class="form-control mb-2 col-md-1" value="" placeholder="micorreo@gmail.com" maxlength="80" />
+                                        <input type="email" id="txtEmail" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
                                     </div>  
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
@@ -479,7 +479,7 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Email</label>
-                                        <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1" value="" placeholder="micorreo@gmail.com" maxlength="10" />
+                                        <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="10" />
                                     </div>  
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
@@ -711,8 +711,9 @@
 
         //debugger;
         var _usuaid = <?php echo $xUsuaid; ?>;
+        var _prodid = <?php echo $prodid; ?>;
+        var _grupid = <?php echo $grupid; ?>;
         var _cboDocumento = $('#cboDocumento').val();
-        //var _cboDocumento = $('#cboDocumento').find('option:selected').text();
         var _txtDocumento = $('#txtDocumento').val();
         var _txtNombre = $.trim($("#txtNombre").val()); 
         var _txtApellido =  $.trim($('#txtApellido').val());
@@ -807,8 +808,12 @@
 
             if(response == 0){
 
+                //debugger
+
                 var form_data = new FormData();
-                form_data.append('xxUsuaid', _usuaid);            
+                form_data.append('xxUsuaid', _usuaid);
+                form_data.append('xxProdid', _prodid);
+                form_data.append('xxGrupid', _grupid);              
                 form_data.append('xxTipoDocumento', _cboDocumento);
                 form_data.append('xxDocumento', _txtDocumento);
                 form_data.append('xxNombre', _txtNombre);
@@ -833,28 +838,32 @@
                 processData: false,
                 contentType: false,
                 dataType: "json",
-                success: function(dataid){
+                    success: function(dataid){
 
-                    if(dataid != 0){
-                        var xrespuesta = $.post("codephp/grabar_beneficiario.php", { xxPaisid: _idpais, xxEmprid: _idempr,xxUsuaid: _iduser,xxClieid: dataid, xxResult: _result });
-                            xrespuesta.done(function(response){
-                                    
-                            if(response == 'OK'){
+                        if(dataid != 0){
 
-                                $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
-                    
+                            if(_result != ''){
+                                var xrespuesta = $.post("codephp/grabar_beneficiario.php", { xxPaisid: _idpais, xxEmprid: _idempr,xxUsuaid: _iduser,xxClieid: dataid, xxResult: _result });
+                                    xrespuesta.done(function(response){
+                                            
+                                    if(response == 'OK'){
+
+                                        $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
+                            
+                                    }
+
+                                });
                             }
 
-                        });
+                            $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
+                        }
 
-                    }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }                                 
 
-                },
-                error: function (error) {
-                    console.log(error);
-                }                                 
-
-            });
+                });
 
             }else{
                 mensajesalertify("Titular ya Existe..!!","W","top-right",3);
