@@ -479,7 +479,7 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Email</label>
-                                        <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="10" />
+                                        <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
                                     </div>  
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
@@ -525,10 +525,9 @@
                                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="tblBeneficiario">
                                         <thead>
                                             <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                <th style="display:none;">Id</th>
                                                 <th>Ciudad</th>
                                                 <th>Nombres</th>
-                                                <th style="text-align: center;">Opciones</th>
+                                                <th>Opciones</th>
                                             </tr>
                                         </thead>
                                         <tbody class="fw-bold text-gray-600">
@@ -635,17 +634,20 @@
     $('#btnAgregar').click(function(){
 
         var _continuar = true;
+        var _count =0;
         var _cboDocumentoBe = $('#cboDocumentoBe').val();
         var _txtDocumentoBe = $('#txtDocumentoBe').val();
         var _txtNombreBe = $.trim($("#txtNombreBe").val());
             _txtNombreBe.toUpperCase();
         var _txtApellidoBe =  $.trim($('#txtApellidoBe').val());
             _txtApellidoBe.toUpperCase();
+        var _txtnombresCompletos =  _txtNombreBe.toUpperCase() + ' ' + _txtApellidoBe.toUpperCase();
         var _cboGeneroBe = $('#cboGeneroBe').val();
         var _cboEstadoCivilBe = $('#cboEstadoCivilBe').val(); 
         var _cboProvinciaBe = $('#cboProvinciaBe').val();
         var _cboCiudadBe = $('#cboCiudadBe').val();
         var _txtCiudadBe = $('#cboCiudadBe').find('option:selected').text();
+            _txtCiudadBe.toUpperCase();
         var _txtDireccionBe =  $.trim($('#txtDireccionBe').val());
         var _txtTelCasaBe = $('#txtTelCasaBe').val();
         var _txtTelOfiBe = $('#txtTelOfiBe').val();
@@ -694,6 +696,68 @@
             mensajesalertify("Seleccione Parentesco..!", "W", "top-right", 3);
             return; 
         }
+
+        var _parametros = {
+            xxDocumento: _txtDocumentoBe
+        }
+
+        var xrespuesta = $.post("codephp/consultar_beneficiario.php", _parametros);
+        xrespuesta.done(function(response){
+            if(response == 0){
+
+                $.each(_result,function(i,item){
+
+                    if(item.arrydocumento == _txtDocumentoBe){
+                            mensajesalertify("Beneficiario ya Existe..!!","W","top-right",3);
+                            _continuar = false;
+                            return false;
+                    }else{
+                        _continuar = true;
+                    }
+
+                });
+
+                if(_continuar){
+
+                    _count = _count + 1;
+                    _output = '<tr id="row_' + _count + '">';
+                    _output += '<td>' + _txtCiudadBe + ' <input type="hidden" id="txtCiudad' + _count + '" value="' + _txtCiudadBe + '" /></td>';
+                    _output += '<td>' + _txtnombresCompletos + ' <input type="hidden" class="form-control mb-2 text-uppercase" id="txtNombres' + _count + '" value="' + _txtnombresCompletos + '" /></td>';
+                    _output += '<td>';
+                    _output += '<button type="button" title="Eliminar Beneficiario" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></td>';
+                    _output += '</tr>';
+
+                    //console.log(_output);
+
+                    $('#tblBeneficiario').append(_output);
+
+                    var _objeto = {
+
+                        arrytipodocumento: _cboDocumentoBe,
+                        arrydocumento: _txtDocumentoBe,
+                        arrynombre: _txtNombreBe,
+                        arryapellido: _txtApellidoBe,
+                        arrygenero: _cboGeneroBe,
+                        arryestadocivil: _cboEstadoCivilBe,
+                        arryciudad: _cboCiudadBe,
+                        arrydireccion: _txtDireccionBe,
+                        arrytelcasa: _txtTelCasaBe,
+                        arrytelofi: _txtTelOfiBe,
+                        arrycelular: _txtTelCelularBe,
+                        arryemail: _txtEmailBe,
+                        arryparentesco: _cboParentesco,
+                        arryfechanacimiento: _fechaNacimientoBe
+                    }
+
+                    _result.push(_objeto);
+        
+                }
+
+            }
+
+
+
+        });
 
 
         //alert('hola');
