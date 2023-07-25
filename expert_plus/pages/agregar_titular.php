@@ -527,6 +527,7 @@
                                             <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                                 <th>Ciudad</th>
                                                 <th>Nombres</th>
+                                                <th>Parentesco</th>
                                                 <th>Opciones</th>
                                             </tr>
                                         </thead>
@@ -638,9 +639,7 @@
         var _cboDocumentoBe = $('#cboDocumentoBe').val();
         var _txtDocumentoBe = $('#txtDocumentoBe').val();
         var _txtNombreBe = $.trim($("#txtNombreBe").val());
-            _txtNombreBe.toUpperCase();
         var _txtApellidoBe =  $.trim($('#txtApellidoBe').val());
-            _txtApellidoBe.toUpperCase();
         var _txtnombresCompletos =  _txtNombreBe.toUpperCase() + ' ' + _txtApellidoBe.toUpperCase();
         var _cboGeneroBe = $('#cboGeneroBe').val();
         var _cboEstadoCivilBe = $('#cboEstadoCivilBe').val(); 
@@ -654,6 +653,8 @@
         var _txtTelCelularBe = $('#txtCelularBe').val();
         var _txtEmailBe =  $.trim($('#txtEmailBe').val());
         var _cboParentesco = $('#cboParentesco').val();
+        var _txtParentesco = $('#cboParentesco').find('option:selected').text();
+            _txtParentesco.toUpperCase();
         var _fechaNacimientoBe = $('#txtFechaNacimientoBe').val();
 
         if(_cboDocumentoBe == ''){
@@ -723,6 +724,7 @@
                     _output = '<tr id="row_' + _count + '">';
                     _output += '<td>' + _txtCiudadBe + ' <input type="hidden" id="txtCiudad' + _count + '" value="' + _txtCiudadBe + '" /></td>';
                     _output += '<td>' + _txtnombresCompletos + ' <input type="hidden" class="form-control mb-2 text-uppercase" id="txtNombres' + _count + '" value="' + _txtnombresCompletos + '" /></td>';
+                    _output += '<td>' + _txtParentesco + ' <input type="hidden" class="form-control mb-2 text-uppercase" id="txtParentesco' + _count + '" value="' + _txtParentesco + '" /></td>';
                     _output += '<td>';
                     _output += '<button type="button" title="Eliminar Beneficiario" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></td>';
                     _output += '</tr>';
@@ -750,6 +752,22 @@
                     }
 
                     _result.push(_objeto);
+
+                    $("#cboDocumentoBe").val('').change();
+                    $("#txtDocumentoBe").val('');
+                    $("#txtNombreBe").val('');
+                    $("#txtApellidoBe").val('');
+                    $("#cboGeneroBe").val('').change();
+                    $("#cboEstadoCivilBe").val('').change();
+                    $("#cboProvinciaBe").val('').change();
+                    $("#cboCiudadBe").val(0).change();
+                    $("#txtDireccionBe").val('');
+                    $("#txtTelCasaBe").val('');
+                    $("#txtTelOfiBe").val('');
+                    $("#txtCelularBe").val('');
+                    $("#txtEmailBe").val('');
+                    $("#cboParentesco").val('').change();
+                    $("#txtFechaNacimientoBe").val('');
         
                 }
 
