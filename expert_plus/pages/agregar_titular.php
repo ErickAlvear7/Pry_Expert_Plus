@@ -47,6 +47,23 @@
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
     $all_provincia = mysqli_query($con, $xSQL);
 
+    $xSQL = "SELECT pst.pers_id AS PerId,CONCAT(pst.pers_nombres,' ',pst.pers_apellidos) AS Nombres,pst.pers_imagen AS  ";
+    $xSQL .="Imagen,CASE pst.pers_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado,pst.pers_ciudad AS CiudadId FROM expert_persona pst";
+    $all_persona = mysqli_query($con, $xSQL);
+
+    foreach ($all_persona as $per){
+
+        $xProvid = $per['CiudadId'];
+      
+    }    
+
+    
+    $xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND prov_id=$xProvid ";
+    $all_ciudad = mysqli_query($con, $xSQL);    
+    foreach ($all_ciudad as $ciu){
+        $xCiudad = $prov['ciudad'];
+    }
+
 
 ?>
 <div id="kt_content_container" class="container-xxl">
@@ -328,28 +345,58 @@
                                             </tr>
                                         </thead>
                                         <tbody class="fw-bold text-gray-600">
+                                            <?php 
+                                                     foreach ($all_persona as $per){
+
+                                                        $xPerid = $per['PerId'];
+                                                        $xNombres = $per['Nombres'];
+                                                        $xImagen = $per['Imagen'];
+                                                        $xEstado = $per['Estado'];
+                                                        
+                                                ?>
+                                                               <?php 
+
+                                                        $xCheking = '';
+                                                        $xDisabledEdit = '';
+
+                                                        if($xEstado == 'Activo'){
+                                                            $xCheking = 'checked="checked"';
+                                                            $xTextColor = "badge badge-light-primary";
+                                                        }else{
+                                                            $xTextColor = "badge badge-light-danger";
+                                                            $xDisabledEdit = 'disabled';
+                                                        }
+                                                        ?> 
                                             <tr>
+                                                <?php
+                                                     foreach ($all_ciudad as $ciu){
+                                                        $xCiudad = trim(mb_strtoupper($ciu['ciudad']));
+                                                        // $xCiudad = $ciu['ciudad'];
+                                                   ?>     
                                                 <td>
-                                                    Quito
+                                                  
+                                                   <?php echo $xCiudad; ?>
+
                                                 </td>
+                                                <?php }?>
                                                 <td>
                                                     <div class="d-flex align-items-center" data-kt-ecommerce-edit-order-filter="product" data-kt-ecommerce-edit-order-id="product_1">
                                                         <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
-                                                            <span class="symbol-label" style="background-image:url(assets/media//stock/ecommerce/1.gif);"></span>
+                                                            <span class="symbol-label" style="background-image:url(logos/<?php echo $xImagen; ?>);"></span>
                                                         </a>
                                                         <div class="ms-5">
-                                                        Erick Alvear
+                                                          <?php echo $xNombres; ?>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td id="td_">   
                                                     <div class="">
-                                                        Activo
+                                                       <?php echo $xEstado; ?>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                        <input class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk" value=""/>
+                                                        <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk" value=""/>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -365,6 +412,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
+                                       <?php }?>
                                         </tbody>
                                     </table>
                                 </div>
