@@ -489,16 +489,16 @@
                     _paisname = _data[5];
                     _addmod = 'mod';                     
 
-                    $parametros = {
-                        xxEmprid: _emprid,
-                        xxIdUsuario: _idusu
+                    var _parametros = {
+                        "xxEmprid" : _emprid,
+                        "xxIdUsuario" : _idusu
                     }
 
                     $.ajax({
                         url: "codephp/editar_usuarios.php",
                         type: "POST",
                         dataType: "json",
-                        data: $parametros,          
+                        data: _parametros,          
                         success: function(data){ 
 
                             var _nombres = data[0]['Nombres'];
@@ -612,32 +612,32 @@
                             _buscar = 'NO';
                         }
                         
-                        $datosUser = {
-                            xxUsuaid: _idusu,
-                            xxEmprid: _emprid,
-                            xxNombre: _nombre,
-                            xxApellido:_apellido,
-                            xxLogin: _login,
-                            xxPaisid: _paisid,
-                            xxPerfilid: _perfilid,
-                            xxCaducaPass: _caduca,
-                            xxCambiarPass: _cambiarPass,
-                            xxFecha: _fechacaduca
+                        var _datosUser = {
+                            "xxUsuaid" : _idusu,
+                            "xxEmprid" : _emprid,
+                            "xxNombre" : _nombre,
+                            "xxApellido" :_apellido,
+                            "xxLogin" : _login,
+                            "xxPaisid" : _paisid,
+                            "xxPerfilid" : _perfilid,
+                            "xxCaducaPass" : _caduca,
+                            "xxCambiarPass" : _cambiarPass,
+                            "xxFecha" : _fechacaduca
                         }	
                         _ulr = "codephp/actualizar_usuario.php";
                     }else{
-                        $datosUser = {
-                            xxUsuaid: _usuaid,
-                            xxEmprid: _emprid,
-                            xxNombre: _nombre,
-                            xxApellido:_apellido,
-                            xxLogin: _login,
-                            xxPassword: _password,
-                            xxPaisid: _paisid,
-                            xxPerfilid: _perfilid,
-                            xxCaducaPass: _caduca,
-                            xxCambiarPass: _cambiarPass,
-                            xxFecha: _fechacaduca
+                        var _datosUser = {
+                            "xxUsuaid" : _usuaid,
+                            "xxEmprid" : _emprid,
+                            "xxNombre" : _nombre,
+                            "xxApellido" :_apellido,
+                            "xxLogin" : _login,
+                            "xxPassword" : _password,
+                            "xxPaisid" : _paisid,
+                            "xxPerfilid" : _perfilid,
+                            "xxCaducaPass" : _caduca,
+                            "xxCambiarPass" : _cambiarPass,
+                            "xxFecha" : _fechacaduca
                         }
                         _ulr = "codephp/grabar_usuarios.php";                        
                     }
@@ -648,7 +648,7 @@
                             
                             if(response == 0){
 
-                                $.post(_ulr, $datosUser , function(response){
+                                $.post(_ulr, _datosUser , function(response){
         
                                     var _userid = response;	
                                     var _usuario = _nombre + ' ' + _apellido;
@@ -775,7 +775,6 @@
 
             $(document).on("click",".btnEstado",function(e){
                 
-                debugger;
                 _fila = $(this).closest("tr");
                 _usuario = $(this).closest("tr").find('td:eq(1)').text();
                 _login = $(this).closest("tr").find('td:eq(2)').text();
@@ -824,13 +823,13 @@
     
                 TableData.row(_fila).data([_userid, _usuario, _login, _lblEstado, _btnchk, _paisname, _btnopc ]).draw();
     
-                $parametros = {
-                    xxUsuaid: _userid,
-                    xxEmprid: _emprid,
-                    xxEstado: _estado
+                var _parametros = {
+                    "xxUsuaid" : _userid,
+                    "xxEmprid" : _emprid,
+                    "xxEstado" : _estado
                 }	
     
-                var xrespuesta = $.post("codephp/delnew_usuario.php", $parametros);
+                var xrespuesta = $.post("codephp/delnew_usuario.php", _parametros);
                 xrespuesta.done(function(response){
                     //console.log(response);
                 });	
@@ -845,12 +844,12 @@
 
             function f_ResetPass(_usuaid, _emprid){
 
-                $parametros={
-                    xxUsuaid: _usuaid,
-                    xxEmprid: _emprid
+                var _parametros = {
+                    "xxUsuaid" : _usuaid,
+                    "xxEmprid" : _emprid
                 }
 
-                $.post("codephp/reset_password.php", $parametros, function(response){
+                $.post("codephp/reset_password.php", _parametros, function(response){
 
                     if(response.trim() == 'OK'){
                         mensajesweetalert("center","success","Password Resetado con exito..!",false,1800);

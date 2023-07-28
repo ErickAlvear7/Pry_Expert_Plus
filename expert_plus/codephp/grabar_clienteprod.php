@@ -41,7 +41,7 @@
             $xFile = (isset($_FILES['xxFileCab']["name"])) ? $_FILES['xxFileCab']["name"] : '';
             $xFilepie = (isset($_FILES['xxFilePie']["name"])) ? $_FILES['xxFilePie']["name"] : '';
 
-            $xPath = "../Cliente/";
+            $xPath = "../logos/";
 
             $xFechafile = new DateTime();
             $xNombreFile = ($xFile != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFileCab"]["name"] : "";  

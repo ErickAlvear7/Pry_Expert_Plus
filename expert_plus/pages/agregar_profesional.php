@@ -951,9 +951,9 @@
 
                     if(_cboid != null){
                         var _parametros = {
-                            xxPaisId: _paisid,
-                            xxEmprId: _emprid,
-                            xxEspeId: _cboid
+                            "xxPaisId" : _paisid,
+                            "xxEmprId" : _emprid,
+                            "xxEspeId" : _cboid
                         } 
 
                         var xrespuesta = $.post("codephp/get_DatosEspecialidad.php", _parametros);
@@ -1162,7 +1162,7 @@
                                                 _detalle = 'Nuevo Prestador Agregado Correctamente';
                                                 _respuesta = 'OK'; 
                                             }else{
-                                                _detalle = 'Error creación de especialidades';
+                                                _detalle = 'Error creacion de especialidades';
                                                 _respuesta = 'ERR';                                
                                             }
 
@@ -1179,12 +1179,12 @@
                                         });    
                                       
                                     }else{
-                                        _detalle = 'Error creación nuevo prestador';
+                                        _detalle = 'Error creacion nuevo prestador';
                                         _respuesta = 'ERR';                                
                                     }
 
                                     if(_respuesta == 'OK'){
-                                        $.redirect('?page=prestador_admin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
+                                        $.redirect('?page=prestador_admin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Exito..!'}); //POR METODO POST
                                     }
                                 },
                                 error: function (error) {

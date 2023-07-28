@@ -951,9 +951,9 @@
 
                     if(_cboid != null){
                         var _parametros = {
-                            xxPaisId: _paisid,
-                            xxEmprId: _emprid,
-                            xxEspeId: _cboid
+                            "xxPaisId" : _paisid,
+                            "xxEmprId" : _emprid,
+                            "xxEspeId" : _cboid
                         } 
 
                         var xrespuesta = $.post("codephp/get_DatosEspecialidad.php", _parametros);
@@ -1162,16 +1162,16 @@
                                                 _detalle = 'Nuevo Prestador Agregado Correctamente';
                                                 _respuesta = 'OK'; 
                                             }else{
-                                                _detalle = 'Error creación de especialidades';
+                                                _detalle = 'Error creacion de especialidades';
                                                 _respuesta = 'ERR';                                
                                             }
 
                                             /**PARA CREAR REGISTRO DE LOGS */
                                             _parametros = {
-                                                xxPaisid: _paisid,
-                                                xxEmprid: _emprid,
-                                                xxUsuaid: _usuaid,
-                                                xxDetalle: _detalle,
+                                                "xxPaisid" : _paisid,
+                                                "xxEmprid" : _emprid,
+                                                "xxUsuaid" : _usuaid,
+                                                "xxDetalle" : _detalle,
                                             }					
                 
                                             $.post("codephp/new_log.php", _parametros, function(response){
@@ -1179,7 +1179,7 @@
                                         });    
                                       
                                     }else{
-                                        _detalle = 'Error creación nuevo prestador';
+                                        _detalle = 'Error creacion nuevo prestador';
                                         _respuesta = 'ERR';                                
                                     }
 

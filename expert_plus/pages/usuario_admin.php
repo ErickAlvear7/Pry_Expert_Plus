@@ -153,9 +153,9 @@
 														<input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
 														<input type="hidden" name="avatar_remove" />
 													</label>
-													<!-- <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
+													<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
 														<i class="bi bi-x fs-2"></i>
-													</span>													 -->
+													</span>													
 												</div>
 												<div class="form-text">Archivos permitidos: png, jpg, jpeg.</div>
 											</div>
@@ -542,7 +542,6 @@
 			$('#btnSave').click(function(e){
 				//e.preventDefault();
 				
-				//debugger;
 				var _paisid = "<?php echo $xPaisid; ?>";
 				var _emprid = "<?php echo $xEmprid; ?>";
 				var _usuaid = "<?php echo $xUsuaid; ?>";
@@ -571,7 +570,7 @@
 					_ext = _ext.toLowerCase();   
 				}
 
-				if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
+				if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
 					mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
 					return;
 				}
@@ -730,14 +729,14 @@
 							}
 
 							// /**PARA CREAR REGISTRO DE LOGS */
-							$parametros = {
-								xxPaisid: _paisid,
-								xxEmprid: _emprid,
-								xxUsuaid: _usuaid,
-								xxDetalle: _detalle,
+							var _parametros = {
+								"xxPaisid" : _paisid,
+								"xxEmprid" : _emprid,
+								"xxUsuaid" : _usuaid,
+								"xxDetalle" : _detalle,
 							}					
 
-							$.post("codephp/new_log.php", $parametros, function(response){
+							$.post("codephp/new_log.php", _parametros, function(response){
 							});                                         
 
 							if(_respuesta == 'OK'){
@@ -749,7 +748,6 @@
 						}
 					}); 
 				}
-
 			});	
 		});	
 
@@ -790,13 +788,13 @@
 			var _changetd = document.getElementById(_td);
 			_changetd.innerHTML = '<td><div class="' + _class + '">' + _estado + ' </div>';
 
-			$parametros = {
-				xxUsuaid: _userid,
-				xxEmprid: _emprid,
-				xxEstado: _estado
+			var _parametros = {
+				"xxUsuaid" : _userid,
+				"xxEmprid" : _emprid,
+				"xxEstado" : _estado
 			}
 
-			var xrespuesta = $.post("codephp/delnew_usuario.php", $parametros);
+			var xrespuesta = $.post("codephp/delnew_usuario.php", _parametros);
 			xrespuesta.done(function(response){
 			});	
 								   
@@ -810,12 +808,12 @@
 		//resetaer password
 		function f_ResetPass(_usuaid, _emprid){
 
-			$parametros = {
-				xxUsuaid: _usuaid,
-				xxEmprid: _emprid
+			var _parametros = {
+				"xxUsuaid" : _usuaid,
+				"xxEmprid" : _emprid
 			}
 
-			$.post("codephp/reset_password.php", $parametros, function(response){
+			$.post("codephp/reset_password.php", _parametros, function(response){
 				if(response.trim() == 'OK'){
 					mensajesweetalert("center","success","password actualizado con exito..!",false,1800);
 				}     

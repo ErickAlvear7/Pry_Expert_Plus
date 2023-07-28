@@ -224,37 +224,37 @@
                 return;
             }
 
-            $parametros = {
-                xxMenu: _menu,
-                xxEmprid: _emprid
+            var _parametros = {
+                "xxMenu" : _menu,
+                "xxEmprid" : _emprid
             }   
 
-            var xrespuesta = $.post("codephp/consultar_menu.php", $parametros);
+            var xrespuesta = $.post("codephp/consultar_menu.php", _parametros);
             xrespuesta.done(function(response){
                 
                 if(response == 0){
 
-                    $datosMenu = {
-                        xxMenu: _menu,
-                        xxObserva: _observacion,
-                        xxEmprid: _emprid,
-                        xxUsuaid: _usuaid,
-                        xxEstado: _estado,
-                        xxResult: _result
+                    var _datosMenu = {
+                        "xxMenu" : _menu,
+                        "xxObserva" : _observacion,
+                        "xxEmprid" : _emprid,
+                        "xxUsuaid" : _usuaid,
+                        "xxEstado" : _estado,
+                        "xxResult" : _result
                     }
 
-                    var xresponse = $.post("codephp/grabar_menu_tarea.php", $datosMenu);
+                    var xresponse = $.post("codephp/grabar_menu_tarea.php", _datosMenu);
                     xresponse.done(function(response){
                         if(response == 'OK'){
                             /**PARA CREAR REGISTRO DE LOGS */
-                            $parametros = {
-                                xxPaisid: _paisid,
-                                xxEmprid: _emprid,
-                                xxUsuaid: _usuaid,
-                                xxDetalle: 'Crear Nuevo Menu',
+                            var _parametros = {
+                                "xxPaisid" : _paisid,
+                                "xxEmprid" : _emprid,
+                                "xxUsuaid" : _usuaid,
+                                "xxDetalle" : 'Crear Nuevo Menu',
                             }					
 
-                            $.post("codephp/new_log.php", $parametros, function(response){
+                            $.post("codephp/new_log.php", _parametros, function(response){
                                 
                             }); 
 

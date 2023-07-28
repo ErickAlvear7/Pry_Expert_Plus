@@ -245,13 +245,13 @@
                 var _changetd = document.getElementById(_td);
                 _changetd.innerHTML = '<td><div class="' + _class + '">' + _estado + ' </div>';						
 
-				$parametros = {
-					xxMenuId: _menuid,
-					xxEmprid: _emprid,
-					xxEstado: _estado
+				var _parametros = {
+					"xxMenuId" : _menuid,
+					"xxEmprid" : _emprid,
+					"xxEstado" : _estado
 				}	
 
-				$.post("codephp/estado_menu.php", $parametros, function(response){
+				$.post("codephp/estado_menu.php", _parametros, function(response){
                         //console.log(response);
                 }); 				
 

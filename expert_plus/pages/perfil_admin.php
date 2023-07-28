@@ -193,17 +193,16 @@
                 var _changetd = document.getElementById(_td);
                 _changetd.innerHTML = '<td><div class="' + _class + '">' + _estado + ' </div>';					
 				
-				$parametros = {
-						xxPaisid: _paisid,
-                        xxIdPerfil: _perfid,
-                        xxIdMeta: 0,
-                        xxEmprid: _emprid,
-                        xxTipo: _estado
-                    }				
+				var _parametros = {
+					"xxPaisid" : _paisid,
+					"xxIdPerfil" : _perfid,
+					"xxIdMeta" : 0,
+					"xxEmprid" : _emprid,
+					"xxTipo" : _estado
+                }				
 				
-				var xrespuesta = $.post("codephp/delnew_perfil.php", $parametros);
+				var xrespuesta = $.post("codephp/delnew_perfil.php", _parametros);
 				xrespuesta.done(function(response){
-					//console.log(response);
 				});				
 
 			}

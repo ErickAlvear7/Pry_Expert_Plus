@@ -263,7 +263,12 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" id="btnGuardar" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">Grabar</button>
+            <button type="button" id="btnGuardar" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">
+                <i class="las la-save"></i>
+                <span class="indicator-label">Grabar</span>
+                <span class="indicator-progress">Espere un momento...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+            </button>
         </div>
       </div>
     </div>
@@ -344,14 +349,14 @@
 
         if(_agregarDet == 'add'){
                 
-            $datosDet ={
-                xxPaisId: _idpais,
-                xxDetalle: _detalle,
-                xxValorV: _valorV,
-                xxValorI: _valorI
+            var _datosDet ={
+                "xxPaisId" : _idpais,
+                "xxDetalle" : _detalle,
+                "xxValorV" : _valorV,
+                "xxValorI" : _valorI
             }
 
-            var xrespuesta = $.post("codephp/consultar_detalle.php", $datosDet);
+            var xrespuesta = $.post("codephp/consultar_detalle.php", _datosDet);
             xrespuesta.done(function(response){
 
                 if(response.trim() == 0){
@@ -431,9 +436,7 @@
       var _parametro = $.trim($("#txtNombrePara").val());
       var _descripcion = $.trim($("#txtDesc").val());
 
-
-      if(_parametro == '')
-      {                        
+      if(_parametro == ''){                        
         mensajesalertify('Ingrese Nombre del Parametro..!', 'W', 'top-center', 5);
         return;
       }
@@ -443,40 +446,35 @@
         return;
       }
 
-
-        $datosParam ={
-            xxPaisId: _idpais,
-            xxEmprId: _idempr,
-            xxParametro: _parametro
+        var _datosParam = {
+            "xxPaisId" : _idpais,
+            "xxEmprId" : _idempr,
+            "xxParametro" : _parametro
         }
 
-
-        var xrespuesta = $.post("codephp/consultar_parametro.php", $datosParam);
+        var xrespuesta = $.post("codephp/consultar_parametro.php", _datosParam);
         xrespuesta.done(function(response){
             if(response == 0){
                         
-                //debugger;
-
-                $parametros ={
-                    xxPaisId: _idpais,
-                    xxUsuaId: _idusua,
-                    xxEmprId: _idempr,
-                    xxParametro: _parametro,
-                    xxResultado: _result,
-                    xxEstado: _estado,
-                    xxDescripcion: _descripcion
-                
+                var _parametros = {
+                    "xxPaisId" : _idpais,
+                    "xxUsuaId" : _idusua,
+                    "xxEmprId" : _idempr,
+                    "xxParametro" : _parametro,
+                    "xxResultado" : _result,
+                    "xxEstado" : _estado,
+                    "xxDescripcion" : _descripcion
                 }
 
                 $.ajax({
                     url: "codephp/grabar_parametro.php",
                     type: "POST",
                     dataType: "json",
-                    data: $parametros,          
+                    data: _parametros,
                     success: function(response){ 
                         if(response != 0){
 
-                            _pacaid = response;										
+                            _pacaid = response;
                             _paramom = _parametro;
                             _paradesc = _descripcion;
                             _checked = "checked='checked'";
@@ -504,18 +502,15 @@
                             
                             $.redirect('?page=param_generales&menuid=<?php echo $menuid; ?>', {'mensaje': _mensaje}); //POR METODO POST
 
-                        }                                                                         
+                        }
                     },
                     error: function (error){
                         console.log(error);
-                    }                            
+                    }
                 }); 
-
-
             }else{
                 mensajesalertify('Nombre del Parametro ya Existe..!', 'W', 'top-center', 5);
             }
-
         });
     }
 
@@ -574,14 +569,14 @@
             var cambiar = document.getElementById(_td);
               cambiar.innerHTML = '<td><div class="' + _class + '">' + _estado + ' </div>';
 
-            $parametros = {
-				xxPacaid: _pacaid,
-                xxPaisid: _paisid,
-				xxEmprid: _emprid,
-				xxEstado: _estado
+            var _parametros = {
+				"xxPacaid" : _pacaid,
+                "xxPaisid" : _paisid,
+				"xxEmprid" : _emprid,
+				"xxEstado" : _estado
 			}
 
-            var xrespuesta = $.post("codephp/delnew_parametro.php", $parametros);
+            var xrespuesta = $.post("codephp/delnew_parametro.php", _parametros);
 			xrespuesta.done(function(response){
 			});	     
 
