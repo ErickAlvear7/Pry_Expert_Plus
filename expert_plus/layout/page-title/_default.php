@@ -54,6 +54,11 @@
 	if($page == 'editcliente'){
         $title = 'Editar Cliente y Producto';
     	$descripcion = 'Listado de Productos / Modificar Datos';
+	}
+	
+	if($page == 'addtitular'){
+        $title = 'Agregar Titular y Beneficiario';
+    	$descripcion = 'Datos del Titular / Beneficiario';
 	}	
 
 	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";

@@ -55,10 +55,10 @@ var KTAppEcommerceSalesSaveOrder = function () {
             "scrollY": "400px",
             "scrollCollapse": true,
             "paging": false,
-            "info": false,
-            'columnDefs': [
-                { orderable: false, targets: 0 }, // Disable ordering on column 0 (checkbox)
-            ]
+            "info": false
+            // 'columnDefs': [
+            //     { orderable: false, targets: 0 }, // Disable ordering on column 0 (checkbox)
+            // ]
         });
     }
 
@@ -77,79 +77,79 @@ var KTAppEcommerceSalesSaveOrder = function () {
         const checkbox = document.getElementById('same_as_billing');
 
         // Show/hide shipping form
-        checkbox.addEventListener('change', e => {
-            if (e.target.checked) {
-                element.classList.add('d-none');
-            } else {
-                element.classList.remove('d-none');
-            }
-        });
+        // checkbox.addEventListener('change', e => {
+        //     if (e.target.checked) {
+        //         element.classList.add('d-none');
+        //     } else {
+        //         element.classList.remove('d-none');
+        //     }
+        // });
     }
 
     // Handle product select
     const handleProductSelect = () => {
         // Define variables
-        const checkboxes = table.querySelectorAll('[type="checkbox"]');
+        // const checkboxes = table.querySelectorAll('[type="checkbox"]');
         const target = document.getElementById('kt_ecommerce_edit_order_selected_products');
         const totalPrice = document.getElementById('kt_ecommerce_edit_order_total_price');
 
         // Loop through all checked products
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', e => {
-                // Select parent row element
-                const parent = checkbox.closest('tr');
+        // checkboxes.forEach(checkbox => {
+        //     checkbox.addEventListener('change', e => {
+        //         // Select parent row element
+        //         const parent = checkbox.closest('tr');
                 
-                // Clone parent element as variable
-                const product = parent.querySelector('[data-kt-ecommerce-edit-order-filter="product"]').cloneNode(true);
+        //         // Clone parent element as variable
+        //         const product = parent.querySelector('[data-kt-ecommerce-edit-order-filter="product"]').cloneNode(true);
 
-                // Create inner wrapper
-                const innerWrapper = document.createElement('div');
+        //         // Create inner wrapper
+        //         const innerWrapper = document.createElement('div');
                 
-                // Store inner content
-                const innerContent = product.innerHTML;
+        //         // Store inner content
+        //         const innerContent = product.innerHTML;
 
-                // Add & remove classes on parent wrapper
-                const wrapperClassesAdd = ['col', 'my-2'];
-                const wrapperClassesRemove = ['d-flex', 'align-items-center'];
+        //         // Add & remove classes on parent wrapper
+        //         const wrapperClassesAdd = ['col', 'my-2'];
+        //         const wrapperClassesRemove = ['d-flex', 'align-items-center'];
 
-                // Define additional classes
-                const additionalClasses = ['border', 'border-dashed', 'rounded', 'p-3', 'bg-white'];
+        //         // Define additional classes
+        //         const additionalClasses = ['border', 'border-dashed', 'rounded', 'p-3', 'bg-white'];
 
-                // Update parent wrapper classes
-                product.classList.remove(...wrapperClassesRemove);
-                product.classList.add(...wrapperClassesAdd);
+        //         // Update parent wrapper classes
+        //         product.classList.remove(...wrapperClassesRemove);
+        //         product.classList.add(...wrapperClassesAdd);
 
-                // Remove parent default content
-                product.innerHTML = '';
+        //         // Remove parent default content
+        //         product.innerHTML = '';
 
-                // Update inner wrapper classes
-                innerWrapper.classList.add(...wrapperClassesRemove);
-                innerWrapper.classList.add(...additionalClasses);                
+        //         // Update inner wrapper classes
+        //         innerWrapper.classList.add(...wrapperClassesRemove);
+        //         innerWrapper.classList.add(...additionalClasses);                
 
-                // Apply stored inner content into new inner wrapper
-                innerWrapper.innerHTML = innerContent;
+        //         // Apply stored inner content into new inner wrapper
+        //         innerWrapper.innerHTML = innerContent;
 
-                // Append new inner wrapper to parent wrapper
-                product.appendChild(innerWrapper);
+        //         // Append new inner wrapper to parent wrapper
+        //         product.appendChild(innerWrapper);
 
-                // Get product id
-                const productId = product.getAttribute('data-kt-ecommerce-edit-order-id');
+        //         // Get product id
+        //         const productId = product.getAttribute('data-kt-ecommerce-edit-order-id');
 
-                if (e.target.checked) {
-                    // Add product to selected product wrapper
-                    target.appendChild(product);
-                } else {
-                    // Remove product from selected product wrapper
-                    const selectedProduct = target.querySelector('[data-kt-ecommerce-edit-order-id="' + productId + '"]');
-                    if (selectedProduct) {
-                        target.removeChild(selectedProduct);
-                    }
-                }
+        //         if (e.target.checked) {
+        //             // Add product to selected product wrapper
+        //             target.appendChild(product);
+        //         } else {
+        //             // Remove product from selected product wrapper
+        //             const selectedProduct = target.querySelector('[data-kt-ecommerce-edit-order-id="' + productId + '"]');
+        //             if (selectedProduct) {
+        //                 target.removeChild(selectedProduct);
+        //             }
+        //         }
 
-                // Trigger empty message logic
-                detectEmpty();
-            });
-        });
+        //         // Trigger empty message logic
+        //         detectEmpty();
+        //     });
+        // });
 
         // Handle empty list message
         const detectEmpty = () => {
@@ -192,131 +192,131 @@ var KTAppEcommerceSalesSaveOrder = function () {
     }
 
     // Submit form handler
-    const handleSubmit = () => {
-        // Define variables
-        let validator;
+    // const handleSubmit = () => {
+    //     // Define variables
+    //     let validator;
 
-        // Get elements
-        const form = document.getElementById('kt_ecommerce_edit_order_form');
-        const submitButton = document.getElementById('kt_ecommerce_edit_order_submit');
+    //     // Get elements
+    //     const form = document.getElementById('kt_ecommerce_edit_order_form');
+    //     const submitButton = document.getElementById('kt_ecommerce_edit_order_submit');
 
-        // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
-        validator = FormValidation.formValidation(
-            form,
-            {
-                fields: {
-                    'payment_method': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Payment method is required'
-                            }
-                        }
-                    },
-                    'shipping_method': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Shipping method is required'
-                            }
-                        }
-                    },
-                    'order_date': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Order date is required'
-                            }
-                        }
-                    },
-                    'billing_order_address_1': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Address line 1 is required'
-                            }
-                        }
-                    },
-                    'billing_order_postcode': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Postcode is required'
-                            }
-                        }
-                    },
-                    'billing_order_state': {
-                        validators: {
-                            notEmpty: {
-                                message: 'State is required'
-                            }
-                        }
-                    },
-                    'billing_order_country': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Country is required'
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    trigger: new FormValidation.plugins.Trigger(),
-                    bootstrap: new FormValidation.plugins.Bootstrap5({
-                        rowSelector: '.fv-row',
-                        eleInvalidClass: '',
-                        eleValidClass: ''
-                    })
-                }
-            }
-        );
+    //     // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+    //     validator = FormValidation.formValidation(
+    //         form,
+    //         {
+    //             fields: {
+    //                 'payment_method': {
+    //                     validators: {
+    //                         notEmpty: {
+    //                             message: 'Payment method is required'
+    //                         }
+    //                     }
+    //                 },
+    //                 'shipping_method': {
+    //                     validators: {
+    //                         notEmpty: {
+    //                             message: 'Shipping method is required'
+    //                         }
+    //                     }
+    //                 },
+    //                 'order_date': {
+    //                     validators: {
+    //                         notEmpty: {
+    //                             message: 'Order date is required'
+    //                         }
+    //                     }
+    //                 },
+    //                 'billing_order_address_1': {
+    //                     validators: {
+    //                         notEmpty: {
+    //                             message: 'Address line 1 is required'
+    //                         }
+    //                     }
+    //                 },
+    //                 'billing_order_postcode': {
+    //                     validators: {
+    //                         notEmpty: {
+    //                             message: 'Postcode is required'
+    //                         }
+    //                     }
+    //                 },
+    //                 'billing_order_state': {
+    //                     validators: {
+    //                         notEmpty: {
+    //                             message: 'State is required'
+    //                         }
+    //                     }
+    //                 },
+    //                 'billing_order_country': {
+    //                     validators: {
+    //                         notEmpty: {
+    //                             message: 'Country is required'
+    //                         }
+    //                     }
+    //                 }
+    //             },
+    //             plugins: {
+    //                 trigger: new FormValidation.plugins.Trigger(),
+    //                 bootstrap: new FormValidation.plugins.Bootstrap5({
+    //                     rowSelector: '.fv-row',
+    //                     eleInvalidClass: '',
+    //                     eleValidClass: ''
+    //                 })
+    //             }
+    //         }
+    //     );
 
-        // Handle submit button
-        submitButton.addEventListener('click', e => {
-            e.preventDefault();
+    //     // Handle submit button
+    //     submitButton.addEventListener('click', e => {
+    //         e.preventDefault();
 
-            // Validate form before submit
-            if (validator) {
-                validator.validate().then(function (status) {
-                    console.log('validated!');
+    //         // Validate form before submit
+    //         if (validator) {
+    //             validator.validate().then(function (status) {
+    //                 console.log('validated!');
 
-                    if (status == 'Valid') {
-                        submitButton.setAttribute('data-kt-indicator', 'on');
+    //                 if (status == 'Valid') {
+    //                     submitButton.setAttribute('data-kt-indicator', 'on');
 
-                        // Disable submit button whilst loading
-                        submitButton.disabled = true;
+    //                     // Disable submit button whilst loading
+    //                     submitButton.disabled = true;
 
-                        setTimeout(function () {
-                            submitButton.removeAttribute('data-kt-indicator');
+    //                     setTimeout(function () {
+    //                         submitButton.removeAttribute('data-kt-indicator');
 
-                            Swal.fire({
-                                text: "Form has been successfully submitted!",
-                                icon: "success",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn btn-primary"
-                                }
-                            }).then(function (result) {
-                                if (result.isConfirmed) {
-                                    // Enable submit button after loading
-                                    submitButton.disabled = false;
+    //                         Swal.fire({
+    //                             text: "Form has been successfully submitted!",
+    //                             icon: "success",
+    //                             buttonsStyling: false,
+    //                             confirmButtonText: "Ok, got it!",
+    //                             customClass: {
+    //                                 confirmButton: "btn btn-primary"
+    //                             }
+    //                         }).then(function (result) {
+    //                             if (result.isConfirmed) {
+    //                                 // Enable submit button after loading
+    //                                 submitButton.disabled = false;
 
-                                    // Redirect to customers list page
-                                    window.location = form.getAttribute("data-kt-redirect");
-                                }
-                            });
-                        }, 2000);
-                    } else {
-                        Swal.fire({
-                            html: "Sorry, looks like there are some errors detected, please try again.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        });
-                    }
-                });
-            }
-        })
-    }
+    //                                 // Redirect to customers list page
+    //                                 window.location = form.getAttribute("data-kt-redirect");
+    //                             }
+    //                         });
+    //                     }, 2000);
+    //                 } else {
+    //                     Swal.fire({
+    //                         html: "Sorry, looks like there are some errors detected, please try again.",
+    //                         icon: "error",
+    //                         buttonsStyling: false,
+    //                         confirmButtonText: "Ok, got it!",
+    //                         customClass: {
+    //                             confirmButton: "btn btn-primary"
+    //                         }
+    //                     });
+    //                 }
+    //             });
+    //         }
+    //     })
+    // }
 
 
     // Public methods
@@ -327,7 +327,7 @@ var KTAppEcommerceSalesSaveOrder = function () {
             handleSearchDatatable();
             handleShippingForm();
             handleProductSelect();
-            handleSubmit();
+            // handleSubmit();
         }
     };
 }();

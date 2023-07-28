@@ -164,7 +164,7 @@
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="required form-label">Cliente</label>
-                                    <input class="form-control mb-2 text-uppercase" type="text" name="txtCliente" id="txtCliente" class="form-control mb-2" minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="" />
+                                    <input class="form-control mb-2 text-uppercase" type="text" name="txtCliente" id="txtCliente"  minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="" />
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="form-label">Descripcion</label>
@@ -243,7 +243,7 @@
                                         <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="029999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                             </div>
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
@@ -451,7 +451,7 @@
 
 <script>
     
-    var _cobertura = "NO",_sistema = "NO", _count = 0, _result = [];;
+    var _cobertura = "NO",_sistema = "NO", _count = 0, _result = [];
 
     $(document).ready(function(){
 
@@ -562,7 +562,7 @@
         var _emprid = "<?php echo $xEmprid; ?>";
         var _paisid = "<?php echo $xPaisid; ?>";
         var _producto = $.trim($("#txtProducto").val());
-            _producto = _producto.toUpperCase();
+            _producto.toUpperCase();
         var _descripcion = $.trim($("#txtDescripcion").val());
         var _costo = $.trim($("#txtCosto").val());
         var _cbogrupo = $('#cboGrupo').val();
@@ -961,7 +961,7 @@
             if(response.trim() == 'OK'){
 
                 var xrespuesta = $.post("codephp/grabar_grupo.php", _parametros);
-                xrespuesta.done(function(response){
+                    xrespuesta.done(function(response){
                     if(response.trim() != 'ERR'){
 
                         mensajesalertify('Nuevo Grupo Agregado', 'S', 'top-center', 3); 
