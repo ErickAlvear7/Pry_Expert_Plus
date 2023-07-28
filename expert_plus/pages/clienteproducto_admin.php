@@ -108,9 +108,6 @@
                        $xDisabledEdit = '';
                        $xTarget = '';
 
-                       
-                    
-
                        if($xEstado == 'Activo'){
                             $xCheking = 'checked="checked"';
                             $xTextColor = "badge badge-light-primary";

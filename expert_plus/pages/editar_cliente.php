@@ -660,7 +660,6 @@
         var _imgPie = "<?php echo $xImgp; ?>";
         _imgPie = _imgPie == '' ? 'companyname.png' : _imgPie;  
         document.getElementById('imgfilePie').style.backgroundImage="url(logos/" + _imgPie + ")"; 
-
         
         $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
         $('#cboCiudad').val(<?php echo $xProvid; ?>).change();
@@ -778,8 +777,7 @@
         var _txtGrupo = $('#cboGrupo').find('option:selected').text();
         var _asistemes = $('#txtAsisMes').val();
         var _asistanu = $('#txtAsisAnu').val();
-
-        
+   
         if(_producto == ''){
             mensajesalertify("Ingrese Producto..!!","W","top-right",3);
             return false;
@@ -860,7 +858,6 @@
         });
 
     });
-
 
     //Desplazar-modal
 
@@ -1038,7 +1035,6 @@
         });
 
     });
-
 
 
     //Check editar producto-modal
