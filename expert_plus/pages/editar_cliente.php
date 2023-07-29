@@ -969,7 +969,6 @@
 
     $(document).on("click",".btnEditar",function(){
 
-        //debugger
         
         $("#modal_producto").find("input,textarea,checkbox").val("");
 
@@ -1196,7 +1195,6 @@
             return false;
         }
 
-    
             
         if(_tel1 != '')
         {
@@ -1281,8 +1279,8 @@
             }
         }
 
-            //Log Cabecera
-
+            
+        //Log Cabecera
 
         var _logocab = document.getElementById("imgfileCab").style.backgroundImage;
         var _urlcab = _logocab.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
@@ -1388,5 +1386,6 @@
 		});
     
    }
+
 
 </script>
