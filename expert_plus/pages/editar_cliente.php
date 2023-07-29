@@ -682,10 +682,10 @@
             $("#cboCiudad").empty();
 
             var _parametros = {
-                xxPaisId: _paisid,
-                xxEmprId: _emprid,
-                xxComboId: _cboid,
-                xxOpcion: 0
+                "xxPaisId" : _paisid,
+                "xxEmprId" : _emprid,
+                "xxComboId" : _cboid,
+                "xxOpcion" : 0
             }
 
             var _respuesta = $.post("codephp/cargar_combos.php", _parametros);
@@ -795,18 +795,18 @@
 
         var _parametros = {
             
-            xxClieid: _clieid,
-            xxGrupid: _cbogrupo,
-            xxPaisid: _paisid,
-            xxEmprid: _emprid,
-            xxProducto: _producto,
-            xxDesc: _descripcion,
-            xxCosto: _costo,
-            xxAsisMes: _asistemes,
-            xxAsisAnu: _asistanu,
-            xxCober: _cobertura,
-            xxSist: _sistema,
-            xxGeren: _gerencial
+            "xxClieid" : _clieid,
+            "xxGrupid" : _cbogrupo,
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxProducto" : _producto,
+            "xxDesc" : _descripcion,
+            "xxCosto" : _costo,
+            "xxAsisMes" : _asistemes,
+            "xxAsisAnu" : _asistanu,
+            "xxCober" : _cobertura,
+            "xxSist" : _sistema,
+            "xxGeren" : _gerencial
         }
 
         var xrespuesta = $.post("codephp/consuin_produtosedit.php", _parametros);
@@ -884,11 +884,11 @@
 
         var _parametros = {
 
-            xxPaisId: _paisid,
-            xxEmprId: _emprid,
-            xxUsuaId: _usuaid,
-            xxGrupo: _nombreGrupo,
-            xxDesc: _descGrupo
+            "xxPaisId" : _paisid,
+            "xxEmprId" : _emprid,
+            "xxUsuaId" : _usuaid,
+            "xxGrupo" : _nombreGrupo,
+            "xxDesc" : _descGrupo
         }
 
         var xrespuesta = $.post("codephp/consultar_grupo.php", _parametros);
@@ -952,11 +952,11 @@
             _changetd.innerHTML = '<div class="' + _class + '">'+_estado+'</div>';
 
             _parametros = {
-                xxProid: _prodid,
-                xxEmprid: _emprid,
-                xxPaisid: _paisid,
-                xxUsuaid: _usuaid,
-                xxEstado: _estado
+                "xxProid" : _prodid,
+                "xxEmprid" : _emprid,
+                "xxPaisid" : _paisid,
+                "xxUsuaid" : _usuaid,
+                "xxEstado" : _estado
             } 
 
         var xrespuesta = $.post("codephp/update_estadoproducto.php", _parametros);
@@ -1112,38 +1112,22 @@
         }
 
         var _parametros = {
-            xxProdid: _prodid,
-            xxGrupid: _cbogrupoedit,
-            xxPaisid: _paisid,
-            xxEmprid: _emprid,
-            xxUsuaid: _usuaid,
-            xxProdedit: _prodedit,
-            xxProdant: _producto,
-            xxDescr: _descredit,
-            xxCostoedit: _costoedit,
-            xxAsisMesedit: _asismesedit,
-            xxAsisAnuedit: _asisanuedit,
-            xxCobertura: _cobedit,
-            xxSistema: _sistedit,
-            xxGerencial: _gerenedit
+            "xxProdid" : _prodid,
+            "xxGrupid" : _cbogrupoedit,
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxUsuaid" : _usuaid,
+            "xxProdedit" : _prodedit,
+            "xxProdant" : _producto,
+            "xxDescr" : _descredit,
+            "xxCostoedit" : _costoedit,
+            "xxAsisMesedit" : _asismesedit,
+            "xxAsisAnuedit" : _asisanuedit,
+            "xxCobertura" : _cobedit,
+            "xxSistema" : _sistedit,
+            "xxGerencial" : _gerenedit
         
         }
-                var _parametros = {
-                    "xxProdid" : _prodid,
-                    "xxGrupid" : _cbogrupoedit,
-                    "xxPaisid" : _paisid,
-                    "xxEmprid" : _emprid,
-                    "xxUsuaid" : _usuaid,
-                    "xxProdedit" : _prodedit,
-                    "xxProdant" : _producto,
-                    "xxDescr" : _descredit,
-                    "xxCostoedit" : _costoedit,
-                    "xxAsisMesedit" : _asismesedit,
-                    "xxAsisAnuedit" : _asisanuedit,
-                    "xxCobertura" : _cobedit,
-                    "xxSistema" : _sistedit,
-                    "xxGerencial": _gerenedit
-                }
 
         var xrespuesta = $.post("codephp/grabar_editarproducto.php", _parametros);
         xrespuesta.done(function(response){
@@ -1173,10 +1157,6 @@
         });   
 
     }
-                });
-             
-                $("#modal_producto").modal("hide");
-            }
 
     //Grabar editar cliente
     $('#btnGrabar').click(function(e){
@@ -1204,27 +1184,6 @@
         var _clieant = $.trim($("#txtClieant").val());
       
 
-                if(_cboCiudad == ''){
-                    mensajesalertify("Seleccione Ciudad..!", "W", "top-right", 3);
-                    return; 
-                }
-                // if(_url != ''){
-                //        try{
-                //            new URL(_url);
-                //        }catch(err){
-                //            mensajesalertify("Direccion URL Incorrecta..!", "W", "top-right", 3);
-                //            return false;
-                //        }
-                //    }
-                   
-                if(_tel1 != '')
-                {
-                    _valor = document.getElementById("txtFono1").value;
-                    if( !(/^\d{9}$/.test(_valor)) ) {
-                        mensajesalertify("Telefono1 incorrecto..!" ,"W", "top-right", 3); 
-                        return;
-                    }
-                }
         if(_cboCiudad == ''){
             mensajesalertify("Seleccione Ciudad..!", "W", "top-right", 3);
             return; 
@@ -1246,14 +1205,6 @@
             }
         }
 
-                if(_tel2 != '')
-                {
-                    _valor = document.getElementById("txtFono2").value;
-                    if( !(/^\d{9}$/.test(_valor)) ) {
-                        mensajesalertify("Telefono2 incorrecto..!" ,"W", "top-right", 3); 
-                        return;
-                    }
-                }                    
         if(_tel2 != '')
         {
             _valor = document.getElementById("txtFono2").value;
@@ -1263,51 +1214,6 @@
             }
         }                    
 
-                if(_tel3 != '')
-                {
-                    _valor = document.getElementById("txtFono3").value;
-                    if( !(/^\d{9}$/.test(_valor)) ) {
-                        mensajesalertify("Telefono3 incorrecto..!" ,"W", "top-right", 3); 
-                        return;
-                    }
-                }  
-                
-                if(_cel1 != '')
-                {
-                    _valor = document.getElementById("txtCelular1").value;
-                    if( !(/^\d{10}$/.test(_valor)) ) {
-                        mensajesalertify("Celular1 incorrecto..!" ,"W", "top-right", 3); 
-                        return;
-                    }
-                }                     
-                
-                if(_cel2 != '')
-                {
-                    _valor = document.getElementById("txtCelular2").value;
-                    if( !(/^\d{10}$/.test(_valor)) ) {
-                        mensajesalertify("Celular1 incorrecto..!" ,"W", "top-right", 3); 
-                        return;
-                    }
-                }
-                
-                if(_cel3 != '')
-                {
-                    _valor = document.getElementById("txtCelular3").value;
-                    if( !(/^\d{10}$/.test(_valor)) ) {
-                        mensajesalertify("Celular1 incorrecto..!" ,"W", "top-right", 3); 
-                        return;
-                    }
-                }                    
-                
-                if(_email1 != ''){
-                    var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-                
-                    if (regex.test($('#txtEmail1').val().trim())) {
-                    }else{
-                        mensajesalertify("Email1 no es Valido..!", "W", "top-center", 3);
-                        return;
-                    }
-                }
         if(_tel3 != '')
         {
             _valor = document.getElementById("txtFono3").value;
@@ -1363,15 +1269,6 @@
             }
         }
 
-                if(_email2 != ''){
-                    var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-                
-                    if (regex.test($('#txtEmail2').val().trim())) {
-                    }else{
-                        mensajesalertify("Email2 no es Valido..!", "W", "top-center", 3);
-                        return;
-                    }
-                }
         if(_email2 != ''){
             var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
         
@@ -1389,20 +1286,10 @@
         var _urlcab = _logocab.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
             _extcab = _urlcab.substring(_urlcab.length - 4);
 
-                if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != '.jpeg'){
-                    _seleccab = 'SI';
-                }  
         if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != 'jpeg'){
              _seleccab = 'SI';
         }  
 
-                if(_seleccab == 'SI'){
-                    var _imagencab = document.getElementById("logoCab");
-                    var _filecab = _imagencab.files[0];
-                    var _fullPathcab = document.getElementById('logoCab').value;
-                    _extcab = _fullPathcab.substring(_fullPathcab.length - 4);
-                    _extcab = _extcab.toLowerCase();   
-                }
         if(_seleccab == 'SI'){
             var _imagencab = document.getElementById("logoCab");
             var _filecab = _imagencab.files[0];
@@ -1411,11 +1298,6 @@
             _extcab = _extcab.toLowerCase();   
         }
 
-                if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != '.jpeg'){
-                    //mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
-                    mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
-                    return;
-                }
         if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != 'jpeg'){
             //mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
             mensajesalertify("El archivo seleccionado en cabecera no es una Imagen..!", "W", "top-right", 3);
@@ -1423,16 +1305,6 @@
         }
 
 
-                    //Log Pie
-
-                var _logopie = document.getElementById("imgfilePie").style.backgroundImage;
-                var _urlpie = _logopie.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-                var _pospie = _urlpie.trim().indexOf('.');
-                var _extpie = _urlpie.trim().substr(_pos, 5);
-
-                if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != '.jpeg'){
-                    _selecpie = 'SI';
-                }  
             //Log Pie
       
 
@@ -1445,13 +1317,6 @@
              _selecpie = 'SI';
         }  
 
-                if(_selecpie == 'SI'){
-                    var _imagenpie = document.getElementById("logoPie");
-                    var _filepie = _imagenpie.files[0];
-                    var _fullPathpie = document.getElementById('logoPie').value;
-                    _extpie = _fullPathpie.substring(_fullPathpie.length - 4);
-                    _extpie = _extpie.toLowerCase();   
-                }
         if(_selecpie == 'SI'){
             var _imagenpie = document.getElementById("logoPie");
             var _filepie = _imagenpie.files[0];
@@ -1460,44 +1325,12 @@
             _extpie = _extpie.toLowerCase();   
         }
 
-                if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != '.jpeg'){
-                    mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
-                    return;
-                }
         if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != 'jpeg'){
             mensajesalertify("El archivo seleccionado en pie no es una Imagen..!", "W", "top-right", 3);
             return;
         }
 
-        if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != 'jpeg'){
-            mensajesalertify("El archivo seleccionado en pie no es una Imagen..!", "W", "top-right", 3);
-            return;
-        }
 
-                    var form_data = new FormData();
-                    form_data.append('xxClieid', _idclie);            
-                    form_data.append('xxPaisid', _idpais);
-                    form_data.append('xxEmprid', _idempr);
-                    form_data.append('xxUsuaid', _iduser);
-                    form_data.append('xxProvid', _cboCiudad);
-                    form_data.append('xxProvidant', _providant);
-                    form_data.append('xxCliente', _cliente);
-                    form_data.append('xxClieant', _clieant);
-                    form_data.append('xxDescrip', _desc);
-                    form_data.append('xxDirec', _direc);
-                    form_data.append('xxUrl', _url);
-                    form_data.append('xxFono1', _tel1);
-                    form_data.append('xxFono2', _tel2);
-                    form_data.append('xxFono3', _tel3);
-                    form_data.append('xxCel1', _cel1);
-                    form_data.append('xxCel2', _cel2);
-                    form_data.append('xxCel3', _cel3);
-                    form_data.append('xxEmail1', _email1);
-                    form_data.append('xxEmail2', _email2);
-                    form_data.append('xxFileCab', _filecab);
-                    form_data.append('xxCambiarcab', _seleccab);
-                    form_data.append('xxFilePie', _filepie);
-                    form_data.append('xxCambiarpie', _selecpie);
         var form_data = new FormData();
         form_data.append('xxClieid', _idclie);            
         form_data.append('xxPaisid', _idpais);
@@ -1523,25 +1356,6 @@
         form_data.append('xxFilePie', _filepie);
         form_data.append('xxCambiarpie', _selecpie);
 
-                $.ajax({
-                    url: "codephp/update_cliente.php",
-                    type: "post",
-                    data: form_data,
-                    processData: false,
-                    contentType: false,
-                    dataType: "json",
-                    success: function(response){
-                        console.log(response);
-                        if(response == 'OK'){
-                            $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito..!'}); //POR METODO POST
-                        }else{
-                            mensajesalertify("Cliente ya Existe..!", "W", "top-right", 3);
-                        }
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
         $.ajax({
             url: "codephp/update_cliente.php",
             type: "post",
@@ -1572,8 +1386,6 @@
 		});
     
    }
-            
-
 
 
 </script>
