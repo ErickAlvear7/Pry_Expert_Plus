@@ -9,6 +9,7 @@
     date_default_timezone_set('America/Guayaquil');	  
 
     $xFechaActual = strftime('%Y-%m-%d', time());
+    $xFechaFinCobertura = date("Y-m-d",strtotime ( "+1 year" , strtotime ( $xFechaActual)));
 
 
    
@@ -176,7 +177,7 @@
                     <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">Titular</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Beneficiarios</a>
+                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tab_beneficiarios">Beneficiarios</a>
                 </li>
                 <div class="d-flex justify-content-end">
                     <button type="button" id="btnRegresar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Regresar'>
@@ -311,7 +312,7 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Fin Cobertura</label>
-                                        <input type="date" id="txtFinCobertura" class="form-control mb-2" value="" />
+                                        <input type="date" id="txtFinCobertura" class="form-control mb-2" value="<?php echo $xFechaFinCobertura; ?>" />
                                     </div>  
                                 </div>                                                          
                             </div>
@@ -420,7 +421,7 @@
                         </div>  
                     </div>
                 </div>
-                <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
+                <div class="tab-pane fade" id="tab_beneficiarios" role="tab-panel">
                     <div class="d-flex flex-column gap-7 gap-lg-10">
                         <div class="card card-flush py-4">
                             <div class="card-header">
@@ -490,8 +491,8 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Provincia</label>
-                                        <select id="cboProvinciaBe" class="form-select mb-2"  data-control="select2" data-hide-search="true" data-placeholder="Seleccione Provincia">
-                                        <!-- <select  id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2" > -->
+                                        <!-- <select id="cboProvinciaBe" class="form-select mb-2"  data-control="select2" data-hide-search="true" data-placeholder="Seleccione Provincia"> -->
+                                        <select  id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2" >
                                                 <option></option>
                                                 <?php foreach ($all_provincia as $prov) : ?>
                                                     <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
@@ -500,8 +501,8 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Ciudad</label>
-                                        <select id="cboCiudadBe" class="form-select mb-2"  data-control="select2" data-hide-search="true" data-placeholder="Seleccione Ciudad">
-                                        <!-- <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2"> -->
+                                        <!-- <select id="cboCiudadBe" class="form-select mb-2"  data-control="select2" data-hide-search="true" data-placeholder="Seleccione Ciudad"> -->
+                                        <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2">
                                                 <option></option>
                                         </select> 
                                     </div>  
@@ -972,20 +973,20 @@
 
                         if(dataid != 0){
 
-                            if(_result != ''){
+                            if(_result.length > 0){
                                 var xrespuesta = $.post("codephp/grabar_beneficiario.php", { xxPaisid: _idpais, xxEmprid: _idempr,xxUsuaid: _iduser,xxClieid: dataid, xxResult: _result });
                                     xrespuesta.done(function(response){
                                             
                                     if(response == 'OK'){
 
-                                        $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
+                                        $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
                             
                                     }
 
                                 });
                             }
 
-                            $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
+                            $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
                         }
 
                     },
