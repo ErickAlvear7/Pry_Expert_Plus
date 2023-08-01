@@ -58,12 +58,15 @@
       
     }    
 
-    
-    $xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND prov_id=$xProvid ";
-    $all_ciudad = mysqli_query($con, $xSQL);    
-    foreach ($all_ciudad as $ciu){
-        $xCiudad = $prov['ciudad'];
+    if(  $xProvid != 0){
+
+        $xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND prov_id=$xProvid ";
+        $all_ciudad = mysqli_query($con, $xSQL);    
+        foreach ($all_ciudad as $ciu){
+            $xCiudad = $prov['ciudad'];
+        }
     }
+ 
 
 
 ?>
@@ -600,7 +603,8 @@
 <script>
     
     var _prodid = '<?php echo $prodid; ?>', _grupid = '<?php echo $grupid; ?>', _userid = '<?php echo $xUsuaid; ?>',
-        _idclie = '<?php echo $clieid; ?>',_result = [];
+        _idclie = '<?php echo $clieid; ?>',_paisid = '<?php echo $xPaisid; ?>',_emprid = '<?php echo $xEmprid; ?>',_result = [];
+
 
     $(document).ready(function(){
     
@@ -834,16 +838,11 @@
     });
 
 
-
-
         //Agregar Persona - Titular 
 
     $('#btnGrabar').click(function(){
 
         //debugger;
-        var _usuaid = <?php echo $xUsuaid; ?>;
-        var _prodid = <?php echo $prodid; ?>;
-        var _grupid = <?php echo $grupid; ?>;
         var _cboDocumento = $('#cboDocumento').val();
         var _txtDocumento = $('#txtDocumento').val();
         var _txtNombre = $.trim($("#txtNombre").val()); 
@@ -940,11 +939,12 @@
             if(response == 0){
 
                 //debugger
-
                 var form_data = new FormData();
-                form_data.append('xxUsuaid', _usuaid);
+                form_data.append('xxUsuaid', _userid);
                 form_data.append('xxProdid', _prodid);
-                form_data.append('xxGrupid', _grupid);              
+                form_data.append('xxGrupid', _grupid);
+                form_data.append('xxPaisid', _paisid);
+                form_data.append('xxEmprid', _emprid);                 
                 form_data.append('xxTipoDocumento', _cboDocumento);
                 form_data.append('xxDocumento', _txtDocumento);
                 form_data.append('xxNombre', _txtNombre);
@@ -979,14 +979,21 @@
                                             
                                     if(response == 'OK'){
 
-                                        $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
+                                        $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', 
+                                        {'mensaje': 'Grabado con Éxito..!',
+                                          'idclie': _idclie
+                                        
+                                        }); //POR METODO POST
                             
                                     }
 
                                 });
                             }
 
-                            $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
+                            $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', 
+                            {'mensaje': 'Grabado con Éxito..!',
+                              'idclie': _idclie
+                            }); //POR METODO POST
                         }
 
                     },

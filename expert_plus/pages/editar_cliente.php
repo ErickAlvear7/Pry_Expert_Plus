@@ -18,6 +18,7 @@
 
 	//$xServidor = $_SERVER['HTTP_HOST'];
 	$page = isset($_GET['page']) ? $_GET['page'] : "index";
+    $mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
     $clieid = $_POST['idclie'];
 	$menuid = $_GET['menuid'];
 	
@@ -86,6 +87,7 @@
 ?>
 
 <div id="kt_content_container" class="container-xxl">
+    <input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
     <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row">
         <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
             <div class="card card-flush py-4">
@@ -647,10 +649,15 @@
 
     $(document).ready(function(){
 
-
         var _paisid = "<?php echo $xPaisid; ?>";
         var _emprid = "<?php echo $xEmprid; ?>";
         var _usuaid = "<?php echo $xUsuaid; ?>";
+
+        var _mensaje = $('input#mensaje').val();
+
+            if(_mensaje != ''){
+                mensajesalertify(_mensaje,"S","top-center",3); 
+            }
 
         //Cargar imagen logo cabecera
         var _imgCab  = "<?php echo $xImgc; ?>";
