@@ -226,11 +226,11 @@
                 _tipo = "Del";
             }
 
-            $parametros = {
-                xxIdTarea: _idtarea,
-                xxIdMenu: _idmenu,
-                xxEmprid: _idempr,
-                xxTipo: _tipo                    
+            var _parametros = {
+                "xxIdTarea" : _idtarea,
+                "xxIdMenu" : _idmenu,
+                "xxEmprid" : _idempr,
+                "xxTipo" : _tipo                    
             }
 
             var xrespuesta = $.post("codephp/delnew_menu.php", $parametros);
@@ -256,9 +256,9 @@
                 _buscar = 'SI';
             }
 
-            $parametros = {
-                xxMenu: _menu,
-                xxEmprid: _emprid                
+            var _parametros = {
+                "xxMenu" : _menu,
+                "xxEmprid" : _emprid                
             }  
 
             if(_buscar == 'SI'){                
@@ -277,25 +277,25 @@
 
         function funGrabar(_paisid,_emprid,_usuaid,_idmenu,_menu,_observacion){
             
-            $datosMenu = {
-                xxMenu: _menu,
-                xxObserva: _observacion,
-                xxEmprid: _emprid,
-                xxIdMenu: _idmenu
+            var _datosMenu = {
+                "xxMenu" : _menu,
+                "xxObserva" : _observacion,
+                "xxEmprid" : _emprid,
+                "xxIdMenu" : _idmenu
             }
 
-            var xresponse = $.post("codephp/update_menu.php", $datosMenu);
+            var xresponse = $.post("codephp/update_menu.php", _datosMenu);
             xresponse.done(function(response){    
                 if(response.trim() == 'OK'){
                     /**PARA CREAR REGISTRO DE LOGS */
-                    $parametros = {
-                        xxPaisid: _paisid,
-                        xxEmprid: _emprid,
-                        xxUsuaid: _usuaid,
-                        xxDetalle: 'Modificar Menú',
+                    var _parametros = {
+                        "xxPaisid" : _paisid,
+                        "xxEmprid" : _emprid,
+                        "xxUsuaid" : _usuaid,
+                        "xxDetalle" : 'Modificar Menú',
                     }					
 
-                    $.post("codephp/new_log.php", $parametros, function(response){
+                    $.post("codephp/new_log.php", _parametros, function(response){
                         
                     }); 
 

@@ -535,33 +535,33 @@
                     return;
                 }
 
-                $parametros = {
-                    xxPaisid: _paisid,
-                    xxPerfil: _perfil,
-                    xxEmprid: _emprid
+                var _parametros = {
+                    "xxPaisid" : _paisid,
+                    "xxPerfil" : _perfil,
+                    "xxEmprid" : _emprid
                 }      
 
-                var xrespuesta = $.post("codephp/consultar_perfil.php", $parametros);
+                var xrespuesta = $.post("codephp/consultar_perfil.php", _parametros);
                 xrespuesta.done(function(response) {
 
                     if(response.trim() == 0){
 
-                        $datosperfil = {
-                            xxPaisid: _paisid,
-                            xxPerfil: _perfil,
-                            xxEmprid: _emprid,
-                            xxUsuaid: _usuaid,
-                            xxObservacion: _observacion,
-                            xxDetalle1: _detalle1,
-                            xxDetalle2: _detalle2,
-                            xxDetalle3: _detalle3,
-                            xxDetalle4: _detalle4,
-                            xxDetalle5: _detalle5,
-                            xxEstado: _estado,
-                            xxResult: _result
+                        var _datosperfil = {
+                            "xxPaisid" : _paisid,
+                            "xxPerfil" : _perfil,
+                            "xxEmprid" : _emprid,
+                            "xxUsuaid" : _usuaid,
+                            "xxObservacion" : _observacion,
+                            "xxDetalle1" : _detalle1,
+                            "xxDetalle2" : _detalle2,
+                            "xxDetalle3" : _detalle3,
+                            "xxDetalle4" : _detalle4,
+                            "xxDetalle5" : _detalle5,
+                            "xxEstado" : _estado,
+                            "xxResult" : _result
                         }
 
-                        $.post("codephp/grabar_perfil.php", $datosperfil, function(response){
+                        $.post("codephp/grabar_perfil.php", _datosperfil, function(response){
 
                             if(response.trim() == 'OK'){
                                 $.redirect('?page=seg_perfiladmin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Perfil Creado Correctamente..!'}); 
@@ -571,14 +571,14 @@
                             }
 
                             /**PARA CREAR REGISTRO DE LOGS */
-                            $parametros = {
-                                xxPaisid: _paisid,
-                                xxEmprid: _emprid,
-                                xxUsuaid: _usuaid,
-                                xxDetalle: _detalle,
+                            var _parametros = {
+                                "xxPaisid" : _paisid,
+                                "xxEmprid" : _emprid,
+                                "xxUsuaid" : _usuaid,
+                                "xxDetalle" : _detalle,
                             }					
 
-                            $.post("codephp/new_log.php", $parametros, function(response){
+                            $.post("codephp/new_log.php", _parametros, function(response){
                                 //console.log(response);
                             });
                             
@@ -610,32 +610,32 @@
                     return;
                 }
 
-                $parametros = {
-                    xxPaisid: _paisid,
-                    xxPerfil: _perfil,
-                    xxEmprid: _emprid
+                var _parametros = {
+                    "xxPaisid" : _paisid,
+                    "xxPerfil" : _perfil,
+                    "xxEmprid" : _emprid
                 }
                 
                 if(_perfil != _perfilold){
-                    var xrespuesta = $.post("codephp/consultar_perfil.php", $parametros);
+                    var xrespuesta = $.post("codephp/consultar_perfil.php", _parametros);
                     xrespuesta.done(function(response) {
                         //console.log(response);
                         if(response.trim() == 0){
 
-                            $datosperfil = {
-                                xxPaisid: _paisid,
-                                xxEmprid: _emprid,
-                                xxPerfilid: _idperfil,
-                                xxPerfil: _perfil,
-                                xxDetalle1: _detalle1,
-                                xxDetalle2: _detalle2,
-                                xxDetalle3: _detalle3,
-                                xxDetalle4: _detalle4,
-                                xxDetalle5: _detalle5,
-                                xxObservacion: _observacion
+                            var _datosperfil = {
+                                "xxPaisid" : _paisid,
+                                "xxEmprid" : _emprid,
+                                "xxPerfilid" : _idperfil,
+                                "xxPerfil" : _perfil,
+                                "xxDetalle1" : _detalle1,
+                                "xxDetalle2" : _detalle2,
+                                "xxDetalle3" : _detalle3,
+                                "xxDetalle4" : _detalle4,
+                                "xxDetalle5" : _detalle5,
+                                "xxObservacion" : _observacion
                             }
 
-                            $.post("codephp/update_perfil.php", $datosperfil, function(response){
+                            $.post("codephp/update_perfil.php", _datosperfil, function(response){
 
                                 if(response.trim() == 'OK'){
                                     $.redirect('?page=seg_perfiladmin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito..!'}); 
@@ -645,14 +645,14 @@
                                 }
 
                                 /**PARA CREAR REGISTRO DE LOGS */
-                                $parametros = {
-                                    xxPaisid: _paisid,
-                                    xxEmprid: _emprid,
-                                    xxUsuaid: _usuaid,
-                                    xxDetalle: _detalle,
+                                var _parametros = {
+                                    "xxPaisid" : _paisid,
+                                    "xxEmprid" : _emprid,
+                                    "xxUsuaid" : _usuaid,
+                                    "xxDetalle" : _detalle,
                                 }					
 
-                                $.post("codephp/new_log.php", $parametros, function(response){
+                                $.post("codephp/new_log.php", _parametros, function(response){
                                     //console.log(response);
                                 });
                                 
@@ -663,20 +663,20 @@
                         }
                     });
                 }else{
-                    $datosperfil = {
-                        xxPaisid: _paisid,
-                        xxEmprid: _emprid,
-                        xxPerfilid: _idperfil,
-                        xxPerfil: _perfil,
-                        xxDetalle1: _detalle1,
-                        xxDetalle2: _detalle2,
-                        xxDetalle3: _detalle3,
-                        xxDetalle4: _detalle4,
-                        xxDetalle5: _detalle5,
-                        xxObservacion: _observacion
+                    var _datosperfil = {
+                        "xxPaisid" : _paisid,
+                        "xxEmprid" : _emprid,
+                        "xxPerfilid" : _idperfil,
+                        "xxPerfil" : _perfil,
+                        "xxDetalle1" : _detalle1,
+                        "xxDetalle2" : _detalle2,
+                        "xxDetalle3" : _detalle3,
+                        "xxDetalle4" : _detalle4,
+                        "xxDetalle5" : _detalle5,
+                        "xxObservacion" : _observacion
                     }
 
-                    $.post("codephp/update_perfil.php", $datosperfil, function(response){
+                    $.post("codephp/update_perfil.php", _datosperfil, function(response){
 
                         if(response.trim() == 'OK'){
                             $.redirect('?page=seg_perfiladmin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito..!'}); 
@@ -686,14 +686,14 @@
                         }
 
                         /**PARA CREAR REGISTRO DE LOGS */
-                        $parametros = {
-                            xxPaisid: _paisid,
-                            xxEmprid: _emprid,
-                            xxUsuaid: _usuaid,
-                            xxDetalle: _detalle,
+                        var _parametros = {
+                            "xxPaisid" : _paisid,
+                            "xxEmprid" : _emprid,
+                            "xxUsuaid" : _usuaid,
+                            "xxDetalle" : _detalle,
                         }					
 
-                        $.post("codephp/new_log.php", $parametros, function(response){
+                        $.post("codephp/new_log.php", _parametros, function(response){
                             //console.log(response);
                         });
                         

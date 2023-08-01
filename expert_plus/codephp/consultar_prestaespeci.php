@@ -27,7 +27,7 @@
             $xCosto = $_POST['xxCosto'];
 
             $xSQL = "SELECT * FROM `expert_prestadora_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pres_id=$xPresid AND espe_id=$xEspeid ";
-            $all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
+            $all_datos = mysqli_query($con, $xSQL);
             $xRow = mysqli_num_rows($all_datos); 
             
             if($xRow == 0){

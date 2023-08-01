@@ -689,10 +689,10 @@
             $("#cboCiudad").empty();
 
             var _parametros = {
-                xxPaisId: _paisid,
-                xxEmprId: _emprid,
-                xxComboId: _cboid,
-                xxOpcion: 0
+                "xxPaisId" : _paisid,
+                "xxEmprId" : _emprid,
+                "xxComboId" : _cboid,
+                "xxOpcion" : 0
             }
 
             var _respuesta = $.post("codephp/cargar_combos.php", _parametros);
@@ -802,18 +802,18 @@
 
         var _parametros = {
             
-            xxClieid: _clieid,
-            xxGrupid: _cbogrupo,
-            xxPaisid: _paisid,
-            xxEmprid: _emprid,
-            xxProducto: _producto,
-            xxDesc: _descripcion,
-            xxCosto: _costo,
-            xxAsisMes: _asistemes,
-            xxAsisAnu: _asistanu,
-            xxCober: _cobertura,
-            xxSist: _sistema,
-            xxGeren: _gerencial
+            "xxClieid" : _clieid,
+            "xxGrupid" : _cbogrupo,
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxProducto" : _producto,
+            "xxDesc" : _descripcion,
+            "xxCosto" : _costo,
+            "xxAsisMes" : _asistemes,
+            "xxAsisAnu" : _asistanu,
+            "xxCober" : _cobertura,
+            "xxSist" : _sistema,
+            "xxGeren" : _gerencial
         }
 
         var xrespuesta = $.post("codephp/consuin_produtosedit.php", _parametros);
@@ -891,11 +891,11 @@
 
         var _parametros = {
 
-            xxPaisId: _paisid,
-            xxEmprId: _emprid,
-            xxUsuaId: _usuaid,
-            xxGrupo: _nombreGrupo,
-            xxDesc: _descGrupo
+            "xxPaisId" : _paisid,
+            "xxEmprId" : _emprid,
+            "xxUsuaId" : _usuaid,
+            "xxGrupo" : _nombreGrupo,
+            "xxDesc" : _descGrupo
         }
 
         var xrespuesta = $.post("codephp/consultar_grupo.php", _parametros);
@@ -959,11 +959,11 @@
             _changetd.innerHTML = '<div class="' + _class + '">'+_estado+'</div>';
 
             _parametros = {
-                xxProid: _prodid,
-                xxEmprid: _emprid,
-                xxPaisid: _paisid,
-                xxUsuaid: _usuaid,
-                xxEstado: _estado
+                "xxProid" : _prodid,
+                "xxEmprid" : _emprid,
+                "xxPaisid" : _paisid,
+                "xxUsuaid" : _usuaid,
+                "xxEstado" : _estado
             } 
 
         var xrespuesta = $.post("codephp/update_estadoproducto.php", _parametros);
@@ -1119,20 +1119,20 @@
         }
 
         var _parametros = {
-            xxProdid: _prodid,
-            xxGrupid: _cbogrupoedit,
-            xxPaisid: _paisid,
-            xxEmprid: _emprid,
-            xxUsuaid: _usuaid,
-            xxProdedit: _prodedit,
-            xxProdant: _producto,
-            xxDescr: _descredit,
-            xxCostoedit: _costoedit,
-            xxAsisMesedit: _asismesedit,
-            xxAsisAnuedit: _asisanuedit,
-            xxCobertura: _cobedit,
-            xxSistema: _sistedit,
-            xxGerencial: _gerenedit
+            "xxProdid" : _prodid,
+            "xxGrupid" : _cbogrupoedit,
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxUsuaid" : _usuaid,
+            "xxProdedit" : _prodedit,
+            "xxProdant" : _producto,
+            "xxDescr" : _descredit,
+            "xxCostoedit" : _costoedit,
+            "xxAsisMesedit" : _asismesedit,
+            "xxAsisAnuedit" : _asisanuedit,
+            "xxCobertura" : _cobedit,
+            "xxSistema" : _sistedit,
+            "xxGerencial" : _gerenedit
         
         }
 

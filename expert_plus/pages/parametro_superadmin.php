@@ -344,13 +344,13 @@
 
         if(_agregarDet == 'add'){
                 
-                $datosDet ={
-					xxDetalle: _detalle,
-                    xxValorV: _valorV,
-                    xxValorI: _valorI
+                var _datosDet ={
+					"xxDetalle" : _detalle,
+                    "xxValorV" : _valorV,
+                    "xxValorI" : _valorI
                 }
 
-                    var xrespuesta = $.post("codephp/consultar_supdetalle.php", $datosDet);
+                    var xrespuesta = $.post("codephp/consultar_supdetalle.php", _datosDet);
                         xrespuesta.done(function(response){
 
                             if(response == 0){
@@ -454,32 +454,27 @@
         return;
       }
 
-
-        $datosParam ={
-            xxParametro: _parametro
+        var _datosParam = {
+            "xxParametro" : _parametro
         }
 
-
-        var xrespuesta = $.post("codephp/consultar_superparametro.php", $datosParam);
+        var xrespuesta = $.post("codephp/consultar_superparametro.php", _datosParam);
         xrespuesta.done(function(response){
             if(response == 0){
                         
-                //debugger;
-
-                $parametros ={
-                    xxUsuaId: _idusua,
-                    xxParametro: _parametro,
-                    xxResultado: _result,
-                    xxEstado: _estado,
-                    xxDescripcion: _descripcion
-                
+                var _parametros = {
+                    "xxUsuaId" : _idusua,
+                    "xxParametro" : _parametro,
+                    "xxResultado" : _result,
+                    "xxEstado" : _estado,
+                    "xxDescripcion" : _descripcion                
                 }
 
                 $.ajax({
                     url: "codephp/grabar_superparametro.php",
                     type: "POST",
                     dataType: "json",
-                    data: $parametros,          
+                    data: _parametros,          
                     success: function(response){ 
                         if(response != 0){
 
@@ -582,12 +577,12 @@
             var cambiar = document.getElementById(_td);
               cambiar.innerHTML = '<td><div class="' + _class + '">' + _estado + ' </div>';
 
-            $parametros = {
-				xxPacaid: _pacaid,
-				xxEstado: _estado
+            var _parametros = {
+				"xxPacaid" : _pacaid,
+				"xxEstado" : _estado
 			}
 
-            var xrespuesta = $.post("codephp/delnew_superparametro.php", $parametros);
+            var xrespuesta = $.post("codephp/delnew_superparametro.php", _parametros);
 			xrespuesta.done(function(response){
 			});	     
 

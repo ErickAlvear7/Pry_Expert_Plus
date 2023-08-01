@@ -220,139 +220,139 @@
             </div>
         </div>
 
-            <script>
+        <script>
 
-                $(document).ready(function(){
+            $(document).ready(function(){
 
-                    $(document).on("click",".chkTarea",function(){
-                        //let _id = $(this).closest('tr').attr('id');  OBTENER EL ID DEL TR
-                        let _rowid = $(this).attr("id");         
-                        let _id = _rowid.substring(3);
-                        let _div = "div_" + _id;              
-                        let _check = $("#chk" + _id).is(":checked");
-                        if(_check){
-                            $("#"+_div).addClass("badge badge-light-primary");
-                        }else{
-                            $("#"+_div).removeClass("badge badge-light-primary");
-                        }                        
-                        //_tarea = $(this).closest("tr").find('td:eq(2)').text();     
-                    });
-                    
-                    var optionFormat = function(item) {
-                        if ( !item.id ) {
-                            return item.text;
-                        }
-    
-                        var span = document.createElement('span');
-                        var imgUrl = item.element.getAttribute('data-kt-select2-country');
-                        var template = '';
-    
-                        if(item.id != 0){
-    
-                            template += '<img src="' + imgUrl + '" class="rounded-circle h-20px me-2" alt="image"/>';
-                        }
-    
-                        template += item.text;
-    
-                        span.innerHTML = template;			
-    
-                        return $(span);
-                    }
-    
-                    $('#cboPais').select2({
-                        templateSelection: optionFormat,
-                        templateResult: optionFormat
-                    });                      
-                    
-                }); 
-
-                function f_Guardar(_emprid, _usuaid){
-                    
-                    var _paisid = "<?php echo $xPaisid; ?> ";
-                    var _perfil = $.trim($("#txtPerfil").val());
-                    var _observacion = $.trim($("#txtDescripcion").val());
-                    var _savepaisid = $("#cboPais").val();
-                    var _estado = "A";
-                    var _result=[];
-
-                    if(_savepaisid == 0){
-                        mensajesweetalert("center","warning","Seleccione Pais..!",false,1800);  
-                        return;
-                    }
-                    
-                    if(_perfil == '')
-                    {       
-                        mensajesweetalert("center","warning","Ingrese Nombre del Perfil..!",false,1800);  
-                        return;
+                $(document).on("click",".chkTarea",function(){
+                    //let _id = $(this).closest('tr').attr('id');  OBTENER EL ID DEL TR
+                    let _rowid = $(this).attr("id");         
+                    let _id = _rowid.substring(3);
+                    let _div = "div_" + _id;              
+                    let _check = $("#chk" + _id).is(":checked");
+                    if(_check){
+                        $("#"+_div).addClass("badge badge-light-primary");
+                    }else{
+                        $("#"+_div).removeClass("badge badge-light-primary");
+                    }                        
+                    //_tarea = $(this).closest("tr").find('td:eq(2)').text();     
+                });
+                
+                var optionFormat = function(item) {
+                    if ( !item.id ) {
+                        return item.text;
                     }
 
-                    var _contar = 0;
+                    var span = document.createElement('span');
+                    var imgUrl = item.element.getAttribute('data-kt-select2-country');
+                    var template = '';
 
-                    var grid = document.getElementById("kt_ecommerce_report_shipping_table");
-                    var checkBoxes = grid.getElementsByTagName("input");
-                    for (var i = 0; i < checkBoxes.length; i++) {
-                        if (checkBoxes[i].checked) {
-                            //var row = checkBoxes[i].parentNode.parentNode;
-                            _result.push(checkBoxes[i].value);
-                            _contar++
-                        }
+                    if(item.id != 0){
+
+                        template += '<img src="' + imgUrl + '" class="rounded-circle h-20px me-2" alt="image"/>';
                     }
 
-                    if(_contar == 0){                        
-                        mensajesweetalert("center","warning","Seleccione al menos una opcion Opciones/Perfil",false,1800);
-                        return;
-                    }
+                    template += item.text;
 
-                    $parametros = {
-                        xxPaisid: _savepaisid,
-                        xxPerfil: _perfil,
-                        xxEmprid: _emprid
-                    }      
-                    
-                    var xrespuesta = $.post("codephp/consultar_perfil.php", $parametros);
-                    xrespuesta.done(function(response) {
-                        //console.log(response);
-                        if(response == 0){
+                    span.innerHTML = template;			
 
-                            $datosperfil = {
-                                xxPaisid: _savepaisid,
-                                xxPerfil: _perfil,
-                                xxEmprid: _emprid,
-                                xxUsuaid: _usuaid,
-                                xxObservacion: _observacion,
-                                xxEstado: _estado,
-                                xxResult: _result
-                            }
-                            
-                            $.post("codephp/grabar_perfil.php", $datosperfil, function(response){
-
-                               if(response.trim() == 'OK'){
-                                   $.redirect('?page=supperfil&menuid=0', {'mensaje': 'Guardado con Exito..!'}); 
-                                   _detalle = 'Nuevo perfil creado desde super admin';
-                               }else{
-                                   _detalle = 'Error al grabar perfil desde super admin ';
-                               }
-                               
-                               /**PARA CREAR REGISTRO DE LOGS */
-                                $parametros = {
-                                    xxPaisid: _paisid,
-                                    xxEmprid: _emprid,
-                                    xxUsuaid: _usuaid,
-                                    xxDetalle: _detalle,
-                                }					
-    
-                                $.post("codephp/new_log.php", $parametros, function(response){
-                                    //console.log(response);
-                                });                                
-                                
-                            });
-                            
-                        }else{
-                            mensajesweetalert("center","warning","Nombre del Perfil ya Existe..!",false,1800);
-                        }
-
-                    });
+                    return $(span);
                 }
 
+                $('#cboPais').select2({
+                    templateSelection: optionFormat,
+                    templateResult: optionFormat
+                });                      
+                
+            }); 
 
-            </script> 
+            function f_Guardar(_emprid, _usuaid){
+                
+                var _paisid = "<?php echo $xPaisid; ?> ";
+                var _perfil = $.trim($("#txtPerfil").val());
+                var _observacion = $.trim($("#txtDescripcion").val());
+                var _savepaisid = $("#cboPais").val();
+                var _estado = "A";
+                var _result=[];
+
+                if(_savepaisid == 0){
+                    mensajesweetalert("center","warning","Seleccione Pais..!",false,1800);  
+                    return;
+                }
+                
+                if(_perfil == '')
+                {       
+                    mensajesweetalert("center","warning","Ingrese Nombre del Perfil..!",false,1800);  
+                    return;
+                }
+
+                var _contar = 0;
+
+                var grid = document.getElementById("kt_ecommerce_report_shipping_table");
+                var checkBoxes = grid.getElementsByTagName("input");
+                for (var i = 0; i < checkBoxes.length; i++) {
+                    if (checkBoxes[i].checked) {
+                        //var row = checkBoxes[i].parentNode.parentNode;
+                        _result.push(checkBoxes[i].value);
+                        _contar++
+                    }
+                }
+
+                if(_contar == 0){                        
+                    mensajesweetalert("center","warning","Seleccione al menos una opcion Opciones/Perfil",false,1800);
+                    return;
+                }
+
+                var _parametros = {
+                    "xxPaisid" : _savepaisid,
+                    "xxPerfil" : _perfil,
+                    "xxEmprid" : _emprid
+                }      
+                
+                var xrespuesta = $.post("codephp/consultar_perfil.php", _parametros);
+                xrespuesta.done(function(response) {
+                    //console.log(response);
+                    if(response == 0){
+
+                        var _datosperfil = {
+                            "xxPaisid" : _savepaisid,
+                            "xxPerfil" : _perfil,
+                            "xxEmprid" : _emprid,
+                            "xxUsuaid" : _usuaid,
+                            "xxObservacion" : _observacion,
+                            "xxEstado" : _estado,
+                            "xxResult" : _result
+                        }
+                        
+                        $.post("codephp/grabar_perfil.php", _datosperfil, function(response){
+
+                            if(response.trim() == 'OK'){
+                                $.redirect('?page=supperfil&menuid=0', {'mensaje': 'Guardado con Exito..!'}); 
+                                _detalle = 'Nuevo perfil creado desde super admin';
+                            }else{
+                                _detalle = 'Error al grabar perfil desde super admin ';
+                            }
+                            
+                            /**PARA CREAR REGISTRO DE LOGS */
+                            var _parametros = {
+                                "xxPaisid" : _paisid,
+                                "xxEmprid" : _emprid,
+                                "xxUsuaid" : _usuaid,
+                                "xxDetalle" : _detalle,
+                            }					
+
+                            $.post("codephp/new_log.php", _parametros, function(response){
+                                //console.log(response);
+                            });                                
+                            
+                        });
+                        
+                    }else{
+                        mensajesweetalert("center","warning","Nombre del Perfil ya Existe..!",false,1800);
+                    }
+
+                });
+            }
+
+
+        </script> 

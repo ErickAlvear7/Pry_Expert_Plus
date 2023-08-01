@@ -199,142 +199,140 @@
             </div>
         </div>
                 
+        <script>
 
+            $(document).ready(function(){
 
-            <script>
+                $(document).on("click",".chkTarea",function(){
+                    //let _id = $(this).closest('tr').attr('id');  OBTENER EL ID DEL TR
+                    let _rowid = $(this).attr("id");         
+                    let _id = _rowid.substring(3);
+                    let _div = "div_" + _id;              
+                    let _check = $("#chk" + _id).is(":checked");
+                    if(_check){
+                        $("#"+_div).addClass("badge badge-light-primary");
+                    }else{
+                        $("#"+_div).removeClass("badge badge-light-primary");
+                    }                        
+                    //_tarea = $(this).closest("tr").find('td:eq(2)').text();                         
+                });
+            }); 
 
-                $(document).ready(function(){
+            function f_Guardar(_paisid, _emprid, _usuaid){
+                _perfil = $.trim($("#txtPerfil").val());
+                _observacion = $.trim($("#txtDescripcion").val());
+                _estado = "A";
+                _result=[];
 
-                    $(document).on("click",".chkTarea",function(){
-                        //let _id = $(this).closest('tr').attr('id');  OBTENER EL ID DEL TR
-                        let _rowid = $(this).attr("id");         
-                        let _id = _rowid.substring(3);
-                        let _div = "div_" + _id;              
-                        let _check = $("#chk" + _id).is(":checked");
-                        if(_check){
-                            $("#"+_div).addClass("badge badge-light-primary");
-                        }else{
-                            $("#"+_div).removeClass("badge badge-light-primary");
-                        }                        
-                        //_tarea = $(this).closest("tr").find('td:eq(2)').text();                         
-                    });
-                }); 
-
-                function f_Guardar(_paisid, _emprid, _usuaid){
-                    _perfil = $.trim($("#txtPerfil").val());
-                    _observacion = $.trim($("#txtDescripcion").val());
-                    _estado = "A";
-                    _result=[];
-
-                    if(_perfil == '')
-                    {       
-                        mensajesweetalert("center","warning","Ingrese Nombre del Perfil..!",false,1800);  
-                        return;
-                    }
-
-                    var _contar = 0;
-
-                    /*$("input[type=checkbox]:checked").map(function(){
-                        if($(this).val() == 'on'){
-                            _result[i] = $(this).val();
-                            i++;
-                        }
-                    });*/
-
-                    /*var tbl = document.getElementById('kt_ecommerce_report_shipping_table');
-                    var rCount = tbl.rows.length;
-                    var cCount = 1;
-                    var allArray = [];
-                    for (var i = 1; i <rCount; i++){
-                        var rowArray = [];
-                        for (var j = 0; j <cCount; j++){                            
-                            rowArray.push(tbl.rows[i].cells[j].children[0].value);
-                        }
-                        allArray.push(rowArray);
-                    }
-                    console.log(allArray);    */             
-
-                    var grid = document.getElementById("kt_ecommerce_report_shipping_table");
-                    var checkBoxes = grid.getElementsByTagName("input");
-                    for (var i = 0; i < checkBoxes.length; i++) {
-                        if (checkBoxes[i].checked) {
-                            //var row = checkBoxes[i].parentNode.parentNode;
-                            _result.push(checkBoxes[i].value);
-                            _contar++
-                        }
-                    }
-
-                    if(_contar == 0){                        
-                        mensajesweetalert("center","warning","Seleccione al menos un opción Menu/Tarea",false,1800);
-                        return;
-                    }
-
-                    $parametros = {
-                        xxPaisid: _paisid,
-                        xxPerfil: _perfil,
-                        xxEmprid: _emprid
-                    }      
-                    
-                    var xrespuesta = $.post("codephp/consultar_perfil.php", $parametros);
-                    xrespuesta.done(function(response) {
-                        //console.log(response);
-                        if(response == 0){
-
-                            $datosperfil = {
-                                xxPaisid: _paisid,
-                                xxPerfil: _perfil,
-                                xxEmprid: _emprid,
-                                xxUsuaid: _usuaid,
-                                xxObservacion: _observacion,
-                                xxEstado: _estado,
-                                xxResult: _result
-                            }
-
-                            $.post("codephp/grabar_perfil.php", $datosperfil, function(response){
-
-                                if(response.trim() == 'OK'){
-                                    $.redirect('?page=seg_perfiladmin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Guardado con Exito..!'}); 
-                                    _detalle = 'Nuevo perfil creado';
-                                }else{
-                                    _detalle = 'Error al grabar perfil';
-                                }
-
-                                /**PARA CREAR REGISTRO DE LOGS */
-                                $parametros = {
-                                    xxPaisid: _paisid,
-                                    xxEmprid: _emprid,
-                                    xxUsuaid: _usuaid,
-                                    xxDetalle: _detalle,
-                                }					
-
-                                $.post("codephp/new_log.php", $parametros, function(response){
-                                    //console.log(response);
-                                });                                
-                                
-                            });                            
-
-                            // $.ajax({
-                            //     url: "codephp/grabar_perfil.php",
-                            //     type: "POST",
-                            //     dataType: "json",
-                            //     data: $datosperfil,          
-                            //     success: function(data){ 
-                            //         console.log(data);
-                            //         if(data == 'OK'){
-                            //             $.redirect('?page=seg_perfiladmin', {'mensaje': 'Guardado con Exito..!'}); 
-                            //         }                                                                         
-                            //     },
-                            //     error: function (error){
-                            //         console.log(error);
-                            //     }                            
-                            // }); 
-
-                        }else{
-                            mensajesweetalert("center","warning","Nombre del Perfil ya Existe..!",false,1800);
-                        }
-
-                    });
+                if(_perfil == '')
+                {       
+                    mensajesweetalert("center","warning","Ingrese Nombre del Perfil..!",false,1800);  
+                    return;
                 }
 
+                var _contar = 0;
 
-            </script> 
+                /*$("input[type=checkbox]:checked").map(function(){
+                    if($(this).val() == 'on'){
+                        _result[i] = $(this).val();
+                        i++;
+                    }
+                });*/
+
+                /*var tbl = document.getElementById('kt_ecommerce_report_shipping_table');
+                var rCount = tbl.rows.length;
+                var cCount = 1;
+                var allArray = [];
+                for (var i = 1; i <rCount; i++){
+                    var rowArray = [];
+                    for (var j = 0; j <cCount; j++){                            
+                        rowArray.push(tbl.rows[i].cells[j].children[0].value);
+                    }
+                    allArray.push(rowArray);
+                }
+                console.log(allArray);    */             
+
+                var grid = document.getElementById("kt_ecommerce_report_shipping_table");
+                var checkBoxes = grid.getElementsByTagName("input");
+                for (var i = 0; i < checkBoxes.length; i++) {
+                    if (checkBoxes[i].checked) {
+                        //var row = checkBoxes[i].parentNode.parentNode;
+                        _result.push(checkBoxes[i].value);
+                        _contar++
+                    }
+                }
+
+                if(_contar == 0){                        
+                    mensajesweetalert("center","warning","Seleccione al menos un opción Menu/Tarea",false,1800);
+                    return;
+                }
+
+                var _parametros = {
+                    "xxPaisid" : _paisid,
+                    "xxPerfil" : _perfil,
+                    "xxEmprid" : _emprid
+                }      
+                
+                var xrespuesta = $.post("codephp/consultar_perfil.php", _parametros);
+                xrespuesta.done(function(response) {
+                    //console.log(response);
+                    if(response == 0){
+
+                        var _datosperfil = {
+                            "xxPaisid" : _paisid,
+                            "xxPerfil" : _perfil,
+                            "xxEmprid" : _emprid,
+                            "xxUsuaid" : _usuaid,
+                            "xxObservacion" : _observacion,
+                            "xxEstado" : _estado,
+                            "xxResult" : _result
+                        }
+
+                        $.post("codephp/grabar_perfil.php", _datosperfil, function(response){
+
+                            if(response.trim() == 'OK'){
+                                $.redirect('?page=seg_perfiladmin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Guardado con Exito..!'}); 
+                                _detalle = 'Nuevo perfil creado';
+                            }else{
+                                _detalle = 'Error al grabar perfil';
+                            }
+
+                            /**PARA CREAR REGISTRO DE LOGS */
+                            var _parametros = {
+                                "xxPaisid" : _paisid,
+                                "xxEmprid" : _emprid,
+                                "xxUsuaid" : _usuaid,
+                                "xxDetalle" : _detalle,
+                            }					
+
+                            $.post("codephp/new_log.php", _parametros, function(response){
+                                //console.log(response);
+                            });                                
+                            
+                        });                            
+
+                        // $.ajax({
+                        //     url: "codephp/grabar_perfil.php",
+                        //     type: "POST",
+                        //     dataType: "json",
+                        //     data: $datosperfil,          
+                        //     success: function(data){ 
+                        //         console.log(data);
+                        //         if(data == 'OK'){
+                        //             $.redirect('?page=seg_perfiladmin', {'mensaje': 'Guardado con Exito..!'}); 
+                        //         }                                                                         
+                        //     },
+                        //     error: function (error){
+                        //         console.log(error);
+                        //     }                            
+                        // }); 
+
+                    }else{
+                        mensajesweetalert("center","warning","Nombre del Perfil ya Existe..!",false,1800);
+                    }
+
+                });
+            }
+
+
+        </script> 

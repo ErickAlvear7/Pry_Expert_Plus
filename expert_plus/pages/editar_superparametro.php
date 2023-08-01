@@ -335,76 +335,71 @@
             _valorI = $.trim($('#txtValorI').val());
         }
 
-                 $datosDetalle ={
-                    xxDetalle: _detalle,
-                    xxValorV: _valorV,
-                    xxValorI: _valorI
+        var _datosDetalle ={
+            "xxDetalle" : _detalle,
+            "xxValorV" : _valorV,
+            "xxValorI" : _valorI
+        }
+
+        var xrespuesta = $.post("codephp/consultar_supdetalle.php", _datosDetalle);
+        xrespuesta.done(function(response){
+            if(response == 0){
+
+                var _parametros = {
+                    "xxPacaId" : _pacaid,
+                    "xxDetalle" : _detalle,
+                    "xxValorV" : _valorV,
+                    "xxValorI" : _valorI,
+                    "xxEstado" : _estado,
+                    "xxOrden" : _ordendet
                 }
 
-                var xrespuesta = $.post("codephp/consultar_supdetalle.php", $datosDetalle);
-                xrespuesta.done(function(response){
-                    if(response == 0){
+                $.ajax({
+                    url: "codephp/grabar_superdetalle.php",
+                    type: "POST",
+                    dataType: "json",
+                    data: _parametros,          
+                    success: function(response){ 
+                        if(response != 0){
+                            _padeid = response;
+                            _padenom = _detalle;
+                            _padev = _valorV;
+                            _padei = _valorI;
+                            _checked = "checked='checked'";
 
-                       // debugger;
+                            var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                                            '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '"' +
+                                            '</div></td>';
+                            
+                            var _btnGrup = '<td><div class="text-center"><div class="btn-group">' +
+                                            '<button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
+                                            '<i class="fa fa-edit"></i></button></div></div></td>';
+                            
 
-                        $parametros ={
-                            xxPacaId: _pacaid,
-                            xxDetalle: _detalle,
-                            xxValorV: _valorV,
-                            xxValorI: _valorI,
-                            xxEstado: _estado,
-                            xxOrden: _ordendet
-                         
-                        }
+                            TableData = $('#kt_ecommerce_report_shipping_table').DataTable();  
+                            TableData.column(0).visible(0);
 
-                        $.ajax({
-							url: "codephp/grabar_superdetalle.php",
-							type: "POST",
-							dataType: "json",
-							data: $parametros,          
-							success: function(response){ 
-								if(response != 0){
+                            TableData.row.add([_padeid, _padenom, _padev, _padei, _btnChk,_btnGrup]).draw();
 
-								           
-                                    _padeid = response;
-                                    _padenom = _detalle;
-                                    _padev = _valorV;
-                                    _padei = _valorI;
-                                    _checked = "checked='checked'";
+                            $("#txtDetalle").val("");
+                            $("#txtValorV").val("");
+                            $("#txtValorI").val("");
 
-                                    var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                                   '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '"' +
-                                                   '</div></td>';
-                                    
-                                    var _btnGrup = '<td><div class="text-center"><div class="btn-group">' +
-                                                   '<button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
-                                                   '<i class="fa fa-edit"></i></button></div></div></td>';
-                                    
+                            $.redirect('?page=editsuperparametro&menuid=<?php echo $menuid; ?>', {idparam: <?php echo $idpaca; ?>}); //POR METODO POST
 
-                                    TableData = $('#kt_ecommerce_report_shipping_table').DataTable();  
-                                    TableData.column(0).visible(0);
-
-                                    TableData.row.add([_padeid, _padenom, _padev, _padei, _btnChk,_btnGrup]).draw();
-
-                                    $("#txtDetalle").val("");
-                                    $("#txtValorV").val("");
-                                    $("#txtValorI").val("");
-
-                                    $.redirect('?page=editsuperparametro&menuid=<?php echo $menuid; ?>', {idparam: <?php echo $idpaca; ?>}); //POR METODO POST
-
-								}                                                                         
-							},
-							error: function (error){
-								console.log(error);
-							}                            
-						});
-
-                    }else{
-
-                        mensajesweetalert("center","warning","Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!",false,1800);
-                    }
-
+                        }                                                                         
+                    },
+                    error: function (error){
+                        console.log(error);
+                    }                            
                 });
+
+            }else{
+
+                mensajesweetalert("center","warning","Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!",false,1800);
+            }
+
+        });
         
     });
 
@@ -420,49 +415,45 @@
         var _data = $('#kt_ecommerce_report_shipping_table').dataTable().fnGetData(_fila);
          _idpade = _data[0];
 
-                $parametros = {
-					xxPadeid: _idpade,
-					xxPacaid: _idpaca
-				}
+        var _parametros = {
+            "xxPadeid" : _idpade,
+            "xxPacaid" : _idpaca
+        }
 
-                $.ajax({
-					url: "codephp/editar_supdetalles.php",
-					type: "POST",
-					dataType: "json",
-					data: $parametros,          
-					success: function(data){ 
-
-                     
-                     //console.log(data);
-                        var _nombre = data[0]['Nombre'];
-                        var _valorv = data[0]['ValorT'];
-                        var _valori = data[0]['ValorI'];
+        $.ajax({
+            url: "codephp/editar_supdetalles.php",
+            type: "POST",
+            dataType: "json",
+            data: _parametros,          
+            success: function(data){ 
+                
+                var _nombre = data[0]['Nombre'];
+                var _valorv = data[0]['ValorT'];
+                var _valori = data[0]['ValorI'];
 
 
-                        $("#txtDetalleEdit").val(_nombre);
-                        $("#txtValorVedit").val(_valorv);
-                        $("#txtValorIedit").val(_valori);
+                $("#txtDetalleEdit").val(_nombre);
+                $("#txtValorVedit").val(_valorv);
+                $("#txtValorIedit").val(_valori);
 
-                        $("#txtDetalleold").val(_nombre);
-                        $("#txtValortexto").val(_valorv);
-                        $("#txtValorentero").val(_valori);
+                $("#txtDetalleold").val(_nombre);
+                $("#txtValortexto").val(_valorv);
+                $("#txtValorentero").val(_valori);
+                                                    
+                if(_valorv == ''){
+                    $("#txtValorVedit").prop("disabled",true);   
+                }
+                if(_valori == ''){
+                    $("#txtValorIedit").prop("disabled",true);   
+                }
 
-                   
-						                                   
-                        if(_valorv == ''){
-                            $("#txtValorVedit").prop("disabled",true);   
-                        }
-                        if(_valori == ''){
-                            $("#txtValorIedit").prop("disabled",true);   
-                        }
+            },
+            error: function (error){
+                console.log(error);
+            }                            
+        }); 
 
-					},
-					error: function (error){
-						console.log(error);
-					}                            
-				}); 
-
-              $("#modal_detalle").modal("show");
+        $("#modal_detalle").modal("show");
 
     });
 
@@ -528,29 +519,29 @@
             return false;
         }
 
-        $datosDetalle ={
-            xxDetalle: _nombre,
-            xxValorV: _valorV,
-            xxValorI: _valorI,
-            xxDetalleold: _nombreold,
-            xxValorVold: _valovold,
-            xxValorIold: _valoriold               
+        var _datosDetalle = {
+            "xxDetalle" : _nombre,
+            "xxValorV" : _valorV,
+            "xxValorI" : _valorI,
+            "xxDetalleold" : _nombreold,
+            "xxValorVold" : _valovold,
+            "xxValorIold" : _valoriold               
         }
 
         if(_consultar == 'SI'){
-            var xrespuesta = $.post("codephp/consultar_supdetalledit.php", $datosDetalle);
+            var xrespuesta = $.post("codephp/consultar_supdetalledit.php", _datosDetalle);
             xrespuesta.done(function(response){
                 if(response.trim() == 0){
 
-                    $parametros ={
-                        xxPacaId: _pacaid,
-                        xxPadeId: _padeid,
-                        xxDetalle: _nombre,
-                        xxValorV: _valorV,
-                        xxValorI: _valorI                    
+                    var _parametros ={
+                        "xxPacaId" : _pacaid,
+                        "xxPadeId" : _padeid,
+                        "xxDetalle" : _nombre,
+                        "xxValorV" : _valorV,
+                        "xxValorI" : _valorI                    
                     }
                     
-                    var xresponse = $.post("codephp/update_supdetalle.php", $parametros);
+                    var xresponse = $.post("codephp/update_supdetalle.php", _parametros);
                     xresponse.done(function(response){    
 
                         if(response.trim() == 'OK'){
@@ -589,15 +580,15 @@
 
             });
         }else{
-            $parametros ={
-                xxPacaId: _pacaid,
-                xxPadeId: _padeid,
-                xxDetalle: _nombre,
-                xxValorV: _valorV,
-                xxValorI: _valorI,
+            var _parametros ={
+                "xxPacaId" : _pacaid,
+                "xxPadeId" : _padeid,
+                "xxDetalle" : _nombre,
+                "xxValorV" : _valorV,
+                "xxValorI" : _valorI,
             }
             
-            var xresponse = $.post("codephp/update_supdetalle.php", $parametros);
+            var xresponse = $.post("codephp/update_supdetalle.php", _parametros);
             xresponse.done(function(response){    
 
                 if(response.trim() == 'OK'){
@@ -638,22 +629,22 @@
             return;
         }
 
-        $datosParam ={
-            xxParametro: _parametro
+        var _datosParam ={
+            "xxParametro" : _parametro
         }
         
         if(_parametroold != _parametro){
-            var xrespuesta = $.post("codephp/consultar_superparametro.php", $datosParam);
+            var xrespuesta = $.post("codephp/consultar_superparametro.php", _datosParam);
             xrespuesta.done(function(response){
                 if(response.trim() == 0){
 
-                    $parametros ={
-                        xxPacaId: _idpaca,
-                        xxParametro: _parametro,
-                        xxDescripcion: _descripcion 
+                    var _parametros = {
+                        "xxPacaId" : _idpaca,
+                        "xxParametro" : _parametro,
+                        "xxDescripcion" : _descripcion 
                     }
                     
-                    var xresponse = $.post("codephp/update_superparametro.php", $parametros);
+                    var xresponse = $.post("codephp/update_superparametro.php", _parametros);
                     xresponse.done(function(response){            
 
                         if(response.trim() == 'OK'){
@@ -667,14 +658,13 @@
 
             });
         }else{
-            $parametros ={
-                xxPacaId: _idpaca,
-                xxParametro: _parametro,
-                xxDescripcion: _descripcion
-                
+            var _parametros ={
+                "xxPacaId" : _idpaca,
+                "xxParametro" : _parametro,
+                "xxDescripcion" : _descripcion
             }
             
-            var xresponse = $.post("codephp/update_superparametro.php", $parametros);
+            var xresponse = $.post("codephp/update_superparametro.php", _parametros);
             xresponse.done(function(response){            
 
                 if(response.trim() == 'OK'){
@@ -705,28 +695,21 @@
             $('#'+_btnedit).prop("disabled",true);
         }
 
+        var _parametros = {
+            "xxPadeid" : _padeid,
+            "xxEstado" : _estado
+        }
 
-            $parametros = {
-                xxPadeid: _padeid,
-                xxEstado: _estado
-            }
-
-            var xrespuesta = $.post("codephp/delnew_supdetalle.php", $parametros);
-            xrespuesta.done(function(response){
-            });	     
+        var xrespuesta = $.post("codephp/delnew_supdetalle.php", _parametros);
+        xrespuesta.done(function(response){
+        });	     
 
     }
 
-      //Desplazar-modal
+    //Desplazar-modal
 
    $("#modal_detalle").draggable({
         handle: ".modal-header"
     });
-    
- 
-
-  
-
-
 
 </script> 	

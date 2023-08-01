@@ -372,15 +372,15 @@
 						_ulr = "codephp/new_tarea.php";
 					}
 
-					$datosTarea = {
-						xxEmprid: _emprid,
-						xxUsuaid: _usuaid,
-						xxTareaId: _idtarea,
-						xxTarea: _tarea,
-						xxPagina: _pagina,
-						xxRuta: _ruta,
-						xxTitulo: _titulo,
-						xxDescripcion: _descripcion  
+					var _datosTarea = {
+						"xxEmprid" : _emprid,
+						"xxUsuaid" : _usuaid,
+						"xxTareaId" : _idtarea,
+						"xxTarea" : _tarea,
+						"xxPagina" : _pagina,
+						"xxRuta" : _ruta,
+						"xxTitulo" : _titulo,
+						"xxDescripcion" : _descripcion  
 					}	
 
 					if(_buscar == 'SI'){
@@ -388,7 +388,7 @@
 						xrespuesta.done(function(response){							
 							if(response == 0){
 
-								$.post(_ulr, $datosTarea , function(data){
+								$.post(_ulr, _datosTarea , function(data){
 
 									var _tareaid = data;
 
@@ -426,14 +426,14 @@
 									}
 
 									/**PARA CREAR REGISTRO DE LOGS */
-									$parametros = {
-										xxPaisid: _paisid,
-										xxEmprid: _emprid,
-										xxUsuaid: _usuaid,
-										xxDetalle: _detalle,
+									var _parametros = {
+										"xxPaisid" : _paisid,
+										"xxEmprid" : _emprid,
+										"xxUsuaid" : _usuaid,
+										"xxDetalle" : _detalle,
 									}					
 
-									$.post("codephp/new_log.php", $parametros, function(response){
+									$.post("codephp/new_log.php", _parametros, function(response){
 									});
 
 									if(_respuesta == 'OK'){
@@ -470,14 +470,14 @@
 
 
 							/**PARA CREAR REGISTRO DE LOGS */
-							$parametros = {
-								xxPaisid: _paisid,
-								xxEmprid: _emprid,
-								xxUsuaid: _usuaid,
-								xxDetalle: _detalle,
+							var _parametros = {
+								"xxPaisid" : _paisid,
+								"xxEmprid" : _emprid,
+								"xxUsuaid" : _usuaid,
+								"xxDetalle" : _detalle,
 							}					
 
-							$.post("codephp/new_log.php", $parametros, function(response){
+							$.post("codephp/new_log.php", _parametros, function(response){
 							});
 
 							if(_respuesta == 'OK'){
@@ -541,13 +541,13 @@
 
 				// TableData.row(_fila).data([_tareaid, _tarea, _ruta, _lblEstado, _btnchk, _btnedit]).draw();			
 
-				$parametros = {
-					xxEmprid: _emprid,
-					xxTareaId: _tareaid,
-					xxEstado: _estado
+				var _parametros = {
+					"xxEmprid" : _emprid,
+					"xxTareaId" : _tareaid,
+					"xxEstado" : _estado
 				}
 
-				$.post("codephp/update_estado_tarea.php", $parametros , function(data){
+				$.post("codephp/update_estado_tarea.php", _parametros , function(data){
 
 				});
 			}			

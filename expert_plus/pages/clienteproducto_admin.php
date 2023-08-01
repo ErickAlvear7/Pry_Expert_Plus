@@ -207,11 +207,11 @@
             _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
 
             var _parametros = {
-                xxClieid: _clieid,
-                xxEmprid: _emprid,
-                xxPaisid: _paisid,
-                xxUsuaid: _usuaid,
-                xxEstado: _estado
+                "xxClieid" : _clieid,
+                "xxEmprid" : _emprid,
+                "xxPaisid" : _paisid,
+                "xxUsuaid" : _usuaid,
+                "xxEstado" : _estado
             } 
             
         var xrespuesta = $.post("codephp/update_estadocliente.php", _parametros);

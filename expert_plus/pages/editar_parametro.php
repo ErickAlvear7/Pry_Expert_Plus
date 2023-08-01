@@ -336,31 +336,31 @@
             _valorI = $.trim($('#txtValorI').val());
         }
 
-                 $datosDetalle ={
-                    xxPaisId: _paisid,
-                    xxDetalle: _detalle,
-                    xxValorV: _valorV,
-                    xxValorI: _valorI
+                 var _datosDetalle ={
+                    "xxPaisId" : _paisid,
+                    "xxDetalle" : _detalle,
+                    "xxValorV" : _valorV,
+                    "xxValorI" : _valorI
                 }
 
-                var xrespuesta = $.post("codephp/consultar_detalle.php", $datosDetalle);
+                var xrespuesta = $.post("codephp/consultar_detalle.php", _datosDetalle);
                 xrespuesta.done(function(response){
                     if(response == 0){
 
-                        $parametros ={
-                            xxPacaId: _pacaid,
-                            xxDetalle: _detalle,
-                            xxValorV: _valorV,
-                            xxValorI: _valorI,
-                            xxEstado: _estado,
-                            xxOrden: _ordendet                         
+                        var _parametros ={
+                            "xxPacaId" : _pacaid,
+                            "xxDetalle" : _detalle,
+                            "xxValorV" : _valorV,
+                            "xxValorI" : _valorI,
+                            "xxEstado" : _estado,
+                            "xxOrden" : _ordendet                         
                         }
 
                         $.ajax({
 							url: "codephp/grabar_detalle.php",
 							type: "POST",
 							dataType: "json",
-							data: $parametros,          
+							data: _parametros,          
 							success: function(response){ 
 								if(response != 0){
                                     _padeid = response;
@@ -416,16 +416,16 @@
         var _data = $('#kt_ecommerce_report_shipping_table').dataTable().fnGetData(_fila);
          _idpade = _data[0];
 
-                $parametros = {
-					xxPadeid: _idpade,
-					xxPacaid: _idpaca
+                var _parametros = {
+					"xxPadeid" : _idpade,
+					"xxPacaid" : _idpaca
 				}
 
                 $.ajax({
 					url: "codephp/editar_detalles.php",
 					type: "POST",
 					dataType: "json",
-					data: $parametros,          
+					data: _parametros,          
 					success: function(data){ 
 
                      //console.log(data);
@@ -521,30 +521,30 @@
             return false;
         }
 
-        $datosDetalle ={
-            xxPaisId: _paisid,
-            xxDetalle: _nombre,
-            xxValorV: _valorV,
-            xxValorI: _valorI,
-            xxDetalleold: _nombreold,
-            xxValorVold: _valovold,
-            xxValorIold: _valoriold               
+        var _datosDetalle ={
+            "xxPaisId" : _paisid,
+            "xxDetalle" : _nombre,
+            "xxValorV" : _valorV,
+            "xxValorI" : _valorI,
+            "xxDetalleold" : _nombreold,
+            "xxValorVold" : _valovold,
+            "xxValorIold" : _valoriold               
         }
 
         if(_consultar == 'SI'){
-            var xrespuesta = $.post("codephp/consultar_detalledit.php", $datosDetalle);
+            var xrespuesta = $.post("codephp/consultar_detalledit.php", _datosDetallee);
             xrespuesta.done(function(response){
                 if(response.trim() == 0){
 
-                    $parametros ={
-                        xxPacaId: _pacaid,
-                        xxPadeId: _padeid,
-                        xxDetalle: _nombre,
-                        xxValorV: _valorV,
-                        xxValorI: _valorI                    
+                    var _parametros ={
+                        "xxPacaId" : _pacaid,
+                        "xxPadeId" : _padeid,
+                        "xxDetalle" : _nombre,
+                        "xxValorV" : _valorV,
+                        "xxValorI" : _valorI                    
                     }
                     
-                    var xresponse = $.post("codephp/update_detalle.php", $parametros);
+                    var xresponse = $.post("codephp/update_detalle.php", _parametros);
                     xresponse.done(function(response){    
 
                         if(response.trim() == 'OK'){
@@ -582,7 +582,7 @@
 
             });
         }else{
-            $parametros ={
+            var _parametros = {
                 xxPacaId: _pacaid,
                 xxPadeId: _padeid,
                 xxDetalle: _nombre,
@@ -590,7 +590,7 @@
                 xxValorI: _valorI,
             }
             
-            var xresponse = $.post("codephp/update_detalle.php", $parametros);
+            var xresponse = $.post("codephp/update_detalle.php", _parametros);
             xresponse.done(function(response){    
 
                 if(response.trim() == 'OK'){
@@ -631,26 +631,26 @@
             return;
         }
 
-        parametros ={
-            xxPaisId: _idpais,
-            xxEmprId: _idempr,
-            xxParametro: _parametro
+        var _parametros = {
+            "xxPaisId" : _idpais,
+            "xxEmprId" : _idempr,
+            "xxParametro" : _parametro
         }
         
         if(_parametroold != _parametro){
-            var xrespuesta = $.post("codephp/consultar_parametro.php", parametros);
+            var xrespuesta = $.post("codephp/consultar_parametro.php", _parametros);
             xrespuesta.done(function(response){
                 if(response.trim() == '0'){
 
-                    parametros ={
-                        xxPacaId: _idpaca,
-                        xxEmprId: _idempr,
-                        xxPaisId: _idpais,
-                        xxParametro: _parametro,
-                        xxDescripcion: _descripcion 
+                    _parametros = {
+                        "xxPacaId" : _idpaca,
+                        "xxEmprId" : _idempr,
+                        "xxPaisId" : _idpais,
+                        "xxParametro" : _parametro,
+                        "xxDescripcion" : _descripcion 
                     }
                     
-                    var xresponse = $.post("codephp/update_parametro.php", parametros);
+                    var xresponse = $.post("codephp/update_parametro.php", _parametros);
                     xresponse.done(function(response){            
                         if(response.trim() == 'OK'){
                             $.redirect('?page=param_generales&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito'}); //POR METODO POST            
@@ -662,15 +662,15 @@
                 }
             });
         }else{
-            parametros ={
-                xxPacaId: _idpaca,
-                xxEmprId: _idempr,
-                xxPaisId: _idpais,
-                xxParametro: _parametro,
-                xxDescripcion: _descripcion                
+            _parametros ={
+                "xxPacaId" : _idpaca,
+                "xxEmprId" : _idempr,
+                "xxPaisId" : _idpais,
+                "xxParametro" : _parametro,
+                "xxDescripcion" : _descripcion                
             }
             
-            var xresponse = $.post("codephp/update_parametro.php", parametros);
+            var xresponse = $.post("codephp/update_parametro.php", _parametros);
             xresponse.done(function(response){            
 
                 if(response.trim() == 'OK'){
@@ -700,12 +700,12 @@
             $('#'+_btnedit).prop("disabled",true);
         }
 
-        parametros = {
-            xxPadeid: _padeid,
-            xxEstado: _estado
+        var _parametros = {
+            "xxPadeid" : _padeid,
+            "xxEstado" : _estado
         }
 
-        var xrespuesta = $.post("codephp/delnew_detalle.php", parametros);
+        var xrespuesta = $.post("codephp/delnew_detalle.php", _parametros);
         xrespuesta.done(function(response){
         });	
     }

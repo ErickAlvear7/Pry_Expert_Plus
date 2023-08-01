@@ -582,9 +582,9 @@
                     //_paisname = _data[3];
                     _addmod = 'mod';                     
 
-                    _parametros = {
-                        xxEmprid: _emprid,
-                        xxIdUsuario: _idusu
+                    var _parametros = {
+                        "xxEmprid" : _emprid,
+                        "xxIdUsuario" : _idusu
                     }
 
                     $.ajax({
@@ -787,11 +787,11 @@
                                         }
 
                                         /**PARA CREAR REGISTRO DE LOGS */
-                                        _parametros = {
-                                            xxPaisid: _savepaisid,
-                                            xxEmprid: _emprid,
-                                            xxUsuaid: _usuaid,
-                                            xxDetalle: _detalle,
+                                        var _parametros = {
+                                            "xxPaisid" : _savepaisid,
+                                            "xxEmprid" : _emprid,
+                                            "xxUsuaid" : _usuaid,
+                                            "xxDetalle" : _detalle,
                                         }					
             
                                         $.post("codephp/new_log.php", _parametros, function(response){
@@ -845,11 +845,11 @@
                                 }
 
                                 // /**PARA CREAR REGISTRO DE LOGS */
-                                _parametros = {
-                                    xxPaisid: _savepaisid,
-                                    xxEmprid: _emprid,
-                                    xxUsuaid: _usuaid,
-                                    xxDetalle: _detalle,
+                                var _parametros = {
+                                    "xxPaisid" : _savepaisid,
+                                    "xxEmprid" : _emprid,
+                                    "xxUsuaid" : _usuaid,
+                                    "xxDetalle" : _detalle,
                                 }					
 
                                 $.post("codephp/new_log.php", _parametros, function(response){
@@ -921,10 +921,10 @@
                 var _changetd = document.getElementById(_td);
                 _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
 
-                _parametros = {
-                    xxUsuaid: _userid,
-                    xxEmprid: _emprid,
-                    xxEstado: _estado
+                var _parametros = {
+                    "xxUsuaid" : _userid,
+                    "xxEmprid" : _emprid,
+                    "xxEstado" : _estado
                 }	
     
                 var xrespuesta = $.post("codephp/delnew_usuario.php", _parametros);
@@ -940,9 +940,9 @@
             //resetaer password
             function f_ResetPass(_usuaid, _emprid){
 
-                _parametros={
-                    xxUsuaid: _usuaid,
-                    xxEmprid: _emprid
+                var _parametros={
+                    "xxUsuaid" : _usuaid,
+                    "xxEmprid" : _emprid
                 }
 
                 $.post("codephp/reset_password.php", _parametros, function(response){

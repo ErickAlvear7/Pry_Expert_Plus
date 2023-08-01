@@ -465,10 +465,10 @@
 
 
             var _parametros = {
-                xxPaisId: _paisid,
-                xxEmprId: _emprid,
-                xxComboId: _cboid,
-                xxOpcion: 0
+                "xxPaisId" : _paisid,
+                "xxEmprId" : _emprid,
+                "xxComboId" : _cboid,
+                "xxOpcion" : 0
             }
 
             var xrespuesta = $.post("codephp/cargar_combos.php", _parametros);
@@ -589,8 +589,8 @@
         if(_agregarPro == 'add'){
                 
             var _parametros = {
-                xxEmprid: _emprid,
-                xxProducto: _producto
+                "xxEmprid" : _emprid,
+                "xxProducto" : _producto
             }
 
             var xrespuesta = $.post("codephp/consultar_producto.php", _parametros);
@@ -831,11 +831,10 @@
         }
         
 
-        var _parametros = {
-            
-            xxPaisId: _idpais,
-            xxEmprId: _idempr,
-            xxCliente: _cliente
+        var _parametros = {            
+            "xxPaisId" : _idpais,
+            "xxEmprId" : _idempr,
+            "xxCliente" : _cliente
         }
 
         var xrespuesta = $.post("codephp/consultar_cliente.php", _parametros);
@@ -950,12 +949,11 @@
 
 
         var _parametros = {
-
-            xxPaisId: _paisid,
-            xxEmprId: _emprid,
-            xxUsuaId: _usuaid,
-            xxGrupo: _nombreGrupo,
-            xxDesc: _descGrupo
+            "xxPaisId" : _paisid,
+            "xxEmprId" : _emprid,
+            "xxUsuaId" : _usuaid,
+            "xxGrupo" : _nombreGrupo,
+            "xxDesc" : _descGrupo
         }
 
         var xrespuesta = $.post("codephp/consultar_grupo.php", _parametros);

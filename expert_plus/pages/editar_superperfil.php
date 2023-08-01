@@ -149,8 +149,8 @@
                                 <div class="row fv-row mb-7">
                                     <div class="col-md-3 text-md-end">
                                         <label class="fs-6 fw-bold form-label mt-3">
-                                            <span>Descripción</span>
-                                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripción del Perfil"></i>
+                                            <span>Descripcion</span>
+                                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ingrese Descripcion del Perfil"></i>
                                         </label>
                                     </div>
                                     <div class="col-md-6">
@@ -207,7 +207,7 @@
                                     <thead>
                                         <tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
                                                 <th>Seleccionar</th>
-                                                <th>Menú</th>                                    
+                                                <th>Menu</th>                                    
                                                 <th>Tarea</th>
                                         </tr>
                                     </thead>
@@ -325,15 +325,15 @@
                         _tipo = "Del";
                     }
 
-                    $parametros = {
-                        xxPaisid: _idpais,
-                        xxIdPerfil: _idperfil,
-                        xxIdMeta: _idmeta,
-                        xxEmprid: _emprid,
-                        xxTipo: _tipo                    
+                    var _parametros = {
+                        "xxPaisid" : _idpais,
+                        "xxIdPerfil" : _idperfil,
+                        "xxIdMeta" : _idmeta,
+                        "xxEmprid" : _emprid,
+                        "xxTipo" : _tipo                    
                     }
 
-                    var xrespuesta = $.post("codephp/delnew_superperfil.php", $parametros);
+                    var xrespuesta = $.post("codephp/delnew_superperfil.php", _parametros);
                     xrespuesta.done(function(response){
                         //console.log(response);
                     });
@@ -360,26 +360,26 @@
 
                     if(_perfil != _nameoldperfil || _paisidold != _savepaisid){
 
-                        $parametros = {
-                            xxPaisid: _savepaisid,
-                            xxPerfil: _perfil,
-                            xxEmprid: _emprid
+                        var _parametros = {
+                            "xxPaisid" : _savepaisid,
+                            "xxPerfil" : _perfil,
+                            "xxEmprid" : _emprid
                         }      
                     
-                        var xrespuesta = $.post("codephp/consultar_perfil.php", $parametros);
+                        var xrespuesta = $.post("codephp/consultar_perfil.php", _parametros);
                         xrespuesta.done(function(response){
                             
                             if(response == 0){
                                 
-                                $datosperfil = {
-                                    xxPaisid: _savepaisid,
-                                    xxPerfil: _perfil,
-                                    xxEmprid: _emprid,
-                                    xxIdPerfil: _idperfil,
-                                    xxObservacion: _observacion
+                                var _datosperfil = {
+                                    "xxPaisid" : _savepaisid,
+                                    "xxPerfil" : _perfil,
+                                    "xxEmprid" : _emprid,
+                                    "xxIdPerfil" : _idperfil,
+                                    "xxObservacion" : _observacion
                                 }
                                 
-                                $.post("codephp/update_superperfil.php", $datosperfil, function(response){
+                                $.post("codephp/update_superperfil.php", _datosperfil, function(response){
                                     
                                     if(response.trim() == 'OK'){
                                        _detalle = 'Perfil actualizado desde super admin';
@@ -390,19 +390,18 @@
                                     }
                                    
                                    /**PARA CREAR REGISTRO DE LOGS */
-                                    $parametros = {
-                                        xxPaisid: _paisid,
-                                        xxEmprid: _emprid,
-                                        xxUsuaid: _usuaid,
-                                        xxDetalle: _detalle,
+                                    var _parametros = {
+                                        "xxPaisid" : _paisid,
+                                        "xxEmprid" : _emprid,
+                                        "xxUsuaid" : _usuaid,
+                                        "xxDetalle" : _detalle,
                                     }					
         
-                                    $.post("codephp/new_log.php", $parametros, function(response){
+                                    $.post("codephp/new_log.php", _parametros, function(response){
                                         //console.log(response);
                                     });
 
                                     $.redirect('?page=supperfil&menuid=0', {'mensaje': _mensaje}); 
-
                                     
                                 });                                 
                                 
@@ -413,15 +412,15 @@
                             }
                         });
                     }else{
-                        $datosperfil = {
-                            xxPaisid: _savepaisid,
-                            xxPerfil: _perfil,
-                            xxEmprid: _emprid,
-                            xxIdPerfil: _idperfil,
-                            xxObservacion: _observacion
+                        var _datosperfil = {
+                            "xxPaisid" : _savepaisid,
+                            "xxPerfil" : _perfil,
+                            "xxEmprid" : _emprid,
+                            "xxIdPerfil" : _idperfil,
+                            "xxObservacion" : _observacion
                         }
                         
-                        $.post("codephp/update_superperfil.php", $datosperfil, function(response){
+                        $.post("codephp/update_superperfil.php", _datosperfil, function(response){
                             
                             if(response.trim() == 'OK'){
                                 _mensaje = 'Actualizado Con Exito';
@@ -432,14 +431,14 @@
                             }
                            
                            /**PARA CREAR REGISTRO DE LOGS */
-                            $parametros = {
-                                xxPaisid: _paisid,
-                                xxEmprid: _emprid,
-                                xxUsuaid: _usuaid,
-                                xxDetalle: _detalle,
+                            var _parametros = {
+                                "xxPaisid" : _paisid,
+                                "xxEmprid" : _emprid,
+                                "xxUsuaid" : _usuaid,
+                                "xxDetalle" : _detalle,
                             }					
 
-                            $.post("codephp/new_log.php", $parametros, function(response){
+                            $.post("codephp/new_log.php", _parametros, function(response){
                                 //console.log(response);
                             });
 

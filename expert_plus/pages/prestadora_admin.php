@@ -236,11 +236,11 @@
             _changetd.innerHTML = '<div class="d-flex align-items-center"><div class="ms-5"><div class="' + _class + '">' + _estado + ' </div></div>';
 
             _parametros = {
-                xxPaisid: _paisid,
-                xxEmprId: _emprid,
-                xxUsuaid: _usuaid,
-                xxPresid: _presid,
-                xxEstado: _estado
+                "xxPaisid" : _paisid,
+                "xxEmprId" : _emprid,
+                "xxUsuaid" : _usuaid,
+                "xxPresid" : _presid,
+                "xxEstado" : _estado
             }	
 
             var xrespuesta = $.post("codephp/update_estadoprestador.php", _parametros);
