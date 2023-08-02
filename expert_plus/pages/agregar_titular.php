@@ -3,16 +3,11 @@
     //error_reporting(E_ALL);
     ini_set('display_errors', 0);
 
-    //file_put_contents('log_seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
-
     putenv("TZ=America/Guayaquil");
     date_default_timezone_set('America/Guayaquil');	  
 
     $xFechaActual = strftime('%Y-%m-%d', time());
     $xFechaFinCobertura = date("Y-m-d",strtotime ( "+1 year" , strtotime ( $xFechaActual)));
-
-
-   
 
     require_once("dbcon/config.php");
     require_once("dbcon/functions.php");
@@ -494,7 +489,6 @@
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Provincia</label>
-                                        <!-- <select id="cboProvinciaBe" class="form-select mb-2"  data-control="select2" data-hide-search="true" data-placeholder="Seleccione Provincia"> -->
                                         <select  id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2" >
                                                 <option></option>
                                                 <?php foreach ($all_provincia as $prov) : ?>
@@ -504,7 +498,6 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="form-label">Ciudad</label>
-                                        <!-- <select id="cboCiudadBe" class="form-select mb-2"  data-control="select2" data-hide-search="true" data-placeholder="Seleccione Ciudad"> -->
                                         <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2">
                                                 <option></option>
                                         </select> 
@@ -931,7 +924,6 @@
 
             if(response == 0){
 
-                //debugger
                 var form_data = new FormData();
                 form_data.append('xxUsuaid', _userid);
                 form_data.append('xxProdid', _prodid);
