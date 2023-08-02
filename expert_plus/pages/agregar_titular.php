@@ -180,7 +180,7 @@
                     <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">Titular</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tab_beneficiarios">Beneficiarios</a>
+                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tab_beneficiarios">Beneficiario</a>
                 </li>
                 <div class="d-flex justify-content-end">
                     <button type="button" id="btnRegresar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Regresar'>
@@ -826,14 +826,7 @@
 
             }
 
-
-
         });
-
-
-        //alert('hola');
-
-        //console.log(_txtCiudadBe);
 
     });
 
@@ -974,7 +967,7 @@
                         if(dataid != 0){
 
                             if(_result.length > 0){
-                                var xrespuesta = $.post("codephp/grabar_beneficiario.php", { xxPaisid: _idpais, xxEmprid: _idempr,xxUsuaid: _iduser,xxClieid: dataid, xxResult: _result });
+                                var xrespuesta = $.post("codephp/grabar_beneficiariotitular.php", { xxTituid: dataid, xxUsuaid: _userid,xxResult: _result });
                                     xrespuesta.done(function(response){
                                             
                                     if(response == 'OK'){
