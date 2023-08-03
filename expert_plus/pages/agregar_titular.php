@@ -554,7 +554,7 @@
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <h2>Beneficiarios Agregados</h2>
+                                    <h2>Beneficiario</h2>
                                 </div>
                             </div>
                             <div class="card-body pt-0">
@@ -587,7 +587,7 @@
 </div>
 <script>
     
-    var _prodid = '<?php echo $prodid; ?>', _grupid = '<?php echo $grupid; ?>', _userid = '<?php echo $xUsuaid; ?>',
+    var _count =0,_prodid = '<?php echo $prodid; ?>', _grupid = '<?php echo $grupid; ?>', _userid = '<?php echo $xUsuaid; ?>',
         _idclie = '<?php echo $clieid; ?>',_paisid = '<?php echo $xPaisid; ?>',_emprid = '<?php echo $xEmprid; ?>',_result = [];
 
 
@@ -673,7 +673,6 @@
     $('#btnAgregar').click(function(){
 
         var _continuar = true;
-        var _count =0;
         var _cboDocumentoBe = $('#cboDocumentoBe').val();
         var _txtDocumentoBe = $('#txtDocumentoBe').val();
         var _txtNombreBe = $.trim($("#txtNombreBe").val());
@@ -815,8 +814,34 @@
 
     });
 
+    //Eliminar Beneficiario en linea
 
-        //Agregar Persona - Titular 
+    $(document).on("click",".btnDelete",function(){
+        var row_id = $(this).attr("id");
+        var _nombres = $('#txtNombres' + row_id + '').val();
+
+        FunRemoveItemFromArr(_result, _nombres);
+        $('#row_' + row_id + '').remove();
+        _count--;
+        _result.length = 0;
+
+    });
+
+    function FunRemoveItemFromArr(arr, deta)
+    {
+        $.each(arr,function(i,item){
+            if(item.arrynombre == deta)
+            {
+                arr.splice(i, 1);
+                return false;
+            }else{
+                continuar = true;
+            }
+        });        
+    };
+
+
+    //Agregar Persona - Titular 
 
     $('#btnGrabar').click(function(){
 
