@@ -342,9 +342,7 @@
 
                                                         $xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND prov_id=$xProvid ";
                                                         $all_ciudad = mysqli_query($con, $xSQL);    
-                                                        foreach ($all_ciudad as $ciu){
-                                                            $xCiudad = $prov['ciudad'];
-                                                        }
+                                            
                                                     }
                                                         
                                                 ?>
@@ -365,7 +363,6 @@
                                                 <?php
                                                      foreach ($all_ciudad as $ciu){
                                                         $xCiudad = trim(mb_strtoupper($ciu['ciudad']));
-                                                        // $xCiudad = $ciu['ciudad'];
                                                    ?>     
                                                 <td>
                                                   
