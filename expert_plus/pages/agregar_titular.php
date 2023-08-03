@@ -595,63 +595,63 @@
     
         $('#cboProvincia').change(function(){
                     
-                    var _paisid = "<?php echo $xPaisid; ?>";
-                    var _emprid = "<?php echo $xEmprid; ?>";                
-                    _cboid = $(this).val(); //obtener el id seleccionado
-                    
-                    $("#cboCiudad").empty();
-         
-                    var _parametros = {
-                        xxPaisId: _paisid,
-                        xxEmprId: _emprid,
-                        xxComboId: _cboid,
-                        xxOpcion: 0
-                    }
-        
-                    var xrespuesta = $.post("codephp/cargar_combos.php", _parametros);
-                        xrespuesta.done(function(response) {
-                    
-                        $("#cboCiudad").html(response);
-                        
-                    });
-                    xrespuesta.fail(function() {
-                        
-                    });
-                    xrespuesta.always(function() {
-                        
-                    });                
+            var _paisid = "<?php echo $xPaisid; ?>";
+            var _emprid = "<?php echo $xEmprid; ?>";                
+            _cboid = $(this).val(); //obtener el id seleccionado
+            
+            $("#cboCiudad").empty();
+    
+            var _parametros = {
+                xxPaisId: _paisid,
+                xxEmprId: _emprid,
+                xxComboId: _cboid,
+                xxOpcion: 0
+            }
+
+            var xrespuesta = $.post("codephp/cargar_combos.php", _parametros);
+                xrespuesta.done(function(response) {
+            
+                $("#cboCiudad").html(response);
+                
+            });
+            xrespuesta.fail(function() {
+                
+            });
+            xrespuesta.always(function() {
+                
+            });                
         
         });
 
         //Datos Provincia para  Beneficiario
         $('#cboProvinciaBe').change(function(){
                     
-                    var _paisid = "<?php echo $xPaisid; ?>";
-                    var _emprid = "<?php echo $xEmprid; ?>";                
-                    _cboid = $(this).val(); //obtener el id seleccionado
-                    
-                    $("#cboCiudadBe").empty();
-        
-        
-                    var _parametros = {
-                        xxPaisId: _paisid,
-                        xxEmprId: _emprid,
-                        xxComboId: _cboid,
-                        xxOpcion: 0
-                    }
-        
-                    var xrespuesta = $.post("codephp/cargar_combos.php", _parametros);
-                        xrespuesta.done(function(response) {
-                    
-                        $("#cboCiudadBe").html(response);
-                        
-                    });
-                    xrespuesta.fail(function() {
-                        
-                    });
-                    xrespuesta.always(function() {
-                        
-                    });                
+            var _paisid = "<?php echo $xPaisid; ?>";
+            var _emprid = "<?php echo $xEmprid; ?>";                
+            _cboid = $(this).val(); //obtener el id seleccionado
+            
+            $("#cboCiudadBe").empty();
+
+
+            var _parametros = {
+                xxPaisId: _paisid,
+                xxEmprId: _emprid,
+                xxComboId: _cboid,
+                xxOpcion: 0
+            }
+
+            var xrespuesta = $.post("codephp/cargar_combos.php", _parametros);
+                xrespuesta.done(function(response) {
+            
+                $("#cboCiudadBe").html(response);
+                
+            });
+            xrespuesta.fail(function() {
+                
+            });
+            xrespuesta.always(function() {
+                
+            });                
         
         });
 
