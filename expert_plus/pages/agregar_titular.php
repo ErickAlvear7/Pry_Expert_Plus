@@ -44,24 +44,9 @@
     $all_provincia = mysqli_query($con, $xSQL);
 
     $xSQL = "SELECT pst.pers_id AS PerId,CONCAT(pst.pers_nombres,' ',pst.pers_apellidos) AS Nombres,pst.pers_imagen AS  ";
-    $xSQL .="Imagen,CASE pst.pers_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado,pst.pers_ciudad AS CiudadId FROM expert_persona pst";
+    $xSQL .="Imagen,CASE pst.pers_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado,pst.pers_ciudad AS CiudadId FROM `expert_persona` pst, `expert_titular` tit ";
+    $xSQL .="WHERE tit.pais_id = $xPaisid AND tit.empr_id=$xEmprid AND pst.pers_id=tit.pers_id AND tit.prod_id=$prodid AND tit.grup_id=$grupid ORDER BY pst.pers_nombres ";
     $all_persona = mysqli_query($con, $xSQL);
-
-    foreach ($all_persona as $per){
-
-        $xProvid = $per['CiudadId'];
-      
-    }    
-
-    if(  $xProvid != 0){
-
-        $xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND prov_id=$xProvid ";
-        $all_ciudad = mysqli_query($con, $xSQL);    
-        foreach ($all_ciudad as $ciu){
-            $xCiudad = $prov['ciudad'];
-        }
-    }
- 
 
 
 ?>
@@ -344,28 +329,38 @@
                                             </tr>
                                         </thead>
                                         <tbody class="fw-bold text-gray-600">
-                                            <?php 
-                                                     foreach ($all_persona as $per){
+                                                <?php 
+                                                    foreach ($all_persona as $per){
 
-                                                        $xPerid = $per['PerId'];
-                                                        $xNombres = $per['Nombres'];
-                                                        $xImagen = $per['Imagen'];
-                                                        $xEstado = $per['Estado'];
+                                                    $xPerid = $per['PerId'];
+                                                    $xNombres = $per['Nombres'];
+                                                    $xImagen = $per['Imagen'];
+                                                    $xEstado = $per['Estado'];
+                                                    $xProvid = $per['CiudadId'];
+
+                                                    if(  $xProvid != 0){
+
+                                                        $xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND prov_id=$xProvid ";
+                                                        $all_ciudad = mysqli_query($con, $xSQL);    
+                                                        foreach ($all_ciudad as $ciu){
+                                                            $xCiudad = $prov['ciudad'];
+                                                        }
+                                                    }
                                                         
                                                 ?>
-                                                               <?php 
+                                                <?php 
 
-                                                        $xCheking = '';
-                                                        $xDisabledEdit = '';
+                                                    $xCheking = '';
+                                                    $xDisabledEdit = '';
 
-                                                        if($xEstado == 'Activo'){
-                                                            $xCheking = 'checked="checked"';
-                                                            $xTextColor = "badge badge-light-primary";
-                                                        }else{
-                                                            $xTextColor = "badge badge-light-danger";
-                                                            $xDisabledEdit = 'disabled';
-                                                        }
-                                                        ?> 
+                                                    if($xEstado == 'Activo'){
+                                                        $xCheking = 'checked="checked"';
+                                                        $xTextColor = "badge badge-light-primary";
+                                                    }else{
+                                                        $xTextColor = "badge badge-light-danger";
+                                                        $xDisabledEdit = 'disabled';
+                                                    }
+                                                ?> 
                                             <tr>
                                                 <?php
                                                      foreach ($all_ciudad as $ciu){
@@ -381,7 +376,7 @@
                                                 <td>
                                                     <div class="d-flex align-items-center" data-kt-ecommerce-edit-order-filter="product" data-kt-ecommerce-edit-order-id="product_1">
                                                         <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
-                                                            <span class="symbol-label" style="background-image:url(logos/<?php echo $xImagen; ?>);"></span>
+                                                            <span class="symbol-label" style="background-image:url(persona/<?php echo $xImagen; ?>);"></span>
                                                         </a>
                                                         <div class="ms-5">
                                                           <?php echo $xNombres; ?>
