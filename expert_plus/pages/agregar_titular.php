@@ -162,15 +162,13 @@
                 <li class="nav-item">
                     <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tab_beneficiarios">Beneficiario</a>
                 </li>
-                <div class="d-flex justify-content-end">
-                    <button type="button" id="btnRegresar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title='Regresar'>
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
-                            </svg>
-                        </span>
-                    </button>
-                </div> 
+                <button type="button" id="btnRegresar" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
+                    <span class="svg-icon svg-icon-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                </button>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
@@ -730,10 +728,47 @@
             return false;
         }
 
+        if(_txtTelCasaBe != '')
+        {
+            _valor = document.getElementById("txtTelCasaBe").value;
+            if( !(/^\d{9}$/.test(_valor)) ) {
+                mensajesalertify("Telefono casa incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }
+
+        if(_txtTelOfiBe != '')
+        {
+            _valor = document.getElementById("txtTelOfiBe").value;
+            if( !(/^\d{9}$/.test(_valor)) ) {
+                mensajesalertify("Telefono oficina incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }
+
+        if(_txtTelCelularBe != '')
+        {
+            _valor = document.getElementById("txtCelularBe").value;
+            if( !(/^\d{10}$/.test(_valor)) ) {
+                mensajesalertify("Celular incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }
+        
+        if(_txtEmailBe != ''){
+            var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+            if (regex.test(_txtEmailBe.trim())){
+            }else{
+                mensajesalertify("Email Incorrecto..!!","W","top-right",3);
+                return false;
+            }  
+        }
+
         if(_cboParentesco == ''){
             mensajesalertify("Seleccione Parentesco..!", "W", "top-right", 3);
             return; 
         }
+
 
         var _parametros = {
             xxDocumento: _txtDocumentoBe
@@ -910,7 +945,7 @@
         }
 
         if(_cboEstadoCivil == ''){
-            mensajesalertify("Seleccione Genero..!", "W", "top-right", 3);
+            mensajesalertify("Seleccione Estado Civil..!", "W", "top-right", 3);
             return; 
         }
 
@@ -924,9 +959,41 @@
             return false;
         }
 
-        if(_fechaFinCobertura == ''){
-            mensajesalertify("Seleccione Fecha fin de Cobertura..!", "W", "top-right", 3);
-            return; 
+        
+        if(_txtTelCasa != '')
+        {
+            _valor = document.getElementById("txtTelCasa").value;
+            if( !(/^\d{9}$/.test(_valor)) ) {
+                mensajesalertify("Telefono casa incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }
+
+        if(_txtTelOfi != '')
+        {
+            _valor = document.getElementById("txtTelOfi").value;
+            if( !(/^\d{9}$/.test(_valor)) ) {
+                mensajesalertify("Telefono oficina incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }
+
+        if(_txtTelCelular != '')
+        {
+            _valor = document.getElementById("txtCelular").value;
+            if( !(/^\d{10}$/.test(_valor)) ) {
+                mensajesalertify("Celular incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }
+        
+        if(_txtEmail != ''){
+            var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+            if (regex.test(_txtEmail.trim())){
+            }else{
+                mensajesalertify("Email Incorrecto..!!","W","top-right",3);
+                return false;
+            }  
         }
 
         var _parametros = {
