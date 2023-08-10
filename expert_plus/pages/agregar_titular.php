@@ -1079,6 +1079,8 @@
         });   
 
     });
+    
+     //Cambiar estado persona
 
     function f_UpdateEstado(_perid,_paisid,_emprid){
 
@@ -1117,8 +1119,6 @@
         var xrespuesta = $.post("codephp/delnew_persona.php", _parametros);
 			xrespuesta.done(function(response){
 		});	
-
-        //alert(_perid);
 
     }
 
