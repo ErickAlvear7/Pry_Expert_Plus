@@ -858,7 +858,6 @@
         
          $.each(_result,function(i,item){
 
-            //debugger;
             if(item.arrydocumento == _documento)
             {
                 _result.splice(i, 1);
@@ -867,7 +866,6 @@
                 continuar = true;
             }
 
-            console.log(_result);
         });      
 
     };
@@ -878,7 +876,6 @@
 
     $('#btnGrabar').click(function(){
 
-        //debugger;
         var _cboDocumento = $('#cboDocumento').val();
         var _txtDocumento = $('#txtDocumento').val();
         var _txtNombre = $.trim($("#txtNombre").val()); 
