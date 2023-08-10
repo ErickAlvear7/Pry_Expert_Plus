@@ -378,23 +378,23 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td id="td_">   
-                                                    <div class="">
+                                                <td id="td_<?php echo $xPerid; ?>">   
+                                                    <div class="<?php echo $xTextColor; ?>">
                                                        <?php echo $xEstado; ?>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                        <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk" value=""/>
+                                                        <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary" onchange="f_UpdateEstado(<?php echo $xPerid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" type="checkbox" id="chk<?php echo $xPerid; ?>" value=""/>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="text-center">
                                                         <div class="btn-group">	
-                                                            <button type="button" id="btnEditar_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular'>
+                                                            <button type="button" id="btnEditar_<?php echo $xPerid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular'>
                                                                 <i class="fa fa-edit"></i>
                                                             </button> 
-                                                            <button type="button" id="btnTitular" onclick="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar'>
+                                                            <button type="button" id="btnAgendar_<?php echo $xPerid; ?>" onclick="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar'>
                                                                 <i class="fa fa-user-plus"></i>
                                                             </button> 
                                                         </div>
@@ -795,13 +795,13 @@
                     _count = _count + 1;
                     _output = '<tr id="row_' + _count + '">';
                     _output += '<td>' + _txtCiudadBe + ' <input type="hidden" id="txtCiudad' + _count + '" value="' + _txtCiudadBe + '" /></td>';
-                    _output += '<td>' + _txtnombresCompletos + ' <input type="hidden" class="form-control mb-2 text-uppercase" id="txtNombres' + _count + '" value="' + _txtnombresCompletos + '" /></td>';
+                    _output += '<td>' + _txtnombresCompletos + ' <input type="hidden" class="form-control mb-2 text-uppercase" id="txtDocumentoBe' + _count + '" value="' + _txtDocumentoBe + '" /></td>';
                     _output += '<td>' + _txtParentesco + ' <input type="hidden" class="form-control mb-2 text-uppercase" id="txtParentesco' + _count + '" value="' + _txtParentesco + '" /></td>';
                     _output += '<td>';
-                    _output += '<button type="button" title="Eliminar Beneficiario" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></td>';
-                    _output += '</tr>';
+                    _output += '<button id="btnDelete' + _count + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"  onclick="f_DelBeneficiario('+"'";
+                    _output +=  _txtDocumentoBe + "'" + ',' + _count + ')"' + ' title="Eliminar Beneficiario" ><i class="fa fa-trash"></i></button></td>';
+                    _output += '</tr>'; 
 
-                    //console.log(_output);
 
                     $('#tblBeneficiario').append(_output);
 
@@ -851,30 +851,28 @@
 
     //Eliminar Beneficiario en linea
 
-    $(document).on("click",".btnDelete",function(){
-        var row_id = $(this).attr("id");
-        var _nombres = $('#txtNombres' + row_id + '').val();
+    function f_DelBeneficiario(_documento,_id){
 
-        FunRemoveItemFromArr(_result, _nombres);
-        $('#row_' + row_id + '').remove();
+        $('#row_' + _id + '').remove();
         _count--;
-        _result.length = 0;
+        
+         $.each(_result,function(i,item){
 
-    });
-
-    function FunRemoveItemFromArr(arr, deta)
-    {
-        $.each(arr,function(i,item){
-            if(item.arrynombre == deta)
+            //debugger;
+            if(item.arrydocumento == _documento)
             {
-                arr.splice(i, 1);
+                _result.splice(i, 1);
                 return false;
             }else{
                 continuar = true;
             }
-        });        
+
+            console.log(_result);
+        });      
+
     };
 
+ 
 
     //Agregar Persona - Titular 
 
@@ -1081,6 +1079,48 @@
         });   
 
     });
+
+    function f_UpdateEstado(_perid,_paisid,_emprid){
+
+        var _check = $("#chk" + _perid).is(":checked");
+        var _checked = "";
+		var _disabled = "";
+        var _class = "badge badge-light-primary";
+        var _td = "td_" + _perid;
+        var _btnedit = "btnEditar_" + _perid;
+        var _btnagen = "btnAgendar_" + _perid;
+
+        if(_check){
+            _estado = "Activo";
+            _disabled = "";
+            _checked = "checked='checked'";
+            $('#'+_btnedit).prop("disabled",false);
+            $('#'+_btnagen).prop("disabled",false);
+        }else{
+            _estado = "Inactivo";
+            _disabled = "disabled";
+            _class = "badge badge-light-danger";
+            $('#'+_btnedit).prop("disabled",true);
+            $('#'+_btnagen).prop("disabled",true);
+        }
+
+        var cambiar = document.getElementById(_td);
+            cambiar.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
+
+        var _parametros = {
+            "xxPerid" : _perid,
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxEstado" : _estado
+        }
+
+        var xrespuesta = $.post("codephp/delnew_persona.php", _parametros);
+			xrespuesta.done(function(response){
+		});	
+
+        //alert(_perid);
+
+    }
 
 
 

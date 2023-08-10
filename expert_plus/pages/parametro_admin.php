@@ -567,7 +567,7 @@
         }
 
             var cambiar = document.getElementById(_td);
-              cambiar.innerHTML = '<td><div class="' + _class + '">' + _estado + ' </div>';
+              cambiar.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
 
             var _parametros = {
 				"xxPacaid" : _pacaid,
