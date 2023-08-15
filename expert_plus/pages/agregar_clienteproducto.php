@@ -168,7 +168,7 @@
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="form-label">Descripcion</label>
-                                    <textarea class="form-control mb-2 text-uppercase" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                                    <textarea class="form-control mb-2 text-uppercase" name="txtDesc" id="txtDesc" rows="1" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
                                 </div>                                 
                             </div>
                         </div>
@@ -205,7 +205,7 @@
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
                                                     </div>
                                                     <div class="col-xl-10 fv-row">
-                                                        <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"></textarea>
+                                                        <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" rows="1" maxlength="250" onkeydown="return (event.keyCode!=13);"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-8">
@@ -323,7 +323,7 @@
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="form-label">Descripcion</label>
-                                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
                                 </div>
                                 <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                     <div class="col">

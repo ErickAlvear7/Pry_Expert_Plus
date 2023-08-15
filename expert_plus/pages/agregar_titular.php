@@ -78,43 +78,7 @@
             <div class="card card-flush py-4">
                 <div class="card-header">
                     <div class="card-title">
-                        <h2>Product Details</h2>
-                    </div>
-                </div>
-                <div class="card-body pt-0">
-                    <label class="form-label">Categories</label>
-                    <select class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" multiple="multiple">
-                        <option></option>
-                        <option value="Computers">Computers</option>
-                        <option value="Watches">Watches</option>
-                        <option value="Headphones">Headphones</option>
-                        <option value="Footwear">Footwear</option>
-                        <option value="Cameras">Cameras</option>
-                        <option value="Shirts">Shirts</option>
-                        <option value="Household">Household</option>
-                        <option value="Handbags">Handbags</option>
-                        <option value="Wines">Wines</option>
-                        <option value="Sandals">Sandals</option>
-                    </select>
-                    <div class="text-muted fs-7 mb-7">Add product to a category.</div>
-                    <a href="../../demo1/dist/apps/ecommerce/catalog/add-category.html" class="btn btn-light-primary btn-sm mb-10">
-                    <span class="svg-icon svg-icon-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                            <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                        </svg>
-                    </span>
-                    Create new category</a>
-                    <label class="form-label d-block">Tags</label>
-                    <input id="kt_ecommerce_add_product_tags" name="kt_ecommerce_add_product_tags" class="form-control mb-2" value="new, trending, sale" />
-                    <div class="text-muted fs-7">Add tags to a product.</div>
-                </div>
-            </div>
-            <br>
-            <div class="card card-flush py-4">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h2>Order Details</h2>
+                        <h3>Detalle Cliente</h3>
                     </div>
                 </div>
                 <div class="card-body pt-0">
@@ -123,34 +87,27 @@
                             <label class="form-label">Order ID</label>
                             <div class="fw-bolder fs-3">#13111</div>
                         </div>
+                      
                         <div class="fv-row">
-                            <label class="required form-label">Payment Method</label>
-                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" name="payment_method" id="kt_ecommerce_edit_order_payment">
-                                <option></option>
-                                <option value="cod">Cash on Delivery</option>
-                                <option value="visa">Credit Card (Visa)</option>
-                                <option value="mastercard">Credit Card (Mastercard)</option>
-                                <option value="paypal">Paypal</option>
-                            </select>
-                            <div class="text-muted fs-7">Set the date of the order to process.</div>
+                        
                         </div>
                         <div class="fv-row">
-                            <label class="required form-label">Shipping Method</label>
-                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" name="shipping_method" id="kt_ecommerce_edit_order_shipping">
-                                <option></option>
-                                <option value="none">N/A - Virtual Product</option>
-                                <option value="standard">Standard Rate</option>
-                                <option value="express">Express Rate</option>
-                                <option value="speed">Speed Overnight Rate</option>
-                            </select>
-                            <div class="text-muted fs-7">Set the date of the order to process.</div>
-                        </div>
-                        <div class="fv-row">
-                            <label class="required form-label">Order Date</label>
-                            <input id="kt_ecommerce_edit_order_date" name="order_date" placeholder="Select a date" class="form-control mb-2" value="" />
-                            <div class="text-muted fs-7">Set the date of the order to process.</div>
+                           
                         </div>
                     </div>
+                </div>
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3>Detalle Producto</h3>
+                    </div>
+                </div>
+                <div class="card-body pt-0">
+                   <div class="d-flex flex-column gap-10">
+                        <div class="fv-row">
+                            <label class="form-label">Pro ID</label>
+                            <div class="fw-bolder fs-3">#13111</div>
+                        </div>
+                   </div>
                 </div>
             </div>
         </div>
