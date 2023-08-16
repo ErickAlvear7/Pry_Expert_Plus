@@ -30,9 +30,8 @@
 
             foreach($xResult as $drfila){
 
-                $xProducto = safe($drfila['arryproducto']);
-                $xDescrip = safe($drfila['arrydescripcion']);
-                $xDesc = strtoupper($xDescrip);
+                $xProducto = trim(mb_strtoupper(safe($drfila['arryproducto'])));
+                $xDescrip = trim(mb_strtoupper(safe($drfila['arrydescripcion'])));
                 $xCosto = $drfila['arrycosto'];
                 $xGrupid = $drfila['arrygrupid'];
                 $xCober = $drfila['arrycober'];
