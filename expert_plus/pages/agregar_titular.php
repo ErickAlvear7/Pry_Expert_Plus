@@ -67,7 +67,7 @@
 
     foreach($Producto as $prod){
         $NomProd = $prod['Producto'];
-       
+        $Costo = $prod['Costo'];
     }
 
 
@@ -140,11 +140,20 @@
                             <div class="d-flex flex-column">
                                 <h5 class="text-gray-800 fw-bolder">Producto</h5>
                                 <div class="fw-bold">
-                                   <label><?php echo $NomProd; ?></label>
+                                  <label><?php echo $NomProd; ?></label>
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-person-fill text-primary fs-1 me-5"></i>
+                            <div class="d-flex flex-column">
+                                <h5 class="text-gray-800 fw-bolder">Costo</h5>
+                                <div class="fw-bold">
+                                   <label class="badge badge-light-success"><?php echo $Costo; ?></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
                 </div>
             </div>
         </div>
