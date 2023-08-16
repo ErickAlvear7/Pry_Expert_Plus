@@ -48,6 +48,31 @@
     $xSQL .="WHERE tit.pais_id = $xPaisid AND tit.empr_id=$xEmprid AND pst.pers_id=tit.pers_id AND tit.prod_id=$prodid AND tit.grup_id=$grupid ORDER BY pst.pers_nombres ";
     $all_persona = mysqli_query($con, $xSQL);
 
+    $xSQL ="SELECT clie_nombre AS Cliente,clie_email2 AS Email FROM `expert_cliente` WHERE clie_id=$clieid AND pais_id=$xPaisid AND empr_id=$xEmprid ";
+    $Cliente = mysqli_query($con, $xSQL);
+
+    foreach($Cliente as $clie){
+        $Nombre = $clie['Cliente'];
+        $Email = $clie['Email'];
+    }
+
+    if($Email == ''){
+        $Email = 'sinemail@gmail.com';
+    }
+
+    $xSQL ="SELECT prod_nombre AS Producto,prod_costo AS Costo,prod_asistmes AS AsisMes,prod_asistanu AS AsisAnu,prod_cobertura AS Cobertura, ";
+    $xSQL .="prod_sistema AS Sistema,prod_gerencial AS Gerencial,prod_estado AS Estado FROM `expert_productos` WHERE prod_id=$prodid AND clie_id=$clieid ";
+    $xSQL .="AND grup_id=$grupid AND pais_id=$xPaisid AND empr_id=$xEmprid ";
+    $Producto = mysqli_query($con, $xSQL);
+
+    foreach($Producto as $prod){
+        $NomProd = $prod['Producto'];
+       
+    }
+
+
+
+
 
 ?>
 <div id="kt_content_container" class="container-xxl">
@@ -83,16 +108,23 @@
                 </div>
                 <div class="card-body pt-0">
                     <div class="d-flex flex-column gap-10">
-                        <div class="fv-row">
-                            <label class="form-label">Order ID</label>
-                            <div class="fw-bolder fs-3">#13111</div>
+                        <div class="d-flex align-items-center">							
+                            <i class="bi bi-file-earmark-text text-primary fs-1 me-5"></i>
+                            <div class="d-flex flex-column">
+                                <h5 class="text-gray-800 fw-bolder">Empresa</h5>
+                                <div class="fw-bold">
+                                   <label><?php echo $Nombre; ?></label>
+                                </div>
+                            </div>
                         </div>
-                      
-                        <div class="fv-row">
-                        
-                        </div>
-                        <div class="fv-row">
-                           
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-chat-square-text-fill text-primary fs-1 me-5"></i>
+                            <div class="d-flex flex-column">
+                                <h5 class="text-gray-800 fw-bolder">Email</h5>
+                                <div class="fw-bold">
+                                    <a href="#" class="link-primary"><?php echo $Email; ?></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -102,12 +134,17 @@
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                   <div class="d-flex flex-column gap-10">
-                        <div class="fv-row">
-                            <label class="form-label">Pro ID</label>
-                            <div class="fw-bolder fs-3">#13111</div>
+                    <div class="d-flex flex-column gap-10">
+                        <div class="d-flex align-items-center">							
+                            <i class="bi bi-file-earmark-text text-primary fs-1 me-5"></i>
+                            <div class="d-flex flex-column">
+                                <h5 class="text-gray-800 fw-bolder">Producto</h5>
+                                <div class="fw-bold">
+                                   <label><?php echo $NomProd; ?></label>
+                                </div>
+                            </div>
                         </div>
-                   </div>
+                    </div> 
                 </div>
             </div>
         </div>
