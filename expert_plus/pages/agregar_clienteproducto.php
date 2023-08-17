@@ -876,7 +876,7 @@
                             var xrespuesta = $.post("codephp/grabar_productoclie.php", { xxPaisid: _idpais, xxEmprid: _idempr,xxUsuaid: _iduser,xxClieid: dataid, xxResult: _result });
                                 xrespuesta.done(function(response){
                                         
-                                if(response == 'OK'){
+                                if(response.trim() == 'OK'){
 
                                     $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
                         
