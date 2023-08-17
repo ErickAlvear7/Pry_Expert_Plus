@@ -48,31 +48,47 @@
     $xSQL .="WHERE tit.pais_id = $xPaisid AND tit.empr_id=$xEmprid AND pst.pers_id=tit.pers_id AND tit.prod_id=$prodid AND tit.grup_id=$grupid ORDER BY pst.pers_nombres ";
     $all_persona = mysqli_query($con, $xSQL);
 
-    $xSQL ="SELECT clie_nombre AS Cliente,clie_email2 AS Email FROM `expert_cliente` WHERE clie_id=$clieid AND pais_id=$xPaisid AND empr_id=$xEmprid ";
+    $xSQL ="SELECT clie_nombre AS Cliente,clie_email2 AS Email,clie_tel1 AS Telefono,clie_cel1 AS Celular FROM `expert_cliente` WHERE clie_id=$clieid AND pais_id=$xPaisid AND empr_id=$xEmprid ";
     $Cliente = mysqli_query($con, $xSQL);
 
     foreach($Cliente as $clie){
         $Nombre = $clie['Cliente'];
         $Email = $clie['Email'];
+        $Telefono = $clie['Telefono'];
+        $Celular = $clie['Celular'];
     }
 
     if($Email == ''){
         $Email = 'sinemail@gmail.com';
     }
 
-    $xSQL ="SELECT prod_nombre AS Producto,prod_costo AS Costo,prod_asistmes AS AsisMes,prod_asistanu AS AsisAnu,prod_cobertura AS Cobertura, ";
-    $xSQL .="prod_sistema AS Sistema,prod_gerencial AS Gerencial,prod_estado AS Estado FROM `expert_productos` WHERE prod_id=$prodid AND clie_id=$clieid ";
-    $xSQL .="AND grup_id=$grupid AND pais_id=$xPaisid AND empr_id=$xEmprid ";
+    $xSQL ="SELECT pro.prod_nombre AS Producto,pro.prod_costo AS Costo,pro.prod_asistmes AS AsisMes,pro.prod_asistanu AS AsisAnu,pro.prod_cobertura AS Cobertura, ";
+    $xSQL .="pro.prod_sistema AS Sistema,pro.prod_gerencial AS Gerencial,pro.prod_estado AS Estado,gru.grup_nombre AS Grupo FROM `expert_productos`pro,`expert_grupos` gru WHERE pro.grup_id =gru.grup_id AND pro.prod_id=$prodid AND pro.clie_id=$clieid ";
+    $xSQL .="AND pro.grup_id=$grupid AND pro.pais_id=$xPaisid AND pro.empr_id=$xEmprid ";
     $Producto = mysqli_query($con, $xSQL);
 
     foreach($Producto as $prod){
         $NomProd = $prod['Producto'];
         $Costo = $prod['Costo'];
+        $AsisMes = $prod['AsisMes'];
+        $AsisAnu = $prod['AsisAnu'];
+        $Cobertura = $prod['Cobertura'];
+        $Sistema = $prod['Sistema'];
+        $Gerencial = $prod['Gerencial'];
+        $Estado = $prod['Estado'];
+        $NomGrupo = $prod['Grupo'];
     }
 
+    $xChekCober = '';
+    $xChekSis= '';
 
+    if($Cobertura == 'SI'){
+        $xChekCober = 'checked="checked"';
+    }
 
-
+    if($Sistema == 'SI'){
+        $xChekSis = 'checked="checked"';
+    }
 
 ?>
 <div id="kt_content_container" class="container-xxl">
@@ -109,7 +125,7 @@
                 <div class="card-body pt-0">
                     <div class="d-flex flex-column gap-10">
                         <div class="d-flex align-items-center">							
-                            <i class="bi bi-file-earmark-text text-primary fs-1 me-5"></i>
+                            <i class="bi bi-filter-square text-primary fs-1 me-5"></i>
                             <div class="d-flex flex-column">
                                 <h5 class="text-gray-800 fw-bolder">Empresa</h5>
                                 <div class="fw-bold">
@@ -118,11 +134,20 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center">
-                            <i class="bi bi-chat-square-text-fill text-primary fs-1 me-5"></i>
+                            <i class="bi bi-envelope-check text-primary fs-1 me-5"></i>
                             <div class="d-flex flex-column">
                                 <h5 class="text-gray-800 fw-bolder">Email</h5>
                                 <div class="fw-bold">
                                     <a href="#" class="link-primary"><?php echo $Email; ?></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">							
+                            <i class="bi bi-telephone-outbound text-primary fs-1 me-5"></i>
+                            <div class="d-flex flex-column">
+                                <h5 class="text-gray-800 fw-bolder">Telefonos</h5>
+                                <div class="fw-bold">
+                                   <label><?php echo $Telefono; ?> - <?php echo $Celular; ?></label>
                                 </div>
                             </div>
                         </div>
@@ -135,21 +160,50 @@
                 </div>
                 <div class="card-body pt-0">
                     <div class="d-flex flex-column gap-10">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-briefcase-fill text-primary fs-1 me-5"></i>
+                            <div class="d-flex flex-column">
+                                <h5 class="text-gray-800 fw-bolder">Grupo</h5>
+                                <div class="fw-bold">
+                                    <label class="badge badge-light-success"><?php echo $NomGrupo; ?></label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="d-flex align-items-center">							
-                            <i class="bi bi-file-earmark-text text-primary fs-1 me-5"></i>
+                            <i class="bi bi-bag-plus text-primary fs-1 me-5"></i>
                             <div class="d-flex flex-column">
                                 <h5 class="text-gray-800 fw-bolder">Producto</h5>
                                 <div class="fw-bold">
-                                  <label><?php echo $NomProd; ?></label>
+                                  <label class="badge badge-light-success"><?php echo $NomProd; ?></label>
                                 </div>
                             </div>
                         </div>
                         <div class="d-flex align-items-center">
-                            <i class="bi bi-person-fill text-primary fs-1 me-5"></i>
+                            <i class="bi bi-bank2 text-primary fs-1 me-5"></i>
                             <div class="d-flex flex-column">
                                 <h5 class="text-gray-800 fw-bolder">Costo</h5>
                                 <div class="fw-bold">
-                                   <label class="badge badge-light-success"><?php echo $Costo; ?></label>
+                                   <label class="badge badge-light-success">$<?php echo $Costo; ?></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-globe2 text-primary fs-1 me-5"></i>
+                            <div class="d-flex flex-column">
+                                <h5 class="text-gray-800 fw-bolder">Cobertura</h5>
+                                <div class="fw-bold">
+                                   <input <?php echo $xChekCober; ?> class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
+                                   <label class="badge badge-light-success"><?php echo $Cobertura; ?></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-grid-1x2-fill text-primary fs-1 me-5"></i>
+                            <div class="d-flex flex-column">
+                                <h5 class="text-gray-800 fw-bolder">Sistema</h5>
+                                <div class="fw-bold">
+                                   <input <?php echo $xChekSis; ?> class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
+                                   <label class="badge badge-light-success"><?php echo $Sistema; ?></label>
                                 </div>
                             </div>
                         </div>
