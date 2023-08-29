@@ -20,8 +20,8 @@
             $xGrupid = $_POST['xxGrupid'];
             $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
-            $xProducto = safe($_POST['xxProducto']);
-            $xDescrip = safe($_POST['xxDesc']);
+            $xProducto = trim(mb_strtoupper(safe($_POST['xxProducto'])));
+            $xDescrip = trim(mb_strtoupper(safe($_POST['xxDesc'])));
             $xCosto = $_POST['xxCosto'];
             $xAsisMes = $_POST['xxAsisMes'];
             $xAsisAnu = $_POST['xxAsisAnu'];

@@ -248,7 +248,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="kt_customer_view_payment_method_1" class="collapse show fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
+                                    <div id="kt_customer_view_payment_method_1" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
                                         <div class="d-flex flex-wrap py-5">
                                             <div class="flex-equal me-5">
                                                 <div class="row mb-8">
@@ -375,7 +375,7 @@
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="form-label">Descripcion</label>
-                                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
                                 </div>
                                 <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                     <div class="col">
@@ -551,7 +551,7 @@
                     <label class="fs-6 fw-bold form-label mb-2">
                         <span>Descripcion</span>
                     </label>
-                    <textarea class="form-control mb-2" name="txtDescGrupo" id="txtDescGrupo" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                    <textarea class="form-control mb-2" name="txtDescGrupo" id="txtDescGrupo" rows="1" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
                 </div>                         
             </div>
             <div class="modal-footer">
@@ -582,7 +582,7 @@
                 </div>
                 <div class="mb-5 fv-row">
                     <label class="form-label">Descripcion</label>
-                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcionEdit" id="txtDescripcionEdit" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcionEdit" id="txtDescripcionEdit" rows="1" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
                 </div>
                 <br>
                 <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
@@ -724,6 +724,8 @@
         if (v > 3) this.value = 3;
     });
 
+     // imput type number modal
+
     document.getElementById("txtAsisMesEdit").addEventListener("change", function() {
         let v = parseInt(this.value);
         if (v < 1) this.value = 1;
@@ -778,7 +780,7 @@
         var _emprid = "<?php echo $xEmprid; ?>";
         var _usuaid = "<?php echo $xUsuaid; ?>";
         var _producto = $.trim($("#txtProducto").val());
-            _producto = _producto.toUpperCase();
+        var _productoUpper = _producto.toUpperCase();
         var _descripcion = $.trim($("#txtDescripcion").val());
         var _costo = $.trim($("#txtCosto").val());
         var _txtGrupo = $('#cboGrupo').find('option:selected').text();
@@ -825,7 +827,7 @@
                 _output = '<tr id="row_' + _id + '">';
                 _output +='<td style="display: none;">' + _id + '</td>';
                 _output +='<td>' +_txtGrupo + '</td>';
-                _output +='<td>' +_producto + '</td>';
+                _output +='<td>' +_productoUpper + '</td>';
                 _output +='<td>' +_costo + '</td>';
                 _output +='<td id="td_'+_id + '"><div class="badge badge-light-primary">Activo</div></td>';
                 _output +='<td><div class="form-check form-check-sm form-check-custom form-check-solid">';
@@ -833,7 +835,10 @@
                 _output +='onchange="f_UpdateEstado('+_id +','+ _emprid +','+_paisid +','+_usuaid +')" value=""/></div></td>';
                 _output +='<td><div class="text-center"><div class="btn-group">';
                 _output +='<button type="button" id="btnEditar_'+_id +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto">';
-                _output +='<i class="fa fa-edit"></i></button></div></div></td></tr>';
+                _output +='<i class="fa fa-edit"></i></button>';
+                _output +='<button type="button" id="btnTitular" onclick="f_Titular('+ _cbogrupo +','+ _id +','+ _clieid +')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" ';
+                _output +='title="Agregar Titular"><i class="fa fa-user"></i></button></div></div></td>';
+                _output +='</tr>';
 
                 $('#tblProducto').append(_output);
                 mensajesalertify('Agregado Correctamente..!', 'S', 'top-center', 3);
@@ -979,7 +984,6 @@
         
         $("#modal_producto").find("input,textarea,checkbox").val("");
 
-        
         _rowid = $(this).attr("id");
         _rowid = _rowid.substring(10);
 
