@@ -197,7 +197,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="kt_customer_view_payment_method_1" class="collapse show fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
+                                    <div id="kt_customer_view_payment_method_1" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
                                         <div class="d-flex flex-wrap py-5">
                                             <div class="flex-equal me-5">
                                                 <div class="row mb-8">
@@ -562,7 +562,7 @@
         var _emprid = "<?php echo $xEmprid; ?>";
         var _paisid = "<?php echo $xPaisid; ?>";
         var _producto = $.trim($("#txtProducto").val());
-            _producto.toUpperCase();
+        var _productoUpper = _producto.toUpperCase();
         var _descripcion = $.trim($("#txtDescripcion").val());
         var _costo = $.trim($("#txtCosto").val());
         var _cbogrupo = $('#cboGrupo').val();
@@ -618,13 +618,16 @@
                         _output = '<tr id="row_' + _count + '">';
                         _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';
                         _output += '<td>' + _txtGrupo + ' <input type="hidden" name="hidden_grupo[]" id="txtGrupo' + _count + '" value="' + _txtGrupo + '" /></td>';
-                        _output += '<td>' + _producto + ' <input type="hidden" name="hidden_producto[]" id="txtProducto' + _count + '" value="' + _producto + '" /></td>';
+                        _output += '<td>' + _productoUpper + ' <input type="hidden" name="hidden_producto[]" id="txtProducto' + _count + '" value="' + _productoUpper + '" /></td>';
                         _output += '<td>' + _costo + ' <input type="hidden" name="hidden_costo[]" id="txtCosto' + _count + '" value="' + _costo + '" /></td>';
                         _output += '<td>';
-                        _output += '<button type="button" title="Eliminar Producto" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></td>';
+                        _output += '<button id="btnDelete' + _count + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"  onclick="f_DelProducto('+"'";
+                        _output +=  _producto + "'" + ',' + _count + ')"' + ' title="Eliminar Producto" ><i class="fa fa-trash"></i></button></td>';
                         _output += '</tr>';
 
                         $('#tblProducto').append(_output);
+
+                        //console.log(_output);
         
                         var _objeto = {
                             arryproducto: _producto,
@@ -903,30 +906,25 @@
 
     }
 
-    //Eliminar Detalle en linea
+    //Eliminar Producto en linea
 
-    $(document).on("click",".btnDelete",function(){
-        var row_id = $(this).attr("id");
-        var _producto = $('#txtProducto' + row_id + '').val();
-
-        FunRemoveItemFromArr(_result, _producto);
-        $('#row_' + row_id + '').remove();
+    function f_DelProducto(_prod,_id){
+        $('#row_' + _id + '').remove();
         _count--;
+        
+         $.each(_result,function(i,item){
 
-    });
-
-    function FunRemoveItemFromArr(arr, deta)
-    {
-        $.each(arr,function(i,item){
-            if(item.arryproducto == deta)
+            if(item.arryproducto == _prod)
             {
-                arr.splice(i, 1);
+                _result.splice(i, 1);
                 return false;
             }else{
                 continuar = true;
             }
-        });        
-    };
+
+        });
+
+    }
 
 
     //Desplazar-modal
