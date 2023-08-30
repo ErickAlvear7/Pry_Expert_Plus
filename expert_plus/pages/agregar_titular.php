@@ -48,7 +48,7 @@
     $xSQL .="WHERE tit.pais_id = $xPaisid AND tit.empr_id=$xEmprid AND pst.pers_id=tit.pers_id AND tit.prod_id=$prodid AND tit.grup_id=$grupid ORDER BY pst.pers_nombres ";
     $all_persona = mysqli_query($con, $xSQL);
 
-    $xSQL ="SELECT clie_nombre AS Cliente,clie_email2 AS Email,clie_tel1 AS Telefono,clie_cel1 AS Celular FROM `expert_cliente` WHERE clie_id=$clieid AND pais_id=$xPaisid AND empr_id=$xEmprid ";
+    $xSQL ="SELECT clie_nombre AS Cliente,clie_email1 AS Email,clie_tel1 AS Telefono,clie_cel1 AS Celular FROM `expert_cliente` WHERE clie_id=$clieid AND pais_id=$xPaisid AND empr_id=$xEmprid ";
     $Cliente = mysqli_query($con, $xSQL);
 
     foreach($Cliente as $clie){

@@ -81,7 +81,7 @@
     $xSQL = "SELECT pro.prod_id AS Idprod, pro.prod_nombre AS Producto, pro.prod_descripcion AS Descrip, pro.prod_costo AS Costo, ";
     $xSQL .="pro.prod_asistmes AS AsisMes, pro.prod_asistanu AS AsisAnu, pro.prod_cobertura AS Cobertura, pro.prod_sistema AS Sistema, ";
     $xSQL .="pro.prod_gerencial AS Gerencial,CASE pro.prod_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, gru.grup_id AS Idgrup,gru.grup_nombre AS Grupo FROM `expert_productos` pro INNER JOIN ";
-    $xSQL .="`expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.clie_id =$clieid AND pro.pais_id =$xPaisid AND pro.empr_id =$xEmprid ORDER BY pro.prod_nombre ";
+    $xSQL .="`expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.clie_id =$clieid AND pro.pais_id =$xPaisid AND pro.empr_id =$xEmprid ORDER BY gru.grup_nombre ";
     $all_prod = mysqli_query($con, $xSQL);
 
 ?>
@@ -836,7 +836,7 @@
                 _output +='<td><div class="text-center"><div class="btn-group">';
                 _output +='<button type="button" id="btnEditar_'+_id +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto">';
                 _output +='<i class="fa fa-edit"></i></button>';
-                _output +='<button type="button" id="btnTitular" onclick="f_Titular('+ _cbogrupo +','+ _id +','+ _clieid +')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" ';
+                _output +='<button type="button" id="btnTitular_'+_id +'" onclick="f_Titular('+ _cbogrupo +','+ _id +','+ _clieid +')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" ';
                 _output +='title="Agregar Titular"><i class="fa fa-user"></i></button></div></div></td>';
                 _output +='</tr>';
 
@@ -946,6 +946,7 @@
         var _class = "badge badge-light-primary";
         var _td = "td_" + _prodid;
         var _btnedit = "btnEditar_" + _prodid;
+        var _btntitu = "btnTitular_" + _prodid;
         var _estado;
 
         if(_check){
@@ -953,11 +954,13 @@
             _estado = 'Activo';
             _checked = "checked='checked'";
             $('#'+_btnedit).prop("disabled",false);
+            $('#'+_btntitu).prop("disabled",false);
 
         }else{
             _estado = 'Inactivo';
             _class = "badge badge-light-danger";
-            $('#'+_btnedit).prop("disabled",true);  
+            $('#'+_btnedit).prop("disabled",true);
+            $('#'+_btntitu).prop("disabled",true);    
         }
 
         var _changetd = document.getElementById(_td);
@@ -986,14 +989,17 @@
 
         _rowid = $(this).attr("id");
         _rowid = _rowid.substring(10);
+        _paisid = '<?php echo $xPaisid;?>';
+        _emprid = '<?php echo $xEmprid;?>';
 
-        var xrespuesta = $.post("codephp/get_datosproductos.php", { xxProid: _rowid });
+        var xrespuesta = $.post("codephp/get_datosproductos.php", { xxProid: _rowid,xxPaisid:_paisid,xxEmprid: _emprid  });
         xrespuesta.done(function(response){
 
 
             var _datos = JSON.parse(response);
 
             $.each(_datos,function(i,item){
+                _clieid = _datos[i].Clieid;
                 _grupid =  _datos[i].Grupid;
                 _producto =  _datos[i].Nombre;
                 _desc =  _datos[i].Descr;
@@ -1098,9 +1104,8 @@
         var _output;
         var _prodid = _rowid;
         var _prodedit= $('#txtProductoEdit').val();
-            _prodedit= _prodedit.toUpperCase();
+        var _prodeditUpper= _prodedit.toUpperCase();
         var _descredit = $('#txtDescripcionEdit').val();
-            _descredit= _descredit.toUpperCase();
         var _costoedit = $('#txtCostoEdit').val();
         var _cbogrupoedit = $('#cboGrupoEdit').val();
         var _txtgrupoedit = $("#cboGrupoEdit option:selected").text();
@@ -1145,17 +1150,22 @@
 
             if(response.trim() == 'OK'){
 
-                _output ='<td style="display: none;">' + _rowid + '</td>';
+                _output ='<td style="display: none;">' + _prodid + '</td>';
                 _output +='<td>' +_txtgrupoedit + '</td>';
-                _output +='<td>' +_prodedit + '</td>';
+                _output +='<td>' +_prodeditUpper + '</td>';
                 _output +='<td>' +_costoedit + '</td>';
-                _output +='<td id="td_'+_rowid + '"><div class="badge badge-light-primary">Activo</div></td>';
+                _output +='<td id="td_'+ _prodid + '"><div class="badge badge-light-primary">Activo</div></td>';
                 _output +='<td><div class="form-check form-check-sm form-check-custom form-check-solid">';
-                _output +='<input class="form-check-input h-20px w-20px border-primary btnEstado" checked="checked" type="checkbox" id="chk'+_rowid +'" ';
-                _output +='onchange="f_UpdateEstado('+_rowid +','+ _emprid + ')" value=""/></div></td>';
+                _output +='<input class="form-check-input h-20px w-20px border-primary btnEstado" checked="checked" type="checkbox" id="chk'+ _prodid +'" ';
+                _output +='onchange="f_UpdateEstado('+ _prodid + ',' + _emprid + ',' + _paisid + ',' + _usuaid + ')" value=""/></div></td>';
                 _output +='<td><div class="text-center"><div class="btn-group">';
-                _output +='<button type="button" id="btnEditar_'+_rowid +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto">';
-                _output +='<i class="fa fa-edit"></i></button></div></div></td>';
+                _output +='<button type="button" id="btnEditar_' + _prodid +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto">';
+                _output +='<i class="fa fa-edit"></i></button>';
+                _output +='<button type="button" id="btnTitular_' + _prodid +'" onclick="f_Titular('+ _cbogrupoedit +','+ _prodid +','+ _clieid +')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" ';
+                _output +='title="Agregar Titular"><i class="fa fa-user"></i></button></div></div></td>';
+
+                console.log(_output);
+              
 
                 $('#row_' + _rowid + '').html(_output);
 
