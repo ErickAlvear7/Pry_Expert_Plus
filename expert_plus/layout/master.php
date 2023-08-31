@@ -89,6 +89,10 @@
 	if($page == 'addtitular'){
 		$xRuta = '/../pages/agregar_titular.php';
 	}	
+
+	if($page == 'edittitular'){
+		$xRuta = '/../pages/editar_titular.php';
+	}	
 	
 	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";
 	$all_tareas = mysqli_query($con, $xSQL);	
