@@ -448,7 +448,7 @@
                                                 <td>
                                                     <div class="text-center">
                                                         <div class="btn-group">	
-                                                            <button type="button" id="btnEditar_<?php echo $xPerid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular'>
+                                                            <button type="button" id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular()" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular'>
                                                                 <i class="fa fa-edit"></i>
                                                             </button> 
                                                             <button type="button" id="btnAgendar_<?php echo $xPerid; ?>" onclick="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar'>
@@ -1177,6 +1177,11 @@
     }
 
 
+    function f_Editartitular(){
+        $.redirect('?page=edittitular&menuid=<?php echo $menuid; ?>' {
+		});
+    
+   }
 
 
 
