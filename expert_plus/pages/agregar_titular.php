@@ -90,6 +90,10 @@
         $xChekSis = 'checked="checked"';
     }
 
+    $xSQL = "SELECT per.pers_id AS Perid, per.pers_numerodocumento AS Documento, CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona, per.pers_imagen AS Imagen, per.pers_estadocivil, ";
+    $xSQL .= "per.pers_fechanacimiento AS Fecha, per.pers_ciudad AS Ciudad, per.pers_direccion AS Direccion, ";
+    $xSQL .="";
+    $xSQL .=" FROM `expert_persona` per,  `expert_titular` tit, `expert_beneficiario` ben WHERE "
 ?>
 <div id="kt_content_container" class="container-xxl">
     <form id="kt_ecommerce_edit_order_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/sales/listing.html">
