@@ -43,7 +43,7 @@
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
     $all_provincia = mysqli_query($con, $xSQL);
 
-    $xSQL = "SELECT pst.pers_id AS PerId,CONCAT(pst.pers_nombres,' ',pst.pers_apellidos) AS Nombres,pst.pers_imagen AS  ";
+    $xSQL = "SELECT pst.pers_id AS PerId, tit.titu_id AS Tituid, CONCAT(pst.pers_nombres,' ',pst.pers_apellidos) AS Nombres,pst.pers_imagen AS  ";
     $xSQL .="Imagen,CASE pst.pers_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado,pst.pers_ciudad AS CiudadId FROM `expert_persona` pst, `expert_titular` tit ";
     $xSQL .="WHERE tit.pais_id = $xPaisid AND tit.empr_id=$xEmprid AND pst.pers_id=tit.pers_id AND tit.prod_id=$prodid AND tit.grup_id=$grupid ORDER BY pst.pers_nombres ";
     $all_persona = mysqli_query($con, $xSQL);
@@ -392,6 +392,7 @@
                                                     foreach ($all_persona as $per){
 
                                                     $xPerid = $per['PerId'];
+                                                    $xTituid = $per['Tituid'];
                                                     $xNombres = $per['Nombres'];
                                                     $xImagen = $per['Imagen'];
                                                     $xEstado = $per['Estado'];
@@ -452,7 +453,7 @@
                                                 <td>
                                                     <div class="text-center">
                                                         <div class="btn-group">	
-                                                            <button type="button" id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular()" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular'>
+                                                            <button type="button" id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular(<?php echo $xPerid; ?>,<?php echo $xTituid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular'>
                                                                 <i class="fa fa-edit"></i>
                                                             </button> 
                                                             <button type="button" id="btnAgendar_<?php echo $xPerid; ?>" onclick="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar'>
@@ -1181,8 +1182,11 @@
     }
 
 
-    function f_Editartitular(){
-        $.redirect('?page=edittitular&menuid=<?php echo $menuid; ?>' {
+    function f_Editartitular(_perid,_tituid){
+        $.redirect('?page=edittitular&menuid=<?php echo $menuid; ?>', {
+            'idper': _perid,
+            'idtit': _tituid,
+           
 		});
     
    }
