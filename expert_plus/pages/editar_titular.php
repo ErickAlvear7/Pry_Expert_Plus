@@ -2806,64 +2806,48 @@
                         </div>
                     </div>
                     <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                        <div class="mb-5 fv-row">
-                            <label class="required form-label">Producto</label>
-                            <input class="form-control mb-2 text-uppercase" type="text" name="txtProductoEdit" id="txtProductoEdit" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
-                        </div>
-                        <div class="mb-5 fv-row">
-                            <label class="form-label">Descripcion</label>
-                            <textarea class="form-control mb-2 text-uppercase" name="txtDescripcionEdit" id="txtDescripcionEdit" rows="1" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
-                        </div>
-                        <br>
-                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                            <div class="col">
-                                <label class="required form-label">Costo</label>
-                                <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                        <div class="mb-7">
+                            <label class="fs-6 fw-bold mb-2">
+                                <span>Editar Imagen</span>
+                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Allowed file types: png, jpg, jpeg."></i>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Image input wrapper-->
+                            <div class="mt-1">
+                                <!--begin::Image input-->
+                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
+                                    <!--begin::Preview existing avatar-->
+                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/avatars/300-6.jpg"></div>
+                                    <!--end::Preview existing avatar-->
+                                    <!--begin::Edit-->
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <!--begin::Inputs-->
+                                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                        <input type="hidden" name="avatar_remove" />
+                                        <!--end::Inputs-->
+                                    </label>
+                                    <!--end::Edit-->
+                                    <!--begin::Cancel-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Cancel-->
+                                    <!--begin::Remove-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Remove-->
+                                </div>
+                                <!--end::Image input-->
                             </div>
-                            <div class="col">
-                                <label class="required form-label">Grupo</label>
-                                <select name="cboGrupoEdit" id="cboGrupoEdit" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
-                                    <option></option>
-                                    <?php 
-                                        $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND grup_estado='A' ";
-                                        $all_datos =  mysqli_query($con, $xSQL);
-                                        foreach ($all_datos as $dato){ ?>
-                                            <option value="<?php echo $dato['Codigo'] ?>"><?php echo $dato['NombreGrupo'] ?></option>
-                                        <?php } ?>  
-                                </select>
-                            </div>
+                            <!--end::Image input wrapper-->
+                        </div> 
+                        <div class="fv-row mb-7">
+                            <label class="fs-6 fw-bold mb-2">Name</label>
+                            <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="Emma Smith" />
                         </div>
-                        <br>
-                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                            <div class="col">
-                                <label class="required form-label">Asistencia Mes</label>
-                                <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control mb-2" value="1" />  
-                            </div>
-                            <div class="col">
-                                <label class="required form-label">Asistencia Anual</label>
-                                <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" value="1" />   
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="mb-5 fv-row">
-                            <h5 class="txtcob" id="lblCoberturaEdit"></h5>
-                            <label class="form-check form-switch form-check-custom form-check-solid">
-                                <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
-                            </label> 
-                        </div>
-                        <div class="mb-5 fv-row">
-                            <h5 class="txtsis"></h5>
-                            <label class="form-check form-switch form-check-custom form-check-solid">
-                                <input class="form-check-input" name="chkSistemaEdit" id="chkSistemaEdit" type="checkbox" />
-                            </label> 
-                        </div>
-                        <div class="mb-5 fv-row">
-                            <h5 class="txtger"></h5>
-                            <label class="form-check form-switch form-check-custom form-check-solid">
-                                <input class="form-check-input" name="chkGerencialEdit" id="chkGerencialEdit" type="checkbox" />
-                            </label> 
-                        </div>            
+                        
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-primary">Modificar</button>
