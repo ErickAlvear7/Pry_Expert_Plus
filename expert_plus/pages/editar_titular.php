@@ -17,7 +17,8 @@
 
     //$xServidor = $_SERVER['HTTP_HOST'];
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
-
+    $perid = $_POST['idper'];
+    $tituid = $_POST['idtit'];
     $menuid = $_GET['menuid'];
 
     @session_start();
@@ -35,6 +36,34 @@
     $xPaisid = $_SESSION["i_paisid"];
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
+
+    $xSQL = "SELECT per.pers_numerodocumento AS Documento, CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona, per.pers_imagen AS Imagen, ";
+    $xSQL .= "per.pers_fechanacimiento AS Fecha, per.pers_direccion AS Direccion, per.pers_telefonocasa AS Telcasa, per.pers_telefonoficina AS Telofi, ";
+    $xSQL .= "per.pers_celular AS Cel, per.pers_email AS Email, per.pers_estado AS Estado, ciu.ciudad AS Ciudad FROM `expert_persona` per, ";
+    $xSQL .= "`expert_titular` tit, `provincia_ciudad` ciu WHERE per.pers_id=$perid AND tit.pers_id=$titid AND per.pers_ciudad=ciu.prov_id AND per.pais_id=$xPaisid AND per.empr_id=$xEmprid ";
+    $titular = mysqli_query($con, $xSQL);
+
+    foreach($titular as $per){
+        $xDocumento = $per['Documento'];
+        $xPersona = $per['Persona'];
+        $xImagen = $per['Imagen'];
+        $xFecha = $per['Fecha'];
+        $xDireccion = $per['Direccion'];
+        $xTelcasa = $per['Telcasa'];
+        $xTelofi = $per['Telofi'];
+        $xCel = $per['Cel'];
+        $xEmail = $per['Email'];
+        $xEstado = $per['Estado'];
+        $xCiudad = $per['Ciudad'];
+    }
+
+    $xSQL = "SELECT ben.bene_numerodocumento AS Docuben, CONCAT(ben.bene_nombres,' ', ben.bene_apellidos) AS Beneficiario, ciu.ciudad AS Ciudadben, ";
+    $xSQL .= "ben.bene_direccion AS Direcben, ben.bene_telefonocasa AS Telecasaben, ben.bene_telefonoficina AS Telofiben, ben.bene_celular AS Celben, ben.bene_email AS Emailben, ";
+    $xSQL .= "pde.pade_nombre AS Parentesco, ben.bene_estado AS Estadoben, ben.bene_fechanacimiento AS Fechaben ";
+    $xSQL .= "FROM `expert_beneficiario` ben, `expert_titular` tit,`provincia_ciudad` ciu, `expert_parametro_detalle` pde ";
+    $xSQL .= "WHERE tit.titu_id=$tituid AND ben.bene_ciudad=ciu.prov_id AND ben.bene_parentesco=pde.pade_valorV ";
+    $all_Beneficiario = mysqli_query($con, $xSQL);
+
 ?>
 
     <!--begin::Container-->
