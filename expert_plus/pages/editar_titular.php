@@ -144,8 +144,11 @@
                                 </span>
                             </span></div>
                             <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit customer details">
-                                <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_details">Edit</a>
+                                <a href="#" class="btn btn-sm btn-light-primary btnEditar" data-bs-toggle="modal" data-bs-target="#modal_titular">Edit</a>
                             </span>
+                            <!-- <button type="button" id="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar">
+                                <i class="fa fa-edit"></i>
+                            </button>  -->
                         </div>
                         <div class="separator"></div>
                         <div id="kt_user_view_details" class="collapse show">
@@ -2788,7 +2791,7 @@
             <!--end::Content-->
         </div>
         <!--begin::Modal - Update user details-->
-        <div class="modal fade" id="modal_producto" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="modal_titular" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
                     <div class="modal-header">
