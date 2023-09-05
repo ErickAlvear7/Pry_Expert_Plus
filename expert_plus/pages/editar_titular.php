@@ -37,7 +37,7 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
-    $xSQL = "SELECT per.pers_numerodocumento AS Documento, CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona, per.pers_imagen AS Imagen, ";
+    $xSQL = "SELECT per.pers_numerodocumento AS Documento, per.pers_nombres AS Nombres, per.pers_apellidos AS Apellidos, CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona, per.pers_imagen AS Imagen, ";
     $xSQL .= "per.pers_fechanacimiento AS Fecha, per.pers_direccion AS Direccion, per.pers_telefonocasa AS Telcasa, per.pers_telefonoficina AS Telofi, ";
     $xSQL .= "per.pers_celular AS Cel, per.pers_email AS Email, per.pers_estado AS Estado, ciu.ciudad AS Ciudad FROM `expert_persona` per, ";
     $xSQL .= "`expert_titular` tit, `provincia_ciudad` ciu WHERE per.pers_id=$perid AND tit.pers_id=$tituid AND per.pers_ciudad=ciu.prov_id AND per.pais_id=$xPaisid AND per.empr_id=$xEmprid ";
@@ -45,6 +45,8 @@
 
     foreach($titular as $per){
         $xDocumento = $per['Documento'];
+        $xNombres = $per['Nombres'];
+        $xApellidos = $per['Apellidos'];
         $xPersona = $per['Persona'];
         $xImagen = $per['Imagen'];
         $xFecha = $per['Fecha'];
@@ -56,6 +58,8 @@
         $xEstado = $per['Estado'];
         $xCiudad = $per['Ciudad'];
     }
+
+
 
     if($xEstado=='A'){
         $xestado='ACTIVO';
@@ -144,7 +148,7 @@
                                 </span>
                             </span></div>
                             <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit customer details">
-                                <a href="#" class="btn btn-sm btn-light-primary btnEditar" data-bs-toggle="modal" data-bs-target="#modal_titular">Edit</a>
+                                <a href="#" class="btn btn-sm btn-light-primary btnEditar" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">Edit</a>
                             </span>
                             <!-- <button type="button" id="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar">
                                 <i class="fa fa-edit"></i>
@@ -2791,70 +2795,10 @@
             <!--end::Content-->
         </div>
         <!--begin::Modal - Update user details-->
-        <div class="modal fade" id="modal_titular" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered mw-650px">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2>Editar Producto</h2>
-                        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                            <span class="svg-icon svg-icon-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                        <div class="mb-7">
-                            <label class="fs-6 fw-bold mb-2">
-                                <span>Editar Imagen</span>
-                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Allowed file types: png, jpg, jpeg."></i>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Image input wrapper-->
-                            <div class="mt-1">
-                                <!--begin::Image input-->
-                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
-                                    <!--begin::Preview existing avatar-->
-                                    <!-- <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/avatars/300-6.jpg"></div> -->
-                                    <!--end::Preview existing avatar-->
-                                    <!--begin::Edit-->
-                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
-                                        <i class="bi bi-pencil-fill fs-7"></i>
-                                        <!--begin::Inputs-->
-                                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
-                                        <input type="hidden" name="avatar_remove" />
-                                        <!--end::Inputs-->
-                                    </label>
-                                    <!--end::Edit-->
-                                    <!--begin::Cancel-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-                                        <i class="bi bi-x fs-2"></i>
-                                    </span>
-                                    <!--end::Cancel-->
-                                    <!--begin::Remove-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-                                        <i class="bi bi-x fs-2"></i>
-                                    </span>
-                                    <!--end::Remove-->
-                                </div>
-                                <!--end::Image input-->
-                            </div>
-                            <!--end::Image input wrapper-->
-                        </div> 
-                        <div class="fv-row mb-7">
-                            <label class="fs-6 fw-bold mb-2">Name</label>
-                            <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="Emma Smith" />
-                        </div>
-                    </div>    
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-primary">Modificar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+
+
+
         <!--end::Modal - Update user details-->
         <!--begin::Modal - Add schedule-->
         <div class="modal fade" id="kt_modal_add_schedule" tabindex="-1" aria-hidden="true">
@@ -3538,4 +3482,115 @@
         <!--end::Modals-->
     </div>
     <!--end::Container-->
-
+    <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered mw-650px">
+            <div class="modal-content">
+                <div class="modal-header" id="kt_modal_add_user_header">
+                    <h2 class="fw-bolder">Editar Usuario</h2>
+                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                    <form id="kt_modal_add_user_form" class="form" method="post" enctype="multipart/form-data">
+                        <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+                            <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_user_info" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_user_info">Titular
+                            <span class="ms-2 rotate-180">
+                                <span class="svg-icon svg-icon-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </span></div>
+                            <div id="kt_modal_update_user_user_info" class="collapse show">
+                                <div class="fv-row mb-7">
+                                    <label class="d-block fw-bold fs-6 mb-5">Avatar</label>
+                                    <div class="image-input image-input-outline" data-kt-image-input="true">
+                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url(persona/<?php echo $xImagen; ?>);" id="imgfile"></div>
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar Avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
+                                            <input type="hidden" name="avatar_remove" />
+                                        </label>
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>													
+                                    </div>
+                                    <div class="form-text">Archivos permitidos: png, jpg, jpeg.</div>
+                                </div>
+                                <div class="row g-9 mb-7">
+                                    <div class="col-md-6 fv-row">
+                                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                            <span>Nombres</span>
+                                        </label>
+                                        <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100"  value="<?php echo $xNombres; ?>" readonly/>
+                                    </div>
+                                    <div class="col-md-6 fv-row">
+                                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                            <span>Apellidos</span>
+                                        </label>
+                                        <input type="text" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" value="<?php echo $xApellidos; ?>" readonly/>
+                                    </div>                                                    
+                                </div>
+                            </div>
+                        <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_address" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_address">Informacion Titular
+                            <span class="ms-2 rotate-180">
+                                <span class="svg-icon svg-icon-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </span></div>
+                            <div id="kt_modal_update_user_address" class="collapse show">
+                                <div class="d-flex flex-column mb-7 fv-row">
+                                    <label class="fs-6 fw-bold mb-2">Direccion</label>
+                                    <input class="form-control form-control-solid" placeholder="Ingrese Direccion" value="<?php echo $xDireccion; ?>" />
+                                </div>
+                                <div class="row g-9 mb-7">
+                                    <div class="col-md-6 fv-row">
+                                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                            <span>Telefono Casa</span>
+                                        </label>
+                                        <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100" placeholder="Ingrese Telefono Casa" value="<?php echo $xTelcasa; ?>"/>
+                                    </div>
+                                    <div class="col-md-6 fv-row">
+                                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                            <span>Telefono Oficina</span>
+                                        </label>
+                                        <input type="text" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" placeholder="Ingrese Telefono Oficina" value="<?php echo $xTelofi; ?>"/>
+                                    </div>                                                    
+                                </div>
+                                <div class="row g-9 mb-7">
+                                    <div class="col-md-6 fv-row">
+                                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                            <span>Celular</span>
+                                        </label>
+                                        <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100" placeholder="Ingrese Celular" value="<?php echo $xCel; ?>"/>
+                                    </div>
+                                    <div class="col-md-6 fv-row">
+                                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                            <span>Email</span>
+                                        </label>
+                                        <input type="email" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" placeholder="Ingrese Email" value="<?php echo $xEmail; ?>"/>
+                                    </div>                                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center pt-15">
+                            <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" id="btnSave">
+                                <span class="indicator-label">Grabar</span>
+                                <span class="indicator-progress">Espere un momento...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                        </div>  
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
