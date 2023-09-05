@@ -866,7 +866,7 @@
 
 
                     $('#tblBeneficiario').append(_output);
-
+    console.log(_output);
                     var _objeto = {
 
                         arrytipodocumento: _cboDocumentoBe,
