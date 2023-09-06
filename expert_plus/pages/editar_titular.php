@@ -69,9 +69,8 @@
         $xestado='ACTIVO';
     }
 
-    $xSQL = "SELECT ben.bene_id AS Beneid, ben.bene_numerodocumento AS Docuben, CONCAT(ben.bene_nombres,' ', ben.bene_apellidos) AS Beneficiario, ciu.ciudad AS Ciudadben, ";
-    $xSQL .= "ben.bene_direccion AS Direcben, ben.bene_telefonocasa AS Telecasaben, ben.bene_telefonoficina AS Telofiben, ben.bene_celular AS Celben, ben.bene_email AS Emailben, ";
-    $xSQL .= "pde.pade_nombre AS Parentesco, ben.bene_estado AS Estadoben, ben.bene_fechanacimiento AS Fechaben ";
+    $xSQL = "SELECT ben.bene_id AS Beneid, CONCAT(ben.bene_nombres,' ', ben.bene_apellidos) AS Beneficiario, ciu.ciudad AS Ciudadben, ";
+    $xSQL .= "pde.pade_nombre AS Parentesco, ben.bene_estado AS Estadoben ";
     $xSQL .= "FROM `expert_beneficiario` ben, `expert_titular` tit,`provincia_ciudad` ciu, `expert_parametro_detalle` pde ";
     $xSQL .= "WHERE tit.titu_id=$tituid AND ben.titu_id=$tituid AND ben.bene_ciudad=ciu.prov_id AND ben.bene_parentesco=pde.pade_valorV ";
     $all_Beneficiario = mysqli_query($con, $xSQL);
@@ -1306,6 +1305,108 @@
         </div>
     </div>
 
+    <!-- modal editar beneficiario -->
+    <div class="modal fade" id="modal_beneficiario" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered mw-650px">
+                <div class="modal-content">
+                    <div class="modal-header" id="kt_modal_add_user_header">
+                        <h2 class="fw-bolder">Editar Beneficiario</h2>
+                        <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                            <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                        <form id="kt_modal_add_user_form" class="form" method="post" enctype="multipart/form-data">
+                            <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+                                <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_user_info" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_user_info">Beneficiario
+                                <span class="ms-2 rotate-180">
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                </span></div>
+                                <div id="kt_modal_update_user_user_info" class="collapse show">
+                                    
+                                    <div class="row g-9 mb-7">
+                                        <div class="col-md-6 fv-row">
+                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                <span>Nombres</span>
+                                            </label>
+                                            <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100"  value="<?php echo $xNombres; ?>" readonly/>
+                                        </div>
+                                        <div class="col-md-6 fv-row">
+                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                <span>Apellidos</span>
+                                            </label>
+                                            <input type="text" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" value="<?php echo $xApellidos; ?>" readonly/>
+                                        </div>                                                    
+                                    </div>
+                                </div>
+                            <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_address" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_address">Informacion Titular
+                                <span class="ms-2 rotate-180">
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                </span></div>
+                                <div id="kt_modal_update_user_address" class="collapse show">
+                                    <div class="d-flex flex-column mb-7 fv-row">
+                                        <label class="fs-6 fw-bold mb-2">Direccion</label>
+                                        <input class="form-control form-control-solid" placeholder="Ingrese Direccion" value="<?php echo $xDireccion; ?>" />
+                                    </div>
+                                    <div class="row g-9 mb-7">
+                                        <div class="col-md-6 fv-row">
+                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                <span>Telefono Casa</span>
+                                            </label>
+                                            <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100" placeholder="Ingrese Telefono Casa" value="<?php echo $xTelcasa; ?>"/>
+                                        </div>
+                                        <div class="col-md-6 fv-row">
+                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                <span>Telefono Oficina</span>
+                                            </label>
+                                            <input type="text" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" placeholder="Ingrese Telefono Oficina" value="<?php echo $xTelofi; ?>"/>
+                                        </div>                                                    
+                                    </div>
+                                    <div class="row g-9 mb-7">
+                                        <div class="col-md-6 fv-row">
+                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                <span>Celular</span>
+                                            </label>
+                                            <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100" placeholder="Ingrese Celular" value="<?php echo $xCel; ?>"/>
+                                        </div>
+                                        <div class="col-md-6 fv-row">
+                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                <span>Email</span>
+                                            </label>
+                                            <input type="email" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" placeholder="Ingrese Email" value="<?php echo $xEmail; ?>"/>
+                                        </div>                                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center pt-15">
+                                <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" id="btnSave">
+                                    <span class="indicator-label">Grabar</span>
+                                    <span class="indicator-progress">Espere un momento...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                </button>
+                            </div>  
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 <script>
 
 
@@ -1321,5 +1422,18 @@ function f_Regresar(_clieid,_prodid,_grupid){
 		});
     
    }
+
+   $(document).on("click",".btnEditar",function(){
+
+        
+        $("#modal_beneficiario").find("input,textarea,checkbox").val("");
+
+        _rowid = $(this).attr("id");
+        _rowid = _rowid.substring(10);
+
+        $("#modal_beneficiario").modal("show");
+  
+
+    });
 
 </script>
