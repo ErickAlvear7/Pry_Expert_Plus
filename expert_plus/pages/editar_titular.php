@@ -19,7 +19,11 @@
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
     $perid = $_POST['idper'];
     $tituid = $_POST['idtit'];
+    $clieid = $_POST['idcli'];
+    $prodid = $_POST['idpro'];
+    $grupid = $_POST['idgru'];
     $menuid = $_GET['menuid'];
+    
 
     @session_start();
 
@@ -65,11 +69,11 @@
         $xestado='ACTIVO';
     }
 
-    $xSQL = "SELECT ben.bene_numerodocumento AS Docuben, CONCAT(ben.bene_nombres,' ', ben.bene_apellidos) AS Beneficiario, ciu.ciudad AS Ciudadben, ";
+    $xSQL = "SELECT ben.bene_id AS Beneid, ben.bene_numerodocumento AS Docuben, CONCAT(ben.bene_nombres,' ', ben.bene_apellidos) AS Beneficiario, ciu.ciudad AS Ciudadben, ";
     $xSQL .= "ben.bene_direccion AS Direcben, ben.bene_telefonocasa AS Telecasaben, ben.bene_telefonoficina AS Telofiben, ben.bene_celular AS Celben, ben.bene_email AS Emailben, ";
     $xSQL .= "pde.pade_nombre AS Parentesco, ben.bene_estado AS Estadoben, ben.bene_fechanacimiento AS Fechaben ";
     $xSQL .= "FROM `expert_beneficiario` ben, `expert_titular` tit,`provincia_ciudad` ciu, `expert_parametro_detalle` pde ";
-    $xSQL .= "WHERE tit.titu_id=$tituid AND ben.bene_ciudad=ciu.prov_id AND ben.bene_parentesco=pde.pade_valorV ";
+    $xSQL .= "WHERE tit.titu_id=$tituid AND ben.titu_id=$tituid AND ben.bene_ciudad=ciu.prov_id AND ben.bene_parentesco=pde.pade_valorV ";
     $all_Beneficiario = mysqli_query($con, $xSQL);
 
 ?>
@@ -294,7 +298,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_user_view_overview_tab">Beneficiario</a>
                     </li>
-                    <button type="button" id="btnRegresar" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
+                    <button type="button" id="btnRegresar" onclick="f_Regresar(<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
                         <span class="svg-icon svg-icon-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
@@ -324,15 +328,57 @@
                                             </tr>
                                         </thead>
                                         <tbody class="fs-6 fw-bold text-gray-600">
-                                            <tr>
-                                                <td>
+                                            <?php 
+                                                foreach($all_Beneficiario as $ben){
+                                                $xBeneid = $ben['Beneid'];
+                                                $xBeneficiario = $ben['Beneficiario'];
+                                                $xCiudadBen = $ben['Ciudadben'];
+                                                $xParentescoBen = $ben['Parentesco'];
+                                                $xEstadoBen = $ben['Estadoben'];
+                                            ?>
+                                            <?php
+                                                if($xEstadoBen=='A'){
+                                                    $xEstadoBen='ACTIVO';
+                                                }else{
+                                                    $xEstadoBen='INACTIVO';
+                                                } 
 
+                                                $xCheking = '';
+                                                $xDisabledEdit = '';
+
+                                                if($xEstadoBen == 'ACTIVO'){
+                                                    $xCheking = 'checked="checked"';
+                                                    $xTextColor = "badge badge-light-primary";
+                                                }else{
+                                                    $xTextColor = "badge badge-light-danger";
+                                                    $xDisabledEdit = 'disabled';
+                                                }
+                                            ?>  
+                                            <tr id="row_<?php echo $xBeneid; ?>">
+                                                <td><?php echo $xCiudadBen; ?></td>
+                                                <td><?php echo $xBeneficiario; ?></td>
+                                                <td><?php echo $xParentescoBen; ?></td>
+                                                <td><?php echo $xEstadoBen; ?></td>
+                                                <td>
+                                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                        <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xBeneid; ?>" 
+                                                        onchange="f_UpdateEstado()" value=""/>
+                                                    </div>
                                                 </td>
-                                            </tr>    
+                                                <td>
+                                                    <div class="text-center">
+                                                        <div class="btn-group">	
+                                                            <button type="button" id="btnEditar_<?php echo $xBeneid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Beneficiario'>
+                                                                <i class="fa fa-edit"></i>
+                                                            </button> 
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <?php } ?>      
                                         </tbody>
                                     </table>
                                 </div>
-                                <!--end::Table wrapper-->
                             </div>
                         </div>
                         <div class="card pt-4 mb-6 mb-xl-9">
@@ -1259,3 +1305,21 @@
             </div>
         </div>
     </div>
+
+<script>
+
+
+
+
+// Funcion de regreso de pagina 
+function f_Regresar(_clieid,_prodid,_grupid){
+
+        $.redirect('?page=addtitular&menuid=<?php echo $menuid; ?>', {
+            'idclie': _clieid,
+            'idprod': _prodid,
+            'idgrup': _grupid
+		});
+    
+   }
+
+</script>

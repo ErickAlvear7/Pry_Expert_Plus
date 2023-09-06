@@ -453,7 +453,7 @@
                                                 <td>
                                                     <div class="text-center">
                                                         <div class="btn-group">	
-                                                            <button type="button" id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular(<?php echo $xPerid; ?>,<?php echo $xTituid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular'>
+                                                            <button type="button" id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular(<?php echo $xPerid; ?>,<?php echo $xTituid; ?>,<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular'>
                                                                 <i class="fa fa-edit"></i>
                                                             </button> 
                                                             <button type="button" id="btnAgendar_<?php echo $xPerid; ?>" onclick="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar'>
@@ -1182,16 +1182,17 @@
     }
 
 
-    function f_Editartitular(_perid,_tituid){
+    function f_Editartitular(_perid,_tituid,_clieid,_prodid,_grupid){
         $.redirect('?page=edittitular&menuid=<?php echo $menuid; ?>', {
             'idper': _perid,
             'idtit': _tituid,
-           
+            'idcli': _clieid,
+            'idpro': _prodid,
+            'idgru': _grupid
 		});
     
    }
-
-
+ 
 
 </script>
 					
