@@ -139,7 +139,7 @@
                             </span>
                         </span></div>
                         <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit customer details">
-                            <a href="#" class="btn btn-sm btn-light-primary btnEditar" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">Editar</a>
+                            <a href="#" class="btn btn-sm btn-light-primary " data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">Editar</a>
                         </span>
                         <!-- <button type="button" id="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar">
                             <i class="fa fa-edit"></i>
@@ -608,7 +608,7 @@ function f_Regresar(_clieid,_prodid,_grupid){
         
         $("#modal_beneficiario").find("input,textarea,checkbox").val("");
 
-        _rowid = $(this).attr("id");
+        var _rowid = $(this).attr("id");
         _rowid = _rowid.substring(10);
 
         $("#modal_beneficiario").modal("show");
