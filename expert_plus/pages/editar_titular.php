@@ -41,24 +41,18 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
-    $xSQL = "SELECT per.pers_numerodocumento AS Documento, per.pers_nombres AS Nombres, per.pers_apellidos AS Apellidos, CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona, per.pers_imagen AS Imagen, ";
-    $xSQL .= "per.pers_fechanacimiento AS Fecha, per.pers_direccion AS Direccion, per.pers_telefonocasa AS Telcasa, per.pers_telefonoficina AS Telofi, ";
-    $xSQL .= "per.pers_celular AS Cel, per.pers_email AS Email, per.pers_estado AS Estado, ciu.ciudad AS Ciudad FROM `expert_persona` per, ";
-    $xSQL .= "`expert_titular` tit, `provincia_ciudad` ciu WHERE per.pers_id=$perid AND tit.pers_id=$tituid AND per.pers_ciudad=ciu.prov_id AND per.pais_id=$xPaisid AND per.empr_id=$xEmprid ";
+    $xSQL = "SELECT per.pers_id AS Perid, per.pers_numerodocumento AS Documento, CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona, ";
+    $xSQL .= "per.pers_imagen AS Imagen, per.pers_fechanacimiento AS Fecha, ciu.ciudad AS Ciudad, per.pers_estado AS Estado ";
+    $xSQL .= "FROM `expert_persona` per, `expert_titular` tit, `provincia_ciudad` ciu ";
+    $xSQL .= "WHERE per.pers_id=$perid AND tit.pers_id=$tituid AND per.pers_ciudad=ciu.prov_id AND per.pais_id=$xPaisid AND per.empr_id=$xEmprid ";
     $titular = mysqli_query($con, $xSQL);
 
     foreach($titular as $per){
+        $xPerid = $per['Perid'];
         $xDocumento = $per['Documento'];
-        $xNombres = $per['Nombres'];
-        $xApellidos = $per['Apellidos'];
         $xPersona = $per['Persona'];
         $xImagen = $per['Imagen'];
         $xFecha = $per['Fecha'];
-        $xDireccion = $per['Direccion'];
-        $xTelcasa = $per['Telcasa'];
-        $xTelofi = $per['Telofi'];
-        $xCel = $per['Cel'];
-        $xEmail = $per['Email'];
         $xEstado = $per['Estado'];
         $xCiudad = $per['Ciudad'];
     }
@@ -139,11 +133,10 @@
                             </span>
                         </span></div>
                         <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit customer details">
-                            <a href="#" class="btn btn-sm btn-light-primary " data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">Editar</a>
+                            <button type="button" id="btnEditarPer_<?php echo $xPerid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditarPer">
+                                Editar
+                            </button> 
                         </span>
-                        <!-- <button type="button" id="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar">
-                            <i class="fa fa-edit"></i>
-                        </button>  -->
                     </div>
                     <div class="separator"></div>
                     <div id="kt_user_view_details" class="collapse show">
@@ -370,7 +363,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modal_persona" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
             <div class="modal-header" id="kt_modal_add_user_header">
@@ -398,8 +391,19 @@
                         <div id="kt_modal_update_user_user_info" class="collapse show">
                             <div class="fv-row mb-7">
                                 <label class="d-block fw-bold fs-6 mb-5">Avatar</label>
-                                <div class="image-input image-input-outline" data-kt-image-input="true">
-                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(persona/<?php echo $xImagen; ?>);" id="imgfile"></div>
+                                <!-- <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('img/default.png')">
+                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(img/default.png);" id="imgfile"></div>
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar Avatar">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
+                                        <input type="hidden" name="avatar_remove" />
+                                    </label>
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>													
+                                </div> -->
+                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('img/default.png')">
+                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(img/default.png);" id="imgfile"></div>
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar Avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
@@ -416,13 +420,13 @@
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Nombres</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100"  value="<?php echo $xNombres; ?>" readonly/>
+                                    <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100"  value="" readonly/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Apellidos</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" value="<?php echo $xApellidos; ?>" readonly/>
+                                    <input type="text" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" value="" readonly/>
                                 </div>                                                    
                             </div>
                         </div>
@@ -437,20 +441,20 @@
                         <div id="kt_modal_update_user_address" class="collapse show">
                             <div class="d-flex flex-column mb-7 fv-row">
                                 <label class="fs-6 fw-bold mb-2">Direccion</label>
-                                <input class="form-control form-control-solid" placeholder="Ingrese Direccion" value="<?php echo $xDireccion; ?>" />
+                                <input class="form-control form-control-solid" id="txtDireccion" placeholder="Ingrese Direccion" value="" />
                             </div>
                             <div class="row g-9 mb-7">
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Telefono Casa</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100" placeholder="Ingrese Telefono Casa" value="<?php echo $xTelcasa; ?>"/>
+                                    <input type="text" class="form-control form-control-solid" id="txtTelcasa"  minlength="5" maxlength="100" placeholder="Ingrese Telefono Casa" value=""/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Telefono Oficina</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" placeholder="Ingrese Telefono Oficina" value="<?php echo $xTelofi; ?>"/>
+                                    <input type="text" class="form-control form-control-solid" id="txtTelofi"  minlength="5" maxlength="100" placeholder="Ingrese Telefono Oficina" value=""/>
                                 </div>                                                    
                             </div>
                             <div class="row g-9 mb-7">
@@ -458,13 +462,13 @@
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Celular</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100" placeholder="Ingrese Celular" value="<?php echo $xCel; ?>"/>
+                                    <input type="text" class="form-control form-control-solid" id="txtCel"  minlength="5" maxlength="100" placeholder="Ingrese Celular" value=""/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Email</span>
                                     </label>
-                                    <input type="email" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" placeholder="Ingrese Email" value="<?php echo $xEmail; ?>"/>
+                                    <input type="email" class="form-control form-control-solid" id="txtEmail"  minlength="5" maxlength="100" placeholder="Ingrese Email" value=""/>
                                 </div>                                                    
                             </div>
                         </div>
@@ -602,6 +606,56 @@ function f_Regresar(_clieid,_prodid,_grupid){
 		});
     
    }
+   $(document).on("click",".btnEditarPer",function(){
+
+        
+        $("#modal_persona").find("input,textarea,checkbox").val("");
+
+        var _rowid = $(this).attr("id");
+        _rowid = _rowid.substring(13);
+        _paisid = '<?php echo $xPaisid;?>';
+        _emprid = '<?php echo $xEmprid;?>';
+
+        $parametros = {
+            xxPerid: _rowid,
+            xxPaisid: _paisid,
+            xxEmprid: _emprid
+        }
+
+        $.ajax({
+					url: "codephp/get_datospersona.php",
+					type: "POST",
+					dataType: "json",
+					data: $parametros,          
+					success: function(data){ 
+						//console.log(data);
+						//debugger;
+						var _nombre = data[0]['Nombres'];
+						var _apellido = data[0]['Apellidos'];
+                        var _avatar = data[0]['Imagen'] == '' ? 'default.png' : data[0]['Imagen'];
+						var _direccion = data[0]['Direccion'];
+                        var _telcasa = data[0]['Telcasa'];
+                        var _telofi = data[0]['Telofi'];
+                        var _cel = data[0]['Cel'];
+                        var _email = data[0]['Email'];
+
+
+						$("#txtNombre").val(_nombre);
+						$("#txtApellido").val(_apellido);
+                        document.getElementById('imgfile').style.backgroundImage="url(persona/" + _avatar + ")";
+						$("#txtDireccion").val(_direccion);
+						$("#txtTelcasa").val(_telcasa);
+                        $("#txtTelofi").val(_telofi);
+						$("#txtCel").val(_cel);
+                        $("#txtEmail").val(_email);
+						                                                                      
+					},
+					error: function (error){
+						console.log(error);
+					}                            
+				}); 
+        $("#modal_persona").modal("show");
+    });
 
    $(document).on("click",".btnEditar",function(){
 
