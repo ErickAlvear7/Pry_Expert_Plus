@@ -305,7 +305,7 @@
                                             <td>
                                                 <div class="text-center">
                                                     <div class="btn-group">	
-                                                        <button type="button" id="btnEditar_<?php echo $xBeneid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title='Editar Beneficiario'>
+                                                        <button type="button" id="btnEditarBe_<?php echo $xBeneid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditarBe" title='Editar Beneficiario'>
                                                             <i class="fa fa-edit"></i>
                                                         </button> 
                                                     </div>
@@ -518,17 +518,17 @@
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Nombres</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100"  value="<?php echo $xNombres; ?>" readonly/>
+                                    <input type="text" class="form-control form-control-solid" id="txtNombreBe" name="txtNombre" minlength="5" maxlength="100"  value="" readonly/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Apellidos</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" value="<?php echo $xApellidos; ?>" readonly/>
+                                    <input type="text" class="form-control form-control-solid" id="txtApellidoBe" name="txtApellido" minlength="5" maxlength="100" value="" readonly/>
                                 </div>                                                    
                             </div>
                         </div>
-                    <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_address" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_address">Informacion Titular
+                    <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_address" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_address">Informacion Beneficiario
                         <span class="ms-2 rotate-180">
                             <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -540,20 +540,20 @@
                         <div id="kt_modal_update_user_address" class="collapse show">
                             <div class="d-flex flex-column mb-7 fv-row">
                                 <label class="fs-6 fw-bold mb-2">Direccion</label>
-                                <input class="form-control form-control-solid" placeholder="Ingrese Direccion" value="<?php echo $xDireccion; ?>" />
+                                <input class="form-control form-control-solid" id="txtDireccionBe" placeholder="Ingrese Direccion" value="" />
                             </div>
                             <div class="row g-9 mb-7">
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Telefono Casa</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100" placeholder="Ingrese Telefono Casa" value="<?php echo $xTelcasa; ?>"/>
+                                    <input type="text" class="form-control form-control-solid" id="txtTelcasaBe"  minlength="5" maxlength="100" placeholder="Ingrese Telefono Casa" value=""/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Telefono Oficina</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" placeholder="Ingrese Telefono Oficina" value="<?php echo $xTelofi; ?>"/>
+                                    <input type="text" class="form-control form-control-solid" id="txtTelofiBe"  minlength="5" maxlength="100" placeholder="Ingrese Telefono Oficina" value=""/>
                                 </div>                                                    
                             </div>
                             <div class="row g-9 mb-7">
@@ -561,13 +561,13 @@
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Celular</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100" placeholder="Ingrese Celular" value="<?php echo $xCel; ?>"/>
+                                    <input type="text" class="form-control form-control-solid" id="txtCelularBe"  minlength="5" maxlength="100" placeholder="Ingrese Celular" value=""/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Email</span>
                                     </label>
-                                    <input type="email" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" placeholder="Ingrese Email" value="<?php echo $xEmail; ?>"/>
+                                    <input type="email" class="form-control form-control-solid" id="txtEmailBe"  minlength="5" maxlength="100" placeholder="Ingrese Email" value=""/>
                                 </div>                                                    
                             </div>
                         </div>
@@ -657,17 +657,42 @@ function f_Regresar(_clieid,_prodid,_grupid){
         $("#modal_persona").modal("show");
     });
 
-   $(document).on("click",".btnEditar",function(){
 
-        
-        $("#modal_beneficiario").find("input,textarea,checkbox").val("");
 
-        var _rowid = $(this).attr("id");
-        _rowid = _rowid.substring(10);
+    $(document).on("click",".btnEditarBe",function(){
+      
+        $("#modal_beneficiario").find("input").val("");
 
-        $("#modal_beneficiario").modal("show");
-  
+        _rowid = $(this).attr("id");
+        _rowid = _rowid.substring(12);
+
+        var xrespuesta = $.post("codephp/get_datosbeneficiario.php", { xxBeneid: _rowid});
+        xrespuesta.done(function(response){
+
+            var _datos = JSON.parse(response);
+            $.each(_datos,function(i,item){
+                _nombre = _datos[i].Nombre;
+                _apellido =  _datos[i].Apellido;
+                _direccion =  _datos[i].Direccion;
+                _telcasa =  _datos[i].Telcasa;
+                _telofi =  _datos[i].Telofi;
+                _celular =  _datos[i].Celular;
+                _email =  _datos[i].Email;
+
+                $('#txtNombreBe').val(_nombre);
+                $('#txtApellidoBe').val(_apellido);
+                $('#txtDireccionBe').val(_direccion);
+                $('#txtTelcasaBe').val(_telcasa);
+                $('#txtTelofiBe').val(_telofi);
+                $('#txtCelularBe').val(_celular);
+                $('#txtEmailBe').val(_email);
+
+                $("#modal_beneficiario").modal("show");
+            }); 
+
+        });
 
     });
+
 
 </script>
