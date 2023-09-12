@@ -448,13 +448,13 @@
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Telefono Casa</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtTelcasa"  minlength="5" maxlength="100" placeholder="Ingrese Telefono Casa" value=""/>
+                                    <input type="text" class="form-control form-control-solid" id="txtTelcasa"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Casa" value=""/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Telefono Oficina</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtTelofi"  minlength="5" maxlength="100" placeholder="Ingrese Telefono Oficina" value=""/>
+                                    <input type="text" class="form-control form-control-solid" id="txtTelofi"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Oficina" value=""/>
                                 </div>                                                    
                             </div>
                             <div class="row g-9 mb-7">
@@ -462,7 +462,7 @@
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Celular</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtCel"  minlength="5" maxlength="100" placeholder="Ingrese Celular" value=""/>
+                                    <input type="text" class="form-control form-control-solid" id="txtCel"  maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Celular" value=""/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
@@ -475,7 +475,7 @@
                     </div>
                     <div class="text-center pt-15">
                         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" id="btnSave">
+                        <button type="button" class="btn btn-primary" id="btnSaveTit">
                             <span class="indicator-label">Grabar</span>
                             <span class="indicator-progress">Espere un momento...
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -547,13 +547,13 @@
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Telefono Casa</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtTelcasaBe"  minlength="5" maxlength="100" placeholder="Ingrese Telefono Casa" value=""/>
+                                    <input type="text" class="form-control form-control-solid" id="txtTelcasaBe" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Casa" value=""/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Telefono Oficina</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtTelofiBe"  minlength="5" maxlength="100" placeholder="Ingrese Telefono Oficina" value=""/>
+                                    <input type="text" class="form-control form-control-solid" id="txtTelofiBe" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Oficina" value=""/>
                                 </div>                                                    
                             </div>
                             <div class="row g-9 mb-7">
@@ -561,7 +561,7 @@
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Celular</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtCelularBe"  minlength="5" maxlength="100" placeholder="Ingrese Celular" value=""/>
+                                    <input type="text" class="form-control form-control-solid" id="txtCelularBe" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Celular" value=""/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
@@ -574,7 +574,7 @@
                     </div>
                     <div class="text-center pt-15">
                         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" id="btnSave">
+                        <button type="button" class="btn btn-primary" id="btnSaveBene">
                             <span class="indicator-label">Grabar</span>
                             <span class="indicator-progress">Espere un momento...
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -594,18 +594,18 @@ $(document).ready(function(){
 
 });
 
-
-
 // Funcion de regreso de pagina 
-function f_Regresar(_clieid,_prodid,_grupid){
+    function f_Regresar(_clieid,_prodid,_grupid){
 
-        $.redirect('?page=addtitular&menuid=<?php echo $menuid; ?>', {
-            'idclie': _clieid,
-            'idprod': _prodid,
-            'idgrup': _grupid
-		});
-    
-   }
+            $.redirect('?page=addtitular&menuid=<?php echo $menuid; ?>', {
+                'idclie': _clieid,
+                'idprod': _prodid,
+                'idgrup': _grupid
+            });
+        
+    }
+
+// Ingreso de datos tabla editar titular
    $(document).on("click",".btnEditarPer",function(){
 
         
@@ -657,8 +657,81 @@ function f_Regresar(_clieid,_prodid,_grupid){
         $("#modal_persona").modal("show");
     });
 
+// Validaciones Editar Titular
+    $('#btnSaveTit').click(function(e){
+
+        var _direccion = $.trim($("#txtDireccion").val()); 
+        var _telcasa = $.trim($("#txtTelcasa").val()); 
+        var _telofi = $.trim($("#txtTelofi").val()); 
+        var _celular = $.trim($("#txtCel").val()); 
+        var _email = $.trim($("#txtEmail").val());
+
+        if(_direccion == ''){
+            mensajesalertify("Ingrese Direccion..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_telcasa == ''){
+            mensajesalertify("Ingrese Numero de Telefono Casa..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_telcasa != '')
+        {
+            _valor = document.getElementById("txtTelcasa").value;
+            if( !(/^\d{9}$/.test(_valor)) ) {
+                mensajesalertify("Telefono casa incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }  
+
+        if(_telofi == ''){
+            mensajesalertify("Ingrese Numero de Telefono Oficina..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_telofi != '')
+        {
+            _valor = document.getElementById("txtTelofi").value;
+            if( !(/^\d{9}$/.test(_valor)) ) {
+                mensajesalertify("Telefono oficina incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }  
+
+        if(_celular == ''){
+            mensajesalertify("Ingrese Numero de Telefono Celular..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_celular != '')
+        {
+            _valor = document.getElementById("txtCel").value;
+            if( !(/^\d{10}$/.test(_valor)) ) {
+                mensajesalertify("Celular  incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }    
+
+        if(_email == ''){
+            mensajesalertify("Ingrese Email..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_email != ''){
+            var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+        
+            if (regex.test($('#txtEmail').val().trim())) {
+            }else{
+                mensajesalertify("Email  no es Valido..!", "W", "top-right", 3);
+                return;
+            }
+        }
 
 
+    });    
+
+// Ingreso de datos en tabla editar beneficiario
     $(document).on("click",".btnEditarBe",function(){
       
         $("#modal_beneficiario").find("input").val("");
@@ -693,6 +766,80 @@ function f_Regresar(_clieid,_prodid,_grupid){
         });
 
     });
+
+// Validaciones Editar Titular
+    $('#btnSaveBene').click(function(e){
+
+        var _direccionbe = $.trim($("#txtDireccionBe").val()); 
+        var _telcasabe = $.trim($("#txtTelcasaBe").val()); 
+        var _telofibe = $.trim($("#txtTelofiBe").val()); 
+        var _celularbe = $.trim($("#txtCelularBe").val()); 
+        var _emailbe = $.trim($("#txtEmailBe").val());
+
+        if(_direccionbe == ''){
+            mensajesalertify("Ingrese Direccion..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_telcasabe == ''){
+            mensajesalertify("Ingrese Numero de Telefono Casa..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_telcasabe != '')
+        {
+            _valor = document.getElementById("txtTelcasaBe").value;
+            if( !(/^\d{9}$/.test(_valor)) ) {
+                mensajesalertify("Telefono casa incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }  
+
+        if(_telofibe == ''){
+            mensajesalertify("Ingrese Numero de Telefono Oficina..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_telofibe != '')
+        {
+            _valor = document.getElementById("txtTelofiBe").value;
+            if( !(/^\d{9}$/.test(_valor)) ) {
+                mensajesalertify("Telefono oficina incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }  
+
+        if(_celularbe == ''){
+            mensajesalertify("Ingrese Numero de Telefono Celular..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_celularbe != '')
+        {
+            _valor = document.getElementById("txtCelularBe").value;
+            if( !(/^\d{10}$/.test(_valor)) ) {
+                mensajesalertify("Celular  incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }    
+
+        if(_emailbe == ''){
+            mensajesalertify("Ingrese Email..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_emailbe != ''){
+            var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+
+            if (regex.test($('#txtEmailBe').val().trim())) {
+            }else{
+                mensajesalertify("Email  no es Valido..!", "W", "top-right", 3);
+                return;
+            }
+        }
+
+    });   
+
 
 
 </script>
