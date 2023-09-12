@@ -132,11 +132,9 @@
                                 </svg>
                             </span>
                         </span></div>
-                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit customer details">
-                            <button type="button" id="btnEditarPer_<?php echo $xPerid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditarPer">
-                                Editar
-                            </button> 
-                        </span>
+                        <button type="button" id="btnEditarPer_<?php echo $xPerid; ?>" class="btn btn-outline-primary btnEditarPer">
+                            Editar
+                        </button> 
                     </div>
                     <div class="separator"></div>
                     <div id="kt_user_view_details" class="collapse show">
@@ -665,6 +663,28 @@ $(document).ready(function(){
         var _telofi = $.trim($("#txtTelofi").val()); 
         var _celular = $.trim($("#txtCel").val()); 
         var _email = $.trim($("#txtEmail").val());
+        var _selecc = 'NO';
+        var _imgfile = document.getElementById("imgfile").style.backgroundImage;
+        var _url = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+        var _pos = _url.trim().indexOf('.');
+        var _ext = _url.trim().substr(_pos, 5);
+
+        if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
+            _selecc = 'SI';
+        }                    
+
+        if(_selecc == 'SI'){
+            var _imagen = document.getElementById("imgavatar");
+            var _file = _imagen.files[0];
+            var _fullPath = document.getElementById('imgavatar').value;
+            _ext = _fullPath.substring(_fullPath.length - 4);
+            _ext = _ext.toLowerCase();   
+        }
+
+        if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
+            mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
+            return;
+        }
 
         if(_direccion == ''){
             mensajesalertify("Ingrese Direccion..!", "W", "top-right", 3);
