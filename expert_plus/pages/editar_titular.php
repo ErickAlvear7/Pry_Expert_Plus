@@ -547,6 +547,7 @@
                                         <span>Telefono Casa</span>
                                     </label>
                                     <input type="text" class="form-control form-control-solid" id="txtTelcasaBe" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Casa" value=""/>
+                                    <input type="hidden" class="form-control form-control-solid" id="txtTelcasaBeAnt" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Casa" value=""/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
@@ -793,10 +794,35 @@ $(document).ready(function(){
 
         var _direccionbe = $.trim($("#txtDireccionBe").val());
         var _direccionbeant =  $.trim($("#txtDireccionBeAnt").val());
-        var _telcasabe = $.trim($("#txtTelcasaBe").val()); 
+        var _telcasabe = $.trim($("#txtTelcasaBe").val());
+        var _telcasabeant = $.trim($("#txtTelcasaBeAnt").val());
         var _telofibe = $.trim($("#txtTelofiBe").val()); 
         var _celularbe = $.trim($("#txtCelularBe").val()); 
         var _emailbe = $.trim($("#txtEmailBe").val());
+        var _continuar = 'SI';
+
+        if(_continuar == 'SI'){
+            if(_direccionbe == ''){
+                mensajesalertify("Ingrese Direccion..!", "W", "top-right", 3);
+                _continuar = 'NO';
+                return; 
+            }else if(_direccionbeant == ''){
+                _continuar = 'SI';
+            }
+
+        }
+
+        if(_continuar == 'SI'){
+            if(_telcasabe == ''){
+                mensajesalertify("Ingrese Numero de Telefono Casa..!", "W", "top-right", 3);
+                _continuar = 'NO';
+                return; 
+            }else  if(_telcasabeant == ''){
+                _continuar = 'SI';
+            }
+        }
+
+
 
         if(_direccionbe == '' && _direccionbeant == ''){
             mensajesalertify("Ingrese Direccion..!", "W", "top-right", 3);
