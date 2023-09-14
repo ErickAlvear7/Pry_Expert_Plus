@@ -777,6 +777,7 @@ $(document).ready(function(){
                 $('#txtNombreBe').val(_nombre);
                 $('#txtApellidoBe').val(_apellido);
                 $('#txtDireccionBe').val(_direccion);
+                $('#txtDireccionBeAnt').val(_direccion);
                 $('#txtTelcasaBe').val(_telcasa);
                 $('#txtTelofiBe').val(_telofi);
                 $('#txtCelularBe').val(_celular);
@@ -801,26 +802,12 @@ $(document).ready(function(){
         var _emailbe = $.trim($("#txtEmailBe").val());
         var _continuar = 'SI';
 
-        if(_continuar == 'SI'){
-            if(_direccionbe == ''){
-                mensajesalertify("Ingrese Direccion..!", "W", "top-right", 3);
-                _continuar = 'NO';
-                return; 
-            }else if(_direccionbeant == ''){
-                _continuar = 'SI';
-            }
+        console.log(_direccionbe);
+        console.log(_direccionbeant);
 
-        }
+      
 
-        if(_continuar == 'SI'){
-            if(_telcasabe == ''){
-                mensajesalertify("Ingrese Numero de Telefono Casa..!", "W", "top-right", 3);
-                _continuar = 'NO';
-                return; 
-            }else  if(_telcasabeant == ''){
-                _continuar = 'SI';
-            }
-        }
+
 
 
 
