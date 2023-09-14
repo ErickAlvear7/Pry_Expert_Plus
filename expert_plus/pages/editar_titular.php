@@ -802,12 +802,6 @@ $(document).ready(function(){
         var _emailbe = $.trim($("#txtEmailBe").val());
         var _continuar = 'SI';
 
-        console.log(_direccionbe);
-        console.log(_direccionbeant);
-
-      
-
-
 
 
 
