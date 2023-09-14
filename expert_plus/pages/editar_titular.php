@@ -539,6 +539,7 @@
                             <div class="d-flex flex-column mb-7 fv-row">
                                 <label class="fs-6 fw-bold mb-2">Direccion</label>
                                 <input class="form-control form-control-solid" id="txtDireccionBe" placeholder="Ingrese Direccion" value="" />
+                                <input type="hidden" class="form-control form-control-solid" id="txtDireccionBeAnt" placeholder="Ingrese Direccion" value="" />
                             </div>
                             <div class="row g-9 mb-7">
                                 <div class="col-md-6 fv-row">
@@ -790,13 +791,14 @@ $(document).ready(function(){
 // Validaciones Editar Titular
     $('#btnSaveBene').click(function(e){
 
-        var _direccionbe = $.trim($("#txtDireccionBe").val()); 
+        var _direccionbe = $.trim($("#txtDireccionBe").val());
+        var _direccionbeant =  $.trim($("#txtDireccionBeAnt").val());
         var _telcasabe = $.trim($("#txtTelcasaBe").val()); 
         var _telofibe = $.trim($("#txtTelofiBe").val()); 
         var _celularbe = $.trim($("#txtCelularBe").val()); 
         var _emailbe = $.trim($("#txtEmailBe").val());
 
-        if(_direccionbe == ''){
+        if(_direccionbe == '' && _direccionbeant == ''){
             mensajesalertify("Ingrese Direccion..!", "W", "top-right", 3);
             return; 
         }
