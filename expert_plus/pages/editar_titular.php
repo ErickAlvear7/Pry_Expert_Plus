@@ -293,17 +293,21 @@
                                             <td><?php echo $xCiudadBen; ?></td>
                                             <td><?php echo $xBeneficiario; ?></td>
                                             <td><?php echo $xParentescoBen; ?></td>
-                                            <td><?php echo $xEstadoBen; ?></td>
+                                            <td id="td_<?php echo $xBeneid; ?>">
+                                                <div class="<?php echo $xTextColor; ?>">
+                                                    <?php echo $xEstadoBen; ?>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                     <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xBeneid; ?>" 
-                                                    onchange="f_UpdateEstado()" value=""/>
+                                                    onchange="f_UpdateEstado(<?php echo $xBeneid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" value=""/>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="text-center">
                                                     <div class="btn-group">	
-                                                        <button type="button" id="btnEditarBe_<?php echo $xBeneid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditarBe" title='Editar Beneficiario'>
+                                                        <button type="button" id="btnEditarBe_<?php echo $xBeneid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditarBe" <?php echo $xDisabledEdit;?> title='Editar Beneficiario'>
                                                             <i class="fa fa-edit"></i>
                                                         </button> 
                                                     </div>
@@ -574,7 +578,7 @@
                     </div>
                     <div class="text-center pt-15">
                         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" id="btnSaveBene">
+                        <button type="button" class="btn btn-primary" id="btnSaveBene" onclick="f_EditarBene(<?php echo $xBeneid;?>,<?php echo $xUsuaid;?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>)"> 
                             <span class="indicator-label">Grabar</span>
                             <span class="indicator-progress">Espere un momento...
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -687,69 +691,6 @@ $(document).ready(function(){
             return;
         }
 
-        if(_direccion == ''){
-            mensajesalertify("Ingrese Direccion..!", "W", "top-right", 3);
-            return; 
-        }
-
-        if(_telcasa == ''){
-            mensajesalertify("Ingrese Numero de Telefono Casa..!", "W", "top-right", 3);
-            return; 
-        }
-
-        if(_telcasa != '')
-        {
-            _valor = document.getElementById("txtTelcasa").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono casa incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }  
-
-        if(_telofi == ''){
-            mensajesalertify("Ingrese Numero de Telefono Oficina..!", "W", "top-right", 3);
-            return; 
-        }
-
-        if(_telofi != '')
-        {
-            _valor = document.getElementById("txtTelofi").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono oficina incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }  
-
-        if(_celular == ''){
-            mensajesalertify("Ingrese Numero de Telefono Celular..!", "W", "top-right", 3);
-            return; 
-        }
-
-        if(_celular != '')
-        {
-            _valor = document.getElementById("txtCel").value;
-            if( !(/^\d{10}$/.test(_valor)) ) {
-                mensajesalertify("Celular  incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }    
-
-        if(_email == ''){
-            mensajesalertify("Ingrese Email..!", "W", "top-right", 3);
-            return; 
-        }
-
-        if(_email != ''){
-            var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-        
-            if (regex.test($('#txtEmail').val().trim())) {
-            }else{
-                mensajesalertify("Email  no es Valido..!", "W", "top-right", 3);
-                return;
-            }
-        }
-
-
     });    
 
 // Modal editar beneficiario
@@ -789,84 +730,74 @@ $(document).ready(function(){
 
     });
 
-// Guardar Editar Titular
-    $('#btnSaveBene').click(function(e){
+// Guardar Editar Beneficiario
+
+    function f_EditarBene(_beneid,_usuaid,_paisid,_emprid){
 
         var _direccionbe = $.trim($("#txtDireccionBe").val());
-        var _direccionbeant =  $.trim($("#txtDireccionBeAnt").val());
         var _telcasabe = $.trim($("#txtTelcasaBe").val());
         var _telcasabeant = $.trim($("#txtTelcasaBeAnt").val());
         var _telofibe = $.trim($("#txtTelofiBe").val()); 
         var _celularbe = $.trim($("#txtCelularBe").val()); 
         var _emailbe = $.trim($("#txtEmailBe").val());
-        var _continuar = 'SI';
 
-
-
-
-        if(_direccionbe == '' && _direccionbeant == ''){
-            mensajesalertify("Ingrese Direccion..!", "W", "top-right", 3);
-            return; 
+        var _parametros = {
+            "xxBeneid" : _beneid,
+            "xxUsuaid" : _usuaid,
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxDireccion" : _direccionbe,
+            "xxTelcasa" : _telcasabe,
+            "xxTelofi" : _telofibe,
+            "xxCelular" : _celularbe,
+            "xxEmail" : _emailbe       
         }
 
-        if(_telcasabe == ''){
-            mensajesalertify("Ingrese Numero de Telefono Casa..!", "W", "top-right", 3);
-            return; 
-        }
+        var xrespuesta = $.post("codephp/update_beneficiario.php", _parametros);
+        xrespuesta.done(function(response){
+            console.log(response)
+        });
 
-        if(_telcasabe != '')
-        {
-            _valor = document.getElementById("txtTelcasaBe").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono casa incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }  
+        $("#modal_beneficiario").modal("hide");
 
-        if(_telofibe == ''){
-            mensajesalertify("Ingrese Numero de Telefono Oficina..!", "W", "top-right", 3);
-            return; 
-        }
+    };   
 
-        if(_telofibe != '')
-        {
-            _valor = document.getElementById("txtTelofiBe").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono oficina incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }  
+//Update Estado Beneficiario 
+function f_UpdateEstado(_beneid,_paisid,_emprid,_usuaid){
 
-        if(_celularbe == ''){
-            mensajesalertify("Ingrese Numero de Telefono Celular..!", "W", "top-right", 3);
-            return; 
-        }
+    var _check = $("#chk" + _beneid).is(":checked");
+    var _checked = "";
+    var _class = "badge badge-light-primary";
+    var _td = "td_" + _beneid;
+    var _btnedit = "btnEditarBe_" + _beneid;
 
-        if(_celularbe != '')
-        {
-            _valor = document.getElementById("txtCelularBe").value;
-            if( !(/^\d{10}$/.test(_valor)) ) {
-                mensajesalertify("Celular  incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }    
+    if(_check){
+        var _estado = 'ACTIVO';
+        _checked = "checked='checked'";
+        $('#'+_btnedit).prop("disabled",false);
+            
+    }else{
+        _estado = 'INACTIVO';
+        _class = "badge badge-light-danger";
+        $('#'+_btnedit).prop("disabled",true);
+    }
 
-        if(_emailbe == ''){
-            mensajesalertify("Ingrese Email..!", "W", "top-right", 3);
-            return; 
-        }
+    var _changetd = document.getElementById(_td);
+        _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
 
-        if(_emailbe != ''){
-            var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+        var _parametros = {
+            "xxBeneid" : _beneid,
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxUsuaid" : _usuaid,
+            "xxEstado" : _estado
+        } 
 
-            if (regex.test($('#txtEmailBe').val().trim())) {
-            }else{
-                mensajesalertify("Email  no es Valido..!", "W", "top-right", 3);
-                return;
-            }
-        }
+        var xrespuesta = $.post("codephp/update_estadobeneficiario.php", _parametros);
+            xrespuesta.done(function(response){
+        });	
 
-    });   
+}
 
 
 
