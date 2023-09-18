@@ -605,11 +605,10 @@ $(document).ready(function(){
         
     }
 
-// Ingreso de datos tabla editar titular
+// Modal editar titular
    $(document).on("click",".btnEditarPer",function(){
 
-        
-        $("#modal_persona").find("input,textarea,checkbox").val("");
+        $("#modal_persona").find("input").val('');
 
         var _rowid = $(this).attr("id");
         _rowid = _rowid.substring(13);
@@ -657,7 +656,7 @@ $(document).ready(function(){
         $("#modal_persona").modal("show");
     });
 
-// Validaciones Editar Titular
+// Guardar Editar Titular
     $('#btnSaveTit').click(function(e){
 
         var _direccion = $.trim($("#txtDireccion").val()); 
@@ -753,7 +752,7 @@ $(document).ready(function(){
 
     });    
 
-// Ingreso de datos en tabla editar beneficiario
+// Modal editar beneficiario
     $(document).on("click",".btnEditarBe",function(){
       
         $("#modal_beneficiario").find("input").val("");
@@ -790,7 +789,7 @@ $(document).ready(function(){
 
     });
 
-// Validaciones Editar Titular
+// Guardar Editar Titular
     $('#btnSaveBene').click(function(e){
 
         var _direccionbe = $.trim($("#txtDireccionBe").val());
