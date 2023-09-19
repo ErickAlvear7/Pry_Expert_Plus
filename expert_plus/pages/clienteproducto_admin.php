@@ -149,8 +149,8 @@
 						<td>
                             <div class="text-center">
 								<div class="btn-group">
-									<button id="btnEditar_<?php echo $xClieid;?>" onclick="f_Editar(<?php echo $xClieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit;?> title='Editar Cliente'>
-										<i class='fa fa-edit'></i>
+									<button id="btnEditar_<?php echo $xClieid;?>" onclick="f_Editar(<?php echo $xClieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit;?> title='Editar Cliente' data-bs-toggle="tooltip" data-bs-placement="right">
+										<i class="fa fa-edit"></i>
 									</button>												 
 								</div>
 							</div>
