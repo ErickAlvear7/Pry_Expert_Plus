@@ -451,15 +451,13 @@
 
 <script>
     
-    var _cobertura = "NO",_sistema = "NO", _count = 0, _result = [];
+    var _cobertura = "NO",_sistema = "NO", _count = 0, _result = [],_paisid = "<?php echo $xPaisid; ?>",_emprid = "<?php echo $xEmprid; ?>";
 
     $(document).ready(function(){
 
         $('#cboProvincia').change(function(){
-                
-            var _paisid = "<?php echo $xPaisid; ?>";
-            var _emprid = "<?php echo $xEmprid; ?>";                
-            _cboid = $(this).val(); //obtener el id seleccionado
+                              
+            var _cboid = $(this).val(); //obtener el id seleccionado
             
             $("#cboCiudad").empty();
 
@@ -622,7 +620,7 @@
                         _output += '<td>' + _costo + ' <input type="hidden" name="hidden_costo[]" id="txtCosto' + _count + '" value="' + _costo + '" /></td>';
                         _output += '<td>';
                         _output += '<button id="btnDelete' + _count + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"  onclick="f_DelProducto('+"'";
-                        _output +=  _producto + "'" + ',' + _count + ')"' + ' title="Eliminar Producto" ><i class="fa fa-trash"></i></button></td>';
+                        _output +=  _producto + "'" + ',' + _count + ')"' + ' title="Eliminar Producto" data-bs-toggle="tooltip" data-bs-placement="right"><i class="fa fa-trash"></i></button></td>';
                         _output += '</tr>';
 
                         $('#tblProducto').append(_output);
