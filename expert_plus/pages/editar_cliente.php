@@ -80,7 +80,7 @@
 
     $xSQL = "SELECT pro.prod_id AS Idprod, pro.prod_nombre AS Producto, pro.prod_descripcion AS Descrip, pro.prod_costo AS Costo, ";
     $xSQL .="pro.prod_asistmes AS AsisMes, pro.prod_asistanu AS AsisAnu, pro.prod_cobertura AS Cobertura, pro.prod_sistema AS Sistema, ";
-    $xSQL .="pro.prod_gerencial AS Gerencial,CASE pro.prod_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, gru.grup_id AS Idgrup,gru.grup_nombre AS Grupo FROM `expert_productos` pro INNER JOIN ";
+    $xSQL .="pro.prod_gerencial AS Gerencial,CASE pro.prod_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado, gru.grup_id AS Idgrup,gru.grup_nombre AS Grupo FROM `expert_productos` pro INNER JOIN ";
     $xSQL .="`expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.clie_id =$clieid AND pro.pais_id =$xPaisid AND pro.empr_id =$xEmprid ORDER BY gru.grup_nombre ";
     $all_prod = mysqli_query($con, $xSQL);
 
@@ -469,7 +469,7 @@
                                                         $xCheking = '';
                                                         $xDisabledEdit = '';
 
-                                                        if($xEstado == 'Activo'){
+                                                        if($xEstado == 'ACTIVO'){
                                                             $xCheking = 'checked="checked"';
                                                             $xTextColor = "badge badge-light-primary";
                                                         }else{
@@ -497,10 +497,10 @@
                                                     <td>
                                                         <div class="text-center">
                                                             <div class="btn-group">	
-                                                                <button type="button" id="btnEditar_<?php echo $xProdid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Producto'>
+                                                                <button type="button" id="btnEditar_<?php echo $xProdid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Producto' data-bs-toggle="tooltip" data-bs-placement="left">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button> 
-                                                                <button type="button" id="btnTitular_<?php echo $xProdid; ?>" onclick="f_Titular(<?php echo $xGrupId;?>,<?php echo $xProdid;?>,<?php echo $clieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Agregar Titular'>
+                                                                <button type="button" id="btnTitular_<?php echo $xProdid; ?>" onclick="f_Titular(<?php echo $xGrupId;?>,<?php echo $xProdid;?>,<?php echo $clieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Agregar Titular' data-bs-toggle="tooltip" data-bs-placement="left">
                                                                     <i class="fa fa-user"></i>
                                                                 </button> 
                                                             </div>
@@ -551,7 +551,7 @@
                     <label class="fs-6 fw-bold form-label mb-2">
                         <span>Descripcion</span>
                     </label>
-                    <textarea class="form-control mb-2" name="txtDescGrupo" id="txtDescGrupo" rows="1" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                    <textarea class="form-control mb-2 text-uppercase" name="txtDescGrupo" id="txtDescGrupo" rows="1" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
                 </div>                         
             </div>
             <div class="modal-footer">
@@ -829,15 +829,15 @@
                 _output +='<td>' +_txtGrupo + '</td>';
                 _output +='<td>' +_productoUpper + '</td>';
                 _output +='<td>' +_costo + '</td>';
-                _output +='<td id="td_'+_id + '"><div class="badge badge-light-primary">Activo</div></td>';
+                _output +='<td id="td_'+_id + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
                 _output +='<td><div class="form-check form-check-sm form-check-custom form-check-solid">';
                 _output +='<input class="form-check-input h-20px w-20px border-primary btnEstado" checked="checked" type="checkbox" id="chk'+_id +'" ';
                 _output +='onchange="f_UpdateEstado('+_id +','+ _emprid +','+_paisid +','+_usuaid +')" value=""/></div></td>';
                 _output +='<td><div class="text-center"><div class="btn-group">';
-                _output +='<button type="button" id="btnEditar_'+_id +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto">';
+                _output +='<button type="button" id="btnEditar_'+_id +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto" data-bs-toggle="tooltip" data-bs-placement="left">';
                 _output +='<i class="fa fa-edit"></i></button>';
                 _output +='<button type="button" id="btnTitular_'+_id +'" onclick="f_Titular('+ _cbogrupo +','+ _id +','+ _clieid +')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" ';
-                _output +='title="Agregar Titular"><i class="fa fa-user"></i></button></div></div></td>';
+                _output +='title="Agregar Titular" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-user"></i></button></div></div></td>';
                 _output +='</tr>';
 
                 $('#tblProducto').append(_output);
@@ -951,13 +951,13 @@
 
         if(_check){
 
-            _estado = 'Activo';
+            _estado = 'ACTIVO';
             _checked = "checked='checked'";
             $('#'+_btnedit).prop("disabled",false);
             $('#'+_btntitu).prop("disabled",false);
 
         }else{
-            _estado = 'Inactivo';
+            _estado = 'INACTIVO';
             _class = "badge badge-light-danger";
             $('#'+_btnedit).prop("disabled",true);
             $('#'+_btntitu).prop("disabled",true);    
@@ -1154,15 +1154,15 @@
                 _output +='<td>' +_txtgrupoedit + '</td>';
                 _output +='<td>' +_prodeditUpper + '</td>';
                 _output +='<td>' +_costoedit + '</td>';
-                _output +='<td id="td_'+ _prodid + '"><div class="badge badge-light-primary">Activo</div></td>';
+                _output +='<td id="td_'+ _prodid + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
                 _output +='<td><div class="form-check form-check-sm form-check-custom form-check-solid">';
                 _output +='<input class="form-check-input h-20px w-20px border-primary btnEstado" checked="checked" type="checkbox" id="chk'+ _prodid +'" ';
                 _output +='onchange="f_UpdateEstado('+ _prodid + ',' + _emprid + ',' + _paisid + ',' + _usuaid + ')" value=""/></div></td>';
                 _output +='<td><div class="text-center"><div class="btn-group">';
-                _output +='<button type="button" id="btnEditar_' + _prodid +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto">';
+                _output +='<button type="button" id="btnEditar_' + _prodid +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto" data-bs-toggle="tooltip" data-bs-placement="left">';
                 _output +='<i class="fa fa-edit"></i></button>';
                 _output +='<button type="button" id="btnTitular_' + _prodid +'" onclick="f_Titular('+ _cbogrupoedit +','+ _prodid +','+ _clieid +')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" ';
-                _output +='title="Agregar Titular"><i class="fa fa-user"></i></button></div></div></td>';
+                _output +='title="Agregar Titular" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-user"></i></button></div></div></td>';
 
                 //console.log(_output);
               
