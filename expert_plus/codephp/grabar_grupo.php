@@ -15,9 +15,7 @@
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());  
     $xTerminal = gethostname();
     $resultado = "ERR";
-    $xRow = 0;  
-    $log_file = "log_error_grabartipopresta.txt";
-
+  
     if(isset($_POST['xxPaisId']) and isset($_POST['xxEmprId']) and isset($_POST['xxUsuaId']) and isset($_POST['xxGrupo'])){
         if(isset($_POST['xxPaisId']) <> '' and isset($_POST['xxEmprId']) <> '' and isset($_POST['xxUsuaId']) <> '' and isset($_POST['xxGrupo']) <> ''){    
 
@@ -25,7 +23,7 @@
             $xEmprid = $_POST['xxEmprId'];
             $xUsuaid = $_POST['xxUsuaId'];
             $xGrupo = trim(mb_strtoupper(safe($_POST['xxGrupo'])));
-            $xDesc = safe($_POST['xxDesc']);
+            $xDesc = trim(mb_strtoupper(safe($_POST['xxDesc'])));
 
 
             $xSQL = "INSERT INTO `expert_grupos`(pais_id,empr_id,grup_nombre,grup_descripcion,usuariocreacion,terminalcreacion,fechacreacion) ";
