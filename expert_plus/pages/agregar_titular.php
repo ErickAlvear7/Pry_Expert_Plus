@@ -764,6 +764,11 @@
             return; 
         }
 
+        if(_txtDocumentoBe.length < 11){
+            mensajesalertify("Documento Incorrecto..!", "W", "top-right", 3);
+            return; 
+        }
+
         if(_txtNombreBe == ''){
             mensajesalertify("Ingrese Nombre..!", "W", "top-right", 3);
             return; 
