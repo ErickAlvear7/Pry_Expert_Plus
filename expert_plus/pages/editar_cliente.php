@@ -577,46 +577,46 @@
                 </div>
             </div>
             <div class="modal-body">
-                <div class="mb-5 fv-row">
-                    <label class="required form-label">Producto</label>
-                    <input class="form-control mb-2 text-uppercase" type="text" name="txtProductoEdit" id="txtProductoEdit" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
-                </div>
-                <div class="mb-5 fv-row">
-                    <label class="form-label">Descripcion</label>
-                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcionEdit" id="txtDescripcionEdit" rows="1" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
-                </div>
-                <br>
-                <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                    <div class="col">
-                        <label class="required form-label">Costo</label>
-                        <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                <div class="border border-hover-primary p-7 rounded mb-7 ">
+                    <div class="mb-5 fv-row">
+                        <label class="required form-label">Producto</label>
+                        <input class="form-control mb-2 text-uppercase" type="text" name="txtProductoEdit" id="txtProductoEdit" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
                     </div>
-                    <div class="col">
-                        <label class="required form-label">Grupo</label>
-                        <select name="cboGrupoEdit" id="cboGrupoEdit" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
-                            <option></option>
-                            <?php 
-                                $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND grup_estado='A' ";
-                                $all_datos =  mysqli_query($con, $xSQL);
-                                foreach ($all_datos as $dato){ ?>
-                                    <option value="<?php echo $dato['Codigo'] ?>"><?php echo $dato['NombreGrupo'] ?></option>
-                                <?php } ?>  
-                        </select>
+                    <div class="mb-5 fv-row">
+                        <label class="form-label">Descripcion</label>
+                        <textarea class="form-control mb-2 text-uppercase" name="txtDescripcionEdit" id="txtDescripcionEdit" rows="1" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                    </div>
+                    <br>
+                    <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                        <div class="col">
+                            <label class="required form-label">Costo</label>
+                            <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                        </div>
+                        <div class="col">
+                            <label class="required form-label">Grupo</label>
+                            <select name="cboGrupoEdit" id="cboGrupoEdit" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
+                                <option></option>
+                                <?php 
+                                    $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND grup_estado='A' ";
+                                    $all_datos =  mysqli_query($con, $xSQL);
+                                    foreach ($all_datos as $dato){ ?>
+                                        <option value="<?php echo $dato['Codigo'] ?>"><?php echo $dato['NombreGrupo'] ?></option>
+                                    <?php } ?>  
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                        <div class="col">
+                            <label class="required form-label">Asistencia Mes</label>
+                            <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control mb-2" value="1" />  
+                        </div>
+                        <div class="col">
+                            <label class="required form-label">Asistencia Anual</label>
+                            <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" value="1" />   
+                        </div>
                     </div>
                 </div>
-                <br>
-                <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                    <div class="col">
-                        <label class="required form-label">Asistencia Mes</label>
-                        <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control mb-2" value="1" />  
-                    </div>
-                    <div class="col">
-                        <label class="required form-label">Asistencia Anual</label>
-                        <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" value="1" />   
-                    </div>
-                </div>
-                <br>
-                <br>
                 <div class="border border-hover-primary p-7 rounded mb-7 ">
                     <div class="row g-9 mb-8">
                         <div class="col-md-4 fv-row">
