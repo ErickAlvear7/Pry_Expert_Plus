@@ -561,6 +561,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="modal_producto" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
@@ -575,7 +576,7 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+            <div class="modal-body">
                 <div class="mb-5 fv-row">
                     <label class="required form-label">Producto</label>
                     <input class="form-control mb-2 text-uppercase" type="text" name="txtProductoEdit" id="txtProductoEdit" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
@@ -616,32 +617,36 @@
                 </div>
                 <br>
                 <br>
-                <div class="mb-5 fv-row">
-                    <h5 class="txtcob" id="lblCoberturaEdit"></h5>
-                    <label class="form-check form-switch form-check-custom form-check-solid">
-                        <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
-                    </label> 
+                <div class="border border-hover-primary p-7 rounded mb-7 ">
+                    <div class="row g-9 mb-8">
+                        <div class="col-md-4 fv-row">
+                            <h5 class="txtcob" id="lblCoberturaEdit"></h5>
+                            <label class="form-check form-switch form-check-custom form-check-solid">
+                                <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
+                            </label> 
+                        </div>
+                        <div class="col-md-4 fv-row t">
+                            <h5 class="txtsis"></h5>
+                            <label class="form-check form-switch form-check-custom form-check-solid">
+                                <input class="form-check-input" name="chkSistemaEdit" id="chkSistemaEdit" type="checkbox" />
+                            </label> 
+                        </div>
+                        <div class="col-md-4 fv-row">
+                            <h5 class="txtger"></h5>
+                            <label class="form-check form-switch form-check-custom form-check-solid">
+                                <input class="form-check-input" name="chkGerencialEdit" id="chkGerencialEdit" type="checkbox" />
+                            </label> 
+                        </div>
+                    </div>
                 </div>
-                <div class="mb-5 fv-row">
-                    <h5 class="txtsis"></h5>
-                    <label class="form-check form-switch form-check-custom form-check-solid">
-                        <input class="form-check-input" name="chkSistemaEdit" id="chkSistemaEdit" type="checkbox" />
-                    </label> 
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-primary">Modificar</button>
                 </div>
-                <div class="mb-5 fv-row">
-                    <h5 class="txtger"></h5>
-                    <label class="form-check form-switch form-check-custom form-check-solid">
-                        <input class="form-check-input" name="chkGerencialEdit" id="chkGerencialEdit" type="checkbox" />
-                    </label> 
-                </div>            
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-primary">Modificar</button>
             </div>
         </div>
     </div>
-</div>
-         
+</div>    
 
 <script>
 
