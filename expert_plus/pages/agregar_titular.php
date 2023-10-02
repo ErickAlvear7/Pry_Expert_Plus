@@ -44,7 +44,7 @@
     $all_provincia = mysqli_query($con, $xSQL);
 
     $xSQL = "SELECT pst.pers_id AS PerId, tit.titu_id AS Tituid, CONCAT(pst.pers_nombres,' ',pst.pers_apellidos) AS Nombres,pst.pers_imagen AS  ";
-    $xSQL .="Imagen,CASE pst.pers_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado,pst.pers_ciudad AS CiudadId FROM `expert_persona` pst, `expert_titular` tit ";
+    $xSQL .="Imagen,CASE pst.pers_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado,pst.pers_ciudad AS CiudadId FROM `expert_persona` pst, `expert_titular` tit ";
     $xSQL .="WHERE tit.pais_id = $xPaisid AND tit.empr_id=$xEmprid AND pst.pers_id=tit.pers_id AND tit.prod_id=$prodid AND tit.grup_id=$grupid ORDER BY pst.pers_nombres ";
     $all_persona = mysqli_query($con, $xSQL);
 
@@ -223,7 +223,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tab_beneficiarios">Beneficiario</a>
                 </li>
-                <button type="button" id="btnRegresar" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
+                <button type="button" id="btnRegresar" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
                     <span class="svg-icon svg-icon-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
@@ -257,7 +257,7 @@
                                     </div>
                                     <div class="fv-row w-100 flex-md-root">
                                         <label class="required form-label">Nro. Documento</label>
-                                        <input type="text" id="txtDocumento" class="form-control mb-2" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"  />
+                                        <input type="text" id="txtDocumento" class="form-control mb-2" value="" minlength="10" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"  />
                                     </div>    
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
@@ -411,7 +411,7 @@
                                                     $xCheking = '';
                                                     $xDisabledEdit = '';
 
-                                                    if($xEstado == 'Activo'){
+                                                    if($xEstado == 'ACTIVO'){
                                                         $xCheking = 'checked="checked"';
                                                         $xTextColor = "badge badge-light-primary";
                                                     }else{
@@ -453,10 +453,10 @@
                                                 <td>
                                                     <div class="text-center">
                                                         <div class="btn-group">	
-                                                            <button type="button" id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular(<?php echo $xPerid; ?>,<?php echo $xTituid; ?>,<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular'>
+                                                            <button type="button" id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular(<?php echo $xPerid; ?>,<?php echo $xTituid; ?>,<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular' data-bs-toggle="tooltip" data-bs-placement="left">
                                                                 <i class="fa fa-edit"></i>
                                                             </button> 
-                                                            <button type="button" id="btnAgendar_<?php echo $xPerid; ?>" onclick="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar'>
+                                                            <button type="button" id="btnAgendar_<?php echo $xPerid; ?>" onclick="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
                                                                 <i class="fa fa-user-plus"></i>
                                                             </button> 
                                                         </div>
@@ -986,6 +986,12 @@
             return; 
         }
 
+        
+        if(_txtDocumento.length < 11){
+            mensajesalertify("Documento Incorrecto..!", "W", "top-right", 3);
+            return; 
+        }
+
         if(_txtNombre == ''){
             mensajesalertify("Ingrese Nombre..!", "W", "top-right", 3);
             return; 
@@ -1152,13 +1158,13 @@
         var _btnagen = "btnAgendar_" + _perid;
 
         if(_check){
-            _estado = "Activo";
+            _estado = "ACTIVO";
             _disabled = "";
             _checked = "checked='checked'";
             $('#'+_btnedit).prop("disabled",false);
             $('#'+_btnagen).prop("disabled",false);
         }else{
-            _estado = "Inactivo";
+            _estado = "INACTIVO";
             _disabled = "disabled";
             _class = "badge badge-light-danger";
             $('#'+_btnedit).prop("disabled",true);
