@@ -377,7 +377,7 @@
                                 </div>
                                 <br>
                                 <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
-                                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_edit_order_product_table">
+                                    <table class="table table-hover align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_edit_order_product_table">
                                         <thead>
                                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                                 <th>Ciudad</th>
@@ -764,7 +764,7 @@
             return; 
         }
 
-        if(_txtDocumentoBe.length < 11){
+        if(_txtDocumentoBe.length < 10){
             mensajesalertify("Documento Incorrecto..!", "W", "top-right", 3);
             return; 
         }
@@ -871,7 +871,7 @@
 
 
                     $('#tblBeneficiario').append(_output);
-    console.log(_output);
+                    //console.log(_output);
                     var _objeto = {
 
                         arrytipodocumento: _cboDocumentoBe,
@@ -992,7 +992,7 @@
         }
 
         
-        if(_txtDocumento.length < 11){
+        if(_txtDocumento.length < 10){
             mensajesalertify("Documento Incorrecto..!", "W", "top-right", 3);
             return; 
         }

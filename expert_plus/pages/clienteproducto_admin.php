@@ -76,7 +76,7 @@
 		    </div>                       
         </div>
 		<div class="card-body pt-0">
-			<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
+			<table class="table table-hover align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
 				<thead>
 					<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0 text-uppercase">
 					    <th>Ciudad</th>
@@ -149,7 +149,7 @@
 						<td>
                             <div class="text-center">
 								<div class="btn-group">
-									<button id="btnEditar_<?php echo $xClieid;?>" onclick="f_Editar(<?php echo $xClieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit;?> title='Editar Cliente' data-bs-toggle="tooltip" data-bs-placement="right">
+									<button id="btnEditar_<?php echo $xClieid;?>" onclick="f_Editar(<?php echo $xClieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit;?> title='Editar Cliente' data-bs-toggle="tooltip" data-bs-placement="left">
 										<i class="fa fa-edit"></i>
 									</button>												 
 								</div>

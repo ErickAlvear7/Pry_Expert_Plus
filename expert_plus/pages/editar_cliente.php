@@ -435,7 +435,7 @@
                             <div class="card-body pt-0">
                                 <div class="d-flex flex-column gap-10">
                                     <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
-                                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="tblProducto">
+                                        <table class="table table-hover align-middle table-row-dashed fs-6 gy-5" id="tblProducto">
                                             <thead>
                                                 <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                                     <th style="display:none;">Id</th>

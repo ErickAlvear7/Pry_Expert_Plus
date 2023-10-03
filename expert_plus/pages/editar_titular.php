@@ -41,27 +41,37 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
-    $xSQL = "SELECT per.pers_id AS Perid, per.pers_numerodocumento AS Documento, CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona, ";
-    $xSQL .= "per.pers_imagen AS Imagen, per.pers_fechanacimiento AS Fecha, ciu.ciudad AS Ciudad, per.pers_estado AS Estado ";
-    $xSQL .= "FROM `expert_persona` per, `expert_titular` tit, `provincia_ciudad` ciu ";
-    $xSQL .= "WHERE per.pers_id=$perid AND tit.pers_id=$tituid AND per.pers_ciudad=ciu.prov_id AND per.pais_id=$xPaisid AND per.empr_id=$xEmprid ";
-    $titular = mysqli_query($con, $xSQL);
+    // $xSQL = "SELECT per.pers_id AS Perid, per.pers_numerodocumento AS Documento, CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona, ";
+    // $xSQL .= "per.pers_imagen AS Imagen, per.pers_fechanacimiento AS Fecha, ciu.ciudad AS Ciudad, per.pers_estado AS Estado ";
+    // $xSQL .= "FROM `expert_persona` per, `expert_titular` tit, `provincia_ciudad` ciu ";
+    // $xSQL .= "WHERE per.pers_id=$perid AND tit.pers_id=$tituid AND per.pers_ciudad=ciu.prov_id AND per.pais_id=$xPaisid AND per.empr_id=$xEmprid ";
+    // $titular = mysqli_query($con, $xSQL);
 
-    foreach($titular as $per){
-        $xPerid = $per['Perid'];
-        $xDocumento = $per['Documento'];
+    $xSQL = "SELECT per.pers_id AS Idper,per.pers_numerodocumento AS Docu,CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona,per.pers_imagen AS Imagen, per.pers_fechanacimiento AS Fecha, ";
+    $xSQL .="per.pers_ciudad AS Ciudad,per.pers_estado AS Estado FROM `expert_persona` per WHERE per.pers_id = $perid AND per.pais_id=$xPaisid AND per.empr_id=$xEmprid ";
+    $persona = mysqli_query($con, $xSQL);
+
+    foreach($persona as $per){
+        $xPerid = $per['Idper'];
+        $xDocumento = $per['Docu'];
         $xPersona = $per['Persona'];
         $xImagen = $per['Imagen'];
         $xFecha = $per['Fecha'];
-        $xEstado = $per['Estado'];
         $xCiudad = $per['Ciudad'];
+        $xEstado = $per['Estado'];
     }
-
-
 
     if($xEstado=='A'){
         $xestado='ACTIVO';
     }
+
+    $xSQL = "SELECT ciudad AS Ciuper FROM `provincia_ciudad` WHERE prov_id=$xCiudad ";
+    $ciudad = mysqli_query($con, $xSQL);
+
+    foreach($ciudad as $ciu){
+        $xCiuper = $ciu['Ciuper'];
+    }
+
 
     $xSQL = "SELECT ben.bene_id AS Beneid, CONCAT(ben.bene_nombres,' ', ben.bene_apellidos) AS Beneficiario, ciu.ciudad AS Ciudadben, ";
     $xSQL .= "pde.pade_nombre AS Parentesco, ben.bene_estado AS Estadoben ";
@@ -124,7 +134,7 @@
                         </div>
                     </div>
                     <div class="d-flex flex-stack fs-4 py-3">
-                        <div class="fw-bolder rotate collapsible" data-bs-toggle="collapse" href="#kt_user_view_details" role="button" aria-expanded="false" aria-controls="kt_user_view_details">Details
+                        <div class="fw-bolder rotate collapsible" data-bs-toggle="collapse" href="#kt_user_view_details" role="button" aria-expanded="false" aria-controls="kt_user_view_details">Detalle
                         <span class="ms-2 rotate-180">
                             <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -139,11 +149,11 @@
                     <div class="separator"></div>
                     <div id="kt_user_view_details" class="collapse show">
                         <div class="pb-5 fs-6">
-                            <div class="fw-bolder mt-5">Cedula</div>
+                            <div class="fw-bolder mt-5">CEDULA</div>
                             <div class="text-gray-600"><?php echo $xDocumento; ?></div>
-                            <div class="fw-bolder mt-5">Cuidad</div>
-                            <div class="text-gray-600"><?php echo $xCiudad; ?></div>
-                            <div class="fw-bolder mt-5">Fecha Nacimiento</div>
+                            <div class="fw-bolder mt-5">CIUDAD</div>
+                            <div class="text-gray-600 text-uppercase"><?php echo $xCiuper; ?></div>
+                            <div class="fw-bolder mt-5">FECHA DE NACIMIENTO</div>
                             <div class="text-gray-600"><?php echo $xFecha; ?></div>
                             <div class="fw-bolder mt-5">Last Login</div>
                             <div class="text-gray-600">25 Jul 2022, 2:40 pm</div>
@@ -233,7 +243,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_user_view_overview_tab">Beneficiario</a>
                 </li>
-                <button type="button" id="btnRegresar" onclick="f_Regresar(<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
+                <button type="button" id="btnRegresar" onclick="f_Regresar(<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="right">
                     <span class="svg-icon svg-icon-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
@@ -251,14 +261,14 @@
                         </div>
                         <div class="card-body pt-0 pb-5">
                             <div class="table-responsive">
-                                <table class="table align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
+                                <table class="table table-hover align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
                                     <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
                                         <tr class="text-start text-muted text-uppercase gs-0">
-                                            <th class="min-w-100px">CIUDAD</th>
+                                            <th class="min-w-90px">CIUDAD</th>
                                             <th>NOMBRES</th>
                                             <th>PARENTESCO</th>
                                             <th>ESTADO</th>
-                                            <th class="min-w-125px">ESTATUS</th>
+                                            <th class="min-w-70px">ESTATUS</th>
                                             <th class="min-w-70px">OPCIONES</th>
                                         </tr>
                                     </thead>
@@ -290,7 +300,7 @@
                                             }
                                         ?>  
                                         <tr id="row_<?php echo $xBeneid; ?>">
-                                            <td><?php echo $xCiudadBen; ?></td>
+                                            <td class="text-uppercase"><?php echo $xCiudadBen; ?></td>
                                             <td><?php echo $xBeneficiario; ?></td>
                                             <td><?php echo $xParentescoBen; ?></td>
                                             <td id="td_<?php echo $xBeneid; ?>">
@@ -299,15 +309,17 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                    <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xBeneid; ?>" 
-                                                    onchange="f_UpdateEstado(<?php echo $xBeneid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" value=""/>
+                                                <div class="text-center">
+                                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                        <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xBeneid; ?>" 
+                                                        onchange="f_UpdateEstado(<?php echo $xBeneid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" value=""/>
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="text-center">
                                                     <div class="btn-group">	
-                                                        <button type="button" id="btnEditarBe_<?php echo $xBeneid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditarBe" <?php echo $xDisabledEdit;?> title='Editar Beneficiario'>
+                                                        <button type="button" id="btnEditarBe_<?php echo $xBeneid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditarBe" <?php echo $xDisabledEdit;?> title="Editar Beneficiario" data-bs-toggle="tooltip" data-bs-placement="left" >
                                                             <i class="fa fa-edit"></i>
                                                         </button> 
                                                     </div>
@@ -422,13 +434,13 @@
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Nombres</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100"  value="" readonly/>
+                                    <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100"  value="" disabled/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Apellidos</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" value="" readonly/>
+                                    <input type="text" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" value="" disabled/>
                                 </div>                                                    
                             </div>
                         </div>
@@ -475,12 +487,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-center pt-15">
+                    <div class="d-flex justify-content-end text-center pt-15">
                         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
                         <button type="button" class="btn btn-primary" id="btnSaveTit">
-                            <span class="indicator-label">Grabar</span>
-                            <span class="indicator-progress">Espere un momento...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            <span class="indicator-label">Modificar</span>
                         </button>
                     </div>  
                 </form>
@@ -520,13 +530,13 @@
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Nombres</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtNombreBe" name="txtNombre" minlength="5" maxlength="100"  value="" readonly/>
+                                    <input type="text" class="form-control form-control-solid" id="txtNombreBe" name="txtNombre" minlength="5" maxlength="100"  value="" disabled/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Apellidos</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtApellidoBe" name="txtApellido" minlength="5" maxlength="100" value="" readonly/>
+                                    <input type="text" class="form-control form-control-solid" id="txtApellidoBe" name="txtApellido" minlength="5" maxlength="100" value="" disabled/>
                                 </div>                                                    
                             </div>
                         </div>
@@ -576,12 +586,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-center pt-15">
+                    <div class="d-flex justify-content-end text-center pt-15">
                         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
                         <button type="button" class="btn btn-primary" id="btnSaveBene" onclick="f_EditarBene(<?php echo $xBeneid;?>,<?php echo $xUsuaid;?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>)"> 
-                            <span class="indicator-label">Grabar</span>
-                            <span class="indicator-progress">Espere un momento...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            <span class="indicator-label">Modificar</span>
                         </button>
                     </div>  
                 </form>
