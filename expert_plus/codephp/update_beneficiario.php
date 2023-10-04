@@ -18,8 +18,8 @@
     $xTerminal = gethostname();    
     $xRespuesta = "ERR";
 
-    if(isset($_POST['xxBeneid']) and isset($_POST['xxTituid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxPaisid']) and isset($_POST['xxEmprid'])){
-        if(isset($_POST['xxBeneid']) <> '' and isset($_POST['xxTituid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' ){
+    if(isset($_POST['xxBeneid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxPaisid']) and isset($_POST['xxEmprid'])){
+        if(isset($_POST['xxBeneid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' ){
             
             $xBeneid = $_POST['xxBeneid'];
             $xTituid = $_POST['xxTituid'];
@@ -34,7 +34,7 @@
             $xEmail = trim(safe($_POST['xxEmail']));
     
             $xSQL = "UPDATE `expert_beneficiario` SET bene_direccion ='$xDireccion',bene_telefonocasa ='$xTelcasa',bene_telefonoficina ='$xTelofi',bene_celular ='$xCelular',bene_email ='$xEmail' ";
-            $xSQL .= "WHERE bene_id=$xBeneid AND titu_id=$xTituid";
+            $xSQL .= "WHERE bene_id=$xBeneid";
             mysqli_query($con, $xSQL);
             $xRespuesta = "OK";
             
