@@ -72,26 +72,6 @@
     $xSQL .= "FROM `expert_beneficiario` WHERE titu_id=$tituid";
     $all_Beneficiario = mysqli_query($con, $xSQL);
 
-    foreach($all_Beneficiario as $ben){
-        $xCiuben = $ben['Ciudadben'];
-        $xParenben = $ben['Parentesco'];
-    }
-
-    $xSQL = "SELECT ciudad AS Ciuben FROM `provincia_ciudad` WHERE prov_id=$xCiuben ";
-    $ciudadben = mysqli_query($con, $xSQL);
-
-    foreach($ciudadben as $ciuben){
-        $xCiubene = $ciuben['Ciuben'];
-    }
-
-    $xSQL = "SELECT pade_nombre AS NombrePare FROM `expert_parametro_detalle` WHERE pade_valorV='$xParenben' ";
-    $parenben = mysqli_query($con, $xSQL);
-
-    foreach($parenben as $pare){
-        $xPareben = $pare['NombrePare'];
-    }
-
-
 
 
 ?>
@@ -292,7 +272,26 @@
                                             foreach($all_Beneficiario as $ben){
                                             $xBeneid = $ben['Beneid'];
                                             $xBeneficiario = $ben['Beneficiario'];
+                                            $xCiuben = $ben['Ciudadben'];
+                                            $xParenben = $ben['Parentesco'];
                                             $xEstadoBen = $ben['Estadoben'];
+                                        ?>
+                                        <?php 
+
+                                            $xSQL = "SELECT ciudad AS Ciuben FROM `provincia_ciudad` WHERE prov_id=$xCiuben ";
+                                            $ciudadben = mysqli_query($con, $xSQL);
+
+                                            foreach($ciudadben as $ciuben){
+                                                $xCiubene = $ciuben['Ciuben'];
+                                            }
+
+                                            $xSQL = "SELECT pade_nombre AS NombrePare FROM `expert_parametro_detalle` WHERE pade_valorV='$xParenben' ";
+                                            $parenben = mysqli_query($con, $xSQL);
+
+                                            foreach($parenben as $pare){
+                                                $xPareben = $pare['NombrePare'];
+                                            }      
+                                        
                                         ?>
                                         <?php
                                             if($xEstadoBen=='A'){
