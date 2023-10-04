@@ -600,7 +600,7 @@
                     </div>
                     <div class="d-flex justify-content-end text-center pt-15">
                         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" id="btnSaveBene" onclick="f_EditarBene(<?php echo $xBeneid;?>,<?php echo $tituid;?>,<?php echo $xUsuaid;?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>)"> 
+                        <button type="button" class="btn btn-primary" id="btnSaveBene" onclick="f_EditarBene(<?php echo $xUsuaid;?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>)"> 
                             <span class="indicator-label">Modificar</span>
                         </button>
                     </div>  
@@ -752,7 +752,9 @@ $(document).ready(function(){
 
 // Guardar Editar Beneficiario
 
-    function f_EditarBene(_beneid,_tituid,_usuaid,_paisid,_emprid){
+    function f_EditarBene(_usuaid,_paisid,_emprid){
+
+        //debugger;
 
         var _direccionbe = $.trim($("#txtDireccionBe").val());
         var _telcasabe = $.trim($("#txtTelcasaBe").val());
@@ -762,8 +764,7 @@ $(document).ready(function(){
         var _emailbe = $.trim($("#txtEmailBe").val());
 
         var _parametros = {
-            "xxBeneid" : _beneid,
-            "xxTituid" : _tituid,
+            "xxBeneid" : _rowid,
             "xxUsuaid" : _usuaid,
             "xxPaisid" : _paisid,
             "xxEmprid" : _emprid,
