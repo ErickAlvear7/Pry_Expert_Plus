@@ -754,8 +754,6 @@ $(document).ready(function(){
 
     function f_EditarBene(_usuaid,_paisid,_emprid){
 
-        debugger;
-
         var _direccionbe = $.trim($("#txtDireccionBe").val());
         var _telcasabe = $.trim($("#txtTelcasaBe").val());
         var _telcasabeant = $.trim($("#txtTelcasaBeAnt").val());

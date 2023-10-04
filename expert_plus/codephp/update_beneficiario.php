@@ -22,7 +22,6 @@
         if(isset($_POST['xxBeneid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' ){
             
             $xBeneid = $_POST['xxBeneid'];
-            $xTituid = $_POST['xxTituid'];
             $xUsuaid = $_POST['xxUsuaid'];
             $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
