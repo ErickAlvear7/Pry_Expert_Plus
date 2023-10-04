@@ -45,8 +45,6 @@
                 mysqli_query($con, $xSQL);                
             }
             
-
-     
         }
     }
     
