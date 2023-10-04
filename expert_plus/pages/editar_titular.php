@@ -41,11 +41,6 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
-    // $xSQL = "SELECT per.pers_id AS Perid, per.pers_numerodocumento AS Documento, CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona, ";
-    // $xSQL .= "per.pers_imagen AS Imagen, per.pers_fechanacimiento AS Fecha, ciu.ciudad AS Ciudad, per.pers_estado AS Estado ";
-    // $xSQL .= "FROM `expert_persona` per, `expert_titular` tit, `provincia_ciudad` ciu ";
-    // $xSQL .= "WHERE per.pers_id=$perid AND tit.pers_id=$tituid AND per.pers_ciudad=ciu.prov_id AND per.pais_id=$xPaisid AND per.empr_id=$xEmprid ";
-    // $titular = mysqli_query($con, $xSQL);
 
     $xSQL = "SELECT per.pers_id AS Idper,per.pers_numerodocumento AS Docu,CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona,per.pers_imagen AS Imagen, per.pers_fechanacimiento AS Fecha, ";
     $xSQL .="per.pers_ciudad AS Ciudad,per.pers_estado AS Estado FROM `expert_persona` per WHERE per.pers_id = $perid AND per.pais_id=$xPaisid AND per.empr_id=$xEmprid ";
