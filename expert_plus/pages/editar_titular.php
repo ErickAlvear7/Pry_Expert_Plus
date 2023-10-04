@@ -68,11 +68,31 @@
     }
 
 
-    $xSQL = "SELECT ben.bene_id AS Beneid, CONCAT(ben.bene_nombres,' ', ben.bene_apellidos) AS Beneficiario, ciu.ciudad AS Ciudadben, ";
-    $xSQL .= "pde.pade_nombre AS Parentesco, ben.bene_estado AS Estadoben ";
-    $xSQL .= "FROM `expert_beneficiario` ben, `expert_titular` tit,`provincia_ciudad` ciu, `expert_parametro_detalle` pde ";
-    $xSQL .= "WHERE tit.titu_id=$tituid AND ben.titu_id=$tituid AND ben.bene_ciudad=ciu.prov_id AND ben.bene_parentesco=pde.pade_valorV ";
+    $xSQL = "SELECT bene_id AS Beneid,CONCAT(bene_nombres,' ',bene_apellidos) AS Beneficiario, bene_ciudad AS Ciudadben, bene_parentesco AS Parentesco, bene_estado AS Estadoben ";
+    $xSQL .= "FROM `expert_beneficiario` WHERE titu_id=$tituid";
     $all_Beneficiario = mysqli_query($con, $xSQL);
+
+    foreach($all_Beneficiario as $ben){
+        $xCiuben = $ben['Ciudadben'];
+        $xParenben = $ben['Parentesco'];
+    }
+
+    $xSQL = "SELECT ciudad AS Ciuben FROM `provincia_ciudad` WHERE prov_id=$xCiuben ";
+    $ciudadben = mysqli_query($con, $xSQL);
+
+    foreach($ciudadben as $ciuben){
+        $xCiubene = $ciuben['Ciuben'];
+    }
+
+    $xSQL = "SELECT pade_nombre AS NombrePare FROM `expert_parametro_detalle` WHERE pade_valorV='$xParenben' ";
+    $parenben = mysqli_query($con, $xSQL);
+
+    foreach($parenben as $pare){
+        $xPareben = $pare['NombrePare'];
+    }
+
+
+
 
 ?>
 
@@ -272,8 +292,6 @@
                                             foreach($all_Beneficiario as $ben){
                                             $xBeneid = $ben['Beneid'];
                                             $xBeneficiario = $ben['Beneficiario'];
-                                            $xCiudadBen = $ben['Ciudadben'];
-                                            $xParentescoBen = $ben['Parentesco'];
                                             $xEstadoBen = $ben['Estadoben'];
                                         ?>
                                         <?php
@@ -295,9 +313,9 @@
                                             }
                                         ?>  
                                         <tr id="row_<?php echo $xBeneid; ?>">
-                                            <td class="text-uppercase"><?php echo $xCiudadBen; ?></td>
+                                            <td class="text-uppercase"><?php echo $xCiubene; ?></td>
                                             <td><?php echo $xBeneficiario; ?></td>
-                                            <td><?php echo $xParentescoBen; ?></td>
+                                            <td><?php echo $xPareben; ?></td>
                                             <td id="td_<?php echo $xBeneid; ?>">
                                                 <div class="<?php echo $xTextColor; ?>">
                                                     <?php echo $xEstadoBen; ?>
@@ -547,7 +565,7 @@
                         <div id="kt_modal_update_user_address" class="collapse show">
                             <div class="d-flex flex-column mb-7 fv-row">
                                 <label class="fs-6 fw-bold mb-2">Direccion</label>
-                                <input class="form-control form-control-solid" id="txtDireccionBe" placeholder="Ingrese Direccion" value="" />
+                                <input class="form-control form-control-solid text-uppercase" id="txtDireccionBe" placeholder="Ingrese Direccion" value="" />
                                 <input type="hidden" class="form-control form-control-solid" id="txtDireccionBeAnt" placeholder="Ingrese Direccion" value="" />
                             </div>
                             <div class="row g-9 mb-7">
@@ -583,7 +601,7 @@
                     </div>
                     <div class="d-flex justify-content-end text-center pt-15">
                         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" id="btnSaveBene" onclick="f_EditarBene(<?php echo $xBeneid;?>,<?php echo $xUsuaid;?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>)"> 
+                        <button type="button" class="btn btn-primary" id="btnSaveBene" onclick="f_EditarBene(<?php echo $xBeneid;?>,<?php echo $tituid;?>,<?php echo $xUsuaid;?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>)"> 
                             <span class="indicator-label">Modificar</span>
                         </button>
                     </div>  
@@ -735,7 +753,7 @@ $(document).ready(function(){
 
 // Guardar Editar Beneficiario
 
-    function f_EditarBene(_beneid,_usuaid,_paisid,_emprid){
+    function f_EditarBene(_beneid,_tituid,_usuaid,_paisid,_emprid){
 
         var _direccionbe = $.trim($("#txtDireccionBe").val());
         var _telcasabe = $.trim($("#txtTelcasaBe").val());
@@ -746,6 +764,7 @@ $(document).ready(function(){
 
         var _parametros = {
             "xxBeneid" : _beneid,
+            "xxTituid" : _tituid,
             "xxUsuaid" : _usuaid,
             "xxPaisid" : _paisid,
             "xxEmprid" : _emprid,
