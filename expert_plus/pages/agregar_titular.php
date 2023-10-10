@@ -120,98 +120,122 @@
                 </div>
             </div>
             <br>
-            <div class="card card-flush py-4">
-                <div class="card-header">
+            <div class="card mb-5 mb-xl-8">
+                <div class="card-header border-0">
                     <div class="card-title">
-                        <h3>Detalle Cliente</h3>
+                        <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_detalle" role="button" aria-expanded="false" aria-controls="view_datos_detalle">Detalle Cliente
+                            <span class="ms-2 rotate-180">
+                                <span class="svg-icon svg-icon-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </span>
+                        </div> 
                     </div>
                 </div>
-                <div class="card-body pt-0">
-                    <div class="d-flex flex-column gap-10">
-                        <div class="d-flex align-items-center">							
-                            <i class="bi bi-filter-square text-primary fs-1 me-5"></i>
-                            <div class="d-flex flex-column">
-                                <h5 class="text-gray-800 fw-bolder">Empresa</h5>
-                                <div class="fw-bold">
-                                   <label><?php echo $Nombre; ?></label>
+                <div class="separator"></div>
+                <div id="view_datos_detalle" class="collapse ">
+                    <div class="card-body pt-2">
+                        <div class="d-flex flex-column gap-10">
+                            <div class="d-flex align-items-center">							
+                                <i class="bi bi-filter-square text-primary fs-1 me-5"></i>
+                                <div class="d-flex flex-column">
+                                    <h5 class="text-gray-800 fw-bolder">Empresa</h5>
+                                    <div class="fw-bold">
+                                    <label><?php echo $Nombre; ?></label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <i class="bi bi-envelope-check text-primary fs-1 me-5"></i>
-                            <div class="d-flex flex-column">
-                                <h5 class="text-gray-800 fw-bolder">Email</h5>
-                                <div class="fw-bold">
-                                    <a href="#" class="link-primary"><?php echo $Email; ?></a>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-envelope-check text-primary fs-1 me-5"></i>
+                                <div class="d-flex flex-column">
+                                    <h5 class="text-gray-800 fw-bolder">Email</h5>
+                                    <div class="fw-bold">
+                                        <a href="#" class="link-primary"><?php echo $Email; ?></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="d-flex align-items-center">							
-                            <i class="bi bi-telephone-outbound text-primary fs-1 me-5"></i>
-                            <div class="d-flex flex-column">
-                                <h5 class="text-gray-800 fw-bolder">Telefonos</h5>
-                                <div class="fw-bold">
-                                   <label><?php echo $Telefono; ?> - <?php echo $Celular; ?></label>
+                            <div class="d-flex align-items-center">							
+                                <i class="bi bi-telephone-outbound text-primary fs-1 me-5"></i>
+                                <div class="d-flex flex-column">
+                                    <h5 class="text-gray-800 fw-bolder">Telefonos</h5>
+                                    <div class="fw-bold">
+                                    <label><?php echo $Telefono; ?> - <?php echo $Celular; ?></label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-header">
+            </div>  
+            <div class="card mb-5 mb-xl-8">
+                <div class="card-header border-0">
                     <div class="card-title">
-                        <h3>Detalle Producto</h3>
+                        <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_producto" role="button" aria-expanded="false" aria-controls="view_datos_producto">Detalle Producto
+                            <span class="ms-2 rotate-180">
+                                <span class="svg-icon svg-icon-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </span>
+                        </div> 
                     </div>
                 </div>
-                <div class="card-body pt-0">
-                    <div class="d-flex flex-column gap-10">
-                        <div class="d-flex align-items-center">
-                            <i class="bi bi-briefcase-fill text-primary fs-1 me-5"></i>
-                            <div class="d-flex flex-column">
-                                <h5 class="text-gray-800 fw-bolder">Grupo</h5>
-                                <div class="fw-bold">
-                                    <label class="badge badge-light-success"><?php echo $NomGrupo; ?></label>
+                <div class="separator"></div>
+                <div id="view_datos_producto" class="collapse ">
+                    <div class="card-body pt-2">
+                        <div class="d-flex flex-column gap-10">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-briefcase-fill text-primary fs-1 me-5"></i>
+                                <div class="d-flex flex-column">
+                                    <h5 class="text-gray-800 fw-bolder">Grupo</h5>
+                                    <div class="fw-bold">
+                                        <label class="badge badge-light-success"><?php echo $NomGrupo; ?></label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="d-flex align-items-center">							
-                            <i class="bi bi-bag-plus text-primary fs-1 me-5"></i>
-                            <div class="d-flex flex-column">
-                                <h5 class="text-gray-800 fw-bolder">Producto</h5>
-                                <div class="fw-bold">
-                                  <label class="badge badge-light-success"><?php echo $NomProd; ?></label>
+                            <div class="d-flex align-items-center">							
+                                <i class="bi bi-bag-plus text-primary fs-1 me-5"></i>
+                                <div class="d-flex flex-column">
+                                    <h5 class="text-gray-800 fw-bolder">Producto</h5>
+                                    <div class="fw-bold">
+                                    <label class="badge badge-light-success"><?php echo $NomProd; ?></label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <i class="bi bi-bank2 text-primary fs-1 me-5"></i>
-                            <div class="d-flex flex-column">
-                                <h5 class="text-gray-800 fw-bolder">Costo</h5>
-                                <div class="fw-bold">
-                                   <label class="badge badge-light-success">$<?php echo $Costo; ?></label>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-bank2 text-primary fs-1 me-5"></i>
+                                <div class="d-flex flex-column">
+                                    <h5 class="text-gray-800 fw-bolder">Costo</h5>
+                                    <div class="fw-bold">
+                                    <label class="badge badge-light-success">$<?php echo $Costo; ?></label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <i class="bi bi-globe2 text-primary fs-1 me-5"></i>
-                            <div class="d-flex flex-column">
-                                <h5 class="text-gray-800 fw-bolder">Cobertura</h5>
-                                <div class="fw-bold">
-                                   <input <?php echo $xChekCober; ?> class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
-                                   <label class="badge badge-light-success"><?php echo $Cobertura; ?></label>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-globe2 text-primary fs-1 me-5"></i>
+                                <div class="d-flex flex-column">
+                                    <h5 class="text-gray-800 fw-bolder">Cobertura</h5>
+                                    <div class="fw-bold">
+                                    <input <?php echo $xChekCober; ?> class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
+                                    <label class="badge badge-light-success"><?php echo $Cobertura; ?></label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <i class="bi bi-grid-1x2-fill text-primary fs-1 me-5"></i>
-                            <div class="d-flex flex-column">
-                                <h5 class="text-gray-800 fw-bolder">Sistema</h5>
-                                <div class="fw-bold">
-                                   <input <?php echo $xChekSis; ?> class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
-                                   <label class="badge badge-light-success"><?php echo $Sistema; ?></label>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-grid-1x2-fill text-primary fs-1 me-5"></i>
+                                <div class="d-flex flex-column">
+                                    <h5 class="text-gray-800 fw-bolder">Sistema</h5>
+                                    <div class="fw-bold">
+                                    <input <?php echo $xChekSis; ?> class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
+                                    <label class="badge badge-light-success"><?php echo $Sistema; ?></label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>    
+                        </div> 
+                    </div>
                 </div>
             </div>
         </div>
@@ -323,7 +347,7 @@
                                 </div>
                                 <div class="mb-10 fv-row">
                                     <label class="form-label">Direccion</label>
-                                    <textarea class="form-control mb-2" id="txtDireccion" style="text-transform: uppercase;" maxlength="250" rows="1"></textarea>
+                                    <textarea class="form-control mb-2" id="txtDireccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
@@ -557,7 +581,7 @@
                                 </div>
                                 <div class="mb-10 fv-row">
                                     <label class="form-label">Direccion</label>
-                                    <textarea class="form-control mb-2" id="txtDireccionBe" style="text-transform: uppercase;" rows="1"></textarea>
+                                    <textarea class="form-control mb-2" id="txtDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
                                 </div>
                                 <div class="d-flex flex-wrap gap-5">
                                     <div class="fv-row w-100 flex-md-root">
@@ -799,24 +823,6 @@
             return false;
         }
 
-        if(_txtTelCasaBe != '')
-        {
-            _valor = document.getElementById("txtTelCasaBe").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono casa incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }
-
-        if(_txtTelOfiBe != '')
-        {
-            _valor = document.getElementById("txtTelOfiBe").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono oficina incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }
-
         if(_txtTelCelularBe != '')
         {
             _valor = document.getElementById("txtCelularBe").value;
@@ -1029,25 +1035,6 @@
         if(_cboCiudad == 0){
             mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
             return false;
-        }
-
-        
-        if(_txtTelCasa != '')
-        {
-            _valor = document.getElementById("txtTelCasa").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono casa incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }
-
-        if(_txtTelOfi != '')
-        {
-            _valor = document.getElementById("txtTelOfi").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono oficina incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
         }
 
         if(_txtTelCelular != '')

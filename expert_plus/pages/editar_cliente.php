@@ -375,7 +375,7 @@
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="form-label">Descripcion</label>
-                                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
                                 </div>
                                 <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                     <div class="col">
@@ -551,7 +551,7 @@
                     <label class="fs-6 fw-bold form-label mb-2">
                         <span>Descripcion</span>
                     </label>
-                    <textarea class="form-control mb-2 text-uppercase" name="txtDescGrupo" id="txtDescGrupo" rows="1" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                    <textarea class="form-control mb-2 text-uppercase" name="txtDescGrupo" id="txtDescGrupo" rows="1" maxlength="150" onkeydown="return(event.keyCode!=13);"></textarea>
                 </div>                         
             </div>
             <div class="modal-footer">
@@ -584,7 +584,7 @@
                     </div>
                     <div class="mb-5 fv-row">
                         <label class="form-label">Descripcion</label>
-                        <textarea class="form-control mb-2 text-uppercase" name="txtDescripcionEdit" id="txtDescripcionEdit" rows="1" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                        <textarea class="form-control mb-2 text-uppercase" name="txtDescripcionEdit" id="txtDescripcionEdit" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
                     </div>
                     <br>
                     <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
@@ -1219,34 +1219,6 @@
             mensajesalertify("Ingrese Nombre del Cliente..!!","W","top-right",3);
             return false;
         }
-
-            
-        if(_tel1 != '')
-        {
-            _valor = document.getElementById("txtFono1").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono 1 incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }
-
-        if(_tel2 != '')
-        {
-            _valor = document.getElementById("txtFono2").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono 2 incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }                    
-
-        if(_tel3 != '')
-        {
-            _valor = document.getElementById("txtFono3").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono 3 incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }  
         
         if(_cel1 != '')
         {
