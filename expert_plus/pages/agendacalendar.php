@@ -1294,6 +1294,8 @@
 
             function f_Selecc(info){
 
+                console.log(info);
+
                 var _continuar = false;
 
                 console.log(_paisid);
@@ -1448,8 +1450,8 @@
                                     
                                     f_LimpiarModal();
 
-                                    $("#fecha_inicio").val(_dateactual);
-                                    $("#fecha_fin").val(_dateactual);
+                                    $("#fecha_inicio").val(_dateselec);
+                                    $("#fecha_fin").val(_dateselec);
                                     $("#hora_inicio").val(_timeinicio);
                                     $("#hora_fin").val(_timefin);
 
@@ -1530,7 +1532,7 @@
 
                 var _parametros = {
                     "xxPaisid" : _paisid,
-                    "xxEmprid" : _emprid,                
+                    "xxEmprid" : _emprid,
                     "xxPresid" : _presid,
                     "xxEspeid" : _espeid,
                     "xxPfesid" : _pfesid,

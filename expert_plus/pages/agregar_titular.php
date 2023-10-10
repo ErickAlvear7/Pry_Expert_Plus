@@ -26,13 +26,13 @@
     @session_start();
 
     if(isset($_SESSION["s_usuario"])){
-    if($_SESSION["s_loged"] != "loged"){
+        if($_SESSION["s_loged"] != "loged"){
+            header("Location: ./logout.php");
+            exit();
+        }
+    } else{
         header("Location: ./logout.php");
         exit();
-    }
-    } else{
-    header("Location: ./logout.php");
-    exit();
     }    
 
     $xPaisid = $_SESSION["i_paisid"];
@@ -43,9 +43,9 @@
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
     $all_provincia = mysqli_query($con, $xSQL);
 
-    $xSQL = "SELECT pst.pers_id AS PerId, tit.titu_id AS Tituid, CONCAT(pst.pers_nombres,' ',pst.pers_apellidos) AS Nombres,pst.pers_imagen AS  ";
-    $xSQL .="Imagen,CASE pst.pers_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado,pst.pers_ciudad AS CiudadId FROM `expert_persona` pst, `expert_titular` tit ";
-    $xSQL .="WHERE tit.pais_id = $xPaisid AND tit.empr_id=$xEmprid AND pst.pers_id=tit.pers_id AND tit.prod_id=$prodid AND tit.grup_id=$grupid ORDER BY pst.pers_nombres ";
+    $xSQL = "SELECT pst.pers_id AS PerId, tit.titu_id AS Tituid, CONCAT(pst.pers_nombres,' ',pst.pers_apellidos) AS Nombres,pst.pers_imagen AS Imagen, ";
+    $xSQL .= "CASE pst.pers_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado,pst.pers_ciudad AS CiudadId FROM `expert_persona` pst, `expert_titular` tit ";
+    $xSQL .= "WHERE tit.pais_id = $xPaisid AND tit.empr_id=$xEmprid AND pst.pers_id=tit.pers_id AND tit.prod_id=$prodid AND tit.grup_id=$grupid ORDER BY pst.pers_nombres ";
     $all_persona = mysqli_query($con, $xSQL);
 
     $xSQL ="SELECT clie_nombre AS Cliente,clie_email1 AS Email,clie_tel1 AS Telefono,clie_cel1 AS Celular FROM `expert_cliente` WHERE clie_id=$clieid AND pais_id=$xPaisid AND empr_id=$xEmprid ";
@@ -456,7 +456,7 @@
                                                             <button type="button" id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular(<?php echo $xPerid; ?>,<?php echo $xTituid; ?>,<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular' data-bs-toggle="tooltip" data-bs-placement="left">
                                                                 <i class="fa fa-edit"></i>
                                                             </button> 
-                                                            <button type="button" id="btnAgendar_<?php echo $xPerid; ?>" onclick="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                            <button type="button" id="btnAgendar" name="btnAgendar" onclick="f_Agendar(<?php echo $xTituid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
                                                                 <i class="fa fa-user-plus"></i>
                                                             </button> 
                                                         </div>
@@ -646,17 +646,14 @@
     </form>
 </div>
 <script>
-    
+
     var _count =0,_prodid = '<?php echo $prodid; ?>', _grupid = '<?php echo $grupid; ?>', _userid = '<?php echo $xUsuaid; ?>',
         _idclie = '<?php echo $clieid; ?>',_paisid = '<?php echo $xPaisid; ?>',_emprid = '<?php echo $xEmprid; ?>',_result = [];
-
-
-    $(document).ready(function(){
     
+    $(document).ready(function(){
+
         $('#cboProvincia').change(function(){
                     
-            var _paisid = "<?php echo $xPaisid; ?>";
-            var _emprid = "<?php echo $xEmprid; ?>";                
             _cboid = $(this).val(); //obtener el id seleccionado
             
             $("#cboCiudad").empty();
@@ -686,8 +683,8 @@
         //Datos Provincia para  Beneficiario
         $('#cboProvinciaBe').change(function(){
                     
-            var _paisid = "<?php echo $xPaisid; ?>";
-            var _emprid = "<?php echo $xEmprid; ?>";                
+            //var _paisid = "<?php echo $xPaisid; ?>";
+            //var _emprid = "<?php echo $xEmprid; ?>";                
             _cboid = $(this).val(); //obtener el id seleccionado
             
             $("#cboCiudadBe").empty();
@@ -715,7 +712,14 @@
         
         });
 
+
+
     });
+
+    function f_Agendar(_tituid){
+
+        $.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'prodid': _prodid, 'grupid': _grupid });
+    }    
 
     //Boton regresar pagina metodo POST
 
