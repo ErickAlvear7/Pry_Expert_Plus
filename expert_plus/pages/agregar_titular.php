@@ -257,130 +257,143 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
+                    <div class="d-flex flex-stack fs-4 py-3">
+                        <div class="fw-bolder rotate collapsible btn btn-sm btn-light-primary" data-bs-toggle="collapse" href="#kt_user_view_titular" role="button" aria-expanded="false" aria-controls="kt_user_view_details">Agregar Titular
+                            <span class="ms-2 rotate-180">
+                                <span class="svg-icon svg-icon-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
                     <div class="d-flex flex-column gap-7 gap-lg-10">
-                        <div class="card card-flush py-4">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h2>Datos Titular</h2>
-                                </div>
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="required form-label">Tipo Documento</label>
-                                        <select class="form-select mb-2" id="cboDocumento" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
-                                            <option></option>
-                                            <?php
-                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                                $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                                $all_datos =  mysqli_query($con, $xSQL);
-                                                foreach($all_datos as $datos){?>
-                                                <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
-                                            <?php }?>
-                                        </select>
-                                    </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="required form-label">Nro. Documento</label>
-                                        <input type="text" id="txtDocumento" class="form-control mb-2" value="" minlength="10" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"  />
-                                    </div>    
-                                </div>
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="required form-label">Nombres</label>
-                                        <input type="text" id="txtNombre" class="form-control mb-2" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
-                                    </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="required form-label">Apellidos</label>
-                                        <input type="text" id="txtApellido" class="form-control mb-2" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
-                                    </div>   
-                                </div>
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="required form-label">Genero</label>
-                                        <select class="form-select mb-2" id="cboGenero" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
-                                            <option></option>
-                                            <?php
-                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                                $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Genero' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                                $all_datos =  mysqli_query($con, $xSQL);
-                                                foreach($all_datos as $datos){?>
-                                                <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                            <?php }?> 
-                                        </select>
-                                    </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Estado Civil</label>
-                                        <select class="form-select mb-2" id="cboEstadoCivil" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
-                                            <option></option>
-                                            <?php
-                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                                $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Estado Civil' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
-                                                $all_datos =  mysqli_query($con, $xSQL);
-                                                foreach($all_datos as $datos){?>
-                                                <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                            <?php }?>                   
-                                        </select>
-                                    </div>      
-                                </div>
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Fecha de Nacimiento</label>
-                                        <input type="date" id="txtFechaNacimiento" class="form-control mb-2" value="" />
+                        <div id="kt_user_view_titular" class="collapse">
+                            <div class="card card-flush py-4">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <h2>Datos Titular</h2>
                                     </div>
                                 </div>
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="required form-label">Provincia</label>
-                                        <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2" >
+                                <div class="card-body pt-0">
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Tipo Documento</label>
+                                            <select class="form-select mb-2" id="cboDocumento" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
                                                 <option></option>
-                                                <?php foreach ($all_provincia as $prov) : ?>
-                                                    <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
-                                                <?php endforeach ?>
-                                        </select>
+                                                <?php
+                                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                                    $all_datos =  mysqli_query($con, $xSQL);
+                                                    foreach($all_datos as $datos){?>
+                                                    <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Nro. Documento</label>
+                                            <input type="text" id="txtDocumento" class="form-control mb-2" value="" minlength="10" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"  />
+                                        </div>    
                                     </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Ciudad</label>
-                                        <select id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2">
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Nombres</label>
+                                            <input type="text" id="txtNombre" class="form-control mb-2" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Apellidos</label>
+                                            <input type="text" id="txtApellido" class="form-control mb-2" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
+                                        </div>   
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Genero</label>
+                                            <select class="form-select mb-2" id="cboGenero" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
                                                 <option></option>
-                                        </select> 
-                                    </div>  
-                                </div>
-                                <div class="mb-10 fv-row">
-                                    <label class="form-label">Direccion</label>
-                                    <textarea class="form-control mb-2" id="txtDireccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
-                                </div>
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Telefono Casa</label>
-                                        <input type="text" id="txtTelCasa" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                                <?php
+                                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Genero' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                                    $all_datos =  mysqli_query($con, $xSQL);
+                                                    foreach($all_datos as $datos){?>
+                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                                <?php }?> 
+                                            </select>
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Estado Civil</label>
+                                            <select class="form-select mb-2" id="cboEstadoCivil" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
+                                                <option></option>
+                                                <?php
+                                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Estado Civil' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
+                                                    $all_datos =  mysqli_query($con, $xSQL);
+                                                    foreach($all_datos as $datos){?>
+                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                                <?php }?>                   
+                                            </select>
+                                        </div>      
                                     </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Telefono Oficina</label>
-                                        <input type="text" id="txtTelOfi" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
-                                    </div>  
-                                </div>
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Telefono Celular</label>
-                                        <input type="text" id="txtCelular" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Fecha de Nacimiento</label>
+                                            <input type="date" id="txtFechaNacimiento" class="form-control mb-2" value="" />
+                                        </div>
                                     </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Email</label>
-                                        <input type="email" id="txtEmail" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
-                                    </div>  
-                                </div>
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Inicio Cobertura</label>
-                                        <input type="date" id="txtIniCobertura" class="form-control mb-2" value="<?php 
-                                          $dia = date('Y-m-d');
-                                          echo date('Y-m-d', strtotime($dia)); ?>" />
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Provincia</label>
+                                            <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2" >
+                                                    <option></option>
+                                                    <?php foreach ($all_provincia as $prov) : ?>
+                                                        <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
+                                                    <?php endforeach ?>
+                                            </select>
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Ciudad</label>
+                                            <select id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2">
+                                                    <option></option>
+                                            </select> 
+                                        </div>  
                                     </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Fin Cobertura</label>
-                                        <input type="date" id="txtFinCobertura" class="form-control mb-2" value="<?php echo $xFechaFinCobertura; ?>" />
-                                    </div>  
-                                </div>                                                          
+                                    <div class="mb-10 fv-row">
+                                        <label class="form-label">Direccion</label>
+                                        <textarea class="form-control mb-2" id="txtDireccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Telefono Casa</label>
+                                            <input type="text" id="txtTelCasa" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Telefono Oficina</label>
+                                            <input type="text" id="txtTelOfi" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                        </div>  
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Telefono Celular</label>
+                                            <input type="text" id="txtCelular" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" id="txtEmail" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
+                                        </div>  
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Inicio Cobertura</label>
+                                            <input type="date" id="txtIniCobertura" class="form-control mb-2" value="<?php 
+                                                $dia = date('Y-m-d');
+                                                echo date('Y-m-d', strtotime($dia)); ?>" />
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Fin Cobertura</label>
+                                            <input type="date" id="txtFinCobertura" class="form-control mb-2" value="<?php echo $xFechaFinCobertura; ?>" />
+                                        </div>  
+                                    </div>                                                          
+                                </div>
                             </div>
                         </div>
                         <div class="card card-flush py-4">
@@ -496,143 +509,156 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="tab_beneficiarios" role="tab-panel">
+                    <div class="d-flex flex-stack fs-4 py-3">
+                        <div class="fw-bolder rotate collapsible btn btn-sm btn-light-primary" data-bs-toggle="collapse" href="#kt_user_view_beneficiario" role="button" aria-expanded="false" aria-controls="kt_user_view_details">Agregar Beneficiario
+                            <span class="ms-2 rotate-180">
+                                <span class="svg-icon svg-icon-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
                     <div class="d-flex flex-column gap-7 gap-lg-10">
-                        <div class="card card-flush py-4">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h2>Datos Beneficiario</h2>
-                                </div>
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="required form-label">Tipo Documento</label>
-                                        <select class="form-select mb-2" id="cboDocumentoBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
-                                            <option></option>
-                                            <?php
-                                              $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                              $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                              $all_datos =  mysqli_query($con, $xSQL);
-                                            foreach($all_datos as $datos){?>
-                                            <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
-                                            <?php }?>
-                                        </select>
+                        <div id="kt_user_view_beneficiario" class="collapse">
+                            <div class="card card-flush py-4">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <h2>Datos Beneficiario</h2>
                                     </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="required form-label">Nro. Documento</label>
-                                        <input type="text" class="form-control mb-2" id="txtDocumentoBe" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                    </div>    
                                 </div>
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="required form-label">Nombres</label>
-                                        <input type="text" class="form-control mb-2" id="txtNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
-                                    </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="required form-label">Apellidos</label>
-                                        <input type="text" class="form-control mb-2" id="txtApellidoBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
-                                    </div>   
-                                </div>
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="required form-label">Genero</label>
-                                        <select class="form-select mb-2" id="cboGeneroBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
-                                            <option></option>
-                                            <?php
-                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                                $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Genero' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                                $all_datos =  mysqli_query($con, $xSQL);
-                                                foreach($all_datos as $datos){?>
-                                                <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                            <?php }?> 
-                                        </select>
-                                    
-                                    </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Estado Civil</label>
-                                        <select class="form-select mb-2" id="cboEstadoCivilBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
-                                            <option></option>
-                                            <?php
-                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                                $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Estado Civil' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
-                                                $all_datos =  mysqli_query($con, $xSQL);
-                                                foreach($all_datos as $datos){?>
-                                                <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                            <?php }?>                   
-                                        </select>
-                                    </div>      
-                                </div>
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="required form-label">Provincia</label>
-                                        <select  id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2" >
+                                <div class="card-body pt-0">
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Tipo Documento</label>
+                                            <select class="form-select mb-2" id="cboDocumentoBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
                                                 <option></option>
-                                                <?php foreach ($all_provincia as $prov) : ?>
-                                                    <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
-                                                <?php endforeach ?>
-                                        </select>
-                                    </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Ciudad</label>
-                                        <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2">
-                                                <option></option>
-                                        </select> 
-                                    </div>  
-                                </div>
-                                <div class="mb-10 fv-row">
-                                    <label class="form-label">Direccion</label>
-                                    <textarea class="form-control mb-2" id="txtDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
-                                </div>
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Telefono Casa</label>
-                                        <input type="text" id="txtTelCasaBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
-                                    </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Telefono Oficina</label>
-                                        <input type="text" id="txtTelOfiBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
-                                    </div>  
-                                </div>
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Telefono Celular</label>
-                                        <input type="text" id="txtCelularBe" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                    </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Email</label>
-                                        <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
-                                    </div>  
-                                </div>
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Parentesco</label>
-                                        <select class="form-select mb-2" id="cboParentesco" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Parentesco">
-                                            <option></option>
-                                            <?php
-                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                                $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Parentesco' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
-                                                $all_datos =  mysqli_query($con, $xSQL);
+                                                <?php
+                                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                                    $all_datos =  mysqli_query($con, $xSQL);
                                                 foreach($all_datos as $datos){?>
-                                                <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                            <?php }?>                   
-                                        </select>
+                                                <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Nro. Documento</label>
+                                            <input type="text" class="form-control mb-2" id="txtDocumentoBe" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                        </div>    
                                     </div>
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <label class="form-label">Fecha de Nacimiento</label>
-                                        <input type="date" id="txtFechaNacimientoBe" class="form-control mb-2" value="" />
-                                    </div> 
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Nombres</label>
+                                            <input type="text" class="form-control mb-2" id="txtNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Apellidos</label>
+                                            <input type="text" class="form-control mb-2" id="txtApellidoBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
+                                        </div>   
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Genero</label>
+                                            <select class="form-select mb-2" id="cboGeneroBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
+                                                <option></option>
+                                                <?php
+                                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Genero' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                                    $all_datos =  mysqli_query($con, $xSQL);
+                                                    foreach($all_datos as $datos){?>
+                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                                <?php }?> 
+                                            </select>
+                                        
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Estado Civil</label>
+                                            <select class="form-select mb-2" id="cboEstadoCivilBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
+                                                <option></option>
+                                                <?php
+                                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Estado Civil' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
+                                                    $all_datos =  mysqli_query($con, $xSQL);
+                                                    foreach($all_datos as $datos){?>
+                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                                <?php }?>                   
+                                            </select>
+                                        </div>      
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="required form-label">Provincia</label>
+                                            <select  id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2" >
+                                                    <option></option>
+                                                    <?php foreach ($all_provincia as $prov) : ?>
+                                                        <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
+                                                    <?php endforeach ?>
+                                            </select>
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Ciudad</label>
+                                            <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2">
+                                                    <option></option>
+                                            </select> 
+                                        </div>  
+                                    </div>
+                                    <div class="mb-10 fv-row">
+                                        <label class="form-label">Direccion</label>
+                                        <textarea class="form-control mb-2" id="txtDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Telefono Casa</label>
+                                            <input type="text" id="txtTelCasaBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Telefono Oficina</label>
+                                            <input type="text" id="txtTelOfiBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                        </div>  
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Telefono Celular</label>
+                                            <input type="text" id="txtCelularBe" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
+                                        </div>  
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-5">
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Parentesco</label>
+                                            <select class="form-select mb-2" id="cboParentesco" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Parentesco">
+                                                <option></option>
+                                                <?php
+                                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Parentesco' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
+                                                    $all_datos =  mysqli_query($con, $xSQL);
+                                                    foreach($all_datos as $datos){?>
+                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                                <?php }?>                   
+                                            </select>
+                                        </div>
+                                        <div class="fv-row w-100 flex-md-root">
+                                            <label class="form-label">Fecha de Nacimiento</label>
+                                            <input type="date" id="txtFechaNacimientoBe" class="form-control mb-2" value="" />
+                                        </div> 
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
+                                            <span class="svg-icon svg-icon-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                                    <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        Agregar
+                                        </button>
+                                    </div>  
                                 </div>
-                                <div class="form-group mt-5">
-                                    <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
-                                        <span class="svg-icon svg-icon-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    Agregar Beneficiario
-                                    </button>
-                                </div>  
                             </div>
                         </div>
                         <div class="card card-flush py-4">
@@ -662,7 +688,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button type="button" id="btnGrabar" onclick="" class="btn btn-primary">
+                <button type="button" id="btnGrabar" onclick="" class="btn btn-primary"><i class="las la-save"></i>
                     <span class="indicator-label">Grabar</span>
                 </button>
             </div>

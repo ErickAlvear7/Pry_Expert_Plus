@@ -234,10 +234,16 @@
             </div>
         </div>
         <div class="flex-lg-row-fluid ms-lg-15">
-            <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
-                <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_user_view_overview_tab">Beneficiario</a>
-                </li>
+            <div class="d-flex flex-stack fs-4 py-3">
+               <div class="fw-bolder rotate collapsible btn btn-sm btn-light-primary" data-bs-toggle="collapse" href="#kt_user_view_beneficiario" role="button" aria-expanded="false" aria-controls="kt_user_view_details">Agregar Beneficiario
+                    <span class="ms-2 rotate-180">
+                        <span class="svg-icon svg-icon-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                            </svg>
+                        </span>
+                    </span>
+                </div>
                 <button type="button" id="btnRegresar" onclick="f_Regresar(<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="right">
                     <span class="svg-icon svg-icon-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -245,245 +251,243 @@
                         </svg>
                     </span>
                 </button>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="kt_user_view_overview_tab" role="tabpanel">
-                    <div class="card pt-4 mb-6 mb-xl-9">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <h2>Datos Beneficiario</h2>
-                            </div>
-                        </div>
-                        <div class="card-body pt-0">
-                            <div class="d-flex flex-wrap gap-5">
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="required form-label">Tipo Documento</label>
-                                    <select class="form-select mb-2" id="cboDocumentoBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
-                                        <option></option>
-                                        <?php
-                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                        $all_datos =  mysqli_query($con, $xSQL);
-                                        foreach($all_datos as $datos){?>
-                                        <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
-                                        <?php }?>
-                                    </select>
-                                </div>
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="required form-label">Nro. Documento</label>
-                                    <input type="text" class="form-control mb-2" id="txtDocumentoBe" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                </div>    
-                            </div>
-                            <div class="d-flex flex-wrap gap-5">
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="required form-label">Nombres</label>
-                                    <input type="text" class="form-control mb-2" id="txtNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
-                                </div>
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="required form-label">Apellidos</label>
-                                    <input type="text" class="form-control mb-2" id="txtApellidoBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
-                                </div>   
-                            </div>
-                            <div class="d-flex flex-wrap gap-5">
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="required form-label">Genero</label>
-                                    <select class="form-select mb-2" id="cboGeneroBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
-                                        <option></option>
-                                        <?php
-                                            $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                            $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Genero' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                            $all_datos =  mysqli_query($con, $xSQL);
-                                            foreach($all_datos as $datos){?>
-                                            <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                        <?php }?> 
-                                    </select>
-                                
-                                </div>
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="form-label">Estado Civil</label>
-                                    <select class="form-select mb-2" id="cboEstadoCivilBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
-                                        <option></option>
-                                        <?php
-                                            $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                            $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Estado Civil' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
-                                            $all_datos =  mysqli_query($con, $xSQL);
-                                            foreach($all_datos as $datos){?>
-                                            <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                        <?php }?>                   
-                                    </select>
-                                </div>      
-                            </div>
-                            <div class="d-flex flex-wrap gap-5">
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="required form-label">Provincia</label>
-                                    <select  id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2" >
-                                            <option></option>
-                                            <?php foreach ($all_provincia as $prov) : ?>
-                                                <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
-                                            <?php endforeach ?>
-                                    </select>
-                                </div>
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="form-label">Ciudad</label>
-                                    <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2">
-                                            <option></option>
-                                    </select> 
-                                </div>  
-                            </div>
-                            <div class="mb-10 fv-row">
-                                <label class="form-label">Direccion</label>
-                                <textarea class="form-control mb-2" id="txtDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
-                            </div>
-                            <div class="d-flex flex-wrap gap-5">
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="form-label">Telefono Casa</label>
-                                    <input type="text" id="txtTelCasaBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
-                                </div>
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="form-label">Telefono Oficina</label>
-                                    <input type="text" id="txtTelOfiBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
-                                </div>  
-                            </div>
-                            <div class="d-flex flex-wrap gap-5">
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="form-label">Telefono Celular</label>
-                                    <input type="text" id="txtCelularBe" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                </div>
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="form-label">Email</label>
-                                    <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
-                                </div>  
-                            </div>
-                            <div class="d-flex flex-wrap gap-5">
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="form-label">Parentesco</label>
-                                    <select class="form-select mb-2" id="cboParentesco" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Parentesco">
-                                        <option></option>
-                                        <?php
-                                            $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                            $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Parentesco' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
-                                            $all_datos =  mysqli_query($con, $xSQL);
-                                            foreach($all_datos as $datos){?>
-                                            <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                        <?php }?>                   
-                                    </select>
-                                </div>
-                                <div class="fv-row w-100 flex-md-root">
-                                    <label class="form-label">Fecha de Nacimiento</label>
-                                    <input type="date" id="txtFechaNacimientoBe" class="form-control mb-2" value="" />
-                                </div> 
-                            </div>
-                            <div class="form-group mt-5">
-                                <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
-                                    <span class="svg-icon svg-icon-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                            <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                Agregar Beneficiario
-                                </button>
-                            </div>  
+            </div>
+            <div id="kt_user_view_beneficiario" class="collapse">
+                <div class="card pt-4 mb-6 mb-xl-9">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h2>Datos Beneficiario</h2>
                         </div>
                     </div>
-                    <div class="card pt-4 mb-6 mb-xl-9">                    
-                        <div class="card-header border-0">                         
-                            <div class="card-title">
-                                <h2>Lista de Beneficiarios</h2>
+                    <div class="card-body pt-0">
+                        <div class="d-flex flex-wrap gap-5">
+                            <div class="fv-row w-100 flex-md-root">
+                                <label class="required form-label">Tipo Documento</label>
+                                <select class="form-select mb-2" id="cboDocumentoBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
+                                    <option></option>
+                                    <?php
+                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                    $all_datos =  mysqli_query($con, $xSQL);
+                                    foreach($all_datos as $datos){?>
+                                    <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
+                            <div class="fv-row w-100 flex-md-root">
+                                <label class="required form-label">Nro. Documento</label>
+                                <input type="text" class="form-control mb-2" id="txtDocumentoBe" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                            </div>    
+                        </div>
+                        <div class="d-flex flex-wrap gap-5">
+                            <div class="fv-row w-100 flex-md-root">
+                                <label class="required form-label">Nombres</label>
+                                <input type="text" class="form-control mb-2" id="txtNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
+                            </div>
+                            <div class="fv-row w-100 flex-md-root">
+                                <label class="required form-label">Apellidos</label>
+                                <input type="text" class="form-control mb-2" id="txtApellidoBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
                             </div>   
                         </div>
-                        <div class="card-body pt-0 pb-5">
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
-                                    <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
-                                        <tr class="text-start text-muted text-uppercase gs-0">
-                                            <th class="min-w-90px">CIUDAD</th>
-                                            <th>NOMBRES</th>
-                                            <th>PARENTESCO</th>
-                                            <th>ESTADO</th>
-                                            <th class="min-w-70px">ESTATUS</th>
-                                            <th class="min-w-70px">OPCIONES</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="fs-6 fw-bold text-gray-600">
-                                        <?php 
-                                            foreach($all_Beneficiario as $ben){
-                                            $xBeneid = $ben['Beneid'];
-                                            $xBeneficiario = $ben['Beneficiario'];
-                                            $xCiuben = $ben['Ciudadben'];
-                                            $xParenben = $ben['Parentesco'];
-                                            $xEstadoBen = $ben['Estadoben'];
-                                        ?>
-                                        <?php 
-
-                                            $xSQL = "SELECT ciudad AS Ciuben FROM `provincia_ciudad` WHERE prov_id=$xCiuben ";
-                                            $ciudadben = mysqli_query($con, $xSQL);
-
-                                            foreach($ciudadben as $ciuben){
-                                                $xCiubene = $ciuben['Ciuben'];
-                                            }
-
-                                            $xSQL = "SELECT pade_nombre AS NombrePare FROM `expert_parametro_detalle` WHERE pade_valorV='$xParenben' ";
-                                            $parenben = mysqli_query($con, $xSQL);
-
-                                            foreach($parenben as $pare){
-                                                $xPareben = $pare['NombrePare'];
-                                            }      
-                                        
-                                        ?>
-                                        <?php
-                                            if($xEstadoBen=='A'){
-                                                $xEstadoBen='ACTIVO';
-                                            }else{
-                                                $xEstadoBen='INACTIVO';
-                                            } 
-
-                                            $xCheking = '';
-                                            $xDisabledEdit = '';
-
-                                            if($xEstadoBen == 'ACTIVO'){
-                                                $xCheking = 'checked="checked"';
-                                                $xTextColor = "badge badge-light-primary";
-                                            }else{
-                                                $xTextColor = "badge badge-light-danger";
-                                                $xDisabledEdit = 'disabled';
-                                            }
-                                        ?>  
-                                        <tr id="row_<?php echo $xBeneid; ?>">
-                                            <td class="text-uppercase"><?php echo $xCiubene; ?></td>
-                                            <td><?php echo $xBeneficiario; ?></td>
-                                            <td><?php echo $xPareben; ?></td>
-                                            <td id="td_<?php echo $xBeneid; ?>">
-                                                <div class="<?php echo $xTextColor; ?>">
-                                                    <?php echo $xEstadoBen; ?>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                        <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xBeneid; ?>" 
-                                                        onchange="f_UpdateEstado(<?php echo $xBeneid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" value=""/>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <div class="btn-group">	
-                                                        <button type="button" id="btnEditarBe_<?php echo $xBeneid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditarBe" <?php echo $xDisabledEdit;?> title="Editar Beneficiario" data-bs-toggle="tooltip" data-bs-placement="left" >
-                                                            <i class="fa fa-edit"></i>
-                                                        </button> 
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <?php } ?>      
-                                    </tbody>
-                                </table>
+                        <div class="d-flex flex-wrap gap-5">
+                            <div class="fv-row w-100 flex-md-root">
+                                <label class="required form-label">Genero</label>
+                                <select class="form-select mb-2" id="cboGeneroBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
+                                    <option></option>
+                                    <?php
+                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Genero' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                        $all_datos =  mysqli_query($con, $xSQL);
+                                        foreach($all_datos as $datos){?>
+                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                    <?php }?> 
+                                </select>
+                            
                             </div>
+                            <div class="fv-row w-100 flex-md-root">
+                                <label class="form-label">Estado Civil</label>
+                                <select class="form-select mb-2" id="cboEstadoCivilBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
+                                    <option></option>
+                                    <?php
+                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Estado Civil' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
+                                        $all_datos =  mysqli_query($con, $xSQL);
+                                        foreach($all_datos as $datos){?>
+                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                    <?php }?>                   
+                                </select>
+                            </div>      
                         </div>
-                    </div>           
+                        <div class="d-flex flex-wrap gap-5">
+                            <div class="fv-row w-100 flex-md-root">
+                                <label class="required form-label">Provincia</label>
+                                <select  id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2" >
+                                        <option></option>
+                                        <?php foreach ($all_provincia as $prov) : ?>
+                                            <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
+                                        <?php endforeach ?>
+                                </select>
+                            </div>
+                            <div class="fv-row w-100 flex-md-root">
+                                <label class="form-label">Ciudad</label>
+                                <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2">
+                                        <option></option>
+                                </select> 
+                            </div>  
+                        </div>
+                        <div class="mb-10 fv-row">
+                            <label class="form-label">Direccion</label>
+                            <textarea class="form-control mb-2" id="txtDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
+                        </div>
+                        <div class="d-flex flex-wrap gap-5">
+                            <div class="fv-row w-100 flex-md-root">
+                                <label class="form-label">Telefono Casa</label>
+                                <input type="text" id="txtTelCasaBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                            </div>
+                            <div class="fv-row w-100 flex-md-root">
+                                <label class="form-label">Telefono Oficina</label>
+                                <input type="text" id="txtTelOfiBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                            </div>  
+                        </div>
+                        <div class="d-flex flex-wrap gap-5">
+                            <div class="fv-row w-100 flex-md-root">
+                                <label class="form-label">Telefono Celular</label>
+                                <input type="text" id="txtCelularBe" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                            </div>
+                            <div class="fv-row w-100 flex-md-root">
+                                <label class="form-label">Email</label>
+                                <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
+                            </div>  
+                        </div>
+                        <div class="d-flex flex-wrap gap-5">
+                            <div class="fv-row w-100 flex-md-root">
+                                <label class="form-label">Parentesco</label>
+                                <select class="form-select mb-2" id="cboParentesco" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Parentesco">
+                                    <option></option>
+                                    <?php
+                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Parentesco' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
+                                        $all_datos =  mysqli_query($con, $xSQL);
+                                        foreach($all_datos as $datos){?>
+                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                    <?php }?>                   
+                                </select>
+                            </div>
+                            <div class="fv-row w-100 flex-md-root">
+                                <label class="form-label">Fecha de Nacimiento</label>
+                                <input type="date" id="txtFechaNacimientoBe" class="form-control mb-2" value="" />
+                            </div> 
+                        </div>
+                        <div class="form-group mt-5">
+                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
+                                <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            Agregar
+                            </button>
+                        </div>  
+                    </div>
                 </div>
             </div>
+            <div class="card pt-4 mb-6 mb-xl-9">                    
+                <div class="card-header border-0">                         
+                    <div class="card-title">
+                        <h2>Lista de Beneficiarios</h2>
+                    </div>   
+                </div>
+                <div class="card-body pt-0 pb-5">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
+                            <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
+                                <tr class="text-start text-muted text-uppercase gs-0">
+                                    <th class="min-w-90px">CIUDAD</th>
+                                    <th>NOMBRES</th>
+                                    <th>PARENTESCO</th>
+                                    <th>ESTADO</th>
+                                    <th class="min-w-70px">ESTATUS</th>
+                                    <th class="min-w-70px">OPCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fs-6 fw-bold text-gray-600">
+                                <?php 
+                                    foreach($all_Beneficiario as $ben){
+                                    $xBeneid = $ben['Beneid'];
+                                    $xBeneficiario = $ben['Beneficiario'];
+                                    $xCiuben = $ben['Ciudadben'];
+                                    $xParenben = $ben['Parentesco'];
+                                    $xEstadoBen = $ben['Estadoben'];
+                                ?>
+                                <?php 
+
+                                    $xSQL = "SELECT ciudad AS Ciuben FROM `provincia_ciudad` WHERE prov_id=$xCiuben ";
+                                    $ciudadben = mysqli_query($con, $xSQL);
+
+                                    foreach($ciudadben as $ciuben){
+                                        $xCiubene = $ciuben['Ciuben'];
+                                    }
+
+                                    $xSQL = "SELECT pade_nombre AS NombrePare FROM `expert_parametro_detalle` WHERE pade_valorV='$xParenben' ";
+                                    $parenben = mysqli_query($con, $xSQL);
+
+                                    foreach($parenben as $pare){
+                                        $xPareben = $pare['NombrePare'];
+                                    }      
+                                
+                                ?>
+                                <?php
+                                    if($xEstadoBen=='A'){
+                                        $xEstadoBen='ACTIVO';
+                                    }else{
+                                        $xEstadoBen='INACTIVO';
+                                    } 
+
+                                    $xCheking = '';
+                                    $xDisabledEdit = '';
+
+                                    if($xEstadoBen == 'ACTIVO'){
+                                        $xCheking = 'checked="checked"';
+                                        $xTextColor = "badge badge-light-primary";
+                                    }else{
+                                        $xTextColor = "badge badge-light-danger";
+                                        $xDisabledEdit = 'disabled';
+                                    }
+                                ?>  
+                                <tr id="row_<?php echo $xBeneid; ?>">
+                                    <td class="text-uppercase"><?php echo $xCiubene; ?></td>
+                                    <td><?php echo $xBeneficiario; ?></td>
+                                    <td><?php echo $xPareben; ?></td>
+                                    <td id="td_<?php echo $xBeneid; ?>">
+                                        <div class="<?php echo $xTextColor; ?>">
+                                            <?php echo $xEstadoBen; ?>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="text-center">
+                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xBeneid; ?>" 
+                                                onchange="f_UpdateEstado(<?php echo $xBeneid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" value=""/>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="text-center">
+                                            <div class="btn-group">	
+                                                <button type="button" id="btnEditarBe_<?php echo $xBeneid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditarBe" <?php echo $xDisabledEdit;?> title="Editar Beneficiario" data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                    <i class="fa fa-edit"></i>
+                                                </button> 
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php } ?>      
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> 
         </div>
     </div>
 </div>
