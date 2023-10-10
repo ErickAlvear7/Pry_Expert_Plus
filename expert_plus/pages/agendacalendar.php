@@ -1185,11 +1185,12 @@
                     calendar = new FullCalendar.Calendar(calendarEl, {
 
                         locale: 'es',
-                        initialView: 'timeGridWeek',
+                        //initialView: 'timeGridWeek',
+                        initialView: 'dayGridMonth',
                         headerToolbar: {
                             left: 'prev, next, today',
                             center: 'title',
-                            right: 'timeGridWeek,timeGridDay'
+                            right: 'dayGridMonth,timeGridWeek,timeGridDay'
                         },
                         navLinks: true, // can click day/week names to navigate views
                         editable: true,
@@ -1541,10 +1542,10 @@
                     "xxCodigoDia" : _dayselect
                 }                
 
-                var _respuesta = $.post("codephp/del_reservatmp.php", _parametros);
-                _respuesta.done(function(response){
+                //var _respuesta = $.post("codephp/del_reservatmp.php", _parametros);
+                //_respuesta.done(function(response){
                     
-                });                
+                //});                
             });
 
             $('#cboTipoRegistro').change(function(){
@@ -1731,7 +1732,7 @@
                 let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
                 console.log(_fechareserva);
 
-                $("#modal_new_agenda").modal("show");                    
+                $("#modal_new_agenda").modal("show");
             }
             
             const hidePopovers = () => {
