@@ -25,7 +25,7 @@
 		$page = 'prestador_admin';
 	}
 
-	if($page == 'addclienteprod' || $page == 'editcliente' || $page == 'addtitular'){
+	if($page == 'addclienteprod' || $page == 'editcliente' || $page == 'addtitular' || $page == 'edittitular'){
 		$page = 'admin_clienteproducto';
 	}
 	
