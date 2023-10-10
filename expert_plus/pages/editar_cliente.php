@@ -1219,34 +1219,6 @@
             mensajesalertify("Ingrese Nombre del Cliente..!!","W","top-right",3);
             return false;
         }
-
-            
-        if(_tel1 != '')
-        {
-            _valor = document.getElementById("txtFono1").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono 1 incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }
-
-        if(_tel2 != '')
-        {
-            _valor = document.getElementById("txtFono2").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono 2 incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }                    
-
-        if(_tel3 != '')
-        {
-            _valor = document.getElementById("txtFono3").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono 3 incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }  
         
         if(_cel1 != '')
         {

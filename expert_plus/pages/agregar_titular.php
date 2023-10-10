@@ -798,25 +798,7 @@
             mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
             return false;
         }
-
-        if(_txtTelCasaBe != '')
-        {
-            _valor = document.getElementById("txtTelCasaBe").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono casa incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }
-
-        if(_txtTelOfiBe != '')
-        {
-            _valor = document.getElementById("txtTelOfiBe").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono oficina incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }
-
+        
         if(_txtTelCelularBe != '')
         {
             _valor = document.getElementById("txtCelularBe").value;
@@ -1029,25 +1011,6 @@
         if(_cboCiudad == 0){
             mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
             return false;
-        }
-
-        
-        if(_txtTelCasa != '')
-        {
-            _valor = document.getElementById("txtTelCasa").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono casa incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
-        }
-
-        if(_txtTelOfi != '')
-        {
-            _valor = document.getElementById("txtTelOfi").value;
-            if( !(/^\d{9}$/.test(_valor)) ) {
-                mensajesalertify("Telefono oficina incorrecto..!" ,"W", "top-right", 3); 
-                return;
-            }
         }
 
         if(_txtTelCelular != '')
