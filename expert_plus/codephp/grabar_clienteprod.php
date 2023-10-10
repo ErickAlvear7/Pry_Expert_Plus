@@ -29,14 +29,14 @@
             $xDesc = trim(mb_strtoupper(safe($_POST['xxDescrip'])));
             $xDirec = trim(mb_strtoupper(safe($_POST['xxDirec'])));
             $xUrl = safe($_POST['xxUrl']);
-            $xTel1 = $_POST['xxTel1'];
-            $xTel2 = $_POST['xxTel2'];
-            $xTel3 = $_POST['xxTel3'];
-            $xCel1 = $_POST['xxCel1'];
-            $xCel2 = $_POST['xxCel2'];
-            $xCel3 = $_POST['xxCel3'];
-            $xEmail1 = safe($_POST['xxEmail1']);
-            $xEmail2 = safe($_POST['xxEmail2']);
+            $xTel1 = trim($_POST['xxTel1']);
+            $xTel2 = trim($_POST['xxTel2']);
+            $xTel3 = trim($_POST['xxTel3']);
+            $xCel1 = trim($_POST['xxCel1']);
+            $xCel2 = trim($_POST['xxCel2']);
+            $xCel3 = trim($_POST['xxCel3']);
+            $xEmail1 = trim(safe($_POST['xxEmail1']));
+            $xEmail2 = trim(safe($_POST['xxEmail2']));
 
             $xFile = (isset($_FILES['xxFileCab']["name"])) ? $_FILES['xxFileCab']["name"] : '';
             $xFilepie = (isset($_FILES['xxFilePie']["name"])) ? $_FILES['xxFilePie']["name"] : '';

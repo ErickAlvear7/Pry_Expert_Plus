@@ -80,8 +80,8 @@
 
     $xSQL = "SELECT pro.prod_id AS Idprod, pro.prod_nombre AS Producto, pro.prod_descripcion AS Descrip, pro.prod_costo AS Costo, ";
     $xSQL .="pro.prod_asistmes AS AsisMes, pro.prod_asistanu AS AsisAnu, pro.prod_cobertura AS Cobertura, pro.prod_sistema AS Sistema, ";
-    $xSQL .="pro.prod_gerencial AS Gerencial,CASE pro.prod_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, gru.grup_id AS Idgrup,gru.grup_nombre AS Grupo FROM `expert_productos` pro INNER JOIN ";
-    $xSQL .="`expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.clie_id =$clieid AND pro.pais_id =$xPaisid AND pro.empr_id =$xEmprid ORDER BY pro.prod_nombre ";
+    $xSQL .="pro.prod_gerencial AS Gerencial,CASE pro.prod_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado, gru.grup_id AS Idgrup,gru.grup_nombre AS Grupo FROM `expert_productos` pro INNER JOIN ";
+    $xSQL .="`expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.clie_id =$clieid AND pro.pais_id =$xPaisid AND pro.empr_id =$xEmprid ORDER BY gru.grup_nombre ";
     $all_prod = mysqli_query($con, $xSQL);
 
 ?>
@@ -165,7 +165,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Productos</a>
                 </li>
-                <a href="?page=admin_clienteproducto&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
+                <a href="?page=admin_clienteproducto&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
                     <span class="svg-icon svg-icon-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
@@ -248,7 +248,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="kt_customer_view_payment_method_1" class="collapse show fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
+                                    <div id="kt_customer_view_payment_method_1" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
                                         <div class="d-flex flex-wrap py-5">
                                             <div class="flex-equal me-5">
                                                 <div class="row mb-8">
@@ -295,7 +295,7 @@
                                         <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="029999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel1; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel1; ?>" />
                                             </div>
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
@@ -375,7 +375,7 @@
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="form-label">Descripcion</label>
-                                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
                                 </div>
                                 <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                     <div class="col">
@@ -435,7 +435,7 @@
                             <div class="card-body pt-0">
                                 <div class="d-flex flex-column gap-10">
                                     <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
-                                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="tblProducto">
+                                        <table class="table table-hover align-middle table-row-dashed fs-6 gy-5" id="tblProducto">
                                             <thead>
                                                 <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                                     <th style="display:none;">Id</th>
@@ -469,7 +469,7 @@
                                                         $xCheking = '';
                                                         $xDisabledEdit = '';
 
-                                                        if($xEstado == 'Activo'){
+                                                        if($xEstado == 'ACTIVO'){
                                                             $xCheking = 'checked="checked"';
                                                             $xTextColor = "badge badge-light-primary";
                                                         }else{
@@ -497,10 +497,10 @@
                                                     <td>
                                                         <div class="text-center">
                                                             <div class="btn-group">	
-                                                                <button type="button" id="btnEditar_<?php echo $xProdid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Producto'>
+                                                                <button type="button" id="btnEditar_<?php echo $xProdid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Producto' data-bs-toggle="tooltip" data-bs-placement="left">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button> 
-                                                                <button type="button" id="btnTitular" onclick="f_Titular(<?php echo $xGrupId;?>,<?php echo $xProdid;?>,<?php echo $clieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Agregar Titular'>
+                                                                <button type="button" id="btnTitular_<?php echo $xProdid; ?>" onclick="f_Titular(<?php echo $xGrupId;?>,<?php echo $xProdid;?>,<?php echo $clieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Agregar Titular' data-bs-toggle="tooltip" data-bs-placement="left">
                                                                     <i class="fa fa-user"></i>
                                                                 </button> 
                                                             </div>
@@ -551,7 +551,7 @@
                     <label class="fs-6 fw-bold form-label mb-2">
                         <span>Descripcion</span>
                     </label>
-                    <textarea class="form-control mb-2" name="txtDescGrupo" id="txtDescGrupo" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                    <textarea class="form-control mb-2 text-uppercase" name="txtDescGrupo" id="txtDescGrupo" rows="1" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
                 </div>                         
             </div>
             <div class="modal-footer">
@@ -561,6 +561,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="modal_producto" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
@@ -575,73 +576,77 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <div class="mb-5 fv-row">
-                    <label class="required form-label">Producto</label>
-                    <input class="form-control mb-2 text-uppercase" type="text" name="txtProductoEdit" id="txtProductoEdit" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
-                </div>
-                <div class="mb-5 fv-row">
-                    <label class="form-label">Descripcion</label>
-                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcionEdit" id="txtDescripcionEdit" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
-                </div>
-                <br>
-                <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                    <div class="col">
-                        <label class="required form-label">Costo</label>
-                        <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+            <div class="modal-body">
+                <div class="border border-hover-primary p-7 rounded mb-7 ">
+                    <div class="mb-5 fv-row">
+                        <label class="required form-label">Producto</label>
+                        <input class="form-control mb-2 text-uppercase" type="text" name="txtProductoEdit" id="txtProductoEdit" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
                     </div>
-                    <div class="col">
-                        <label class="required form-label">Grupo</label>
-                        <select name="cboGrupoEdit" id="cboGrupoEdit" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
-                            <option></option>
-                            <?php 
-                                $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND grup_estado='A' ";
-                                $all_datos =  mysqli_query($con, $xSQL);
-                                foreach ($all_datos as $dato){ ?>
-                                    <option value="<?php echo $dato['Codigo'] ?>"><?php echo $dato['NombreGrupo'] ?></option>
-                                <?php } ?>  
-                        </select>
+                    <div class="mb-5 fv-row">
+                        <label class="form-label">Descripcion</label>
+                        <textarea class="form-control mb-2 text-uppercase" name="txtDescripcionEdit" id="txtDescripcionEdit" rows="1" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                    </div>
+                    <br>
+                    <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                        <div class="col">
+                            <label class="required form-label">Costo</label>
+                            <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                        </div>
+                        <div class="col">
+                            <label class="required form-label">Grupo</label>
+                            <select name="cboGrupoEdit" id="cboGrupoEdit" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
+                                <option></option>
+                                <?php 
+                                    $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND grup_estado='A' ";
+                                    $all_datos =  mysqli_query($con, $xSQL);
+                                    foreach ($all_datos as $dato){ ?>
+                                        <option value="<?php echo $dato['Codigo'] ?>"><?php echo $dato['NombreGrupo'] ?></option>
+                                    <?php } ?>  
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                        <div class="col">
+                            <label class="required form-label">Asistencia Mes</label>
+                            <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control mb-2" value="1" />  
+                        </div>
+                        <div class="col">
+                            <label class="required form-label">Asistencia Anual</label>
+                            <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" value="1" />   
+                        </div>
                     </div>
                 </div>
-                <br>
-                <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                    <div class="col">
-                        <label class="required form-label">Asistencia Mes</label>
-                        <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control mb-2" value="1" />  
+                <div class="border border-hover-primary p-7 rounded mb-7 ">
+                    <div class="row g-9 mb-8">
+                        <div class="col-md-4 fv-row">
+                            <h5 class="txtcob" id="lblCoberturaEdit"></h5>
+                            <label class="form-check form-switch form-check-custom form-check-solid">
+                                <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
+                            </label> 
+                        </div>
+                        <div class="col-md-4 fv-row t">
+                            <h5 class="txtsis"></h5>
+                            <label class="form-check form-switch form-check-custom form-check-solid">
+                                <input class="form-check-input" name="chkSistemaEdit" id="chkSistemaEdit" type="checkbox" />
+                            </label> 
+                        </div>
+                        <div class="col-md-4 fv-row">
+                            <h5 class="txtger"></h5>
+                            <label class="form-check form-switch form-check-custom form-check-solid">
+                                <input class="form-check-input" name="chkGerencialEdit" id="chkGerencialEdit" type="checkbox" />
+                            </label> 
+                        </div>
                     </div>
-                    <div class="col">
-                        <label class="required form-label">Asistencia Anual</label>
-                        <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" value="1" />   
-                    </div>
                 </div>
-                <br>
-                <br>
-                <div class="mb-5 fv-row">
-                    <h5 class="txtcob" id="lblCoberturaEdit"></h5>
-                    <label class="form-check form-switch form-check-custom form-check-solid">
-                        <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
-                    </label> 
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-primary">Modificar</button>
                 </div>
-                <div class="mb-5 fv-row">
-                    <h5 class="txtsis"></h5>
-                    <label class="form-check form-switch form-check-custom form-check-solid">
-                        <input class="form-check-input" name="chkSistemaEdit" id="chkSistemaEdit" type="checkbox" />
-                    </label> 
-                </div>
-                <div class="mb-5 fv-row">
-                    <h5 class="txtger"></h5>
-                    <label class="form-check form-switch form-check-custom form-check-solid">
-                        <input class="form-check-input" name="chkGerencialEdit" id="chkGerencialEdit" type="checkbox" />
-                    </label> 
-                </div>            
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-primary">Modificar</button>
             </div>
         </div>
     </div>
-</div>
-         
+</div>    
 
 <script>
 
@@ -724,6 +729,8 @@
         if (v > 3) this.value = 3;
     });
 
+     // imput type number modal
+
     document.getElementById("txtAsisMesEdit").addEventListener("change", function() {
         let v = parseInt(this.value);
         if (v < 1) this.value = 1;
@@ -778,7 +785,7 @@
         var _emprid = "<?php echo $xEmprid; ?>";
         var _usuaid = "<?php echo $xUsuaid; ?>";
         var _producto = $.trim($("#txtProducto").val());
-            _producto = _producto.toUpperCase();
+        var _productoUpper = _producto.toUpperCase();
         var _descripcion = $.trim($("#txtDescripcion").val());
         var _costo = $.trim($("#txtCosto").val());
         var _txtGrupo = $('#cboGrupo').find('option:selected').text();
@@ -825,15 +832,18 @@
                 _output = '<tr id="row_' + _id + '">';
                 _output +='<td style="display: none;">' + _id + '</td>';
                 _output +='<td>' +_txtGrupo + '</td>';
-                _output +='<td>' +_producto + '</td>';
+                _output +='<td>' +_productoUpper + '</td>';
                 _output +='<td>' +_costo + '</td>';
-                _output +='<td id="td_'+_id + '"><div class="badge badge-light-primary">Activo</div></td>';
+                _output +='<td id="td_'+_id + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
                 _output +='<td><div class="form-check form-check-sm form-check-custom form-check-solid">';
                 _output +='<input class="form-check-input h-20px w-20px border-primary btnEstado" checked="checked" type="checkbox" id="chk'+_id +'" ';
                 _output +='onchange="f_UpdateEstado('+_id +','+ _emprid +','+_paisid +','+_usuaid +')" value=""/></div></td>';
                 _output +='<td><div class="text-center"><div class="btn-group">';
-                _output +='<button type="button" id="btnEditar_'+_id +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto">';
-                _output +='<i class="fa fa-edit"></i></button></div></div></td></tr>';
+                _output +='<button type="button" id="btnEditar_'+_id +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto" data-bs-toggle="tooltip" data-bs-placement="left">';
+                _output +='<i class="fa fa-edit"></i></button>';
+                _output +='<button type="button" id="btnTitular_'+_id +'" onclick="f_Titular('+ _cbogrupo +','+ _id +','+ _clieid +')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" ';
+                _output +='title="Agregar Titular" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-user"></i></button></div></div></td>';
+                _output +='</tr>';
 
                 $('#tblProducto').append(_output);
                 mensajesalertify('Agregado Correctamente..!', 'S', 'top-center', 3);
@@ -941,18 +951,21 @@
         var _class = "badge badge-light-primary";
         var _td = "td_" + _prodid;
         var _btnedit = "btnEditar_" + _prodid;
+        var _btntitu = "btnTitular_" + _prodid;
         var _estado;
 
         if(_check){
 
-            _estado = 'Activo';
+            _estado = 'ACTIVO';
             _checked = "checked='checked'";
             $('#'+_btnedit).prop("disabled",false);
+            $('#'+_btntitu).prop("disabled",false);
 
         }else{
-            _estado = 'Inactivo';
+            _estado = 'INACTIVO';
             _class = "badge badge-light-danger";
-            $('#'+_btnedit).prop("disabled",true);  
+            $('#'+_btnedit).prop("disabled",true);
+            $('#'+_btntitu).prop("disabled",true);    
         }
 
         var _changetd = document.getElementById(_td);
@@ -979,17 +992,19 @@
         
         $("#modal_producto").find("input,textarea,checkbox").val("");
 
-        
         _rowid = $(this).attr("id");
         _rowid = _rowid.substring(10);
+        _paisid = '<?php echo $xPaisid;?>';
+        _emprid = '<?php echo $xEmprid;?>';
 
-        var xrespuesta = $.post("codephp/get_datosproductos.php", { xxProid: _rowid });
+        var xrespuesta = $.post("codephp/get_datosproductos.php", { xxProid: _rowid,xxPaisid:_paisid,xxEmprid: _emprid  });
         xrespuesta.done(function(response){
 
 
             var _datos = JSON.parse(response);
 
             $.each(_datos,function(i,item){
+                _clieid = _datos[i].Clieid;
                 _grupid =  _datos[i].Grupid;
                 _producto =  _datos[i].Nombre;
                 _desc =  _datos[i].Descr;
@@ -1094,9 +1109,8 @@
         var _output;
         var _prodid = _rowid;
         var _prodedit= $('#txtProductoEdit').val();
-            _prodedit= _prodedit.toUpperCase();
+        var _prodeditUpper= _prodedit.toUpperCase();
         var _descredit = $('#txtDescripcionEdit').val();
-            _descredit= _descredit.toUpperCase();
         var _costoedit = $('#txtCostoEdit').val();
         var _cbogrupoedit = $('#cboGrupoEdit').val();
         var _txtgrupoedit = $("#cboGrupoEdit option:selected").text();
@@ -1141,18 +1155,22 @@
 
             if(response.trim() == 'OK'){
 
-                _output ='<td style="display: none;">' + _rowid + '</td>';
+                _output ='<td style="display: none;">' + _prodid + '</td>';
                 _output +='<td>' +_txtgrupoedit + '</td>';
-                _output +='<td>' +_prodedit + '</td>';
+                _output +='<td>' +_prodeditUpper + '</td>';
                 _output +='<td>' +_costoedit + '</td>';
-                _output +='<td id="td_'+_rowid + '"><div class="badge badge-light-primary">Activo</div></td>';
+                _output +='<td id="td_'+ _prodid + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
                 _output +='<td><div class="form-check form-check-sm form-check-custom form-check-solid">';
-                _output +='<input class="form-check-input h-20px w-20px border-primary btnEstado" checked="checked" type="checkbox" id="chk'+_rowid +'" ';
-                _output +='onchange="f_UpdateEstado('+_rowid +','+ _emprid + ')" value=""/></div></td>';
+                _output +='<input class="form-check-input h-20px w-20px border-primary btnEstado" checked="checked" type="checkbox" id="chk'+ _prodid +'" ';
+                _output +='onchange="f_UpdateEstado('+ _prodid + ',' + _emprid + ',' + _paisid + ',' + _usuaid + ')" value=""/></div></td>';
                 _output +='<td><div class="text-center"><div class="btn-group">';
-                _output +='<button type="button" id="btnEditar_'+_rowid +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto">';
-                _output +='<i class="fa fa-edit"></i></button></div></div></td>';
+                _output +='<button type="button" id="btnEditar_' + _prodid +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto" data-bs-toggle="tooltip" data-bs-placement="left">';
+                _output +='<i class="fa fa-edit"></i></button>';
+                _output +='<button type="button" id="btnTitular_' + _prodid +'" onclick="f_Titular('+ _cbogrupoedit +','+ _prodid +','+ _clieid +')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" ';
+                _output +='title="Agregar Titular" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-user"></i></button></div></div></td>';
 
+                //console.log(_output);
+              
                 $('#row_' + _rowid + '').html(_output);
 
                 $("#modal_producto").modal("hide");

@@ -34,7 +34,7 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
-    $xSQL = "SELECT clie.clie_id AS IdCliente, clie.clie_nombre AS Cliente, clie.clie_url AS Urll, clie.clie_descripcion AS Descrip,clie.clie_imgcab AS Logo, CASE clie.clie_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado, ";
+    $xSQL = "SELECT clie.clie_id AS IdCliente, clie.clie_nombre AS Cliente, clie.clie_url AS Urll, clie.clie_descripcion AS Descrip,clie.clie_imgcab AS Logo, CASE clie.clie_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado, ";
     $xSQL .="pro.ciudad AS Ciudad FROM `expert_cliente` clie, `provincia_ciudad` pro WHERE clie.prov_id = pro.prov_id ";
     $all_clie = mysqli_query($con, $xSQL);
 
@@ -76,7 +76,7 @@
 		    </div>                       
         </div>
 		<div class="card-body pt-0">
-			<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
+			<table class="table table-hover align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
 				<thead>
 					<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0 text-uppercase">
 					    <th>Ciudad</th>
@@ -108,7 +108,7 @@
                        $xDisabledEdit = '';
                        $xTarget = '';
 
-                       if($xEstado == 'Activo'){
+                       if($xEstado == 'ACTIVO'){
                             $xCheking = 'checked="checked"';
                             $xTextColor = "badge badge-light-primary";
                         }else{
@@ -149,8 +149,8 @@
 						<td>
                             <div class="text-center">
 								<div class="btn-group">
-									<button id="btnEditar_<?php echo $xClieid;?>" onclick="f_Editar(<?php echo $xClieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit;?> title='Editar Cliente'>
-										<i class='fa fa-edit'></i>
+									<button id="btnEditar_<?php echo $xClieid;?>" onclick="f_Editar(<?php echo $xClieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit;?> title='Editar Cliente' data-bs-toggle="tooltip" data-bs-placement="left">
+										<i class="fa fa-edit"></i>
 									</button>												 
 								</div>
 							</div>
@@ -193,12 +193,12 @@
         var _btnedit = "btnEditar_" + _clieid;
 
         if(_check){
-            var _estado = 'Activo';
+            var _estado = 'ACTIVO';
             _checked = "checked='checked'";
             $('#'+_btnedit).prop("disabled",false);
             
         }else{
-            _estado = 'Inactivo';
+            _estado = 'INACTIVO';
             _class = "badge badge-light-danger";
             $('#'+_btnedit).prop("disabled",true);
         }

@@ -25,7 +25,7 @@
             $xUsuaid = $_POST['xxUsuaid'];
             $xEstado = safe($_POST['xxEstado']);
 
-            if($xEstado == 'Activo'){
+            if($xEstado == 'ACTIVO'){
                 $xEstado = 'A';
             }else{
                 $xEstado = 'I';

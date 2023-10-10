@@ -119,7 +119,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Productos</a>
                 </li>
-                <a href="?page=admin_clienteproducto&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
+                <a href="?page=admin_clienteproducto&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
                     <span class="svg-icon svg-icon-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
@@ -168,7 +168,7 @@
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="form-label">Descripcion</label>
-                                    <textarea class="form-control mb-2 text-uppercase" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                                    <textarea class="form-control mb-2 text-uppercase" name="txtDesc" id="txtDesc" rows="1" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
                                 </div>                                 
                             </div>
                         </div>
@@ -197,7 +197,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="kt_customer_view_payment_method_1" class="collapse show fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
+                                    <div id="kt_customer_view_payment_method_1" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
                                         <div class="d-flex flex-wrap py-5">
                                             <div class="flex-equal me-5">
                                                 <div class="row mb-8">
@@ -205,7 +205,7 @@
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
                                                     </div>
                                                     <div class="col-xl-10 fv-row">
-                                                        <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"></textarea>
+                                                        <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" rows="1" maxlength="250" onkeydown="return (event.keyCode!=13);"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-8">
@@ -323,7 +323,7 @@
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="form-label">Descripcion</label>
-                                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
                                 </div>
                                 <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                     <div class="col">
@@ -438,7 +438,7 @@
                     <label class="fs-6 fw-bold form-label mb-2">
                         <span>Descripcion</span>
                     </label>
-                    <textarea class="form-control mb-2" name="txtDescGrupo" id="txtDescGrupo" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                    <textarea class="form-control mb-2 text-uppercase" name="txtDescGrupo" id="txtDescGrupo" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
                 </div>                         
             </div>
             <div class="modal-footer">
@@ -451,15 +451,13 @@
 
 <script>
     
-    var _cobertura = "NO",_sistema = "NO", _count = 0, _result = [];
+    var _cobertura = "NO",_sistema = "NO", _count = 0, _result = [],_paisid = "<?php echo $xPaisid; ?>",_emprid = "<?php echo $xEmprid; ?>";
 
     $(document).ready(function(){
 
         $('#cboProvincia').change(function(){
-                
-            var _paisid = "<?php echo $xPaisid; ?>";
-            var _emprid = "<?php echo $xEmprid; ?>";                
-            _cboid = $(this).val(); //obtener el id seleccionado
+                              
+            var _cboid = $(this).val(); //obtener el id seleccionado
             
             $("#cboCiudad").empty();
 
@@ -562,7 +560,7 @@
         var _emprid = "<?php echo $xEmprid; ?>";
         var _paisid = "<?php echo $xPaisid; ?>";
         var _producto = $.trim($("#txtProducto").val());
-            _producto.toUpperCase();
+        var _productoUpper = _producto.toUpperCase();
         var _descripcion = $.trim($("#txtDescripcion").val());
         var _costo = $.trim($("#txtCosto").val());
         var _cbogrupo = $('#cboGrupo').val();
@@ -618,13 +616,16 @@
                         _output = '<tr id="row_' + _count + '">';
                         _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';
                         _output += '<td>' + _txtGrupo + ' <input type="hidden" name="hidden_grupo[]" id="txtGrupo' + _count + '" value="' + _txtGrupo + '" /></td>';
-                        _output += '<td>' + _producto + ' <input type="hidden" name="hidden_producto[]" id="txtProducto' + _count + '" value="' + _producto + '" /></td>';
+                        _output += '<td>' + _productoUpper + ' <input type="hidden" name="hidden_producto[]" id="txtProducto' + _count + '" value="' + _productoUpper + '" /></td>';
                         _output += '<td>' + _costo + ' <input type="hidden" name="hidden_costo[]" id="txtCosto' + _count + '" value="' + _costo + '" /></td>';
                         _output += '<td>';
-                        _output += '<button type="button" title="Eliminar Producto" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></td>';
+                        _output += '<button id="btnDelete' + _count + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"  onclick="f_DelProducto('+"'";
+                        _output +=  _producto + "'" + ',' + _count + ')"' + ' title="Eliminar Producto" data-bs-toggle="tooltip" data-bs-placement="right"><i class="fa fa-trash"></i></button></td>';
                         _output += '</tr>';
 
                         $('#tblProducto').append(_output);
+
+                        //console.log(_output);
         
                         var _objeto = {
                             arryproducto: _producto,
@@ -876,7 +877,7 @@
                             var xrespuesta = $.post("codephp/grabar_productoclie.php", { xxPaisid: _idpais, xxEmprid: _idempr,xxUsuaid: _iduser,xxClieid: dataid, xxResult: _result });
                                 xrespuesta.done(function(response){
                                         
-                                if(response == 'OK'){
+                                if(response.trim() == 'OK'){
 
                                     $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
                         
@@ -903,30 +904,25 @@
 
     }
 
-    //Eliminar Detalle en linea
+    //Eliminar Producto en linea
 
-    $(document).on("click",".btnDelete",function(){
-        var row_id = $(this).attr("id");
-        var _producto = $('#txtProducto' + row_id + '').val();
-
-        FunRemoveItemFromArr(_result, _producto);
-        $('#row_' + row_id + '').remove();
+    function f_DelProducto(_prod,_id){
+        $('#row_' + _id + '').remove();
         _count--;
+        
+         $.each(_result,function(i,item){
 
-    });
-
-    function FunRemoveItemFromArr(arr, deta)
-    {
-        $.each(arr,function(i,item){
-            if(item.arryproducto == deta)
+            if(item.arryproducto == _prod)
             {
-                arr.splice(i, 1);
+                _result.splice(i, 1);
                 return false;
             }else{
                 continuar = true;
             }
-        });        
-    };
+
+        });
+
+    }
 
 
     //Desplazar-modal

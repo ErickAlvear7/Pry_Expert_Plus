@@ -16,12 +16,12 @@
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());  
     $xTerminal = gethostname();    
 
-    if(isset($_POST['xxClieid']) and isset($_POST['xxEmprid']) and isset($_POST['xxPaisid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxEstado'])){
-        if(isset($_POST['xxClieid']) <> '' and isset($_POST['xxEmprid']) <> ''  and isset($_POST['xxPaisid']) <> ''  and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxEstado']) <> ''){
+    if(isset($_POST['xxBeneid']) and isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxEstado'])){
+        if(isset($_POST['xxBeneid']) <> '' and isset($_POST['xxPaisid']) <> ''  and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxEstado']) <> ''){
             
-            $xClieid = $_POST['xxClieid'];
-            $xEmprid = $_POST['xxEmprid'];
+            $xBeneid = $_POST['xxBeneid'];
             $xPaisid = $_POST['xxPaisid'];
+            $xEmprid = $_POST['xxEmprid'];
             $xUsuaid = $_POST['xxUsuaid'];
             $xEstado = safe($_POST['xxEstado']);
 
@@ -31,12 +31,12 @@
                 $xEstado = 'I';
             }
 
-            $xSQL = "UPDATE `expert_cliente` SET clie_estado='$xEstado', fechacreacion='{$xFecha}',terminalcreacion='$xTerminal' ";
-            $xSQL .= "WHERE clie_id=$xClieid AND empr_id=$xEmprid ";
+            $xSQL = "UPDATE `expert_beneficiario` SET bene_estado ='$xEstado' ";
+            $xSQL .= "WHERE bene_id=$xBeneid";
             mysqli_query($con, $xSQL);
 
             $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
-            $xSQL .= "VALUES('Cambio de estado cliente',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
+            $xSQL .= "VALUES('Cambio de estado beneficiario',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
             mysqli_query($con, $xSQL);   
 
             $xRespuesta = "OK";

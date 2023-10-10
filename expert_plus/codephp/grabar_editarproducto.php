@@ -29,7 +29,7 @@
             $xUsuaid = $_POST['xxUsuaid'];
             $xProdnew = trim(mb_strtoupper(safe($_POST['xxProdedit'])));
             $xProdant = $_POST['xxProdant'];
-            $xDesc = safe($_POST['xxDescr']);
+            $xDesc = trim(mb_strtoupper(safe($_POST['xxDescr'])));
             $xCosto = safe($_POST['xxCostoedit']);
             $xAsisMes = $_POST['xxAsisMesedit'];
             $xAsisAnu = $_POST['xxAsisAnuedit'];
