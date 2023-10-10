@@ -1185,12 +1185,13 @@
                     calendar = new FullCalendar.Calendar(calendarEl, {
 
                         locale: 'es',
-                        //initialView: 'timeGridWeek',
-                        initialView: 'dayGridMonth',
+                        initialView: 'timeGridWeek',
+                        //initialView: 'dayGridMonth',
                         headerToolbar: {
                             left: 'prev, next, today',
                             center: 'title',
-                            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                            //right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                            right: 'timeGridWeek,timeGridDay'
                         },
                         navLinks: true, // can click day/week names to navigate views
                         editable: true,
