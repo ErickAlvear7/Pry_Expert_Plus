@@ -1371,7 +1371,6 @@
             contentType: false,
             dataType: "json",
             success: function(response){
-                console.log(response);
                 if(response == 'OK'){
                     $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito..!'}); //POR METODO POST
                 }else{

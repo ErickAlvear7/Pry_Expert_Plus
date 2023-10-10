@@ -18,21 +18,22 @@
     $xTerminal = gethostname();
     $xRespuesta = 0;
 
-    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxPreeid']) and isset($_POST['xxProfid'])  ){
-        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxPreeid']) <> '' and isset($_POST['xxProfid']) <> ''){
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxPreeid']) and isset($_POST['xxProfid']) and isset($_POST['xxIntervalo'])  ){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxPreeid']) <> '' and isset($_POST['xxProfid']) <> '' and isset($_POST['xxIntervalo']) <> ''  ){
             
             $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
             $xUsuaid = $_POST['xxUsuaid'];
             $xPreeid = $_POST['xxPreeid'];
+            $xIntervalo = $_POST['xxIntervalo'];
             $xProfid =  $_POST['xxProfid'];
 
             $xSQL = "SELECT * FROM `expert_profesional_especi` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pree_id=$xPreeid AND prof_id=$xProfid ";
             $all_datos = mysqli_query($con, $xSQL);
             if(mysqli_num_rows($all_datos) == 0 )
             {
-                $xSQL = "INSERT INTO `expert_profesional_especi`(pais_id,empr_id,pree_id,prof_id,fechacreacion,usuariocreacion,terminalcreacion) ";
-                $xSQL .= "VALUES($xPaisid,$xEmprid,$xPreeid,$xProfid,'{$xFecha}',$xUsuaid,'$xTerminal')";
+                $xSQL = "INSERT INTO `expert_profesional_especi`(pais_id,empr_id,pree_id,prof_id,intervalo,fechacreacion,usuariocreacion,terminalcreacion) ";
+                $xSQL .= "VALUES($xPaisid,$xEmprid,$xPreeid,$xProfid,$xIntervalo,'{$xFecha}',$xUsuaid,'$xTerminal')";
                 if(mysqli_query($con, $xSQL)){
     
                     $xId = mysqli_insert_id($con);

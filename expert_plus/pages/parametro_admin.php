@@ -520,23 +520,23 @@
         row_id = $(this).attr("id");
         _detalle = $('#txtDetalle' + row_id + '').val();
 
-        FunRemoveItemFromArr(_result, _detalle);
-        $('#row_' + row_id + '').remove();
-        _count--;
-
-    });
-    function FunRemoveItemFromArr(arr, deta)
-    {
-        $.each(arr,function(i,item){
-            if(item.arrydetalle == deta)
+        $.each(_result,function(i,item){
+            if(item.arrydetalle == _detalle)
             {
-                arr.splice(i, 1);
+                _result.splice(i, 1);
                 return false;
             }else{
                 continuar = true;
             }
-        });        
-    };
+        }); 
+
+        //FunRemoveItemFromArr(_result, _detalle);
+        $('#row_' + row_id + '').remove();
+        _count--;
+
+        console.log(_result);
+
+    });
 
     function f_Editar(_paraid){
         $.redirect('?page=editparametro&menuid=<?php echo $menuid; ?>', {'idparam': _paraid}); //POR METODO POST

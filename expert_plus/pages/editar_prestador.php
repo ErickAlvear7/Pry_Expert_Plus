@@ -147,7 +147,18 @@
                                     </svg>
                                 </span>
                                 Nuevo Profesional
-                            </button>                                               
+                            </button>    
+                            <div class="separator my-7"></div>
+                            <button type="button" id="btnProbarAgenda" class="btn btn-primary w-100" >
+                                <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M20 14H18V10H20C20.6 10 21 10.4 21 11V13C21 13.6 20.6 14 20 14ZM21 19V17C21 16.4 20.6 16 20 16H18V20H20C20.6 20 21 19.6 21 19ZM21 7V5C21 4.4 20.6 4 20 4H18V8H20C20.6 8 21 7.6 21 7Z" fill="currentColor" />
+                                        <path opacity="0.3" d="M17 22H3C2.4 22 2 21.6 2 21V3C2 2.4 2.4 2 3 2H17C17.6 2 18 2.4 18 3V21C18 21.6 17.6 22 17 22ZM10 7C8.9 7 8 7.9 8 9C8 10.1 8.9 11 10 11C11.1 11 12 10.1 12 9C12 7.9 11.1 7 10 7ZM13.3 16C14 16 14.5 15.3 14.3 14.7C13.7 13.2 12 12 10.1 12C8.10001 12 6.49999 13.1 5.89999 14.7C5.59999 15.3 6.19999 16 7.39999 16H13.3Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                Probar Agenda
+                            </button>    
+
                         </div>
                     </div>
                 </div>
@@ -265,7 +276,7 @@
                                     <div id="kt_customer_view_payment_method" class="card-body pt-0">
                                         <div class="py-0" data-kt-customer-payment-method="row">
                                             <div class="py-3 d-flex flex-stack flex-wrap">
-                                                <div class="d-flex align-items-center collapsible rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_1" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_1">
+                                                <div class="d-flex align-items-center  collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_1" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_1">
                                                     <div class="me-3 rotate-90">
                                                         <span class="svg-icon svg-icon-3">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -281,7 +292,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div id="kt_customer_view_payment_method_1" class="collapse show fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
+                                            <div id="kt_customer_view_payment_method_1" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
                                                 <div class="d-flex flex-wrap py-5">
                                                     <div class="flex-equal me-5">
                                                         <div class="row mb-8">
@@ -403,7 +414,7 @@
                             </div>
                             <div class="d-flex justify-content-end">
                                 <!--<a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancelar</a>-->
-                                <button type="button" id="btnSave" class="btn btn-primary">
+                                <button type="button" id="btnSave" class="btn btn-primary"><i class="las la-save"></i>
                                     <span class="indicator-label">Grabar</span>
                                     <span class="indicator-progress">Espere un momento...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -766,6 +777,15 @@
                                             </select>                                            
                                         </div>
                                     </div>
+                                         <div class="col">
+                                        <div class="fv-row mb-7">
+                                            <label class="fs-6 fw-bold form-label mt-3">
+                                                <span class="required">Intervalo</span>
+                                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Intervalo de 10 a 60 minutos"></i>
+                                            </label>   
+                                            <input type="number" name="txtIntervalo" id="txtIntervalo" min="10" max="60" step="10" class="form-control mb-2" value="10" onKeyPress="if(this.value.length==2) return false;"  pattern="/^-?\d+\.?\d*$/" />
+                                        </div>
+                                    </div>                               
                                 </div>
 
                                 <div class="form-group mt-5">
@@ -787,6 +807,7 @@
                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                             <th>Profesional</th>
                                             <th>Tipo_Profesion</th>
+                                            <th>Intervalo</th>
                                             <th>Estado</th>
                                             <th>Status</th>
                                             <th>Opciones</th>
@@ -837,7 +858,7 @@
                                                 <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's email."></i> -->
                                             </label>
                                             <?php	
-                                                $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Dias Semana' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
+                                                $xSQL = "SELECT pde.pade_valorI AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Dias Semana' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
                                                 $all_dias = mysqli_query($con, $xSQL);    
                                             ?>
                                             <select name="cboDias" id="cboDias" aria-label="Seleccione Dia" data-control="select2" data-placeholder="Seleccione Dia" data-dropdown-parent="#modal_horarios" class="form-select mb-2" >
@@ -848,7 +869,7 @@
                                             </select>
                                         </div>
                                     </div>  
-                                    <div class="col">
+                                    <!-- <div class="col">
                                         <div class="fv-row mb-7">
                                             <label class="fs-6 fw-bold form-label mt-3">
                                                 <span class="required">Intervalo</span>
@@ -856,7 +877,7 @@
                                             </label>   
                                             <input type="number" name="txtIntervalo" id="txtIntervalo" min="10" max="60" step="10" class="form-control mb-2" value="10" />
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
@@ -902,7 +923,7 @@
                                     <thead>
                                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                             <th>Dia</th>
-                                            <th>Intervalo</th>
+                                            <!-- <th>Intervalo</th> -->
                                             <th>H.Desde</th>
                                             <th>H.Hasta</th>
                                             <th>Opciones</th>
@@ -1128,7 +1149,7 @@
                                             <label class="fs-6 fw-bold form-label mt-3">
                                                 <span class="required">No. Documento</span>
                                             </label>   
-                                            <input type="text" name="txtNumDocumento" id="txtNumDocumento" class="form-control mb-2" maxlength="20" placeholder="Numero Documento"  />                                                     
+                                            <input type="text" name="txtNumDocumento" id="txtNumDocumento" class="form-control mb-2" maxlength="10" placeholder="Numero Documento"  />                                                     
                                         </div>
                                     </div>
                                 </div>
@@ -1198,7 +1219,7 @@
                                 <div id="datos_profesional" class="card-body pt-0">
                                     <div class="py-0" data-kt-customer-payment-method="row">
                                         <div class="py-3 d-flex flex-stack flex-wrap">
-                                            <div class="d-flex align-items-center collapsible rotate" data-bs-toggle="collapse" href="#direccion_profesional" role="button" aria-expanded="false" aria-controls="direccion_profesional">
+                                            <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#direccion_profesional" role="button" aria-expanded="false" aria-controls="direccion_profesional">
                                                 <div class="me-3 rotate-90">
                                                     <span class="svg-icon svg-icon-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1214,7 +1235,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="direccion_profesional" class="collapse show fs-6 ps-12" data-bs-parent="#datos_profesional">
+                                        <div id="direccion_profesional" class="collapse fs-6 ps-12" data-bs-parent="#datos_profesional">
                                             <div class="row row-cols-1 row-cols-sm-1 rol-cols-md-1 row-cols-lg-1">
                                                 <div class="col-xl-10 fv-row">
                                                     <textarea class="form-control mb-2 text-uppercase" name="txtDireccionProf" id="txtDireccionProf" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDireccion; ?> </textarea>
@@ -1341,7 +1362,8 @@
                 document.getElementById('imgfile').style.backgroundImage="url(logos/" + _logo + ")";
 
                 $('#cboProvincia').change(function(){
-                        
+                    
+                    debugger;
                     _cboid = $(this).val(); //obtener el id seleccionado
                     $("#cboCiudad").empty();
 
@@ -1409,7 +1431,12 @@
                     $("#cboTipoDoc").val('').change();
                     $("#cboTipoGenero").val('').change();
                     $("#cboTipoProfesion").val('').change();
-                });                
+                });     
+                
+                $("#btnProbarAgenda").click(function(){
+                    $.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': 1, 'prodid': 6, 'grupid': 2 });
+
+                });                 
 
                 $('#btnSaveNew').click(function(e){
 
@@ -1942,12 +1969,21 @@
                 _rowid = $(this).attr("id");
                 _rowid = _rowid.substring(10);
 
-                var xrespuesta = $.post("codephp/get_datosespecipresta.php", { xxPreeid: _rowid });
+                alert(_rowid);
+
+                var _parametros = {
+                    "xxPaisid" : _paisid,
+                    "xxEmprid" : _emprid,
+                    "xxPreeid" : _rowid
+                }                
+
+                var xrespuesta = $.post("codephp/get_datosespecipresta.php", _parametros );
                 xrespuesta.done(function(response){
                     
                     var _datos = JSON.parse(response);
 
                     $.each(_datos,function(i,item){
+
                         _espeid =  _datos[i].Espeid;
                         _pvp =  _datos[i].Pvp;
                         _costo =  _datos[i].Costo;
@@ -1957,15 +1993,16 @@
                         $('#txtCostoEdit').val(_costo);
                         $('#txtcboespe').val(_espeid);
 
-                        $("#modal-editar-especialidad").modal("show");
-
-                    });                    
+                    });
+                    
+                    $("#modal-editar-especialidad").modal("show");
                 });
 
             });	
             
             function f_AgregarProfesional(_paisid, _emprid, _presid, _preeid){
 
+                debugger;
                 var tb = document.getElementById('tblProfesional');
                     while(tb.rows.length > 1) {
                     tb.deleteRow(1);
@@ -1994,6 +2031,7 @@
                             _nombres = item.Nombres + ' ' + item.Apellidos;
                             _tipoprofe = item.Profesion;
                             _estado = item.Estado;
+                            _intervalo = item.Intervalo;
                             _checked = '';
                             _disabledbtn1 = '';
                             _disabledbtn2 = '';
@@ -2010,6 +2048,7 @@
                             _output = '<tr id="trprof_' + _id + '">';
                             _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _nombres + '</span><input type="hidden" id="txtProfesional_' + _id + '" value="' + _nombres + '" /></div></div></td>';
                             _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _tipoprofe + '</span></div></div></td>';
+                            _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
                             _output += '<td id="tdprof_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="' + _textcolor + '">' + _estado + '</div></div></div></td>';
                             _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                             _output += '<input class="form-check-input h-20px w-20px border-primary" ' +  _checked + ' type="checkbox" id="chkprof' + _id + '" onchange="f_UpdateEstProf(';
@@ -2025,6 +2064,7 @@
                         });
 
                         $("#cboTipoProfe").val(0).change(); 
+                        $("#txtIntervalo").val(10);
                         //$("#modal_profesional").find("input,textarea").val("");
                         $("#modal_profesional").modal("show");
                         $('#modal_profesional').modal('handleUpdate');                           
@@ -2042,17 +2082,24 @@
                 var _profid = $('#cboProfesional').val();
                 var _profesional = $('#cboProfesional option:selected').text();
                 var _profesion = $('#cboTipoProfe option:selected').text();
+                var _intervalo = $('#txtIntervalo').val();
 
                 if(_profid == 0){
                     mensajesalertify("Seleccione Profesional..!", "W", "top-center", 3);
                     return;
                 }
 
+                if(_intervalo == ''){
+                    mensajesalertify("Ingrese Internvalo..!", "W", "top-center", 5);
+                    return;
+                }                
+
                 var _parametros = {
                     "xxPaisid" : _paisid,
                     "xxEmprid" : _emprid,
                     "xxUsuaid" : _usuaid,
                     "xxPreeid" : _selpreeid,
+                    "xxIntervalo" : _intervalo,
                     "xxProfid" : _profid
                 }	
     
@@ -2065,6 +2112,7 @@
                         _output = '<tr id="trprof_' + _id + '">';
                         _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _profesional + '</span><input type="hidden" id="txtProfesional_' + _id + '" value="' + _profesional +  '" /></div></div></td>';
                         _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _profesion + '</span></div></div></td>';
+                        _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
                         _output += '<td id="tdprof_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="badge badge-light-primary">Activo</div></div></div></td>';
                         _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                         _output += '<input class="form-check-input h-20px w-20px border-primary" type="checkbox" checked="checked" id="chkprof' + _id + '" onchange="f_UpdateEstProf(';
@@ -2074,11 +2122,11 @@
                         _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Configurar Horario" ><i class="fas fa-cogs"></i></button>';                        
                         _output += '<button id="btnDelProf_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" onclick="f_DelAsigProf(';
                         _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Eliminar Profesional Asignado" ><i class="fa fa-trash"></i></button></div></div></td></tr>'
-
+                        
                         $('#tblProfesional').append(_output);
 
                     }else{
-                        mensajesalertify("Profesional ya esta existe..!", "W", "top-center", 3);
+                        mensajesalertify("Profesional esta agregado..!", "W", "top-center", 3);
                     }
 
                     $("#cboTipoProfe").val(0).change(); 
@@ -2139,7 +2187,7 @@
                 document.getElementById("headertitu1").innerHTML = "Especialidad: " + _selespecialidad + "<br><br>" + "Profesional: " + _selprofesional;
 
                 $("#cboDias").val(0).change();
-                $("#txtIntervalo").val(10);
+                //$("#txtIntervalo").val(10);
                 $("#txtHoraDesde").val('');
                 $("#txtHoraHasta").val('');
 
@@ -2157,17 +2205,21 @@
                     success: function(response){ 
                         $.each(response, function(i, item){
 
+                            //debugger;
+                            
                             _id = item.Id;
                             _dia = item.Dia;
-                            _intervalo = item.Intervalo;
+                            //_intervalo = item.Intervalo;
                             _horadesde = item.HoraDesde;
+                            _horafdesde = _horadesde.substring(0,5);
                             _horahasta = item.HoraHasta;
+                            _horafhasta = _horahasta.substring(0,5);
 
                             _output = '<tr id="trhorario_' + _id + '">';
                             _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _dia + '</span></div></div></td>';
-                            _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
-                            _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _horadesde + '</span></div></div></td>';
-                            _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _horahasta + '</span></div></div></td>';
+                            //_output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
+                            _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _horafdesde + '</span></div></div></td>';
+                            _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _horafhasta + '</span></div></div></td>';
                             _output += '<td class=""><div class=""><div class="btn-group">'
                             _output += '<button id="btnDelHorario_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"  onclick="f_DelHorario(';
                             _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Eliminar Turno/Horario" ><i class="fa fa-trash"></i></button></div></div></td></tr>'
@@ -2232,9 +2284,10 @@
             $('#btnAgregarHorario').click(function(e){
 
                 var _dia = $('#cboDias').val();
-                var _intervalo = $('#txtIntervalo').val();
+                var _intervalo = 0;
+                //var _intervalo = $('#txtIntervalo').val();
                 var _horadesde = $('#txtHoraDesde').val();
-                var _horahasta = $('#txtHoraHasta').val();
+                var _horahasta = $('#txtHoraHasta').val();                
 
                 var _diatext = $('#cboDias option:selected').text();
 
@@ -2243,10 +2296,10 @@
                     return;
                 }
 
-                if(_intervalo == ''){
-                    mensajesalertify("Ingrese Internvalo..!", "W", "top-center", 5);
-                    return;
-                }
+                // if(_intervalo == ''){
+                //     mensajesalertify("Ingrese Internvalo..!", "W", "top-center", 5);
+                //     return;
+                // }
 
                 if(_horadesde == ''){
                     mensajesalertify("Seleccion Hora Inicio..!", "W", "top-center", 5);
@@ -2268,12 +2321,12 @@
                     return;
                 } 
 
-                var diferencia = minutos_final - minutos_inicio;
+                // var diferencia = minutos_final - minutos_inicio;
 
-                if(parseInt(_intervalo) >= diferencia){
-                    mensajesalertify("La diferencia del Intervalo es menor o igual a la horas establecidas..!", "W", "top-center", 5);
-                    return;
-                }
+                // if(parseInt(_intervalo) >= diferencia){
+                //     mensajesalertify("La diferencia del Intervalo es menor o igual a la horas establecidas..!", "W", "top-center", 5);
+                //     return;
+                // }
 
                 //var horas = Math.floor(diferencia / 60);
                 //var minutos = diferencia % 60;
@@ -2285,6 +2338,7 @@
                     "xxUsuaid" : _usuaid,
                     "xxPfesid" : _selecpfesid,
                     "xxDia" : _dia,
+                    "xxDiaText" : _diatext,
                     "xxIntervalo" : _intervalo,
                     "xxHoraInicio" : _horadesde,
                     "xxHoraFin" : _horahasta
@@ -2298,14 +2352,12 @@
 
                         _output = '<tr id="trhorario_' + _id + '">';
                         _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _diatext + '</span></div></div></td>';
-                        _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
+                        //_output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
                         _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _horadesde + '</span></div></div></td>';
                         _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _horahasta + '</span></div></div></td>';
                         _output += '<td class=""><div class=""><div class="btn-group">';
                         _output += '<button id="btnDelHorario_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" onclick="f_DelHorario(';
                         _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Eliminar Turno/Horario" ><i class="fa fa-trash"></i></button></div></div></td></tr>'
-
-                        console.log(_output);
 
                         $('#tblHorarios').append(_output);
 

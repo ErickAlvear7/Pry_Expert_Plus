@@ -1,0 +1,737 @@
+<html lang='es'>
+                            <head>
+                                <meta charset='utf-8' />
+                                
+                                <style>
+                                    #customers {
+                                      font-family: Arial, Helvetica, sans-serif;
+                                      border-collapse: collapse;
+                                      width: 100%;
+                                    }
+                                    
+                                    #customers td, #customers th {
+                                      border: 1px solid #ddd;
+                                      padding: 8px;
+                                    }
+                                    
+                                    #customers tr:nth-child(even){background-color: #f2f2f2;}
+                                    
+                                    #customers tr:hover {background-color: #ddd;}
+                                    
+                                    #customers th {
+                                      padding-top: 12px;
+                                      padding-bottom: 12px;
+                                      text-align: left;
+                                      background-color: #d6dad6;
+                                      color: red;
+                                    }
+                                    
+                                </style>
+                            </head>
+                            <body>
+                                
+                        <br><br><img src='./logos/citaagendadax.png' alt='' style='height: 100%; width: 100%;' /><br><br>Nuevo Agendamiento: <strong>ERICK ALVEAR</strong><br><br><hr><br>Registrar los siguientes datos para agendamiento<br><br><hr><br>
+                            <table align='center' class='table' id='customers'>
+                                <tbody>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Cliente</td>
+                                        <td style='text-align:center'>:</td>
+                                        <td>SEGUROS PICHINCHA</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Producto</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>FAMILIA PROTEGIDA</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Medicamentos</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>NO</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Codigo Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>1001</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Ciudad Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>Pichincha/Quito</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Fecha Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>2023-10-09 20:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Hora Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>20:00 - 20:30 </td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Prestadora</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>ASISTANET</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Profesional</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>CRISTIAN ALVEAR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Especialidad</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>BIOMETRIA HEMATICA + EMO</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Motivo</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>REALIZAR EXAMENES</td>
+                                    </tr>
+                                    <tr>                                    
+                                        <td style='font-weight:bold;'>Detalle</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>ESTA ES UNA PRUEBA</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Cedula Titular </td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>1718699760</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Tipo Cliente</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>T</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Cliente</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>ERICK ALVEAR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Fecha Nacimiento</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>1982-08-15</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Direccion</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>CAMINOS DEL SUR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Telefonos</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>022630922/0995677298</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Usuario</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>admin@prestasalud.com</td>
+                                    </tr>
+                                </tbody></table> <hr><br><br>Estimado Cliente, acuda a su cita agendada 10 minutos antes de la hora registrada.<br><br>Recuerde llevar el documento de identidad del Titular del servicio.<br><br><br><br>Atentamente,<br><br><img src='cid:LogoFirma' width='280' height='120' /><br><br><hr>Pie de Pagina1 <br>Pie de Pagina2 <br>Pie de Pagina3 <br>Pie de Pagina4 <br>	<table align="center">
+                                                <tr>
+                                                  <td bgcolor="#ffffff" align="center" style="color:#212b35;font-family:ShopifySans,Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;line-height:22px;padding-top:30px;padding-bottom:30px">
+                                                    <p style="padding-top:15px; color: #5d91ab;"> Copyright &copy; <a href="https://http://www.prestasalud.com/" style="padding-top:15px;color:#212b35;text-decoration:none" target="_blank" >PRESTASALUD S.A</a> | Direccion, Telf: +593 99 999 9999>
+                                                    <p align="center" style="padding-top:15px"><strong><a href="#" style="color:#212b35;font-size:13px;text-decoration:none" target="_blank" >Anular su suscripción</a></strong></p> 
+                                                  </td>
+                                            </tr></table> <br> <br>
+                                </body>
+                                </html>
+
+2023-10-10 02:47:56 ERROR: - PHPMailer\PHPMailer\Exception: Could not access file: ./logos/LogoPrestasalud.png in C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php:3534
+Stack trace:
+#0 C:\xampp\htdocs\proyecto-expert+\expert_plus\codephp\agendar_cita.php(355): PHPMailer\PHPMailer\PHPMailer->addEmbeddedImage('./logos/LogoPre...', 'LogoFirma', 'LogoPrestasalud...')
+#1 {main} - uid[Could not access file: ./logos/LogoPrestasalud.png] 
+
+<html lang='es'>
+                            <head>
+                                <meta charset='utf-8' />
+                                
+                                <style>
+                                    #customers {
+                                      font-family: Arial, Helvetica, sans-serif;
+                                      border-collapse: collapse;
+                                      width: 100%;
+                                    }
+                                    
+                                    #customers td, #customers th {
+                                      border: 1px solid #ddd;
+                                      padding: 8px;
+                                    }
+                                    
+                                    #customers tr:nth-child(even){background-color: #f2f2f2;}
+                                    
+                                    #customers tr:hover {background-color: #ddd;}
+                                    
+                                    #customers th {
+                                      padding-top: 12px;
+                                      padding-bottom: 12px;
+                                      text-align: left;
+                                      background-color: #d6dad6;
+                                      color: red;
+                                    }
+                                    
+                                </style>
+                            </head>
+                            <body>
+                                
+                        <br><br><img src='../logos/citaagendadax.png' alt='' style='height: 100%; width: 100%;' /><br><br>Nuevo Agendamiento: <strong>ERICK ALVEAR</strong><br><br><hr><br>Registrar los siguientes datos para agendamiento<br><br><hr><br>
+                            <table align='center' class='table' id='customers'>
+                                <tbody>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Cliente</td>
+                                        <td style='text-align:center'>:</td>
+                                        <td>SEGUROS PICHINCHA</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Producto</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>FAMILIA PROTEGIDA</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Medicamentos</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>NO</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Codigo Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>1001</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Ciudad Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>Pichincha/Quito</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Fecha Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>2023-10-09 20:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Hora Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>20:00 - 20:30 </td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Prestadora</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>ASISTANET</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Profesional</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>CRISTIAN ALVEAR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Especialidad</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>BIOMETRIA HEMATICA + EMO</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Motivo</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>REALIZAR EXAMENES</td>
+                                    </tr>
+                                    <tr>                                    
+                                        <td style='font-weight:bold;'>Detalle</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>ESTA ES UNA PRUEBA DEL AGENDAMIENTO</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Cedula Titular </td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>1718699760</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Tipo Cliente</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>T</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Cliente</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>ERICK ALVEAR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Fecha Nacimiento</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>1982-08-15</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Direccion</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>CAMINOS DEL SUR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Telefonos</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>022630922/0995677298</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Usuario</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>admin@prestasalud.com</td>
+                                    </tr>
+                                </tbody></table> <hr><br><br>Estimado Cliente, acuda a su cita agendada 10 minutos antes de la hora registrada.<br><br>Recuerde llevar el documento de identidad del Titular del servicio.<br><br><br><br>Atentamente,<br><br><img src='cid:LogoFirma' width='280' height='120' /><br><br><hr>Pie de Pagina1 <br>Pie de Pagina2 <br>Pie de Pagina3 <br>Pie de Pagina4 <br>	<table align="center">
+                                                <tr>
+                                                  <td bgcolor="#ffffff" align="center" style="color:#212b35;font-family:ShopifySans,Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;line-height:22px;padding-top:30px;padding-bottom:30px">
+                                                    <p style="padding-top:15px; color: #5d91ab;"> Copyright &copy; <a href="https://http://www.prestasalud.com/" style="padding-top:15px;color:#212b35;text-decoration:none" target="_blank" >PRESTASALUD S.A</a> | Direccion, Telf: +593 99 999 9999>
+                                                    <p align="center" style="padding-top:15px"><strong><a href="#" style="color:#212b35;font-size:13px;text-decoration:none" target="_blank" >Anular su suscripción</a></strong></p> 
+                                                  </td>
+                                            </tr></table> <br> <br>
+                                </body>
+                                </html>
+
+2023-10-10 02:54:06 ERROR: - PHPMailer\PHPMailer\Exception: SMTP Error: Could not authenticate. in C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php:2043
+Stack trace:
+#0 C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php(1858): PHPMailer\PHPMailer\PHPMailer->smtpConnect(Array)
+#1 C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php(1601): PHPMailer\PHPMailer\PHPMailer->smtpSend('Date: Tue, 10 O...', 'This is a multi...')
+#2 C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php(1437): PHPMailer\PHPMailer\PHPMailer->postSend()
+#3 C:\xampp\htdocs\proyecto-expert+\expert_plus\codephp\agendar_cita.php(364): PHPMailer\PHPMailer\PHPMailer->send()
+#4 {main} - uid[SMTP Error: Could not authenticate.] 
+
+<html lang='es'>
+                            <head>
+                                <meta charset='utf-8' />
+                                
+                                <style>
+                                    #customers {
+                                      font-family: Arial, Helvetica, sans-serif;
+                                      border-collapse: collapse;
+                                      width: 100%;
+                                    }
+                                    
+                                    #customers td, #customers th {
+                                      border: 1px solid #ddd;
+                                      padding: 8px;
+                                    }
+                                    
+                                    #customers tr:nth-child(even){background-color: #f2f2f2;}
+                                    
+                                    #customers tr:hover {background-color: #ddd;}
+                                    
+                                    #customers th {
+                                      padding-top: 12px;
+                                      padding-bottom: 12px;
+                                      text-align: left;
+                                      background-color: #d6dad6;
+                                      color: red;
+                                    }
+                                    
+                                </style>
+                            </head>
+                            <body>
+                                
+                        <br><br><img src='../logos/citaagendadax.png' alt='' style='height: 100%; width: 100%;' /><br><br>Nuevo Agendamiento: <strong>ERICK ALVEAR</strong><br><br><hr><br>Registrar los siguientes datos para agendamiento<br><br><hr><br>
+                            <table align='center' class='table' id='customers'>
+                                <tbody>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Cliente</td>
+                                        <td style='text-align:center'>:</td>
+                                        <td>SEGUROS PICHINCHA</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Producto</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>FAMILIA PROTEGIDA</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Medicamentos</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>NO</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Codigo Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>1001</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Ciudad Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>Pichincha/Quito</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Fecha Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>2023-10-09 20:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Hora Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>20:30 - 21:00 </td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Prestadora</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>ASISTANET</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Profesional</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>CRISTIAN ALVEAR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Especialidad</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>BIOMETRIA HEMATICA + EMO</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Motivo</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>REALIZAR EXAMENES</td>
+                                    </tr>
+                                    <tr>                                    
+                                        <td style='font-weight:bold;'>Detalle</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>ESTA ES UNA OPCION DE REGISTRO</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Cedula Titular </td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>1718699760</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Tipo Cliente</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>T</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Cliente</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>ERICK ALVEAR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Fecha Nacimiento</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>1982-08-15</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Direccion</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>CAMINOS DEL SUR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Telefonos</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>022630922/0995677298</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Usuario</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>admin@prestasalud.com</td>
+                                    </tr>
+                                </tbody></table> <hr><br><br>Estimado Cliente, acuda a su cita agendada 10 minutos antes de la hora registrada.<br><br>Recuerde llevar el documento de identidad del Titular del servicio.<br><br><br><br>Atentamente,<br><br><img src='cid:LogoFirma' width='280' height='120' /><br><br><hr>Pie de Pagina1 <br>Pie de Pagina2 <br>Pie de Pagina3 <br>Pie de Pagina4 <br>	<table align="center">
+                                                <tr>
+                                                  <td bgcolor="#ffffff" align="center" style="color:#212b35;font-family:ShopifySans,Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;line-height:22px;padding-top:30px;padding-bottom:30px">
+                                                    <p style="padding-top:15px; color: #5d91ab;"> Copyright &copy; <a href="https://http://www.prestasalud.com/" style="padding-top:15px;color:#212b35;text-decoration:none" target="_blank" >PRESTASALUD S.A</a> | Direccion, Telf: +593 99 999 9999>
+                                                    <p align="center" style="padding-top:15px"><strong><a href="#" style="color:#212b35;font-size:13px;text-decoration:none" target="_blank" >Anular su suscripción</a></strong></p> 
+                                                  </td>
+                                            </tr></table> <br> <br>
+                                </body>
+                                </html>
+
+2023-10-10 03:07:52 ERROR: - PHPMailer\PHPMailer\Exception: SMTP Error: Could not authenticate. in C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php:2043
+Stack trace:
+#0 C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php(1858): PHPMailer\PHPMailer\PHPMailer->smtpConnect(Array)
+#1 C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php(1601): PHPMailer\PHPMailer\PHPMailer->smtpSend('Date: Tue, 10 O...', 'This is a multi...')
+#2 C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php(1437): PHPMailer\PHPMailer\PHPMailer->postSend()
+#3 C:\xampp\htdocs\proyecto-expert+\expert_plus\codephp\agendar_cita.php(365): PHPMailer\PHPMailer\PHPMailer->send()
+#4 {main} - uid[SMTP Error: Could not authenticate.] 
+
+<html lang='es'>
+                            <head>
+                                <meta charset='utf-8' />
+                                
+                                <style>
+                                    #customers {
+                                      font-family: Arial, Helvetica, sans-serif;
+                                      border-collapse: collapse;
+                                      width: 100%;
+                                    }
+                                    
+                                    #customers td, #customers th {
+                                      border: 1px solid #ddd;
+                                      padding: 8px;
+                                    }
+                                    
+                                    #customers tr:nth-child(even){background-color: #f2f2f2;}
+                                    
+                                    #customers tr:hover {background-color: #ddd;}
+                                    
+                                    #customers th {
+                                      padding-top: 12px;
+                                      padding-bottom: 12px;
+                                      text-align: left;
+                                      background-color: #d6dad6;
+                                      color: red;
+                                    }
+                                    
+                                </style>
+                            </head>
+                            <body>
+                                
+                        <br><br><img src='../logos/citaagendadax.png' alt='' style='height: 100%; width: 100%;' /><br><br>Nuevo Agendamiento: <strong>ERICK ALVEAR</strong><br><br><hr><br>Registrar los siguientes datos para agendamiento<br><br><hr><br>
+                            <table align='center' class='table' id='customers'>
+                                <tbody>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Cliente</td>
+                                        <td style='text-align:center'>:</td>
+                                        <td>SEGUROS PICHINCHA</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Producto</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>FAMILIA PROTEGIDA</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Medicamentos</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>NO</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Codigo Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>1001</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Ciudad Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>Pichincha/Quito</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Fecha Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>2023-10-09 20:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Hora Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>20:30 - 21:00 </td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Prestadora</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>ASISTANET</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Profesional</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>CRISTIAN ALVEAR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Especialidad</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>BIOMETRIA HEMATICA + EMO</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Motivo</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>REALIZAR EXAMENES</td>
+                                    </tr>
+                                    <tr>                                    
+                                        <td style='font-weight:bold;'>Detalle</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>ESTA ES UNA OPCION ESPECIFICA</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Cedula Titular </td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>1718699760</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Tipo Cliente</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>T</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Cliente</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>ERICK ALVEAR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Fecha Nacimiento</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>1982-08-15</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Direccion</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>CAMINOS DEL SUR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Telefonos</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>022630922/0995677298</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Usuario</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>admin@prestasalud.com</td>
+                                    </tr>
+                                </tbody></table> <hr><br><br>Estimado Cliente, acuda a su cita agendada 10 minutos antes de la hora registrada.<br><br>Recuerde llevar el documento de identidad del Titular del servicio.<br><br><br><br>Atentamente,<br><br><img src='cid:LogoFirma' width='280' height='120' /><br><br><hr>Pie de Pagina1 <br>Pie de Pagina2 <br>Pie de Pagina3 <br>Pie de Pagina4 <br>	<table align="center">
+                                                <tr>
+                                                  <td bgcolor="#ffffff" align="center" style="color:#212b35;font-family:ShopifySans,Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;line-height:22px;padding-top:30px;padding-bottom:30px">
+                                                    <p style="padding-top:15px; color: #5d91ab;"> Copyright &copy; <a href="https://http://www.prestasalud.com/" style="padding-top:15px;color:#212b35;text-decoration:none" target="_blank" >PRESTASALUD S.A</a> | Direccion, Telf: +593 99 999 9999>
+                                                    <p align="center" style="padding-top:15px"><strong><a href="#" style="color:#212b35;font-size:13px;text-decoration:none" target="_blank" >Anular su suscripción</a></strong></p> 
+                                                  </td>
+                                            </tr></table> <br> <br>
+                                </body>
+                                </html>
+
+2023-10-10 03:09:19 ERROR: - PHPMailer\PHPMailer\Exception: SMTP Error: Could not connect to SMTP host. in C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php:2032
+Stack trace:
+#0 C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php(1858): PHPMailer\PHPMailer\PHPMailer->smtpConnect(Array)
+#1 C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php(1601): PHPMailer\PHPMailer\PHPMailer->smtpSend('Date: Tue, 10 O...', 'This is a multi...')
+#2 C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php(1437): PHPMailer\PHPMailer\PHPMailer->postSend()
+#3 C:\xampp\htdocs\proyecto-expert+\expert_plus\codephp\agendar_cita.php(365): PHPMailer\PHPMailer\PHPMailer->send()
+#4 {main} - uid[SMTP Error: Could not connect to SMTP host.] 
+
+<html lang='es'>
+                            <head>
+                                <meta charset='utf-8' />
+                                
+                                <style>
+                                    #customers {
+                                      font-family: Arial, Helvetica, sans-serif;
+                                      border-collapse: collapse;
+                                      width: 100%;
+                                    }
+                                    
+                                    #customers td, #customers th {
+                                      border: 1px solid #ddd;
+                                      padding: 8px;
+                                    }
+                                    
+                                    #customers tr:nth-child(even){background-color: #f2f2f2;}
+                                    
+                                    #customers tr:hover {background-color: #ddd;}
+                                    
+                                    #customers th {
+                                      padding-top: 12px;
+                                      padding-bottom: 12px;
+                                      text-align: left;
+                                      background-color: #d6dad6;
+                                      color: red;
+                                    }
+                                    
+                                </style>
+                            </head>
+                            <body>
+                                
+                        <br><br><img src='../logos/citaagendadax.png' alt='' style='height: 100%; width: 100%;' /><br><br>Nuevo Agendamiento: <strong>ERICK ALVEAR</strong><br><br><hr><br>Registrar los siguientes datos para agendamiento<br><br><hr><br>
+                            <table align='center' class='table' id='customers'>
+                                <tbody>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Cliente</td>
+                                        <td style='text-align:center'>:</td>
+                                        <td>SEGUROS PICHINCHA</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Producto</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>FAMILIA PROTEGIDA</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Medicamentos</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>NO</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Codigo Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>1001</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Ciudad Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>Pichincha/Quito</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Fecha Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>2023-10-09 20:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Hora Cita</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>20:30 - 21:00 </td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Prestadora</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>ASISTANET</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Profesional</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>CRISTIAN ALVEAR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Especialidad</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>BIOMETRIA HEMATICA + EMO</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Motivo</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>REALIZAR EXAMENES</td>
+                                    </tr>
+                                    <tr>                                    
+                                        <td style='font-weight:bold;'>Detalle</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>ESTE ES UN REGISTRO DE PRUEBA PARA VER COMO FUNCIONA</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Cedula Titular </td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>1718699760</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Tipo Cliente</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>T</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Cliente</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>ERICK ALVEAR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Fecha Nacimiento</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>1982-08-15</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Direccion</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>CAMINOS DEL SUR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Telefonos</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>022630922/0995677298</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='font-weight:bold;'>Usuario</td>
+                                        <td style='text-align:center;'>:</td>
+                                        <td>admin@prestasalud.com</td>
+                                    </tr>
+                                </tbody></table> <hr><br><br>Estimado Cliente, acuda a su cita agendada 10 minutos antes de la hora registrada.<br><br>Recuerde llevar el documento de identidad del Titular del servicio.<br><br><br><br>Atentamente,<br><br><img src='cid:LogoFirma' width='280' height='120' /><br><br><hr>Pie de Pagina1 <br>Pie de Pagina2 <br>Pie de Pagina3 <br>Pie de Pagina4 <br>	<table align="center">
+                                                <tr>
+                                                  <td bgcolor="#ffffff" align="center" style="color:#212b35;font-family:ShopifySans,Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;line-height:22px;padding-top:30px;padding-bottom:30px">
+                                                    <p style="padding-top:15px; color: #5d91ab;"> Copyright &copy; <a href="https://http://www.prestasalud.com/" style="padding-top:15px;color:#212b35;text-decoration:none" target="_blank" >PRESTASALUD S.A</a> | Direccion, Telf: +593 99 999 9999>
+                                                    <p align="center" style="padding-top:15px"><strong><a href="#" style="color:#212b35;font-size:13px;text-decoration:none" target="_blank" >Anular su suscripción</a></strong></p> 
+                                                  </td>
+                                            </tr></table> <br> <br>
+                                </body>
+                                </html>
+
+2023-10-10 03:17:27 ERROR: - PHPMailer\PHPMailer\Exception: SMTP Error: Could not authenticate. in C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php:2043
+Stack trace:
+#0 C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php(1858): PHPMailer\PHPMailer\PHPMailer->smtpConnect(Array)
+#1 C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php(1601): PHPMailer\PHPMailer\PHPMailer->smtpSend('Date: Tue, 10 O...', 'This is a multi...')
+#2 C:\xampp\htdocs\proyecto-expert+\expert_plus\PHPMailer\PHPMailer.php(1437): PHPMailer\PHPMailer\PHPMailer->postSend()
+#3 C:\xampp\htdocs\proyecto-expert+\expert_plus\codephp\agendar_cita.php(365): PHPMailer\PHPMailer\PHPMailer->send()
+#4 {main} - uid[SMTP Error: Could not authenticate.] 
+

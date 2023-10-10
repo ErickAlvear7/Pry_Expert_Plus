@@ -838,7 +838,7 @@
 												</span>
 												<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown w-100 w-lg-600px p-5 p-lg-5">
 
-<?php include 'layout/header/__mega-menu.php' ?>
+<?php include 'layout/header/__mega-menu.php' ?> 
 												</div>
 											</div>
 										</div>

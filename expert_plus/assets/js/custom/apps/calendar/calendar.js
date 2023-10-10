@@ -805,6 +805,7 @@ var KTAppCalendar = function () {
         startFlatpickr.setDate(data.startDate, true, 'Y-m-d');
 
         // Handle null end dates
+
         const endDate = data.endDate ? data.endDate : moment(data.startDate).format();
         endFlatpickr.setDate(endDate, true, 'Y-m-d');
 
@@ -816,7 +817,7 @@ var KTAppCalendar = function () {
                 dw.classList.add('d-none');
             });
         } else {
-            startTimeFlatpickr.setDate(data.startDate, true, 'Y-m-d H:i');
+            startTimeFlatpickr.s(data.startDate, true, 'Y-m-d H:i');
             endTimeFlatpickr.setDate(data.endDate, true, 'Y-m-d H:i');
             endFlatpickr.setDate(data.startDate, true, 'Y-m-d');
             allDayToggle.checked = false;

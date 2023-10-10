@@ -88,6 +88,18 @@
 	
 	if($page == 'addtitular'){
 		$xRuta = '/../pages/agregar_titular.php';
+	}
+	
+	if($page == 'edittitular'){
+		$xRuta = '/../pages/editar_titular.php';
+	}	
+
+	if($page == 'adminagenda'){		
+		$xRuta = '/../pages/agendamiento_admin.php';
+	}
+
+	if($page == 'admincalendar'){
+		$xRuta = '/../pages/agendacalendar.php';
 	}	
 	
 	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";
@@ -182,12 +194,12 @@
 									<div class="menu-sub menu-sub-dropdown w-175px py-4">
 										<!--begin::Menu item-->
 										<div class="menu-item px-3">
-											<a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Create Group</a>
+											<a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Crear Grupo</a>
 										</div>
 										<!--end::Menu item-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-3">
-											<a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Invite Members</a>
+											<a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Invitar Miembros</a>
 										</div>
 										<!--end::Menu item-->
 										<!--begin::Menu item-->

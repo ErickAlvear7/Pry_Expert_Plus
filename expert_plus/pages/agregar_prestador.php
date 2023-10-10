@@ -238,7 +238,7 @@
                                     <div id="kt_customer_view_payment_method" class="card-body pt-0">
                                         <div class="py-0" data-kt-customer-payment-method="row">
                                             <div class="py-3 d-flex flex-stack flex-wrap">
-                                                <div class="d-flex align-items-center collapsible rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_1" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_1">
+                                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_1" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_1">
                                                     <div class="me-3 rotate-90">
                                                         <span class="svg-icon svg-icon-3">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -254,7 +254,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div id="kt_customer_view_payment_method_1" class="collapse show fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
+                                            <div id="kt_customer_view_payment_method_1" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
                                                 <div class="d-flex flex-wrap py-5">
                                                     <div class="flex-equal me-5">
                                                         <div class="row mb-8">
@@ -581,9 +581,9 @@
                                 <input type="number" name="txtPvpNew" id="txtPvpNew" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>                            
 
-                            <div class="text-center pt-15">
+                            <div class="text-end pt-15">
                                 <button type="reset" data-bs-dismiss="modal" class="btn btn-secondary">Cerrar</button>
-                                <button type="button" id="btnSaveNew" class="btn btn-primary">
+                                <button type="button" id="btnSaveNew" class="btn btn-primary"><i class="las la-save"></i>
                                     <span class="indicator-label">Grabar</span>
                                     <span class="indicator-progress">Espere un momento...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

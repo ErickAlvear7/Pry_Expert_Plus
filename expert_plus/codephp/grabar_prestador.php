@@ -53,7 +53,7 @@
                     move_uploaded_file($xTmpFile,$xPath.$xNombreFile);
                 }
             }else{
-                $xNombreFile = "companyname.png";
+                $xNombreFile = "";
             }             
 
             $xSQL = "INSERT INTO `expert_prestadora`(pais_id,empr_id,prov_id,pres_nombre,pres_sector,pres_tipoprestador,pres_direccion,pres_url,pres_fono1,pres_fono2,pres_fono3,pres_celular1,pres_celular2,pres_celular3,pres_email1,pres_enviar1,pres_email2,pres_enviar2,pres_logo,fechacreacion,usuariocreacion,terminalcreacion) ";

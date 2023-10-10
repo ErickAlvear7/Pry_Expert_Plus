@@ -82,6 +82,7 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="assets/sweetalert2/css/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 		<link href="assets/alertify/css/alertify.min.css" rel="stylesheet" type="text/css" />
 		
+		<link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
 
 		<?php
 			if($mode == 'dark'){
@@ -91,7 +92,7 @@ License: For each use you must have a valid license purchased only from above li
 		<?php	
 			}else{
 		?>
-			<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+			<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />			
 			<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<?php
 			}
@@ -100,6 +101,9 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Global Stylesheets Bundle-->
 		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>		
+
+		
+
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -172,12 +176,13 @@ License: For each use you must have a valid license purchased only from above li
 		<?php } ?>
 
 		<?php if($page == 'addtitular') { ?>
-
-	        
 			<script src="assets/js/custom/apps/ecommerce/sales/save-order.js"></script>
-			
-
 		<?php } ?>
+
+		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+
+
+
 		
 		
 		

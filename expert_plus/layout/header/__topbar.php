@@ -5,7 +5,7 @@
 	$xAvatar = $_SESSION["s_avatar"];
 
 	if(strlen($xAvatar) < 5){
-		$xAvatar = "default.png";
+		$xAvatar = "userlogo.png";
 	}	
 
 ?>

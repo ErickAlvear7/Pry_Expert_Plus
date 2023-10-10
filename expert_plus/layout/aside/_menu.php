@@ -24,6 +24,10 @@
 	if($page == 'addprestador' || $page == 'modprestador'){
 		$page = 'prestador_admin';
 	}
+
+	if($page == 'addclienteprod' || $page == 'editcliente'){
+		$page = 'admin_clienteproducto';
+	}
 	
 	@session_start();
 
