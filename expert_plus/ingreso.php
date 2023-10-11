@@ -150,7 +150,7 @@
 			<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(assets/media/illustrations/sketchy-1/<?php if($mode == 'dark'){ echo '14.png'; }else{ echo '14-dark.png'; } ?>">
 				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 					<div class="imagen">
-					   <img alt="Logo" src="assets/media/logos/LogoPresta.png" class="h-100px w-350px" />
+					   <img alt="Logo" src="assets/media/logos/PrestaSlogin.png" class="h-200px w-500px" />
 					</div>
 					<div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
 						<form class="form w-100" method="post" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="" action="">
