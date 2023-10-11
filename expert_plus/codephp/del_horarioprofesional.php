@@ -3,6 +3,9 @@
     //error_reporting(E_ALL);
     ini_set('display_errors', 0);
 
+    putenv("TZ=America/Guayaquil");
+    date_default_timezone_set('America/Guayaquil');        
+
     require_once("../dbcon/config.php");
     require_once("../dbcon/functions.php");
 
