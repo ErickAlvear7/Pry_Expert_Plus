@@ -262,15 +262,6 @@
                 <div class="separator"></div>
                 <div id="view_datos_opciones" class="collapse ">
                     <div class="card-body pt-2">
-                        <button type="button" id="btnNewEstado" class="btn btn-light-primary btn-sm mb-10">
-                            <span class="svg-icon svg-icon-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                    <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                </svg>
-                            </span>                                                                
-                            Nuevo Estado civil
-                        </button>
                         <button type="button" id="btnNewParen" class="btn btn-light-primary btn-sm mb-10">
                             <span class="svg-icon svg-icon-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
