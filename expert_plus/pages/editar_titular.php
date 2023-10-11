@@ -494,6 +494,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="modal_persona" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
@@ -615,6 +616,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="modal_beneficiario" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
@@ -629,8 +631,9 @@
                     </span>
                 </div>
             </div>
+
             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <form id="kt_modal_add_user_form" class="form" method="post" enctype="multipart/form-data">
+                <!-- <form id="kt_modal_add_user_form" class="form" method="post" enctype="multipart/form-data"> -->
                     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
                         <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_user_info" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_user_info">Beneficiario
                         <span class="ms-2 rotate-180">
@@ -646,7 +649,7 @@
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Nombres</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtNombreBe" name="txtNombre" minlength="5" maxlength="100"  value="" readonly/>
+                                    <input type="text" class="form-control form-control-solid" id="txtNombreBe" name="txtNombre" minlength="5" maxlength="100" disable />
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
@@ -706,7 +709,7 @@
                             <span class="indicator-label">Modificar</span>
                         </button>
                     </div>  
-                </form>
+                <!-- </form> -->
             </div>
         </div>
     </div>
@@ -821,17 +824,32 @@ $(document).ready(function(){
       
         // $("#modal_beneficiario").find("input").val("");
 
+        debugger;
         _rowid = $(this).attr("id");
         _rowid = _rowid.substring(12);
 
         var xrespuesta = $.post("codephp/get_datosbeneficiario.php", { xxBeneid: _rowid});
         xrespuesta.done(function(response){
-
+            debugger;
+            console.log(response);
             var _datos = JSON.parse(response);
-         
+            console.log(_datos);
+
+            var _nombre = _datos[0].Nombre;
+
+            $("#txtNombre").val('asdfasdfasdfsda');
             
-            $.each(_datos,function(i,item){
-                //debugger;
+            /*$('#txtNombreBe').val(_nombre);
+            $('#txtApellidoBe').val(_apellido);
+            $('#txtDireccionBe').val(_direccion);
+            $('#txtDireccionBeAnt').val(_direccion);
+            $('#txtTelcasaBe').val(_telcasa);
+            $('#txtTelofiBe').val(_telofi);
+            $('#txtCelularBe').val(_celular);
+            $('#txtEmailBe').val(_email);*/
+
+            
+            /*$.each(_datos,function(i,item){
                 _nombre = _datos[i].Nombre;
                 _apellido =  _datos[i].Apellido;
                 _direccion =  _datos[i].Direccion;
@@ -840,18 +858,11 @@ $(document).ready(function(){
                 _celular =  _datos[i].Celular;
                 _email =  _datos[i].Email;
 
-                $('#txtNombreBe').val(_nombre);
-                $('#txtApellidoBe').val(_apellido);
-                $('#txtDireccionBe').val(_direccion);
-                $('#txtDireccionBeAnt').val(_direccion);
-                $('#txtTelcasaBe').val(_telcasa);
-                $('#txtTelofiBe').val(_telofi);
-                $('#txtCelularBe').val(_celular);
-                $('#txtEmailBe').val(_email);
                 
-            }); 
+            });*/ 
 
             $("#modal_beneficiario").modal("show");
+            //$("#modal_persona").modal("show");
 
         });
 

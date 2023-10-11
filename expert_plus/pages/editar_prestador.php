@@ -1969,8 +1969,6 @@
                 _rowid = $(this).attr("id");
                 _rowid = _rowid.substring(10);
 
-                alert(_rowid);
-
                 var _parametros = {
                     "xxPaisid" : _paisid,
                     "xxEmprid" : _emprid,

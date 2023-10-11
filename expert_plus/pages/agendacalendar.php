@@ -1217,7 +1217,7 @@
                         
                         },
                         datesSet: function(){
-                            hidePopovers();                                                   
+                            hidePopovers();
                         },
                         /*dateClick: function(info) {
                             f_Selecc(info)
