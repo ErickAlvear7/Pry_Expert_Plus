@@ -478,7 +478,7 @@
                                                 <button type="button" id="btnEditarBe_<?php echo $xBeneid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditarBe" <?php echo $xDisabledEdit;?> title="Editar Beneficiario" data-bs-toggle="tooltip" data-bs-placement="left" >
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button type="button" id="btnAgendar" name="btnAgendar" onclick="f_Agendar(<?php echo $xBeneid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                <button type="button" id="btnAgendar_<?php echo $xBeneid; ?>" name="btnAgendar" onclick="f_Agendar(<?php echo $xBeneid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit;?> title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
                                                     <i class="fa fa-user-plus"></i>
                                                 </button>  
                                             </div>
@@ -702,6 +702,9 @@
 
 <script>
 
+var _prodid='<?php echo $xprodid; ?>';
+var _grupid='<?php echo $xgrupid; ?>';
+
 $(document).ready(function(){
 
 });
@@ -876,16 +879,19 @@ function f_UpdateEstado(_beneid,_paisid,_emprid,_usuaid){
     var _class = "badge badge-light-primary";
     var _td = "td_" + _beneid;
     var _btnedit = "btnEditarBe_" + _beneid;
+    var _btnagen = "btnAgendar_" + _beneid;
 
     if(_check){
         var _estado = 'ACTIVO';
         _checked = "checked='checked'";
         $('#'+_btnedit).prop("disabled",false);
+        $('#'+_btnagen).prop("disabled",false);
             
     }else{
         _estado = 'INACTIVO';
         _class = "badge badge-light-danger";
         $('#'+_btnedit).prop("disabled",true);
+        $('#'+_btnagen).prop("disabled",true);
     }
 
     var _changetd = document.getElementById(_td);
@@ -906,9 +912,8 @@ function f_UpdateEstado(_beneid,_paisid,_emprid,_usuaid){
 }
 
 //Redireccionar Agendar Beneficiarios
-function f_Agendar(_tituid){
-
-$.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'prodid': _prodid, 'grupid': _grupid });
+function f_Agendar(_beneid){
+    $.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': _beneid, 'prodid': _prodid, 'grupid': _grupid });
 }  
 
 

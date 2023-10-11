@@ -490,10 +490,10 @@
                                                 <td>
                                                     <div class="text-center">
                                                         <div class="btn-group">	
-                                                            <button type="button" id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular(<?php echo $xPerid; ?>,<?php echo $xTituid; ?>,<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                            <button type="button" <?php echo $xDisabledEdit;?> id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular(<?php echo $xPerid; ?>,<?php echo $xTituid; ?>,<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular' data-bs-toggle="tooltip" data-bs-placement="left">
                                                                 <i class="fa fa-edit"></i>
                                                             </button> 
-                                                            <button type="button" id="btnAgendar" name="btnAgendar" onclick="f_Agendar(<?php echo $xTituid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                            <button type="button" <?php echo $xDisabledEdit;?> id="btnAgendar_<?php echo $xPerid; ?>" name="btnAgendar" onclick="f_Agendar(<?php echo $xTituid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
                                                                 <i class="fa fa-user-plus"></i>
                                                             </button> 
                                                         </div>

@@ -103,7 +103,7 @@
 
                 $xSQL = "UPDATE `expert_cliente` SET prov_id=$xProvid,clie_nombre='$xCliente',clie_descripcion ='$xDesc',clie_direccion='$xDireccion', ";
                 $xSQL .= "clie_url='$xUrl',clie_tel1='$xFono1',clie_tel2='$xFono2',clie_tel3='$xFono3',clie_cel1='$xCelular1',clie_cel2='$xCelular2', ";
-                $xSQL .= "clie_cel3='$xCelular3',clie_email1='$xEmail1',clie_email2='$xEmail12' WHERE clie_id=$xClieid AND pais_id=$xPaisid ";
+                $xSQL .= "clie_cel3='$xCelular3',clie_email1='$xEmail1',clie_email2='$xEmail2' WHERE clie_id=$xClieid AND pais_id=$xPaisid ";
                 mysqli_query($con, $xSQL);
                 $xRespuesta = "OK";
                 
