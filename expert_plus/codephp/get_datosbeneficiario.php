@@ -17,35 +17,11 @@
 
             $xBeneid = $_POST['xxBeneid'];
 
-            //$xDatos = [];
 
             $xSQL = "SELECT bene_nombres AS Nombre, bene_apellidos AS Apellido, bene_direccion AS Direccion, bene_telefonocasa AS Telcasa, bene_telefonoficina AS Telofi, ";
             $xSQL .= "bene_celular AS Celular, bene_email AS Email FROM `expert_beneficiario` WHERE bene_id=$xBeneid ";
             $all_datos = mysqli_query($con, $xSQL);
             $resultado = mysqli_fetch_all($all_datos,MYSQLI_ASSOC);
-
-            /*foreach($all_datos as $ben) {
-
-                $xNombre = $ben["Nombre"]; 
-                $xApellido = $ben["Apellido"];
-                $xDireccion = $ben["Direccion"];
-                $xTelcasa = $ben["Telcasa"];
-                $xTelofi = $ben["Telofi"];
-                $xCel = $ben["Celular"];
-                $xEmail = $ben["Email"];
- 
-                $xDatos = array(
-                    'Nombre'=> $xNombre, 
-                    'Apellido'=> $xApellido, 
-                    'Direccion'=> $xDireccion, 
-                    'Telcasa'=> $xTelcasa,
-                    'Telofi'=> $xTelofi,
-                    'Celular'=> $xCel,
-                    'Email'=> $xEmail,
-                
-                );    
-                
-            } */
 
         }
     }

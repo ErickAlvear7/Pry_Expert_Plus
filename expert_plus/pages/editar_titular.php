@@ -282,11 +282,11 @@
                         <div class="d-flex flex-wrap gap-5">
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Nombres</label>
-                                <input type="text" class="form-control mb-2" id="txtNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
+                                <input type="text" class="form-control mb-2" id="" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Apellidos</label>
-                                <input type="text" class="form-control mb-2" id="txtApellidoBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
+                                <input type="text" class="form-control mb-2" id="" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
                             </div>   
                         </div>
                         <div class="d-flex flex-wrap gap-5">
@@ -822,22 +822,19 @@ $(document).ready(function(){
 // Modal editar beneficiario
     $(document).on("click",".btnEditarBe",function(){
       
-        // $("#modal_beneficiario").find("input").val("");
+        $("#modal_beneficiario").find("input").val("");
 
-        debugger;
         _rowid = $(this).attr("id");
         _rowid = _rowid.substring(12);
 
         var xrespuesta = $.post("codephp/get_datosbeneficiario.php", { xxBeneid: _rowid});
         xrespuesta.done(function(response){
-            debugger;
-            console.log(response);
-            var _datos = JSON.parse(response);
-            console.log(_datos);
 
+            var _datos = JSON.parse(response);
+    
             var _nombre = _datos[0].Nombre;
 
-            $("#txtNombre").val('asdfasdfasdfsda');
+            $("#txtNombreBe").val(_nombre);
             
             /*$('#txtNombreBe').val(_nombre);
             $('#txtApellidoBe').val(_apellido);
@@ -848,18 +845,6 @@ $(document).ready(function(){
             $('#txtCelularBe').val(_celular);
             $('#txtEmailBe').val(_email);*/
 
-            
-            /*$.each(_datos,function(i,item){
-                _nombre = _datos[i].Nombre;
-                _apellido =  _datos[i].Apellido;
-                _direccion =  _datos[i].Direccion;
-                _telcasa =  _datos[i].Telcasa;
-                _telofi =  _datos[i].Telofi;
-                _celular =  _datos[i].Celular;
-                _email =  _datos[i].Email;
-
-                
-            });*/ 
 
             $("#modal_beneficiario").modal("show");
             //$("#modal_persona").modal("show");
