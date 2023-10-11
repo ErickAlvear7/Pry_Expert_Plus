@@ -282,11 +282,11 @@
                         <div class="d-flex flex-wrap gap-5">
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Nombres</label>
-                                <input type="text" class="form-control mb-2" id="txtNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
+                                <input type="text" class="form-control mb-2" id="" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Apellidos</label>
-                                <input type="text" class="form-control mb-2" id="txtApellidoBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
+                                <input type="text" class="form-control mb-2" id="" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
                             </div>   
                         </div>
                         <div class="d-flex flex-wrap gap-5">
@@ -478,7 +478,7 @@
                                                 <button type="button" id="btnEditarBe_<?php echo $xBeneid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditarBe" <?php echo $xDisabledEdit;?> title="Editar Beneficiario" data-bs-toggle="tooltip" data-bs-placement="left" >
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button type="button" id="btnAgendar" name="btnAgendar" onclick="f_Agendar(<?php echo $xBeneid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                <button type="button" id="btnAgendar_<?php echo $xBeneid; ?>" name="btnAgendar" onclick="f_Agendar(<?php echo $xBeneid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit;?> title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
                                                     <i class="fa fa-user-plus"></i>
                                                 </button>  
                                             </div>
@@ -523,19 +523,8 @@
                         <div id="kt_modal_update_user_user_info" class="collapse show">
                             <div class="fv-row mb-7">
                                 <label class="d-block fw-bold fs-6 mb-5">Avatar</label>
-                                <!-- <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('img/default.png')">
-                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(img/default.png);" id="imgfile"></div>
-                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar Avatar">
-                                        <i class="bi bi-pencil-fill fs-7"></i>
-                                        <input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
-                                        <input type="hidden" name="avatar_remove" />
-                                    </label>
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
-                                        <i class="bi bi-x fs-2"></i>
-                                    </span>													
-                                </div> -->
-                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('img/default.png')">
-                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(img/default.png);" id="imgfile"></div>
+                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('img/account.png')">
+                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(img/account.png);" id="imgfile"></div>
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar Avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
@@ -616,7 +605,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="modal_beneficiario" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
@@ -631,97 +619,103 @@
                     </span>
                 </div>
             </div>
-
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <!-- <form id="kt_modal_add_user_form" class="form" method="post" enctype="multipart/form-data"> -->
-                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
-                        <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_user_info" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_user_info">Beneficiario
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">               
+                <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+                    <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_user_info" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_user_info">Beneficiario
+                    <span class="ms-2 rotate-180">
+                        <span class="svg-icon svg-icon-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                            </svg>
+                        </span>
+                    </span></div>
+                    <div id="kt_modal_update_user_user_info" class="collapse show">
+                        <div class="row g-9 mb-7">
+                            <div class="col-md-6 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span>Nombres</span>
+                                </label>
+                                <input type="text" class="form-control form-control-solid" id="txtNombreBeMo" name="txtNombre" minlength="5" maxlength="100" disable />
+                            </div>
+                            <div class="col-md-6 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span>Apellidos</span>
+                                </label>
+                                <input type="text" class="form-control form-control-solid" id="txtApellidoBeMo" name="txtApellido" minlength="5" maxlength="100" value="" readonly/>
+                            </div>                                                    
+                        </div>
+                    </div>
+                    <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_address" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_address">Informacion Beneficiario
                         <span class="ms-2 rotate-180">
                             <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
                                 </svg>
                             </span>
-                        </span></div>
-                        <div id="kt_modal_update_user_user_info" class="collapse show">
-                            <div class="row g-9 mb-7">
-                                <div class="col-md-6 fv-row">
-                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                        <span>Nombres</span>
-                                    </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtNombreBe" name="txtNombre" minlength="5" maxlength="100" disable />
-                                </div>
-                                <div class="col-md-6 fv-row">
-                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                        <span>Apellidos</span>
-                                    </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtApellidoBe" name="txtApellido" minlength="5" maxlength="100" value="" readonly/>
-                                </div>                                                    
-                            </div>
+                        </span>
+                    </div>
+                    <div id="kt_modal_update_user_address" class="collapse show">
+                        <div class="d-flex flex-column mb-7 fv-row">
+                            <label class="fs-6 fw-bold mb-2">Direccion</label>
+                            <input class="form-control form-control-solid text-uppercase" id="txtDireccionBeMo" placeholder="Ingrese Direccion" value="" />
                         </div>
-                        <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_address" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_address">Informacion Beneficiario
-                            <span class="ms-2 rotate-180">
-                                <span class="svg-icon svg-icon-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                    </svg>
-                                </span>
-                            </span>
+                        <div class="row g-9 mb-7">
+                            <div class="col-md-6 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span>Telefono Casa</span>
+                                </label>
+                                <input type="text" class="form-control form-control-solid" id="txtTelcasaBeMo" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Casa" value=""/>
+                            </div>
+                            <div class="col-md-6 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span>Telefono Oficina</span>
+                                </label>
+                                <input type="text" class="form-control form-control-solid" id="txtTelofiBeMo" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Oficina" value=""/>
+                            </div>                                                    
                         </div>
-                        <div id="kt_modal_update_user_address" class="collapse show">
-                            <div class="d-flex flex-column mb-7 fv-row">
-                                <label class="fs-6 fw-bold mb-2">Direccion</label>
-                                <input class="form-control form-control-solid text-uppercase" id="txtDireccionBe" placeholder="Ingrese Direccion" value="" />
+                        <div class="row g-9 mb-7">
+                            <div class="col-md-6 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span>Celular</span>
+                                </label>
+                                <input type="text" class="form-control form-control-solid" id="txtCelularBeMo" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Celular" value=""/>
                             </div>
-                            <div class="row g-9 mb-7">
-                                <div class="col-md-6 fv-row">
-                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                        <span>Telefono Casa</span>
-                                    </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtTelcasaBe" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Casa" value=""/>
-                                </div>
-                                <div class="col-md-6 fv-row">
-                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                        <span>Telefono Oficina</span>
-                                    </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtTelofiBe" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Oficina" value=""/>
-                                </div>                                                    
-                            </div>
-                            <div class="row g-9 mb-7">
-                                <div class="col-md-6 fv-row">
-                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                        <span>Celular</span>
-                                    </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtCelularBe" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Celular" value=""/>
-                                </div>
-                                <div class="col-md-6 fv-row">
-                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                        <span>Email</span>
-                                    </label>
-                                    <input type="email" class="form-control form-control-solid" id="txtEmailBe"  minlength="5" maxlength="100" placeholder="Ingrese Email" value=""/>
-                                </div>                                                    
-                            </div>
+                            <div class="col-md-6 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span>Email</span>
+                                </label>
+                                <input type="email" class="form-control form-control-solid" id="txtEmailBeMo"  minlength="5" maxlength="100" placeholder="Ingrese Email" value=""/>
+                            </div>                                                    
                         </div>
                     </div>
-                    <div class="d-flex justify-content-end text-center pt-15">
-                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" id="btnSaveBene" onclick="f_EditarBene(<?php echo $xUsuaid;?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>)"> 
-                            <span class="indicator-label">Modificar</span>
-                        </button>
-                    </div>  
-                <!-- </form> -->
+                </div>
+                <div class="d-flex justify-content-end text-center pt-15">
+                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnSaveBene" onclick="f_EditarBene(<?php echo $xUsuaid;?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>)"> 
+                        <span class="indicator-label">Modificar</span>
+                    </button>
+                </div>  
             </div>
         </div>
     </div>
 </div>
 
-
 <script>
 
+var _prodid='<?php echo $xprodid; ?>';
+var _grupid='<?php echo $xgrupid; ?>';
 
 $(document).ready(function(){
 
+});
 
+// Desplazar Modal
+$("#modal_beneficiario").draggable({
+        handle: ".modal-header"
+    });
+
+$("#modal_persona").draggable({
+    handle: ".modal-header"
 });
 
 // Funcion de regreso de pagina 
@@ -822,62 +816,39 @@ $(document).ready(function(){
 // Modal editar beneficiario
     $(document).on("click",".btnEditarBe",function(){
       
-        // $("#modal_beneficiario").find("input").val("");
+        $("#modal_beneficiario").find("input").val("");
 
-        debugger;
         _rowid = $(this).attr("id");
         _rowid = _rowid.substring(12);
 
         var xrespuesta = $.post("codephp/get_datosbeneficiario.php", { xxBeneid: _rowid});
         xrespuesta.done(function(response){
-            debugger;
-            console.log(response);
+
             var _datos = JSON.parse(response);
-            console.log(_datos);
 
-            var _nombre = _datos[0].Nombre;
-
-            $("#txtNombre").val('asdfasdfasdfsda');
-            
-            /*$('#txtNombreBe').val(_nombre);
-            $('#txtApellidoBe').val(_apellido);
-            $('#txtDireccionBe').val(_direccion);
-            $('#txtDireccionBeAnt').val(_direccion);
-            $('#txtTelcasaBe').val(_telcasa);
-            $('#txtTelofiBe').val(_telofi);
-            $('#txtCelularBe').val(_celular);
-            $('#txtEmailBe').val(_email);*/
-
-            
-            /*$.each(_datos,function(i,item){
-                _nombre = _datos[i].Nombre;
-                _apellido =  _datos[i].Apellido;
-                _direccion =  _datos[i].Direccion;
-                _telcasa =  _datos[i].Telcasa;
-                _telofi =  _datos[i].Telofi;
-                _celular =  _datos[i].Celular;
-                _email =  _datos[i].Email;
-
-                
-            });*/ 
+            $("#txtNombreBeMo").val(_datos[0].Nombre);
+            $('#txtApellidoBeMo').val(_datos[0].Apellido);
+            $('#txtDireccionBeMo').val(_datos[0].Direccion);
+            $('#txtTelcasaBeMo').val(_datos[0].Telcasa);
+            $('#txtTelofiBeMo').val(_datos[0].Telofi);
+            $('#txtCelularBeMo').val(_datos[0].Celular);
+            $('#txtEmailBeMo').val(_datos[0].Email);
 
             $("#modal_beneficiario").modal("show");
-            //$("#modal_persona").modal("show");
 
         });
-
     });
 
 // Guardar Editar Beneficiario
 
     function f_EditarBene(_usuaid,_paisid,_emprid){
-
-        var _direccionbe = $.trim($("#txtDireccionBe").val());
-        var _telcasabe = $.trim($("#txtTelcasaBe").val());
-        var _telcasabeant = $.trim($("#txtTelcasaBeAnt").val());
-        var _telofibe = $.trim($("#txtTelofiBe").val()); 
-        var _celularbe = $.trim($("#txtCelularBe").val()); 
-        var _emailbe = $.trim($("#txtEmailBe").val());
+        
+        var _direccionbe = $.trim($("#txtDireccionBeMo").val());
+        var _telcasabe = $.trim($("#txtTelcasaBeMo").val());
+        var _telcasabeant = $.trim($("#txtTelcasaBeAntMo").val());
+        var _telofibe = $.trim($("#txtTelofiBeMo").val()); 
+        var _celularbe = $.trim($("#txtCelularBeMo").val()); 
+        var _emailbe = $.trim($("#txtEmailBeMo").val());
 
         var _parametros = {
             "xxBeneid" : _rowid,
@@ -908,16 +879,19 @@ function f_UpdateEstado(_beneid,_paisid,_emprid,_usuaid){
     var _class = "badge badge-light-primary";
     var _td = "td_" + _beneid;
     var _btnedit = "btnEditarBe_" + _beneid;
+    var _btnagen = "btnAgendar_" + _beneid;
 
     if(_check){
         var _estado = 'ACTIVO';
         _checked = "checked='checked'";
         $('#'+_btnedit).prop("disabled",false);
+        $('#'+_btnagen).prop("disabled",false);
             
     }else{
         _estado = 'INACTIVO';
         _class = "badge badge-light-danger";
         $('#'+_btnedit).prop("disabled",true);
+        $('#'+_btnagen).prop("disabled",true);
     }
 
     var _changetd = document.getElementById(_td);
@@ -938,9 +912,8 @@ function f_UpdateEstado(_beneid,_paisid,_emprid,_usuaid){
 }
 
 //Redireccionar Agendar Beneficiarios
-function f_Agendar(_tituid){
-
-$.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'prodid': _prodid, 'grupid': _grupid });
+function f_Agendar(_beneid){
+    $.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': _beneid, 'prodid': _prodid, 'grupid': _grupid });
 }  
 
 

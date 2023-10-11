@@ -39,6 +39,13 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
+    $xSQL = "SELECT paca_id AS Idpaca FROM `expert_parametro_cabecera` WHERE paca_nombre='Estado Civil' ";
+    $all_id = mysqli_query($con, $xSQL);
+
+    foreach($all_id as $id){
+        $xPacaid = $id['Idpaca'];
+    }
+
     $xSQL = "SELECT DISTINCT provincia AS Descripcion FROM `provincia_ciudad` ";
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
     $all_provincia = mysqli_query($con, $xSQL);
@@ -90,10 +97,10 @@
         $xChekSis = 'checked="checked"';
     }
 
-    $xSQL = "SELECT per.pers_id AS Perid, per.pers_numerodocumento AS Documento, CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona, per.pers_imagen AS Imagen, per.pers_estadocivil, ";
-    $xSQL .= "per.pers_fechanacimiento AS Fecha, per.pers_ciudad AS Ciudad, per.pers_direccion AS Direccion, ";
-    $xSQL .="";
-    $xSQL .=" FROM `expert_persona` per,  `expert_titular` tit, `expert_beneficiario` ben WHERE "
+    // $xSQL = "SELECT per.pers_id AS Perid, per.pers_numerodocumento AS Documento, CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona, per.pers_imagen AS Imagen, per.pers_estadocivil, ";
+    // $xSQL .= "per.pers_fechanacimiento AS Fecha, per.pers_ciudad AS Ciudad, per.pers_direccion AS Direccion, ";
+    // $xSQL .="";
+    // $xSQL .=" FROM `expert_persona` per,  `expert_titular` tit, `expert_beneficiario` ben WHERE "
 ?>
 <div id="kt_content_container" class="container-xxl">
     <form id="kt_ecommerce_edit_order_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/sales/listing.html">
@@ -106,7 +113,7 @@
                 </div>
                 <div class="card-body text-center pt-0">
                     <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
-                        <div class="image-input-wrapper w-150px h-150px" id="imgAvatar" style="background-image: url(assets/media/svg/avatars/blank.svg);"></div>
+                        <div class="image-input-wrapper w-150px h-150px" id="imgAvatar" style="background-image: url(assets/media/svg/avatars/Addimg.svg);"></div>
                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar foto">
                             <i class="bi bi-pencil-fill fs-7"></i>    
                             <input type="file" id="imgTitular" accept=".png, .jpg, .jpeg" />
@@ -235,6 +242,35 @@
                                 </div>
                             </div>
                         </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-5 mb-xl-8">
+                <div class="card-header border-0">
+                    <div class="card-title">
+                        <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_opciones" role="button" aria-expanded="false" aria-controls="view_datos_producto">Opciones
+                            <span class="ms-2 rotate-180">
+                                <span class="svg-icon svg-icon-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </span>
+                        </div> 
+                    </div>
+                </div>
+                <div class="separator"></div>
+                <div id="view_datos_opciones" class="collapse ">
+                    <div class="card-body pt-2">
+                        <button type="button" id="btnNewParen" class="btn btn-light-primary btn-sm mb-10">
+                            <span class="svg-icon svg-icon-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                    <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>                                                                
+                            Nuevo Parentesco
+                        </button>
                     </div>
                 </div>
             </div>
@@ -490,10 +526,10 @@
                                                 <td>
                                                     <div class="text-center">
                                                         <div class="btn-group">	
-                                                            <button type="button" id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular(<?php echo $xPerid; ?>,<?php echo $xTituid; ?>,<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                            <button type="button" <?php echo $xDisabledEdit;?> id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular(<?php echo $xPerid; ?>,<?php echo $xTituid; ?>,<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular' data-bs-toggle="tooltip" data-bs-placement="left">
                                                                 <i class="fa fa-edit"></i>
                                                             </button> 
-                                                            <button type="button" id="btnAgendar" name="btnAgendar" onclick="f_Agendar(<?php echo $xTituid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                            <button type="button" <?php echo $xDisabledEdit;?> id="btnAgendar_<?php echo $xPerid; ?>" name="btnAgendar" onclick="f_Agendar(<?php echo $xTituid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
                                                                 <i class="fa fa-user-plus"></i>
                                                             </button> 
                                                         </div>
@@ -695,6 +731,43 @@
         </div>
     </form>
 </div>
+<div class="modal fade" id="modal_new_paren" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Nuevo Parentesco</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <div class="d-flex flex-column mb-7 fv-row">
+                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span class="required">Detalle</span>
+                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del detalle"></i>
+                    </label>
+                    <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />
+                </div>
+                <div class="fv-row mb-15">
+                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span class="required">Valor Texto</span>
+                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
+                    </label>
+                    <input type="text" class="form-control form-control-solid" id="txtValorV" name="txtValorV" minlength="1" maxlength="50" placeholder="valor texto" value="" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnGuardar" onclick="f_GuardarParen(<?php echo $xPacaid; ?>)" class="btn btn-primary">Grabar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
 
     var _count =0,_prodid = '<?php echo $prodid; ?>', _grupid = '<?php echo $grupid; ?>', _userid = '<?php echo $xUsuaid; ?>',
@@ -726,7 +799,9 @@
             });
             xrespuesta.always(function() {
                 
-            });                
+            }); 
+            
+          
         
         });
 
@@ -766,6 +841,69 @@
 
     });
 
+    $("#btnNewParen").click(function(){
+
+      $("#modal_new_paren").modal("show");
+    });
+
+
+    //Gravar Parentesco Modal
+
+    function f_GuardarParen(_idpaca){
+
+        var _estado = 'A';
+        var _paisid = '<?php echo  $xPaisid; ?>';
+
+        if($.trim($('#txtDetalle').val()).length == 0)
+        {           
+            mensajesalertify('Ingrese Detalle..!', 'W', 'top-right', 5);
+            return false;          
+        }
+
+        if($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0 )
+        {    
+            mensajesalertify('Ingrese Valor Texto o Valor Entero..!', 'W', 'top-right', 5);
+            return false;
+        }
+
+        if($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0 )
+        {    
+            mensajesalertify('Ingrese Solo Valor Texto o Valor Entero..!', 'W', 'top-right', 5);
+            return false;       
+        }
+
+        var _detalle = $.trim($('#txtDetalle').val());
+        var _valorV =  $.trim($('#txtValorV').val());
+
+
+        if($.trim($('#txtValorI').val()).length == 0){
+            var _valorI = 0;
+        }else{
+            _valorI = $.trim($('#txtValorI').val());
+        }
+
+        var _parametros ={
+            "xxPaisId" : _paisid,
+            "xxDetalle" : _detalle,
+            "xxValorV" : _valorV,
+            "xxValorI" : _valorI
+        }
+
+        var xrespuesta = $.post("codephp/consultar_detalle.php", _parametros);
+        xrespuesta.done(function(response){
+
+            if(response == 0){
+
+
+            }else{
+                mensajesalertify('Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!', 'W', 'top-right', 5);
+            }
+
+
+        });
+    }
+
+    //Agendar Titular
     function f_Agendar(_tituid){
 
         $.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'prodid': _prodid, 'grupid': _grupid });

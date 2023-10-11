@@ -57,7 +57,7 @@
                     move_uploaded_file($xTmpFile,$xPath.$xNombreFile);
                 }
             }else{
-                $xNombreFile = "default.png";
+                $xNombreFile = "imaadd.png";
             } 
 
             
