@@ -1139,7 +1139,7 @@
             var _parametros = {
                 "xxPaisid" : _paisid,
                 "xxEmprid" : _emprid,
-                "xxPfesid" : 14//_pfesid
+                "xxPfesid" : _pfesid
             }           
             
             /*var _hours = [
