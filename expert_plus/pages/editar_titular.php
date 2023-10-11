@@ -408,7 +408,7 @@
                                     <th>PARENTESCO</th>
                                     <th>ESTADO</th>
                                     <th class="min-w-70px">ESTATUS</th>
-                                    <th class="min-w-70px">OPCIONES</th>
+                                    <th class="min-w-70px" style="text-align: center;">OPCIONES</th>
                                 </tr>
                             </thead>
                             <tbody class="fs-6 fw-bold text-gray-600">
@@ -477,7 +477,10 @@
                                             <div class="btn-group">	
                                                 <button type="button" id="btnEditarBe_<?php echo $xBeneid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditarBe" <?php echo $xDisabledEdit;?> title="Editar Beneficiario" data-bs-toggle="tooltip" data-bs-placement="left" >
                                                     <i class="fa fa-edit"></i>
-                                                </button> 
+                                                </button>
+                                                <button type="button" id="btnAgendar" name="btnAgendar" onclick="f_Agendar(<?php echo $xBeneid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                    <i class="fa fa-user-plus"></i>
+                                                </button>  
                                             </div>
                                         </div>
                                     </td>
@@ -638,36 +641,34 @@
                             </span>
                         </span></div>
                         <div id="kt_modal_update_user_user_info" class="collapse show">
-                            
                             <div class="row g-9 mb-7">
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Nombres</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtNombreBe" name="txtNombre" minlength="5" maxlength="100"  value="" disabled/>
+                                    <input type="text" class="form-control form-control-solid" id="txtNombreBe" name="txtNombre" minlength="5" maxlength="100"  value="" readonly/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Apellidos</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtApellidoBe" name="txtApellido" minlength="5" maxlength="100" value="" disabled/>
+                                    <input type="text" class="form-control form-control-solid" id="txtApellidoBe" name="txtApellido" minlength="5" maxlength="100" value="" readonly/>
                                 </div>                                                    
                             </div>
                         </div>
-                    <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_address" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_address">Informacion Beneficiario
-                        <span class="ms-2 rotate-180">
-                            <span class="svg-icon svg-icon-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                </svg>
+                        <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_address" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_address">Informacion Beneficiario
+                            <span class="ms-2 rotate-180">
+                                <span class="svg-icon svg-icon-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                    </svg>
+                                </span>
                             </span>
-                        </span>
-                    </div>
+                        </div>
                         <div id="kt_modal_update_user_address" class="collapse show">
                             <div class="d-flex flex-column mb-7 fv-row">
                                 <label class="fs-6 fw-bold mb-2">Direccion</label>
                                 <input class="form-control form-control-solid text-uppercase" id="txtDireccionBe" placeholder="Ingrese Direccion" value="" />
-                                <input type="hidden" class="form-control form-control-solid" id="txtDireccionBeAnt" placeholder="Ingrese Direccion" value="" />
                             </div>
                             <div class="row g-9 mb-7">
                                 <div class="col-md-6 fv-row">
@@ -675,7 +676,6 @@
                                         <span>Telefono Casa</span>
                                     </label>
                                     <input type="text" class="form-control form-control-solid" id="txtTelcasaBe" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Casa" value=""/>
-                                    <input type="hidden" class="form-control form-control-solid" id="txtTelcasaBeAnt" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Casa" value=""/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
@@ -715,6 +715,7 @@
 
 <script>
 
+
 $(document).ready(function(){
 
 
@@ -748,37 +749,37 @@ $(document).ready(function(){
         }
 
         $.ajax({
-					url: "codephp/get_datospersona.php",
-					type: "POST",
-					dataType: "json",
-					data: $parametros,          
-					success: function(data){ 
-						//console.log(data);
-						//debugger;
-						var _nombre = data[0]['Nombres'];
-						var _apellido = data[0]['Apellidos'];
-                        var _avatar = data[0]['Imagen'] == '' ? 'default.png' : data[0]['Imagen'];
-						var _direccion = data[0]['Direccion'];
-                        var _telcasa = data[0]['Telcasa'];
-                        var _telofi = data[0]['Telofi'];
-                        var _cel = data[0]['Cel'];
-                        var _email = data[0]['Email'];
+            url: "codephp/get_datospersona.php",
+            type: "POST",
+            dataType: "json",
+            data: $parametros,          
+            success: function(data){ 
+                //console.log(data);
+                //debugger;
+                var _nombre = data[0]['Nombres'];
+                var _apellido = data[0]['Apellidos'];
+                var _avatar = data[0]['Imagen'] == '' ? 'default.png' : data[0]['Imagen'];
+                var _direccion = data[0]['Direccion'];
+                var _telcasa = data[0]['Telcasa'];
+                var _telofi = data[0]['Telofi'];
+                var _cel = data[0]['Cel'];
+                var _email = data[0]['Email'];
 
 
-						$("#txtNombre").val(_nombre);
-						$("#txtApellido").val(_apellido);
-                        document.getElementById('imgfile').style.backgroundImage="url(persona/" + _avatar + ")";
-						$("#txtDireccion").val(_direccion);
-						$("#txtTelcasa").val(_telcasa);
-                        $("#txtTelofi").val(_telofi);
-						$("#txtCel").val(_cel);
-                        $("#txtEmail").val(_email);
-						                                                                      
-					},
-					error: function (error){
-						console.log(error);
-					}                            
-				}); 
+                $("#txtNombre").val(_nombre);
+                $("#txtApellido").val(_apellido);
+                document.getElementById('imgfile').style.backgroundImage="url(persona/" + _avatar + ")";
+                $("#txtDireccion").val(_direccion);
+                $("#txtTelcasa").val(_telcasa);
+                $("#txtTelofi").val(_telofi);
+                $("#txtCel").val(_cel);
+                $("#txtEmail").val(_email);
+                                                                                        
+            },
+            error: function (error){
+                console.log(error);
+            }                            
+        }); 
         $("#modal_persona").modal("show");
     });
 
@@ -818,7 +819,7 @@ $(document).ready(function(){
 // Modal editar beneficiario
     $(document).on("click",".btnEditarBe",function(){
       
-        $("#modal_beneficiario").find("input").val("");
+        // $("#modal_beneficiario").find("input").val("");
 
         _rowid = $(this).attr("id");
         _rowid = _rowid.substring(12);
@@ -827,7 +828,10 @@ $(document).ready(function(){
         xrespuesta.done(function(response){
 
             var _datos = JSON.parse(response);
+         
+            
             $.each(_datos,function(i,item){
+                //debugger;
                 _nombre = _datos[i].Nombre;
                 _apellido =  _datos[i].Apellido;
                 _direccion =  _datos[i].Direccion;
@@ -844,9 +848,10 @@ $(document).ready(function(){
                 $('#txtTelofiBe').val(_telofi);
                 $('#txtCelularBe').val(_celular);
                 $('#txtEmailBe').val(_email);
-
-                $("#modal_beneficiario").modal("show");
+                
             }); 
+
+            $("#modal_beneficiario").modal("show");
 
         });
 
@@ -920,6 +925,12 @@ function f_UpdateEstado(_beneid,_paisid,_emprid,_usuaid){
         });	
 
 }
+
+//Redireccionar Agendar Beneficiarios
+function f_Agendar(_tituid){
+
+$.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'prodid': _prodid, 'grupid': _grupid });
+}  
 
 
 

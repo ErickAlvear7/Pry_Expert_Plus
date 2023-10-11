@@ -44,13 +44,12 @@
                 
                 );    
                 
-            }
-
-            print json_encode($xDatos, JSON_UNESCAPED_UNICODE);
+            } 
 
         }
     }
 
     mysqli_close($con);
+    print json_encode($xDatos, JSON_UNESCAPED_UNICODE);
     
 ?>
