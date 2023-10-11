@@ -82,8 +82,6 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="assets/sweetalert2/css/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 		<link href="assets/alertify/css/alertify.min.css" rel="stylesheet" type="text/css" />
 		
-		<link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
-
 		<?php
 			if($mode == 'dark'){
 		?>
@@ -178,13 +176,6 @@ License: For each use you must have a valid license purchased only from above li
 		<?php if($page == 'addtitular') { ?>
 			<script src="assets/js/custom/apps/ecommerce/sales/save-order.js"></script>
 		<?php } ?>
-
-		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-
-
-
-		
-		
 		
 	</body>
 	<!--end::Body-->
