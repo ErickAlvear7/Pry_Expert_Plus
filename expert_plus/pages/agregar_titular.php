@@ -274,7 +274,6 @@
                     </div>
                 </div>
             </div>
-          
         </div>
         <div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">
             <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n2">
