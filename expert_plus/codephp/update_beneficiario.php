@@ -26,13 +26,15 @@
             $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
 
+            $xNombre = trim(mb_strtoupper(safe($_POST['xxNombre'])));
+            $xApellido = trim(mb_strtoupper(safe($_POST['xxAplledio'])));
             $xDireccion = trim(mb_strtoupper(safe($_POST['xxDireccion'])));
             $xTelcasa = trim(safe($_POST['xxTelcasa']));
             $xTelofi = trim(safe($_POST['xxTelofi']));
             $xCelular = trim(safe($_POST['xxCelular']));
             $xEmail = trim(safe($_POST['xxEmail']));
     
-            $xSQL = "UPDATE `expert_beneficiario` SET bene_direccion ='$xDireccion',bene_telefonocasa ='$xTelcasa',bene_telefonoficina ='$xTelofi',bene_celular ='$xCelular',bene_email ='$xEmail' ";
+            $xSQL = "UPDATE `expert_beneficiario` SET bene_nombres='$xNombre', bene_apellidos='$xApellido', bene_direccion ='$xDireccion',bene_telefonocasa ='$xTelcasa',bene_telefonoficina ='$xTelofi',bene_celular ='$xCelular',bene_email ='$xEmail' ";
             $xSQL .= "WHERE bene_id=$xBeneid";
             mysqli_query($con, $xSQL);
             $xRespuesta = "OK";

@@ -19,7 +19,7 @@
 
 
             $xSQL = "SELECT bene_nombres AS Nombre, bene_apellidos AS Apellido, bene_direccion AS Direccion, bene_telefonocasa AS Telcasa, bene_telefonoficina AS Telofi, ";
-            $xSQL .= "bene_celular AS Celular, bene_email AS Email FROM `expert_beneficiario` WHERE bene_id=$xBeneid ";
+            $xSQL .= "bene_celular AS Celular, bene_email AS Email FROM `expert_beneficiario` WHERE bene_id=$xBeneid ";      
             $all_datos = mysqli_query($con, $xSQL);
             $resultado = mysqli_fetch_all($all_datos,MYSQLI_ASSOC);
 

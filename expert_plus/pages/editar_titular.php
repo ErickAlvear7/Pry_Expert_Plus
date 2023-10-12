@@ -635,13 +635,13 @@
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                     <span>Nombres</span>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" id="txtNombreBeMo" name="txtNombre" minlength="5" maxlength="100" disable />
+                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtNombreBeMo" name="txtNombre" minlength="5" maxlength="100"/>
                             </div>
                             <div class="col-md-6 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                     <span>Apellidos</span>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" id="txtApellidoBeMo" name="txtApellido" minlength="5" maxlength="100" value="" readonly/>
+                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtApellidoBeMo" name="txtApellido" minlength="5" maxlength="100" value=""/>
                             </div>                                                    
                         </div>
                     </div>
@@ -841,8 +841,10 @@ $("#modal_persona").draggable({
 
 // Guardar Editar Beneficiario
 
-    function f_EditarBene(_usuaid,_paisid,_emprid){
-        
+    function f_EditarBene(_usuaid,_paisid,_emprid){   
+
+        var _nombrebebe= $.trim($("#txtNombreBeMo").val());
+        var _apellidobe= $.trim($("#txtApellidoBeMo").val());
         var _direccionbe = $.trim($("#txtDireccionBeMo").val());
         var _telcasabe = $.trim($("#txtTelcasaBeMo").val());
         var _telcasabeant = $.trim($("#txtTelcasaBeAntMo").val());
@@ -855,6 +857,8 @@ $("#modal_persona").draggable({
             "xxUsuaid" : _usuaid,
             "xxPaisid" : _paisid,
             "xxEmprid" : _emprid,
+            "xxNombre" : _nombrebebe,
+            "xxAplledio" : _apellidobe,
             "xxDireccion" : _direccionbe,
             "xxTelcasa" : _telcasabe,
             "xxTelofi" : _telofibe,
@@ -864,7 +868,11 @@ $("#modal_persona").draggable({
 
         var xrespuesta = $.post("codephp/update_beneficiario.php", _parametros);
         xrespuesta.done(function(response){
-            console.log(response)
+            if(response.trim() == 'OK'){
+                _output ='<td class="text-uppercase">' + __rowid + '</td>';
+                _output +='<td>' +_txtgrupoedit + '</td>';
+
+            }
         });
 
         $("#modal_beneficiario").modal("hide");
