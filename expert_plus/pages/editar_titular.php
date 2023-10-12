@@ -17,6 +17,7 @@
 
     //$xServidor = $_SERVER['HTTP_HOST'];
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
+    $mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
     $perid = $_POST['idper'];
     $tituid = $_POST['idtit'];
     $clieid = $_POST['idcli'];
@@ -77,6 +78,7 @@
 ?>
 
 <div id="kt_content_container" class="container-xxl">
+    <input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
     <div class="d-flex flex-column flex-lg-row">
         <div class="flex-column flex-lg-row-auto w-lg-250px w-xl-350px mb-10">
             <div class="card mb-5 mb-xl-8">
@@ -707,6 +709,12 @@ var _grupid='<?php echo $xgrupid; ?>';
 
 $(document).ready(function(){
 
+    var _mensaje = $('input#mensaje').val();
+
+        if(_mensaje != ''){
+            mensajesalertify(_mensaje,"S","top-center",3); 
+        }
+
 });
 
 // Desplazar Modal
@@ -868,11 +876,12 @@ $("#modal_persona").draggable({
 
         var xrespuesta = $.post("codephp/update_beneficiario.php", _parametros);
         xrespuesta.done(function(response){
-            if(response.trim() == 'OK'){
-                _output ='<td class="text-uppercase">' + __rowid + '</td>';
-                _output +='<td>' +_txtgrupoedit + '</td>';
-
-            }
+            // debugger;
+            if(response.trim() == "OK"){
+                    $.redirect('?page=edittitular&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito..!'}); //POR METODO POST
+                }else{
+                    mensajesalertify("Error..!", "W", "top-right", 3);
+                }
         });
 
         $("#modal_beneficiario").modal("hide");
