@@ -751,12 +751,12 @@
                     <span class="required">Detalle</span>
                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del detalle"></i>
                     </label>
-                    <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />
+                    <input type="text" class="form-control form-control-solid text-upper" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />
                 </div>
                 <div class="fv-row mb-15">
                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                     <span class="required">Valor Texto</span>
-                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
+                    <i class="fas fa-exclamation-circle ms-2 fs-7 text-upper" data-bs-toggle="tooltip" title="solo valor en texto"></i>
                     </label>
                     <input type="text" class="form-control form-control-solid" id="txtValorV" name="txtValorV" minlength="1" maxlength="50" placeholder="valor texto" value="" />
                 </div>
@@ -876,17 +876,10 @@
         var _valorV =  $.trim($('#txtValorV').val());
 
 
-        if($.trim($('#txtValorI').val()).length == 0){
-            var _valorI = 0;
-        }else{
-            _valorI = $.trim($('#txtValorI').val());
-        }
-
         var _parametros ={
             "xxPaisId" : _paisid,
             "xxDetalle" : _detalle,
             "xxValorV" : _valorV,
-            "xxValorI" : _valorI
         }
 
         var xrespuesta = $.post("codephp/consultar_detalle.php", _parametros);
