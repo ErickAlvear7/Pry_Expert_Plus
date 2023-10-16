@@ -112,9 +112,6 @@
                             $xLogo = trim($presta['Logo']);
                             $xEstado = trim($presta['Estado']);
                             $xUrl = trim($presta['Url']);
-                            if($xLogo == ''){
-                                $xLogo = 'user.jpg';
-                            }
                         ?>
                             <?php 
 
