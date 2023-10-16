@@ -99,7 +99,7 @@
                         $xLogo = $clie['Logo'];
                         $xEstado = $clie['Estado'];
                         if($xLogo == ''){
-                            $xLogo = 'companyname.png';
+                            $xLogo = 'logo.jpg';
                         }
                         
                     ?>

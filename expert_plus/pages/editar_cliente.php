@@ -678,11 +678,11 @@
 
         //Cargar imagen logo cabecera
         var _imgCab  = "<?php echo $xImgc; ?>";
-        _imgCab = _imgCab == '' ? 'logo.png' : _imgCab;
+        _imgCab = _imgCab == '' ? 'logo.jpg' : _imgCab;
         document.getElementById('imgfileCab').style.backgroundImage="url(logos/" + _imgCab + ")"; 
             //Cargar imagen logp pie
         var _imgPie = "<?php echo $xImgp; ?>";
-        _imgPie = _imgPie == '' ? 'logo.png' : _imgPie;  
+        _imgPie = _imgPie == '' ? 'logo.jpg' : _imgPie;  
         document.getElementById('imgfilePie').style.backgroundImage="url(logos/" + _imgPie + ")"; 
         
         $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();

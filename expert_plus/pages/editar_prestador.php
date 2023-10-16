@@ -1272,7 +1272,7 @@
         _btnopctiontipo = 'Add';
         _selpreeid = 0;
 
-        _logo = _logo == '' ? 'companyname.png' : _logo;
+        _logo = _logo == '' ? 'user.jpg' : _logo;
 
         $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
         $('#cboCiudad').val(<?php echo $xProvid; ?>).change();
