@@ -19,6 +19,8 @@
             $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
 
+            $xDatos = [];
+
             $xSQL = "SELECT(SELECT prv.ciudad FROM `provincia_ciudad` prv WHERE prv.prov_id=bne.bene_ciudad) AS Ciudad, bne.bene_nombres AS Nombres, ";
             $xSQL .= "bne.bene_apellidos AS Apellidos, bne.bene_direccion AS Direccion, (SELECT pde.pade_nombre FROM `expert_parametro_detalle` pde, ";
             $xSQL .= "`expert_parametro_cabecera` pca WHERE pde.paca_id=pca.paca_id AND pca.paca_nombre='Parentesco' AND pde.pade_valorv=bne.bene_parentesco) AS Parentesco, ";
