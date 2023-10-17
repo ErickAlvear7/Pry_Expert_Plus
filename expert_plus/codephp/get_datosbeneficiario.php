@@ -18,16 +18,47 @@
             $xBeneid = $_POST['xxBeneid'];
 
 
-            $xSQL = "SELECT bene_nombres AS Nombre, bene_apellidos AS Apellido, bene_direccion AS Direccion, bene_telefonocasa AS Telcasa, bene_telefonoficina AS Telofi, ";
-            $xSQL .= "bene_celular AS Celular, bene_email AS Email FROM `expert_beneficiario` WHERE bene_id=$xBeneid ";      
+            $xSQL = "SELECT(SELECT prv.ciudad FROM `provincia_ciudad` prv WHERE prv.prov_id=bne.bene_ciudad) AS Ciudad, bne.bene_nombres AS Nombres, ";
+            $xSQL .= "bne.bene_apellidos AS Apellidos, bne.bene_direccion AS Direccion, (SELECT pde.pade_nombre FROM `expert_parametro_detalle` pde, ";
+            $xSQL .= "`expert_parametro_cabecera` pca WHERE pde.paca_id=pca.paca_id AND pca.paca_nombre='Parentesco' AND pde.pade_valorv=bne.bene_parentesco) AS Parentesco, ";
+            $xSQL .= "bne.bene_telefonocasa AS Telcasa, bne.bene_telefonoficina AS Telofi, bne.bene_celular AS Celular, bne.bene_email AS Email, ";
+            $xSQL .= "bne.bene_estado AS Estado FROM `expert_beneficiario` bne WHERE bne.bene_id=$xBeneid";
             $all_datos = mysqli_query($con, $xSQL);
-            $resultado = mysqli_fetch_all($all_datos,MYSQLI_ASSOC);
+
+             foreach($all_datos as $pro) {
+
+                $xCiudad = $pro["Ciudad"]; 
+                $xNombres = $pro["Nombres"];
+                $xApellidos = $pro["Apellidos"];
+                $xDireccion = $pro["Direccion"];
+                $xParentesco = $pro["Parentesco"];
+                $xTelcasa = $pro["Telcasa"];
+                $xTelofi = $pro["Telofi"];
+                $xCelular = $pro["Celular"];
+                $xEmail = $pro["Email"];
+                $xEstado = $pro["Estado"];
+ 
+                $xDatos[] = array(
+                    'Ciudad'=> $xCiudad, 
+                    'Nombres'=> $xNombres, 
+                    'Apellidos'=> $xApellidos, 
+                    'Direccion'=> $xDireccion, 
+                    'Parentesco'=> $xParentesco,
+                    'Telcasa'=> $xTelcasa,
+                    'Telofi'=> $xTelofi,
+                    'Celular'=> $xCelular,
+                    'Email'=> $xEmail,
+                    'Estado'=> $xEstado,
+                
+                );    
+                
+            }
+            print json_encode($xDatos, JSON_UNESCAPED_UNICODE);
 
         }
     }
 
     mysqli_close($con);
-    //print json_encode($xDatos, JSON_UNESCAPED_UNICODE);
-    echo json_encode($resultado);
+    // echo json_encode($resultado);
     
 ?>
