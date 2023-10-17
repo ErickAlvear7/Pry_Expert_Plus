@@ -12,31 +12,32 @@
     $log_file = "err_consulta";
     
 
-    if(isset($_POST['xxBeneid'])){
-        if(isset($_POST['xxBeneid']) <> ''){
+    if(isset($_POST['xxBeneid'])  and isset($_POST['xxPaisid']) and isset($_POST['xxEmprid'])){
+        if(isset($_POST['xxBeneid']) <> '' and isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> ''){
 
             $xBeneid = $_POST['xxBeneid'];
-
+            $xPaisid = $_POST['xxPaisid'];
+            $xEmprid = $_POST['xxEmprid'];
 
             $xSQL = "SELECT(SELECT prv.ciudad FROM `provincia_ciudad` prv WHERE prv.prov_id=bne.bene_ciudad) AS Ciudad, bne.bene_nombres AS Nombres, ";
             $xSQL .= "bne.bene_apellidos AS Apellidos, bne.bene_direccion AS Direccion, (SELECT pde.pade_nombre FROM `expert_parametro_detalle` pde, ";
             $xSQL .= "`expert_parametro_cabecera` pca WHERE pde.paca_id=pca.paca_id AND pca.paca_nombre='Parentesco' AND pde.pade_valorv=bne.bene_parentesco) AS Parentesco, ";
             $xSQL .= "bne.bene_telefonocasa AS Telcasa, bne.bene_telefonoficina AS Telofi, bne.bene_celular AS Celular, bne.bene_email AS Email, ";
-            $xSQL .= "bne.bene_estado AS Estado FROM `expert_beneficiario` bne WHERE bne.bene_id=$xBeneid";
+            $xSQL .= "bne.bene_estado AS Estado FROM `expert_beneficiario` bne WHERE bne.bene_id=$xBeneid AND bne.pais_id = $xPaisid AND bne.empr_id = $xEmprid" ;
             $all_datos = mysqli_query($con, $xSQL);
 
-             foreach($all_datos as $pro) {
+             foreach($all_datos as $ben) {
 
-                $xCiudad = $pro["Ciudad"]; 
-                $xNombres = $pro["Nombres"];
-                $xApellidos = $pro["Apellidos"];
-                $xDireccion = $pro["Direccion"];
-                $xParentesco = $pro["Parentesco"];
-                $xTelcasa = $pro["Telcasa"];
-                $xTelofi = $pro["Telofi"];
-                $xCelular = $pro["Celular"];
-                $xEmail = $pro["Email"];
-                $xEstado = $pro["Estado"];
+                $xCiudad = $ben["Ciudad"]; 
+                $xNombres = $ben["Nombres"];
+                $xApellidos = $ben["Apellidos"];
+                $xDireccion = $ben["Direccion"];
+                $xParentesco = $ben["Parentesco"];
+                $xTelcasa = $ben["Telcasa"];
+                $xTelofi = $ben["Telofi"];
+                $xCelular = $ben["Celular"];
+                $xEmail = $ben["Email"];
+                $xEstado = $ben["Estado"];
  
                 $xDatos[] = array(
                     'Ciudad'=> $xCiudad, 

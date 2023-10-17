@@ -828,14 +828,20 @@ $("#modal_persona").draggable({
 
         _rowid = $(this).attr("id");
         _rowid = _rowid.substring(12);
+        _paisid = '<?php echo $xPaisid;?>';
+        _emprid = '<?php echo $xEmprid;?>';
 
-        var xrespuesta = $.post("codephp/get_datosbeneficiario.php", { xxBeneid: _rowid});
+        var xrespuesta = $.post("codephp/get_datosbeneficiario.php", { xxBeneid: _rowid,xxPaisid:_paisid,xxEmprid: _emprid});
         xrespuesta.done(function(response){
 
             var _datos = JSON.parse(response);
 
-            $("#txtNombreBeMo").val(_datos[0].Nombre);
-            $('#txtApellidoBeMo').val(_datos[0].Apellido);
+            _ciudadben = _datos[0].Ciudad;
+            _perenben = _datos[0].Parentesco;
+            _estadoben = _datos[0].Estado;
+
+            $("#txtNombreBeMo").val(_datos[0].Nombres);
+            $('#txtApellidoBeMo').val(_datos[0].Apellidos);
             $('#txtDireccionBeMo').val(_datos[0].Direccion);
             $('#txtTelcasaBeMo').val(_datos[0].Telcasa);
             $('#txtTelofiBeMo').val(_datos[0].Telofi);
