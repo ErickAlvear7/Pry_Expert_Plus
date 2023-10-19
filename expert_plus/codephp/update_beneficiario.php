@@ -6,8 +6,6 @@
     putenv("TZ=America/Guayaquil");
     date_default_timezone_set('America/Guayaquil');    
 
-    //file_put_contents('log_seguimiento_grabarperfil.txt', 'Ingreso a Grabar' . "\n\n", FILE_APPEND); 
-
 	require_once("../dbcon/config.php");
 	require_once("../dbcon/functions.php");
 
@@ -27,7 +25,7 @@
             $xEmprid = $_POST['xxEmprid'];
 
             $xNombre = trim(mb_strtoupper(safe($_POST['xxNombre'])));
-            $xApellido = trim(mb_strtoupper(safe($_POST['xxAplledio'])));
+            $xApellido = trim(mb_strtoupper(safe($_POST['xxApellido'])));
             $xDireccion = trim(mb_strtoupper(safe($_POST['xxDireccion'])));
             $xTelcasa = trim(safe($_POST['xxTelcasa']));
             $xTelofi = trim(safe($_POST['xxTelofi']));
@@ -49,7 +47,8 @@
         }
     }
     
-    //echo $xRespuesta;
-    print json_encode($xRespuesta, JSON_UNESCAPED_UNICODE);
+
+    //print json_encode($xRespuesta, JSON_UNESCAPED_UNICODE);
+    echo $xRespuesta;
 	
 ?>	

@@ -409,8 +409,8 @@
                                     <th>NOMBRES</th>
                                     <th>PARENTESCO</th>
                                     <th>ESTADO</th>
-                                    <th class="min-w-70px">ESTATUS</th>
-                                    <th class="min-w-70px" style="text-align: center;">OPCIONES</th>
+                                    <th>ESTATUS</th>
+                                    <th style="text-align: center;">OPCIONES</th>
                                 </tr>
                             </thead>
                             <tbody class="fs-6 fw-bold text-gray-600">
@@ -467,11 +467,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="text-center">
-                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xBeneid; ?>" 
-                                                onchange="f_UpdateEstado(<?php echo $xBeneid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" value=""/>
-                                            </div>
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xBeneid; ?>" 
+                                            onchange="f_UpdateEstado(<?php echo $xBeneid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" value=""/>
                                         </div>
                                     </td>
                                     <td>
@@ -855,24 +853,37 @@ $("#modal_persona").draggable({
 
 // Guardar Editar Beneficiario
 
-    function f_EditarBene(_usuaid,_paisid,_emprid){   
+    function f_EditarBene(_usuaid,_paisid,_emprid){
 
-        var _nombrebebe= $.trim($("#txtNombreBeMo").val());
+        var _output;
+        var _beneid = _rowid;
+        var _nombrebe= $.trim($("#txtNombreBeMo").val());
         var _apellidobe= $.trim($("#txtApellidoBeMo").val());
+        var _nombrescombe = _nombrebe.toUpperCase() + ' ' + _apellidobe.toUpperCase();
         var _direccionbe = $.trim($("#txtDireccionBeMo").val());
         var _telcasabe = $.trim($("#txtTelcasaBeMo").val());
-        var _telcasabeant = $.trim($("#txtTelcasaBeAntMo").val());
         var _telofibe = $.trim($("#txtTelofiBeMo").val()); 
         var _celularbe = $.trim($("#txtCelularBeMo").val()); 
         var _emailbe = $.trim($("#txtEmailBeMo").val());
 
+        if(_nombrebe == ''){
+            mensajesalertify("Ingrese Nombre..!!","W","top-right",3);
+            return false;
+        }
+
+        if(_apellidobe == ''){
+            mensajesalertify("Ingrese Apellido..!!","W","top-right",3);
+            return false;
+        }
+
+
         var _parametros = {
-            "xxBeneid" : _rowid,
+            "xxBeneid" : _beneid,
             "xxUsuaid" : _usuaid,
             "xxPaisid" : _paisid,
             "xxEmprid" : _emprid,
-            "xxNombre" : _nombrebebe,
-            "xxAplledio" : _apellidobe,
+            "xxNombre" : _nombrebe,
+            "xxApellido" : _apellidobe,
             "xxDireccion" : _direccionbe,
             "xxTelcasa" : _telcasabe,
             "xxTelofi" : _telofibe,
@@ -882,17 +893,31 @@ $("#modal_persona").draggable({
 
         var xrespuesta = $.post("codephp/update_beneficiario.php", _parametros);
         xrespuesta.done(function(response){
-            // debugger;
-            if(response.trim() == "OK"){
-                    $.redirect('?page=edittitular&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito..!'}); //POR METODO POST
-                }else{
-                    mensajesalertify("Error..!", "W", "top-right", 3);
-                }
+         
+            if(response.trim() == 'OK'){
+
+                _output ='<td class="text-uppercase">' + _ciudadben + '</td>';
+                _output +='<td>' +_nombrescombe + '</td>';
+                _output +='<td>' +_perenben + '</td>';
+                _output +='<td id="td_'+ _beneid + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
+                _output +='<td><div class="form-check form-check-sm form-check-custom form-check-solid">';
+                _output +='<input checked="checked" class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk'+ _beneid +'" ';
+                _output +='onchange="f_UpdateEstado('+ _beneid + ',' + _paisid + ',' + _emprid + ',' + _usuaid + ')" value=""/></div></td>';
+                _output +='<td><div class="text-center"><div class="btn-group">';
+                _output +='<button type="button" id="btnEditarBe_' + _beneid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditarBe" title="Editar Producto" data-bs-toggle="tooltip" data-bs-placement="left">';
+                _output +='<i class="fa fa-edit"></i></button>';
+                _output +='<button type="button" id="btnAgendar_' + _beneid + '" name="btnAgendar" onclick="f_Agendar('+ _beneid + ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" ';
+                _output +='title="Agendar" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-user-plus"></i></button></div></div></td>';
+
+                //console.log(_output);
+              
+                $('#row_' + _beneid + '').html(_output);
+
+                $("#modal_beneficiario").modal("hide");
+            }
+            
         });
-
-        $("#modal_beneficiario").modal("hide");
-
-    };   
+    }  
 
 //Update Estado Beneficiario 
 function f_UpdateEstado(_beneid,_paisid,_emprid,_usuaid){
