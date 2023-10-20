@@ -1259,7 +1259,7 @@
                         if(dataid != 0){
 
                             if(_result.length > 0){
-                                var xrespuesta = $.post("codephp/grabar_beneficiariotitular.php", { xxTituid: dataid, xxUsuaid: _userid,xxResult: _result });
+                                var xrespuesta = $.post("codephp/grabar_beneficiariotitular.php", { xxTituid: dataid, xxUsuaid: _userid,xxPaisid: _paisid,xxEmprid: _emprid,xxResult: _result });
                                     xrespuesta.done(function(response){
                                             
                                     if(response == 'OK'){
