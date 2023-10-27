@@ -1099,7 +1099,7 @@
                     $("#cboParentesco").val('').change();
                     $("#txtFechaNacimientoBe").val('');
         
-                }
+                } 
 
             }
 
@@ -1294,12 +1294,13 @@
                                     }
 
                                 });
-                            }
+                            }else{
+                                $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', 
+                                {'mensaje': 'Grabado con Éxito..!',
+                                    'idclie': _idclie
+                                }); //POR METODO POST
 
-                            $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', 
-                            {'mensaje': 'Grabado con Éxito..!',
-                              'idclie': _idclie
-                            }); //POR METODO POST
+                            }
                         }
 
                     },
@@ -1312,7 +1313,6 @@
             }else{
                 mensajesalertify("Titular ya Existe..!!","W","top-right",3);
                 return false;
-
             }
 
         });   
