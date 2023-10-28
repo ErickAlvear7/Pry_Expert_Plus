@@ -39,11 +39,17 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
-    $xSQL = "SELECT paca_id AS Idpaca FROM `expert_parametro_cabecera` WHERE paca_nombre='Estado Civil' ";
+    $xSQL = "SELECT paca_id AS Idpaca FROM `expert_parametro_cabecera` WHERE paca_nombre='Parentesco' ";
     $all_id = mysqli_query($con, $xSQL);
 
     foreach($all_id as $id){
         $xPacaid = $id['Idpaca'];
+    }
+
+    $xSQL = "SELECT  pade_orden AS Orden FROM `expert_parametro_detalle`WHERE paca_id = $xPacaid ORDER BY pade_orden DESC LIMIT 1 ";
+    $orden = mysqli_query($con, $xSQL);
+    foreach($orden as $ord){
+        $xOrdenDet = $ord['Orden'];
     }
 
     $xSQL = "SELECT DISTINCT provincia AS Descripcion FROM `provincia_ciudad` ";
@@ -768,19 +774,19 @@
                     <span class="required">Detalle</span>
                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del detalle"></i>
                     </label>
-                    <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />
+                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="80" placeholder="nombre del detalle" value="" />
                 </div>
                 <div class="fv-row mb-15">
                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                     <span class="required">Valor Texto</span>
-                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
+                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="valor texto ejemplo FFF"></i>
                     </label>
-                    <input type="text" class="form-control form-control-solid" id="txtValorV" name="txtValorV" minlength="1" maxlength="50" placeholder="valor texto" value="" />
+                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorV" name="txtValorV" minlength="3" maxlength="3" placeholder="valor texto" value="" />
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnGuardar" onclick="f_GuardarParen(<?php echo $xPacaid; ?>)" class="btn btn-primary">Grabar</button>
+                <button type="button" id="btnGuardar" onclick="f_GuardarParen(<?php echo $xPacaid; ?>,<?php echo $xOrdenDet; ?>)" class="btn btn-primary">Grabar</button>
             </div>
         </div>
     </div>
@@ -858,64 +864,86 @@
 
     });
 
+   
     $("#btnNewParen").click(function(){
 
       $("#modal_new_paren").modal("show");
     });
 
 
+    $("#modal_new_paren").draggable({
+        handle: ".modal-header"
+    });
+
+
     //Gravar Parentesco Modal
 
-    function f_GuardarParen(_idpaca){
+    function f_GuardarParen(_idpaca,_ordet){
 
         var _estado = 'A';
-        var _paisid = '<?php echo  $xPaisid; ?>';
 
-        if($.trim($('#txtDetalle').val()).length == 0)
+        if($.trim($('#txtDetalle').val()) == '')
         {           
-            mensajesalertify('Ingrese Detalle..!', 'W', 'top-right', 5);
+            mensajesalertify('Ingrese Detalle..!', 'W', 'top-right', 3);
             return false;          
         }
 
-        if($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0 )
+        if($.trim($('#txtValorV').val()) == '')
         {    
-            mensajesalertify('Ingrese Valor Texto o Valor Entero..!', 'W', 'top-right', 5);
+            mensajesalertify('Ingrese Valor Texto..!', 'W', 'top-right', 3);
             return false;
         }
 
-        if($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0 )
-        {    
-            mensajesalertify('Ingrese Solo Valor Texto o Valor Entero..!', 'W', 'top-right', 5);
-            return false;       
-        }
-
+     
         var _detalle = $.trim($('#txtDetalle').val());
         var _valorV =  $.trim($('#txtValorV').val());
 
-
-        if($.trim($('#txtValorI').val()).length == 0){
-            var _valorI = 0;
-        }else{
-            _valorI = $.trim($('#txtValorI').val());
-        }
-
-        var _parametros ={
-            "xxPaisId" : _paisid,
+        var _parametro ={
+            "xxPacaid" : _idpaca,
             "xxDetalle" : _detalle,
             "xxValorV" : _valorV,
-            "xxValorI" : _valorI
         }
 
-        var xrespuesta = $.post("codephp/consultar_detalle.php", _parametros);
+        var xrespuesta = $.post("codephp/consultar_newdetalle.php", _parametro);
         xrespuesta.done(function(response){
+
 
             if(response == 0){
 
+                _ordet++;
+
+                var _parametros ={
+                    "xxPacaid" : _idpaca,
+                    "xxPaisid" : _paisid,
+                    "xxOrden" : _ordet,
+                    "xxDetalle" : _detalle,
+                    "xxValorV" : _valorV,
+                    "xxEstado" : _estado,
+                }
+
+                var xrespuesta = $.post("codephp/grabar_newdetalle.php", _parametros);
+                xrespuesta.done(function(response){
+
+                    if(response.trim() != 'ERR'){
+
+                        mensajesalertify('Nuevo Parentesco Agregado', 'S', 'top-center', 3); 
+
+                        $("#txtDetalle").val("");
+                        $("#txtValorV").val("");
+                        $("#cboParentesco").empty();
+                        $("#cboParentesco").html(response);      
+                        $("#modal_new_paren").modal("hide");
+
+                    }
+
+                });
 
             }else{
-                mensajesalertify('Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!', 'W', 'top-right', 5);
-            }
 
+                mensajesalertify('Parentesco ya Existe', 'W', 'top-right', 3);
+                $("#txtDetalle").val("");
+                $("#txtValorV").val("");
+            }
 
         });
     }
