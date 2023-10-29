@@ -940,7 +940,7 @@
 
             }else{
 
-                mensajesalertify('Parentesco ya Existe', 'W', 'top-right', 3);
+                mensajesalertify('Parentesco ya Existe y/o Valor texto', 'W', 'top-right', 3);
                 $("#txtDetalle").val("");
                 $("#txtValorV").val("");
             }
