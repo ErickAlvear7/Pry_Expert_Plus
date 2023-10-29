@@ -494,6 +494,14 @@
                                                             $xTextColor = "badge badge-light-danger";
                                                             $xDisabledEdit = 'disabled';
                                                         }
+
+                                                    
+                                                        $xSQL = "SELECT COUNT(*) AS Titu FROM `expert_titular` WHERE prod_id = $xProdid ";
+                                                        $cont_titu = mysqli_query($con, $xSQL);
+                                                        foreach ($cont_titu as $titu){
+                                                            $xTitu = $titu['Titu'];
+                                                        }
+                                                    
                                                     ?>
 
                                                 <tr id="row_<?php echo $xProdid; ?>">
@@ -518,7 +526,7 @@
                                                                 <button type="button" id="btnEditar_<?php echo $xProdid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title="Editar Producto" data-bs-toggle="tooltip" data-bs-placement="left">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button> 
-                                                                <button type="button" id="btnTitular_<?php echo $xProdid; ?>" onclick="f_Titular(<?php echo $xGrupId;?>,<?php echo $xProdid;?>,<?php echo $clieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title="Agregar Titular" data-bs-toggle="tooltip" data-bs-placement="left">
+                                                                <button type="button" id="btnTitular_<?php echo $xProdid; ?>" onclick="f_Titular(<?php echo $xGrupId;?>,<?php echo $xProdid;?>,<?php echo $clieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title="Agregar Titular (+<?php echo $xTitu; ?>)" data-bs-toggle="tooltip" data-bs-placement="left">
                                                                     <i class="fa fa-user"></i>
                                                                 </button> 
                                                             </div>
