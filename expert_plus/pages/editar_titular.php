@@ -42,6 +42,10 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
+    $xSQL = "SELECT DISTINCT provincia AS Descripcion FROM `provincia_ciudad` ";
+	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
+    $all_provincia = mysqli_query($con, $xSQL);
+
 
     $xSQL = "SELECT per.pers_id AS Idper,per.pers_numerodocumento AS Docu,CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona,per.pers_imagen AS Imagen, per.pers_fechanacimiento AS Fecha, ";
     $xSQL .="per.pers_ciudad AS Ciudad,per.pers_estado AS Estado FROM `expert_persona` per WHERE per.pers_id = $perid AND per.pais_id=$xPaisid AND per.empr_id=$xEmprid ";
@@ -235,7 +239,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex-lg-row-fluid ms-lg-15">
+        <div id="tab_Addbeneficiarios" class="flex-lg-row-fluid ms-lg-15">
             <div class="d-flex flex-stack fs-4 py-3">
                <div class="fw-bolder rotate collapsible btn btn-sm btn-light-primary" data-bs-toggle="collapse" href="#kt_user_view_beneficiario" role="button" aria-expanded="false" aria-controls="kt_user_view_details">Agregar Beneficiario
                     <span class="ms-2 rotate-180">
@@ -265,7 +269,7 @@
                         <div class="d-flex flex-wrap gap-5">
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Tipo Documento</label>
-                                <select class="form-select mb-2" id="cboDocumentoBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
+                                <select class="form-select mb-2" id="cboAddDocumentoBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
                                     <option></option>
                                     <?php
                                     $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -278,23 +282,23 @@
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Nro. Documento</label>
-                                <input type="text" class="form-control mb-2" id="txtDocumentoBe" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                <input type="text" class="form-control mb-2" id="txtAddDocumentoBe" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>    
                         </div>
                         <div class="d-flex flex-wrap gap-5">
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Nombres</label>
-                                <input type="text" class="form-control mb-2" id="" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
+                                <input type="text" class="form-control mb-2" id="txtAddNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Apellidos</label>
-                                <input type="text" class="form-control mb-2" id="" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
+                                <input type="text" class="form-control mb-2" id="txtAddApellidoBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
                             </div>   
                         </div>
                         <div class="d-flex flex-wrap gap-5">
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Genero</label>
-                                <select class="form-select mb-2" id="cboGeneroBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
+                                <select class="form-select mb-2" id="cboAddGeneroBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
                                     <option></option>
                                     <?php
                                         $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -308,7 +312,7 @@
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="form-label">Estado Civil</label>
-                                <select class="form-select mb-2" id="cboEstadoCivilBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
+                                <select class="form-select mb-2" id="cboAddEstadoCivilBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
                                     <option></option>
                                     <?php
                                         $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -323,7 +327,7 @@
                         <div class="d-flex flex-wrap gap-5">
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Provincia</label>
-                                <select  id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2" >
+                                <select id="cboAddProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tab_Addbeneficiarios" class="form-select mb-2" >
                                         <option></option>
                                         <?php foreach ($all_provincia as $prov) : ?>
                                             <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
@@ -332,33 +336,33 @@
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="form-label">Ciudad</label>
-                                <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2">
+                                <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tab_Addbeneficiarios" class="form-select mb-2">
                                         <option></option>
                                 </select> 
                             </div>  
                         </div>
                         <div class="mb-10 fv-row">
                             <label class="form-label">Direccion</label>
-                            <textarea class="form-control mb-2" id="txtDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
+                            <textarea class="form-control mb-2" id="txtAddDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
                         </div>
                         <div class="d-flex flex-wrap gap-5">
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="form-label">Telefono Casa</label>
-                                <input type="text" id="txtTelCasaBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                <input type="text" id="txtAddTelCasaBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="form-label">Telefono Oficina</label>
-                                <input type="text" id="txtTelOfiBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                <input type="text" id="txtAddTelOfiBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
                             </div>  
                         </div>
                         <div class="d-flex flex-wrap gap-5">
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="form-label">Telefono Celular</label>
-                                <input type="text" id="txtCelularBe" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                <input type="text" id="txtAddCelularBe" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="form-label">Email</label>
-                                <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
+                                <input type="email" id="txtAddEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
                             </div>  
                         </div>
                         <div class="d-flex flex-wrap gap-5">
@@ -377,7 +381,7 @@
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="form-label">Fecha de Nacimiento</label>
-                                <input type="date" id="txtFechaNacimientoBe" class="form-control mb-2" value="" />
+                                <input type="date" id="txtAddFechaNacimientoBe" class="form-control mb-2" value="" />
                             </div> 
                         </div>
                         <div class="form-group mt-5">
@@ -702,8 +706,7 @@
 
 <script>
 
-var _prodid='<?php echo $xprodid; ?>';
-var _grupid='<?php echo $xgrupid; ?>';
+var _prodid='<?php echo $xprodid; ?>',_grupid='<?php echo $xgrupid; ?>',_paisid = '<?php echo $xPaisid; ?>',_emprid = '<?php echo $xEmprid; ?>';
 
 $(document).ready(function(){
 
@@ -713,7 +716,11 @@ $(document).ready(function(){
             mensajesalertify(_mensaje,"S","top-center",3); 
         }
 
+ 
+
+
 });
+
 
 // Desplazar Modal
 $("#modal_beneficiario").draggable({
@@ -817,7 +824,8 @@ $("#modal_persona").draggable({
             return;
         }
 
-    });    
+    });
+
 
 // Modal editar beneficiario
     $(document).on("click",".btnEditarBe",function(){
@@ -917,7 +925,99 @@ $("#modal_persona").draggable({
             }
             
         });
-    }  
+    } 
+    
+$('#btnAgregar').click(function(){
+
+    var _cboAddDocumentoBe = $('#cboAddDocumentoBe').val();
+    var _txtAddDocumentoBe = $('#txtAddDocumentoBe').val();
+    var _txtAddNombreBe = $.trim($("#txtAddNombreBe").val());
+    var _txtAddApellidoBe =  $.trim($('#txtAddApellidoBe').val());
+    var _txtAddnombresCompletos =  _txtAddNombreBe.toUpperCase() + ' ' + _txtAddApellidoBe.toUpperCase();
+    var _cboAddGeneroBe = $('#cboAddGeneroBe').val();
+    var _cboAddEstadoCivilBe = $('#cboAddEstadoCivilBe').val();
+    var _cboProvinciaBe = $('#cboProvinciaBe').val();
+    var _cboCiudadBe = $('#cboCiudadBe').val();
+    var _txtCiudadBe = $('#cboCiudadBe').find('option:selected').text();
+        _txtCiudadBe.toUpperCase();
+    var _txtAddDireccionBe =  $.trim($('#txtAddDireccionBe').val());
+    var _txtAddTelCasaBe = $('#txtAddTelCasaBe').val();
+    var _txtAddTelOfiBe = $('#txtAddTelOfiBe').val();
+    var _txtAddTelCelularBe = $('#txtAddCelularBe').val();
+    var _txtAddEmailBe =  $.trim($('#txtAddEmailBe').val());
+    var _cboParentesco = $('#cboParentesco').val();
+    var _txtParentesco = $('#cboParentesco').find('option:selected').text();
+        _txtParentesco.toUpperCase();
+    var _fechaAddNacimientoBe = $('#txtAddFechaNacimientoBe').val();
+
+
+    if(_cboAddDocumentoBe == ''){
+        mensajesalertify("Seleccione Tipo Documento..!", "W", "top-right", 3);
+        return; 
+    }
+
+    if(_txtAddDocumentoBe == ''){
+        mensajesalertify("Ingrese Numero de Documento..!", "W", "top-right", 3);
+        return; 
+    }
+
+    if(_txtAddDocumentoBe.length < 10){
+        mensajesalertify("Documento Incorrecto..!", "W", "top-right", 3);
+        return; 
+    }
+
+    if(_txtAddNombreBe == ''){
+        mensajesalertify("Ingrese Nombre..!", "W", "top-right", 3);
+        return; 
+    }
+
+    if(_txtAddApellidoBe == ''){
+        mensajesalertify("Ingrese Apellido..!", "W", "top-right", 3);
+        return; 
+    }
+
+    
+    if(_cboAddGeneroBe == ''){
+        mensajesalertify("Seleccione Genero..!", "W", "top-right", 3);
+        return; 
+    }
+
+
+    if(_cboProvinciaBe == ''){
+        mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
+        return false;
+    }
+
+    if(_cboCiudadBe == 0){
+        mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
+        return false;
+    }
+
+    if(_txtAddTelCelularBe != '')
+    {
+        _valor = document.getElementById("txtAddCelularBe").value;
+        if( !(/^\d{10}$/.test(_valor)) ) {
+            mensajesalertify("Celular incorrecto..!" ,"W", "top-right", 3); 
+            return;
+        }
+    }
+    
+    if(_txtAddEmailBe != ''){
+        var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+        if (regex.test(_txtAddEmailBe.trim())){
+        }else{
+            mensajesalertify("Email Incorrecto..!!","W","top-right",3);
+            return false;
+        }  
+    }
+
+    if(_cboParentesco == ''){
+        mensajesalertify("Seleccione Parentesco..!", "W", "top-right", 3);
+        return; 
+    }
+
+
+});
 
 //Update Estado Beneficiario 
 function f_UpdateEstado(_beneid,_paisid,_emprid,_usuaid){
