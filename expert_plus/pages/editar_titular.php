@@ -327,7 +327,7 @@
                         <div class="d-flex flex-wrap gap-5">
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Provincia</label>
-                                <select id="cboAddProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tab_Addbeneficiarios" class="form-select mb-2" >
+                                <select id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tab_Addbeneficiarios" class="form-select mb-2" >
                                         <option></option>
                                         <?php foreach ($all_provincia as $prov) : ?>
                                             <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
@@ -706,43 +706,69 @@
 
 <script>
 
-var _prodid='<?php echo $xprodid; ?>',_grupid='<?php echo $xgrupid; ?>',_paisid = '<?php echo $xPaisid; ?>',_emprid = '<?php echo $xEmprid; ?>';
+    var _prodid='<?php echo $xprodid; ?>',_grupid='<?php echo $xgrupid; ?>',_paisid = '<?php echo $xPaisid; ?>',_emprid = '<?php echo $xEmprid; ?>', _usuaid='<?php echo $xUsuaid ; ?>';
 
-$(document).ready(function(){
+    $(document).ready(function(){
 
-    var _mensaje = $('input#mensaje').val();
+        var _mensaje = $('input#mensaje').val();
 
         if(_mensaje != ''){
             mensajesalertify(_mensaje,"S","top-center",3); 
         }
 
- 
+        $('#cboProvinciaBe').change(function(){
+                        
+            _cboid = $(this).val(); //obtener el id seleccionado
+            
+            $("#cboCiudadBe").empty();
 
 
-});
+            var _parametros = {
+                xxPaisId: _paisid,
+                xxEmprId: _emprid,
+                xxComboId: _cboid,
+                xxOpcion: 0
+            }
+
+            var xrespuesta = $.post("codephp/cargar_combos.php", _parametros);
+                xrespuesta.done(function(response) {
+            
+                $("#cboCiudadBe").html(response);
+                
+            });
+            xrespuesta.fail(function() {
+                
+            });
+            xrespuesta.always(function() {
+                
+            });                
+        
+        });
+
+    });
 
 
-// Desplazar Modal
-$("#modal_beneficiario").draggable({
+     // Desplazar Modal
+    $("#modal_beneficiario").draggable({
         handle: ".modal-header"
     });
 
-$("#modal_persona").draggable({
+    $("#modal_persona").draggable({
     handle: ".modal-header"
-});
+    });
 
-// Funcion de regreso de pagina 
+    // Funcion de regreso de pagina 
     function f_Regresar(_clieid,_prodid,_grupid){
 
-            $.redirect('?page=addtitular&menuid=<?php echo $menuid; ?>', {
-                'idclie': _clieid,
-                'idprod': _prodid,
-                'idgrup': _grupid
-            });
-        
+        $.redirect('?page=addtitular&menuid=<?php echo $menuid; ?>', {
+            'idclie': _clieid,
+            'idprod': _prodid,
+            'idgrup': _grupid
+        });
+    
     }
 
-// Modal editar titular
+    // Modal editar titular
    $(document).on("click",".btnEditarPer",function(){
 
         $("#modal_persona").find("input").val('');
@@ -793,7 +819,7 @@ $("#modal_persona").draggable({
         $("#modal_persona").modal("show");
     });
 
-// Guardar Editar Titular
+    // Guardar Editar Titular
     $('#btnSaveTit').click(function(e){
 
         var _direccion = $.trim($("#txtDireccion").val()); 
@@ -827,7 +853,7 @@ $("#modal_persona").draggable({
     });
 
 
-// Modal editar beneficiario
+    // Modal editar beneficiario
     $(document).on("click",".btnEditarBe",function(){
       
         $("#modal_beneficiario").find("input").val("");
@@ -859,7 +885,7 @@ $("#modal_persona").draggable({
         });
     });
 
-// Guardar Editar Beneficiario
+    // Guardar Editar Beneficiario
 
     function f_EditarBene(_usuaid,_paisid,_emprid){
 
@@ -916,8 +942,6 @@ $("#modal_persona").draggable({
                 _output +='<i class="fa fa-edit"></i></button>';
                 _output +='<button type="button" id="btnAgendar_' + _beneid + '" name="btnAgendar" onclick="f_Agendar('+ _beneid + ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" ';
                 _output +='title="Agendar" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-user-plus"></i></button></div></div></td>';
-
-                //console.log(_output);
               
                 $('#row_' + _beneid + '').html(_output);
 
@@ -926,144 +950,196 @@ $("#modal_persona").draggable({
             
         });
     } 
+
+    //Agregar Nuevo Beneficiario directo a la BDD
     
-$('#btnAgregar').click(function(){
+    $('#btnAgregar').click(function(){
 
-    var _cboAddDocumentoBe = $('#cboAddDocumentoBe').val();
-    var _txtAddDocumentoBe = $('#txtAddDocumentoBe').val();
-    var _txtAddNombreBe = $.trim($("#txtAddNombreBe").val());
-    var _txtAddApellidoBe =  $.trim($('#txtAddApellidoBe').val());
-    var _txtAddnombresCompletos =  _txtAddNombreBe.toUpperCase() + ' ' + _txtAddApellidoBe.toUpperCase();
-    var _cboAddGeneroBe = $('#cboAddGeneroBe').val();
-    var _cboAddEstadoCivilBe = $('#cboAddEstadoCivilBe').val();
-    var _cboProvinciaBe = $('#cboProvinciaBe').val();
-    var _cboCiudadBe = $('#cboCiudadBe').val();
-    var _txtCiudadBe = $('#cboCiudadBe').find('option:selected').text();
-        _txtCiudadBe.toUpperCase();
-    var _txtAddDireccionBe =  $.trim($('#txtAddDireccionBe').val());
-    var _txtAddTelCasaBe = $('#txtAddTelCasaBe').val();
-    var _txtAddTelOfiBe = $('#txtAddTelOfiBe').val();
-    var _txtAddTelCelularBe = $('#txtAddCelularBe').val();
-    var _txtAddEmailBe =  $.trim($('#txtAddEmailBe').val());
-    var _cboParentesco = $('#cboParentesco').val();
-    var _txtParentesco = $('#cboParentesco').find('option:selected').text();
-        _txtParentesco.toUpperCase();
-    var _fechaAddNacimientoBe = $('#txtAddFechaNacimientoBe').val();
-
-
-    if(_cboAddDocumentoBe == ''){
-        mensajesalertify("Seleccione Tipo Documento..!", "W", "top-right", 3);
-        return; 
-    }
-
-    if(_txtAddDocumentoBe == ''){
-        mensajesalertify("Ingrese Numero de Documento..!", "W", "top-right", 3);
-        return; 
-    }
-
-    if(_txtAddDocumentoBe.length < 10){
-        mensajesalertify("Documento Incorrecto..!", "W", "top-right", 3);
-        return; 
-    }
-
-    if(_txtAddNombreBe == ''){
-        mensajesalertify("Ingrese Nombre..!", "W", "top-right", 3);
-        return; 
-    }
-
-    if(_txtAddApellidoBe == ''){
-        mensajesalertify("Ingrese Apellido..!", "W", "top-right", 3);
-        return; 
-    }
-
-    
-    if(_cboAddGeneroBe == ''){
-        mensajesalertify("Seleccione Genero..!", "W", "top-right", 3);
-        return; 
-    }
+        var _tituid = '<?php echo $tituid; ?>';
+        var _cboAddDocumentoBe = $('#cboAddDocumentoBe').val();
+        var _txtAddDocumentoBe = $('#txtAddDocumentoBe').val();
+        var _txtAddNombreBe = $.trim($("#txtAddNombreBe").val());
+        var _txtAddApellidoBe =  $.trim($('#txtAddApellidoBe').val());
+        var _txtAddnombresCompletos =  _txtAddNombreBe.toUpperCase() + ' ' + _txtAddApellidoBe.toUpperCase();
+        var _cboAddGeneroBe = $('#cboAddGeneroBe').val();
+        var _cboAddEstadoCivilBe = $('#cboAddEstadoCivilBe').val();
+        var _cboProvinciaBe = $('#cboProvinciaBe').val();
+        var _cboCiudadBe = $('#cboCiudadBe').val();
+        var _txtCiudadBe = $('#cboCiudadBe').find('option:selected').text();
+            _txtCiudadBe.toUpperCase();
+        var _txtAddDireccionBe =  $.trim($('#txtAddDireccionBe').val());
+        var _txtAddTelCasaBe = $('#txtAddTelCasaBe').val();
+        var _txtAddTelOfiBe = $('#txtAddTelOfiBe').val();
+        var _txtAddTelCelularBe = $('#txtAddCelularBe').val();
+        var _txtAddEmailBe =  $.trim($('#txtAddEmailBe').val());
+        var _cboParentesco = $('#cboParentesco').val();
+        var _txtParentesco = $('#cboParentesco').find('option:selected').text();
+            _txtParentesco.toUpperCase();
+        var _fechaAddNacimientoBe = $('#txtAddFechaNacimientoBe').val();
 
 
-    if(_cboProvinciaBe == ''){
-        mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
-        return false;
-    }
-
-    if(_cboCiudadBe == 0){
-        mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
-        return false;
-    }
-
-    if(_txtAddTelCelularBe != '')
-    {
-        _valor = document.getElementById("txtAddCelularBe").value;
-        if( !(/^\d{10}$/.test(_valor)) ) {
-            mensajesalertify("Celular incorrecto..!" ,"W", "top-right", 3); 
-            return;
+        if(_cboAddDocumentoBe == ''){
+            mensajesalertify("Seleccione Tipo Documento..!", "W", "top-right", 3);
+            return; 
         }
-    }
-    
-    if(_txtAddEmailBe != ''){
-        var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-        if (regex.test(_txtAddEmailBe.trim())){
-        }else{
-            mensajesalertify("Email Incorrecto..!!","W","top-right",3);
+
+        if(_txtAddDocumentoBe == ''){
+            mensajesalertify("Ingrese Numero de Documento..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_txtAddDocumentoBe.length < 10){
+            mensajesalertify("Documento Incorrecto..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_txtAddNombreBe == ''){
+            mensajesalertify("Ingrese Nombre..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_txtAddApellidoBe == ''){
+            mensajesalertify("Ingrese Apellido..!", "W", "top-right", 3);
+            return; 
+        }
+
+        
+        if(_cboAddGeneroBe == ''){
+            mensajesalertify("Seleccione Genero..!", "W", "top-right", 3);
+            return; 
+        }
+
+
+        if(_cboProvinciaBe == ''){
+            mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
             return false;
-        }  
-    }
+        }
 
-    if(_cboParentesco == ''){
-        mensajesalertify("Seleccione Parentesco..!", "W", "top-right", 3);
-        return; 
-    }
+        if(_cboCiudadBe == 0){
+            mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
+            return false;
+        }
 
+        if(_txtAddTelCelularBe != '')
+        {
+            _valor = document.getElementById("txtAddCelularBe").value;
+            if( !(/^\d{10}$/.test(_valor)) ) {
+                mensajesalertify("Celular incorrecto..!" ,"W", "top-right", 3); 
+                return;
+            }
+        }
+        
+        if(_txtAddEmailBe != ''){
+            var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+            if (regex.test(_txtAddEmailBe.trim())){
+            }else{
+                mensajesalertify("Email Incorrecto..!!","W","top-right",3);
+                return false;
+            }  
+        }
 
-});
+        if(_cboParentesco == ''){
+            mensajesalertify("Seleccione Parentesco..!", "W", "top-right", 3);
+            return; 
+        }
 
-//Update Estado Beneficiario 
-function f_UpdateEstado(_beneid,_paisid,_emprid,_usuaid){
-
-    var _check = $("#chk" + _beneid).is(":checked");
-    var _checked = "";
-    var _class = "badge badge-light-primary";
-    var _td = "td_" + _beneid;
-    var _btnedit = "btnEditarBe_" + _beneid;
-    var _btnagen = "btnAgendar_" + _beneid;
-
-    if(_check){
-        var _estado = 'ACTIVO';
-        _checked = "checked='checked'";
-        $('#'+_btnedit).prop("disabled",false);
-        $('#'+_btnagen).prop("disabled",false);
+        var _parametro = {
             
-    }else{
-        _estado = 'INACTIVO';
-        _class = "badge badge-light-danger";
-        $('#'+_btnedit).prop("disabled",true);
-        $('#'+_btnagen).prop("disabled",true);
+            xxTituid: _tituid,
+            xxPaisId: _paisid,
+            xxEmprId: _emprid,
+            xxDocumento: _txtAddDocumentoBe
+        }
+
+        var xrespuesta = $.post("codephp/consultar_beneficiario.php", _parametro);
+        xrespuesta.done(function(response){
+
+            if(response == 0){
+                var _parametros ={
+
+                    "xxTituid" : _tituid,
+                    "xxPaisid" : _paisid,
+                    "xxEmprid" : _emprid,
+                    "xxUsuaid" : _usuaid,
+                    "xxTipodocu" : _cboAddDocumentoBe,
+                    "xxDocumento" : _txtAddDocumentoBe,
+                    "xxNombres" : _txtAddNombreBe,
+                    "xxApellidos" : _txtAddApellidoBe,
+                    "xxGenero" : _cboAddGeneroBe,
+                    "xxEstadocicvil" : _cboAddEstadoCivilBe,
+                    "xxCiudad" : _cboCiudadBe,
+                    "xxDireccion" : _txtAddDireccionBe,
+                    "xxTelcasa" : _txtAddTelCasaBe,
+                    "xxTelofi" : _txtAddTelOfiBe,
+                    "xxCelular" : _txtAddTelCelularBe,
+                    "xxEmail" : _txtAddEmailBe,
+                    "xxParentesco" : _cboParentesco,
+                    "xxFechanaci" : _fechaAddNacimientoBe
+                }
+                
+                var xrespuesta = $.post("codephp/grabar_newbeneficiario.php", _parametros);
+                xrespuesta.done(function(response){
+
+                    if(response != 0){
+
+                        _id = response;
+                        console.log(_id);
+                    }
+
+
+                });
+
+            }else{
+                mensajesalertify("Beneficiario ya Existe..!!","W","top-right",3);
+                return false;
+            }
+
+        });
+    });
+
+    //Update Estado Beneficiario 
+    function f_UpdateEstado(_beneid,_paisid,_emprid,_usuaid){
+
+        var _check = $("#chk" + _beneid).is(":checked");
+        var _checked = "";
+        var _class = "badge badge-light-primary";
+        var _td = "td_" + _beneid;
+        var _btnedit = "btnEditarBe_" + _beneid;
+        var _btnagen = "btnAgendar_" + _beneid;
+
+        if(_check){
+            var _estado = 'ACTIVO';
+            _checked = "checked='checked'";
+            $('#'+_btnedit).prop("disabled",false);
+            $('#'+_btnagen).prop("disabled",false);
+                
+        }else{
+            _estado = 'INACTIVO';
+            _class = "badge badge-light-danger";
+            $('#'+_btnedit).prop("disabled",true);
+            $('#'+_btnagen).prop("disabled",true);
+        }
+
+        var _changetd = document.getElementById(_td);
+            _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
+
+            var _parametros = {
+                "xxBeneid" : _beneid,
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxUsuaid" : _usuaid,
+                "xxEstado" : _estado
+            } 
+
+            var xrespuesta = $.post("codephp/update_estadobeneficiario.php", _parametros);
+                xrespuesta.done(function(response){
+            });	
+
     }
 
-    var _changetd = document.getElementById(_td);
-        _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
-
-        var _parametros = {
-            "xxBeneid" : _beneid,
-            "xxPaisid" : _paisid,
-            "xxEmprid" : _emprid,
-            "xxUsuaid" : _usuaid,
-            "xxEstado" : _estado
-        } 
-
-        var xrespuesta = $.post("codephp/update_estadobeneficiario.php", _parametros);
-            xrespuesta.done(function(response){
-        });	
-
-}
-
-//Redireccionar Agendar Beneficiarios
-function f_Agendar(_beneid){
-    $.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': _beneid, 'prodid': _prodid, 'grupid': _grupid });
-}  
-
-
+    //Redireccionar Agendar Beneficiarios
+    function f_Agendar(_beneid){
+     $.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': _beneid, 'prodid': _prodid, 'grupid': _grupid });
+    }  
 
 </script>

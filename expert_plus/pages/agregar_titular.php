@@ -52,6 +52,14 @@
         $xOrdenDet = $ord['Orden'];
     }
 
+    $xSQL = "SELECT  titu_id AS Idtitu FROM `expert_beneficiario` ORDER BY titu_id DESC LIMIT 1 ";
+    $titularid = mysqli_query($con, $xSQL);
+
+    foreach($titularid as $tit){
+        $xIdtitu = $tit['Idtitu'];
+    }
+
+
     $xSQL = "SELECT DISTINCT provincia AS Descripcion FROM `provincia_ciudad` ";
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
     $all_provincia = mysqli_query($con, $xSQL);
@@ -968,7 +976,8 @@
     //Agregar Beneficiario - Titular
 
     $('#btnAgregar').click(function(){
-
+       
+        var _tituid = '<?php echo $xIdtitu; ?>';
         var _continuar = true;
         var _cboDocumentoBe = $('#cboDocumentoBe').val();
         var _txtDocumentoBe = $('#txtDocumentoBe').val();
@@ -1057,6 +1066,10 @@
 
 
         var _parametros = {
+            
+            xxTituid: _tituid,
+            xxPaisId: _paisid,
+            xxEmprId: _emprid,
             xxDocumento: _txtDocumentoBe
         }
 
@@ -1129,6 +1142,9 @@
         
                 } 
 
+            }else{
+                mensajesalertify("Beneficiario ya Existe..!!","W","top-right",3);
+                return false;
             }
 
         });
