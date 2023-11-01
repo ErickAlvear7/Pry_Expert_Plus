@@ -17,6 +17,7 @@
 
     //$xServidor = $_SERVER['HTTP_HOST'];
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
+    $mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
     $perid = $_POST['idper'];
     $tituid = $_POST['idtit'];
     $clieid = $_POST['idcli'];
@@ -40,6 +41,10 @@
     $xPaisid = $_SESSION["i_paisid"];
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
+
+    $xSQL = "SELECT DISTINCT provincia AS Descripcion FROM `provincia_ciudad` ";
+	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
+    $all_provincia = mysqli_query($con, $xSQL);
 
 
     $xSQL = "SELECT per.pers_id AS Idper,per.pers_numerodocumento AS Docu,CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona,per.pers_imagen AS Imagen, per.pers_fechanacimiento AS Fecha, ";
@@ -77,6 +82,7 @@
 ?>
 
 <div id="kt_content_container" class="container-xxl">
+    <input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
     <div class="d-flex flex-column flex-lg-row">
         <div class="flex-column flex-lg-row-auto w-lg-250px w-xl-350px mb-10">
             <div class="card mb-5 mb-xl-8">
@@ -233,7 +239,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex-lg-row-fluid ms-lg-15">
+        <div id="tab_Addbeneficiarios" class="flex-lg-row-fluid ms-lg-15">
             <div class="d-flex flex-stack fs-4 py-3">
                <div class="fw-bolder rotate collapsible btn btn-sm btn-light-primary" data-bs-toggle="collapse" href="#kt_user_view_beneficiario" role="button" aria-expanded="false" aria-controls="kt_user_view_details">Agregar Beneficiario
                     <span class="ms-2 rotate-180">
@@ -263,7 +269,7 @@
                         <div class="d-flex flex-wrap gap-5">
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Tipo Documento</label>
-                                <select class="form-select mb-2" id="cboDocumentoBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
+                                <select class="form-select mb-2" id="cboAddDocumentoBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
                                     <option></option>
                                     <?php
                                     $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -276,23 +282,23 @@
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Nro. Documento</label>
-                                <input type="text" class="form-control mb-2" id="txtDocumentoBe" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                <input type="text" class="form-control mb-2" id="txtAddDocumentoBe" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>    
                         </div>
                         <div class="d-flex flex-wrap gap-5">
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Nombres</label>
-                                <input type="text" class="form-control mb-2" id="" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
+                                <input type="text" class="form-control mb-2" id="txtAddNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Apellidos</label>
-                                <input type="text" class="form-control mb-2" id="" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
+                                <input type="text" class="form-control mb-2" id="txtAddApellidoBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
                             </div>   
                         </div>
                         <div class="d-flex flex-wrap gap-5">
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Genero</label>
-                                <select class="form-select mb-2" id="cboGeneroBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
+                                <select class="form-select mb-2" id="cboAddGeneroBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
                                     <option></option>
                                     <?php
                                         $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -306,7 +312,7 @@
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="form-label">Estado Civil</label>
-                                <select class="form-select mb-2" id="cboEstadoCivilBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
+                                <select class="form-select mb-2" id="cboAddEstadoCivilBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
                                     <option></option>
                                     <?php
                                         $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
@@ -321,7 +327,7 @@
                         <div class="d-flex flex-wrap gap-5">
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="required form-label">Provincia</label>
-                                <select  id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2" >
+                                <select id="cboAddProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tab_Addbeneficiarios" class="form-select mb-2" >
                                         <option></option>
                                         <?php foreach ($all_provincia as $prov) : ?>
                                             <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
@@ -330,33 +336,33 @@
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="form-label">Ciudad</label>
-                                <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2">
+                                <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tab_Addbeneficiarios" class="form-select mb-2">
                                         <option></option>
                                 </select> 
                             </div>  
                         </div>
                         <div class="mb-10 fv-row">
                             <label class="form-label">Direccion</label>
-                            <textarea class="form-control mb-2" id="txtDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
+                            <textarea class="form-control mb-2" id="txtAddDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
                         </div>
                         <div class="d-flex flex-wrap gap-5">
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="form-label">Telefono Casa</label>
-                                <input type="text" id="txtTelCasaBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                <input type="text" id="txtAddTelCasaBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="form-label">Telefono Oficina</label>
-                                <input type="text" id="txtTelOfiBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                <input type="text" id="txtAddTelOfiBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
                             </div>  
                         </div>
                         <div class="d-flex flex-wrap gap-5">
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="form-label">Telefono Celular</label>
-                                <input type="text" id="txtCelularBe" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                <input type="text" id="txtAddCelularBe" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="form-label">Email</label>
-                                <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
+                                <input type="email" id="txtAddEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
                             </div>  
                         </div>
                         <div class="d-flex flex-wrap gap-5">
@@ -375,7 +381,7 @@
                             </div>
                             <div class="fv-row w-100 flex-md-root">
                                 <label class="form-label">Fecha de Nacimiento</label>
-                                <input type="date" id="txtFechaNacimientoBe" class="form-control mb-2" value="" />
+                                <input type="date" id="txtAddFechaNacimientoBe" class="form-control mb-2" value="" />
                             </div> 
                         </div>
                         <div class="form-group mt-5">
@@ -407,8 +413,8 @@
                                     <th>NOMBRES</th>
                                     <th>PARENTESCO</th>
                                     <th>ESTADO</th>
-                                    <th class="min-w-70px">ESTATUS</th>
-                                    <th class="min-w-70px" style="text-align: center;">OPCIONES</th>
+                                    <th>ESTATUS</th>
+                                    <th style="text-align: center;">OPCIONES</th>
                                 </tr>
                             </thead>
                             <tbody class="fs-6 fw-bold text-gray-600">
@@ -465,11 +471,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="text-center">
-                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xBeneid; ?>" 
-                                                onchange="f_UpdateEstado(<?php echo $xBeneid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" value=""/>
-                                            </div>
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xBeneid; ?>" 
+                                            onchange="f_UpdateEstado(<?php echo $xBeneid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" value=""/>
                                         </div>
                                     </td>
                                     <td>
@@ -635,13 +639,13 @@
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                     <span>Nombres</span>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" id="txtNombreBeMo" name="txtNombre" minlength="5" maxlength="100" disable />
+                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtNombreBeMo" name="txtNombre" minlength="5" maxlength="100"/>
                             </div>
                             <div class="col-md-6 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                     <span>Apellidos</span>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" id="txtApellidoBeMo" name="txtApellido" minlength="5" maxlength="100" value="" readonly/>
+                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtApellidoBeMo" name="txtApellido" minlength="5" maxlength="100" value=""/>
                             </div>                                                    
                         </div>
                     </div>
@@ -702,12 +706,21 @@
 
 <script>
 
-var _prodid='<?php echo $xprodid; ?>';
-var _grupid='<?php echo $xgrupid; ?>';
+var _prodid='<?php echo $xprodid; ?>',_grupid='<?php echo $xgrupid; ?>',_paisid = '<?php echo $xPaisid; ?>',_emprid = '<?php echo $xEmprid; ?>';
 
 $(document).ready(function(){
 
+    var _mensaje = $('input#mensaje').val();
+
+        if(_mensaje != ''){
+            mensajesalertify(_mensaje,"S","top-center",3); 
+        }
+
+ 
+
+
 });
+
 
 // Desplazar Modal
 $("#modal_beneficiario").draggable({
@@ -811,7 +824,8 @@ $("#modal_persona").draggable({
             return;
         }
 
-    });    
+    });
+
 
 // Modal editar beneficiario
     $(document).on("click",".btnEditarBe",function(){
@@ -820,14 +834,20 @@ $("#modal_persona").draggable({
 
         _rowid = $(this).attr("id");
         _rowid = _rowid.substring(12);
+        _paisid = '<?php echo $xPaisid;?>';
+        _emprid = '<?php echo $xEmprid;?>';
 
-        var xrespuesta = $.post("codephp/get_datosbeneficiario.php", { xxBeneid: _rowid});
+        var xrespuesta = $.post("codephp/get_datosbeneficiario.php", { xxBeneid: _rowid,xxPaisid:_paisid,xxEmprid: _emprid});
         xrespuesta.done(function(response){
 
             var _datos = JSON.parse(response);
 
-            $("#txtNombreBeMo").val(_datos[0].Nombre);
-            $('#txtApellidoBeMo').val(_datos[0].Apellido);
+            _ciudadben = _datos[0].Ciudad;
+            _perenben = _datos[0].Parentesco;
+            _estadoben = _datos[0].Estado;
+
+            $("#txtNombreBeMo").val(_datos[0].Nombres);
+            $('#txtApellidoBeMo').val(_datos[0].Apellidos);
             $('#txtDireccionBeMo').val(_datos[0].Direccion);
             $('#txtTelcasaBeMo').val(_datos[0].Telcasa);
             $('#txtTelofiBeMo').val(_datos[0].Telofi);
@@ -842,19 +862,36 @@ $("#modal_persona").draggable({
 // Guardar Editar Beneficiario
 
     function f_EditarBene(_usuaid,_paisid,_emprid){
-        
+
+        var _output;
+        var _beneid = _rowid;
+        var _nombrebe= $.trim($("#txtNombreBeMo").val());
+        var _apellidobe= $.trim($("#txtApellidoBeMo").val());
+        var _nombrescombe = _nombrebe.toUpperCase() + ' ' + _apellidobe.toUpperCase();
         var _direccionbe = $.trim($("#txtDireccionBeMo").val());
         var _telcasabe = $.trim($("#txtTelcasaBeMo").val());
-        var _telcasabeant = $.trim($("#txtTelcasaBeAntMo").val());
         var _telofibe = $.trim($("#txtTelofiBeMo").val()); 
         var _celularbe = $.trim($("#txtCelularBeMo").val()); 
         var _emailbe = $.trim($("#txtEmailBeMo").val());
 
+        if(_nombrebe == ''){
+            mensajesalertify("Ingrese Nombre..!!","W","top-right",3);
+            return false;
+        }
+
+        if(_apellidobe == ''){
+            mensajesalertify("Ingrese Apellido..!!","W","top-right",3);
+            return false;
+        }
+
+
         var _parametros = {
-            "xxBeneid" : _rowid,
+            "xxBeneid" : _beneid,
             "xxUsuaid" : _usuaid,
             "xxPaisid" : _paisid,
             "xxEmprid" : _emprid,
+            "xxNombre" : _nombrebe,
+            "xxApellido" : _apellidobe,
             "xxDireccion" : _direccionbe,
             "xxTelcasa" : _telcasabe,
             "xxTelofi" : _telofibe,
@@ -864,12 +901,123 @@ $("#modal_persona").draggable({
 
         var xrespuesta = $.post("codephp/update_beneficiario.php", _parametros);
         xrespuesta.done(function(response){
-            console.log(response)
+         
+            if(response.trim() == 'OK'){
+
+                _output ='<td class="text-uppercase">' + _ciudadben + '</td>';
+                _output +='<td>' +_nombrescombe + '</td>';
+                _output +='<td>' +_perenben + '</td>';
+                _output +='<td id="td_'+ _beneid + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
+                _output +='<td><div class="form-check form-check-sm form-check-custom form-check-solid">';
+                _output +='<input checked="checked" class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk'+ _beneid +'" ';
+                _output +='onchange="f_UpdateEstado('+ _beneid + ',' + _paisid + ',' + _emprid + ',' + _usuaid + ')" value=""/></div></td>';
+                _output +='<td><div class="text-center"><div class="btn-group">';
+                _output +='<button type="button" id="btnEditarBe_' + _beneid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditarBe" title="Editar Producto" data-bs-toggle="tooltip" data-bs-placement="left">';
+                _output +='<i class="fa fa-edit"></i></button>';
+                _output +='<button type="button" id="btnAgendar_' + _beneid + '" name="btnAgendar" onclick="f_Agendar('+ _beneid + ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" ';
+                _output +='title="Agendar" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-user-plus"></i></button></div></div></td>';
+
+                //console.log(_output);
+              
+                $('#row_' + _beneid + '').html(_output);
+
+                $("#modal_beneficiario").modal("hide");
+            }
+            
         });
+    } 
+    
+$('#btnAgregar').click(function(){
 
-        $("#modal_beneficiario").modal("hide");
+    var _cboAddDocumentoBe = $('#cboAddDocumentoBe').val();
+    var _txtAddDocumentoBe = $('#txtAddDocumentoBe').val();
+    var _txtAddNombreBe = $.trim($("#txtAddNombreBe").val());
+    var _txtAddApellidoBe =  $.trim($('#txtAddApellidoBe').val());
+    var _txtAddnombresCompletos =  _txtAddNombreBe.toUpperCase() + ' ' + _txtAddApellidoBe.toUpperCase();
+    var _cboAddGeneroBe = $('#cboAddGeneroBe').val();
+    var _cboAddEstadoCivilBe = $('#cboAddEstadoCivilBe').val();
+    var _cboProvinciaBe = $('#cboProvinciaBe').val();
+    var _cboCiudadBe = $('#cboCiudadBe').val();
+    var _txtCiudadBe = $('#cboCiudadBe').find('option:selected').text();
+        _txtCiudadBe.toUpperCase();
+    var _txtAddDireccionBe =  $.trim($('#txtAddDireccionBe').val());
+    var _txtAddTelCasaBe = $('#txtAddTelCasaBe').val();
+    var _txtAddTelOfiBe = $('#txtAddTelOfiBe').val();
+    var _txtAddTelCelularBe = $('#txtAddCelularBe').val();
+    var _txtAddEmailBe =  $.trim($('#txtAddEmailBe').val());
+    var _cboParentesco = $('#cboParentesco').val();
+    var _txtParentesco = $('#cboParentesco').find('option:selected').text();
+        _txtParentesco.toUpperCase();
+    var _fechaAddNacimientoBe = $('#txtAddFechaNacimientoBe').val();
 
-    };   
+
+    if(_cboAddDocumentoBe == ''){
+        mensajesalertify("Seleccione Tipo Documento..!", "W", "top-right", 3);
+        return; 
+    }
+
+    if(_txtAddDocumentoBe == ''){
+        mensajesalertify("Ingrese Numero de Documento..!", "W", "top-right", 3);
+        return; 
+    }
+
+    if(_txtAddDocumentoBe.length < 10){
+        mensajesalertify("Documento Incorrecto..!", "W", "top-right", 3);
+        return; 
+    }
+
+    if(_txtAddNombreBe == ''){
+        mensajesalertify("Ingrese Nombre..!", "W", "top-right", 3);
+        return; 
+    }
+
+    if(_txtAddApellidoBe == ''){
+        mensajesalertify("Ingrese Apellido..!", "W", "top-right", 3);
+        return; 
+    }
+
+    
+    if(_cboAddGeneroBe == ''){
+        mensajesalertify("Seleccione Genero..!", "W", "top-right", 3);
+        return; 
+    }
+
+
+    if(_cboProvinciaBe == ''){
+        mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
+        return false;
+    }
+
+    if(_cboCiudadBe == 0){
+        mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
+        return false;
+    }
+
+    if(_txtAddTelCelularBe != '')
+    {
+        _valor = document.getElementById("txtAddCelularBe").value;
+        if( !(/^\d{10}$/.test(_valor)) ) {
+            mensajesalertify("Celular incorrecto..!" ,"W", "top-right", 3); 
+            return;
+        }
+    }
+    
+    if(_txtAddEmailBe != ''){
+        var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+        if (regex.test(_txtAddEmailBe.trim())){
+        }else{
+            mensajesalertify("Email Incorrecto..!!","W","top-right",3);
+            return false;
+        }  
+    }
+
+    if(_cboParentesco == ''){
+        mensajesalertify("Seleccione Parentesco..!", "W", "top-right", 3);
+        return; 
+    }
+
+
+});
 
 //Update Estado Beneficiario 
 function f_UpdateEstado(_beneid,_paisid,_emprid,_usuaid){

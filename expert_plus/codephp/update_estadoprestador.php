@@ -25,7 +25,7 @@
             $xPresid = $_POST['xxPresid'];
             $xEstado = safe($_POST['xxEstado']);
 
-            if($xEstado == 'Activo'){
+            if($xEstado == 'ACTIVO'){
                 $xEstado = 'A';
             }else{
                 $xEstado = 'I';

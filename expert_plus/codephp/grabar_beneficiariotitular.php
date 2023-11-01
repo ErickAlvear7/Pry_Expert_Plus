@@ -18,11 +18,13 @@ $xTerminal = gethostname();
 
 $xresultado = "ERR";
 
-if(isset($_POST['xxTituid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxResult'])){
-    if(isset($_POST['xxTituid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxResult']) <> ''){
+if(isset($_POST['xxTituid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxResult'])){
+    if(isset($_POST['xxTituid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxResult']) <> ''){
 
         $xTituid = $_POST['xxTituid'];
         $xUsuaid = $_POST['xxUsuaid'];
+        $xPaisid = $_POST['xxPaisid'];
+        $xEmprid = $_POST['xxEmprid'];
         $xResult = $_POST['xxResult'];
 
 
@@ -43,10 +45,10 @@ if(isset($_POST['xxTituid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxR
             $xParentesco = $drfila['arryparentesco'];
             $xFechanacimiento = $drfila['arryfechanacimiento'];
         
-            $xSQL = "INSERT INTO `expert_beneficiario` (titu_id,bene_tipoidentificacion,bene_numerodocumento,bene_nombres,bene_apellidos,  ";
+            $xSQL = "INSERT INTO `expert_beneficiario` (titu_id,pais_id,empr_id,bene_tipoidentificacion,bene_numerodocumento,bene_nombres,bene_apellidos,  ";
             $xSQL .= "bene_genero,bene_estadocivil,bene_ciudad,bene_direccion,bene_telefonocasa,bene_telefonoficina,bene_celular, ";
             $xSQL .= "bene_email,bene_parentesco,bene_fechanacimiento,fechacreacion,usuariocreacion,terminalcreacion) ";
-            $xSQL .= "VALUES ($xTituid,'$xTipodocumento','$xDocumento','$xNombre','$xApellido','$xGenero','$xEstadocivil',$xCiudad,'$xDireccion', ";
+            $xSQL .= "VALUES ($xTituid,$xPaisid,$xEmprid,'$xTipodocumento','$xDocumento','$xNombre','$xApellido','$xGenero','$xEstadocivil',$xCiudad,'$xDireccion', ";
             $xSQL .= "'$xTelcasa','$xTelofi','$xCelular','$xEmail','$xParentesco','{$xFechanacimiento}','{$xFecha}',$xUsuaid,'$xTerminal')";
             mysqli_query($con, $xSQL);
 

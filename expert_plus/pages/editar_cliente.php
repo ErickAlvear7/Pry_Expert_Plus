@@ -218,7 +218,7 @@
                                     <input type="hidden" name="txtClieant" id="txtClieant" class="form-control mb-2" value="<?php echo $xCliente; ?>" />
                                 </div>
                                 <div class="mb-5 fv-row">
-                                    <label class="required form-label">Descripcion</label>
+                                    <label class="form-label">Descripcion</label>
                                     <textarea class="form-control mb-2 text-uppercase" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"><?php echo $xDesc; ?></textarea>
                                 </div>                                 
                             </div>
@@ -232,43 +232,43 @@
                             <div id="kt_customer_view_payment_method" class="card-body pt-0">
                                 <div class="py-0" data-kt-customer-payment-method="row">
                                     <div class="py-3 d-flex flex-stack flex-wrap">
-                                        <div class="d-flex align-items-center collapsible rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_1" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_1">
-                                            <div class="me-3 rotate-90">
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                            <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" alt="" />
-                                            <div class="me-3">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="text-gray-800 fw-bolder">Direccion</div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    	<div class="d-flex align-items-center  collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_1" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_1">
+                                    		<div class="me-3 rotate-90">
+                                    			<span class="svg-icon svg-icon-3">
+                                    				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    					<path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                    				</svg>
+                                    			</span>
+                                    		</div>
+                                    		<img src="assets/media/logos/ubicacion.png" class="w-20px me-3" alt="" />
+                                    		<div class="me-3">
+                                    			<div class="d-flex align-items-center">
+                                    				<div class="text-gray-800 fw-bolder">Direccion</div>
+                                    			</div>
+                                    		</div>
+                                    	</div>
                                     </div>
                                     <div id="kt_customer_view_payment_method_1" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
-                                        <div class="d-flex flex-wrap py-5">
-                                            <div class="flex-equal me-5">
-                                                <div class="row mb-8">
-                                                    <div class="col-xl-2">
-                                                        <div class="required fs-6 fw-bold mt-2 mb-3">Direccion:</div>
-                                                    </div>
-                                                    <div class="col-xl-10 fv-row">
-                                                        <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"><?php echo $xDirec; ?></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-8">
-                                                    <div class="col-xl-2">
-                                                        <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
-                                                    </div>
-                                                    <div class="col-xl-10 fv-row">
-                                                        <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" placeholder="https://misitio.com" maxlength="150" value="<?php echo $xUrl; ?>" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    	<div class="d-flex flex-wrap py-5">
+                                    		<div class="flex-equal me-5">
+                                    			<div class="row mb-8">
+                                    				<div class="col-xl-2">
+                                    					<div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
+                                    				</div>
+                                    				<div class="col-xl-10 fv-row">
+                                    					<textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDirec; ?> </textarea>
+                                    				</div>
+                                    			</div>
+                                    			<div class="row mb-8">
+                                    				<div class="col-xl-2">
+                                    					<div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
+                                    				</div>
+                                    				<div class="col-xl-10 fv-row">
+                                    					<input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" placeHolder="https://wwww.dominio.com" value="<?php echo $xUrl; ?>" />
+                                    				</div>
+                                    			</div>
+                                    		</div>
+                                    	</div>
                                     </div>
                                 </div>
                                 <div class="separator separator-dashed"></div>
@@ -359,6 +359,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="d-flex justify-content-end">
+                		<button type="button" id="btnGrabar" class="btn btn-primary"><i class="las la-save"></i>
+                			<span class="indicator-label">Grabar</span>
+                		</button>
+            	   </div>
                 </div>
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                     <div class="d-flex flex-stack fs-4 py-3">
@@ -489,6 +494,14 @@
                                                             $xTextColor = "badge badge-light-danger";
                                                             $xDisabledEdit = 'disabled';
                                                         }
+
+                                                    
+                                                        $xSQL = "SELECT COUNT(*) AS Titu FROM `expert_titular` WHERE prod_id = $xProdid ";
+                                                        $cont_titu = mysqli_query($con, $xSQL);
+                                                        foreach ($cont_titu as $titu){
+                                                            $xTitu = $titu['Titu'];
+                                                        }
+                                                    
                                                     ?>
 
                                                 <tr id="row_<?php echo $xProdid; ?>">
@@ -510,10 +523,10 @@
                                                     <td>
                                                         <div class="text-center">
                                                             <div class="btn-group">	
-                                                                <button type="button" id="btnEditar_<?php echo $xProdid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Producto' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                                <button type="button" id="btnEditar_<?php echo $xProdid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title="Editar Producto" data-bs-toggle="tooltip" data-bs-placement="left">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button> 
-                                                                <button type="button" id="btnTitular_<?php echo $xProdid; ?>" onclick="f_Titular(<?php echo $xGrupId;?>,<?php echo $xProdid;?>,<?php echo $clieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Agregar Titular' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                                <button type="button" id="btnTitular_<?php echo $xProdid; ?>" onclick="f_Titular(<?php echo $xGrupId;?>,<?php echo $xProdid;?>,<?php echo $clieid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title="Agregar Titular (+<?php echo $xTitu; ?> )" data-bs-toggle="tooltip" data-bs-placement="left">
                                                                     <i class="fa fa-user"></i>
                                                                 </button> 
                                                             </div>
@@ -529,11 +542,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="d-flex justify-content-end">
-                <button type="button" id="btnGrabar" class="btn btn-primary"><i class="las la-save"></i>
-                    <span class="indicator-label">Grabar</span>
-                </button>
             </div>
         </div>
     </form>
@@ -853,7 +861,7 @@
                 _output +='<td><div class="text-center"><div class="btn-group">';
                 _output +='<button type="button" id="btnEditar_'+_id +'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" title="Editar Producto" data-bs-toggle="tooltip" data-bs-placement="left">';
                 _output +='<i class="fa fa-edit"></i></button>';
-                _output +='<button type="button" id="btnTitular_'+_id +'" onclick="f_Titular('+ _cbogrupo +','+ _id +','+ _clieid +')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" ';
+                _output +='<button type="button" id="btnTitular_'+_id +'" onclick="f_Titular('+ _cbogrupo +','+ _id +','+ _clieid +')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Agregar Titular (+0 )" data-bs-toggle="tooltip" data-bs-placement="left"';
                 _output +='title="Agregar Titular" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-user"></i></button></div></div></td>';
                 _output +='</tr>';
 

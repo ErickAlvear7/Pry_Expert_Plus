@@ -53,7 +53,7 @@
                     move_uploaded_file($xTmpFile,$xPath.$xNombreFile);
                 }
             }else{
-                $xNombreFile = "logo.png";
+                $xNombreFile = "cliente.png";
             } 
 
             $xNombreFilePie = ($xFilepie != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFilePie"]["name"] : "";  
@@ -65,7 +65,7 @@
                     move_uploaded_file($xTmpFile,$xPath.$xNombreFilePie);
                 }
             }else{
-                $xNombreFilePie = "logo.png";
+                $xNombreFilePie = "cliente.png";
             } 
 
             

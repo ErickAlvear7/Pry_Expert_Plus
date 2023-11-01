@@ -39,11 +39,17 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
-    $xSQL = "SELECT paca_id AS Idpaca FROM `expert_parametro_cabecera` WHERE paca_nombre='Estado Civil' ";
+    $xSQL = "SELECT paca_id AS Idpaca FROM `expert_parametro_cabecera` WHERE paca_nombre='Parentesco' ";
     $all_id = mysqli_query($con, $xSQL);
 
     foreach($all_id as $id){
         $xPacaid = $id['Idpaca'];
+    }
+
+    $xSQL = "SELECT  pade_orden AS Orden FROM `expert_parametro_detalle`WHERE paca_id = $xPacaid ORDER BY pade_orden DESC LIMIT 1 ";
+    $orden = mysqli_query($con, $xSQL);
+    foreach($orden as $ord){
+        $xOrdenDet = $ord['Orden'];
     }
 
     $xSQL = "SELECT DISTINCT provincia AS Descripcion FROM `provincia_ciudad` ";
@@ -55,18 +61,37 @@
     $xSQL .= "WHERE tit.pais_id = $xPaisid AND tit.empr_id=$xEmprid AND pst.pers_id=tit.pers_id AND tit.prod_id=$prodid AND tit.grup_id=$grupid ORDER BY pst.pers_nombres ";
     $all_persona = mysqli_query($con, $xSQL);
 
-    $xSQL ="SELECT clie_nombre AS Cliente,clie_email1 AS Email,clie_tel1 AS Telefono,clie_cel1 AS Celular FROM `expert_cliente` WHERE clie_id=$clieid AND pais_id=$xPaisid AND empr_id=$xEmprid ";
+    $xSQL ="SELECT clie_nombre AS Cliente,clie_tel1 AS Tel1,clie_tel2 AS Tel2,clie_cel1 AS Cel1,clie_cel2 AS Cel2,clie_email1 AS Email1,clie_email2 AS Email2 FROM `expert_cliente` WHERE clie_id=$clieid AND pais_id=$xPaisid AND empr_id=$xEmprid ";
     $Cliente = mysqli_query($con, $xSQL);
 
     foreach($Cliente as $clie){
         $Nombre = $clie['Cliente'];
-        $Email = $clie['Email'];
-        $Telefono = $clie['Telefono'];
-        $Celular = $clie['Celular'];
+        $Telefono1 = $clie['Tel1'];
+        $Telefono2 = $clie['Tel2'];
+        $Celular1 = $clie['Cel1'];
+        $Celular2 = $clie['Cel2'];
+        $Email1 = $clie['Email1'];
+        $Email2 = $clie['Email2'];
     }
 
-    if($Email == ''){
-        $Email = 'sinemail@gmail.com';
+    if($Telefono1 == ''){
+        $Telefono1 = ' # ';
+    }
+    
+    if($Telefono2 == ''){
+        $Telefono2 = ' # ';
+    }
+
+    if($Celular1 == ''){
+        $Celular1 = ' # ';
+    }
+
+    if($Celular2 == ''){
+        $Celular2 = ' # ';
+    }
+
+    if($Email1 == ''){
+        $Email1 = 'sinemail@gmail.com';
     }
 
     $xSQL ="SELECT pro.prod_nombre AS Producto,pro.prod_costo AS Costo,pro.prod_asistmes AS AsisMes,pro.prod_asistanu AS AsisAnu,pro.prod_cobertura AS Cobertura, ";
@@ -97,10 +122,6 @@
         $xChekSis = 'checked="checked"';
     }
 
-    // $xSQL = "SELECT per.pers_id AS Perid, per.pers_numerodocumento AS Documento, CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Persona, per.pers_imagen AS Imagen, per.pers_estadocivil, ";
-    // $xSQL .= "per.pers_fechanacimiento AS Fecha, per.pers_ciudad AS Ciudad, per.pers_direccion AS Direccion, ";
-    // $xSQL .="";
-    // $xSQL .=" FROM `expert_persona` per,  `expert_titular` tit, `expert_beneficiario` ben WHERE "
 ?>
 <div id="kt_content_container" class="container-xxl">
     <form id="kt_ecommerce_edit_order_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/sales/listing.html">
@@ -159,7 +180,7 @@
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Email</h5>
                                     <div class="fw-bold">
-                                        <a href="#" class="link-primary"><?php echo $Email; ?></a>
+                                        <a href="#" class="link-primary"><?php echo $Email1; ?></a>
                                     </div>
                                 </div>
                             </div>
@@ -167,9 +188,10 @@
                                 <i class="bi bi-telephone-outbound text-primary fs-1 me-5"></i>
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Telefonos</h5>
-                                    <div class="fw-bold">
-                                    <label><?php echo $Telefono; ?> - <?php echo $Celular; ?></label>
-                                    </div>
+                                    <div class="text-gray-600">Telefono 1:&nbsp;<?php echo $Telefono1; ?></div>
+                                    <div class="text-gray-600">Telefono 2:&nbsp;<?php echo $Telefono2; ?></div>
+                                    <div class="text-gray-600">Celular 1:&nbsp;<?php echo $Celular1; ?></div>
+                                    <div class="text-gray-600">Celular 2:&nbsp;<?php echo $Celular2; ?></div>
                                 </div>
                             </div>
                         </div>
@@ -248,7 +270,7 @@
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0">
                     <div class="card-title">
-                        <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_opciones" role="button" aria-expanded="false" aria-controls="view_datos_producto">Opciones
+                        <!-- <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_opciones" role="button" aria-expanded="false" aria-controls="view_datos_producto">Opciones
                             <span class="ms-2 rotate-180">
                                 <span class="svg-icon svg-icon-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -256,11 +278,12 @@
                                     </svg>
                                 </span>
                             </span>
-                        </div> 
+                        </div>  -->
+                        <h2>Opciones</h2>
                     </div>
                 </div>
                 <div class="separator"></div>
-                <div id="view_datos_opciones" class="collapse ">
+                <!-- <div id="view_datos_opciones" class="collapse "> -->
                     <div class="card-body pt-2">
                         <button type="button" id="btnNewParen" class="btn btn-light-primary btn-sm mb-10">
                             <span class="svg-icon svg-icon-2">
@@ -272,7 +295,7 @@
                             Nuevo Parentesco
                         </button>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
         </div>
         <div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">
@@ -751,19 +774,19 @@
                     <span class="required">Detalle</span>
                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del detalle"></i>
                     </label>
-                    <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />
+                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="80" placeholder="nombre del detalle" value="" />
                 </div>
                 <div class="fv-row mb-15">
                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                     <span class="required">Valor Texto</span>
-                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
+                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="valor texto ejemplo FFF"></i>
                     </label>
-                    <input type="text" class="form-control form-control-solid" id="txtValorV" name="txtValorV" minlength="1" maxlength="50" placeholder="valor texto" value="" />
+                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorV" name="txtValorV" minlength="3" maxlength="3" placeholder="valor texto" value="" />
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnGuardar" onclick="f_GuardarParen(<?php echo $xPacaid; ?>)" class="btn btn-primary">Grabar</button>
+                <button type="button" id="btnGuardar" onclick="f_GuardarParen(<?php echo $xPacaid; ?>,<?php echo $xOrdenDet; ?>)" class="btn btn-primary">Grabar</button>
             </div>
         </div>
     </div>
@@ -841,64 +864,86 @@
 
     });
 
+   
     $("#btnNewParen").click(function(){
 
       $("#modal_new_paren").modal("show");
     });
 
 
+    $("#modal_new_paren").draggable({
+        handle: ".modal-header"
+    });
+
+
     //Gravar Parentesco Modal
 
-    function f_GuardarParen(_idpaca){
+    function f_GuardarParen(_idpaca,_ordet){
 
         var _estado = 'A';
-        var _paisid = '<?php echo  $xPaisid; ?>';
 
-        if($.trim($('#txtDetalle').val()).length == 0)
+        if($.trim($('#txtDetalle').val()) == '')
         {           
-            mensajesalertify('Ingrese Detalle..!', 'W', 'top-right', 5);
+            mensajesalertify('Ingrese Detalle..!', 'W', 'top-right', 3);
             return false;          
         }
 
-        if($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0 )
+        if($.trim($('#txtValorV').val()) == '')
         {    
-            mensajesalertify('Ingrese Valor Texto o Valor Entero..!', 'W', 'top-right', 5);
+            mensajesalertify('Ingrese Valor Texto..!', 'W', 'top-right', 3);
             return false;
         }
 
-        if($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0 )
-        {    
-            mensajesalertify('Ingrese Solo Valor Texto o Valor Entero..!', 'W', 'top-right', 5);
-            return false;       
-        }
-
+     
         var _detalle = $.trim($('#txtDetalle').val());
         var _valorV =  $.trim($('#txtValorV').val());
 
-
-        if($.trim($('#txtValorI').val()).length == 0){
-            var _valorI = 0;
-        }else{
-            _valorI = $.trim($('#txtValorI').val());
-        }
-
-        var _parametros ={
-            "xxPaisId" : _paisid,
+        var _parametro ={
+            "xxPacaid" : _idpaca,
             "xxDetalle" : _detalle,
             "xxValorV" : _valorV,
-            "xxValorI" : _valorI
         }
 
-        var xrespuesta = $.post("codephp/consultar_detalle.php", _parametros);
+        var xrespuesta = $.post("codephp/consultar_newdetalle.php", _parametro);
         xrespuesta.done(function(response){
+
 
             if(response == 0){
 
+                _ordet++;
+
+                var _parametros ={
+                    "xxPacaid" : _idpaca,
+                    "xxPaisid" : _paisid,
+                    "xxOrden" : _ordet,
+                    "xxDetalle" : _detalle,
+                    "xxValorV" : _valorV,
+                    "xxEstado" : _estado,
+                }
+
+                var xrespuesta = $.post("codephp/grabar_newdetalle.php", _parametros);
+                xrespuesta.done(function(response){
+
+                    if(response.trim() != 'ERR'){
+
+                        mensajesalertify('Nuevo Parentesco Agregado', 'S', 'top-center', 3); 
+
+                        $("#txtDetalle").val("");
+                        $("#txtValorV").val("");
+                        $("#cboParentesco").empty();
+                        $("#cboParentesco").html(response);      
+                        $("#modal_new_paren").modal("hide");
+
+                    }
+
+                });
 
             }else{
-                mensajesalertify('Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!', 'W', 'top-right', 5);
-            }
 
+                mensajesalertify('Parentesco ya Existe y/o Valor texto', 'W', 'top-right', 3);
+                $("#txtDetalle").val("");
+                $("#txtValorV").val("");
+            }
 
         });
     }
@@ -1082,7 +1127,7 @@
                     $("#cboParentesco").val('').change();
                     $("#txtFechaNacimientoBe").val('');
         
-                }
+                } 
 
             }
 
@@ -1151,9 +1196,7 @@
                 mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
                 return;
             }   
-            
         }
-
 
         if(_cboDocumento == ''){
             mensajesalertify("Seleccione Tipo Documento..!", "W", "top-right", 3);
@@ -1165,7 +1208,6 @@
             return; 
         }
 
-        
         if(_txtDocumento.length < 10){
             mensajesalertify("Documento Incorrecto..!", "W", "top-right", 3);
             return; 
@@ -1226,7 +1268,7 @@
         }
 
         
-        var xrespuesta = $.post("codephp/consultar_persona.php",_parametros );
+        var xrespuesta = $.post("./codephp/consultar_persona.php",_parametros );
         xrespuesta.done(function(response){
 
             if(response == 0){
@@ -1255,7 +1297,7 @@
                 form_data.append('xxImgTitu', _fileTitu);
 
                 $.ajax({
-                url: "codephp/grabar_personatitular.php",
+                url: "./codephp/grabar_personatitular.php",
                 type: "post",                
                 data: form_data,
                 processData: false,
@@ -1266,7 +1308,7 @@
                         if(dataid != 0){
 
                             if(_result.length > 0){
-                                var xrespuesta = $.post("codephp/grabar_beneficiariotitular.php", { xxTituid: dataid, xxUsuaid: _userid,xxResult: _result });
+                                var xrespuesta = $.post("./codephp/grabar_beneficiariotitular.php", { xxTituid: dataid, xxUsuaid: _userid,xxPaisid: _paisid,xxEmprid: _emprid,xxResult: _result });
                                     xrespuesta.done(function(response){
                                             
                                     if(response == 'OK'){
@@ -1280,12 +1322,13 @@
                                     }
 
                                 });
-                            }
+                            }else{
+                                $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', 
+                                {'mensaje': 'Grabado con Éxito..!',
+                                    'idclie': _idclie
+                                }); //POR METODO POST
 
-                            $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', 
-                            {'mensaje': 'Grabado con Éxito..!',
-                              'idclie': _idclie
-                            }); //POR METODO POST
+                            }
                         }
 
                     },
@@ -1298,7 +1341,6 @@
             }else{
                 mensajesalertify("Titular ya Existe..!!","W","top-right",3);
                 return false;
-
             }
 
         });   

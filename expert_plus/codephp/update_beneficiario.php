@@ -6,8 +6,6 @@
     putenv("TZ=America/Guayaquil");
     date_default_timezone_set('America/Guayaquil');    
 
-    //file_put_contents('log_seguimiento_grabarperfil.txt', 'Ingreso a Grabar' . "\n\n", FILE_APPEND); 
-
 	require_once("../dbcon/config.php");
 	require_once("../dbcon/functions.php");
 
@@ -26,13 +24,15 @@
             $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
 
+            $xNombre = trim(mb_strtoupper(safe($_POST['xxNombre'])));
+            $xApellido = trim(mb_strtoupper(safe($_POST['xxApellido'])));
             $xDireccion = trim(mb_strtoupper(safe($_POST['xxDireccion'])));
             $xTelcasa = trim(safe($_POST['xxTelcasa']));
             $xTelofi = trim(safe($_POST['xxTelofi']));
             $xCelular = trim(safe($_POST['xxCelular']));
             $xEmail = trim(safe($_POST['xxEmail']));
     
-            $xSQL = "UPDATE `expert_beneficiario` SET bene_direccion ='$xDireccion',bene_telefonocasa ='$xTelcasa',bene_telefonoficina ='$xTelofi',bene_celular ='$xCelular',bene_email ='$xEmail' ";
+            $xSQL = "UPDATE `expert_beneficiario` SET bene_nombres='$xNombre', bene_apellidos='$xApellido', bene_direccion ='$xDireccion',bene_telefonocasa ='$xTelcasa',bene_telefonoficina ='$xTelofi',bene_celular ='$xCelular',bene_email ='$xEmail' ";
             $xSQL .= "WHERE bene_id=$xBeneid";
             mysqli_query($con, $xSQL);
             $xRespuesta = "OK";
@@ -47,7 +47,8 @@
         }
     }
     
-    //echo $xRespuesta;
-    print json_encode($xRespuesta, JSON_UNESCAPED_UNICODE);
+
+    //print json_encode($xRespuesta, JSON_UNESCAPED_UNICODE);
+    echo $xRespuesta;
 	
 ?>	
