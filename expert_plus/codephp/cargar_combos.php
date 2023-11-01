@@ -12,8 +12,8 @@
     $log_file = "err_consulta";
     $xRow = 0;  
 
-    if(isset($_POST['xxPaisId']) and isset($_POST['xxComboId']) and isset($_POST['xxOpcion']) ){
-        if(isset($_POST['xxPaisId']) <> '' and isset($_POST['xxComboId']) <> '' and isset($_POST['xxOpcion']) <> ''){ 
+    if(isset($_POST['xxPaisId']) and isset($_POST['xxEmprId']) and isset($_POST['xxComboId']) and isset($_POST['xxOpcion']) ){
+        if(isset($_POST['xxPaisId']) <> '' and isset($_POST['xxEmprId']) <> '' and isset($_POST['xxComboId']) <> '' and isset($_POST['xxOpcion']) <> ''){ 
 
             $xPaisid = $_POST['xxPaisId'];
             $xEmprid = $_POST['xxEmprId'];

@@ -3775,14 +3775,25 @@
                 let _cboprofid = $("#cboProfesional").val();
                 let _cbociudid = $("#cboCiudad").val();
 
-                alert('Prestador: ' + _cboprestaid);
-                alert('Especialidad: ' + _cboespeid);
-                alert('Profesional: ' + _cboprofid);
-
                 if(_tituid == ''){
                     mensajesalertify("No se ha seleccionado Cliente para Agendamiento", "W", "top-center", 5);
-                    return;                    
+                    return;
                 }
+
+                if(_cboprestaid == 0){
+                    mensajesalertify("Seleccione Prestador", "W", "top-center", 5);
+                    return;
+                }
+
+                if(_cboespeid == 0){
+                    mensajesalertify("Seleccione Especialidad", "W", "top-center", 5);
+                    return;
+                }
+
+                if(_cboprofid == 0){
+                    mensajesalertify("Seleccione Profesional", "W", "top-center", 5);
+                    return;
+                }              
 
                 $.redirect('?page=admincalendar&menuid=<?php echo $menuid; ?>', {'tituid': _tituid, 'beneid': 0, 'prodid': _prodid, 'grupid': _grupid, 'presaid': _cboprestaid, 'espeid': _cboespeid, 'pfesid': _cboprofid, 'ciudid': _cbociudid }); //POR METODO POST
 

@@ -515,6 +515,7 @@
                                                                         $xEstado = 'Inactivo';
                                                                         $xTextColor = "badge badge-light-danger";
                                                                         $xDisabledEdit = 'disabled';
+                                                                        $xDisabledPerson = 'disabled';
                                                                     }
                                 
                                                                 ?>

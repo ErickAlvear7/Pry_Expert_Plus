@@ -31,7 +31,7 @@
 						<!--begin::Logo-->
 						
 						 <a href="?page=index">
-							<img alt="Logo" src="assets/media/logos/<?php if($mode == 'dark') { echo 'LogoPresta.png'; } else { echo 'LogoPresta.png'; } ?>" class="h-75px logo" />	
+							<img alt="Logo" src="assets/media/logos/<?php if($mode == 'dark') { echo 'PrestaSlogin.png'; } else { echo 'PrestaSlogin.png'; } ?>" class="h-90px w-200px logo" />	
 						</a>
 						
 						<!--end::Logo-->

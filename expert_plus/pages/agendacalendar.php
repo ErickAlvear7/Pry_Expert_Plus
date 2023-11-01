@@ -46,13 +46,6 @@
     $xGrupid = $_POST['grupid'];
     $xCiudid = $_POST['ciudid'];
 
-    $xTituid = 1;
-    $xBeneid = 0;
-
-    $xProdid = 6;
-    $xGrupid = 2;
-    $xCiudid = 188;
-
     $xSQL = "SELECT per.pers_numerodocumento,per.pers_nombres,per.pers_apellidos,per.pers_imagen,(SELECT prv.provincia FROM `provincia_ciudad` prv WHERE per.pers_ciudad=prv.prov_id) AS provincia,(SELECT prv.ciudad FROM `provincia_ciudad` prv WHERE per.pers_ciudad=prv.prov_id) AS ciudad,";
     $xSQL .= "(SELECT pro.prod_nombre FROM `expert_productos` pro WHERE pro.prod_id=tit.prod_id AND pro.pais_id=$xPaisid AND pro.empr_id=$xEmprid) AS producto, (SELECT gru.grup_nombre FROM `expert_grupos` gru WHERE gru.grup_id=tit.grup_id AND gru.pais_id=$xPaisid AND gru.empr_id=$xEmprid) AS grupo,";
     $xSQL .= "per.pers_fechanacimiento,per.pers_direccion,per.pers_celular,per.pers_email,per.pers_estado,tit.prod_id,per.pers_ciudad FROM `expert_titular` tit INNER JOIN `expert_persona` per ON per.pers_id=tit.pers_id ";
@@ -89,15 +82,14 @@
 
     }    
 
+    $xIntervalo = 30;
+
     $xSQL = "SELECT * FROM `expert_profesional_especi` ";
 	$xSQL .= "WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pfes_id=$xPfesid  ";
     $all_datos = mysqli_query($con, $xSQL);
     foreach ($all_datos as $datos) {
         $xIntervalo = $datos['intervalo'];
     }
-
-    $xIntervalo = 30;
-    $xEspeid = 3;
 
 ?>
 
@@ -1119,10 +1111,6 @@
             var popover;
             var popoverState = false;            
 
-            _presid = 6;
-            _espeid = 3;
-            _pfesid = 14;
-
             var calendar;
 
             var data = {
@@ -1158,7 +1146,6 @@
                 data: _parametros,
                 dataType: "json",
                 success: function(response){
-                    //debugger;
                     
                     var _hours = response;
                     var _jsonObj = JSON.stringify(response);
@@ -1178,8 +1165,6 @@
                     var _slot = '00:' + _interval + ':00';                    
                     
                     var calendarEl = document.getElementById('mycalendar');
-
-                    //debugger;
 
                     //$('#mycalendar').fullCalendar();
                     calendar = new FullCalendar.Calendar(calendarEl, {
@@ -1296,12 +1281,7 @@
 
             function f_Selecc(info){
 
-                console.log(info);
-
                 var _continuar = false;
-
-                console.log(_paisid);
-                console.log(_pfesid);
 
                 var _dateactual = moment(info.date).format("YYYY-MM-DD");
                 var _dateselec = moment(info.startStr).format("YYYY-MM-DD");
@@ -1394,7 +1374,7 @@
                 var _parametros = {
                     "xxPaisid" : _paisid,
                     "xxEmprid" : _emprid,
-                    "xxPfesid" : 14, //_pfesid
+                    "xxPfesid" : _pfesid,
                     "xxCodDia" : _dayselect,
                     "xHini" : _timeinicio,
                     "xHfin" : _timefin                    
@@ -1543,10 +1523,10 @@
                     "xxCodigoDia" : _dayselect
                 }                
 
-                //var _respuesta = $.post("codephp/del_reservatmp.php", _parametros);
-                //_respuesta.done(function(response){
+                var _respuesta = $.post("codephp/del_reservatmp.php", _parametros);
+                _respuesta.done(function(response){
                     
-                //});                
+                });                
             });
 
             $('#cboTipoRegistro').change(function(){
@@ -1581,9 +1561,6 @@
             });            
 
             $('#btnAgendar').click(function(){
-
-                debugger;
-
 
                 var _tiporegistro = $('#cboTipoRegistro').val();
                 var _motivo = $('#cboMotivo').val();
