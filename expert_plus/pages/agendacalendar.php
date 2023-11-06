@@ -4,7 +4,7 @@
 	//error_reporting(E_ALL);
     ini_set('display_errors', 0);
 
-   	//file_put_contents('log_seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
+   	//file_put_contents('log_1seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
 
     putenv("TZ=America/Guayaquil");
     date_default_timezone_set('America/Guayaquil');	  
@@ -40,12 +40,18 @@
     $xTituid = $_POST['tituid'];
     $xBeneid = $_POST['beneid'];
     $xPresid = $_POST['presaid'];
-    $xEspeid = $_POST['espeid'];
+    $xPreeid = $_POST['preeid'];
     $xPfesid = $_POST['pfesid'];
     $xProdid = $_POST['prodid'];
     $xGrupid = $_POST['grupid'];
     $xCiudid = $_POST['ciudid'];
-
+    
+    $xSQL = "SELECT * FROM `expert_prestadora_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pree_id=$xPreeid ";
+    $all_datos = mysqli_query($con, $xSQL);
+    foreach ($all_datos as $datos) {
+        $xEspeid = $datos['espe_id'];
+    }
+    
     $xSQL = "SELECT per.pers_numerodocumento,per.pers_nombres,per.pers_apellidos,per.pers_imagen,(SELECT prv.provincia FROM `provincia_ciudad` prv WHERE per.pers_ciudad=prv.prov_id) AS provincia,(SELECT prv.ciudad FROM `provincia_ciudad` prv WHERE per.pers_ciudad=prv.prov_id) AS ciudad,";
     $xSQL .= "(SELECT pro.prod_nombre FROM `expert_productos` pro WHERE pro.prod_id=tit.prod_id AND pro.pais_id=$xPaisid AND pro.empr_id=$xEmprid) AS producto, (SELECT gru.grup_nombre FROM `expert_grupos` gru WHERE gru.grup_id=tit.grup_id AND gru.pais_id=$xPaisid AND gru.empr_id=$xEmprid) AS grupo,";
     $xSQL .= "per.pers_fechanacimiento,per.pers_direccion,per.pers_celular,per.pers_email,per.pers_estado,tit.prod_id,per.pers_ciudad FROM `expert_titular` tit INNER JOIN `expert_persona` per ON per.pers_id=tit.pers_id ";
@@ -81,7 +87,7 @@
         $xEdad =  $xDiferencia->format("%y");             
 
     }    
-
+    
     $xIntervalo = 30;
 
     $xSQL = "SELECT * FROM `expert_profesional_especi` ";
@@ -1138,15 +1144,13 @@
                 }
             ]*/
 
-            //console.log(_hours);
-
             $.ajax({
                 url: "codephp/get_turnoshorarios.php",
                 type: "post",
                 data: _parametros,
                 dataType: "json",
                 success: function(response){
-                    
+
                     var _hours = response;
                     var _jsonObj = JSON.stringify(response);
                     var _json = JSON.parse(_jsonObj);
@@ -1525,7 +1529,6 @@
 
                 var _respuesta = $.post("codephp/del_reservatmp.php", _parametros);
                 _respuesta.done(function(response){
-                    
                 });                
             });
 
@@ -1708,7 +1711,6 @@
                 $("#hora_inicio").val(_timeinicio);
                 $("#hora_fin").val(_timefin);*/
                 let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
-                console.log(_fechareserva);
 
                 $("#modal_new_agenda").modal("show");
             }
