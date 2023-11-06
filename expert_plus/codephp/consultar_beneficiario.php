@@ -12,15 +12,15 @@
     $log_file = "err_consulta";
     $xRow = 0;  
 
-    if(isset($_POST['xxTituid']) and isset($_POST['xxPaisId']) and isset($_POST['xxEmprId']) and isset($_POST['xxDocumento'])){
-        if(isset($_POST['xxTituid']) <> '' and isset($_POST['xxPaisId']) <> '' and isset($_POST['xxEmprId']) <> '' and isset($_POST['xxDocumento']) <> ''){ 
+    if(isset($_POST['xxProdId']) and isset($_POST['xxPaisId']) and isset($_POST['xxEmprId']) and isset($_POST['xxDocumento'])){
+        if(isset($_POST['xxProdId']) <> '' and isset($_POST['xxPaisId']) <> '' and isset($_POST['xxEmprId']) <> '' and isset($_POST['xxDocumento']) <> ''){ 
 
-            $xTituid = $_POST['xxTituid'];
+            $xProdid = $_POST['xxProdId'];
             $xPaisid = $_POST['xxPaisId'];
             $xEmprid = $_POST['xxEmprId'];
             $xDocumento = $_POST['xxDocumento'];
 
-            $xSQL = "SELECT * FROM `expert_beneficiario` WHERE titu_id=$xTituid AND pais_id=$xPaisid AND empr_id=$xEmprid AND bene_numerodocumento= '$xDocumento' ";
+            $xSQL = "SELECT * FROM `expert_beneficiario` bene, `expert_titular` titu WHERE bene.bene_id=titu.titu_id AND titu.prod_id=$xProdid";
             $all_bene = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
             $xRow = mysqli_num_rows($all_bene);    
            

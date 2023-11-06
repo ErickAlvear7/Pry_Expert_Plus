@@ -24,12 +24,11 @@
             $xOrden = $_POST['xxOrden'];
             $xDetalle = trim(mb_strtoupper(safe($_POST['xxDetalle']))); 
             $xValorV = trim(mb_strtoupper(safe($_POST['xxValorV'])));
-            $xEstado = safe($_POST['xxEstado']);
             
             
             $xSQL = "INSERT INTO `expert_parametro_detalle` (paca_id,pade_orden,pade_nombre, ";
-            $xSQL .= "pade_valorV,pade_estado) ";
-            $xSQL .= "VALUES ($xPacaid,$xOrden,'$xDetalle','$xValorV','$xEstado')";
+            $xSQL .= "pade_valorV) ";
+            $xSQL .= "VALUES ($xPacaid,$xOrden,'$xDetalle','$xValorV')";
             mysqli_query($con, $xSQL); 
 
             $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";

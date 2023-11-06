@@ -406,7 +406,7 @@
                 </div>
                 <div class="card-body pt-0 pb-5">
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
+                        <table class="table table-hover align-middle table-row-dashed gy-5" id="tblBeneficiario">
                             <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
                                 <tr class="text-start text-muted text-uppercase gs-0">
                                     <th class="min-w-90px">CIUDAD</th>
@@ -498,7 +498,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="modal_persona" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
@@ -1083,7 +1082,42 @@
                     if(response != 0){
 
                         _id = response;
-                        console.log(_id);
+                            
+                        _output = '<tr id="row_' + _id + '">';
+                        _output +='<td class="text-uppercase">' + _txtCiudadBe + '</td>';
+                        _output +='<td>' +_txtAddnombresCompletos + '</td>';
+                        _output +='<td>' +_txtParentesco + '</td>';
+                        _output +='<td id="td_'+ _id + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
+                        _output +='<td><div class="form-check form-check-sm form-check-custom form-check-solid">';
+                        _output +='<input checked="checked" class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk'+ _id +'" ';
+                        _output +='onchange="f_UpdateEstado('+ _id + ',' + _paisid + ',' + _emprid + ',' + _usuaid + ')" value=""/></div></td>';
+                        _output +='<td><div class="text-center"><div class="btn-group">';
+                        _output +='<button type="button" id="btnEditarBe_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditarBe" title="Editar Producto" data-bs-toggle="tooltip" data-bs-placement="left">';
+                        _output +='<i class="fa fa-edit"></i></button>';
+                        _output +='<button type="button" id="btnAgendar_' + _id + '" name="btnAgendar" onclick="f_Agendar('+ _id + ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" ';
+                        _output +='title="Agendar" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-user-plus"></i></button></div></div></td>';
+                        _output +='</tr>';
+
+                        $('#tblBeneficiario').append(_output);
+                        mensajesalertify('Agregado Correctamente..!', 'S', 'top-center', 3);
+
+                        console.log(_output);
+
+                        $("#cboAddDocumentoBe").val('').change();
+                        $("#txtAddDocumentoBe").val('');
+                        $("#txtAddNombreBe").val('');
+                        $("#txtAddApellidoBe").val('');
+                        $("#cboAddGeneroBe").val('').change();
+                        $("#cboAddEstadoCivilBe").val('').change();
+                        $("#cboProvinciaBe").val('').change();
+                        $("#cboCiudadBe").val(0).change();
+                        $("#txtAddDireccionBe").val('');
+                        $("#txtAddTelCasaBe").val('');
+                        $("#txtAddTelOfiBe").val('');
+                        $("#txtAddCelularBe").val('');
+                        $("#txtAddEmailBe").val('');
+                        $("#cboParentesco").val('').change();
+                        $("#txtAddFechaNacimientoBe").val('');
                     }
 
 
