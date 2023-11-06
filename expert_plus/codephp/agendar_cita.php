@@ -51,7 +51,7 @@
             $xUsuaid = $_POST['xxUsuaid'];
 
             $xCodigoAgenda = 1001;
-            $xLogoCab = "citaagendadax.png";
+            $xLogoCab = "Agendamiento.png";
             $xLogoFirma = "LogoPrestasalud.png";
             $xCliente = "";
             $xProducto = "";
@@ -151,15 +151,11 @@
             //ENVIANDO MAIL DEL AGENDAMIENTO
             if($xAgendado == 110){
 
-                /*require_once '/home/bbplusah/bbplus-ec.com/common/PHPMailer/Exception.php';
+                require_once '/home/bbplusah/bbplus-ec.com/common/PHPMailer/Exception.php';
                 require_once '/home/bbplusah/bbplus-ec.com/common/PHPMailer/PHPMailer.php';
-                require_once '/home/bbplusah/bbplus-ec.com/common/PHPMailer/SMTP.php';*/
+                require_once '/home/bbplusah/bbplus-ec.com/common/PHPMailer/SMTP.php';
 
-                require_once '../PHPMailer/Exception.php';
-                require_once '../PHPMailer/PHPMailer.php';
-                require_once '../PHPMailer/SMTP.php';
 
-                
                 $mail = new PHPMailer(true);
                
                 try {
@@ -167,22 +163,15 @@
                     $mail->SMTPDebug = 0;
                     $mail->SMTPAuth   = true;
                     
-                    /*$mail->Host       = 'mail.bbplus-ec.com';
-                    $mail->Username   = 'noreply@bbplus-ec.com';
-                    $mail->Password   = 'wG.ok$sY.E{j';
-                    $mail->Sender     = 'noreply@bbplus-ec.com';
+                    $mail->Host       = 'expertplus.bbplus-ec.com';
+                    $mail->Username   = 'agendamiento@expertplus.bbplus-ec.com';
+                    $mail->Password   = '37-]9{TkWOJN';
+                    $mail->Sender     = 'agendamiento@expertplus.bbplus-ec.com';
                     $mail->SMTPSecure = "ssl";
-                    $mail->Port       = 465;*/
+                    $mail->Port       = 465;
 
-                    $mail->SMTPSecure = "tls";
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                    $mail->Username = 'cfam2212@gmail.com';
-                    $mail->Password = 'crisalve_2212';
-                    $mail->Port = 587;                    
-                    
-                    $mail->setFrom('cfam2212@gmail.com', 'Agendamiento - PRESTASALUD S.A');
-                    $mail->addReplyTo('vroldan@prestasalud.com', 'Agendamiento - PRESTASALUD S.A');
+                    $mail->setFrom('agendamiento@expertplus.bbplus-ec.com', 'Agendamiento - PRESTASALUD S.A');
+                    $mail->addReplyTo('agendamiento@expertplus.bbplus-ec.com', 'Agendamiento - PRESTASALUD S.A');
                     
                     //file_put_contents('log_errores_enviarmail.txt', $xPCorreo . "\n\n", FILE_APPEND);
                     
@@ -226,8 +215,8 @@
                         
                         $message .= "<br><br>";
                         //$message .= "<img src='https://bbplus-ec.com/img/GraciasPorRegistrarse.png' alt='' style='height: 100%; width: 100%;' /><br><br>";
-                        $message .= "<img src='../logos/$xLogoCab' alt='' style='height: 100%; width: 100%;' /><br><br>";
-                        $message .= "Nuevo Agendamiento: <strong>$xPaciente</strong><br><br>";
+                        $message .= "<img src='https://expertplus.bbplus-ec.com/logos/$xLogoCab' alt='' style='height: 100%; width: 100%;' /><br><br>";
+                        $message .= "Registrar Agendamiento para : <strong>$xPaciente</strong><br><br>";
                         $message .= "<hr><br>";
                         $message .= "Registrar los siguientes datos para agendamiento<br><br>";
                         $message .= "<hr><br>";
@@ -337,26 +326,23 @@
                         $message .= "Atentamente,<br><br>";
                         $message .= "<img src='cid:LogoFirma' width='280' height='120' />";
                         $message .= "<br><br><hr>";
-                        $message .= "Pie de Pagina1 <br>";
-                        $message .= "Pie de Pagina2 <br>";
-                        $message .= "Pie de Pagina3 <br>";
-                        $message .= "Pie de Pagina4 <br>";
+                        $message .= "AV. GONZALEZ SUAREZ N32-90 Y JACINTO BEJARANO <br>";
+                        $message .= "(593 2) 3959 229<br>";
                         $message .= '	<table align="center">
                                                 <tr>
                                                   <td bgcolor="#ffffff" align="center" style="color:#212b35;font-family:ShopifySans,Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;line-height:22px;padding-top:30px;padding-bottom:30px">
-                                                    <p style="padding-top:15px; color: #5d91ab;"> Copyright &copy; <a href="https://http://www.prestasalud.com/" style="padding-top:15px;color:#212b35;text-decoration:none" target="_blank" >PRESTASALUD S.A</a> | Direccion, Telf: +593 99 999 9999>
-                                                    <p align="center" style="padding-top:15px"><strong><a href="#" style="color:#212b35;font-size:13px;text-decoration:none" target="_blank" >Anular su suscripción</a></strong></p> 
+                                                    <p style="padding-top:15px; color: #5d91ab;"> Copyright &copy; <a href="https://www.prestasalud.com/portal/" style="padding-top:15px;color:#212b35;text-decoration:none" target="_blank" >PRESTASALUD S.A</a> | AV. GONZALEZ SUAREZ N32-90 Y JACINTO BEJARANO, Telf: (593 2) 3959 229 >
+                                                    <p align="center" style="padding-top:15px"><strong><a href="#" style="color:#212b35;font-size:13px;text-decoration:none" target="_blank" >Anular su suscripcion</a></strong></p> 
                                                   </td>
                                             </tr></table>';
                         $message .= " <br> <br>
                                 </body>
                                 </html>";
 
-                        file_put_contents('log_1seguimiento.txt', "$message" . "\n\n", FILE_APPEND);
+                        //file_put_contents('log_1seguimiento.txt', "$message" . "\n\n", FILE_APPEND);
                         // Content
-                        //$xLogoFirma = "/home/bbplusah/bbplus-ec.com/img/LogoFirmaBBPLUSNew.jpeg";
-                        $xFirma = "../logos/$xLogoFirma";
-                        $mail->AddEmbeddedImage($xFirma, "LogoFirma", "$xLogoFirma");
+                        $xLOGO = "/home/bbplusah/expertplus.bbplus-ec.com/logos/$xLogoFirma";
+                        $mail->AddEmbeddedImage($xLOGO, 'LogoFirma', $xLogoFirma);
                         $mail->isHTML(true);      
                         $subject = "Datos Para Agendamiento - $xPaciente ";
                         $subject = utf8_decode($subject);
@@ -375,7 +361,7 @@
                     $xCodigoAgenda = -1;
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                     echo $e;
-                    file_put_contents('log_1seguimiento.txt', "$xFecha ERROR: - $e - uid[$mail->ErrorInfo] " . "\n\n", FILE_APPEND);
+                    file_put_contents('1_logseguimiento.txt', "$xFecha ERROR: - $e - uid[$mail->ErrorInfo] " . "\n\n", FILE_APPEND);
                     exit(0);
                 }                
             }

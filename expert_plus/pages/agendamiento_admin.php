@@ -169,7 +169,7 @@
                                     <div class="fw-bolder mt-5">No. Documento</div>
                                     <div class="text-gray-600"><?php echo $xNumDocumento; ?>
                                         <br /><?php echo $xFechaNacimientoText; ?>
-                                        <br /><?php echo $xEdad; ?> Años
+                                        <br /><?php echo $xEdad; ?> A���os
                                     </div>
                                     
                                     <div class="fw-bolder mt-5">Email</div>
@@ -435,6 +435,7 @@
                                         </label>
                                         <?php 
                                             $xSQL = "SELECT pres_id AS Codigo, pres_nombre AS Descripcion FROM `expert_prestadora` WHERE pais_id=$xPaisid and empr_id=$xEmprid AND prov_id=$xCiudadid AND pres_estado='A' ";
+                                            file_put_contents('log_1seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
                                             $all_prestadora = mysqli_query($con, $xSQL);
                                         ?>                                        
                                         <select name="cboPrestador" id="cboPrestador" aria-label="Seleccione Prestador" data-control="select2" data-placeholder="Seleccione Prestador" data-dropdown-parent="#tabTitular" class="form-select mb-2">
@@ -3597,7 +3598,7 @@
             var _ciudadid = "<?php echo $xCiudadid; ?>";
             var _avatar = "<?php echo $xAvatar; ?>";
             var _cboprestaid = 0;
-            var _cboespeid = 0;
+            var _cbopreeid = 0;
             var _cboprofid = 0;
 
 
@@ -3745,14 +3746,14 @@
 
             $('#cboEspecialidad').change(function(){
 
-                _cboespeid = $(this).val();
+                _cbopreeid = $(this).val();
 
                 $("#cboProfesional").empty();
 
                 var _parametros = {
                     xxPaisid: _paisid,
                     xxEmprid: _emprid,
-                    xxPreeid: _cboespeid
+                    xxPreeid: _cbopreeid
                 }
 
                 var _respuesta = $.post("codephp/get_comboprofesionalespeci.php", _parametros);
@@ -3774,18 +3775,18 @@
 
                 let _cboprofid = $("#cboProfesional").val();
                 let _cbociudid = $("#cboCiudad").val();
-
+                
                 if(_tituid == ''){
                     mensajesalertify("No se ha seleccionado Cliente para Agendamiento", "W", "top-center", 5);
-                    return;
+                    return;                    
                 }
-
+                
                 if(_cboprestaid == 0){
                     mensajesalertify("Seleccione Prestador", "W", "top-center", 5);
                     return;
                 }
 
-                if(_cboespeid == 0){
+                if(_cbopreeid == 0){
                     mensajesalertify("Seleccione Especialidad", "W", "top-center", 5);
                     return;
                 }
@@ -3793,9 +3794,9 @@
                 if(_cboprofid == 0){
                     mensajesalertify("Seleccione Profesional", "W", "top-center", 5);
                     return;
-                }              
+                }                  
 
-                $.redirect('?page=admincalendar&menuid=<?php echo $menuid; ?>', {'tituid': _tituid, 'beneid': 0, 'prodid': _prodid, 'grupid': _grupid, 'presaid': _cboprestaid, 'espeid': _cboespeid, 'pfesid': _cboprofid, 'ciudid': _cbociudid }); //POR METODO POST
+                $.redirect('?page=admincalendar&menuid=<?php echo $menuid; ?>', {'tituid': _tituid, 'beneid': 0, 'prodid': _prodid, 'grupid': _grupid, 'presaid': _cboprestaid, 'preeid': _cbopreeid, 'pfesid': _cboprofid, 'ciudid': _cbociudid }); //POR METODO POST
 
             });
             
