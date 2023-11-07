@@ -67,6 +67,7 @@
             $xDireccion = "";
             $xTelefono = "";
             $xMotivo = "";
+            $xAgendaid = 0;
 
             $xSQL = "SELECT (SELECT cli.clie_nombre FROM `expert_cliente` cli WHERE cli.clie_id=prd.clie_id AND cli.pais_id=$xPaisid AND cli.empr_id=$xEmprid) AS Cliente,";
             $xSQL .= "prod_nombre FROM `expert_productos` prd WHERE prd.pais_id=$xPaisid AND prd.empr_id=$xEmprid AND prd.prod_id=$xProdid ";
@@ -137,7 +138,15 @@
                 $xSQL = "INSERT INTO `expert_agenda`(pais_id,empr_id,tipo_cliente,titu_id,bene_id,prod_id,grup_id,pres_id,espe_id,pfes_id,fecha_inicio,fecha_fin,codigo_dia,dia,hora_desde,hora_hasta,tipo_registro,motivo_registro,observacion,estado_agenda,codigo_agenda,color,textcolor,fechacreacion,usuariocreacion,terminalcreacion) ";
                 $xSQL .= "VALUES($xPaisid,$xEmprid,'$xTipoCliente',$xTituid,$xBeneid,$xProdid,$xGrupid,$xPresid,$xEspeid,$xPfesid,'{$xFechaIni}','{$xFechaFin}',$xCodigoDia,'$xDia','{$xHoraDesde}','{$xHoraHasta}','$xTipoRegistro',$xMotivoRegistro,'$xObservacion','$xEstadoAgenda',$xCodigoAgenda,'$xColor','$xTextColor','{$xFecha}',$xUsuaid,'$xTerminal') ";
                 if(mysqli_query($con, $xSQL)){
+                    
+                    //BORRAR EL AGENDAMIENTO TEMPORAL
+                    
+                    $xSQL = "DELETE FROM `expert_reserva_tmp` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pres_id=$xPresid AND espe_id=$xEspeid AND pfes_id=$xPfesid AND fecha_inicio='$xFechaIni' AND fecha_fin='$xFechaFin' AND codigo_dia=$xCodigoDia  ";
+                    mysqli_query($con, $xSQL);
+                    
+                    file_put_contents('1_logseguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
     
+                    $xAgendaid = mysqli_insert_id($con);
                     $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
                     $xSQL .= "VALUES('Registro Agendado',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
                     mysqli_query($con, $xSQL); 
@@ -145,11 +154,17 @@
                     $xAgendado = 110;
                 }
             }else{
-                $xCodigoAgenda = 0;
+                $xAgendaid = 0;
             }
 
             //ENVIANDO MAIL DEL AGENDAMIENTO
             if($xAgendado == 110){
+                
+                if($xTipoCliente == 'T'){
+                    $xTipoCliente = 'TITULAR';
+                }else{
+                    $xTipoCliente = 'BENEFICIARIO';
+                }
 
                 require_once '/home/bbplusah/bbplus-ec.com/common/PHPMailer/Exception.php';
                 require_once '/home/bbplusah/bbplus-ec.com/common/PHPMailer/PHPMailer.php';
@@ -173,10 +188,10 @@
                     $mail->setFrom('agendamiento@expertplus.bbplus-ec.com', 'Agendamiento - PRESTASALUD S.A');
                     $mail->addReplyTo('agendamiento@expertplus.bbplus-ec.com', 'Agendamiento - PRESTASALUD S.A');
                     
-                    //file_put_contents('log_errores_enviarmail.txt', $xPCorreo . "\n\n", FILE_APPEND);
-                    
                     $mail->addAddress("xchxch1803@gmail.com", "$xPaciente");
-                    $mail->addBCC("vinirol@gmail.com");
+                    $mail->addBCC("vroldan@gmail.com");
+                    $mail->addBCC("alperez@prestasalud.com");
+                    $mail->addBCC("vroldan@prestasalud.com");
                     
                     // -- BODY --
                         $message = "<html lang='es'>
@@ -225,97 +240,78 @@
                                 <tbody>
                                     <tr>
                                         <td style='font-weight:bold;'>Cliente</td>
-                                        <td style='text-align:center'>:</td>
                                         <td>$xCliente</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Producto</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xProducto</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Medicamentos</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$XMedicamentos</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Codigo Cita</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xCodigoAgenda</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Ciudad Cita</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xCiudadAgenda</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Fecha Cita</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xFechaIni</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Hora Cita</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xHoraCita</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Prestadora</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xPrestadora</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Profesional</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xProfesional</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Especialidad</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xEspecialidad</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Motivo</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xMotivo</td>
                                     </tr>
                                     <tr>                                    
                                         <td style='font-weight:bold;'>Detalle</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xObservacion</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Cedula Titular </td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$CedulaTitu</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Tipo Cliente</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xTipoCliente</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Cliente</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xPaciente</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Fecha Nacimiento</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xFechaNacimiento</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Direccion</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xDireccion</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Telefonos</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xTelefono</td>
                                     </tr>
                                     <tr>
                                         <td style='font-weight:bold;'>Usuario</td>
-                                        <td style='text-align:center;'>:</td>
                                         <td>$xUserAgent</td>
                                     </tr>
                                 </tbody></table> ";
@@ -329,12 +325,12 @@
                         $message .= "AV. GONZALEZ SUAREZ N32-90 Y JACINTO BEJARANO <br>";
                         $message .= "(593 2) 3959 229<br>";
                         $message .= '	<table align="center">
-                                                <tr>
-                                                  <td bgcolor="#ffffff" align="center" style="color:#212b35;font-family:ShopifySans,Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;line-height:22px;padding-top:30px;padding-bottom:30px">
-                                                    <p style="padding-top:15px; color: #5d91ab;"> Copyright &copy; <a href="https://www.prestasalud.com/portal/" style="padding-top:15px;color:#212b35;text-decoration:none" target="_blank" >PRESTASALUD S.A</a> | AV. GONZALEZ SUAREZ N32-90 Y JACINTO BEJARANO, Telf: (593 2) 3959 229 >
-                                                    <p align="center" style="padding-top:15px"><strong><a href="#" style="color:#212b35;font-size:13px;text-decoration:none" target="_blank" >Anular su suscripcion</a></strong></p> 
-                                                  </td>
-                                            </tr></table>';
+                                            <tr>
+                                              <td bgcolor="#ffffff" align="center" style="color:#212b35;font-family:ShopifySans,Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;line-height:22px;padding-top:30px;padding-bottom:30px">
+                                                <p style="padding-top:15px; color: #5d91ab;"> Copyright &copy; <a href="https://www.prestasalud.com/portal/" style="padding-top:15px;color:#212b35;text-decoration:none" target="_blank" >PRESTASALUD S.A</a> | AV. GONZALEZ SUAREZ N32-90 Y JACINTO BEJARANO, Telf: (593 2) 3959 229 </p>
+                                              </td>
+                                            </tr>
+                                        </table>';
                         $message .= " <br> <br>
                                 </body>
                                 </html>";
@@ -358,7 +354,7 @@
                         mysqli_query($con, $xSQL); 
 
                 }catch (Exception $e) {
-                    $xCodigoAgenda = -1;
+                    $xAgendaid = -1;
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                     echo $e;
                     file_put_contents('1_logseguimiento.txt', "$xFecha ERROR: - $e - uid[$mail->ErrorInfo] " . "\n\n", FILE_APPEND);
@@ -369,6 +365,6 @@
     }
     
     mysqli_close($con);
-    echo $xCodigoAgenda;
+    echo $xAgendaid;
 
 ?>

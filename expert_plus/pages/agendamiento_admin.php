@@ -169,7 +169,7 @@
                                     <div class="fw-bolder mt-5">No. Documento</div>
                                     <div class="text-gray-600"><?php echo $xNumDocumento; ?>
                                         <br /><?php echo $xFechaNacimientoText; ?>
-                                        <br /><?php echo $xEdad; ?> A���os
+                                        <br /><?php echo $xEdad; ?> 
                                     </div>
                                     
                                     <div class="fw-bolder mt-5">Email</div>

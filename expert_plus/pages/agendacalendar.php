@@ -1651,7 +1651,7 @@
                 var _respuesta = $.post("codephp/agendar_cita.php", _parametros);
                 _respuesta.done(function(response){
                     if(response >= 0){
-                        $.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'prodid': _prodid, 'grupid': _grupid });
+                        $.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'prodid': _prodid, 'grupid': _grupid, 'agendaid': response });
                     }else{
                         Swal.fire({
                             text: "Error en el envio del correo, valide la informacion",
