@@ -157,212 +157,212 @@
             }
 
             //ENVIANDO MAIL DEL AGENDAMIENTO
-            if($xAgendado == 110){
+            // if($xAgendado == 110){
                 
-                if($xTipoCliente == 'T'){
-                    $xTipoCliente = 'TITULAR';
-                }else{
-                    $xTipoCliente = 'BENEFICIARIO';
-                }
+            //     if($xTipoCliente == 'T'){
+            //         $xTipoCliente = 'TITULAR';
+            //     }else{
+            //         $xTipoCliente = 'BENEFICIARIO';
+            //     }
 
-                require_once '/home/bbplusah/bbplus-ec.com/common/PHPMailer/Exception.php';
-                require_once '/home/bbplusah/bbplus-ec.com/common/PHPMailer/PHPMailer.php';
-                require_once '/home/bbplusah/bbplus-ec.com/common/PHPMailer/SMTP.php';
+            //     require_once '/home/bbplusah/bbplus-ec.com/common/PHPMailer/Exception.php';
+            //     require_once '/home/bbplusah/bbplus-ec.com/common/PHPMailer/PHPMailer.php';
+            //     require_once '/home/bbplusah/bbplus-ec.com/common/PHPMailer/SMTP.php';
 
 
-                $mail = new PHPMailer(true);
+            //     $mail = new PHPMailer(true);
                
-                try {
-                    $mail->isSMTP();
-                    $mail->SMTPDebug = 0;
-                    $mail->SMTPAuth   = true;
+            //     try {
+            //         $mail->isSMTP();
+            //         $mail->SMTPDebug = 0;
+            //         $mail->SMTPAuth   = true;
                     
-                    $mail->Host       = 'expertplus.bbplus-ec.com';
-                    $mail->Username   = 'agendamiento@expertplus.bbplus-ec.com';
-                    $mail->Password   = '37-]9{TkWOJN';
-                    $mail->Sender     = 'agendamiento@expertplus.bbplus-ec.com';
-                    $mail->SMTPSecure = "ssl";
-                    $mail->Port       = 465;
+            //         $mail->Host       = 'expertplus.bbplus-ec.com';
+            //         $mail->Username   = 'agendamiento@expertplus.bbplus-ec.com';
+            //         $mail->Password   = '37-]9{TkWOJN';
+            //         $mail->Sender     = 'agendamiento@expertplus.bbplus-ec.com';
+            //         $mail->SMTPSecure = "ssl";
+            //         $mail->Port       = 465;
 
-                    $mail->setFrom('agendamiento@expertplus.bbplus-ec.com', 'Agendamiento - PRESTASALUD S.A');
-                    $mail->addReplyTo('agendamiento@expertplus.bbplus-ec.com', 'Agendamiento - PRESTASALUD S.A');
+            //         $mail->setFrom('agendamiento@expertplus.bbplus-ec.com', 'Agendamiento - PRESTASALUD S.A');
+            //         $mail->addReplyTo('agendamiento@expertplus.bbplus-ec.com', 'Agendamiento - PRESTASALUD S.A');
                     
-                    $mail->addAddress("xchxch1803@gmail.com", "$xPaciente");
-                    $mail->addBCC("vroldan@gmail.com");
-                    $mail->addBCC("alperez@prestasalud.com");
-                    $mail->addBCC("vroldan@prestasalud.com");
+            //         $mail->addAddress("xchxch1803@gmail.com", "$xPaciente");
+            //         $mail->addBCC("vroldan@gmail.com");
+            //         $mail->addBCC("alperez@prestasalud.com");
+            //         $mail->addBCC("vroldan@prestasalud.com");
                     
-                    // -- BODY --
-                        $message = "<html lang='es'>
-                            <head>
-                                <meta charset='utf-8' />
+            //         // -- BODY --
+            //             $message = "<html lang='es'>
+            //                 <head>
+            //                     <meta charset='utf-8' />
                                 
-                                <style>
-                                    #customers {
-                                      font-family: Arial, Helvetica, sans-serif;
-                                      border-collapse: collapse;
-                                      width: 100%;
-                                    }
+            //                     <style>
+            //                         #customers {
+            //                           font-family: Arial, Helvetica, sans-serif;
+            //                           border-collapse: collapse;
+            //                           width: 100%;
+            //                         }
                                     
-                                    #customers td, #customers th {
-                                      border: 1px solid #ddd;
-                                      padding: 8px;
-                                    }
+            //                         #customers td, #customers th {
+            //                           border: 1px solid #ddd;
+            //                           padding: 8px;
+            //                         }
                                     
-                                    #customers tr:nth-child(even){background-color: #f2f2f2;}
+            //                         #customers tr:nth-child(even){background-color: #f2f2f2;}
                                     
-                                    #customers tr:hover {background-color: #ddd;}
+            //                         #customers tr:hover {background-color: #ddd;}
                                     
-                                    #customers th {
-                                      padding-top: 12px;
-                                      padding-bottom: 12px;
-                                      text-align: left;
-                                      background-color: #d6dad6;
-                                      color: red;
-                                    }
+            //                         #customers th {
+            //                           padding-top: 12px;
+            //                           padding-bottom: 12px;
+            //                           text-align: left;
+            //                           background-color: #d6dad6;
+            //                           color: red;
+            //                         }
                                     
-                                </style>
-                            </head>
-                            <body>
+            //                     </style>
+            //                 </head>
+            //                 <body>
                                 
-                        "; 
+            //             "; 
                         
-                        $message .= "<br><br>";
-                        //$message .= "<img src='https://bbplus-ec.com/img/GraciasPorRegistrarse.png' alt='' style='height: 100%; width: 100%;' /><br><br>";
-                        $message .= "<img src='https://expertplus.bbplus-ec.com/logos/$xLogoCab' alt='' style='height: 100%; width: 100%;' /><br><br>";
-                        $message .= "Registrar Agendamiento para : <strong>$xPaciente</strong><br><br>";
-                        $message .= "<hr><br>";
-                        $message .= "Registrar los siguientes datos para agendamiento<br><br>";
-                        $message .= "<hr><br>";
-                        $message .= "
-                            <table align='center' class='table' id='customers'>
-                                <tbody>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Cliente</td>
-                                        <td>$xCliente</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Producto</td>
-                                        <td>$xProducto</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Medicamentos</td>
-                                        <td>$XMedicamentos</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Codigo Cita</td>
-                                        <td>$xCodigoAgenda</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Ciudad Cita</td>
-                                        <td>$xCiudadAgenda</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Fecha Cita</td>
-                                        <td>$xFechaIni</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Hora Cita</td>
-                                        <td>$xHoraCita</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Prestadora</td>
-                                        <td>$xPrestadora</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Profesional</td>
-                                        <td>$xProfesional</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Especialidad</td>
-                                        <td>$xEspecialidad</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Motivo</td>
-                                        <td>$xMotivo</td>
-                                    </tr>
-                                    <tr>                                    
-                                        <td style='font-weight:bold;'>Detalle</td>
-                                        <td>$xObservacion</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Cedula Titular </td>
-                                        <td>$CedulaTitu</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Tipo Cliente</td>
-                                        <td>$xTipoCliente</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Cliente</td>
-                                        <td>$xPaciente</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Fecha Nacimiento</td>
-                                        <td>$xFechaNacimiento</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Direccion</td>
-                                        <td>$xDireccion</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Telefonos</td>
-                                        <td>$xTelefono</td>
-                                    </tr>
-                                    <tr>
-                                        <td style='font-weight:bold;'>Usuario</td>
-                                        <td>$xUserAgent</td>
-                                    </tr>
-                                </tbody></table> ";
-                        $message .= "<hr><br><br>";
-                        $message .= "Estimado Cliente, acuda a su cita agendada 10 minutos antes de la hora registrada.<br><br>";
-                        $message .= "Recuerde llevar el documento de identidad del Titular del servicio.";
-                        $message .= "<br><br><br><br>";
-                        $message .= "Atentamente,<br><br>";
-                        $message .= "<img src='cid:LogoFirma' width='280' height='120' />";
-                        $message .= "<br><br><hr>";
-                        $message .= "AV. GONZALEZ SUAREZ N32-90 Y JACINTO BEJARANO <br>";
-                        $message .= "(593 2) 3959 229<br>";
-                        $message .= '	<table align="center">
-                                            <tr>
-                                              <td bgcolor="#ffffff" align="center" style="color:#212b35;font-family:ShopifySans,Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;line-height:22px;padding-top:30px;padding-bottom:30px">
-                                                <p style="padding-top:15px; color: #5d91ab;"> Copyright &copy; <a href="https://www.prestasalud.com/portal/" style="padding-top:15px;color:#212b35;text-decoration:none" target="_blank" >PRESTASALUD S.A</a> | AV. GONZALEZ SUAREZ N32-90 Y JACINTO BEJARANO, Telf: (593 2) 3959 229 </p>
-                                              </td>
-                                            </tr>
-                                        </table>';
-                        $message .= " <br> <br>
-                                </body>
-                                </html>";
+            //             $message .= "<br><br>";
+            //             //$message .= "<img src='https://bbplus-ec.com/img/GraciasPorRegistrarse.png' alt='' style='height: 100%; width: 100%;' /><br><br>";
+            //             $message .= "<img src='https://expertplus.bbplus-ec.com/logos/$xLogoCab' alt='' style='height: 100%; width: 100%;' /><br><br>";
+            //             $message .= "Registrar Agendamiento para : <strong>$xPaciente</strong><br><br>";
+            //             $message .= "<hr><br>";
+            //             $message .= "Registrar los siguientes datos para agendamiento<br><br>";
+            //             $message .= "<hr><br>";
+            //             $message .= "
+            //                 <table align='center' class='table' id='customers'>
+            //                     <tbody>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Cliente</td>
+            //                             <td>$xCliente</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Producto</td>
+            //                             <td>$xProducto</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Medicamentos</td>
+            //                             <td>$XMedicamentos</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Codigo Cita</td>
+            //                             <td>$xCodigoAgenda</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Ciudad Cita</td>
+            //                             <td>$xCiudadAgenda</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Fecha Cita</td>
+            //                             <td>$xFechaIni</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Hora Cita</td>
+            //                             <td>$xHoraCita</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Prestadora</td>
+            //                             <td>$xPrestadora</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Profesional</td>
+            //                             <td>$xProfesional</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Especialidad</td>
+            //                             <td>$xEspecialidad</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Motivo</td>
+            //                             <td>$xMotivo</td>
+            //                         </tr>
+            //                         <tr>                                    
+            //                             <td style='font-weight:bold;'>Detalle</td>
+            //                             <td>$xObservacion</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Cedula Titular </td>
+            //                             <td>$CedulaTitu</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Tipo Cliente</td>
+            //                             <td>$xTipoCliente</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Cliente</td>
+            //                             <td>$xPaciente</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Fecha Nacimiento</td>
+            //                             <td>$xFechaNacimiento</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Direccion</td>
+            //                             <td>$xDireccion</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Telefonos</td>
+            //                             <td>$xTelefono</td>
+            //                         </tr>
+            //                         <tr>
+            //                             <td style='font-weight:bold;'>Usuario</td>
+            //                             <td>$xUserAgent</td>
+            //                         </tr>
+            //                     </tbody></table> ";
+            //             $message .= "<hr><br><br>";
+            //             $message .= "Estimado Cliente, acuda a su cita agendada 10 minutos antes de la hora registrada.<br><br>";
+            //             $message .= "Recuerde llevar el documento de identidad del Titular del servicio.";
+            //             $message .= "<br><br><br><br>";
+            //             $message .= "Atentamente,<br><br>";
+            //             $message .= "<img src='cid:LogoFirma' width='280' height='120' />";
+            //             $message .= "<br><br><hr>";
+            //             $message .= "AV. GONZALEZ SUAREZ N32-90 Y JACINTO BEJARANO <br>";
+            //             $message .= "(593 2) 3959 229<br>";
+            //             $message .= '	<table align="center">
+            //                                 <tr>
+            //                                   <td bgcolor="#ffffff" align="center" style="color:#212b35;font-family:ShopifySans,Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;line-height:22px;padding-top:30px;padding-bottom:30px">
+            //                                     <p style="padding-top:15px; color: #5d91ab;"> Copyright &copy; <a href="https://www.prestasalud.com/portal/" style="padding-top:15px;color:#212b35;text-decoration:none" target="_blank" >PRESTASALUD S.A</a> | AV. GONZALEZ SUAREZ N32-90 Y JACINTO BEJARANO, Telf: (593 2) 3959 229 </p>
+            //                                   </td>
+            //                                 </tr>
+            //                             </table>';
+            //             $message .= " <br> <br>
+            //                     </body>
+            //                     </html>";
 
-                        //file_put_contents('log_1seguimiento.txt', "$message" . "\n\n", FILE_APPEND);
-                        // Content
-                        $xLOGO = "/home/bbplusah/expertplus.bbplus-ec.com/logos/$xLogoFirma";
-                        $mail->AddEmbeddedImage($xLOGO, 'LogoFirma', $xLogoFirma);
-                        $mail->isHTML(true);      
-                        $subject = "Datos Para Agendamiento - $xPaciente ";
-                        $subject = utf8_decode($subject);
-                        $mail->Subject = $subject;
-                        $mail->Body    = utf8_decode($message);
-                        //$mail->AddAttachment($destinationpdf);
-                        //$mail->AddAttachment($destinationxml);
+            //             //file_put_contents('log_1seguimiento.txt', "$message" . "\n\n", FILE_APPEND);
+            //             // Content
+            //             $xLOGO = "/home/bbplusah/expertplus.bbplus-ec.com/logos/$xLogoFirma";
+            //             $mail->AddEmbeddedImage($xLOGO, 'LogoFirma', $xLogoFirma);
+            //             $mail->isHTML(true);      
+            //             $subject = "Datos Para Agendamiento - $xPaciente ";
+            //             $subject = utf8_decode($subject);
+            //             $mail->Subject = $subject;
+            //             $mail->Body    = utf8_decode($message);
+            //             //$mail->AddAttachment($destinationpdf);
+            //             //$mail->AddAttachment($destinationxml);
                         
-                        $mail->send();
+            //             $mail->send();
                         
-                        $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
-                        $xSQL .= "VALUES('Mail Agendamiento Enviado',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
-                        mysqli_query($con, $xSQL); 
+            //             $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
+            //             $xSQL .= "VALUES('Mail Agendamiento Enviado',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
+            //             mysqli_query($con, $xSQL); 
 
-                }catch (Exception $e) {
-                    $xAgendaid = -1;
-                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                    echo $e;
-                    $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
-                    $xSQL .= "VALUES('$e',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
-                    mysqli_query($con, $xSQL);                     
-                    //file_put_contents('1_logseguimiento.txt', "$xFecha ERROR: - $e - uid[$mail->ErrorInfo] " . "\n\n", FILE_APPEND);
-                    exit(0);
-                }                
-            }
+            //     }catch (Exception $e) {
+            //         $xAgendaid = -1;
+            //         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            //         echo $e;
+            //         $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
+            //         $xSQL .= "VALUES('$e',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
+            //         mysqli_query($con, $xSQL);                     
+            //         //file_put_contents('1_logseguimiento.txt', "$xFecha ERROR: - $e - uid[$mail->ErrorInfo] " . "\n\n", FILE_APPEND);
+            //         exit(0);
+            //     }                
+            // }
         }
     }
     

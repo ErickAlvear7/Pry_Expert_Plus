@@ -436,7 +436,7 @@
                                         </label>
                                         <?php 
                                             $xSQL = "SELECT pres_id AS Codigo, pres_nombre AS Descripcion FROM `expert_prestadora` WHERE pais_id=$xPaisid and empr_id=$xEmprid AND prov_id=$xCiudadid AND pres_estado='A' ";
-                                            file_put_contents('log_1seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
+                                            //file_put_contents('log_1seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
                                             $all_prestadora = mysqli_query($con, $xSQL);
                                         ?>                                        
                                         <select name="cboPrestador" id="cboPrestador" aria-label="Seleccione Prestador" data-control="select2" data-placeholder="Seleccione Prestador" data-dropdown-parent="#tabTitular" class="form-select mb-2">
@@ -3607,9 +3607,19 @@
             if(_agendaid > 0){
                 alert('Mostrar resumen del agendamiento: ' + _agendaid);
                 //CREAR UN AJAX que CONSULTE LA AGENDA PARA UN RESUMEN
-                
+                var xrespuesta = $.post("codephp/get_datosagendamiento.php", { xxAgendaid: _agendaid,xxPaisid:_paisid,xxEmprid: _emprid});
+                xrespuesta.done(function(response){
+
+                    var _datos = JSON.parse(response);
+                    console.log(_datos);
+
+                    // _ciudadben = _datos[0].Ciudad;
+                    // _perenben = _datos[0].Parentesco;
+                    // _estadoben = _datos[0].Estado;
+                    // _estadoben = _datos[0].Estado;
 
 
+                    });
             }            
 
             document.getElementById('imgfiletitular').style.backgroundImage="url(persona/" + _avatar + ")";
