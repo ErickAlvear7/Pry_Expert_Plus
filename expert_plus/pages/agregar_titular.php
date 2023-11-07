@@ -956,7 +956,7 @@
     //Agendar Titular
     function f_Agendar(_tituid){
 
-        $.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'prodid': _prodid, 'grupid': _grupid });
+        $.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'prodid': _prodid, 'grupid': _grupid, 'agendaid': 0 });
     }    
 
     //Boton regresar pagina metodo POST
