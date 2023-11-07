@@ -52,12 +52,12 @@
         $xOrdenDet = $ord['Orden'];
     }
 
-    $xSQL = "SELECT  titu_id AS Idtitu FROM `expert_beneficiario` ORDER BY titu_id DESC LIMIT 1 ";
-    $titularid = mysqli_query($con, $xSQL);
+    // $xSQL = "SELECT  titu_id AS Idtitu FROM `expert_beneficiario` ORDER BY titu_id DESC LIMIT 1 ";
+    // $titularid = mysqli_query($con, $xSQL);
 
-    foreach($titularid as $tit){
-        $xIdtitu = $tit['Idtitu'];
-    }
+    // foreach($titularid as $tit){
+    //     $xIdtitu = $tit['Idtitu'];
+    // }
 
 
     $xSQL = "SELECT DISTINCT provincia AS Descripcion FROM `provincia_ciudad` ";
@@ -522,6 +522,12 @@
                                                         $xTextColor = "badge badge-light-danger";
                                                         $xDisabledEdit = 'disabled';
                                                     }
+
+                                                    $xSQL = "SELECT COUNT(*) AS Bene FROM `expert_beneficiario` WHERE titu_id=$xTituid ";
+                                                    $cont_bene = mysqli_query($con, $xSQL);
+                                                    foreach ($cont_bene as $ben){
+                                                        $xBene = $ben['Bene'];
+                                                    }
                                                 ?> 
                                             <tr>
                                                 <?php
@@ -557,7 +563,7 @@
                                                 <td>
                                                     <div class="text-center">
                                                         <div class="btn-group">	
-                                                            <button type="button" <?php echo $xDisabledEdit;?> id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular(<?php echo $xPerid; ?>,<?php echo $xTituid; ?>,<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                            <button type="button" <?php echo $xDisabledEdit;?> id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular(<?php echo $xPerid; ?>,<?php echo $xTituid; ?>,<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular (+<?php echo $xBene; ?>B )' data-bs-toggle="tooltip" data-bs-placement="left">
                                                                 <i class="fa fa-edit"></i>
                                                             </button> 
                                                             <button type="button" <?php echo $xDisabledEdit;?> id="btnAgendar_<?php echo $xPerid; ?>" name="btnAgendar" onclick="f_Agendar(<?php echo $xTituid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
@@ -831,16 +837,12 @@
             xrespuesta.always(function() {
                 
             }); 
-            
-          
         
         });
 
         //Datos Provincia para  Beneficiario
         $('#cboProvinciaBe').change(function(){
-                    
-            //var _paisid = "<?php echo $xPaisid; ?>";
-            //var _emprid = "<?php echo $xEmprid; ?>";                
+                                  
             _cboid = $(this).val(); //obtener el id seleccionado
             
             $("#cboCiudadBe").empty();
@@ -868,8 +870,6 @@
         
         });
 
-
-
     });
 
    
@@ -887,8 +887,6 @@
     //Gravar Parentesco Modal
 
     function f_GuardarParen(_idpaca,_ordet){
-
-        var _estado = 'A';
 
         if($.trim($('#txtDetalle').val()) == '')
         {           
@@ -925,8 +923,7 @@
                     "xxPaisid" : _paisid,
                     "xxOrden" : _ordet,
                     "xxDetalle" : _detalle,
-                    "xxValorV" : _valorV,
-                    "xxEstado" : _estado,
+                    "xxValorV" : _valorV
                 }
 
                 var xrespuesta = $.post("codephp/grabar_newdetalle.php", _parametros);
@@ -977,7 +974,6 @@
 
     $('#btnAgregar').click(function(){
        
-        var _tituid = '<?php echo $xIdtitu; ?>';
         var _continuar = true;
         var _cboDocumentoBe = $('#cboDocumentoBe').val();
         var _txtDocumentoBe = $('#txtDocumentoBe').val();
@@ -1067,7 +1063,7 @@
 
         var _parametros = {
             
-            xxTituid: _tituid,
+            xxProdId: _prodid,
             xxPaisId: _paisid,
             xxEmprId: _emprid,
             xxDocumento: _txtDocumentoBe
@@ -1172,7 +1168,6 @@
 
     };
 
- 
 
     //Agregar Persona - Titular 
 
