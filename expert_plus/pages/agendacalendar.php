@@ -1698,9 +1698,8 @@
                 popover = KTApp.initBootstrapPopover(element, options);
 
                 // Show popover
-                popover.show();     
-                popoverState = true;       
-
+                popover.show();
+                popoverState = true;
             }
 
             function f_DelAgenda(arg){

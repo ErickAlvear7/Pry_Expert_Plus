@@ -40,6 +40,7 @@
     $xTituid = $_POST['tituid'];
     $xProdid = $_POST['prodid'];
     $xGrupid = $_POST['grupid'];
+    $xAgendaid = $_POST['agendaid'];
 
     if(!isset($_POST['tituid'])){
         if($_POST['tituid'] == ''){
@@ -3601,6 +3602,14 @@
             var _cbopreeid = 0;
             var _cboprofid = 0;
 
+            var _agendaid = "<?php echo $xAgendaid; ?>";
+            if(_agendaid > 0){
+                alert('Mostrar resumen del agendamiento: ' + _agendaid);
+                //CREAR UN AJAX que CONSULTE LA AGENDA PARA UN RESUMEN
+                
+
+
+            }            
 
             document.getElementById('imgfiletitular').style.backgroundImage="url(persona/" + _avatar + ")";
 

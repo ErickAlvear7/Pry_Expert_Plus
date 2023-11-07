@@ -1210,22 +1210,22 @@
         }
 
         if(_cboDocumento == ''){
-            mensajesalertify("Seleccione Tipo Documento..!", "W", "top-right", 3);
+            mensajesalertify("Seleccione Tipo Documento Titular..!", "W", "top-right", 3);
             return; 
         }
 
         if(_txtDocumento == ''){
-            mensajesalertify("Ingrese Numero de Documento..!", "W", "top-right", 3);
+            mensajesalertify("Ingrese Numero de Documento Titular..!", "W", "top-right", 3);
             return; 
         }
 
         if(_txtDocumento.length < 10){
-            mensajesalertify("Documento Incorrecto..!", "W", "top-right", 3);
+            mensajesalertify("Documento Incorrecto Titular ..!", "W", "top-right", 3);
             return; 
         }
 
         if(_txtNombre == ''){
-            mensajesalertify("Ingrese Nombre..!", "W", "top-right", 3);
+            mensajesalertify("Ingrese Nombre Titular..!", "W", "top-right", 3);
             return; 
         }
 
@@ -1324,9 +1324,11 @@
                                             
                                     if(response == 'OK'){
 
-                                        $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', 
+                                        $.redirect('?page=addtitular&menuid=<?php echo $menuid; ?>', 
                                         {'mensaje': 'Grabado con Éxito..!',
-                                          'idclie': _idclie
+                                          'idclie': _idclie,
+                                          'idprod' : _prodid,
+                                          'idgrup' : _grupid
                                         
                                         }); //POR METODO POST
                             
@@ -1334,9 +1336,11 @@
 
                                 });
                             }else{
-                                $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', 
+                                $.redirect('?page=addtitular&menuid=<?php echo $menuid; ?>', 
                                 {'mensaje': 'Grabado con Éxito..!',
-                                    'idclie': _idclie
+                                    'idclie': _idclie,
+                                    'idprod' : _prodid,
+                                    'idgrup' : _grupid
                                 }); //POR METODO POST
 
                             }

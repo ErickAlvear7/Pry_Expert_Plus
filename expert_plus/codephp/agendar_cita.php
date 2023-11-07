@@ -139,19 +139,18 @@
                 $xSQL .= "VALUES($xPaisid,$xEmprid,'$xTipoCliente',$xTituid,$xBeneid,$xProdid,$xGrupid,$xPresid,$xEspeid,$xPfesid,'{$xFechaIni}','{$xFechaFin}',$xCodigoDia,'$xDia','{$xHoraDesde}','{$xHoraHasta}','$xTipoRegistro',$xMotivoRegistro,'$xObservacion','$xEstadoAgenda',$xCodigoAgenda,'$xColor','$xTextColor','{$xFecha}',$xUsuaid,'$xTerminal') ";
                 if(mysqli_query($con, $xSQL)){
                     
+                    $xAgendaid = mysqli_insert_id($con);
+
                     //BORRAR EL AGENDAMIENTO TEMPORAL
                     
                     $xSQL = "DELETE FROM `expert_reserva_tmp` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pres_id=$xPresid AND espe_id=$xEspeid AND pfes_id=$xPfesid AND fecha_inicio='$xFechaIni' AND fecha_fin='$xFechaFin' AND codigo_dia=$xCodigoDia  ";
                     mysqli_query($con, $xSQL);
-                    
-                    file_put_contents('1_logseguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
-    
-                    $xAgendaid = mysqli_insert_id($con);
+                                        
                     $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
                     $xSQL .= "VALUES('Registro Agendado',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
                     mysqli_query($con, $xSQL); 
                     
-                    $xAgendado = 110;
+                    $xAgendado = 111;
                 }
             }else{
                 $xAgendaid = 0;
@@ -357,7 +356,10 @@
                     $xAgendaid = -1;
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                     echo $e;
-                    file_put_contents('1_logseguimiento.txt', "$xFecha ERROR: - $e - uid[$mail->ErrorInfo] " . "\n\n", FILE_APPEND);
+                    $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
+                    $xSQL .= "VALUES('$e',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
+                    mysqli_query($con, $xSQL);                     
+                    //file_put_contents('1_logseguimiento.txt', "$xFecha ERROR: - $e - uid[$mail->ErrorInfo] " . "\n\n", FILE_APPEND);
                     exit(0);
                 }                
             }
