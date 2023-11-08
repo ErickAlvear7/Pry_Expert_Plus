@@ -73,10 +73,22 @@
     }
 
 
-    $xSQL = "SELECT bene_id AS Beneid,CONCAT(bene_nombres,' ',bene_apellidos) AS Beneficiario, bene_ciudad AS Ciudadben, bene_parentesco AS Parentesco, bene_estado AS Estadoben ";
+    $xSQL = "SELECT bene_id AS Beneid,bene_numerodocumento AS Docu,CONCAT(bene_nombres,' ',bene_apellidos) AS Beneficiario, bene_ciudad AS Ciudadben, bene_parentesco AS Parentesco, bene_estado AS Estadoben ";
     $xSQL .= "FROM `expert_beneficiario` WHERE titu_id=$tituid";
     $all_Beneficiario = mysqli_query($con, $xSQL);
 
+    $xSQL = "SELECT paca_id AS Idpaca FROM `expert_parametro_cabecera` WHERE paca_nombre='Parentesco' ";
+    $all_id = mysqli_query($con, $xSQL);
+
+    foreach($all_id as $id){
+        $xPacaid = $id['Idpaca'];
+    }
+
+    $xSQL = "SELECT  pade_orden AS Orden FROM `expert_parametro_detalle`WHERE paca_id = $xPacaid ORDER BY pade_orden DESC LIMIT 1 ";
+    $orden = mysqli_query($con, $xSQL);
+    foreach($orden as $ord){
+        $xOrdenDet = $ord['Orden'];
+    }
 
 
 ?>
@@ -148,7 +160,7 @@
                         </button> 
                     </div>
                     <div class="separator"></div>
-                    <div id="kt_user_view_details" class="collapse show">
+                    <div id="kt_user_view_details" class="collapse">
                         <div class="pb-5 fs-6">
                             <div class="fw-bolder mt-5">CEDULA</div>
                             <div class="text-gray-600"><?php echo $xDocumento; ?></div>
@@ -165,78 +177,21 @@
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0">
                     <div class="card-title">
-                        <h3 class="fw-bolder m-0">Connected Accounts</h3>
+                      <h2>Opciones</h2>
                     </div>
                 </div>
+                <div class="separator"></div>
                 <div class="card-body pt-2">
-                    <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6">
-                        <span class="svg-icon svg-icon-2tx svg-icon-primary me-4">
+                    <button type="button" id="btnNewParen" class="btn btn-light-primary btn-sm mb-10">
+                        <span class="svg-icon svg-icon-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path opacity="0.3" d="M22 19V17C22 16.4 21.6 16 21 16H8V3C8 2.4 7.6 2 7 2H5C4.4 2 4 2.4 4 3V19C4 19.6 4.4 20 5 20H21C21.6 20 22 19.6 22 19Z" fill="currentColor" />
-                                <path d="M20 5V21C20 21.6 19.6 22 19 22H17C16.4 22 16 21.6 16 21V8H8V4H19C19.6 4 20 4.4 20 5ZM3 8H4V4H3C2.4 4 2 4.4 2 5V7C2 7.6 2.4 8 3 8Z" fill="currentColor" />
+                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
                             </svg>
-                        </span>
-                        <div class="d-flex flex-stack flex-grow-1">
-                            <div class="fw-bold">
-                                <div class="fs-6 text-gray-700">By connecting an account, you hereby agree to our
-                                <a href="#" class="me-1">privacy policy</a>and
-                                <a href="#">terms of use</a>.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="py-2">
-                        <div class="d-flex flex-stack">
-                            <div class="d-flex">
-                                <img src="assets/media/svg/brand-logos/google-icon.svg" class="w-30px me-6" alt="" />
-                                <div class="d-flex flex-column">
-                                    <a href="#" class="fs-5 text-dark text-hover-primary fw-bolder">Google</a>
-                                    <div class="fs-6 fw-bold text-muted">Plan properly your workflow</div>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" name="google" type="checkbox" value="1" id="kt_modal_connected_accounts_google" checked="checked" />
-                                    <span class="form-check-label fw-bold text-muted" for="kt_modal_connected_accounts_google"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="separator separator-dashed my-5"></div>
-                        <div class="d-flex flex-stack">
-                            <div class="d-flex">
-                                <img src="assets/media/svg/brand-logos/github.svg" class="w-30px me-6" alt="" />
-                                <div class="d-flex flex-column">
-                                    <a href="#" class="fs-5 text-dark text-hover-primary fw-bolder">Github</a>
-                                    <div class="fs-6 fw-bold text-muted">Keep eye on on your Repositories</div>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" name="github" type="checkbox" value="1" id="kt_modal_connected_accounts_github" checked="checked" />
-                                    <span class="form-check-label fw-bold text-muted" for="kt_modal_connected_accounts_github"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="separator separator-dashed my-5"></div>
-                        <div class="d-flex flex-stack">
-                            <div class="d-flex">
-                                <img src="assets/media/svg/brand-logos/slack-icon.svg" class="w-30px me-6" alt="" />
-                                <div class="d-flex flex-column">
-                                    <a href="#" class="fs-5 text-dark text-hover-primary fw-bolder">Slack</a>
-                                    <div class="fs-6 fw-bold text-muted">Integrate Projects Discussions</div>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <label class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" name="slack" type="checkbox" value="1" id="kt_modal_connected_accounts_slack" />
-                                    <span class="form-check-label fw-bold text-muted" for="kt_modal_connected_accounts_slack"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer border-0 d-flex justify-content-center pt-0">
-                    <button class="btn btn-sm btn-light-primary">Save Changes</button>
-                </div>
+                        </span>                                                                
+                        Nuevo Parentesco
+                    </button>
+                </div>   
             </div>
         </div>
         <div id="tab_Addbeneficiarios" class="flex-lg-row-fluid ms-lg-15">
@@ -411,6 +366,7 @@
                                 <tr class="text-start text-muted text-uppercase gs-0">
                                     <th class="min-w-90px">CIUDAD</th>
                                     <th>NOMBRES</th>
+                                    <th>DOCUMENTO</th>
                                     <th>PARENTESCO</th>
                                     <th>ESTADO</th>
                                     <th>ESTATUS</th>
@@ -421,6 +377,7 @@
                                 <?php 
                                     foreach($all_Beneficiario as $ben){
                                     $xBeneid = $ben['Beneid'];
+                                    $xDocu = $ben['Docu'];
                                     $xBeneficiario = $ben['Beneficiario'];
                                     $xCiuben = $ben['Ciudadben'];
                                     $xParenben = $ben['Parentesco'];
@@ -464,6 +421,7 @@
                                 <tr id="row_<?php echo $xBeneid; ?>">
                                     <td class="text-uppercase"><?php echo $xCiubene; ?></td>
                                     <td><?php echo $xBeneficiario; ?></td>
+                                    <td><?php echo $xDocu; ?></td>
                                     <td><?php echo $xPareben; ?></td>
                                     <td id="td_<?php echo $xBeneid; ?>">
                                         <div class="<?php echo $xTextColor; ?>">
@@ -702,10 +660,47 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="modal_new_paren" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Nuevo Parentesco</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <div class="d-flex flex-column mb-7 fv-row">
+                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span class="required">Detalle</span>
+                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del detalle"></i>
+                    </label>
+                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="80" placeholder="nombre del detalle" value="" />
+                </div>
+                <div class="fv-row mb-15">
+                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span class="required">Valor Texto</span>
+                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="valor texto ejemplo FFF"></i>
+                    </label>
+                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorV" name="txtValorV" minlength="3" maxlength="3" placeholder="valor texto" value="" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnGuardar" onclick="f_GuardarParen(<?php echo $xPacaid; ?>,<?php echo $xOrdenDet; ?>)" class="btn btn-primary">Grabar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
 
-    var _prodid='<?php echo $xprodid; ?>',_grupid='<?php echo $xgrupid; ?>',_paisid = '<?php echo $xPaisid; ?>',_emprid = '<?php echo $xEmprid; ?>', _usuaid='<?php echo $xUsuaid ; ?>';
+    var _tituid='<?php echo $tituid; ?>',_prodid='<?php echo $prodid; ?>',_grupid='<?php echo $grupid; ?>',_paisid = '<?php echo $xPaisid; ?>',_emprid = '<?php echo $xEmprid; ?>', _usuaid='<?php echo $xUsuaid ; ?>';
 
     $(document).ready(function(){
 
@@ -746,6 +741,16 @@
 
     });
 
+    $("#btnNewParen").click(function(){
+
+      $("#modal_new_paren").modal("show");
+    });
+
+
+    $("#modal_new_paren").draggable({
+       handle: ".modal-header"
+    });
+
 
      // Desplazar Modal
     $("#modal_beneficiario").draggable({
@@ -765,6 +770,75 @@
             'idgrup': _grupid
         });
     
+    }
+
+        //Gravar Parentesco Modal
+
+    function f_GuardarParen(_idpaca,_ordet){
+
+        if($.trim($('#txtDetalle').val()) == '')
+        {           
+            mensajesalertify('Ingrese Detalle..!', 'W', 'top-right', 3);
+            return false;          
+        }
+
+        if($.trim($('#txtValorV').val()) == '')
+        {    
+            mensajesalertify('Ingrese Valor Texto..!', 'W', 'top-right', 3);
+            return false;
+        }
+
+
+        var _detalle = $.trim($('#txtDetalle').val());
+        var _valorV =  $.trim($('#txtValorV').val());
+
+        var _parametro ={
+            "xxPacaid" : _idpaca,
+            "xxDetalle" : _detalle,
+            "xxValorV" : _valorV,
+        }
+
+        var xrespuesta = $.post("codephp/consultar_newdetalle.php", _parametro);
+        xrespuesta.done(function(response){
+
+
+            if(response == 0){
+
+                _ordet++;
+
+                var _parametros ={
+                    "xxPacaid" : _idpaca,
+                    "xxPaisid" : _paisid,
+                    "xxOrden" : _ordet,
+                    "xxDetalle" : _detalle,
+                    "xxValorV" : _valorV
+                }
+
+                var xrespuesta = $.post("codephp/grabar_newdetalle.php", _parametros);
+                xrespuesta.done(function(response){
+
+                    if(response.trim() != 'ERR'){
+
+                        mensajesalertify('Nuevo Parentesco Agregado', 'S', 'top-center', 3); 
+
+                        $("#txtDetalle").val("");
+                        $("#txtValorV").val("");
+                        $("#cboParentesco").empty();
+                        $("#cboParentesco").html(response);      
+                        $("#modal_new_paren").modal("hide");
+
+                    }
+
+                });
+
+            }else{
+
+                mensajesalertify('Parentesco ya Existe y/o Valor texto', 'W', 'top-right', 3);
+                $("#txtDetalle").val("");
+                $("#txtValorV").val("");
+            }
+
+        });
     }
 
     // Modal editar titular
@@ -789,8 +863,7 @@
             dataType: "json",
             data: $parametros,          
             success: function(data){ 
-                //console.log(data);
-                //debugger;
+           
                 var _nombre = data[0]['Nombres'];
                 var _apellido = data[0]['Apellidos'];
                 var _avatar = data[0]['Imagen'] == '' ? 'default.png' : data[0]['Imagen'];
@@ -867,6 +940,7 @@
 
             var _datos = JSON.parse(response);
 
+            _documento = _datos[0].Docu;
             _ciudadben = _datos[0].Ciudad;
             _perenben = _datos[0].Parentesco;
             _estadoben = _datos[0].Estado;
@@ -931,6 +1005,7 @@
 
                 _output ='<td class="text-uppercase">' + _ciudadben + '</td>';
                 _output +='<td>' +_nombrescombe + '</td>';
+                _output +='<td>' +_documento + '</td>';
                 _output +='<td>' +_perenben + '</td>';
                 _output +='<td id="td_'+ _beneid + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
                 _output +='<td><div class="form-check form-check-sm form-check-custom form-check-solid">';
@@ -954,7 +1029,6 @@
     
     $('#btnAgregar').click(function(){
 
-        var _tituid = '<?php echo $tituid; ?>';
         var _cboAddDocumentoBe = $('#cboAddDocumentoBe').val();
         var _txtAddDocumentoBe = $('#txtAddDocumentoBe').val();
         var _txtAddNombreBe = $.trim($("#txtAddNombreBe").val());
@@ -1044,9 +1118,9 @@
 
         var _parametro = {
             
-            xxTituid: _tituid,
-            xxPaisId: _paisid,
-            xxEmprId: _emprid,
+            xxProdid: _prodid,
+            xxPaisid: _paisid,
+            xxEmprid: _emprid,
             xxDocumento: _txtAddDocumentoBe
         }
 
@@ -1059,6 +1133,7 @@
                     "xxTituid" : _tituid,
                     "xxPaisid" : _paisid,
                     "xxEmprid" : _emprid,
+                    "xxProdid" : _prodid,
                     "xxUsuaid" : _usuaid,
                     "xxTipodocu" : _cboAddDocumentoBe,
                     "xxDocumento" : _txtAddDocumentoBe,
@@ -1086,6 +1161,7 @@
                         _output = '<tr id="row_' + _id + '">';
                         _output +='<td class="text-uppercase">' + _txtCiudadBe + '</td>';
                         _output +='<td>' +_txtAddnombresCompletos + '</td>';
+                        _output +='<td>' +_txtAddDocumentoBe + '</td>';
                         _output +='<td>' +_txtParentesco + '</td>';
                         _output +='<td id="td_'+ _id + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
                         _output +='<td><div class="form-check form-check-sm form-check-custom form-check-solid">';
@@ -1101,7 +1177,7 @@
                         $('#tblBeneficiario').append(_output);
                         mensajesalertify('Agregado Correctamente..!', 'S', 'top-center', 3);
 
-                        console.log(_output);
+                        //console.log(_output);
 
                         $("#cboAddDocumentoBe").val('').change();
                         $("#txtAddDocumentoBe").val('');
