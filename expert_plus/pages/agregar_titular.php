@@ -17,6 +17,7 @@
 
     //$xServidor = $_SERVER['HTTP_HOST'];
     $page = isset($_GET['page']) ? $_GET['page'] : "index";
+    $mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
 
     $menuid = $_GET['menuid'];
     $clieid = $_POST['idclie'];
@@ -51,13 +52,6 @@
     foreach($orden as $ord){
         $xOrdenDet = $ord['Orden'];
     }
-
-    // $xSQL = "SELECT  titu_id AS Idtitu FROM `expert_beneficiario` ORDER BY titu_id DESC LIMIT 1 ";
-    // $titularid = mysqli_query($con, $xSQL);
-
-    // foreach($titularid as $tit){
-    //     $xIdtitu = $tit['Idtitu'];
-    // }
 
 
     $xSQL = "SELECT DISTINCT provincia AS Descripcion FROM `provincia_ciudad` ";
@@ -132,6 +126,7 @@
 
 ?>
 <div id="kt_content_container" class="container-xxl">
+    <input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
     <form id="kt_ecommerce_edit_order_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/sales/listing.html">
         <div class="w-100 flex-lg-row-auto w-lg-300px mb-7 me-7 me-lg-10">
             <div class="card card-flush py-4">
@@ -278,32 +273,21 @@
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0">
                     <div class="card-title">
-                        <!-- <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_opciones" role="button" aria-expanded="false" aria-controls="view_datos_producto">Opciones
-                            <span class="ms-2 rotate-180">
-                                <span class="svg-icon svg-icon-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                    </svg>
-                                </span>
-                            </span>
-                        </div>  -->
                         <h2>Opciones</h2>
                     </div>
                 </div>
                 <div class="separator"></div>
-                <!-- <div id="view_datos_opciones" class="collapse "> -->
-                    <div class="card-body pt-2">
-                        <button type="button" id="btnNewParen" class="btn btn-light-primary btn-sm mb-10">
-                            <span class="svg-icon svg-icon-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                    <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                </svg>
-                            </span>                                                                
-                            Nuevo Parentesco
-                        </button>
-                    </div>
-                <!-- </div> -->
+                <div class="card-body pt-2">
+                    <button type="button" id="btnNewParen" class="btn btn-light-primary btn-sm mb-10">
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+                            </svg>
+                        </span>                                                                
+                        Nuevo Parentesco
+                    </button>
+                </div>
             </div>
         </div>
         <div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">
@@ -761,7 +745,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button type="button" id="btnGrabar" onclick="" class="btn btn-primary"><i class="las la-save"></i>
+                <button type="button" id="btnGrabar" class="btn btn-primary"><i class="las la-save"></i>
                     <span class="indicator-label">Grabar</span>
                 </button>
             </div>
@@ -811,6 +795,12 @@
         _idclie = '<?php echo $clieid; ?>',_paisid = '<?php echo $xPaisid; ?>',_emprid = '<?php echo $xEmprid; ?>',_result = [];
     
     $(document).ready(function(){
+
+        var _mensaje = $('input#mensaje').val();
+
+        if(_mensaje != ''){
+            mensajesalertify(_mensaje,"S","top-center",3); 
+        }
 
         $('#cboProvincia').change(function(){
                     
@@ -1063,9 +1053,9 @@
 
         var _parametros = {
             
-            xxProdId: _prodid,
-            xxPaisId: _paisid,
-            xxEmprId: _emprid,
+            xxProdid: _prodid,
+            xxPaisid: _paisid,
+            xxEmprid: _emprid,
             xxDocumento: _txtDocumentoBe
         }
 
@@ -1169,7 +1159,7 @@
     };
 
 
-    //Agregar Persona - Titular 
+    //Agregar Titular -Beneficiario a la BDD
 
     $('#btnGrabar').click(function(){
 
@@ -1273,9 +1263,12 @@
         }
 
         var _parametros = {
-            
+
+            xxProdid: _prodid,
+            xxPaisid: _paisid,
+            xxEmprid: _emprid,
             xxDocumento: _txtDocumento,
-        
+
         }
 
         
@@ -1319,7 +1312,7 @@
                         if(dataid != 0){
 
                             if(_result.length > 0){
-                                var xrespuesta = $.post("./codephp/grabar_beneficiariotitular.php", { xxTituid: dataid, xxUsuaid: _userid,xxPaisid: _paisid,xxEmprid: _emprid,xxResult: _result });
+                                var xrespuesta = $.post("./codephp/grabar_beneficiariotitular.php", { xxTituid: dataid, xxUsuaid: _userid,xxPaisid: _paisid,xxEmprid: _emprid,xxProdid: _prodid,xxResult: _result });
                                     xrespuesta.done(function(response){
                                             
                                     if(response == 'OK'){
@@ -1358,7 +1351,8 @@
                 return false;
             }
 
-        });   
+        }); 
+        
 
     });
     

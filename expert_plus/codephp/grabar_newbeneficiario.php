@@ -17,12 +17,13 @@ $xTerminal = gethostname();
 
 $xLastid = 0;  
 
-if(isset($_POST['xxTituid']) and isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxDocumento'])){
-    if(isset($_POST['xxTituid']) <> '' and isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxDocumento']) <> ''){
-
+if(isset($_POST['xxTituid']) and isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxProdid']) and isset($_POST['xxUsuaid'])){
+    if(isset($_POST['xxTituid']) <> '' and isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> ''  and isset($_POST['xxProdid']) <> '' and isset($_POST['xxUsuaid']) <> ''){
+        
         $xTituid = $_POST['xxTituid'];
         $xPaisid = $_POST['xxPaisid'];
         $xEmprid = $_POST['xxEmprid'];
+        $xProdid = $_POST['xxProdid'];
         $xUsuaid = $_POST['xxUsuaid'];
         $xTipodocumento = $_POST['xxTipodocu'];
         $xDocumento = trim($_POST['xxDocumento']);
@@ -40,10 +41,10 @@ if(isset($_POST['xxTituid']) and isset($_POST['xxPaisid']) and isset($_POST['xxE
         $xFechanacimiento = $_POST['xxFechanaci'];
 
         
-        $xSQL = "INSERT INTO `expert_beneficiario` (titu_id,pais_id,empr_id,bene_tipoidentificacion,bene_numerodocumento,bene_nombres,bene_apellidos,  ";
+        $xSQL = "INSERT INTO `expert_beneficiario` (titu_id,pais_id,empr_id,prod_id,bene_tipoidentificacion,bene_numerodocumento,bene_nombres,bene_apellidos,  ";
         $xSQL .= "bene_genero,bene_estadocivil,bene_ciudad,bene_direccion,bene_telefonocasa,bene_telefonoficina,bene_celular, ";
         $xSQL .= "bene_email,bene_parentesco,bene_fechanacimiento,fechacreacion,usuariocreacion,terminalcreacion) ";
-        $xSQL .= "VALUES ($xTituid,$xPaisid,$xEmprid,'$xTipodocumento','$xDocumento','$xNombre','$xApellido','$xGenero','$xEstadocivil',$xCiudad,'$xDireccion', ";
+        $xSQL .= "VALUES ($xTituid,$xPaisid,$xEmprid,$xProdid,'$xTipodocumento','$xDocumento','$xNombre','$xApellido','$xGenero','$xEstadocivil',$xCiudad,'$xDireccion', ";
         $xSQL .= "'$xTelcasa','$xTelofi','$xCelular','$xEmail','$xParentesco','{$xFechanacimiento}','{$xFecha}',$xUsuaid,'$xTerminal')";
         mysqli_query($con, $xSQL);
         $xLastid = mysqli_insert_id($con);

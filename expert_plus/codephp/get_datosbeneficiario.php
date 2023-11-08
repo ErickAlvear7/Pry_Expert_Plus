@@ -21,7 +21,7 @@
 
             $xDatos = [];
 
-            $xSQL = "SELECT(SELECT prv.ciudad FROM `provincia_ciudad` prv WHERE prv.prov_id=bne.bene_ciudad) AS Ciudad, bne.bene_nombres AS Nombres, ";
+            $xSQL = "SELECT(SELECT prv.ciudad FROM `provincia_ciudad` prv WHERE prv.prov_id=bne.bene_ciudad) AS Ciudad,bene_numerodocumento AS Docu, bne.bene_nombres AS Nombres, ";
             $xSQL .= "bne.bene_apellidos AS Apellidos, bne.bene_direccion AS Direccion, (SELECT pde.pade_nombre FROM `expert_parametro_detalle` pde, ";
             $xSQL .= "`expert_parametro_cabecera` pca WHERE pde.paca_id=pca.paca_id AND pca.paca_nombre='Parentesco' AND pde.pade_valorv=bne.bene_parentesco) AS Parentesco, ";
             $xSQL .= "bne.bene_telefonocasa AS Telcasa, bne.bene_telefonoficina AS Telofi, bne.bene_celular AS Celular, bne.bene_email AS Email, ";
@@ -30,7 +30,8 @@
 
              foreach($all_datos as $ben) {
 
-                $xCiudad = $ben["Ciudad"]; 
+                $xCiudad = $ben["Ciudad"];
+                $xDocu = $ben["Docu"]; 
                 $xNombres = $ben["Nombres"];
                 $xApellidos = $ben["Apellidos"];
                 $xDireccion = $ben["Direccion"];
@@ -42,7 +43,8 @@
                 $xEstado = $ben["Estado"];
  
                 $xDatos[] = array(
-                    'Ciudad'=> $xCiudad, 
+                    'Ciudad'=> $xCiudad,
+                    'Docu'=> $xDocu,  
                     'Nombres'=> $xNombres, 
                     'Apellidos'=> $xApellidos, 
                     'Direccion'=> $xDireccion, 
