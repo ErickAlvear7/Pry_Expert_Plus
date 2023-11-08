@@ -23,14 +23,14 @@ function mensajesalertify(_mensaje, _tipo, _position, _tiempo){
 
 //FUNCIONES ALERTIFY
 
-function mensajesweetalert(_position, _icon, _title, _showconfirbutton, _timer){
+function mensajesweetalert(_position, _icon, _title, _showconfirbutton, _timer, opcion){
     Swal.fire({
         position: _position,
         icon: _icon,
         title: _title,
         showConfirmButton: _showconfirbutton,
         timer: _timer
-      })
+      });
 }
 
 function mensajetoastr(_position, _tipo, _title, _mensaje, _timer, _closebutton, _progress){

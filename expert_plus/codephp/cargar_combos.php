@@ -12,12 +12,12 @@
     $log_file = "err_consulta";
     $xRow = 0;  
 
-    if(isset($_POST['xxPaisId']) and isset($_POST['xxEmprId']) and isset($_POST['xxComboId']) and isset($_POST['xxOpcion']) ){
-        if(isset($_POST['xxPaisId']) <> '' and isset($_POST['xxEmprId']) <> '' and isset($_POST['xxComboId']) <> '' and isset($_POST['xxOpcion']) <> ''){ 
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxComboid']) and isset($_POST['xxOpcion']) ){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxComboid']) <> '' and isset($_POST['xxOpcion']) <> ''){ 
 
-            $xPaisid = $_POST['xxPaisId'];
-            $xEmprid = $_POST['xxEmprId'];
-            $xComboid = $_POST['xxComboId'];
+            $xPaisid = $_POST['xxPaisid'];
+            $xEmprid = $_POST['xxEmprid'];
+            $xComboid = $_POST['xxComboid'];
             $xOpcion = $_POST['xxOpcion'];
 
             switch($xOpcion){
