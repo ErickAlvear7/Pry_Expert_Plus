@@ -103,7 +103,7 @@
                         <div class="symbol symbol-100px symbol-circle mb-7">
                             <img src="persona/<?php echo $xImagen; ?>" alt="image" />
                         </div>
-                        <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-3"><?php echo $xPersona; ?></a>
+                        <label class="fs-3 text-gray-800 fw-bolder mb-3"><?php echo $xPersona; ?></label>
                         <div class="mb-9">
                             <div class="badge badge-lg badge-light-primary d-inline"><?php echo $xestado; ?></div>
                         </div>
@@ -155,9 +155,15 @@
                                 </svg>
                             </span>
                         </span></div>
-                        <button type="button" id="btnEditarPer_<?php echo $xPerid; ?>" class="btn btn-outline-primary btnEditarPer">
-                            Editar
-                        </button> 
+                        <button type="button" id="btnEditarPer_<?php echo $xPerid; ?>" class="btn btn-light-primary btn-sm mb-10 btnEditarPer">
+                            <span class="svg-icon svg-icon-2">
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                    <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg> -->
+                            </span>                                                                
+                           Editar
+                        </button>
                     </div>
                     <div class="separator"></div>
                     <div id="kt_user_view_details" class="collapse">
@@ -502,13 +508,13 @@
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Nombres</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100"  value="" disabled/>
+                                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtNombre" name="txtNombre" minlength="5" maxlength="100"  value="" />
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Apellidos</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" value="" disabled/>
+                                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" value="" />
                                 </div>                                                    
                             </div>
                         </div>
@@ -523,7 +529,7 @@
                         <div id="kt_modal_update_user_address" class="collapse show">
                             <div class="d-flex flex-column mb-7 fv-row">
                                 <label class="fs-6 fw-bold mb-2">Direccion</label>
-                                <input class="form-control form-control-solid" id="txtDireccion" placeholder="Ingrese Direccion" value="" />
+                                <input class="form-control form-control-solid text-uppercase" id="txtDireccion" placeholder="Ingrese Direccion" value="" />
                             </div>
                             <div class="row g-9 mb-7">
                                 <div class="col-md-6 fv-row">
@@ -550,7 +556,7 @@
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span>Email</span>
                                     </label>
-                                    <input type="email" class="form-control form-control-solid" id="txtEmail"  minlength="5" maxlength="100" placeholder="Ingrese Email" value=""/>
+                                    <input type="email" class="form-control form-control-solid text-lowercase" id="txtEmail"  minlength="5" maxlength="100" placeholder="Ingrese Email" value=""/>
                                 </div>                                                    
                             </div>
                         </div>
@@ -700,7 +706,8 @@
 
 <script>
 
-    var _tituid='<?php echo $tituid; ?>',_prodid='<?php echo $prodid; ?>',_grupid='<?php echo $grupid; ?>',_paisid = '<?php echo $xPaisid; ?>',_emprid = '<?php echo $xEmprid; ?>', _usuaid='<?php echo $xUsuaid ; ?>';
+    var _tituid='<?php echo $tituid; ?>',_prodid='<?php echo $prodid; ?>',_grupid='<?php echo $grupid; ?>',_paisid = '<?php echo $xPaisid; ?>',_emprid = '<?php echo $xEmprid; ?>', 
+    _usuaid='<?php echo $xUsuaid ; ?>',_clieid = '<?php echo $clieid; ?>';
 
     $(document).ready(function(){
 
@@ -846,13 +853,13 @@
 
         $("#modal_persona").find("input").val('');
 
-        var _rowid = $(this).attr("id");
-        _rowid = _rowid.substring(13);
+        _persid = $(this).attr("id");
+        _persid = _persid.substring(13);
         _paisid = '<?php echo $xPaisid;?>';
         _emprid = '<?php echo $xEmprid;?>';
 
         $parametros = {
-            xxPerid: _rowid,
+            xxPerid: _persid,
             xxPaisid: _paisid,
             xxEmprid: _emprid
         }
@@ -866,13 +873,12 @@
            
                 var _nombre = data[0]['Nombres'];
                 var _apellido = data[0]['Apellidos'];
-                var _avatar = data[0]['Imagen'] == '' ? 'default.png' : data[0]['Imagen'];
+                _avatar = data[0]['Imagen'] == '' ? 'imaadd.png' : data[0]['Imagen'];
                 var _direccion = data[0]['Direccion'];
                 var _telcasa = data[0]['Telcasa'];
                 var _telofi = data[0]['Telofi'];
                 var _cel = data[0]['Cel'];
                 var _email = data[0]['Email'];
-
 
                 $("#txtNombre").val(_nombre);
                 $("#txtApellido").val(_apellido);
@@ -894,12 +900,15 @@
     // Guardar Editar Titular
     $('#btnSaveTit').click(function(e){
 
+        var _nombre = $.trim($("#txtNombre").val());
+        var _apellido = $.trim($("#txtApellido").val()); 
         var _direccion = $.trim($("#txtDireccion").val()); 
         var _telcasa = $.trim($("#txtTelcasa").val()); 
         var _telofi = $.trim($("#txtTelofi").val()); 
         var _celular = $.trim($("#txtCel").val()); 
         var _email = $.trim($("#txtEmail").val());
         var _selecc = 'NO';
+
         var _imgfile = document.getElementById("imgfile").style.backgroundImage;
         var _url = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
         var _pos = _url.trim().indexOf('.');
@@ -921,6 +930,51 @@
             mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
             return;
         }
+
+        var form_data = new FormData();
+        form_data.append('xxPersid', _persid);           
+        form_data.append('xxPaisid', _paisid);
+        form_data.append('xxEmprid', _emprid);
+        form_data.append('xxUsuaid', _usuaid);
+        form_data.append('xxNombre', _nombre);
+        form_data.append('xxApellido', _apellido);
+        form_data.append('xxDireccion', _direccion);
+        form_data.append('xxTelcasa', _telcasa);
+        form_data.append('xxTelofi', _telofi);
+        form_data.append('xxCelular', _celular);
+        form_data.append('xxEmail', _email);
+        form_data.append('xxSelecc', _selecc);
+        form_data.append('xxAvatar', _avatar);
+        form_data.append('xxFile', _file);
+
+        $.ajax({
+            url:"codephp/update_titular.php",
+            type: "post",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            success: function(response){
+
+                if($.trim(response)=='OK'){
+
+                    $.redirect('?page=edittitular&menuid=<?php echo $menuid; ?>', 
+                    { 
+                      'idper': _persid,
+                      'idtit': _tituid,
+                      'idcli': _clieid,
+                      'idpro': _prodid,
+                      'idgru': _grupid
+
+                    }); //POR METODO POST
+
+                }                            
+                                                     
+            },								
+            error: function (error){
+                console.log(error);
+            }
+        });
 
     });
 
