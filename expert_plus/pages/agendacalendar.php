@@ -1539,9 +1539,9 @@
 
                 if(_cboid == 'Agendar'){
                     var _parametros = {
-                        "xxPaisId" : _paisid,
-                        "xxEmprId" : _emprid,
-                        "xxComboId" : _espeid,
+                        "xxPaisid" : _paisid,
+                        "xxEmprid" : _emprid,
+                        "xxComboid" : _espeid,
                         "xxOpcion" : 2
                     }
 
