@@ -170,7 +170,8 @@
         var _mensaje = $('input#mensaje').val();
 
         if(_mensaje != ''){
-            mensajesalertify(_mensaje,"S","top-center",3); 
+            //mensajesalertify(_mensaje,"S","top-center",3);
+            mensajesweetalert('top-center','success',_mensaje,false,1900); 
         }
 
     });	
