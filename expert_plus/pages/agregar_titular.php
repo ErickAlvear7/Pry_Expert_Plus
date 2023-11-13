@@ -799,7 +799,9 @@
         var _mensaje = $('input#mensaje').val();
 
         if(_mensaje != ''){
-            mensajesalertify(_mensaje,"S","top-center",3); 
+            //mensajesalertify(_mensaje,"S","top-center",3);
+            mensajesweetalert('top-center','success',_mensaje,false,1900);
+
         }
 
         $('#cboProvincia').change(function(){
@@ -809,9 +811,9 @@
             $("#cboCiudad").empty();
     
             var _parametros = {
-                xxPaisId: _paisid,
-                xxEmprId: _emprid,
-                xxComboId: _cboid,
+                xxPaisid: _paisid,
+                xxEmprid: _emprid,
+                xxComboid: _cboid,
                 xxOpcion: 0
             }
 
