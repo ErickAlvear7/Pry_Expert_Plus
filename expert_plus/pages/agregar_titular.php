@@ -841,9 +841,9 @@
 
 
             var _parametros = {
-                xxPaisId: _paisid,
-                xxEmprId: _emprid,
-                xxComboId: _cboid,
+                xxPaisid: _paisid,
+                xxEmprid: _emprid,
+                xxComboid: _cboid,
                 xxOpcion: 0
             }
 
