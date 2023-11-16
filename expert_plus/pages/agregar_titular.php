@@ -290,465 +290,126 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">
-            <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n2">
-                <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">Titular</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tab_beneficiarios">Beneficiario</a>
-                </li>
-                <button type="button" id="btnRegresar" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
-                    <span class="svg-icon svg-icon-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
-                        </svg>
-                    </span>
-                </button>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
-                    <div class="d-flex flex-stack fs-4 py-3">
-                        <div class="fw-bolder rotate collapsible btn btn-sm btn-light-primary" data-bs-toggle="collapse" href="#kt_user_view_titular" role="button" aria-expanded="false" aria-controls="kt_user_view_details">Agregar Titular
-                            <span class="ms-2 rotate-180">
-                                <span class="svg-icon svg-icon-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                    </svg>
-                                </span>
-                            </span>
-                        </div>
+        <div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">      
+            <div class="d-flex justify-content-center">
+                <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create App</a>
+            </div>
+            <div class="card card-flush py-4">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>Titulares Agregados</h2>
                     </div>
-                    <div class="d-flex flex-column gap-7 gap-lg-10">
-                        <div id="kt_user_view_titular" class="collapse">
-                            <div class="card card-flush py-4">
-                                <div class="card-header">
-                                    <div class="card-title">
-                                        <h2>Datos Titular</h2>
-                                    </div>
-                                </div>
-                                <div class="card-body pt-0">
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="required form-label">Tipo Documento</label>
-                                            <select class="form-select mb-2" id="cboDocumento" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
-                                                <option></option>
-                                                <?php
-                                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                                    $all_datos =  mysqli_query($con, $xSQL);
-                                                    foreach($all_datos as $datos){?>
-                                                    <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
-                                                <?php }?>
-                                            </select>
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="required form-label">Nro. Documento</label>
-                                            <input type="text" id="txtDocumento" class="form-control mb-2" value="" minlength="10" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"  />
-                                        </div>    
-                                    </div>
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="required form-label">Nombres</label>
-                                            <input type="text" id="txtNombre" class="form-control mb-2" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="required form-label">Apellidos</label>
-                                            <input type="text" id="txtApellido" class="form-control mb-2" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
-                                        </div>   
-                                    </div>
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="required form-label">Genero</label>
-                                            <select class="form-select mb-2" id="cboGenero" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
-                                                <option></option>
-                                                <?php
-                                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Genero' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                                    $all_datos =  mysqli_query($con, $xSQL);
-                                                    foreach($all_datos as $datos){?>
-                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                                <?php }?> 
-                                            </select>
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Estado Civil</label>
-                                            <select class="form-select mb-2" id="cboEstadoCivil" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
-                                                <option></option>
-                                                <?php
-                                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Estado Civil' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
-                                                    $all_datos =  mysqli_query($con, $xSQL);
-                                                    foreach($all_datos as $datos){?>
-                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                                <?php }?>                   
-                                            </select>
-                                        </div>      
-                                    </div>
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Fecha de Nacimiento</label>
-                                            <input type="date" id="txtFechaNacimiento" class="form-control mb-2" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="required form-label">Provincia</label>
-                                            <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2" >
-                                                    <option></option>
-                                                    <?php foreach ($all_provincia as $prov) : ?>
-                                                        <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
-                                                    <?php endforeach ?>
-                                            </select>
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Ciudad</label>
-                                            <select id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2">
-                                                    <option></option>
-                                            </select> 
-                                        </div>  
-                                    </div>
-                                    <div class="mb-10 fv-row">
-                                        <label class="form-label">Direccion</label>
-                                        <textarea class="form-control mb-2" id="txtDireccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
-                                    </div>
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Telefono Casa</label>
-                                            <input type="text" id="txtTelCasa" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Telefono Oficina</label>
-                                            <input type="text" id="txtTelOfi" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
-                                        </div>  
-                                    </div>
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Telefono Celular</label>
-                                            <input type="text" id="txtCelular" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Email</label>
-                                            <input type="email" id="txtEmail" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
-                                        </div>  
-                                    </div>
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Inicio Cobertura</label>
-                                            <input type="date" id="txtIniCobertura" class="form-control mb-2" value="<?php 
-                                                $dia = date('Y-m-d');
-                                                echo date('Y-m-d', strtotime($dia)); ?>" />
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Fin Cobertura</label>
-                                            <input type="date" id="txtFinCobertura" class="form-control mb-2" value="<?php echo $xFechaFinCobertura; ?>" />
-                                        </div>  
-                                    </div>                                                          
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card card-flush py-4">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h2>Titulares Agregados</h2>
-                                </div>
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="d-flex align-items-center position-relative mb-n7">
-                                    <span class="svg-icon svg-icon-1 position-absolute ms-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
-                                            <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                    <input type="text" data-kt-ecommerce-edit-order-filter="search" class="form-control form-control-solid w-100 w-lg-50 ps-14" placeholder="Buscar Titular" />
-                                </div>
-                                <br>
-                                <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
-                                    <table class="table table-hover align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_edit_order_product_table">
-                                        <thead>
-                                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                <th>Ciudad</th>
-                                                <th>Nombres</th>
-                                                <th>Estado</th>
-                                                <th>Status</th>
-                                                <th style="text-align: center;">Opciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="fw-bold text-gray-600">
-                                                <?php 
-                                                    foreach ($all_persona as $per){
+                </div>
+                <div class="card-body pt-0">
+                    <div class="d-flex align-items-center position-relative mb-n7">
+                        <span class="svg-icon svg-icon-1 position-absolute ms-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+                            </svg>
+                        </span>
+                        <input type="text" data-kt-ecommerce-edit-order-filter="search" class="form-control form-control-solid w-100 w-lg-50 ps-14" placeholder="Buscar Titular" />
+                    </div>
+                    <br>
+                    <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
+                        <table class="table table-hover align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_edit_order_product_table">
+                            <thead>
+                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                    <th>Ciudad</th>
+                                    <th>Nombres</th>
+                                    <th>Estado</th>
+                                    <th>Status</th>
+                                    <th style="text-align: center;">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fw-bold text-gray-600">
+                                    <?php 
+                                        foreach ($all_persona as $per){
 
-                                                    $xPerid = $per['PerId'];
-                                                    $xTituid = $per['Tituid'];
-                                                    $xNombres = $per['Nombres'];
-                                                    $xImagen = $per['Imagen'];
-                                                    $xEstado = $per['Estado'];
-                                                    $xProvid = $per['CiudadId'];
+                                        $xPerid = $per['PerId'];
+                                        $xTituid = $per['Tituid'];
+                                        $xNombres = $per['Nombres'];
+                                        $xImagen = $per['Imagen'];
+                                        $xEstado = $per['Estado'];
+                                        $xProvid = $per['CiudadId'];
 
-                                                    if(  $xProvid != 0){
+                                        if(  $xProvid != 0){
 
-                                                        $xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND prov_id=$xProvid ";
-                                                        $all_ciudad = mysqli_query($con, $xSQL);    
+                                            $xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND prov_id=$xProvid ";
+                                            $all_ciudad = mysqli_query($con, $xSQL);    
+                                
+                                        }
                                             
-                                                    }
-                                                        
-                                                ?>
-                                                <?php 
+                                    ?>
+                                    <?php 
 
-                                                    $xCheking = '';
-                                                    $xDisabledEdit = '';
+                                        $xCheking = '';
+                                        $xDisabledEdit = '';
 
-                                                    if($xEstado == 'ACTIVO'){
-                                                        $xCheking = 'checked="checked"';
-                                                        $xTextColor = "badge badge-light-primary";
-                                                    }else{
-                                                        $xTextColor = "badge badge-light-danger";
-                                                        $xDisabledEdit = 'disabled';
-                                                    }
+                                        if($xEstado == 'ACTIVO'){
+                                            $xCheking = 'checked="checked"';
+                                            $xTextColor = "badge badge-light-primary";
+                                        }else{
+                                            $xTextColor = "badge badge-light-danger";
+                                            $xDisabledEdit = 'disabled';
+                                        }
 
-                                                    $xSQL = "SELECT COUNT(*) AS Bene FROM `expert_beneficiario` WHERE titu_id=$xTituid ";
-                                                    $cont_bene = mysqli_query($con, $xSQL);
-                                                    foreach ($cont_bene as $ben){
-                                                        $xBene = $ben['Bene'];
-                                                    }
-                                                ?> 
-                                            <tr>
-                                                <?php
-                                                     foreach ($all_ciudad as $ciu){
-                                                        $xCiudad = trim(mb_strtoupper($ciu['ciudad']));
-                                                   ?>     
-                                                <td>
-                                                  
-                                                   <?php echo $xCiudad; ?>
+                                        $xSQL = "SELECT COUNT(*) AS Bene FROM `expert_beneficiario` WHERE titu_id=$xTituid ";
+                                        $cont_bene = mysqli_query($con, $xSQL);
+                                        foreach ($cont_bene as $ben){
+                                            $xBene = $ben['Bene'];
+                                        }
+                                    ?> 
+                                <tr>
+                                    <?php
+                                        foreach ($all_ciudad as $ciu){
+                                            $xCiudad = trim(mb_strtoupper($ciu['ciudad']));
+                                    ?>     
+                                    <td>
+                                    
+                                    <?php echo $xCiudad; ?>
 
-                                                </td>
-                                                <?php }?>
-                                                <td>
-                                                    <div class="d-flex align-items-center" data-kt-ecommerce-edit-order-filter="product" data-kt-ecommerce-edit-order-id="product_1">
-                                                        <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
-                                                            <span class="symbol-label" style="background-image:url(persona/<?php echo $xImagen; ?>);"></span>
-                                                        </a>
-                                                        <div class="ms-5">
-                                                          <?php echo $xNombres; ?>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td id="td_<?php echo $xPerid; ?>">   
-                                                    <div class="<?php echo $xTextColor; ?>">
-                                                       <?php echo $xEstado; ?>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                        <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary" onchange="f_UpdateEstado(<?php echo $xPerid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" type="checkbox" id="chk<?php echo $xPerid; ?>" value=""/>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="text-center">
-                                                        <div class="btn-group">	
-                                                            <button type="button" <?php echo $xDisabledEdit;?> id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular(<?php echo $xPerid; ?>,<?php echo $xTituid; ?>,<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular (+<?php echo $xBene; ?>B )' data-bs-toggle="tooltip" data-bs-placement="left">
-                                                                <i class="fa fa-edit"></i>
-                                                            </button> 
-                                                            <button type="button" <?php echo $xDisabledEdit;?> id="btnAgendar_<?php echo $xPerid; ?>" name="btnAgendar" onclick="f_Agendar(<?php echo $xTituid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
-                                                                <i class="fa fa-user-plus"></i>
-                                                            </button> 
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                       <?php }?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>  
+                                    </td>
+                                    <?php }?>
+                                    <td>
+                                        <div class="d-flex align-items-center" data-kt-ecommerce-edit-order-filter="product" data-kt-ecommerce-edit-order-id="product_1">
+                                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
+                                                <span class="symbol-label" style="background-image:url(persona/<?php echo $xImagen; ?>);"></span>
+                                            </a>
+                                            <div class="ms-5">
+                                            <?php echo $xNombres; ?>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td id="td_<?php echo $xPerid; ?>">   
+                                        <div class="<?php echo $xTextColor; ?>">
+                                        <?php echo $xEstado; ?>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary" onchange="f_UpdateEstado(<?php echo $xPerid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" type="checkbox" id="chk<?php echo $xPerid; ?>" value=""/>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="text-center">
+                                            <div class="btn-group">	
+                                                <button type="button" <?php echo $xDisabledEdit;?> id="btnEditar_<?php echo $xPerid; ?>" onclick="f_Editartitular(<?php echo $xPerid; ?>,<?php echo $xTituid; ?>,<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Editar Titular (+<?php echo $xBene; ?>B )' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                    <i class="fa fa-edit"></i>
+                                                </button> 
+                                                <button type="button" <?php echo $xDisabledEdit;?> id="btnAgendar_<?php echo $xPerid; ?>" name="btnAgendar" onclick="f_Agendar(<?php echo $xTituid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                    <i class="fa fa-user-plus"></i>
+                                                </button> 
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                        <?php }?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="tab_beneficiarios" role="tab-panel">
-                    <div class="d-flex flex-stack fs-4 py-3">
-                        <div class="fw-bolder rotate collapsible btn btn-sm btn-light-primary" data-bs-toggle="collapse" href="#kt_user_view_beneficiario" role="button" aria-expanded="false" aria-controls="kt_user_view_details">Agregar Beneficiario
-                            <span class="ms-2 rotate-180">
-                                <span class="svg-icon svg-icon-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                    </svg>
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-column gap-7 gap-lg-10">
-                        <div id="kt_user_view_beneficiario" class="collapse">
-                            <div class="card card-flush py-4">
-                                <div class="card-header">
-                                    <div class="card-title">
-                                        <h2>Datos Beneficiario</h2>
-                                    </div>
-                                </div>
-                                <div class="card-body pt-0">
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="required form-label">Tipo Documento</label>
-                                            <select class="form-select mb-2" id="cboDocumentoBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
-                                                <option></option>
-                                                <?php
-                                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                                    $all_datos =  mysqli_query($con, $xSQL);
-                                                foreach($all_datos as $datos){?>
-                                                <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
-                                                <?php }?>
-                                            </select>
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="required form-label">Nro. Documento</label>
-                                            <input type="text" class="form-control mb-2" id="txtDocumentoBe" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                        </div>    
-                                    </div>
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="required form-label">Nombres</label>
-                                            <input type="text" class="form-control mb-2" id="txtNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="required form-label">Apellidos</label>
-                                            <input type="text" class="form-control mb-2" id="txtApellidoBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
-                                        </div>   
-                                    </div>
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="required form-label">Genero</label>
-                                            <select class="form-select mb-2" id="cboGeneroBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
-                                                <option></option>
-                                                <?php
-                                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Genero' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                                    $all_datos =  mysqli_query($con, $xSQL);
-                                                    foreach($all_datos as $datos){?>
-                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                                <?php }?> 
-                                            </select>
-                                        
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Estado Civil</label>
-                                            <select class="form-select mb-2" id="cboEstadoCivilBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
-                                                <option></option>
-                                                <?php
-                                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Estado Civil' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
-                                                    $all_datos =  mysqli_query($con, $xSQL);
-                                                    foreach($all_datos as $datos){?>
-                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                                <?php }?>                   
-                                            </select>
-                                        </div>      
-                                    </div>
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="required form-label">Provincia</label>
-                                            <select  id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2" >
-                                                    <option></option>
-                                                    <?php foreach ($all_provincia as $prov) : ?>
-                                                        <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
-                                                    <?php endforeach ?>
-                                            </select>
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Ciudad</label>
-                                            <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tab_beneficiarios" class="form-select mb-2">
-                                                    <option></option>
-                                            </select> 
-                                        </div>  
-                                    </div>
-                                    <div class="mb-10 fv-row">
-                                        <label class="form-label">Direccion</label>
-                                        <textarea class="form-control mb-2" id="txtDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
-                                    </div>
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Telefono Casa</label>
-                                            <input type="text" id="txtTelCasaBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Telefono Oficina</label>
-                                            <input type="text" id="txtTelOfiBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
-                                        </div>  
-                                    </div>
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Telefono Celular</label>
-                                            <input type="text" id="txtCelularBe" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Email</label>
-                                            <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
-                                        </div>  
-                                    </div>
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Parentesco</label>
-                                            <select class="form-select mb-2" id="cboParentesco" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Parentesco">
-                                                <option></option>
-                                                <?php
-                                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Parentesco' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
-                                                    $all_datos =  mysqli_query($con, $xSQL);
-                                                    foreach($all_datos as $datos){?>
-                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                                <?php }?>                   
-                                            </select>
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <label class="form-label">Fecha de Nacimiento</label>
-                                            <input type="date" id="txtFechaNacimientoBe" class="form-control mb-2" value="" />
-                                        </div> 
-                                    </div>
-                                    <div class="form-group mt-5">
-                                        <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
-                                            <span class="svg-icon svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                                    <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                        Agregar
-                                        </button>
-                                    </div>  
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card card-flush py-4">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h2>Beneficiario</h2>
-                                </div>
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="d-flex flex-column gap-10">
-                                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="tblBeneficiario">
-                                        <thead>
-                                            <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                <th>Ciudad</th>
-                                                <th>Nombres</th>
-                                                <th>Parentesco</th>
-                                                <th>Opciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="fw-bold text-gray-600">
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>     
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-end">
-                <button type="button" id="btnGrabar" class="btn btn-primary"><i class="las la-save"></i>
-                    <span class="indicator-label">Grabar</span>
-                </button>
-            </div>
+            </div>  
         </div>
     </form>
 </div>
@@ -785,6 +446,402 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 <button type="button" id="btnGuardar" onclick="f_GuardarParen(<?php echo $xPacaid; ?>,<?php echo $xOrdenDet; ?>)" class="btn btn-primary">Grabar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="kt_modal_create_app" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-900px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Agregar Titular</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <!--begin::Stepper-->
+                <div class="stepper stepper-pills flex-xl-row flex-row-fluid" id="kt_modal_create_app_stepper">
+                    <div class="d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px">
+                        <!--begin::Nav-->
+                        <div class="stepper-nav ps-lg-10">
+                            <!--begin::Step 1-->
+                            <div class="stepper-item current" data-kt-stepper-element="nav">
+                                <div class="stepper-line w-40px"></div>
+                                <div class="stepper-icon w-40px h-40px">
+                                    <i class="stepper-check fas fa-check"></i>
+                                    <span class="stepper-number">1</span>
+                                </div>
+                                <div class="stepper-label">
+                                    <h3 class="stepper-title">Titular</h3>
+                                </div>
+                            </div>
+                            <!--begin::Step 2-->
+                            <div class="stepper-item" data-kt-stepper-element="nav">
+                                <div class="stepper-line w-40px"></div>
+                                <div class="stepper-icon w-40px h-40px">
+                                    <i class="stepper-check fas fa-check"></i>
+                                    <span class="stepper-number">2</span>
+                                </div>
+                                <div class="stepper-label">
+                                    <h3 class="stepper-title">Beneficiario</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--begin::Content-->
+                    <div class="flex-row-fluid py-lg-5 px-lg-15">
+                        <form class="form" novalidate="novalidate" id="kt_modal_create_app_form">
+                            <!--begin::Step 1-->
+                            <div class="current" data-kt-stepper-element="content">
+                                <div class="w-100">
+                                    <div class="container-fluid">
+                                        <div class="card mb-5 mb-xl-8">
+                                            <div class="card-header border-0">
+                                                <div class="card-title">
+                                                    <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_titular" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Foto Tiular
+                                                        <span class="ms-2 rotate-180">
+                                                            <span class="svg-icon svg-icon-3">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                                                </svg>
+                                                            </span>
+                                                        </span>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div id="view_imagen_titular" class="collapse ">
+                                                <div class="card card-flush py-4">
+                                                    <div class="card-body pt-0">
+                                                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
+                                                            <div class="image-input-wrapper w-150px h-150px" id="imgAvatar" style="background-image: url(assets/media/svg/avatars/Addimg.svg);"></div>
+                                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar foto">
+                                                                <i class="bi bi-pencil-fill fs-7"></i>    
+                                                                <input type="file" id="imgTitular" accept=".png, .jpg, .jpeg" />
+                                                                <input type="hidden" name="avatar_remove" />
+                                                            </label>
+                                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar foto">
+                                                                <i class="bi bi-x fs-2"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-5 mb-xl-8">
+                                            <div class="card-header border-0">
+                                                <div class="card-title">
+                                                    <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_titular" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Tiular
+                                                        <span class="ms-2 rotate-180">
+                                                            <span class="svg-icon svg-icon-3">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                                                </svg>
+                                                            </span>
+                                                        </span>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div id="view_datos_titular" class="collapse ">
+                                                <div class="card card-flush py-4">
+                                                    <div class="card-body pt-0">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label class="required form-label">Tipo Documento</label>
+                                                                <select class="form-select mb-2" id="cboDocumento" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
+                                                                    <option></option>
+                                                                    <?php
+                                                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                                                        $all_datos =  mysqli_query($con, $xSQL);
+                                                                        foreach($all_datos as $datos){?>
+                                                                        <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
+                                                                    <?php }?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <label class="required form-label">Nro. Documento</label>
+                                                                <input type="text" id="txtDocumento" class="form-control mb-2" value="" minlength="10" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"  />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="required form-label">Genero</label>
+                                                                <select class="form-select mb-2" id="cboGenero" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
+                                                                    <option></option>
+                                                                    <?php
+                                                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Genero' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                                                        $all_datos =  mysqli_query($con, $xSQL);
+                                                                        foreach($all_datos as $datos){?>
+                                                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                                                    <?php }?> 
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <label class="form-label">Estado Civil</label>
+                                                                <select class="form-select mb-2" id="cboEstadoCivil" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
+                                                                    <option></option>
+                                                                    <?php
+                                                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Estado Civil' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
+                                                                        $all_datos =  mysqli_query($con, $xSQL);
+                                                                        foreach($all_datos as $datos){?>
+                                                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                                                    <?php }?>                   
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label class="required form-label">Nombres</label>
+                                                                <input type="text" id="txtNombre" class="form-control mb-2" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="required form-label">Apellidos</label>
+                                                                <input type="text" id="txtApellido" class="form-control mb-2" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Fecha de Nacimiento</label>
+                                                                <input type="date" id="txtFechaNacimiento" class="form-control mb-2" value="" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label class="required form-label">Provincia</label>
+                                                                <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2" >
+                                                                        <option></option>
+                                                                        <?php foreach ($all_provincia as $prov) : ?>
+                                                                            <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
+                                                                        <?php endforeach ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Ciudad</label>
+                                                                <select id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2">
+                                                                        <option></option>
+                                                                </select>    
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Direccion</label>
+                                                                <textarea class="form-control mb-2" id="txtDireccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Telefono Casa</label>
+                                                                <input type="text" id="txtTelCasa" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Telefono Oficina</label>
+                                                                <input type="text" id="txtTelOfi" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>   
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Telefono Celular</label>
+                                                                <input type="text" id="txtCelular" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />  
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                    <label class="form-label">Email</label>
+                                                                    <input type="email" id="txtEmail" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Inicio Cobertura</label>
+                                                                <input type="date" id="txtIniCobertura" class="form-control mb-2" value="<?php 
+                                                                    $dia = date('Y-m-d');
+                                                                    echo date('Y-m-d', strtotime($dia)); ?>" />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Fin Cobertura</label>
+                                                                <input type="date" id="txtFinCobertura" class="form-control mb-2" value="<?php echo $xFechaFinCobertura; ?>" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="fv-row">
+                                        <div class="fv-row">
+                                            <label class="d-flex flex-stack mb-5 cursor-pointer">
+                                                <span class="d-flex align-items-center me-2">
+                                                    <span class="symbol symbol-50px me-6">
+                                                        <span class="symbol-label bg-light-primary">
+                                                            <span class="svg-icon svg-icon-1 svg-icon-primary">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <path opacity="0.3" d="M18.4 5.59998C21.9 9.09998 21.9 14.8 18.4 18.3C14.9 21.8 9.2 21.8 5.7 18.3L18.4 5.59998Z" fill="currentColor" />
+                                                                    <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM19.9 11H13V8.8999C14.9 8.6999 16.7 8.00005 18.1 6.80005C19.1 8.00005 19.7 9.4 19.9 11ZM11 19.8999C9.7 19.6999 8.39999 19.2 7.39999 18.5C8.49999 17.7 9.7 17.2001 11 17.1001V19.8999ZM5.89999 6.90002C7.39999 8.10002 9.2 8.8 11 9V11.1001H4.10001C4.30001 9.4001 4.89999 8.00002 5.89999 6.90002ZM7.39999 5.5C8.49999 4.7 9.7 4.19998 11 4.09998V7C9.7 6.8 8.39999 6.3 7.39999 5.5ZM13 17.1001C14.3 17.3001 15.6 17.8 16.6 18.5C15.5 19.3 14.3 19.7999 13 19.8999V17.1001ZM13 4.09998C14.3 4.29998 15.6 4.8 16.6 5.5C15.5 6.3 14.3 6.80002 13 6.90002V4.09998ZM4.10001 13H11V15.1001C9.1 15.3001 7.29999 16 5.89999 17.2C4.89999 16 4.30001 14.6 4.10001 13ZM18.1 17.1001C16.6 15.9001 14.8 15.2 13 15V12.8999H19.9C19.7 14.5999 19.1 16.0001 18.1 17.1001Z" fill="currentColor" />
+                                                                </svg>
+                                                            </span>
+                                                        </span>
+                                                    </span>
+                                                    <span class="d-flex flex-column">
+                                                        <span class="fw-bolder fs-6">Desea Agreagar un Beneficiario?</span>
+                                                    </span>
+                                                </span>
+                                                <span class="form-check form-check-custom form-check-solid">
+                                                    <input class="form-check-input" type="radio" name="category" value="1" />
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--begin::Step 2-->
+                            <div data-kt-stepper-element="content">
+                                <div class="w-100">
+                                    <!--begin::Input group-->
+                                    <div class="fv-row">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-5 fw-bold mb-4">
+                                            <span class="required">ESTOY AKI</span>
+                                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify your apps framework"></i>
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin:Option-->
+                                        <label class="d-flex flex-stack cursor-pointer mb-5">
+                                            <!--begin:Label-->
+                                            <span class="d-flex align-items-center me-2">
+                                                <!--begin:Icon-->
+                                                <span class="symbol symbol-50px me-6">
+                                                    <span class="symbol-label bg-light-warning">
+                                                        <i class="fab fa-html5 text-warning fs-2x"></i>
+                                                    </span>
+                                                </span>
+                                                <!--end:Icon-->
+                                                <!--begin:Info-->
+                                                <span class="d-flex flex-column">
+                                                    <span class="fw-bolder fs-6">HTML5</span>
+                                                    <span class="fs-7 text-muted">Base Web Projec</span>
+                                                </span>
+                                                <!--end:Info-->
+                                            </span>
+                                            <!--end:Label-->
+                                            <!--begin:Input-->
+                                            <span class="form-check form-check-custom form-check-solid">
+                                                <input class="form-check-input" type="radio" checked="checked" name="framework" value="1" />
+                                            </span>
+                                            <!--end:Input-->
+                                        </label>
+                                        <!--end::Option-->
+                                        <!--begin:Option-->
+                                        <label class="d-flex flex-stack cursor-pointer mb-5">
+                                            <!--begin:Label-->
+                                            <span class="d-flex align-items-center me-2">
+                                                <!--begin:Icon-->
+                                                <span class="symbol symbol-50px me-6">
+                                                    <span class="symbol-label bg-light-success">
+                                                        <i class="fab fa-react text-success fs-2x"></i>
+                                                    </span>
+                                                </span>
+                                                <!--end:Icon-->
+                                                <!--begin:Info-->
+                                                <span class="d-flex flex-column">
+                                                    <span class="fw-bolder fs-6">ReactJS</span>
+                                                    <span class="fs-7 text-muted">Robust and flexible app framework</span>
+                                                </span>
+                                                <!--end:Info-->
+                                            </span>
+                                            <!--end:Label-->
+                                            <!--begin:Input-->
+                                            <span class="form-check form-check-custom form-check-solid">
+                                                <input class="form-check-input" type="radio" name="framework" value="2" />
+                                            </span>
+                                            <!--end:Input-->
+                                        </label>
+                                        <!--end::Option-->
+                                        <!--begin:Option-->
+                                        <label class="d-flex flex-stack cursor-pointer mb-5">
+                                            <!--begin:Label-->
+                                            <span class="d-flex align-items-center me-2">
+                                                <!--begin:Icon-->
+                                                <span class="symbol symbol-50px me-6">
+                                                    <span class="symbol-label bg-light-danger">
+                                                        <i class="fab fa-angular text-danger fs-2x"></i>
+                                                    </span>
+                                                </span>
+                                                <!--end:Icon-->
+                                                <!--begin:Info-->
+                                                <span class="d-flex flex-column">
+                                                    <span class="fw-bolder fs-6">Angular</span>
+                                                    <span class="fs-7 text-muted">Powerful data mangement</span>
+                                                </span>
+                                                <!--end:Info-->
+                                            </span>
+                                            <!--end:Label-->
+                                            <!--begin:Input-->
+                                            <span class="form-check form-check-custom form-check-solid">
+                                                <input class="form-check-input" type="radio" name="framework" value="3" />
+                                            </span>
+                                            <!--end:Input-->
+                                        </label>
+                                        <!--end::Option-->
+                                        <!--begin:Option-->
+                                        <label class="d-flex flex-stack cursor-pointer">
+                                            <!--begin:Label-->
+                                            <span class="d-flex align-items-center me-2">
+                                                <!--begin:Icon-->
+                                                <span class="symbol symbol-50px me-6">
+                                                    <span class="symbol-label bg-light-primary">
+                                                        <i class="fab fa-vuejs text-primary fs-2x"></i>
+                                                    </span>
+                                                </span>
+                                                <!--end:Icon-->
+                                                <!--begin:Info-->
+                                                <span class="d-flex flex-column">
+                                                    <span class="fw-bolder fs-6">Vue</span>
+                                                    <span class="fs-7 text-muted">Lightweight and responsive framework</span>
+                                                </span>
+                                                <!--end:Info-->
+                                            </span>
+                                            <!--end:Label-->
+                                            <!--begin:Input-->
+                                            <span class="form-check form-check-custom form-check-solid">
+                                                <input class="form-check-input" type="radio" name="framework" value="4" />
+                                            </span>
+                                            <!--end:Input-->
+                                        </label>
+                                        <!--end::Option-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                            </div>
+                            <!--begin::Actions botones-->
+                            <div class="d-flex flex-stack pt-10">
+                                <div class="me-2">
+                                    <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
+                                    <span class="svg-icon svg-icon-3 me-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="currentColor" />
+                                            <path d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->Back</button>
+                                </div>
+                                <div>
+                                    <button type="button" id="btnGrabar" class="btn btn-primary"><i class="las la-save"></i>
+                                        <span class="indicator-label">Grabar</span>
+                                    </button>
+                                    <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue
+                                        <span class="svg-icon svg-icon-3 ms-1 me-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="currentColor" />
+                                                <path d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

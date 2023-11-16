@@ -153,6 +153,7 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="assets/js/custom/intro.js"></script>
 		<script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script>
 		<script src="assets/js/custom/utilities/modals/users-search.js"></script>
+		<script src="assets/js/custom/utilities/modals/create-app.js"></script>
 
 		<!--JS ADICIONALES-->
 		<script src="assets/sweetalert2/js/sweetalert2.min.js"></script>
