@@ -615,7 +615,7 @@
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <label class="required form-label">Provincia</label>
-                                                                <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2" >
+                                                                <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#view_datos_titular" class="form-select mb-2" >
                                                                         <option></option>
                                                                         <?php foreach ($all_provincia as $prov) : ?>
                                                                             <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
@@ -624,7 +624,7 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label class="form-label">Ciudad</label>
-                                                                <select id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2">
+                                                                <select id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#view_datos_titular" class="form-select mb-2">
                                                                         <option></option>
                                                                 </select>    
                                                             </div>
