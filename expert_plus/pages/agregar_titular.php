@@ -291,8 +291,16 @@
             </div>
         </div>
         <div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">      
-            <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create App</a>
+            <div class="d-flex justify-content-start">
+                <a href="#" class="btn btn-light-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">
+                    <span class="svg-icon svg-icon-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                            <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+                        </svg>
+                    </span>                                       
+                Agregar Titular
+                </a>
             </div>
             <div class="card card-flush py-4">
                 <div class="card-header">
@@ -450,8 +458,9 @@
         </div>
     </div>
 </div>
+<!--Modal Crear Titular-->
 <div class="modal fade" id="kt_modal_create_app" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-900px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Agregar Titular</h2>
@@ -548,11 +557,11 @@
                                                     </div> 
                                                 </div>
                                             </div>
-                                            <div id="view_datos_titular" class="collapse ">
+                                            <div id="view_datos_titular" class="collapse show ">
                                                 <div class="card card-flush py-4">
                                                     <div class="card-body pt-0">
                                                         <div class="row">
-                                                            <div class="col-md-5">
+                                                            <div class="col-md-6">
                                                                 <label class="required form-label">Tipo Documento</label>
                                                                 <select class="form-select mb-2" id="cboDocumento" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
                                                                     <option></option>
@@ -613,7 +622,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-6">
                                                                 <label class="required form-label">Provincia</label>
                                                                 <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#view_datos_titular" class="form-select mb-2" >
                                                                         <option></option>
@@ -622,13 +631,16 @@
                                                                         <?php endforeach ?>
                                                                 </select>
                                                             </div>
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-6">
                                                                 <label class="form-label">Ciudad</label>
                                                                 <select id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#view_datos_titular" class="form-select mb-2">
                                                                         <option></option>
                                                                 </select>    
                                                             </div>
-                                                            <div class="col-md-4">
+                                                          
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
                                                                 <label class="form-label">Direccion</label>
                                                                 <textarea class="form-control mb-2" id="txtDireccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
                                                             </div>
@@ -697,120 +709,175 @@
                             <!--begin::Step 2-->
                             <div data-kt-stepper-element="content">
                                 <div class="w-100">
-                                    <!--begin::Input group-->
-                                    <div class="fv-row">
-                                        <!--begin::Label-->
-                                        <label class="d-flex align-items-center fs-5 fw-bold mb-4">
-                                            <span class="required">ESTOY AKI</span>
-                                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify your apps framework"></i>
-                                        </label>
-                                        <!--end::Label-->
-                                        <!--begin:Option-->
-                                        <label class="d-flex flex-stack cursor-pointer mb-5">
-                                            <!--begin:Label-->
-                                            <span class="d-flex align-items-center me-2">
-                                                <!--begin:Icon-->
-                                                <span class="symbol symbol-50px me-6">
-                                                    <span class="symbol-label bg-light-warning">
-                                                        <i class="fab fa-html5 text-warning fs-2x"></i>
-                                                    </span>
-                                                </span>
-                                                <!--end:Icon-->
-                                                <!--begin:Info-->
-                                                <span class="d-flex flex-column">
-                                                    <span class="fw-bolder fs-6">HTML5</span>
-                                                    <span class="fs-7 text-muted">Base Web Projec</span>
-                                                </span>
-                                                <!--end:Info-->
-                                            </span>
-                                            <!--end:Label-->
-                                            <!--begin:Input-->
-                                            <span class="form-check form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="radio" checked="checked" name="framework" value="1" />
-                                            </span>
-                                            <!--end:Input-->
-                                        </label>
-                                        <!--end::Option-->
-                                        <!--begin:Option-->
-                                        <label class="d-flex flex-stack cursor-pointer mb-5">
-                                            <!--begin:Label-->
-                                            <span class="d-flex align-items-center me-2">
-                                                <!--begin:Icon-->
-                                                <span class="symbol symbol-50px me-6">
-                                                    <span class="symbol-label bg-light-success">
-                                                        <i class="fab fa-react text-success fs-2x"></i>
-                                                    </span>
-                                                </span>
-                                                <!--end:Icon-->
-                                                <!--begin:Info-->
-                                                <span class="d-flex flex-column">
-                                                    <span class="fw-bolder fs-6">ReactJS</span>
-                                                    <span class="fs-7 text-muted">Robust and flexible app framework</span>
-                                                </span>
-                                                <!--end:Info-->
-                                            </span>
-                                            <!--end:Label-->
-                                            <!--begin:Input-->
-                                            <span class="form-check form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="radio" name="framework" value="2" />
-                                            </span>
-                                            <!--end:Input-->
-                                        </label>
-                                        <!--end::Option-->
-                                        <!--begin:Option-->
-                                        <label class="d-flex flex-stack cursor-pointer mb-5">
-                                            <!--begin:Label-->
-                                            <span class="d-flex align-items-center me-2">
-                                                <!--begin:Icon-->
-                                                <span class="symbol symbol-50px me-6">
-                                                    <span class="symbol-label bg-light-danger">
-                                                        <i class="fab fa-angular text-danger fs-2x"></i>
-                                                    </span>
-                                                </span>
-                                                <!--end:Icon-->
-                                                <!--begin:Info-->
-                                                <span class="d-flex flex-column">
-                                                    <span class="fw-bolder fs-6">Angular</span>
-                                                    <span class="fs-7 text-muted">Powerful data mangement</span>
-                                                </span>
-                                                <!--end:Info-->
-                                            </span>
-                                            <!--end:Label-->
-                                            <!--begin:Input-->
-                                            <span class="form-check form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="radio" name="framework" value="3" />
-                                            </span>
-                                            <!--end:Input-->
-                                        </label>
-                                        <!--end::Option-->
-                                        <!--begin:Option-->
-                                        <label class="d-flex flex-stack cursor-pointer">
-                                            <!--begin:Label-->
-                                            <span class="d-flex align-items-center me-2">
-                                                <!--begin:Icon-->
-                                                <span class="symbol symbol-50px me-6">
-                                                    <span class="symbol-label bg-light-primary">
-                                                        <i class="fab fa-vuejs text-primary fs-2x"></i>
-                                                    </span>
-                                                </span>
-                                                <!--end:Icon-->
-                                                <!--begin:Info-->
-                                                <span class="d-flex flex-column">
-                                                    <span class="fw-bolder fs-6">Vue</span>
-                                                    <span class="fs-7 text-muted">Lightweight and responsive framework</span>
-                                                </span>
-                                                <!--end:Info-->
-                                            </span>
-                                            <!--end:Label-->
-                                            <!--begin:Input-->
-                                            <span class="form-check form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="radio" name="framework" value="4" />
-                                            </span>
-                                            <!--end:Input-->
-                                        </label>
-                                        <!--end::Option-->
-                                    </div>
-                                    <!--end::Input group-->
+                                     <div class="container-fluid">
+                                        <div class="card mb-5 mb-xl-8">
+                                            <div class="card-header border-0">
+                                                <div class="card-title">
+                                                    <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_beneficiario" role="button" aria-expanded="false" aria-controls="view_datos_beneficiario">Datos Beneficiario
+                                                        <span class="ms-2 rotate-180">
+                                                            <span class="svg-icon svg-icon-3">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                                                </svg>
+                                                            </span>
+                                                        </span>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div id="view_datos_beneficiario" class="collapse show">
+                                                <div class="card card-flush py-4">
+                                                    <div class="card-body pt-0">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label class="form-label">Parentesco</label>
+                                                                <select class="form-select mb-2" id="cboParentesco" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Parentesco">
+                                                                    <option></option>
+                                                                    <?php
+                                                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Parentesco' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
+                                                                        $all_datos =  mysqli_query($con, $xSQL);
+                                                                        foreach($all_datos as $datos){?>
+                                                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                                                    <?php }?>                   
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="required form-label">Tipo Documento</label>
+                                                                <select class="form-select mb-2" id="cboDocumentoBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
+                                                                    <option></option>
+                                                                    <?php
+                                                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                                                        $all_datos =  mysqli_query($con, $xSQL);
+                                                                    foreach($all_datos as $datos){?>
+                                                                    <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
+                                                                    <?php }?>
+                                                                </select>
+                                                            </div> 
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <label class="required form-label">Nro. Documento</label>
+                                                                <input type="text" class="form-control mb-2" id="txtDocumentoBe" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="required form-label">Genero</label>
+                                                                <select class="form-select mb-2" id="cboGeneroBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
+                                                                    <option></option>
+                                                                    <?php
+                                                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Genero' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                                                        $all_datos =  mysqli_query($con, $xSQL);
+                                                                        foreach($all_datos as $datos){?>
+                                                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                                                    <?php }?> 
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <label class="form-label">Estado Civil</label>
+                                                                <select class="form-select mb-2" id="cboEstadoCivilBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
+                                                                    <option></option>
+                                                                    <?php
+                                                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
+                                                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Estado Civil' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
+                                                                        $all_datos =  mysqli_query($con, $xSQL);
+                                                                        foreach($all_datos as $datos){?>
+                                                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                                                    <?php }?>                   
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label class="required form-label">Nombres</label>
+                                                                <input type="text" class="form-control mb-2" id="txtNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="required form-label">Apellidos</label>
+                                                                <input type="text" class="form-control mb-2" id="txtApellidoBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Fecha de Nacimiento</label>
+                                                                <input type="date" id="txtFechaNacimientoBe" class="form-control mb-2" value="" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label class="required form-label">Provincia</label>
+                                                                <select  id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#view_datos_beneficiario" class="form-select mb-2" >
+                                                                        <option></option>
+                                                                        <?php foreach ($all_provincia as $prov) : ?>
+                                                                            <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
+                                                                        <?php endforeach ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="form-label">Ciudad</label>
+                                                                <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#view_datos_beneficiario" class="form-select mb-2">
+                                                                        <option></option>
+                                                                </select>  
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <label class="form-label">Direccion</label>
+                                                                <textarea class="form-control mb-2" id="txtDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <label class="form-label">Telefono Casa</label>
+                                                                <input type="text" id="txtTelCasaBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <label class="form-label">Telefono Oficina</label>
+                                                                <input type="text" id="txtTelOfiBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>      
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <label class="form-label">Telefono Celular</label>
+                                                                <input type="text" id="txtCelularBe" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />  
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <label class="form-label">Email</label>
+                                                                <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="mi@gmail.com" maxlength="80" />   
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group mt-5">
+                                                                <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
+                                                                    <span class="svg-icon svg-icon-2">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                            <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                                                            <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+                                                                        </svg>
+                                                                    </span>
+                                                                Agregar
+                                                                </button>
+                                                            </div>  
+                                                        </div>
+                                                    </div> 
+                                               </div>
+                                               <div class="card card-flush py-4">
+                                                    <div class="card-body pt-0">
+                                                        <div class="d-flex flex-column gap-10">
+                                                            <table class="table align-middle table-row-dashed fs-6 gy-5 text-center" id="tblBeneficiario">
+                                                                <thead>
+                                                                    <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                                        <th>Ciudad</th>
+                                                                        <th>Nombres</th>
+                                                                        <th>Parentesco</th>
+                                                                        <th>Opciones</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="fw-bold text-gray-600">
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                     </div>
                                 </div>
                             </div>
                             <!--begin::Actions botones-->
@@ -1273,6 +1340,17 @@
             return; 
         }
 
+        if(_cboGenero == ''){
+            mensajesalertify("Seleccione Genero..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_cboEstadoCivil == ''){
+            mensajesalertify("Seleccione Estado Civil..!", "W", "top-right", 3);
+            return; 
+        }
+
+
         if(_txtNombre == ''){
             mensajesalertify("Ingrese Nombre Titular..!", "W", "top-right", 3);
             return; 
@@ -1283,15 +1361,6 @@
             return; 
         }
 
-        if(_cboGenero == ''){
-            mensajesalertify("Seleccione Genero..!", "W", "top-right", 3);
-            return; 
-        }
-
-        if(_cboEstadoCivil == ''){
-            mensajesalertify("Seleccione Estado Civil..!", "W", "top-right", 3);
-            return; 
-        }
 
         if(_cboProvincia == ''){
             mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
