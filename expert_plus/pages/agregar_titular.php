@@ -292,7 +292,7 @@
         </div>
         <div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">      
             <div class="d-flex justify-content-start">
-                <a href="#" class="btn btn-light-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">
+                <a href="#" class="btn btn-light-primary btn-sm" id="btnAgregartitu">
                     <span class="svg-icon svg-icon-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
@@ -839,7 +839,7 @@
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <label class="form-label">Email</label>
-                                                                <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="mi@gmail.com" maxlength="80" />   
+                                                                <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="mi@gmail.com" minlength="1" maxlength="80" />   
                                                             </div>
                                                         </div>
                                                         <div class="row">
@@ -860,13 +860,13 @@
                                                <div class="card card-flush py-4">
                                                     <div class="card-body pt-0">
                                                         <div class="d-flex flex-column gap-10">
-                                                            <table class="table align-middle table-row-dashed fs-6 gy-5 text-center" id="tblBeneficiario">
+                                                            <table class="table align-middle table-row-dashed fs-6 gy-5" id="tblBeneficiario">
                                                                 <thead>
                                                                     <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                                                         <th>Ciudad</th>
                                                                         <th>Nombres</th>
                                                                         <th>Parentesco</th>
-                                                                        <th>Opciones</th>
+                                                                        <th class="text-center">Opciones</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody class="fw-bold text-gray-600">
@@ -924,7 +924,7 @@
 
         if(_mensaje != ''){
             //mensajesalertify(_mensaje,"S","top-center",3);
-            mensajesweetalert('top-center','success',_mensaje,false,1900);
+            mensajesweetalert('top-center','success',_mensaje,false,2000);
 
         }
 
@@ -988,14 +988,29 @@
 
     });
 
-   
+   //Abrir Modal Parentesco
     $("#btnNewParen").click(function(){
 
       $("#modal_new_paren").modal("show");
     });
 
+     //Abrir Modal Agregar-Titular
+    $("#btnAgregartitu").click(function(){
 
+       $("#kt_modal_create_app").find('input,textarea').val('').end();
+       $("#kt_modal_create_app").modal("show");
+
+    });
+
+ 
+ 
+
+    //Desplazar Modales
     $("#modal_new_paren").draggable({
+        handle: ".modal-header"
+    });
+
+    $("#kt_modal_create_app").draggable({
         handle: ".modal-header"
     });
 
@@ -1112,44 +1127,49 @@
             _txtParentesco.toUpperCase();
         var _fechaNacimientoBe = $('#txtFechaNacimientoBe').val();
 
+        if(_cboParentesco == ''){
+            mensajesalertify("Seleccione Parentesco Beneficiario..!", "W", "top-right", 3);
+            return; 
+        }
+
         if(_cboDocumentoBe == ''){
-            mensajesalertify("Seleccione Tipo Documento..!", "W", "top-right", 3);
+            mensajesalertify("Seleccione Tipo Documento Beneficiario..!", "W", "top-right", 3);
             return; 
         }
 
         if(_txtDocumentoBe == ''){
-            mensajesalertify("Ingrese Numero de Documento..!", "W", "top-right", 3);
+            mensajesalertify("Ingrese Numero de Documento Beneficiario..!", "W", "top-right", 3);
             return; 
         }
 
         if(_txtDocumentoBe.length < 10){
-            mensajesalertify("Documento Incorrecto..!", "W", "top-right", 3);
-            return; 
-        }
-
-        if(_txtNombreBe == ''){
-            mensajesalertify("Ingrese Nombre..!", "W", "top-right", 3);
-            return; 
-        }
-
-        if(_txtApellidoBe == ''){
-            mensajesalertify("Ingrese Apellido..!", "W", "top-right", 3);
+            mensajesalertify("Documento Incorrecto Beneficiario..!", "W", "top-right", 3);
             return; 
         }
 
         if(_cboGeneroBe == ''){
-            mensajesalertify("Seleccione Genero..!", "W", "top-right", 3);
+            mensajesalertify("Seleccione Genero Beneficiario..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_txtNombreBe == ''){
+            mensajesalertify("Ingrese Nombre Beneficiario..!", "W", "top-right", 3);
+            return; 
+        }
+
+        if(_txtApellidoBe == ''){
+            mensajesalertify("Ingrese Apellido Beneficiario..!", "W", "top-right", 3);
             return; 
         }
 
 
         if(_cboProvinciaBe == ''){
-            mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
+            mensajesalertify("Seleccione Provincia Beneficiario..!!","W","top-right",3);
             return false;
         }
 
         if(_cboCiudadBe == 0){
-            mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
+            mensajesalertify("Seleccione Ciudad Beneficiario..!!","W","top-right",3);
             return false;
         }
 
@@ -1157,7 +1177,7 @@
         {
             _valor = document.getElementById("txtCelularBe").value;
             if( !(/^\d{10}$/.test(_valor)) ) {
-                mensajesalertify("Celular incorrecto..!" ,"W", "top-right", 3); 
+                mensajesalertify("Celular Incorrecto Beneficiario..!" ,"W", "top-right", 3); 
                 return;
             }
         }
@@ -1166,16 +1186,12 @@
             var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
             if (regex.test(_txtEmailBe.trim())){
             }else{
-                mensajesalertify("Email Incorrecto..!!","W","top-right",3);
+                mensajesalertify("Email Incorrecto Beneficiario..!!","W","top-right",3);
                 return false;
             }  
         }
 
-        if(_cboParentesco == ''){
-            mensajesalertify("Seleccione Parentesco..!", "W", "top-right", 3);
-            return; 
-        }
-
+      
 
         var _parametros = {
             
@@ -1445,6 +1461,8 @@
                                             
                                     if(response == 'OK'){
 
+                                        $("#kt_modal_create_app").modal("hide");
+
                                         $.redirect('?page=addtitular&menuid=<?php echo $menuid; ?>', 
                                         {'mensaje': 'Grabado con Éxito..!',
                                           'idclie': _idclie,
@@ -1457,6 +1475,9 @@
 
                                 });
                             }else{
+
+                                $("#kt_modal_create_app").modal("hide");
+
                                 $.redirect('?page=addtitular&menuid=<?php echo $menuid; ?>', 
                                 {'mensaje': 'Grabado con Éxito..!',
                                     'idclie': _idclie,
