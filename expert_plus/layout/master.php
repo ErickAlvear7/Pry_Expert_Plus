@@ -100,7 +100,11 @@
 
 	if($page == 'admincalendar'){
 		$xRuta = '/../pages/agendacalendar.php';
-	}	
+	}
+
+	if($page == 'agendatitular_admin'){
+		$xRuta = '/../pages/titularagenda_admin.php';
+	}		
 	
 	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";
 	$all_tareas = mysqli_query($con, $xSQL);	
