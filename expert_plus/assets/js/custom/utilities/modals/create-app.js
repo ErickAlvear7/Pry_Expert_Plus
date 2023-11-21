@@ -158,7 +158,7 @@ var KTCreateApp = function () {
 					category: {
 						validators: {
 							notEmpty: {
-								message: 'Selecione si desea agregar'
+								message: 'Seleccione si desea continuar..!!'
 							}
 						}
 					}
