@@ -129,7 +129,7 @@
     <input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
     <form id="kt_ecommerce_edit_order_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/sales/listing.html">
         <div class="w-100 flex-lg-row-auto w-lg-300px mb-7 me-7 me-lg-10">
-            <div class="card card-flush py-4">
+            <!-- <div class="card card-flush py-4">
                 <div class="card-header">
                     <div class="card-title">
                         <h2>Titular</h2>
@@ -150,7 +150,7 @@
                     <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                 </div>
             </div>
-            <br>
+            <br> -->
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0">
                     <div class="card-title">
@@ -166,7 +166,7 @@
                     </div>
                 </div>
                 <div class="separator"></div>
-                <div id="view_datos_detalle" class="collapse ">
+                <div id="view_datos_detalle" class="collapse show">
                     <div class="card-body pt-2">
                         <div class="d-flex flex-column gap-10">
                             <div class="d-flex align-items-center">							
@@ -216,7 +216,7 @@
                     </div>
                 </div>
                 <div class="separator"></div>
-                <div id="view_datos_producto" class="collapse ">
+                <div id="view_datos_producto" class="collapse show">
                     <div class="card-body pt-2">
                         <div class="d-flex flex-column gap-10">
                             <div class="d-flex align-items-center">
@@ -290,18 +290,27 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">      
-            <div class="d-flex justify-content-start">
-                <a href="#" class="btn btn-light-primary btn-sm" id="btnAgregartitu">
+        <div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">
+            <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n2">     
+                <div class="d-flex justify-content-start">
+                    <a href="#" class="btn btn-light-primary btn-sm" id="btnAgregartitu">
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+                            </svg>
+                        </span>                                       
+                    Agregar Titular
+                    </a>
+                </div>
+                <button type="button" id="btnRegresar" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
                     <span class="svg-icon svg-icon-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                            <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+                            <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
                         </svg>
-                    </span>                                       
-                Agregar Titular
-                </a>
-            </div>
+                    </span>
+                </button>
+            </ul>
             <div class="card card-flush py-4">
                 <div class="card-header">
                     <div class="card-title">
@@ -666,13 +675,11 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label class="form-label">Inicio Cobertura</label>
-                                                                <input type="date" id="txtIniCobertura" class="form-control mb-2" value="<?php 
-                                                                    $dia = date('Y-m-d');
-                                                                    echo date('Y-m-d', strtotime($dia)); ?>" />
+                                                                <input type="date" id="txtIniCobertura" class="form-control mb-2" value="" />
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label class="form-label">Fin Cobertura</label>
-                                                                <input type="date" id="txtFinCobertura" class="form-control mb-2" value="<?php echo $xFechaFinCobertura; ?>" />
+                                                                <input type="date" id="txtFinCobertura" class="form-control mb-2" value="" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -684,24 +691,15 @@
                                         <div class="fv-row">
                                             <label class="d-flex flex-stack mb-5 cursor-pointer">
                                                 <span class="d-flex align-items-center me-2">
-                                                    <span class="symbol symbol-50px me-6">
-                                                        <span class="symbol-label bg-light-primary">
-                                                            <span class="svg-icon svg-icon-1 svg-icon-primary">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                    <path opacity="0.3" d="M18.4 5.59998C21.9 9.09998 21.9 14.8 18.4 18.3C14.9 21.8 9.2 21.8 5.7 18.3L18.4 5.59998Z" fill="currentColor" />
-                                                                    <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM19.9 11H13V8.8999C14.9 8.6999 16.7 8.00005 18.1 6.80005C19.1 8.00005 19.7 9.4 19.9 11ZM11 19.8999C9.7 19.6999 8.39999 19.2 7.39999 18.5C8.49999 17.7 9.7 17.2001 11 17.1001V19.8999ZM5.89999 6.90002C7.39999 8.10002 9.2 8.8 11 9V11.1001H4.10001C4.30001 9.4001 4.89999 8.00002 5.89999 6.90002ZM7.39999 5.5C8.49999 4.7 9.7 4.19998 11 4.09998V7C9.7 6.8 8.39999 6.3 7.39999 5.5ZM13 17.1001C14.3 17.3001 15.6 17.8 16.6 18.5C15.5 19.3 14.3 19.7999 13 19.8999V17.1001ZM13 4.09998C14.3 4.29998 15.6 4.8 16.6 5.5C15.5 6.3 14.3 6.80002 13 6.90002V4.09998ZM4.10001 13H11V15.1001C9.1 15.3001 7.29999 16 5.89999 17.2C4.89999 16 4.30001 14.6 4.10001 13ZM18.1 17.1001C16.6 15.9001 14.8 15.2 13 15V12.8999H19.9C19.7 14.5999 19.1 16.0001 18.1 17.1001Z" fill="currentColor" />
-                                                                </svg>
-                                                            </span>
-                                                        </span>
+                                                    <span class="d-flex flex-column-md-4">
+                                                        <span class="fw-bolder fs-6">Desea Agreagar un Beneficiario..?</span>
                                                     </span>
-                                                    <span class="d-flex flex-column">
-                                                        <span class="fw-bolder fs-6">Desea Agreagar un Beneficiario?</span>
-                                                    </span>
-                                                </span>
-                                                <span class="form-check form-check-custom form-check-solid">
-                                                    <input class="form-check-input" type="radio" name="category" value="1" />
                                                 </span>
                                             </label>
+                                            <span class="form-check form-check-custom form-check-solid">
+                                                <input class="form-check-input" type="checkbox" id="chkCambiar" name="category" value="1" />
+                                                <label class="form-check-label lblTxt" id="lblTexto"></label>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -986,7 +984,10 @@
         
         });
 
+
     });
+
+ 
 
    //Abrir Modal Parentesco
     $("#btnNewParen").click(function(){
@@ -996,10 +997,35 @@
 
      //Abrir Modal Agregar-Titular
     $("#btnAgregartitu").click(function(){
+        //debugger;
+      $("#kt_modal_create_app").modal("show");
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth();
+        var yyyy = today.getFullYear();
+        today = dd+'/'+mm+'/'+yyyy;
+        $('#txtIniCobertura').attr('value', today);
+
+       var _fechafincob = '<?php echo $xFechaFinCobertura; ?>'
+       var _fechafin = moment(_fechafincob);
+       $('#txtFinCobertura').val(_fechafin);
+      
 
        $("#kt_modal_create_app").find('input,textarea').val('').end();
-       $("#kt_modal_create_app").modal("show");
+       $("#lblTexto").html('NO');
+     
 
+    });
+
+    $(document).on("click","#chkCambiar",function(){
+
+        if($("#chkCambiar").is(":checked")){
+  
+            $("#lblTexto").html('SI');             
+            
+        }else{
+            $("#lblTexto").html('NO');
+        }   
     });
 
  
@@ -1357,12 +1383,12 @@
         }
 
         if(_cboGenero == ''){
-            mensajesalertify("Seleccione Genero..!", "W", "top-right", 3);
+            mensajesalertify("Seleccione Genero Titular..!", "W", "top-right", 3);
             return; 
         }
 
         if(_cboEstadoCivil == ''){
-            mensajesalertify("Seleccione Estado Civil..!", "W", "top-right", 3);
+            mensajesalertify("Seleccione Estado Civil Titular..!", "W", "top-right", 3);
             return; 
         }
 
@@ -1373,18 +1399,18 @@
         }
 
         if(_txtApellido == ''){
-            mensajesalertify("Ingrese Apellido..!", "W", "top-right", 3);
+            mensajesalertify("Ingrese Apellido Titular..!", "W", "top-right", 3);
             return; 
         }
 
 
         if(_cboProvincia == ''){
-            mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
+            mensajesalertify("Seleccione Provincia Titular..!!","W","top-right",3);
             return false;
         }
 
         if(_cboCiudad == 0){
-            mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
+            mensajesalertify("Seleccione Ciudad Titular..!!","W","top-right",3);
             return false;
         }
 
@@ -1392,7 +1418,7 @@
         {
             _valor = document.getElementById("txtCelular").value;
             if( !(/^\d{10}$/.test(_valor)) ) {
-                mensajesalertify("Celular incorrecto..!" ,"W", "top-right", 3); 
+                mensajesalertify("Celular Incorrecto Titular..!" ,"W", "top-right", 3); 
                 return;
             }
         }
@@ -1401,7 +1427,7 @@
             var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
             if (regex.test(_txtEmail.trim())){
             }else{
-                mensajesalertify("Email Incorrecto..!!","W","top-right",3);
+                mensajesalertify("Email Incorrecto Titular..!!","W","top-right",3);
                 return false;
             }  
         }
