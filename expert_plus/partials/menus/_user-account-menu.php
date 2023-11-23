@@ -165,7 +165,6 @@
 
 				function f_ChangeMode(obj){
 
-					debugger;
 					let _check = $("#chkMode").is(":checked");
 					let _emprid = "<?php echo $xEmprid; ?>";
 					let _usuaid = "<?php echo $xUsuaid; ?>";
