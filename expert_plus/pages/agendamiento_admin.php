@@ -1122,8 +1122,8 @@
                                         <!--begin::Date-->
                                         <li class="nav-item me-1">
                                             <a class="nav-link btn d-flex flex-column flex-center rounded-pill min-w-40px me-2 py-4 btn-active-primary" data-bs-toggle="tab" href="#kt_schedule_day_0">
-                                                <span class="opacity-50 fs-7 fw-bold">Su</span>
-                                                <span class="fs-6 fw-boldest">21</span>
+                                                <span class="opacity-50 fs-7 fw-bold">Nov-2023</span>
+                                                <span class="fs-6 fw-boldest">11</span>
                                             </a>
                                         </li>
                                         <!--end::Date-->

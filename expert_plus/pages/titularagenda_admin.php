@@ -174,7 +174,7 @@
                                     <div class="text-center">
                                         <div class="btn-group">
                                             <button id="btnAgendar" onclick="f_Agendar(<?php echo $xTituid;?>,<?php echo $xProdid;?>,<?php echo $xGrupid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit;?> title='Agendar Cita' data-bs-toggle="tooltip" data-bs-placement="left">
-                                                <i class="fa fa-user-plus"></i>
+                                                <i class="fa fa-hospital"></i>
                                             </button>												 
                                         </div>
                                     </div>
@@ -205,7 +205,7 @@
 
         // Redirect boton editar cliente
 
-    function f_Editar(_clieid){
+    function f_Agendar(_clieid){
         $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {'idclie': _clieid}); //POR METODO POST
     }
 
