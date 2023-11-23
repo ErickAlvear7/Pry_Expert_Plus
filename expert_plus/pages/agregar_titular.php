@@ -675,11 +675,11 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label class="form-label">Inicio Cobertura</label>
-                                                                <input type="date" id="txtIniCobertura" class="form-control mb-2" value="" />
+                                                                <input type="date" id="txtIniCobertura" class="form-control mb-2" />
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label class="form-label">Fin Cobertura</label>
-                                                                <input type="date" id="txtFinCobertura" class="form-control mb-2" value="" />
+                                                                <input type="date" id="txtFinCobertura" class="form-control mb-2" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -997,22 +997,17 @@
 
      //Abrir Modal Agregar-Titular
     $("#btnAgregartitu").click(function(){
-        //debugger;
-      $("#kt_modal_create_app").modal("show");
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth();
-        var yyyy = today.getFullYear();
-        today = dd+'/'+mm+'/'+yyyy;
-        $('#txtIniCobertura').attr('value', today);
+ 
+      $("#kt_modal_create_app").find('input,textarea').val('').end();
+     
+       var _fechainicob = '<?php echo $xFechaActual; ?>';
+       $('#txtIniCobertura').val(_fechainicob);
 
-       var _fechafincob = '<?php echo $xFechaFinCobertura; ?>'
-       var _fechafin = moment(_fechafincob);
-       $('#txtFinCobertura').val(_fechafin);
+       var _fechafincob = '<?php echo $xFechaFinCobertura; ?>';
+       $('#txtFinCobertura').val(_fechafincob);
       
-
-       $("#kt_modal_create_app").find('input,textarea').val('').end();
        $("#lblTexto").html('NO');
+       $("#kt_modal_create_app").modal("show");
      
 
     });
