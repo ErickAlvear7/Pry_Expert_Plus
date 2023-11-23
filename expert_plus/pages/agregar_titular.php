@@ -707,7 +707,7 @@
                             <!--begin::Step 2-->
                             <div data-kt-stepper-element="content">
                                 <div class="w-100">
-                                     <div class="container-fluid">
+                                    <div class="container-fluid">
                                         <div class="card mb-5 mb-xl-8">
                                             <div class="card-header border-0">
                                                 <div class="card-title">
