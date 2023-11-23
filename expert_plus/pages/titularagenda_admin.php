@@ -205,7 +205,8 @@
 
         // Redirect boton editar cliente
 
-    function f_Agendar(_clieid){
+    function f_Agendar(_tituid, _prodid, _grupid){
+        
         $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {'idclie': _clieid}); //POR METODO POST
     }
 

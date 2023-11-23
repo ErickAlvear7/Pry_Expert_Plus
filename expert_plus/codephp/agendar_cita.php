@@ -51,7 +51,7 @@
             $xUsuaid = $_POST['xxUsuaid'];
 
             $xCodigoAgenda = 1001;
-            $xLogoCab = "Agendamiento.png";
+            $xLogoCab = "Agendamiento01.png";
             $xLogoFirma = "PrestaSlogin.png";
             $xCliente = "";
             $xProducto = "";
@@ -157,7 +157,7 @@
                     $xSQL .= "VALUES('Registro Agendado',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
                     mysqli_query($con, $xSQL); 
                     
-                    $xAgendado = 110;
+                    $xAgendado = 111;
                 }
             }else{
                 $xAgendaid = 0;
