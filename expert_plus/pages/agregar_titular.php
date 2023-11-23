@@ -216,7 +216,7 @@
                     </div>
                 </div>
                 <div class="separator"></div>
-                <div id="view_datos_producto" class="collapse show">
+                <div id="view_datos_producto" class="collapse">
                     <div class="card-body pt-2">
                         <div class="d-flex flex-column gap-10">
                             <div class="d-flex align-items-center">
@@ -894,7 +894,7 @@
                                     <button type="button" id="btnGrabar" class="btn btn-primary"><i class="las la-save"></i>
                                         <span class="indicator-label">Grabar</span>
                                     </button>
-                                    <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue
+                                    <button type="button" id="continuar" class="btn btn-lg btn-primary d-none" data-kt-stepper-action="next">Continue
                                         <span class="svg-icon svg-icon-3 ms-1 me-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="currentColor" />
@@ -1012,14 +1012,21 @@
 
     });
 
+    //Checkbox para continuar y agregar Beneficiario
+
     $(document).on("click","#chkCambiar",function(){
+
+        _ocultar = document.getElementById('continuar');
+       
 
         if($("#chkCambiar").is(":checked")){
   
-            $("#lblTexto").html('SI');             
+            $("#lblTexto").html('SI');
+            _ocultar.classList.remove('d-none');           
             
         }else{
             $("#lblTexto").html('NO');
+            _ocultar.classList.add('d-none');
         }   
     });
 
