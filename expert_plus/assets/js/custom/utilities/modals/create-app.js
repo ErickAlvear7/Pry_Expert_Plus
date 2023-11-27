@@ -155,13 +155,13 @@ var KTCreateApp = function () {
 							}
 						}
 					},
-					category: {
-						validators: {
-							notEmpty: {
-								message: 'Seleccione si desea continuar..!!'
-							}
-						}
-					}
+					// category: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: 'Seleccione si desea continuar..!!'
+					// 		}
+					// 	}
+					// }
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
