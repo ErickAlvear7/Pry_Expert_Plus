@@ -221,146 +221,6 @@
                     </span>
                 </button>
             </div>
-            <!-- <div id="kt_user_view_beneficiario" class="collapse">
-                <div class="card pt-4 mb-6 mb-xl-9">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <h2>Datos Beneficiario</h2>
-                        </div>
-                    </div>
-                    <div class="card-body pt-0">
-                        <div class="d-flex flex-wrap gap-5">
-                            <div class="fv-row w-100 flex-md-root">
-                                <label class="required form-label">Tipo Documento</label>
-                                <select class="form-select mb-2" id="cboAddDocumentoBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
-                                    <option></option>
-                                    <?php
-                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                    $all_datos =  mysqli_query($con, $xSQL);
-                                    foreach($all_datos as $datos){?>
-                                    <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
-                                    <?php }?>
-                                </select>
-                            </div>
-                            <div class="fv-row w-100 flex-md-root">
-                                <label class="required form-label">Nro. Documento</label>
-                                <input type="text" class="form-control mb-2" id="txtAddDocumentoBe" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                            </div>    
-                        </div>
-                        <div class="d-flex flex-wrap gap-5">
-                            <div class="fv-row w-100 flex-md-root">
-                                <label class="required form-label">Nombres</label>
-                                <input type="text" class="form-control mb-2" id="txtAddNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
-                            </div>
-                            <div class="fv-row w-100 flex-md-root">
-                                <label class="required form-label">Apellidos</label>
-                                <input type="text" class="form-control mb-2" id="txtAddApellidoBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
-                            </div>   
-                        </div>
-                        <div class="d-flex flex-wrap gap-5">
-                            <div class="fv-row w-100 flex-md-root">
-                                <label class="required form-label">Genero</label>
-                                <select class="form-select mb-2" id="cboAddGeneroBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
-                                    <option></option>
-                                    <?php
-                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Genero' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                        $all_datos =  mysqli_query($con, $xSQL);
-                                        foreach($all_datos as $datos){?>
-                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                    <?php }?> 
-                                </select>
-                            
-                            </div>
-                            <div class="fv-row w-100 flex-md-root">
-                                <label class="form-label">Estado Civil</label>
-                                <select class="form-select mb-2" id="cboAddEstadoCivilBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
-                                    <option></option>
-                                    <?php
-                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Estado Civil' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
-                                        $all_datos =  mysqli_query($con, $xSQL);
-                                        foreach($all_datos as $datos){?>
-                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                    <?php }?>                   
-                                </select>
-                            </div>      
-                        </div>
-                        <div class="d-flex flex-wrap gap-5">
-                            <div class="fv-row w-100 flex-md-root">
-                                <label class="required form-label">Provincia</label>
-                                <select id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tab_Addbeneficiarios" class="form-select mb-2" >
-                                        <option></option>
-                                        <?php foreach ($all_provincia as $prov) : ?>
-                                            <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
-                                        <?php endforeach ?>
-                                </select>
-                            </div>
-                            <div class="fv-row w-100 flex-md-root">
-                                <label class="form-label">Ciudad</label>
-                                <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tab_Addbeneficiarios" class="form-select mb-2">
-                                        <option></option>
-                                </select> 
-                            </div>  
-                        </div>
-                        <div class="mb-10 fv-row">
-                            <label class="form-label">Direccion</label>
-                            <textarea class="form-control mb-2" id="txtAddDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
-                        </div>
-                        <div class="d-flex flex-wrap gap-5">
-                            <div class="fv-row w-100 flex-md-root">
-                                <label class="form-label">Telefono Casa</label>
-                                <input type="text" id="txtAddTelCasaBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
-                            </div>
-                            <div class="fv-row w-100 flex-md-root">
-                                <label class="form-label">Telefono Oficina</label>
-                                <input type="text" id="txtAddTelOfiBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
-                            </div>  
-                        </div>
-                        <div class="d-flex flex-wrap gap-5">
-                            <div class="fv-row w-100 flex-md-root">
-                                <label class="form-label">Telefono Celular</label>
-                                <input type="text" id="txtAddCelularBe" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                            </div>
-                            <div class="fv-row w-100 flex-md-root">
-                                <label class="form-label">Email</label>
-                                <input type="email" id="txtAddEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
-                            </div>  
-                        </div>
-                        <div class="d-flex flex-wrap gap-5">
-                            <div class="fv-row w-100 flex-md-root">
-                                <label class="form-label">Parentesco</label>
-                                <select class="form-select mb-2" id="cboParentesco" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Parentesco">
-                                    <option></option>
-                                    <?php
-                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Parentesco' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
-                                        $all_datos =  mysqli_query($con, $xSQL);
-                                        foreach($all_datos as $datos){?>
-                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                    <?php }?>                   
-                                </select>
-                            </div>
-                            <div class="fv-row w-100 flex-md-root">
-                                <label class="form-label">Fecha de Nacimiento</label>
-                                <input type="date" id="txtAddFechaNacimientoBe" class="form-control mb-2" value="" />
-                            </div> 
-                        </div>
-                        <div class="form-group mt-5">
-                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>
-                            Agregar
-                            </button>
-                        </div>  
-                    </div>
-                </div>
-            </div> -->
             <div class="card pt-4 mb-6 mb-xl-9">                    
                 <div class="card-header border-0">                         
                     <div class="card-title">
@@ -464,10 +324,11 @@
         </div>
     </div>
 </div>
+<!--Modal Editar Titular -->
 <div class="modal fade" id="modal_persona" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-650px">
         <div class="modal-content"> 
-            <div class="modal-header" id="kt_modal_add_user_header">
+            <div class="modal-header">
                 <h2 class="fw-bolder">Editar Titular</h2>
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
@@ -478,7 +339,7 @@
                     </span>
                 </div>
             </div>
-            <div class="container-fluid">
+            <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card mb-5 mb-xl-8">
                     <div class="card-header border-0">
                         <div class="card-title">
@@ -530,35 +391,35 @@
                         <div class="card card-flush py-4">
                             <div class="card-body pt-0">
                                 <div class="row">
-                                <div class="col-md-6">
+                                    <div class="col-md-6">
                                         <label class="required form-label">Nombres</label>
                                         <input type="text" class="form-control form-control-solid text-uppercase" id="txtNombre" name="txtNombre" minlength="5" maxlength="100"  value="" />
-                                </div>
-                                <div class="col-md-6">
+                                    </div>
+                                    <div class="col-md-6">
                                         <label class="required form-label">Apellidos</label>
                                         <input type="text" class="form-control form-control-solid text-uppercase" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" value="" />
-                                </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-md-12">
-                                    <label class="form-label">Direccion</label>
-                                    <textarea class="form-control mb-2" id="txtDireccion" placeholder="Ingrese Direccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
-                                </div>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                <div class="col-md-6">
-                                    <label class="form-label">Telefono Casa</label>
-                                    <input type="text" class="form-control form-control-solid" id="txtTelcasa"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Casa" value=""/>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Telefono Oficina</label>
-                                    <input type="text" class="form-control form-control-solid" id="txtTelofi"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Oficina" value=""/>
-                                </div>
+                                    <div class="col-md-12">
+                                        <label class="form-label">Direccion</label>
+                                        <textarea class="form-control mb-2" id="txtDireccion" placeholder="Ingrese Direccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                    <label class="form-label">Celular</label>
-                                    <input type="text" class="form-control form-control-solid" id="txtCel"  maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Celular" value=""/>
+                                        <label class="form-label">Telefono Casa</label>
+                                        <input type="text" class="form-control form-control-solid" id="txtTelcasa"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Casa" value=""/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Telefono Oficina</label>
+                                        <input type="text" class="form-control form-control-solid" id="txtTelofi"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Oficina" value=""/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Celular</label>
+                                        <input type="text" class="form-control form-control-solid" id="txtCel"  maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Celular" value=""/>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Email</label>
@@ -566,23 +427,24 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="button" id="btnSaveTit" class="btn btn-primary">Grabar</button>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnSaveTit" class="btn btn-primary">Modificar</button>
+            </div>
         </div>
     </div>
 </div>
+<!--Modal Editar Beneficiario -->
 <div class="modal fade" id="modal_beneficiario" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
-            <div class="modal-header" id="kt_modal_add_user_header">
-                <h2 class="fw-bolder">Editar Beneficiario</h2>
-                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+            <div class="modal-header">
+                <h2>Editar Beneficiario</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
@@ -591,86 +453,58 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">               
-                <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
-                    <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_user_info" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_user_info">Beneficiario
-                    <span class="ms-2 rotate-180">
-                        <span class="svg-icon svg-icon-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                            </svg>
-                        </span>
-                    </span></div>
-                    <div id="kt_modal_update_user_user_info" class="collapse show">
-                        <div class="row g-9 mb-7">
-                            <div class="col-md-6 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span>Nombres</span>
-                                </label>
+            <div class="modal-body scroll-y mx-5 mx-xl-10 pt-0 pb-15">
+                <div class="card card-flush py-2">
+                    <div class="card-body pt-0">
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <label class="required form-label">Nombres</label>
                                 <input type="text" class="form-control form-control-solid text-uppercase" id="txtNombreBeMo" name="txtNombre" minlength="5" maxlength="100"/>
                             </div>
-                            <div class="col-md-6 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span>Apellidos</span>
-                                </label>
-                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtApellidoBeMo" name="txtApellido" minlength="5" maxlength="100" value=""/>
-                            </div>                                                    
-                        </div>
-                    </div>
-                    <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_user_address" role="button" aria-expanded="false" aria-controls="kt_modal_update_user_address">Informacion Beneficiario
-                        <span class="ms-2 rotate-180">
-                            <span class="svg-icon svg-icon-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                </svg>
-                            </span>
-                        </span>
-                    </div>
-                    <div id="kt_modal_update_user_address" class="collapse show">
-                        <div class="d-flex flex-column mb-7 fv-row">
-                            <label class="fs-6 fw-bold mb-2">Direccion</label>
-                            <input class="form-control form-control-solid text-uppercase" id="txtDireccionBeMo" placeholder="Ingrese Direccion" value="" />
-                        </div>
-                        <div class="row g-9 mb-7">
-                            <div class="col-md-6 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span>Telefono Casa</span>
-                                </label>
-                                <input type="text" class="form-control form-control-solid" id="txtTelcasaBeMo" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Casa" value=""/>
+                            <div class="col-md-6">
+                                <label class="required form-label">Apellidos</label>
+                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtApellidoBeMo" name="txtApellido" minlength="5" maxlength="100" value=""/>   
                             </div>
-                            <div class="col-md-6 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span>Telefono Oficina</span>
-                                </label>
-                                <input type="text" class="form-control form-control-solid" id="txtTelofiBeMo" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Oficina" value=""/>
-                            </div>                                                    
                         </div>
-                        <div class="row g-9 mb-7">
-                            <div class="col-md-6 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span>Celular</span>
-                                </label>
-                                <input type="text" class="form-control form-control-solid" id="txtCelularBeMo" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Celular" value=""/>
+                        <div class="row mb-5">
+                            <div class="col-md-12">
+                                <label class="form-label">Direccion</label>
+                                <textarea class="form-control mb-2" id="txtDireccionBeMo" placeholder="Ingrese Direccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
                             </div>
-                            <div class="col-md-6 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span>Email</span>
-                                </label>
-                                <input type="email" class="form-control form-control-solid" id="txtEmailBeMo"  minlength="5" maxlength="100" placeholder="Ingrese Email" value=""/>
-                            </div>                                                    
+                        </div>
+                        <div class="row mb-5">
+                           <div class="col-md-6">
+                               <label class="form-label">Telefono Casa</label>
+                               <input type="text" class="form-control form-control-solid" id="txtTelcasaBeMo" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Casa" value=""/>
+                           </div>
+                           <div class="col-md-6">
+                               <label class="form-label">Telefono Oficina</label>
+                               <input type="text" class="form-control form-control-solid" id="txtTelofiBeMo" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Oficina" value=""/>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-6">
+                               <label class="form-label">Telefono Celular</label>
+                               <input type="text" class="form-control form-control-solid" id="txtCelularBeMo" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Celular" value=""/>
+                           </div>
+                           <div class="col-md-6">
+                               <label class="form-label">Email</label>
+                               <input type="email" class="form-control form-control-solid" id="txtEmailBeMo"  minlength="5" maxlength="100" placeholder="Ingrese Email" value=""/>
+                           </div>
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-end text-center pt-15">
-                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="btnSaveBene" onclick="f_EditarBene(<?php echo $xUsuaid;?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>)"> 
-                        <span class="indicator-label">Modificar</span>
-                    </button>
-                </div>  
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnSaveBene" onclick="f_EditarBene(<?php echo $xUsuaid;?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>)"> 
+                    <span class="indicator-label">Modificar</span>
+                </button>
             </div>
         </div>
     </div>
 </div>
+<!--Modal Agregar Parentesco-Beneficiario -->
 <div class="modal fade" id="modal_new_paren" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
@@ -708,6 +542,7 @@
         </div>
     </div>
 </div>
+<!--Modal Agregar Beneficiario -->
 <div class="modal fade" id="modal_addbeneficiario" tabindex="-1" aria-hidden="true">
    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
