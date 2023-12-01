@@ -97,6 +97,17 @@
         $xIntervalo = $datos['intervalo'];
     }
 
+    $xTituid = 1;
+    $xBeneid = 0;
+    $xPresid = 6;
+    $xPreeid = 3;
+    $xPfesid = 15;
+    $xProdid = 7;
+    $xGrupid = 1;
+    $xCiudid = 188;    
+    $xEspeid = 1;
+
+
 ?>
 
     <style>
@@ -1218,7 +1229,7 @@
                         },*/
                         eventClick: function (arg) {
                             hidePopovers();
-                            f_DelAgenda(arg);
+                            f_ClickAgenda(arg);
                         },
                         eventMouseEnter: function (arg) {
                             f_ViewDatos(arg);
@@ -1703,13 +1714,28 @@
                 popoverState = true;
             }
 
-            function f_DelAgenda(arg){
+            function f_ClickAgenda(arg){
                 
+                console.log(arg);
+                let _id = arg.event.id;
+                let _agenid = arg.event.extendedProps.usuariocreacion;
+                console.log(_agenid);
                 //alert('Borrar agenda, si es reservatmp elimina solo el usuario, si es agenda, mostrar form para cancelar');
                 /*$("#fecha_inicio").val(_dateactual);
                 $("#fecha_fin").val(_dateactual);
                 $("#hora_inicio").val(_timeinicio);
                 $("#hora_fin").val(_timefin);*/
+
+                let _usuaid = "<?php echo $xUsuaid; ?>";
+
+                if(_agenid == _usuaid){
+
+                    
+
+                }
+
+
+
                 let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
 
                 $("#modal_new_agenda").modal("show");
