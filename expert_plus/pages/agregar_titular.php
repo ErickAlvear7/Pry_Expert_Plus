@@ -183,7 +183,7 @@
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Email</h5>
                                     <div class="fw-bold">
-                                        <a href="#" class="link-primary"><?php echo $Email1; ?></a>
+                                        <div class="text-gray-600"><?php echo $Email1; ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -707,7 +707,7 @@
                             <!--begin::Step 2-->
                             <div data-kt-stepper-element="content">
                                 <div class="w-100">
-                                     <div class="container-fluid">
+                                    <div class="container-fluid">
                                         <div class="card mb-5 mb-xl-8">
                                             <div class="card-header border-0">
                                                 <div class="card-title">
@@ -894,7 +894,7 @@
                                     <button type="button" id="btnGrabar" class="btn btn-primary"><i class="las la-save"></i>
                                         <span class="indicator-label">Grabar</span>
                                     </button>
-                                    <button type="button" id="continuar" class="btn btn-lg btn-primary d-none" data-kt-stepper-action="next">Continue
+                                    <button type="button" id="continuar" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue
                                         <span class="svg-icon svg-icon-3 ms-1 me-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="currentColor" />
@@ -922,7 +922,7 @@
 
         if(_mensaje != ''){
             //mensajesalertify(_mensaje,"S","top-center",3);
-            mensajesweetalert('top-center','success',_mensaje,false,2000);
+            mensajesweetalert('top-center','success',_mensaje,false,3000);
 
         }
 
@@ -983,11 +983,8 @@
             });                
         
         });
-
-
     });
 
- 
 
    //Abrir Modal Parentesco
     $("#btnNewParen").click(function(){
@@ -998,27 +995,41 @@
      //Abrir Modal Agregar-Titular
     $("#btnAgregartitu").click(function(){
  
-      $("#kt_modal_create_app").find('input,textarea').val('').end();
-     
-       var _fechainicob = '<?php echo $xFechaActual; ?>';
-       $('#txtIniCobertura').val(_fechainicob);
+        $("#kt_modal_create_app").find('input,textarea').val('').end();
 
-       var _fechafincob = '<?php echo $xFechaFinCobertura; ?>';
-       $('#txtFinCobertura').val(_fechafincob);
-      
-       $("#lblTexto").html('NO');
-       $("#kt_modal_create_app").modal("show");
-     
+        $('#cboDocumento').val(null).trigger('change');
+        $('#cboGenero').val(null).trigger('change');
+        $('#cboEstadoCivil').val(null).trigger('change');
+        $('#cboProvincia').val(null).trigger('change');
+
+        $('#cboParentesco').val(null).trigger('change');
+        $('#cboDocumentoBe').val(null).trigger('change');
+        $('#cboGeneroBe').val(null).trigger('change');
+        $('#cboEstadoCivilBe').val(null).trigger('change');
+        $('#cboProvinciaBe').val(null).trigger('change');
+
+        $('#chkCambiar').prop('checked',false);
+
+        _ocultar = document.getElementById('continuar');
+        _ocultar.classList.add('d-none');
+
+        $("#lblTexto").html('NO');
+        
+        var _fechainicob = '<?php echo $xFechaActual; ?>';
+        $('#txtIniCobertura').val(_fechainicob);
+
+        var _fechafincob = '<?php echo $xFechaFinCobertura; ?>';
+        $('#txtFinCobertura').val(_fechafincob);
+        
+        
+        $("#kt_modal_create_app").modal("show");
 
     });
 
     //Checkbox para continuar y agregar Beneficiario
 
     $(document).on("click","#chkCambiar",function(){
-
-        _ocultar = document.getElementById('continuar');
        
-
         if($("#chkCambiar").is(":checked")){
   
             $("#lblTexto").html('SI');
@@ -1030,8 +1041,6 @@
         }   
     });
 
- 
- 
 
     //Desplazar Modales
     $("#modal_new_paren").draggable({
@@ -1220,7 +1229,6 @@
         }
 
       
-
         var _parametros = {
             
             xxProdid: _prodid,
