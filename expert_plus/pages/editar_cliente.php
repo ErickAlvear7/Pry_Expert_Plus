@@ -366,84 +366,20 @@
             	   </div>
                 </div>
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
-                    <div class="d-flex flex-stack fs-4 py-3">
-                        <div class="fw-bolder rotate collapsible btn btn-sm btn-light-primary" data-bs-toggle="collapse" href="#kt_user_view_producto" role="button" aria-expanded="false" aria-controls="kt_user_view_details">Agregar Producto
-                            <span class="ms-2 rotate-180">
-                                <span class="svg-icon svg-icon-3">
+                    <div class="d-flex flex-stack fs-4 py-3 mb-2">
+                        <div class="d-flex justify-content-start">
+                            <a href="#" class="btn btn-light-primary btn-sm" id="btnAgregarprod">
+                                <span class="svg-icon svg-icon-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
                                     </svg>
-                                </span>
-                            </span>
+                                </span>                                       
+                            Agregar Producto
+                            </a>
                         </div>
                     </div>
                     <div class="d-flex flex-column gap-7 gap-lg-10">
-                        <div id="kt_user_view_producto" class="collapse">
-                            <div class="card card-flush py-4">
-                                <div class="card-header">
-                                    <div class="card-title">
-                                        <h2>Datos Producto</h2>
-                                    </div>
-                                </div>
-                                <div class="card-body pt-0">
-                                    <div class="mb-5 fv-row">
-                                        <label class="required form-label">Producto</label>
-                                        <input class="form-control mb-2 text-uppercase" type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
-                                    </div>
-                                    <div class="mb-5 fv-row">
-                                        <label class="form-label">Descripcion</label>
-                                        <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
-                                    </div>
-                                    <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                        <div class="col">
-                                            <label class="required form-label">Costo</label>
-                                            <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                        </div>
-                                        <div class="col">
-                                            <label class="required form-label">Grupo</label>
-                                            <select name="cboGrupo" id="cboGrupo" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
-                                                <option></option>
-                                                <?php foreach ($all_grupos as $datos) : ?>
-                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['NombreGrupo']) ?></option>
-                                                <?php endforeach ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                        <div class="col">
-                                            <label class="required form-label">Asistencia Mes</label>
-                                            <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" value="1" />
-                                            <br>
-                                            <label class="form-check form-switch form-check-custom form-check-solid">
-                                                <input class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
-                                                <span class="form-check-label fw-bold text-muted" id="lblCobertura" for="chkEnviar1">Cobertura NO</span>
-                                            </label> 
-                                        </div>
-                                        <div class="col">
-                                            <label class="required form-label">Asistencia Anual</label>
-                                            <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" placeholder="1" value="1" />
-                                            <br>
-                                            <label class="form-check form-switch form-check-custom form-check-solid">
-                                                <input class="form-check-input" name="chkSistema" id="chkSistema" type="checkbox" />
-                                                <span class="form-check-label fw-bold text-muted" id="lblSistema" for="chkEnviar1">Sistema NO</span>
-                                            </label> 
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="form-group mt-5">
-                                        <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
-                                            <span class="svg-icon svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                                    <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                        Agregar
-                                        </button>
-                                    </div>                                        
-                                </div>
-                            </div>
-                        </div>
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title">
@@ -546,6 +482,7 @@
         </div>
     </form>
 </div>
+<!--MODAL NUEVO GRUPO-->
 <div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
@@ -582,8 +519,86 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="modal_producto" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
+<!--MODAL AGREGAR PRODUCTO-->
+<div class="modal fade" id="modal_addproducto" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Agregar Producto</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="required form-label">Producto</label>
+                                <input class="form-control mb-2 text-uppercase" type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Descripcion</label>
+                                <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="required form-label">Costo</label>
+                                <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="required form-label">Grupo</label>
+                                <select name="cboGrupo" id="cboGrupo" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#modal_addproducto" class="form-select mb-2" >
+                                    <option></option>
+                                    <?php foreach ($all_grupos as $datos) : ?>
+                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['NombreGrupo']) ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-7">
+                            <div class="col-md-6">
+                                <label class="form-label">Asistencia Mes</label>
+                                <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" value="1" />   
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Asistencia Anual</label>
+                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" placeholder="1" value="1" />  
+                            </div>
+                        </div>
+                        <div class="row border border-hover-primary py-4">
+                            <div class="col-md-6">
+                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                    <input class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
+                                    <h5 class="form-check-label" id="lblCobertura" for="chkEnviar1">Cobertura NO</h5>
+                                </label>  
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                    <input class="form-check-input" name="chkSistema" id="chkSistema" type="checkbox" />
+                                    <h5 class="form-check-label" id="lblSistema" for="chkEnviar1">Sistema NO</h5>
+                                </label>   
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnAgregar" class="btn btn-primary">Grabar</button>
+            </div>
+        </div>   
+    </div>
+</div>
+<!--MODAL EDITAR PRODUCTO-->
+<div class="modal fade" id="modal_editproducto" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Editar Producto</h2>
@@ -596,77 +611,79 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body">
-                <div class="border border-hover-primary p-7 rounded mb-7 ">
-                    <div class="mb-5 fv-row">
-                        <label class="required form-label">Producto</label>
-                        <input class="form-control mb-2 text-uppercase" type="text" name="txtProductoEdit" id="txtProductoEdit" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
-                    </div>
-                    <div class="mb-5 fv-row">
-                        <label class="form-label">Descripcion</label>
-                        <textarea class="form-control mb-2 text-uppercase" name="txtDescripcionEdit" id="txtDescripcionEdit" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
-                    </div>
-                    <br>
-                    <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                        <div class="col">
-                            <label class="required form-label">Costo</label>
-                            <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="required form-label">Producto</label>
+                                <input class="form-control mb-2 text-uppercase" type="text" name="txtProductoEdit" id="txtProductoEdit" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
+                            </div>
                         </div>
-                        <div class="col">
-                            <label class="required form-label">Grupo</label>
-                            <select name="cboGrupoEdit" id="cboGrupoEdit" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
-                                <option></option>
-                                <?php 
-                                    $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND grup_estado='A' ";
-                                    $all_datos =  mysqli_query($con, $xSQL);
-                                    foreach ($all_datos as $dato){ ?>
-                                        <option value="<?php echo $dato['Codigo'] ?>"><?php echo $dato['NombreGrupo'] ?></option>
-                                    <?php } ?>  
-                            </select>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-label">Descripcion</label>
+                                <textarea class="form-control mb-2 text-uppercase" name="txtDescripcionEdit" id="txtDescripcionEdit" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
+                            </div>    
                         </div>
-                    </div>
-                    <br>
-                    <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                        <div class="col">
-                            <label class="required form-label">Asistencia Mes</label>
-                            <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control mb-2" value="1" />  
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="required form-label">Costo</label>
+                                <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="required form-label">Grupo</label>
+                                <select name="cboGrupoEdit" id="cboGrupoEdit" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
+                                    <option></option>
+                                    <?php 
+                                        $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND grup_estado='A' ";
+                                        $all_datos =  mysqli_query($con, $xSQL);
+                                        foreach ($all_datos as $dato){ ?>
+                                            <option value="<?php echo $dato['Codigo'] ?>"><?php echo $dato['NombreGrupo'] ?></option>
+                                        <?php } ?>  
+                                </select>
+                            </div>
                         </div>
-                        <div class="col">
-                            <label class="required form-label">Asistencia Anual</label>
-                            <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" value="1" />   
+                        <div class="row mb-7">
+                            <div class="col-md-6">
+                                <label class="form-label">Asistencia Mes</label>
+                                <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control mb-2" value="1" />  
+                            </div>
+                           <div class="col-md-6">
+                                <label class="form-label">Asistencia Anual</label>
+                                <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" value="1" />   
+                           </div>
+                        </div>
+                        <div class="row border border-hover-primary py-4">
+                            <div class="col-md-4">    
+                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                    <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
+                                    <h5 class="form-check-label txtcob" id="lblCoberturaEdit"></h5>
+                                </label> 
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                    <input class="form-check-input" name="chkSistemaEdit" id="chkSistemaEdit" type="checkbox" />
+                                    <h5 class="form-check-label txtsis"></h5>
+                                </label> 
+                            </div>
+                            <div class="col-md-4">   
+                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                    <input class="form-check-input" name="chkGerencialEdit" id="chkGerencialEdit" type="checkbox" />
+                                    <h5 class="form-check-label txtger"></h5>
+                                </label> 
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="border border-hover-primary p-7 rounded mb-7 ">
-                    <div class="row g-9 mb-8">
-                        <div class="col-md-4 fv-row">
-                            <h5 class="txtcob" id="lblCoberturaEdit"></h5>
-                            <label class="form-check form-switch form-check-custom form-check-solid">
-                                <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
-                            </label> 
-                        </div>
-                        <div class="col-md-4 fv-row t">
-                            <h5 class="txtsis"></h5>
-                            <label class="form-check form-switch form-check-custom form-check-solid">
-                                <input class="form-check-input" name="chkSistemaEdit" id="chkSistemaEdit" type="checkbox" />
-                            </label> 
-                        </div>
-                        <div class="col-md-4 fv-row">
-                            <h5 class="txtger"></h5>
-                            <label class="form-check form-switch form-check-custom form-check-solid">
-                                <input class="form-check-input" name="chkGerencialEdit" id="chkGerencialEdit" type="checkbox" />
-                            </label> 
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-primary">Modificar</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-primary">Modificar</button>
             </div>
         </div>
     </div>
-</div>    
+</div>   
 
 <script>
 
@@ -735,6 +752,7 @@
 
     });
 
+    
     // imput type number
 
     document.getElementById("txtAsisMes").addEventListener("change", function() {
@@ -791,6 +809,26 @@
         $("#lblSistema").text("Sistema NO");
 
         }
+    });
+
+    //Modal-Agregar-Producto
+    $('#btnAgregarprod').click(function(){
+
+        $("#txtProducto").val("");
+        $("#txtDescripcion").val("");
+        $("#txtCosto").val("0.00");
+        $("#cboGrupo").val(0).change();
+        $("#txtAsisMes").val("1");
+        $("#txtAsisAnu").val("1");
+        document.getElementById("chkCobertura").checked = false;
+        _cobertura = "NO";
+        $("#lblCobertura").text("Cobertura NO");
+        document.getElementById("chkSistema").checked = false;
+        _sistema = "NO";
+        $("#lblSistema").text("Sistema NO");   
+
+        $('#modal_addproducto').modal('show');
+
     });
 
 
@@ -866,20 +904,10 @@
                 _output +='</tr>';
 
                 $('#tblProducto').append(_output);
-                mensajesalertify('Agregado Correctamente..!', 'S', 'top-center', 3);
+                //mensajesalertify('Agregado Correctamente..!', 'S', 'top-center', 3);
 
-                $("#txtProducto").val("");
-                $("#txtDescripcion").val("");
-                $("#txtCosto").val("0.00");
-                $("#cboGrupo").val(0).change();
-                $("#txtAsisMes").val("1");
-                $("#txtAsisAnu").val("1");
-                document.getElementById("chkCobertura").checked = false;
-                _cobertura = "NO";
-                $("#lblCobertura").text("Cobertura NO");
-                document.getElementById("chkSistema").checked = false;
-                _sistema = "NO";
-                $("#lblSistema").text("Sistema NO");   
+                $('#modal_addproducto').modal('hide');
+                mensajesweetalert('top-center','success','Agregado Correctamente',false,2500);
               
 
             }else{
@@ -898,11 +926,15 @@
 
     //Desplazar-modal
 
-    $("#modal_producto").draggable({
+    $("#modal_editproducto").draggable({
         handle: ".modal-header"
     });
 
     $("#modal_new_grupo").draggable({
+        handle: ".modal-header"
+    });
+
+    $("#modal_addproducto").draggable({
         handle: ".modal-header"
     });
 
@@ -1010,7 +1042,7 @@
     $(document).on("click",".btnEditar",function(){
 
         
-        $("#modal_producto").find("input,textarea,checkbox").val("");
+        $("#modal_editproducto").find("input,textarea,checkbox").val("");
 
         _rowid = $(this).attr("id");
         _rowid = _rowid.substring(10);
@@ -1069,7 +1101,7 @@
                 }
 
 
-                $("#modal_producto").modal("show");
+                $("#modal_editproducto").modal("show");
 
             });  
 
@@ -1193,7 +1225,7 @@
               
                 $('#row_' + _rowid + '').html(_output);
 
-                $("#modal_producto").modal("hide");
+                $("#modal_editproducto").modal("hide");
 
             }else{
                 mensajesalertify("Producto ya está asignado..!", "W", "top-right", 3);
