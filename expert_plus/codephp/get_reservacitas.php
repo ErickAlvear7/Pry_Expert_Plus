@@ -24,7 +24,7 @@
             $xPfesid = $_POST['xxPfesid'];
             
             //$xSQL = "SELECT rsrv_id as id,'ReservaTMP' AS title,'Horario Reservado Temporalmente' AS description,fecha_inicio AS start,fecha_fin AS end,hora_desde AS horaini,hora_hasta AS horafin,(SELECT usu.usua_login FROM `expert_usuarios` usu WHERE usu.pais_id=$xPaisid and usu.empr_id=$xEmprid AND usu.usua_id=usuariocreacion) AS username,color,textcolor FROM `expert_reserva_tmp` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pres_id=$xPresid AND espe_id=$xEspeid AND pfes_id=$xPfesid ";
-            $xSQL = "SELECT rsrv_id as id,'ReservaTMP' AS title,'Horario Reservado Temporalmente' AS description,fecha_inicio AS start,fecha_fin AS end,";
+            $xSQL = "SELECT rsrv_id as id,'ReservaTMP' AS title,'Horario Reservado Temporalmente' AS description,fecha_inicio AS start,fecha_fin AS end,fecha_inicio,fecha_fin,codigo_dia,dia,usuariocreacion,  ";
             $xSQL .= "hora_desde AS horaini,hora_hasta AS horafin,(SELECT CONCAT(prv.provincia,'/',prv.ciudad) FROM `provincia_ciudad` prv WHERE prv.pais_id=$xPaisid AND prv.prov_id=rsv.ciud_id) AS Provincia,";
             $xSQL .= "(SELECT pre.pres_nombre FROM `expert_prestadora` pre WHERE pre.pais_id=$xPaisid AND pre.empr_id=$xEmprid AND pre.pres_id=rsv.pres_id) AS Prestadora,";
             $xSQL .= "(SELECT esp.espe_nombre FROM `expert_especialidad` esp WHERE esp.pais_id=$xPaisid AND esp.empr_id=$xEmprid AND esp.espe_id=rsv.espe_id) AS Especialidad,";
