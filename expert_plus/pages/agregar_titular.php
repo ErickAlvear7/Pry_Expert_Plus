@@ -129,28 +129,6 @@
     <input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
     <form id="kt_ecommerce_edit_order_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/sales/listing.html">
         <div class="w-100 flex-lg-row-auto w-lg-300px mb-7 me-7 me-lg-10">
-            <!-- <div class="card card-flush py-4">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h2>Titular</h2>
-                    </div>    
-                </div>
-                <div class="card-body text-center pt-0">
-                    <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
-                        <div class="image-input-wrapper w-150px h-150px" id="imgAvatar" style="background-image: url(assets/media/svg/avatars/Addimg.svg);"></div>
-                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar foto">
-                            <i class="bi bi-pencil-fill fs-7"></i>    
-                            <input type="file" id="imgTitular" accept=".png, .jpg, .jpeg" />
-                            <input type="hidden" name="avatar_remove" />
-                        </label>
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar foto">
-                            <i class="bi bi-x fs-2"></i>
-                        </span>
-                    </div>
-                    <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
-                </div>
-            </div>
-            <br> -->
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0">
                     <div class="card-title">
@@ -482,7 +460,7 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body py-lg-10 px-lg-10">
+            <div class="modal-body py-lg-10 px-lg-2">
                 <!--begin::Stepper-->
                 <div class="stepper stepper-pills flex-xl-row flex-row-fluid" id="kt_modal_create_app_stepper">
                     <div class="d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px">

@@ -326,7 +326,7 @@
 </div>
 <!--Modal Editar Titular -->
 <div class="modal fade" id="modal_persona" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-650px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content"> 
             <div class="modal-header">
                 <h2 class="fw-bolder">Editar Titular</h2>
@@ -440,8 +440,8 @@
 </div>
 <!--Modal Editar Beneficiario -->
 <div class="modal fade" id="modal_beneficiario" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+       <div class="modal-content">
             <div class="modal-header">
                 <h2>Editar Beneficiario</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -453,26 +453,26 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-10 pt-0 pb-15">
-                <div class="card card-flush py-2">
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
                     <div class="card-body pt-0">
-                        <div class="row mb-5">
+                        <div class="row">
                             <div class="col-md-6">
                                 <label class="required form-label">Nombres</label>
                                 <input type="text" class="form-control form-control-solid text-uppercase" id="txtNombreBeMo" name="txtNombre" minlength="5" maxlength="100"/>
                             </div>
                             <div class="col-md-6">
                                 <label class="required form-label">Apellidos</label>
-                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtApellidoBeMo" name="txtApellido" minlength="5" maxlength="100" value=""/>   
+                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtApellidoBeMo" name="txtApellido" minlength="5" maxlength="100" value=""/>
                             </div>
                         </div>
-                        <div class="row mb-5">
-                            <div class="col-md-12">
+                        <div class="row">
+                           <div class="col-md-12">
                                 <label class="form-label">Direccion</label>
                                 <textarea class="form-control mb-2" id="txtDireccionBeMo" placeholder="Ingrese Direccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
-                            </div>
+                           </div>
                         </div>
-                        <div class="row mb-5">
+                        <div class="row">
                            <div class="col-md-6">
                                <label class="form-label">Telefono Casa</label>
                                <input type="text" class="form-control form-control-solid" id="txtTelcasaBeMo" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Casa" value=""/>
@@ -480,7 +480,7 @@
                            <div class="col-md-6">
                                <label class="form-label">Telefono Oficina</label>
                                <input type="text" class="form-control form-control-solid" id="txtTelofiBeMo" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Oficina" value=""/>
-                           </div>
+                            </div>
                         </div>
                         <div class="row">
                            <div class="col-md-6">
@@ -490,7 +490,7 @@
                            <div class="col-md-6">
                                <label class="form-label">Email</label>
                                <input type="email" class="form-control form-control-solid" id="txtEmailBeMo"  minlength="5" maxlength="100" placeholder="Ingrese Email" value=""/>
-                           </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -542,6 +542,8 @@
                                 <label class="required form-label">Producto</label>
                                 <input class="form-control mb-2 text-uppercase" type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-12">
                                 <label class="form-label">Descripcion</label>
                                 <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
