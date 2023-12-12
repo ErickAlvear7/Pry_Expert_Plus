@@ -497,7 +497,7 @@
                             <div class="current" data-kt-stepper-element="content">
                                 <div class="w-100">
                                     <div class="container-fluid">
-                                        <div class="card mb-5 mb-xl-8">
+                                        <div class="card mb-1 mb-xl-1">
                                             <div class="card-header border-0">
                                                 <div class="card-title">
                                                     <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_titular" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Foto Titular
@@ -530,7 +530,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card mb-5 mb-xl-8">
+                                        <div class="card mb-1 mb-xl-1">
                                             <div class="card-header border-0">
                                                 <div class="card-title">
                                                     <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_titular" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Titular
@@ -547,7 +547,7 @@
                                             <div id="view_datos_titular" class="collapse show ">
                                                 <div class="card card-flush py-4">
                                                     <div class="card-body pt-0">
-                                                        <div class="row">
+                                                        <div class="row mb-3">
                                                             <div class="col-md-6">
                                                                 <label class="required form-label">Tipo Documento</label>
                                                                 <select class="form-select mb-2" id="cboDocumento" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
@@ -562,7 +562,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
+                                                        <div class="row mb-3">
                                                             <div class="col-md-3">
                                                                 <label class="required form-label">Nro. Documento</label>
                                                                 <input type="text" id="txtDocumento" class="form-control mb-2" value="" minlength="10" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"  />
@@ -594,7 +594,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
+                                                        <div class="row mb-3">
                                                             <div class="col-md-4">
                                                                 <label class="required form-label">Nombres</label>
                                                                 <input type="text" id="txtNombre" class="form-control mb-2" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
@@ -608,7 +608,7 @@
                                                                 <input type="date" id="txtFechaNacimiento" class="form-control mb-2" value="" />
                                                             </div>
                                                         </div>
-                                                        <div class="row">
+                                                        <div class="row mb-3">
                                                             <div class="col-md-6">
                                                                 <label class="required form-label">Provincia</label>
                                                                 <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#view_datos_titular" class="form-select mb-2" >
@@ -619,20 +619,19 @@
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label">Ciudad</label>
+                                                                <label class="required form-label">Ciudad</label>
                                                                 <select id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#view_datos_titular" class="form-select mb-2">
                                                                         <option></option>
                                                                 </select>    
-                                                            </div>
-                                                          
+                                                            </div>  
                                                         </div>
-                                                        <div class="row">
+                                                        <div class="row mb-3">
                                                             <div class="col-md-12">
                                                                 <label class="form-label">Direccion</label>
                                                                 <textarea class="form-control mb-2" id="txtDireccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
+                                                        <div class="row mb-3">
                                                             <div class="col-md-4">
                                                                 <label class="form-label">Telefono Casa</label>
                                                                 <input type="text" id="txtTelCasa" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
@@ -670,7 +669,7 @@
                                             <label class="d-flex flex-stack mb-5 cursor-pointer">
                                                 <span class="d-flex align-items-center me-2">
                                                     <span class="d-flex flex-column-md-4">
-                                                        <span class="fw-bolder fs-6">Desea Agreagar un Beneficiario..?</span>
+                                                        <span class="fw-bolder fs-5">Desea Agreagar un Beneficiario..?</span>
                                                     </span>
                                                 </span>
                                             </label>
@@ -703,9 +702,9 @@
                                             <div id="view_datos_beneficiario" class="collapse show">
                                                 <div class="card card-flush py-4">
                                                     <div class="card-body pt-0">
-                                                        <div class="row">
+                                                        <div class="row mb-3">
                                                             <div class="col-md-6">
-                                                                <label class="form-label">Parentesco</label>
+                                                                <label class="required form-label">Parentesco</label>
                                                                 <select class="form-select mb-2" id="cboParentesco" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Parentesco">
                                                                     <option></option>
                                                                     <?php
@@ -731,7 +730,7 @@
                                                                 </select>
                                                             </div> 
                                                         </div>
-                                                        <div class="row">
+                                                        <div class="row mb-3">
                                                             <div class="col-md-3">
                                                                 <label class="required form-label">Nro. Documento</label>
                                                                 <input type="text" class="form-control mb-2" id="txtDocumentoBe" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
@@ -763,7 +762,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
+                                                        <div class="row mb-3">
                                                             <div class="col-md-4">
                                                                 <label class="required form-label">Nombres</label>
                                                                 <input type="text" class="form-control mb-2" id="txtNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
@@ -777,7 +776,7 @@
                                                                 <input type="date" id="txtFechaNacimientoBe" class="form-control mb-2" value="" />
                                                             </div>
                                                         </div>
-                                                        <div class="row">
+                                                        <div class="row mb-3">
                                                             <div class="col-md-6">
                                                                 <label class="required form-label">Provincia</label>
                                                                 <select  id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#view_datos_beneficiario" class="form-select mb-2" >
@@ -788,13 +787,13 @@
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label">Ciudad</label>
+                                                                <label class="required form-label">Ciudad</label>
                                                                 <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#view_datos_beneficiario" class="form-select mb-2">
                                                                         <option></option>
                                                                 </select>  
                                                             </div>
                                                         </div>
-                                                        <div class="row">
+                                                        <div class="row mb-3">
                                                             <div class="col-md-12">
                                                                 <label class="form-label">Direccion</label>
                                                                 <textarea class="form-control mb-2" id="txtDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea> 

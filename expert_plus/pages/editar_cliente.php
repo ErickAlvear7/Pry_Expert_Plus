@@ -574,7 +574,7 @@
                                 <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" placeholder="1" value="1" />  
                             </div>
                         </div>
-                        <div class="row border border-hover-primary py-4">
+                        <div class="row border border-hover-primary py-lg-4 px-lg-20">
                             <div class="col-md-6">
                                 <label class="form-check form-switch form-check-custom form-check-solid">
                                     <input class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
@@ -656,7 +656,7 @@
                                 <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" value="1" />   
                            </div>
                         </div>
-                        <div class="row border border-hover-primary py-4">
+                        <div class="row border border-hover-primary py-lg-4 px-lg-10">
                             <div class="col-md-4">    
                                 <label class="form-check form-switch form-check-custom form-check-solid">
                                     <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
