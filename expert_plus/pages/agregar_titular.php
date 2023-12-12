@@ -664,7 +664,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="fv-row">
+                                    <!-- <div class="fv-row">
                                         <div class="fv-row">
                                             <label class="d-flex flex-stack mb-5 cursor-pointer">
                                                 <span class="d-flex align-items-center me-2">
@@ -678,6 +678,13 @@
                                                 <label class="form-check-label lblTxt" id="lblTexto"></label>
                                             </span>
                                         </div>
+                                    </div> -->
+                                    <div class="fv-row">
+                                        <label class="form-check form-switch form-check-custom form-check-solid">
+                                            <h5 class="form-check-label mx-3">Desea Agreagar un Beneficiario..?</h5>
+                                            <input class="form-check-input" type="checkbox" id="chkCambiar" name="category" value="1" />
+                                            <h5 class="form-check-label" id="lblTexto"></h5>
+                                        </label> 
                                     </div>
                                 </div>
                             </div>
