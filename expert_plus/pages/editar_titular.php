@@ -340,7 +340,7 @@
                 </div>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
-                <div class="card mb-5 mb-xl-8">
+                <div class="card mb-1 mb-xl-1">
                     <div class="card-header border-0">
                         <div class="card-title">
                             <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_titular" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Foto Titular
@@ -560,7 +560,7 @@
             <div class="modal-body py-lg-10 px-lg-10">
                 <div id="view_data" class="card card-flush py-4">
                     <div class="card-body pt-0">
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-md-6">
                                 <label class="required form-label">Parentesco</label>
                                 <select class="form-select mb-2" id="cboParentesco" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Parentesco">
@@ -588,7 +588,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mb-3">
                            <div class="col-md-3">
                                 <label class="required form-label">Nro. Documento</label>
                                 <input type="text" class="form-control mb-2" id="txtAddDocumentoBe" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
@@ -620,7 +620,7 @@
                                 </select>
                            </div>
                         </div>
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-md-4">
                                 <label class="required form-label">Nombres</label>
                                 <input type="text" class="form-control mb-2" id="txtAddNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />   
@@ -634,7 +634,7 @@
                                 <input type="date" id="txtAddFechaNacimientoBe" class="form-control mb-2" value="" />   
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mb-3">
                            <div class="col-md-6">
                                 <label class="required form-label">Provincia</label>
                                 <select id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#view_data" class="form-select mb-2" >
@@ -651,7 +651,7 @@
                                 </select> 
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-md-12">
                                 <label class="form-label">Direccion</label>
                                 <textarea class="form-control mb-2" id="txtAddDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea> 

@@ -681,7 +681,7 @@
                                     </div> -->
                                     <div class="fv-row">
                                         <label class="form-check form-switch form-check-custom form-check-solid">
-                                            <h5 class="form-check-label mx-3">Desea Agreagar un Beneficiario..?</h5>
+                                            <h5 class="form-check-label mx-3">Desea Agregar un Beneficiario..?</h5>
                                             <input class="form-check-input" type="checkbox" id="chkCambiar" name="category" value="1" />
                                             <h5 class="form-check-label" id="lblTexto"></h5>
                                         </label> 
