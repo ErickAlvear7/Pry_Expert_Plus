@@ -194,7 +194,7 @@
                     </div>
                 </div>
                 <div class="separator"></div>
-                <div id="view_datos_producto" class="collapse">
+                <div id="view_datos_producto" class="collapse show">
                     <div class="card-body pt-2">
                         <div class="d-flex flex-column gap-10">
                             <div class="d-flex align-items-center">
