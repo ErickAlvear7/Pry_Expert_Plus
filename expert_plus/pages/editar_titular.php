@@ -390,7 +390,7 @@
                     <div id="view_datos_titular" class="collapse show">
                         <div class="card card-flush py-4">
                             <div class="card-body pt-0">
-                                <div class="row">
+                                <div class="row mb-4">
                                     <div class="col-md-6">
                                         <label class="required form-label">Nombres</label>
                                         <input type="text" class="form-control form-control-solid text-uppercase" id="txtNombre" name="txtNombre" minlength="5" maxlength="100"  value="" />
@@ -400,13 +400,13 @@
                                         <input type="text" class="form-control form-control-solid text-uppercase" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" value="" />
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row mb-4">
                                     <div class="col-md-12">
                                         <label class="form-label">Direccion</label>
                                         <textarea class="form-control mb-2" id="txtDireccion" placeholder="Ingrese Direccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row mb-4">
                                     <div class="col-md-6">
                                         <label class="form-label">Telefono Casa</label>
                                         <input type="text" class="form-control form-control-solid" id="txtTelcasa"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Casa" value=""/>
