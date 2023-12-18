@@ -201,7 +201,7 @@
             </div>
         </div>
         <div id="tab_Addbeneficiarios" class="flex-lg-row-fluid ms-lg-15">
-            <div class="d-flex flex-stack fs-4 py-3">
+            <div class="d-flex flex-stack fs-4 py-3 mt-n2 mb-2">
                 <div class="d-flex justify-content-start">
                     <a href="#" class="btn btn-light-primary btn-sm" id="btnAgregarbene">
                         <span class="svg-icon svg-icon-2">
@@ -339,7 +339,7 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body py-lg-10 px-lg-10">
+            <div class="modal-body py-lg-10 px-lg-10 mt-n3">
                 <div class="card mb-1 mb-xl-1">
                     <div class="card-header border-0">
                         <div class="card-title">
@@ -388,7 +388,7 @@
                         </div>
                     </div>
                     <div id="view_datos_titular" class="collapse show">
-                        <div class="card card-flush py-4">
+                        <div class="card card-flush py-2">
                             <div class="card-body pt-0">
                                 <div class="row mb-4">
                                     <div class="col-md-6">
