@@ -310,71 +310,17 @@
                 </div>
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                     <div class="d-flex flex-column gap-7 gap-lg-10">
-                        <div class="card card-flush py-4">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h2>Producto</h2>
-                                </div>
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="mb-5 fv-row">
-                                    <label class="required form-label">Producto</label>
-                                    <input class="form-control mb-2 text-uppercase" type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
-                                </div>
-                                <div class="mb-5 fv-row">
-                                    <label class="form-label">Descripcion</label>
-                                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
-                                </div>
-                                <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                    <div class="col">
-                                        <label class="required form-label">Costo</label>
-                                        <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                    </div>
-                                    <div class="col">
-                                        <label class="required form-label">Grupo</label>
-                                        <select name="cboGrupo" id="cboGrupo" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
-                                            <option></option>
-                                            <?php foreach ($all_grupos as $datos) : ?>
-                                                <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['NombreGrupo']) ?></option>
-                                            <?php endforeach ?>
-                                        </select>
-                        
-                                    </div>
-                                </div>
-                                <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                    <div class="col">
-                                        <label class="form-label">Asistencia Mes</label>
-                                        <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" value="1" />
-                                        <br>
-                                        <label class="form-check form-switch form-check-custom form-check-solid">
-                                            <input class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
-                                            <span class="form-check-label fw-bold text-muted" id="lblCobertura" for="chkEnviar1">Cobertura NO</span>
-                                        </label> 
-                                    </div>
-                                    <div class="col">
-                                        <label class="form-label">Asistencia Anual</label>
-                                        <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" value="1" />
-                                        <br>
-                                        <label class="form-check form-switch form-check-custom form-check-solid">
-                                            <input class="form-check-input" name="chkSistema" id="chkSistema" type="checkbox" />
-                                            <span class="form-check-label fw-bold text-muted" id="lblSistema" for="chkEnviar1">Sistema NO</span>
-                                        </label> 
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="form-group mt-5">
-                                    <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
-                                        <span class="svg-icon svg-icon-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    Agregar Producto
-                                    </button>
-                                </div>                                        
-                            </div>
-                        </div>
+                        <div class="form-group mt-2 mb-n2">
+                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAddProd">
+                                <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            Agregar Producto
+                            </button>
+                        </div>  
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title">
@@ -412,6 +358,87 @@
         </div>
     </form>
 </div>
+
+<!--MODAL AGREGAR PRODUCTO-->
+<div class="modal fade" id="modal_addproducto" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Agregar Producto</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="required form-label">Producto</label>
+                                <input class="form-control mb-2 text-uppercase" type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-label">Descripcion</label>
+                                <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="required form-label">Costo</label>
+                                <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="required form-label">Grupo</label>
+                                <select name="cboGrupo" id="cboGrupo" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#modal_addproducto" class="form-select mb-2" >
+                                    <option></option>
+                                    <?php foreach ($all_grupos as $datos) : ?>
+                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['NombreGrupo']) ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-7">
+                            <div class="col-md-6">
+                                <label class="form-label">Asistencia Mes</label>
+                                <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" value="1" />   
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Asistencia Anual</label>
+                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" placeholder="1" value="1" />  
+                            </div>
+                        </div>
+                        <div class="row border border-hover-primary py-lg-4 px-lg-20">
+                            <div class="col-md-6">
+                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                    <input class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
+                                    <h5 class="form-check-label" id="lblCobertura" for="chkEnviar1">Cobertura NO</h5>
+                                </label>  
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                    <input class="form-check-input" name="chkSistema" id="chkSistema" type="checkbox" />
+                                    <h5 class="form-check-label" id="lblSistema" for="chkEnviar1">Sistema NO</h5>
+                                </label>   
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnAgregar" class="btn btn-primary">Grabar</button>
+            </div>
+        </div>   
+    </div>
+</div>
+<!--MODAL NUEVO GRUPO -->
 <div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
@@ -494,6 +521,10 @@
         $( "#txtCosto" ).blur(function() {
             this.value = parseFloat(this.value).toFixed(2);
 
+        });
+
+        $('#btnAddProd').click(function(){
+            $('#modal_addproducto').modal('show');
         });
         
         $(document).on("click","#chkCobertura",function(){
