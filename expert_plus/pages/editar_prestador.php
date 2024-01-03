@@ -327,7 +327,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div id="kt_customer_view_payment_method_2" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
                                         <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
@@ -519,7 +518,6 @@
                                                                     </div>
                                                                 </div>
                                                             </td>
-                        
                                                             <td>
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="ms-5">
@@ -527,7 +525,6 @@
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            
                                                             <td>
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="ms-5">
@@ -535,7 +532,6 @@
                                                                     </div>
                                                                 </div>
                                                             </td>                                    
-                        
                                                             <td id="td_<?php echo $xId; ?>">
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="ms-5">
@@ -543,7 +539,6 @@
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            
                                                             <td>
                                                                 <div class="text-center">
                                                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -552,7 +547,6 @@
                                                                     </div>
                                                                 </div>
                                                             </td> 													
-                        
                                                             <td class="">
                                                                 <div class="">
                                                                     <div class="btn-group">
