@@ -550,10 +550,10 @@
                                                             <td class="">
                                                                 <div class="">
                                                                     <div class="btn-group">
-                                                                        <button id="btnEditar_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Especialidad Asiganada' >
+                                                                        <button id="btnEditar_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Especialidad Asiganada' data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class='fa fa-edit'></i>
                                                                         </button>	
-                                                                        <button id="btnPerson_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick='f_AgregarProfesional(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>,<?php echo $xId; ?>)' title='Agregar Profesional' >
+                                                                        <button id="btnPerson_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick='f_AgregarProfesional(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>,<?php echo $xId; ?>)' title='Agregar Profesional'data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class="fas fa-user"></i>
                                                                         </button>	                                                                                                                             
                                                                     </div>
@@ -927,9 +927,9 @@
         </div>
     </div>
 </div> 
-
+<!--Modal Tipo Porfesion -->      
 <div class="modal fade" id="modal_new_tipoprofesion" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog mw-650px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Nuevo Tipo Profesional</h2>
@@ -942,133 +942,124 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                        <span>Tipo Profesion</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Ingrese Tipo Profesion (Medico-Odontolo-Educador-Plomero-etc.."></i>
-                    </label>
-                    <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="150" placeholder="Tipo Profesion" name="txtTipoProfesion" id="txtTipoProfesion" />
-                </div>
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                        <span>Valor/Codigo</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Ingrese Tipo Profesion (Medico-Odontolo-Educador-Plomero-etc.."></i>
-                    </label>
-                    <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="100" placeholder="Valor/Codigo" name="txtCodigoTipo" id="txtCodigoTipo" />
-                </div>                        
-                <div class="form-group mt-5">
-                    <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarTipo">
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                            </svg>
-                        </span>
-                        Agregar
-                    </button>
-                </div>
-
-                <br>
-                <div class="mb-10">
-                    <div class="mh-300px scroll-y me-n7 pe-7">
-                        <table id="tblTipoProfesion" class="table align-middle table-row-dashed fs-6 gy-5 table-hover" style="width: 100%;">
-                            <thead>
-                                <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                                    <th>Tipo Profesion</th>
-                                    <th>Estado</th>
-                                    <th>Status</th>                                
-                                    <th>Opciones</th>
-                                </tr>
-                            </thead>
-
-                            <?php 
-                                $xSQL = "SELECT pca.paca_id,pde.pade_id,pde.pade_nombre,pde.pade_estado,pde.pade_valorV FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Profesion' AND pca.paca_estado='A' AND pde.pade_estado='A' ORDER BY pde.pade_orden ";
-                                $all_tipos = mysqli_query($con, $xSQL);
-                            ?>
-                            <tbody class="text-gray-600 fw-bold">
-
-                                <?php 
-                                            
-                                    foreach($all_tipos as $tipo){
-                                        $xPacaid = $tipo['paca_id'];
-                                        $xPadeid = $tipo['pade_id'];
-                                        $xTipoProfe = trim($tipo['pade_nombre']);
-                                        $xValorV = trim($tipo['pade_valorV']);
-                                        $xEstado = trim($tipo['pade_estado']);
-                                    ?>
-                                        <?php 
-
-                                            $xChkSelecc = '';
-                                            $xDisabledEdit = '';
-
-                                            if($xEstado == 'A'){
-                                                $xChkSelecc = 'checked="checked"';
-                                                $xTextColor = "badge badge-light-primary";
-                                                $xEstadoTxt = 'ACTIVO';
-                                            }else{
-                                                $xTextColor = "badge badge-light-danger";
-                                                $xDisabledEdit = 'disabled';
-                                                $xDisabledReset = 'disabled';
-                                                $xEstadoTxt = 'INACTIVO';
-                                            }
-
-                                        ?>
-                                        <tr id="tr_<?php echo $xPadeid; ?>">
-                                            <td>
-                                                <?php echo $xTipoProfe; ?>
-                                                <input type="hidden" id="txtPadeid<?php echo $xPadeid; ?>" value="<?php echo $xPadeid; ?>" />
-                                                <input type="hidden" id="txtTiprofe<?php echo $xPadeid; ?>" value="<?php echo $xTipoProfe; ?>" />
-                                                <input type="hidden" id="txtValor<?php echo $xPadeid; ?>" value="<?php echo $xValorV; ?>" />
-                                            </td>
-                                            
-                                            <td id="td_<?php echo $xPadeid; ?>">
-                                                <div class="<?php echo $xTextColor; ?>"><?php echo $xEstadoTxt; ?></div>
-                                            </td>
-                                            
-                                            <td>
-                                                <div class="text-center">
-                                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                        <input <?php echo $xChkSelecc; ?> class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chktipo<?php echo $xPadeid; ?>" 
-                                                            onchange="f_UpdateEstTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)" />
-                                                    </div>
-                                                </div>
-                                            </td> 													
-
-                                            <td>
-                                                <div class="text-center">
-                                                    <div class="btn-group">
-                                                        <button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Tipo Profesion' onclick="f_EditarTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)">
-                                                            <i class='fa fa-edit'></i>
-                                                        </button>	                                                
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div class="card-body pt-0">
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <label class="required form-label">Tipo Profesion
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Ingrese Tipo Profesion (Medico-Odontolo-Educador-Plomero-etc.."></i>
+                                </label>
+                                <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="150" placeholder="Tipo Profesion" name="txtTipoProfesion" id="txtTipoProfesion" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="required form-label">Valor/Codigo
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title=""></i>
+                                </label>
+                                <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="100" placeholder="Valor/Codigo" name="txtCodigoTipo" id="txtCodigoTipo" />
+                            </div>
+                        </div>
+                        <div class="form-group mt-5">
+                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarTipo">
+                                <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                Agregar
+                            </button>
+                        </div>
+                        <div class="mt-5">
+                            <div class="mh-300px scroll-y me-n7 pe-7">
+                                <table id="tblTipoProfesion" class="table align-middle table-row-dashed fs-6 gy-5 table-hover" style="width: 100%;">
+                                    <thead>
+                                        <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                                            <th>Tipo Profesion</th>
+                                            <th>Estado</th>
+                                            <th>Status</th>                                
+                                            <th>Opciones</th>
                                         </tr>
-                                <?php } ?>  
+                                    </thead>
 
-                            </tbody>
-                        </table>
+                                    <?php 
+                                        $xSQL = "SELECT pca.paca_id,pde.pade_id,pde.pade_nombre,pde.pade_estado,pde.pade_valorV FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Profesion' AND pca.paca_estado='A' AND pde.pade_estado='A' ORDER BY pde.pade_orden ";
+                                        $all_tipos = mysqli_query($con, $xSQL);
+                                    ?>
+                                    <tbody class="text-gray-600 fw-bold">
+
+                                        <?php 
+                                                    
+                                            foreach($all_tipos as $tipo){
+                                                $xPacaid = $tipo['paca_id'];
+                                                $xPadeid = $tipo['pade_id'];
+                                                $xTipoProfe = trim($tipo['pade_nombre']);
+                                                $xValorV = trim($tipo['pade_valorV']);
+                                                $xEstado = trim($tipo['pade_estado']);
+                                            ?>
+                                                <?php 
+
+                                                    $xChkSelecc = '';
+                                                    $xDisabledEdit = '';
+
+                                                    if($xEstado == 'A'){
+                                                        $xChkSelecc = 'checked="checked"';
+                                                        $xTextColor = "badge badge-light-primary";
+                                                        $xEstadoTxt = 'ACTIVO';
+                                                    }else{
+                                                        $xTextColor = "badge badge-light-danger";
+                                                        $xDisabledEdit = 'disabled';
+                                                        $xDisabledReset = 'disabled';
+                                                        $xEstadoTxt = 'INACTIVO';
+                                                    }
+
+                                                ?>
+                                                <tr id="tr_<?php echo $xPadeid; ?>">
+                                                    <td>
+                                                        <?php echo $xTipoProfe; ?>
+                                                        <input type="hidden" id="txtPadeid<?php echo $xPadeid; ?>" value="<?php echo $xPadeid; ?>" />
+                                                        <input type="hidden" id="txtTiprofe<?php echo $xPadeid; ?>" value="<?php echo $xTipoProfe; ?>" />
+                                                        <input type="hidden" id="txtValor<?php echo $xPadeid; ?>" value="<?php echo $xValorV; ?>" />
+                                                    </td>
+                                                    
+                                                    <td id="td_<?php echo $xPadeid; ?>">
+                                                        <div class="<?php echo $xTextColor; ?>"><?php echo $xEstadoTxt; ?></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="text-center">
+                                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                                <input <?php echo $xChkSelecc; ?> class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chktipo<?php echo $xPadeid; ?>" 
+                                                                    onchange="f_UpdateEstTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)" />
+                                                            </div>
+                                                        </div>
+                                                    </td> 													
+                                                    <td>
+                                                        <div class="text-center">
+                                                            <div class="btn-group">
+                                                                <button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Tipo Profesion' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)">
+                                                                    <i class='fa fa-edit'></i>
+                                                                </button>	                                                
+                                                            </div>
+                                                        </div>
+                                                    </td>   
+                                                </tr>
+                                        <?php } ?>  
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="separator d-flex flex-center mb-8">
-                    <span class="text-uppercase bg-body fs-7 fw-bold text-muted px-3"></span>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
-                    <!-- <button type="button" class="btn btn-primary" id="btnSaveProf">
-                        <span class="indicator-label">Grabar</span>
-                        <span class="indicator-progress">Espere un momento...
-                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                    </button> -->
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
-</div>
+</div>   
 <!--Modal Nuevo Profesional -->
 <div class="modal fade" id="modal-new-profesional"" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
@@ -1452,7 +1443,7 @@
                 }else{
                     if(response.trim() != 'ERR'){
                         //mensajesalertify('Especialidad Agregada', 'S', 'top-center', 3);
-                        mensajesweetalert('top-center','success','Especialidad Agregada',false,1800);
+                        mensajesweetalert('top-center','success','Especialidad Agregada',false,2500);
                         $("#cboEspecialidad").empty();
                         $("#cboEspecialidad").html(response);
                         $("#modal-new-especialidad").modal("hide");
@@ -1623,12 +1614,12 @@
             var _continuar = true;
 
             if(_tipoprofesion == ''){
-                mensajesalertify('Ingrese Tipo Profesion..!', 'W', 'top-center', 5);
+                mensajesalertify('Ingrese Tipo Profesion..!', 'W', 'top-right', 3);
                 return;
             }
 
             if(_valcodigoprof == ''){
-                mensajesalertify('Ingrese Valor/Codigo Tipo Profesion..!', 'W', 'top-center', 5);
+                mensajesalertify('Ingrese Valor/Codigo Tipo Profesion..!', 'W', 'top-right', 3);
                 return;
             }
 
@@ -1685,7 +1676,8 @@
                             $('#tr_' + _padeid + '').html(_output);
                             _mensaje = "Tipo Profesion Modificada Correctamente..!";
                         }                                
-                        mensajesalertify(_mensaje, 'S', 'top-center', 5);
+                        //mensajesalertify(_mensaje, 'S', 'top-center', 5);
+                        mensajesweetalert('top-center','success',_mensaje,false,2500);
 
                         //Listar Nuevamente los tipos de Profesion
                         var _parametros = {
@@ -2595,7 +2587,7 @@
 
             if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
                 //mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
-                mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 5);
+                mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
                 return;
             }                    
         }
@@ -2644,7 +2636,7 @@
                 
                 if(response.trim() == 'OK'){
                     //mensajesalertify("Profesional agregado correctamente..!", "W", "top-center", 5);
-                    mensajesweetalert('top-center','success','Profesional agregado correctamente..!',false,2000);
+                    mensajesweetalert('top-center','success','Profesional agregado correctamente..!',false,2500);
                     $("#modal-new-profesional").modal("hide");
 
                 }else{
