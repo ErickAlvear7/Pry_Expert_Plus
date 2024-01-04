@@ -701,7 +701,7 @@
         </div>
     </div>
 </div>
-
+<!--Modal Profesional -->
 <div class="modal fade" id="modal_profesional" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-750px">
         <div class="modal-content">
@@ -805,7 +805,7 @@
         </div>
     </div>
 </div>         
-                
+   <!--Modal Horarios -->             
 <div class="modal fade" id="modal_horarios" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-750px">
         <div class="modal-content">
@@ -1069,11 +1069,11 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="modal-new-profesional" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
-        <div class="modal-content">
-            <div class="modal-header" id="modal-new-profesional_header">
+<!--Modal Nuevo Profesional -->
+<div class="modal fade" id="modal-new-profesional"" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+        <div class="modal-content"> 
+            <div class="modal-header">
                 <h2 class="fw-bolder">Nuevo Profesional</h2>
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
@@ -1084,226 +1084,224 @@
                     </span>
                 </div>
             </div>
-
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <form id="modal-new-profesional_form" class="form" method="post" enctype="multipart/form-data">
-                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="modal-new-profesional_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
-                        <div class="fv-row mb-7">
-                            <label class="d-block fw-bold fs-6 mb-5">Avatar</label>
-                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
-                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfileprof"></div>
-                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar Avatar">
-                                    <i class="bi bi-pencil-fill fs-7"></i>
-                                    <input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
-                                    <input type="hidden" name="avatar_remove" />
-                                </label>
-                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
-                                    <i class="bi bi-x fs-2"></i>
+            <div class="modal-body py-lg-10 px-lg-10 mt-n3">
+                <div class="card mb-1 mb-xl-1">
+                    <div class="card-header border-0">
+                        <div class="card-title">
+                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_avatar" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
+                                <span class="ms-2 rotate-180">
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                        </svg>
+                                    </span>
                                 </span>
-                            </div>
-                            <div class="form-text">Archivos permitidos: png, jpg, jpeg.</div>
+                            </div> 
                         </div>
-
-                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                            <div class="col">
-                                <div class="fv-row mb-7">
-                                    <label class="fs-6 fw-bold form-label mt-3">
-                                        <span class="required">Tipo Documento</span>
-                                        <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's email."></i> -->
-                                    </label>
-                                    <?php	
-                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Documento' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
-                                        $all_parametro = mysqli_query($con, $xSQL);    
-                                    ?>
-                                    <select name="cboTipoDoc" id="cboTipoDoc" aria-label="Seleccione Tipo Documento" data-control="select2" data-placeholder="Seleccione Tipo Documento" data-dropdown-parent="#modal-new-profesional" class="form-select mb-2" >
-                                        <option></option>
-                                        <?php foreach ($all_parametro as $parametro) : ?>
-                                            <option value="<?php echo $parametro['Codigo'] ?>"><?php echo $parametro['Descripcion']; ?></option>
-                                        <?php endforeach ?>
-                                    </select>
-                                </div>
-                            </div>  
-                            <div class="col">
-                                <div class="fv-row mb-7">
-                                    <label class="fs-6 fw-bold form-label mt-3">
-                                        <span class="required">No. Documento</span>
-                                    </label>   
-                                    <input type="text" name="txtNumDocumento" id="txtNumDocumento" class="form-control mb-2" maxlength="10" placeholder="Numero Documento"  />                                                     
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                            <div class="col">
-                                <div class="fv-row mb-7">
-                                        <label class="fs-6 fw-bold form-label mt-3">
-                                            <span class="required">Nombres</span>
-                                        </label>   
-                                        <input type="text" name="txtNombresProf" id="txtNombresProf" class="form-control mb-2 text-uppercase" maxlength="100" placeholder="Nombres"  />
-                                    </div>
-                                </div>  
-                            <div class="col">
-                                <div class="fv-row mb-7">
-                                    <label class="fs-6 fw-bold form-label mt-3">
-                                        <span class="required">Apellidos</span>
-                                    </label>   
-                                    <input type="text" name="txtApellidosProf" id="txtApellidosProf" class="form-control mb-2 text-uppercase" maxlength="100" placeholder="Apellidos" />
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                            <div class="col">
-                                <div class="fv-row mb-7">
-                                    <label class="fs-6 fw-bold form-label mt-3">
-                                        <span class="required">Genero</span>
-                                        <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's email."></i> -->
-                                    </label>
-                                    <?php	
-                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Genero' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
-                                        $all_parametro = mysqli_query($con, $xSQL);    
-                                    ?>
-                                    <select name="cboTipoGenero" id="cboTipoGenero" aria-label="Seleccione Genero" data-control="select2" data-placeholder="Seleccione Genero" data-dropdown-parent="#modal-new-profesional" class="form-select mb-2" >
-                                        <option></option>
-                                        <?php foreach ($all_parametro as $parametro) : ?>
-                                            <option value="<?php echo $parametro['Codigo'] ?>"><?php echo $parametro['Descripcion']; ?></option>
-                                        <?php endforeach ?>
-                                    </select>
-                                </div>
-                            </div>  
-                            <div class="col">
-                                <div class="fv-row mb-7">
-                                    <label class="fs-6 fw-bold form-label mt-3">
-                                        <span class="required">Tipo Profesion</span>
-                                    </label>   
-                                    <?php	
-                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Profesion' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
-                                        $all_parametro = mysqli_query($con, $xSQL);    
-                                    ?>
-                                    <select name="cboTipoProfesion" id="cboTipoProfesion" aria-label="Seleccione Profesion" data-control="select2" data-placeholder="Seleccione Profesion" data-dropdown-parent="#modal-new-profesional" class="form-select mb-2" >
-                                        <option></option>
-                                        <?php foreach ($all_parametro as $parametro) : ?>
-                                            <option value="<?php echo $parametro['Codigo'] ?>"><?php echo $parametro['Descripcion']; ?></option>
-                                        <?php endforeach ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-header border-0">
-                            <div class="card-title">
-                                <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
-                            </div>
-                        </div>
-                        <div id="datos_profesional" class="card-body pt-0">
-                            <div class="py-0" data-kt-customer-payment-method="row">
-                                <div class="py-3 d-flex flex-stack flex-wrap">
-                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#direccion_profesional" role="button" aria-expanded="false" aria-controls="direccion_profesional">
-                                        <div class="me-3 rotate-90">
-                                            <span class="svg-icon svg-icon-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                        <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" alt="" />
-                                        <div class="me-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="text-gray-800 fw-bolder">Direccion</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="direccion_profesional" class="collapse fs-6 ps-12" data-bs-parent="#datos_profesional">
-                                    <div class="row row-cols-1 row-cols-sm-1 rol-cols-md-1 row-cols-lg-1">
-                                        <div class="col-xl-10 fv-row">
-                                            <textarea class="form-control mb-2 text-uppercase" name="txtDireccionProf" id="txtDireccionProf" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDireccion; ?> </textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="separator separator-dashed"></div>
-                            <div class="py-0" data-kt-customer-payment-method="row">
-                                <div class="py-3 d-flex flex-stack flex-wrap">
-                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#telefono_profesional" role="button" aria-expanded="false" aria-controls="telefono_profesional">
-                                        <div class="me-3 rotate-90">
-                                            <span class="svg-icon svg-icon-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                        <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
-                                        <div class="me-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="text-gray-800 fw-bolder">Telefonos</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div id="telefono_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
-                                    <div class="row row-cols-2 row-cols-sm-2 rol-cols-md-2 row-cols-lg-2">
-                                        <div class="col">
-                                            <div class="fs-6 fw-bold mt-3 mb-3">Telefono</div>
-                                            <input type="text" class="form-control mb-3 w-150px" name="txtFonoProf" id="txtFonoProf" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                        </div>
-                                        <div class="col">
-                                            <div class="fs-6 fw-bold mt-3 mb-3">Celular</div>
-                                            <input type="text" class="form-control mb-3 w-150px" name="txtCelularProf" id="txtCelularProf" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="separator separator-dashed"></div>
-                            
-                            <div class="py-0" data-kt-customer-payment-method="row">
-                                <div class="py-3 d-flex flex-stack flex-wrap">
-                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#email_profesional" role="button" aria-expanded="false" aria-controls="email_profesional">
-                                        <div class="me-3 rotate-90">
-                                            <span class="svg-icon svg-icon-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                        <img src="assets/media/logos/email.png" class="w-20px me-3" alt="" />
-                                        <div class="me-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="text-gray-800 fw-bolder">E-mail</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="email_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <input type="email" name="txtEmailProf" id="txtEmailProf" maxlength="100" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" />
-                                        </div>
-                                        <label class="form-check form-switch form-check-custom form-check-solid">
-                                            <input class="form-check-input" name="chkEnviarProf" id="chkEnviarProf" type="checkbox" />
-                                            <span id="spanEnvProf" class="form-check-label fw-bold text-muted" for="chkEnviarProf">No Enviar </span>
-                                        </label>                                                    
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                                
-
                     </div>
-
-                    <div class="modal-footer pt-15">
-                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" id="btnSaveProf"><i class="las la-save"></i>
-                            <span class="indicator-label">Grabar</span>
-                            <span class="indicator-progress">Espere un momento...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                    </div>  
-                </form>
+                    <div id="view_avatar" class="collapse">
+                        <div class="card card-flush py-4">
+                            <div class="card-body pt-0">
+                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
+                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfileprof"></div>
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar Avatar">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
+                                        <input type="hidden" name="avatar_remove" />
+                                    </label>
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                </div>
+                                <div class="form-text">Archivos permitidos: png, jpg, jpeg.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-1 mb-xl-1">
+                    <div class="card-header border-0">
+                        <div class="card-title">
+                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_informacion" role="button" aria-expanded="false" aria-controls="view_datos_titular">Informacion
+                                <span class="ms-2 rotate-180">
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                </span>
+                            </div> 
+                        </div>
+                    </div>
+                    <div id="view_informacion" class="collapse show">
+                        <div class="card card-flush py-2">
+                            <div id="modal_select" class="card-body pt-0">
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <label class="required form-label">Tipo Documento</label>
+                                        <?php	
+                                            $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Documento' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
+                                            $all_parametro = mysqli_query($con, $xSQL);    
+                                        ?>
+                                        <select name="cboTipoDoc" id="cboTipoDoc" aria-label="Seleccione Tipo Documento" data-control="select2" data-placeholder="Seleccione Tipo Documento" data-dropdown-parent="#modal_select" class="form-select mb-2" >
+                                            <option></option>
+                                            <?php foreach ($all_parametro as $parametro) : ?>
+                                                <option value="<?php echo $parametro['Codigo'] ?>"><?php echo $parametro['Descripcion']; ?></option>
+                                            <?php endforeach ?>
+                                        </select>
+                                        </div>
+                                    <div class="col-md-6">
+                                        <label class="required form-label">Numero Documento</label>
+                                        <input type="text" name="txtNumDocumento" id="txtNumDocumento" class="form-control mb-2" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Numero Documento"  />
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                   <div class="col-md-6">
+                                       <label class="required form-label">Nombres</label>
+                                       <input type="text" name="txtNombresProf" id="txtNombresProf" class="form-control mb-2 text-uppercase" maxlength="100" placeholder="Nombres"  />
+                                   </div>
+                                   <div class="col-md-6">
+                                       <label class="required form-label">Apellidos</label>
+                                       <input type="text" name="txtApellidosProf" id="txtApellidosProf" class="form-control mb-2 text-uppercase" maxlength="100" placeholder="Apellidos" />
+                                   </div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-md-6">
+                                        <label class="required form-label">Genero</label>
+                                        <?php	
+                                            $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Genero' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
+                                            $all_parametro = mysqli_query($con, $xSQL);    
+                                        ?>
+                                        <select name="cboTipoGenero" id="cboTipoGenero" aria-label="Seleccione Genero" data-control="select2" data-placeholder="Seleccione Genero" data-dropdown-parent="#modal_select" class="form-select mb-2" >
+                                            <option></option>
+                                            <?php foreach ($all_parametro as $parametro) : ?>
+                                                <option value="<?php echo $parametro['Codigo'] ?>"><?php echo $parametro['Descripcion']; ?></option>
+                                            <?php endforeach ?>
+                                        </select>
+                                   </div>
+                                   <div class="col-md-6">
+                                       <label class="required form-label">Tipo Profesion</label>
+                                       <?php	
+                                            $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Profesion' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
+                                            $all_parametro = mysqli_query($con, $xSQL);    
+                                        ?>
+                                        <select name="cboTipoProfesion" id="cboTipoProfesion" aria-label="Seleccione Profesion" data-control="select2" data-placeholder="Seleccione Profesion" data-dropdown-parent="#modal_select" class="form-select mb-2" >
+                                            <option></option>
+                                            <?php foreach ($all_parametro as $parametro) : ?>
+                                                <option value="<?php echo $parametro['Codigo'] ?>"><?php echo $parametro['Descripcion']; ?></option>
+                                            <?php endforeach ?>
+                                        </select>
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-1 mb-xl-1">
+                   <div class="card-header border-0">
+                       <div class="card-title">
+                           <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                       </div>
+                   </div>
+                   <div id="datos_profesional" class="card-body pt-0">
+                        <div class="py-0" data-kt-customer-payment-method="row">
+                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#direccion_profesional" role="button" aria-expanded="false" aria-controls="direccion_profesional">
+                                    <div class="me-3 rotate-90">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" alt="" />
+                                    <div class="me-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-gray-800 fw-bolder">Direccion</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="direccion_profesional" class="collapse fs-6 ps-12" data-bs-parent="#datos_profesional">
+                                <div class="row mb-4">
+                                    <div class="col-md-12">
+                                        <textarea class="form-control mb-2 text-uppercase" name="txtDireccionProf" id="txtDireccionProf" rows="1" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDireccion; ?> </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed"></div>
+                        <div class="py-0" data-kt-customer-payment-method="row">
+                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#telefono_profesional" role="button" aria-expanded="false" aria-controls="telefono_profesional">
+                                    <div class="me-3 rotate-90">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
+                                    <div class="me-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="telefono_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="fs-6 fw-bold mt-3 mb-3">Telefono</div>
+                                        <input type="text" class="form-control mb-3" name="txtFonoProf" id="txtFonoProf" maxlength="9" placeholder="029999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="fs-6 fw-bold mt-3 mb-3">Celular</div>
+                                        <input type="text" class="form-control mb-3" name="txtCelularProf" id="txtCelularProf" maxlength="10" placeholder="099999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed"></div> 
+                        <div class="py-0" data-kt-customer-payment-method="row">
+                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#email_profesional" role="button" aria-expanded="false" aria-controls="email_profesional">
+                                    <div class="me-3 rotate-90">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <img src="assets/media/logos/email.png" class="w-20px me-3" alt="" />
+                                    <div class="me-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-gray-800 fw-bolder">E-mail</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="email_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
+                                <div class="d-flex flex-wrap gap-5">
+                                    <div class="fv-row w-100 flex-md-root">
+                                        <input type="email" name="txtEmailProf" id="txtEmailProf" maxlength="100" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" />
+                                    </div>
+                                    <label class="form-check form-switch form-check-custom form-check-solid">
+                                        <input class="form-check-input" name="chkEnviarProf" id="chkEnviarProf" type="checkbox" />
+                                        <span id="spanEnvProf" class="form-check-label fw-bold text-muted" for="chkEnviarProf">No Enviar </span>
+                                    </label>                                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnSaveProf" class="btn btn-primary"><i class="las la-plus"></i>Agregar</button>
             </div>
         </div>
     </div>
-</div>        
+</div>  
 
 <script>
     $(document).ready(function(){
@@ -2564,27 +2562,27 @@
         }
 
         if(_tipodoc == ''){
-            mensajesalertify("Seleccione Tipo Documento..!", "W", "top-center", 5);
+            mensajesalertify("Seleccione Tipo Documento..!", "W", "top-right", 3);
             return;                    
         }
 
         if(_numdocumento == ''){
-            mensajesalertify("Ingrese Numero de Documento..!", "W", "top-center", 5);
+            mensajesalertify("Ingrese Numero de Documento..!", "W", "top-right", 3);
             return;                    
         }
 
         if(_nombres == ''){
-            mensajesalertify("Ingrese Nombres..!", "W", "top-center", 5);
+            mensajesalertify("Ingrese Nombres..!", "W", "top-right", 3);
             return;                    
         }
 
         if(_genero == ''){
-            mensajesalertify("Seleccione Tipo Genero..!", "W", "top-center", 5);
+            mensajesalertify("Seleccione Tipo Genero..!", "W", "top-right", 3);
             return;                    
         }
 
         if(_tipoprof == ''){
-            mensajesalertify("Seleccione Tipo Profesion..!", "W", "top-center", 5);
+            mensajesalertify("Seleccione Tipo Profesion..!", "W", "top-right", 3);
             return;                    
         }                 
 
@@ -2597,7 +2595,7 @@
 
             if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
                 //mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
-                mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-center", 5);
+                mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 5);
                 return;
             }                    
         }
@@ -2607,14 +2605,14 @@
         
             if (regex.test($('#txtEmailProf').val().trim())) {
             }else{
-                mensajesalertify("Email no es Valido..!", "W", "top-center", 5);
+                mensajesalertify("Email no es Valido..!", "W", "top-right", 3);
                 return;
             }
         }
 
         if(_enviarprof == 'SI'){
             if(_emailprof.trim() == ''){
-                mensajesalertify("Ingrese Email..!", "W", "top-center", 5);
+                mensajesalertify("Ingrese Email..!", "W", "top-right", 3);
             }
         }
         
@@ -2645,11 +2643,12 @@
             success: function(response){
                 
                 if(response.trim() == 'OK'){
-                    mensajesalertify("Profesional agregado correctamente..!", "W", "top-center", 5);
+                    //mensajesalertify("Profesional agregado correctamente..!", "W", "top-center", 5);
+                    mensajesweetalert('top-center','success','Profesional agregado correctamente..!',false,2000);
                     $("#modal-new-profesional").modal("hide");
 
                 }else{
-                    mensajesalertify("Profesional ya Existe..!", "W", "top-center", 5);
+                    mensajesalertify("Profesional ya Existe..!", "W", "top-right", 3);
                 }
             },								
             error: function (error){
