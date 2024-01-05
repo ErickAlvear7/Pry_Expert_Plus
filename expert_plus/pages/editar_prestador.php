@@ -640,7 +640,7 @@
 </div>   
 <!--Modal Editar Especialidad -->
 <div class="modal fade" id="modal-editar-especialidad" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Editar Especialidad-Asignada</h2>
@@ -653,62 +653,52 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <form id="kt_modal_new_card_form" class="form">
-                    <div class="row mb-10">
-                        <div class="col-md-12 fv-row">
-                            <label class="required fs-6 fw-bold form-label mb-2">Especialidad</label>
-                            <div class="row fv-row">
-                                <div class="col-12">
-                                    <select name="cboEspecialidadEdit" id="cboEspecialidadEdit" aria-label="Seleccione Especialidad" data-control="select2" data-placeholder="Seleccione Especialidad" data-dropdown-parent="#modal-editar-especialidad" class="form-select mb-2">
-                                        <option></option>
-                                        <?php 
-                                        $xSQL = "SELECT espe_id AS Codigo,espe_nombre AS NombreEspe FROM `expert_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND espe_estado='A' ";
-                                        $all_datos =  mysqli_query($con, $xSQL);
-                                        foreach ($all_datos as $datos){ ?>
-                                            <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['NombreEspe'] ?></option>
-                                        <?php } ?>                                                        
-                                    </select>  
-                                </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div card-body pt-0">
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                 <label class="required form-label">Especialidad</label>
+                                <select name="cboEspecialidadEdit" id="cboEspecialidadEdit" aria-label="Seleccione Especialidad" data-control="select2" data-placeholder="Seleccione Especialidad" data-dropdown-parent="#modal-editar-especialidad" class="form-select mb-2">
+                                    <option></option>
+                                    <?php 
+                                    $xSQL = "SELECT espe_id AS Codigo,espe_nombre AS NombreEspe FROM `expert_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND espe_estado='A' ";
+                                    $all_datos =  mysqli_query($con, $xSQL);
+                                    foreach ($all_datos as $datos){ ?>
+                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['NombreEspe'] ?></option>
+                                    <?php } ?>                                                        
+                                </select>  
                             </div>
                         </div>
-                    </div>
-
-                    <div class="mb-10 fv-row">
-                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                            <div class="col">
-                                <label class="form-label">Pvp</label>
-                                <input type="number" name="txtPvpEdit" id="txtPvpEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                        <div class="row">
+                            <div class="col-md-6">
+                               <label class="required form-label">Pvp</label>
+                               <input type="number" name="txtPvpEdit" id="txtPvpEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
-                            <div class="col">
-                                <label class="form-label">Costo Red</label>
-                                <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                            <div class="col-md-6">
+                               <label class="required form-label">Costo Red</label>
+                               <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
                             <input type="hidden" name="txtcboespe" id="txtcboespe" class="form-control mb-2"  />
                         </div>
                     </div>
-
-                    <div class="modal-footer pt-15">
-                        <button type="reset" data-bs-dismiss="modal" class="btn btn-secondary">Cerrar</button>
-                        <button type="button" id="btnEditarEspe" class="btn btn-primary" onclick="f_GrabarEspe(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>)"><i class="las la-save"></i>
-                            <span class="indicator-label">Grabar</span>
-                            <span class="indicator-progress">Espere un momento...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                    </div>
-                </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnEditarEspe" onclick="f_GrabarEspe(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>)" class="btn btn-primary">Modificar</button>
             </div>
         </div>
     </div>
-</div>
-<!--Modal Profesional -->
+</div>   
+<!--Modal Profesional /Configurar Horarios-->
 <div class="modal fade" id="modal_profesional" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-750px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Agregar Profesional/Configurar Horarios</h2> 
-                    
-                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">                                
+                <h2 class="mb-2">Agregar Profesional/Configurar Horarios</h2>
+                <h2 id="headerTitle" class="fs-6 fw-bold form-label mb-2"></h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
@@ -717,57 +707,39 @@
                     </span>
                 </div>
             </div>
-
-            <div class="modal-header">
-                <h5 id="headerTitle"></h5>
-            </div>
-            
-            <div class="modal-body scroll-y mx-lg-5 my-7">
-                <div class="flex-lg-row-fluid ">
-                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="modal_profesional_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#modal_profesional_header" data-kt-scroll-wrappers="#modal_profesional_scroll" data-kt-scroll-offset="150px">
-                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                            <div class="col">
-                                <div class="fv-row mb-7">
-                                    <label class="fs-6 fw-bold form-label mt-3">
-                                        <span class="required">Tipo Profesion</span>
-                                        <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's email."></i> -->
-                                    </label>
+            <div class="modal-body py-lg-5 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-md-5">
+                                 <label class="required form-label">Tipo Profesion</label>
+                                <?php 
+                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid ";
+                                    $xSQL .= "AND pca.paca_nombre='Tipo Profesion' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                    $all_datos =  mysqli_query($con, $xSQL);
+                                ?>
+                                <select name="cboTipoProfe" id="cboTipoProfe" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo" data-dropdown-parent="#modal_profesional" class="form-select mb-2" onchange="f_GetProfesional(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,this)">
+                                    <option></option>
                                     <?php 
-                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid ";
-                                        $xSQL .= "AND pca.paca_nombre='Tipo Profesion' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                        $all_datos =  mysqli_query($con, $xSQL);
-                                    ?>
-                                    <select name="cboTipoProfe" id="cboTipoProfe" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo" data-dropdown-parent="#modal_profesional" class="form-select mb-2" onchange="f_GetProfesional(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,this)">
-                                        <option></option>
-                                        <?php 
-                                        foreach ($all_datos as $datos){ ?>
-                                            <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
+                                    foreach ($all_datos as $datos){ ?>
+                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
-                            <div class="col">
-                                <div class="fv-row mb-7">
-                                    <label class="fs-6 fw-bold form-label mt-3">
-                                        <span class="required">Profesional</span>
-                                    </label>
-                                    <select name="cboProfesional" id="cboProfesional" aria-label="Seleccione Profesional" data-control="select2" data-placeholder="Seleccione Profesional" data-dropdown-parent="#modal_profesional" class="form-select mb-2">
-                                        <option></option>
-                                    </select>                                            
-                                </div>
+                            <div class="col-md-5">
+                                <label class="required form-label">Profesional</label>
+                                <select name="cboProfesional" id="cboProfesional" aria-label="Seleccione Profesional" data-control="select2" data-placeholder="Seleccione Profesional" data-dropdown-parent="#modal_profesional" class="form-select mb-2">
+                                    <option></option>
+                                </select> 
                             </div>
-                                    <div class="col">
-                                <div class="fv-row mb-7">
-                                    <label class="fs-6 fw-bold form-label mt-3">
-                                        <span class="required">Intervalo</span>
-                                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Intervalo de 10 a 60 minutos"></i>
-                                    </label>   
-                                    <input type="number" name="txtIntervalo" id="txtIntervalo" min="10" max="60" step="10" class="form-control mb-2" value="10" onKeyPress="if(this.value.length==2) return false;"  pattern="/^-?\d+\.?\d*$/" />
-                                </div>
-                            </div>                               
+                            <div class="col-md-2">
+                                 <label class="required form-label">Intervalo
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Intervalo de 10 a 60 minutos"></i>
+                                 </label>
+                                 <input type="number" name="txtIntervalo" id="txtIntervalo" min="10" max="60" step="10" class="form-control mb-2" value="10" onKeyPress="if(this.value.length==2) return false;"  pattern="/^-?\d+\.?\d*$/" />
+                            </div>
                         </div>
-
-                        <div class="form-group mt-5">
+                        <div class="form-group mt-5 mb-4">
                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarProfesional">
                                 <span class="svg-icon svg-icon-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -778,10 +750,7 @@
                             Agregar Profesional
                             </button>
                         </div>
-
-                        <div class="separator my-7"></div>
-                        
-                        <table id="tblProfesional" class="table align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
+                        <table id="tblProfesional" class="table table-hover align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
                             <thead>
                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                     <th>Profesional</th>
@@ -792,20 +761,18 @@
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
-                            <tbody class="fw-bold text-gray-600">
-
-                            </tbody>
+                            <tbody class="fw-bold text-gray-600"></tbody>
                         </table>
-                    </div>
-                    <div class="modal-footer pt-15">
-                        <button type="reset" data-bs-dismiss="modal" class="btn btn-secondary">Cerrar</button>
                     </div>
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
         </div>
     </div>
-</div>         
-   <!--Modal Horarios -->             
+</div>   
+<!--Modal Horarios -->             
 <div class="modal fade" id="modal_horarios" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-750px">
         <div class="modal-content">
@@ -1331,7 +1298,7 @@
 
         $('#cboProvincia').change(function(){
             
-            debugger;
+            //debugger;
             _cboid = $(this).val(); //obtener el id seleccionado
             $("#cboCiudad").empty();
 
@@ -1970,7 +1937,7 @@
     
     function f_AgregarProfesional(_paisid, _emprid, _presid, _preeid){
 
-        debugger;
+        //debugger;
         var tb = document.getElementById('tblProfesional');
             while(tb.rows.length > 1) {
             tb.deleteRow(1);
@@ -2023,9 +1990,9 @@
                     _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
                     _output += '<td class=""><div class=""><div class="btn-group">'
                     _output += '<button id="btnHorario_' + _id  + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnhorario"' + _disabledbtn1 + ' onclick="f_ConfHorario(';
-                    _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Configurar Horario" ><i class="fas fa-cogs"></i></button>';
+                    _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Configurar Horario" data-bs-toggle="tooltip" data-bs-placement="left" ><i class="fas fa-cogs"></i></button>';
                     _output += '<button id="btnDelProf_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"' + _disabledbtn2 + ' onclick="f_DelAsigProf(';
-                    _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Eliminar Profesional Asignado" ><i class="fa fa-trash"></i></button></div></div></td></tr>'
+                    _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Eliminar Profesional Asignado" data-bs-toggle="tooltip" data-bs-placement="left" ><i class="fa fa-trash"></i></button></div></div></td></tr>'
 
                     $('#tblProfesional').append(_output);
 
@@ -2053,12 +2020,12 @@
         var _intervalo = $('#txtIntervalo').val();
 
         if(_profid == 0){
-            mensajesalertify("Seleccione Profesional..!", "W", "top-center", 3);
+            mensajesalertify("Seleccione Profesional..!", "W", "top-right", 3);
             return;
         }
 
         if(_intervalo == ''){
-            mensajesalertify("Ingrese Internvalo..!", "W", "top-center", 5);
+            mensajesalertify("Ingrese Internvalo..!", "W", "top-right", 5);
             return;
         }                
 
@@ -2094,7 +2061,9 @@
                 $('#tblProfesional').append(_output);
 
             }else{
-                mensajesalertify("Profesional esta agregado..!", "W", "top-center", 3);
+                //mensajesalertify("Profesional esta agregado..!", "W", "top-center", 3);
+                mensajesweetalert('top-center','success','Profesional Agregado',false,2500);
+ 
             }
 
             $("#cboTipoProfe").val(0).change(); 
@@ -2491,7 +2460,7 @@
 
                 $('#row_' + _rowid + '').html(_output);
             }else{
-                mensajesalertify("Especialidad ya está asignada..!", "W", "top-center", 3);
+                mensajesalertify("Especialidad ya está asignada..!", "W", "top-right", 3);
             }
         });	                
 
@@ -2517,7 +2486,7 @@
                 }
             }else{
                 $('#chkEnviarProf').prop('checked','');
-                mensajesalertify("Email no es Valido", "W", "top-center", 3);
+                mensajesalertify("Email no es Valido", "W", "top-right", 3);
                 _enviarprof = 'SI';
                 return;
             }
