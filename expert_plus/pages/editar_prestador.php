@@ -640,7 +640,7 @@
 </div>   
 <!--Modal Editar Especialidad -->
 <div class="modal fade" id="modal-editar-especialidad" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Editar Especialidad-Asignada</h2>
@@ -774,12 +774,12 @@
 </div>   
 <!--Modal Horarios -->             
 <div class="modal fade" id="modal_horarios" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-750px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Configurar Horarios/Turnos</h2> 
-
-                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">                                
+                <h2>Configurar Horarios/Turnos</h2>
+                <h5 id="headertitu1"></h5>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
@@ -788,22 +788,13 @@
                     </span>
                 </div>
             </div>
-
-            <div class="modal-header">
-                <h5 id="headertitu1"></h5>
-            </div>
-            
-            <div class="modal-body scroll-y mx-lg-5 my-7">
-                <div class="flex-lg-row-fluid">
-                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="modal_horarios_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#modal_horarios_header" data-kt-scroll-wrappers="#modal_horarios_scroll" data-kt-scroll-offset="300px">
-                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                            <div class="col">
-                                <div class="fv-row mb-7">
-                                    <label class="fs-6 fw-bold form-label mt-3">
-                                        <span class="required">Dia</span>
-                                        <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's email."></i> -->
-                                    </label>
-                                    <?php	
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-2">
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-md-4">
+                                 <label class="required form-label">Dia</label>
+                                   <?php	
                                         $xSQL = "SELECT pde.pade_valorI AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Dias Semana' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
                                         $all_dias = mysqli_query($con, $xSQL);    
                                     ?>
@@ -813,39 +804,17 @@
                                             <option value="<?php echo $dias['Codigo'] ?>"><?php echo $dias['Descripcion']; ?></option>
                                         <?php endforeach ?>
                                     </select>
-                                </div>
-                            </div>  
-                            <!-- <div class="col">
-                                <div class="fv-row mb-7">
-                                    <label class="fs-6 fw-bold form-label mt-3">
-                                        <span class="required">Intervalo</span>
-                                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Intervalo de 30 a 60 minutos"></i>
-                                    </label>   
-                                    <input type="number" name="txtIntervalo" id="txtIntervalo" min="10" max="60" step="10" class="form-control mb-2" value="10" />
-                                </div>
-                            </div> -->
-                        </div>
-
-                        <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                            <div class="col">
-                                <div class="fv-row mb-7">
-                                    <label class="fs-6 fw-bold form-label mt-3">
-                                        <span class="required">Hora Desde</span>
-                                    </label>
-                                    <input class="form-control form-control-solid" name="txtHoraDesde" id="txtHoraDesde" placeholder="Hora Inicio" />
-                                </div>
-                            </div>  
-                            <div class="col">
-                                <div class="fv-row mb-7">
-                                    <label class="fs-6 fw-bold form-label mt-3">
-                                        <span class="required">Hora Hasta</span>
-                                    </label>   
-                                    <input class="form-control form-control-solid" name="txtHoraHasta" id="txtHoraHasta" placeholder="Hora Hasta" />
-                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                 <label class="required form-label">Hora Desde</label>
+                                 <input class="form-control form-control-solid" name="txtHoraDesde" id="txtHoraDesde" placeholder="Hora Inicio" />
+                            </div>
+                            <div class="col-md-4">
+                                 <label class="required form-label">Hora Hasta</label>
+                                  <input class="form-control form-control-solid" name="txtHoraHasta" id="txtHoraHasta" placeholder="Hora Hasta" />
                             </div>
                         </div>
-
-                        <div class="form-group mt-5">
+                         <div class="form-group mt-5 mb-5">
                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarHorario">
                                 <span class="svg-icon svg-icon-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -856,44 +825,33 @@
                             Agregar Horario
                             </button>
                         </div>
+                         <div class="separator my-7"></div>
+                        <h2>Turnos Asignados</h2>
+                        <div class="mh-300px scroll-y me-n7 pe-7">
+                            <table id="tblHorarios" class="table table-hover align-middle table-row-dashed fs-6 gy-5 mt-3" style="width: 100%;">
+                                <thead>
+                                    <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                        <th>Dia</th>
+                                        <!-- <th>Intervalo</th> -->
+                                        <th>H.Desde</th>
+                                        <th>H.Hasta</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="fw-bold text-gray-600">
 
-                        <div class="separator my-7"></div>
-                        
-                        <div class="card-header">
-                            <div class="card-title">
-                                <h2>Turnos Asignados</h2>
-                            </div>
-                        </div>                                     
-
-                        <table id="tblHorarios" class="table align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
-                            <thead>
-                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                    <th>Dia</th>
-                                    <!-- <th>Intervalo</th> -->
-                                    <th>H.Desde</th>
-                                    <th>H.Hasta</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody class="fw-bold text-gray-600">
-
-                            </tbody>
-                        </table>
-
-                        <div class="modal-footer pt-15">
-                            <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
-                            <!-- <button type="button" class="btn btn-primary" id="btnGrabarHorario" onclick="f_GrabarHorarios(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-save"></i>
-                                <span class="indicator-label">Grabar</span>
-                                <span class="indicator-progress">Por favor espere...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                            </button> -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
         </div>
     </div>
-</div> 
+</div>   
 <!--Modal Tipo Porfesion -->      
 <div class="modal fade" id="modal_new_tipoprofesion" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
@@ -2229,7 +2187,7 @@
         var _diatext = $('#cboDias option:selected').text();
 
         if(_dia == ''){
-            mensajesalertify("Seleccione Dia..!", "W", "top-center", 5);
+            mensajesalertify("Seleccione Dia..!", "W", "top-right", 3);
             return;
         }
 
@@ -2239,12 +2197,12 @@
         // }
 
         if(_horadesde == ''){
-            mensajesalertify("Seleccion Hora Inicio..!", "W", "top-center", 5);
+            mensajesalertify("Seleccion Hora Inicio..!", "W", "top-right", 3);
             return;
         }
 
         if(_horahasta == ''){
-            mensajesalertify("Seleccione Hora Final..!", "W", "top-center", 5);
+            mensajesalertify("Seleccione Hora Final..!", "W", "top-right", 3);
             return;
         }                
 
@@ -2254,7 +2212,7 @@
         var minutos_final = _horahasta.split(':').reduce((p, c) => parseInt(p) * 60 + parseInt(c));
         
         if (minutos_final < minutos_inicio){
-            mensajesalertify("La Hora Inicio no puede ser mayor a la Hora Final..!", "W", "top-center", 5);
+            mensajesalertify("La Hora Inicio no puede ser mayor a la Hora Final..!", "W", "top-right", 3);
             return;
         } 
 
@@ -2297,12 +2255,13 @@
                 _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Eliminar Turno/Horario" ><i class="fa fa-trash"></i></button></div></div></td></tr>'
 
                 $('#tblHorarios').append(_output);
+                mensajesweetalert('top-center','success','Horario Agregado',false,2500);
 
             }else{
-                mensajesalertify("Dia - Turno/Horario ya existe..!", "W", "top-center", 3);
+                mensajesalertify("Dia - Turno/Horario ya existe..!", "W", "top-right", 3);
             }
 
-            $("#cboTipoProfe").val(0).change(); 
+            $("#cboDias").val(0).change(); 
             $("#cboProfesional").val(0).change(); 
 
         });
