@@ -405,49 +405,16 @@
                 </div>
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                     <div class="d-flex flex-column gap-7 gap-lg-10">
-                        <div class="card card-flush py-4">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h2>Datos Especialidad</h2>
-                                </div>
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="mb-10 fv-row">
-                                    <label class="required form-label">Especialidad</label>
-                                    <select name="cboEspecialidad" id="cboEspecialidad" aria-label="Seleccione Especialidad" data-control="select2" data-placeholder="Seleccione Especialidad" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2">
-                                        <option></option>
-                                        <?php 
-                                        $xSQL = "SELECT espe_id AS Codigo,espe_nombre AS NombreEspe FROM `expert_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND espe_estado='A' ";
-                                        $all_datos =  mysqli_query($con, $xSQL);
-                                        foreach ($all_datos as $datos){ ?>
-                                            <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['NombreEspe'] ?></option>
-                                        <?php } ?>                                                        
-                                    </select>                                             
-                                </div>
-                                <div class="mb-10 fv-row">
-                                    <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                        <div class="col">
-                                            <label class="form-label">Pvp</label>
-                                            <input type="number" name="txtPvp" id="txtPvp" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" disabled />
-                                        </div>
-                                        <div class="col">
-                                            <label class="form-label">Costo Red</label>
-                                            <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group mt-5">
-                                    <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
-                                        <span class="svg-icon svg-icon-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    Agregar Especialidad
-                                    </button>
-                                </div>                                        
-                            </div>
+                        <div class="d-flex justify-content-start">
+                            <a href="#" class="btn btn-light-primary btn-sm" id="btnAddespe">
+                                <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>                                       
+                            Agregar Especialidad
+                            </a>
                         </div>
                         <div class="card card-flush py-4">
                             <div class="card-header">
@@ -627,7 +594,59 @@
             </div>
         </div>
     </div>
-</div>   
+</div>
+<!--Modal Agregar Especialidad -->
+<div class="modal fade" id="modal-add-especialidad" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Editar Especialidad-Asignada</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div card-body pt-0">
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <label class="required form-label">Especialidad</label>
+                                <select name="cboEspecialidad" id="cboEspecialidad" aria-label="Seleccione Especialidad" data-control="select2" data-placeholder="Seleccione Especialidad" data-dropdown-parent="#modal-add-especialidad" class="form-select mb-2">
+                                    <option></option>
+                                    <?php 
+                                    $xSQL = "SELECT espe_id AS Codigo,espe_nombre AS NombreEspe FROM `expert_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND espe_estado='A' ";
+                                    $all_datos =  mysqli_query($con, $xSQL);
+                                    foreach ($all_datos as $datos){ ?>
+                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['NombreEspe'] ?></option>
+                                    <?php } ?>                                                        
+                                </select>  
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                               <label class="required form-label">Pvp</label>
+                               <input type="number" name="txtPvp" id="txtPvp" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" disabled />
+                            </div>
+                            <div class="col-md-6">
+                               <label class="required form-label">Costo Red</label>
+                               <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnAgregar" class="btn btn-primary"><i class="las la-plus"></i>Agregar</button> 
+            </div>
+        </div>
+    </div>
+</div>  
 <!--Modal Editar Especialidad -->
 <div class="modal fade" id="modal-editar-especialidad" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
@@ -1276,7 +1295,13 @@
         
         $( "#txtPvpNew" ).blur(function() {
             this.value = parseFloat(this.value).toFixed(2);
-        });                 
+        });
+
+        //MODAL AGREGAR ESPECIALIDAD
+        $('#btnAddespe').click(function(){
+
+            $("#modal-add-especialidad").modal("show");
+        });
 
         $("#btnNuevaEspe").click(function(){
             
@@ -1350,11 +1375,11 @@
             var xrespuesta = $.post("codephp/grabar_especialidad.php", _parametros);
             xrespuesta.done(function(response){
                 if(response.trim() == 'EXISTE'){
-                    mensajesalertify('Especialidad ya Existe', 'W', 'top-right', 3);
+                    mensajesalertify('Especialidad ya Existe..!!', 'W', 'top-right', 3);
                 }else{
                     if(response.trim() != 'ERR'){
                         //mensajesalertify('Especialidad Agregada', 'S', 'top-center', 3);
-                        mensajesweetalert('top-center','success','Especialidad Agregada',false,2500);
+                        mensajesweetalert('top-center','success','Nueva Especialidad Agregada',false,2500);
                         $("#cboEspecialidad").empty();
                         $("#cboEspecialidad").html(response);
                         $("#modal-new-especialidad").modal("hide");
@@ -1369,12 +1394,12 @@
             var _valorv = $.trim($("#txtValor").val());
 
             if(_tipoprestador == ''){
-                mensajesalertify('Ingrese Tipo Prestador', 'W', 'top-center', 3);
+                mensajesalertify('Ingrese Tipo Prestador', 'W', 'top-right', 3);
                 return;
             }
 
             if(_valorv == ''){
-                mensajesalertify('Ingrese Valor', 'W', 'top-center', 3);
+                mensajesalertify('Ingrese Valor', 'W', 'top-right', 3);
                 return;
             }
 
@@ -1389,7 +1414,7 @@
             var xrespuesta = $.post("codephp/grabar_tipoprestador.php", _parametros);
             xrespuesta.done(function(response){
                 if(response.trim() == 'EXISTE'){
-                    mensajesalertify('Tipo Prestador/Valor ya Existe', 'W', 'top-center', 3);
+                    mensajesalertify('Tipo Prestador/Valor ya Existe', 'W', 'top-right', 3);
                 }else{
                     if(response.trim() != 'ERR'){
                         mensajesalertify('Tipo Prestador Agregado', 'S', 'top-center', 3);
@@ -1466,7 +1491,7 @@
             var _presid = <?php echo $xPresid; ?>;
 
             if(_especialidad == ''){
-                mensajesalertify('Seleccione Especialidad..!', 'W', 'top-center', 3);
+                mensajesalertify('Seleccione Especialidad..!!', 'W', 'top-right', 3);
                 return;
             }
 
@@ -1507,9 +1532,11 @@
 
                     $('#tblEspecialidad').append(_output);
 
-                    mensajesalertify('Especialidad Agregada Correctamente..!', 'S', 'top-center', 3);
+                    //mensajesalertify('Especialidad Agregada Correctamente..!', 'S', 'top-center', 3);
+                    $("#modal-add-especialidad").modal("hide");
+                    mensajesweetalert('top-center','success','Especialidad Agregada',false,2500);
                 }else{
-                    mensajesalertify('Especialidad ya está Asignada..!', 'W', 'top-center', 3);
+                    mensajesalertify('Especialidad ya está Asignada..!', 'W', 'top-right', 3);
                 }
 
                 $("#cboEspecialidad").val(0).change();
@@ -2567,6 +2594,10 @@
     $("#modal-new-especialidad").draggable({
         handle: ".modal-header"
     }); 
+
+    $("#modal-add-especialidad").draggable({
+        handle: ".modal-header"
+    });
     
     $("#modal-editar-especialidad").draggable({
         handle: ".modal-header"
