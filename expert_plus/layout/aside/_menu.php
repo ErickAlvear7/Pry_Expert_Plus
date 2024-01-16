@@ -28,6 +28,10 @@
 	if($page == 'addclienteprod' || $page == 'editcliente' || $page == 'addtitular' || $page == 'edittitular' || $page == 'adminagenda' || $page == 'admincalendar' ){
 		$page = 'admin_clienteproducto';
 	}
+
+	if($apge == 'agendar_titubeneadmin'){
+		$page = 'agendatitular_admin';
+	}
 	
 	@session_start();
 
