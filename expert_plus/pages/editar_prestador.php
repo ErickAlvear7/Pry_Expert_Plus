@@ -147,16 +147,6 @@
                         Nuevo Profesional
                     </button>    
                     <div class="separator my-7"></div>
-                    <!--<button type="button" id="btnProbarAgenda" class="btn btn-primary w-100" >
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M20 14H18V10H20C20.6 10 21 10.4 21 11V13C21 13.6 20.6 14 20 14ZM21 19V17C21 16.4 20.6 16 20 16H18V20H20C20.6 20 21 19.6 21 19ZM21 7V5C21 4.4 20.6 4 20 4H18V8H20C20.6 8 21 7.6 21 7Z" fill="currentColor" />
-                                <path opacity="0.3" d="M17 22H3C2.4 22 2 21.6 2 21V3C2 2.4 2.4 2 3 2H17C17.6 2 18 2.4 18 3V21C18 21.6 17.6 22 17 22ZM10 7C8.9 7 8 7.9 8 9C8 10.1 8.9 11 10 11C11.1 11 12 10.1 12 9C12 7.9 11.1 7 10 7ZM13.3 16C14 16 14.5 15.3 14.3 14.7C13.7 13.2 12 12 10.1 12C8.10001 12 6.49999 13.1 5.89999 14.7C5.59999 15.3 6.19999 16 7.39999 16H13.3Z" fill="currentColor" />
-                            </svg>
-                        </span>
-                        Probar Agenda
-                    </button>  -->  
-
                 </div>
             </div>
         </div>
@@ -575,7 +565,7 @@
 </div>
 <!--Modal Nueva Especialidad -->
 <div class="modal fade" id="modal-new-especialidad" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Nueva Especialidad</h2>
@@ -707,8 +697,8 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body py-lg-5 px-lg-10">
-                <div class="card card-flush py-4">
+            <div class="modal-body py-lg-2 px-lg-10">
+                <div class="card card-flush pt-10 pb-n3">
                     <div class="card-body pt-0">
                         <div class="row">
                             <div class="col-md-5">
@@ -814,7 +804,7 @@
                                   <input class="form-control form-control-solid" name="txtHoraHasta" id="txtHoraHasta" placeholder="Hora Hasta" />
                             </div>
                         </div>
-                         <div class="form-group mt-5 mb-5">
+                         <div class="form-group my-5">
                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarHorario">
                                 <span class="svg-icon svg-icon-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -854,7 +844,7 @@
 </div>   
 <!--Modal Tipo Porfesion -->      
 <div class="modal fade" id="modal_new_tipoprofesion" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Nuevo Tipo Profesional</h2>
@@ -886,7 +876,7 @@
                                 <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="100" placeholder="Valor/Codigo" name="txtCodigoTipo" id="txtCodigoTipo" />
                             </div>
                         </div>
-                        <div class="form-group mt-5">
+                        <div class="form-group my-5">
                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarTipo">
                                 <span class="svg-icon svg-icon-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -897,85 +887,81 @@
                                 Agregar
                             </button>
                         </div>
-                        <div class="mt-5">
-                            <div class="mh-300px scroll-y me-n7 pe-7">
-                                <table id="tblTipoProfesion" class="table align-middle table-row-dashed fs-6 gy-5 table-hover" style="width: 100%;">
-                                    <thead>
-                                        <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                                            <th>Tipo Profesion</th>
-                                            <th>Estado</th>
-                                            <th>Status</th>                                
-                                            <th>Opciones</th>
-                                        </tr>
-                                    </thead>
+                        <div class="mh-300px scroll-y me-n7 pe-7">
+                            <table id="tblTipoProfesion" class="table align-middle table-row-dashed fs-6 gy-5 table-hover" style="width: 100%;">
+                                <thead>
+                                    <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                                        <th>Tipo Profesion</th>
+                                        <th>Estado</th>
+                                        <th>Status</th>                                
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+
+                                <?php 
+                                    $xSQL = "SELECT pca.paca_id,pde.pade_id,pde.pade_nombre,pde.pade_estado,pde.pade_valorV FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Profesion' AND pca.paca_estado='A' AND pde.pade_estado='A' ORDER BY pde.pade_orden ";
+                                    $all_tipos = mysqli_query($con, $xSQL);
+                                ?>
+                                <tbody class="text-gray-600 fw-bold">
 
                                     <?php 
-                                        $xSQL = "SELECT pca.paca_id,pde.pade_id,pde.pade_nombre,pde.pade_estado,pde.pade_valorV FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Profesion' AND pca.paca_estado='A' AND pde.pade_estado='A' ORDER BY pde.pade_orden ";
-                                        $all_tipos = mysqli_query($con, $xSQL);
-                                    ?>
-                                    <tbody class="text-gray-600 fw-bold">
+                                                
+                                        foreach($all_tipos as $tipo){
+                                            $xPacaid = $tipo['paca_id'];
+                                            $xPadeid = $tipo['pade_id'];
+                                            $xTipoProfe = trim($tipo['pade_nombre']);
+                                            $xValorV = trim($tipo['pade_valorV']);
+                                            $xEstado = trim($tipo['pade_estado']);
+                                        ?>
+                                            <?php 
 
-                                        <?php 
-                                                    
-                                            foreach($all_tipos as $tipo){
-                                                $xPacaid = $tipo['paca_id'];
-                                                $xPadeid = $tipo['pade_id'];
-                                                $xTipoProfe = trim($tipo['pade_nombre']);
-                                                $xValorV = trim($tipo['pade_valorV']);
-                                                $xEstado = trim($tipo['pade_estado']);
+                                                $xChkSelecc = '';
+                                                $xDisabledEdit = '';
+
+                                                if($xEstado == 'A'){
+                                                    $xChkSelecc = 'checked="checked"';
+                                                    $xTextColor = "badge badge-light-primary";
+                                                    $xEstadoTxt = 'ACTIVO';
+                                                }else{
+                                                    $xTextColor = "badge badge-light-danger";
+                                                    $xDisabledEdit = 'disabled';
+                                                    $xDisabledReset = 'disabled';
+                                                    $xEstadoTxt = 'INACTIVO';
+                                                }
+
                                             ?>
-                                                <?php 
-
-                                                    $xChkSelecc = '';
-                                                    $xDisabledEdit = '';
-
-                                                    if($xEstado == 'A'){
-                                                        $xChkSelecc = 'checked="checked"';
-                                                        $xTextColor = "badge badge-light-primary";
-                                                        $xEstadoTxt = 'ACTIVO';
-                                                    }else{
-                                                        $xTextColor = "badge badge-light-danger";
-                                                        $xDisabledEdit = 'disabled';
-                                                        $xDisabledReset = 'disabled';
-                                                        $xEstadoTxt = 'INACTIVO';
-                                                    }
-
-                                                ?>
-                                                <tr id="tr_<?php echo $xPadeid; ?>">
-                                                    <td>
-                                                        <?php echo $xTipoProfe; ?>
-                                                        <input type="hidden" id="txtPadeid<?php echo $xPadeid; ?>" value="<?php echo $xPadeid; ?>" />
-                                                        <input type="hidden" id="txtTiprofe<?php echo $xPadeid; ?>" value="<?php echo $xTipoProfe; ?>" />
-                                                        <input type="hidden" id="txtValor<?php echo $xPadeid; ?>" value="<?php echo $xValorV; ?>" />
-                                                    </td>
-                                                    
-                                                    <td id="td_<?php echo $xPadeid; ?>">
-                                                        <div class="<?php echo $xTextColor; ?>"><?php echo $xEstadoTxt; ?></div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="text-center">
-                                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input <?php echo $xChkSelecc; ?> class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chktipo<?php echo $xPadeid; ?>" 
-                                                                    onchange="f_UpdateEstTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)" />
-                                                            </div>
+                                            <tr id="tr_<?php echo $xPadeid; ?>">
+                                                <td>
+                                                    <?php echo $xTipoProfe; ?>
+                                                    <input type="hidden" id="txtPadeid<?php echo $xPadeid; ?>" value="<?php echo $xPadeid; ?>" />
+                                                    <input type="hidden" id="txtTiprofe<?php echo $xPadeid; ?>" value="<?php echo $xTipoProfe; ?>" />
+                                                    <input type="hidden" id="txtValor<?php echo $xPadeid; ?>" value="<?php echo $xValorV; ?>" />
+                                                </td>
+                                                
+                                                <td id="td_<?php echo $xPadeid; ?>">
+                                                    <div class="<?php echo $xTextColor; ?>"><?php echo $xEstadoTxt; ?></div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-center">
+                                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                            <input <?php echo $xChkSelecc; ?> class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chktipo<?php echo $xPadeid; ?>" 
+                                                                onchange="f_UpdateEstTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)" />
                                                         </div>
-                                                    </td> 													
-                                                    <td>
-                                                        <div class="text-center">
-                                                            <div class="btn-group">
-                                                                <button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Tipo Profesion' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)">
-                                                                    <i class='fa fa-edit'></i>
-                                                                </button>	                                                
-                                                            </div>
-                                                        </div>
-                                                    </td>   
-                                                </tr>
-                                        <?php } ?>  
+                                                    </div>
+                                                </td> 													
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Tipo Profesion' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)">
+                                                            <i class='fa fa-edit'></i>
+                                                        </button>	                                                
+                                                    </div>
+                                                </td>   
+                                            </tr>
+                                    <?php } ?>  
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                                </tbody>
+                            </table>
+                        </div>  
                     </div>
                 </div>
             </div>
