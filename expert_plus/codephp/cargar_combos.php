@@ -27,7 +27,7 @@
                     $options ='<option></option>';
                     foreach ($all_datos as $ciudad){ 
                         $options .='<option value="'.$ciudad["prov_id"].'">' . mb_strtoupper($ciudad["ciudad"]).'</option>';
-                    }                        
+                    }                             
                     break;
                 case 1: //PARAMETROS POR VALOR TEXTO
                     $xSQL = "SELECT * FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid ";
@@ -47,6 +47,15 @@
                     foreach ($all_datos as $datos){ 
                         $options .='<option value="'.$datos["Codigo"].'">' . $datos["Descripcion"].'</option>';
                     }                      
+                    break;
+
+                case 3: //LLENAR PROVINCIA EN BASE DE CIUDAD 
+                    $xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND prov_id='$xComboid' AND estado='A' ";        
+                    $all_datos =  mysqli_query($con, $xSQL);
+                    $options ='<option></option>';
+                    foreach ($all_datos as $provincia){ 
+                        $options .='<option value="'.$provincia["provincia"].'">' . mb_strtoupper($provincia["provincia"]).'</option>';
+                    }                        
                     break;
             }
         }

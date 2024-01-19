@@ -396,26 +396,12 @@
                                         <div class="col">
                                             <div class="fv-row mb-7">
                                                 <label class="fs-6 fw-bold form-label mt-3">
-                                                    <span class="required">Provincia</span>
-                                                    <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's email."></i> -->
-                                                </label>
-                                                <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tabTitular" class="form-select mb-2"  >
-                                                    <option></option>
-                                                    <?php foreach ($all_provincia as $prov) : ?>
-                                                        <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
-                                                    <?php endforeach ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="fv-row mb-7">
-                                                <label class="fs-6 fw-bold form-label mt-3">
                                                     <span class="required">Ciudad</span>
                                                     <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's phone number (optional)."></i> -->
                                                 </label>
                                                 <?php 
                                                     $xSQL = "SELECT prov_id AS Codigo, ciudad AS Descripcion FROM `provincia_ciudad` ";
-	                                                $xSQL .= "WHERE pais_id=$xPaisid AND provincia='$xProvincia' AND estado='A' ORDER BY ciudad ";
+	                                                $xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY ciudad ";
                                                     $all_ciudad = mysqli_query($con, $xSQL);
                                                 ?>
                                                 <select name="cboCiudad" id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tabTitular" class="form-select mb-2">
@@ -423,6 +409,21 @@
                                                         <option value="<?php echo $ciudad['Codigo'] ?>"><?php echo mb_strtoupper($ciudad['Descripcion']) ?></option>
                                                     <?php endforeach ?>
                                                 </select>                                                      
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col">
+                                            <div class="fv-row mb-7">
+                                                <label class="fs-6 fw-bold form-label mt-3">
+                                                    <span class="required">Provincia</span>
+                                                    <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's email."></i> -->
+                                                </label>
+                                                <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tabTitular" class="form-select mb-2"  >
+                                                    <!-- <option></option> -->
+                                                    <?php foreach ($all_provincia as $prov) : ?>
+                                                        <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
+                                                    <?php endforeach ?>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -3627,11 +3628,11 @@
             $('#cboProvincia').val(_provincia).change();
             $('#cboCiudad').val(_ciudadid).change();
 
-            $('#cboProvincia').change(function(){
+            $('#cboCiudad').change(function(){
                 
                 _cboid = $(this).val(); //obtener el id seleccionado
 
-                $("#cboCiudad").empty();
+                $("#cboProvincia").empty();
                 $("#cboEspecialidad").empty();
                 $("#cboProfesional").empty();
 
@@ -3639,13 +3640,13 @@
                     "xxPaisid": _paisid,
                     "xxEmprid": _emprid,
                     "xxComboid": _cboid,
-                    "xxOpcion": 0
+                    "xxOpcion": 3
                 }
 
                 var _respuesta = $.post("codephp/cargar_combos.php", _parametros);
                 _respuesta.done(function(response) {
                     //document.getElementById("city").className = "form-control";
-                    $("#cboCiudad").html(response);
+                    $("#cboProvincia").html(response);
                     
                 });
                 _respuesta.fail(function() {

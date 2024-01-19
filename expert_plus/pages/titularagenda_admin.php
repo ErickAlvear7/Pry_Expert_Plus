@@ -91,15 +91,15 @@
                 </div>
             </div> 
             <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-                <div class="w-100 mw-150px">
+                <div class="w-50 mw-150px">
                     <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Estado" data-kt-ecommerce-product-filter="status">                                    
                         <option></option>
                         <option value="all">Todos</option>
                         <option value="Activo">Activo</option>
                         <option value="Inactivo">Inactivo</option>
                     </select>
-            </div>
-                <a href="?page=addclienteprod&menuid=<?php echo $menuid; ?>" class="btn btn-primary">
+                </div>
+                <!-- <a href="?page=addclienteprod&menuid=<?php echo $menuid; ?>" class="btn btn-primary">
                     <span class="svg-icon svg-icon-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
@@ -107,7 +107,7 @@
                         </svg>
                     </span>
                     Nuevo Titular
-                </a>
+                </a> -->
             </div>                       
         </div>
         <div class="card-body pt-0">
