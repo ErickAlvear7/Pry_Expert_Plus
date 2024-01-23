@@ -3704,7 +3704,7 @@
                 _profid = $('#cboProfesional').val();
                 alert(_profid);
                 if(_profid == ''){
-                    mensajesalertify("Seleccione Profecional", "W", "top-center", 5);
+                    mensajesalertify("Seleccione Profesional", "W", "top-center", 5);
                     return;
                 }
 
