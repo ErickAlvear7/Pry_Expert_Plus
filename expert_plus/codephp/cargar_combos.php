@@ -52,9 +52,9 @@
                 case 3: //LLENAR PROVINCIA EN BASE DE CIUDAD 
                     $xSQL = "SELECT * FROM `provincia_ciudad` WHERE pais_id=$xPaisid AND prov_id='$xComboid' AND estado='A' ";        
                     $all_datos =  mysqli_query($con, $xSQL);
-                    $options ='<option></option>';
+                    //$options ='<option></option>';
                     foreach ($all_datos as $provincia){ 
-                        $options .='<option value="'.$provincia["provincia"].'">' . mb_strtoupper($provincia["provincia"]).'</option>';
+                        $options .='<option value="'.$provincia["prov_id"].'">' . mb_strtoupper($provincia["provincia"]).'</option>';
                     }                        
                     break;
             }
