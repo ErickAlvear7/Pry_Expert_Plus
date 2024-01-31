@@ -228,7 +228,7 @@
 </div>
 <!--Modal Usuario-->
 <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable  mw-900px">
         <div class="modal-content"> 
             <div class="modal-header">
                 <h2 id="titulo" class="fw-bolder"></h2>
@@ -487,6 +487,18 @@
 			}
 
 		});
+
+		//refrescar modal al cerrar 
+
+		$('#kt_modal_add_user').on('hidden.bs.modal', function (e) {
+			$(this)
+			.find("input,textarea,select")
+			.val('')
+			.end()
+			.find("input[type=checkbox], input[type=radio]")
+			.prop("checked", "")
+			.end();
+		})
 
 		//editar modal usuario
 
