@@ -58,3 +58,21 @@ function mensajetoastr(_position, _tipo, _title, _mensaje, _timer, _closebutton,
     
 
 }
+
+function toastSweetAlert(_position,_timer,_icon,_title){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: _position,
+        showConfirmButton: false,
+        timer: _timer,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+        });
+        Toast.fire({
+        icon: _icon,
+        title: _title
+    });
+}
