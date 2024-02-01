@@ -188,10 +188,8 @@
 										<span><?php echo $login; ?></span>
 									</div>
 								</td>
-								
 								<td><?php echo $usu['Pais']; ?></td>
 								<td><?php echo $perfil; ?></td>
-								
 								<td id="td_<?php echo $idusuario; ?>">
 									<div class="<?php echo $xTextColor; ?>"><?php echo $estado; ?></div>
 								</td>
@@ -204,7 +202,6 @@
 										</div>
 									</div>
 								</td> 													
-
 								<td class="text-end">
 									<div class="text-center">
 										<div class="btn-group">
@@ -220,7 +217,6 @@
 								
 							</tr>
 					<?php } ?>  
-
 				</tbody>
 			</table>
 		</div>

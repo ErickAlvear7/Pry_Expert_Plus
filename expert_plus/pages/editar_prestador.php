@@ -1350,12 +1350,12 @@
             var _pvpnew = $("#txtPvpNew").val();
 
             if(_cbotipoespe == ''){
-                mensajesalertify('Seleccion Tipo Especialidad', 'W', 'top-right', 3);
+                toastSweetAlert("top-end",3000,"warning","Seleccion Tipo Especialidad");
                 return;
             }
 
             if(_especialidad == ''){
-                mensajesalertify('Ingrese Especialidad', 'W', 'top-right', 3);
+                toastSweetAlert("top-end",3000,"warning","Ingrese Especialidad");
                 return;
             }
 
@@ -1375,11 +1375,10 @@
             var xrespuesta = $.post("codephp/grabar_especialidad.php", _parametros);
             xrespuesta.done(function(response){
                 if(response.trim() == 'EXISTE'){
-                    mensajesalertify('Especialidad ya Existe..!!', 'W', 'top-right', 3);
+                    toastSweetAlert("top-end",3000,"info","Especialidad ya Existe..!!");
                 }else{
                     if(response.trim() != 'ERR'){
-                        //mensajesalertify('Especialidad Agregada', 'S', 'top-center', 3);
-                        mensajesweetalert('top-center','success','Nueva Especialidad Agregada',false,2500);
+                        toastSweetAlert("top-end",3000,"success","Nueva Especialidad Agregada");
                         $("#cboEspecialidad").empty();
                         $("#cboEspecialidad").html(response);
                         $("#modal-new-especialidad").modal("hide");
@@ -1394,12 +1393,12 @@
             var _valorv = $.trim($("#txtValor").val());
 
             if(_tipoprestador == ''){
-                mensajesalertify('Ingrese Tipo Prestador', 'W', 'top-right', 3);
+                toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Prestador");
                 return;
             }
 
             if(_valorv == ''){
-                mensajesalertify('Ingrese Valor', 'W', 'top-right', 3);
+                toastSweetAlert("top-end",3000,"warning","Ingrese Valor");
                 return;
             }
 
@@ -1414,10 +1413,10 @@
             var xrespuesta = $.post("codephp/grabar_tipoprestador.php", _parametros);
             xrespuesta.done(function(response){
                 if(response.trim() == 'EXISTE'){
-                    mensajesalertify('Tipo Prestador/Valor ya Existe', 'W', 'top-right', 3);
+                    toastSweetAlert("top-end",3000,"info","Tipo Prestador/Valor ya Existe");
                 }else{
                     if(response.trim() != 'ERR'){
-                        mensajesalertify('Tipo Prestador Agregado', 'S', 'top-center', 3);
+                        toastSweetAlert("top-end",3000,"success","Tipo Prestador Agregado");
                         $("#cboTipo").empty();
                         $("#cboTipo").html(response);
                         $("#modal-new-tipoprestador").modal("hide");
@@ -1444,7 +1443,7 @@
                     }
                 }else{
                     $('#chkEnviar1').prop('checked','');
-                    mensajesalertify("Email no es Valido", "W", "top-center", 3);
+                    toastSweetAlert("top-end",3000,"error","Email no es Valido");
                     _enviar1 = 'SI';
                     return;
                 }
@@ -1472,7 +1471,7 @@
                     }                            
                 }else{
                     $('#chkEnviar2').prop('checked','');
-                    mensajesalertify("Email no es Valido", "W", "top-center", 3);
+                    toastSweetAlert("top-end",3000,"error","Email no es Valido");
                     _enviar2 = 'NO';
                     return;
                 }
@@ -1491,7 +1490,7 @@
             var _presid = <?php echo $xPresid; ?>;
 
             if(_especialidad == ''){
-                mensajesalertify('Seleccione Especialidad..!!', 'W', 'top-right', 3);
+                toastSweetAlert("top-end",3000,"warning","Seleccione Especialidad..!!");
                 return;
             }
 
@@ -1534,9 +1533,9 @@
 
                     //mensajesalertify('Especialidad Agregada Correctamente..!', 'S', 'top-center', 3);
                     $("#modal-add-especialidad").modal("hide");
-                    mensajesweetalert('top-center','success','Especialidad Agregada',false,2500);
+                    toastSweetAlert("top-end",3000,"success","Especialidad Agregada");
                 }else{
-                    mensajesalertify('Especialidad ya está Asignada..!', 'W', 'top-right', 3);
+                    toastSweetAlert("top-end",3000,"info","Especialidad ya está Asignada..!");
                 }
 
                 $("#cboEspecialidad").val(0).change();
@@ -1552,12 +1551,12 @@
             var _continuar = true;
 
             if(_tipoprofesion == ''){
-                mensajesalertify('Ingrese Tipo Profesion..!', 'W', 'top-right', 3);
+                toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Profesion..!");
                 return;
             }
 
             if(_valcodigoprof == ''){
-                mensajesalertify('Ingrese Valor/Codigo Tipo Profesion..!', 'W', 'top-right', 3);
+                toastSweetAlert("top-end",3000,"warning","Ingrese Valor/Codigo Tipo Profesion..!");
                 return;
             }
 
@@ -1609,13 +1608,15 @@
 
                         if(_btnopctiontipo == 'Add'){
                             $('#tblTipoProfesion').append(_output);
-                            _mensaje = "Tipo Profesion Agregada Correctamente..!";
+                            //_mensaje = "Tipo Profesion Agregada Correctamente..!";
+                            toastSweetAlert("top-end",3000,"success","Tipo Profesion Agregado Correctamente..!");
                         }else{
                             $('#tr_' + _padeid + '').html(_output);
-                            _mensaje = "Tipo Profesion Modificada Correctamente..!";
+                            //_mensaje = "Tipo Profesion Modificada Correctamente..!";
+                            toastSweetAlert("top-end",3000,"success","Tipo Profesion Modificado Correctamente..!");
                         }                                
-                        //mensajesalertify(_mensaje, 'S', 'top-center', 5);
-                        mensajesweetalert('top-center','success',_mensaje,false,2500);
+
+                        //toastSweetAlert("top-end",3000,"success",_mensaje);
 
                         //Listar Nuevamente los tipos de Profesion
                         var _parametros = {
@@ -1630,7 +1631,7 @@
                             $("#cboTipoProfesion").html(xresponse);
                         });                                
                     }else{
-                        mensajesalertify('Tipo Profesion ya existe.!', 'W', 'top-center', 5);                            
+                        toastSweetAlert("top-end",3000,"info","Tipo Profesion ya existe.!");                           
                     }
 
                     $("#txtTipoProfesion").val('');
@@ -1695,27 +1696,27 @@
             _respuesta = 'OK';
 
             if(_provid == ''){
-                mensajesalertify("Seleccione Provincia..!", "W", "top-center", 3);
+                toastSweetAlert("top-end",3000,"warning","Seleccione Provincia..!"); 
                 return; 
             }
 
             if(_ciudid == ''){
-                mensajesalertify("Seleccione Ciudad..!", "W", "top-center", 3);
+                toastSweetAlert("top-end",3000,"warning","Seleccione Ciudad..!"); 
                 return; 
             }
 
             if(_prestador == ''){
-                mensajesalertify("Ingrese Nombre del Prestador..!", "W", "top-center", 3);
+                toastSweetAlert("top-end",3000,"warning","Ingrese Nombre del Prestador..!"); 
                 return;                         
             }
 
             if(_sector == ''){
-                mensajesalertify("Seleccione Sector..!", "W", "top-center", 3);
+                toastSweetAlert("top-end",3000,"warning","Seleccione Sector..!"); 
                 return; 
             }
             
             if(_tipopresta == ''){
-                mensajesalertify("Seleccione Tipo Prestador..!", "W", "top-center", 3);
+                toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Prestador..!"); 
                 return; 
             }                       
             
@@ -1723,7 +1724,7 @@
                 try{
                     new URL(_url);
                 }catch(err){
-                    mensajesalertify("Direccion URL Incorrecta..!", "W", "top-center", 3);
+                    toastSweetAlert("top-end",3000,"error","Direccion URL Incorrecta..!"); 
                     return false;
                 }
             }
@@ -1732,7 +1733,7 @@
             {
                 _valor = document.getElementById("txtFono1").value;
                 if( !(/^\d{9}$/.test(_valor)) ) {
-                    mensajesalertify("Telefono1 incorrecto..!" ,"W", "top-center", 3); 
+                    toastSweetAlert("top-end",3000,"error","Telefono 1 incorrecto..!"); 
                     return;
                 }
             }
@@ -1741,7 +1742,7 @@
             {
                 _valor = document.getElementById("txtFono2").value;
                 if( !(/^\d{9}$/.test(_valor)) ) {
-                    mensajesalertify("Telefono2 incorrecto..!" ,"W", "top-center", 3); 
+                    toastSweetAlert("top-end",3000,"error","Telefono 2 incorrecto..!");  
                     return;
                 }
             }                    
@@ -1750,7 +1751,7 @@
             {
                 _valor = document.getElementById("txtFono3").value;
                 if( !(/^\d{9}$/.test(_valor)) ) {
-                    mensajesalertify("Telefono3 incorrecto..!" ,"W", "top-center", 3); 
+                    toastSweetAlert("top-end",3000,"error","Telefono 3 incorrecto..!");  
                     return;
                 }
             }  
@@ -1759,7 +1760,7 @@
             {
                 _valor = document.getElementById("txtCelular1").value;
                 if( !(/^\d{10}$/.test(_valor)) ) {
-                    mensajesalertify("Celular1 incorrecto..!" ,"W", "top-center", 3); 
+                    toastSweetAlert("top-end",3000,"error","Celular 1 incorrecto..!");  
                     return;
                 }
             }                     
@@ -1768,7 +1769,7 @@
             {
                 _valor = document.getElementById("txtCelular2").value;
                 if( !(/^\d{10}$/.test(_valor)) ) {
-                    mensajesalertify("Celular1 incorrecto..!" ,"W", "top-center", 3); 
+                    toastSweetAlert("top-end",3000,"error","Celular 2 incorrecto..!"); 
                     return;
                 }
             }
@@ -1777,7 +1778,7 @@
             {
                 _valor = document.getElementById("txtCelular3").value;
                 if( !(/^\d{10}$/.test(_valor)) ) {
-                    mensajesalertify("Celular1 incorrecto..!" ,"W", "top-center", 3); 
+                    toastSweetAlert("top-end",3000,"error","Celular 3 incorrecto..!");  
                     return;
                 }
             }                    
@@ -1787,7 +1788,7 @@
             
                 if (regex.test($('#txtEmail1').val().trim())) {
                 }else{
-                    mensajesalertify("Email1 no es Valido..!", "W", "top-center", 3);
+                    toastSweetAlert("top-end",3000,"error","Email 1 no es Valido..!"); 
                     return;
                 }
             }
@@ -1797,7 +1798,7 @@
             
                 if (regex.test($('#txtEmail2').val().trim())) {
                 }else{
-                    mensajesalertify("Email2 no es Valido..!", "W", "top-center", 3);
+                    toastSweetAlert("top-end",3000,"error","Email 2 no es Valido..!"); 
                     return;
                 }
             }
@@ -1817,7 +1818,7 @@
                 if(_ext.trim() == '.png' || _ext.trim() == '.jpg' || _ext.trim() == 'jpeg'){
                     _cambiarlogo = 'SI';
                 }else{
-                    mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-center", 3);
+                    toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una Imagen..!"); 
                     return;
                 }
             }
@@ -1861,7 +1862,7 @@
                     if(response == 'OK'){
                         $.redirect('?page=prestador_admin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito..!'}); //POR METODO POST
                     }else{
-                        mensajesalertify("Prestador ya Existe..!", "W", "top-center", 3);
+                        toastSweetAlert("top-end",3000,"info","Prestador ya Existe..!"); 
                     }
                 },
                 error: function (error) {
@@ -1991,12 +1992,12 @@
         var _intervalo = $('#txtIntervalo').val();
 
         if(_profid == 0){
-            mensajesalertify("Seleccione Profesional..!", "W", "top-right", 3);
+            toastSweetAlert("top-end",3000,"warning","Seleccione Profesional..!"); 
             return;
         }
 
         if(_intervalo == ''){
-            mensajesalertify("Ingrese Internvalo..!", "W", "top-right", 5);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Internvalo..!"); 
             return;
         }                
 
@@ -2032,9 +2033,7 @@
                 $('#tblProfesional').append(_output);
 
             }else{
-                //mensajesalertify("Profesional esta agregado..!", "W", "top-center", 3);
-                mensajesweetalert('top-center','success','Profesional Agregado',false,2500);
- 
+                toastSweetAlert("top-end",3000,"success","Profesional Agregado"); 
             }
 
             $("#cboTipoProfe").val(0).change(); 
@@ -2159,10 +2158,10 @@
         var xrespuesta = $.post("codephp/consultar_horarioprofesional.php", _parametros);
             xrespuesta.done(function(response){
             if(response.trim() == 'OK'){
-                mensajesalertify("Registro Eliminado..!", "E", "top-center", 3);
+                toastSweetAlert("top-end",3000,"error","Registro Eliminado..!");
                 $('#trprof_' + _pfesid).remove();
             }else{
-                mensajesalertify("El registro tiene horarios configurados..!", "W", "top-center", 3);
+                toastSweetAlert("top-end",3000,"info","El registro tiene horarios configurados..!");
             }
         });
     }
@@ -2181,10 +2180,10 @@
         var xrespuesta = $.post("codephp/del_horarioprofesional.php", _parametros);
             xrespuesta.done(function(response){
             if(response.trim() == 'OK'){
-                mensajesalertify("Registro Eliminado..!", "E", "top-center", 5);
+                toastSweetAlert("top-end",3000,"error","Registro Eliminado..!");
                 $('#trhorario_' + _horaid).remove();
             }else{
-                mensajesalertify("Hubo algun error, no se puedo eliminar..!", "W", "top-center", 5);
+                toastSweetAlert("top-end",3000,"question","Hubo algun error, no se puedo eliminar..!");
             }
         });
     }            
@@ -2200,7 +2199,7 @@
         var _diatext = $('#cboDias option:selected').text();
 
         if(_dia == ''){
-            mensajesalertify("Seleccione Dia..!", "W", "top-right", 3);
+            toastSweetAlert("top-end",3000,"warning","Seleccione Dia..!");
             return;
         }
 
@@ -2210,12 +2209,12 @@
         // }
 
         if(_horadesde == ''){
-            mensajesalertify("Seleccion Hora Inicio..!", "W", "top-right", 3);
+            toastSweetAlert("top-end",3000,"warning","Seleccion Hora Inicio..!");
             return;
         }
 
         if(_horahasta == ''){
-            mensajesalertify("Seleccione Hora Final..!", "W", "top-right", 3);
+            toastSweetAlert("top-end",3000,"warning","Seleccione Hora Final..!");
             return;
         }                
 
@@ -2225,7 +2224,7 @@
         var minutos_final = _horahasta.split(':').reduce((p, c) => parseInt(p) * 60 + parseInt(c));
         
         if (minutos_final < minutos_inicio){
-            mensajesalertify("La Hora Inicio no puede ser mayor a la Hora Final..!", "W", "top-right", 3);
+            toastSweetAlert("top-end",3000,"question","La Hora Inicio no puede ser mayor a la Hora Final..!");
             return;
         } 
 
@@ -2268,10 +2267,10 @@
                 _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Eliminar Turno/Horario" ><i class="fa fa-trash"></i></button></div></div></td></tr>'
 
                 $('#tblHorarios').append(_output);
-                mensajesweetalert('top-center','success','Horario Agregado',false,2500);
+                toastSweetAlert("top-end",3000,"success","Horario Agregado");
 
             }else{
-                mensajesalertify("Dia - Turno/Horario ya existe..!", "W", "top-right", 3);
+                toastSweetAlert("top-end",3000,"info","Dia - Turno/Horario ya existe..!");
             }
 
             $("#cboDias").val(0).change(); 
@@ -2432,7 +2431,7 @@
 
                 $('#row_' + _rowid + '').html(_output);
             }else{
-                mensajesalertify("Especialidad ya está asignada..!", "W", "top-right", 3);
+                toastSweetAlert("top-end",3000,"info","Especialidad ya está asignada..!");
             }
         });	                
 
@@ -2458,7 +2457,7 @@
                 }
             }else{
                 $('#chkEnviarProf').prop('checked','');
-                mensajesalertify("Email no es Valido", "W", "top-right", 3);
+                toastSweetAlert("top-end",3000,"error","Email no es Valido");
                 _enviarprof = 'SI';
                 return;
             }
@@ -2495,27 +2494,27 @@
         }
 
         if(_tipodoc == ''){
-            mensajesalertify("Seleccione Tipo Documento..!", "W", "top-right", 3);
+            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Documento..!");
             return;                    
         }
 
         if(_numdocumento == ''){
-            mensajesalertify("Ingrese Numero de Documento..!", "W", "top-right", 3);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Numero de Documento..!");
             return;                    
         }
 
         if(_nombres == ''){
-            mensajesalertify("Ingrese Nombres..!", "W", "top-right", 3);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Nombres..!");
             return;                    
         }
 
         if(_genero == ''){
-            mensajesalertify("Seleccione Tipo Genero..!", "W", "top-right", 3);
+            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Genero..!");
             return;                    
         }
 
         if(_tipoprof == ''){
-            mensajesalertify("Seleccione Tipo Profesion..!", "W", "top-right", 3);
+            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Profesion..!");
             return;                    
         }                 
 
@@ -2527,8 +2526,7 @@
             _ext = _ext.toLowerCase();   
 
             if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
-                //mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
-                mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
+                toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una Imagen..!");
                 return;
             }                    
         }
@@ -2538,14 +2536,14 @@
         
             if (regex.test($('#txtEmailProf').val().trim())) {
             }else{
-                mensajesalertify("Email no es Valido..!", "W", "top-right", 3);
+                toastSweetAlert("top-end",3000,"error","Email no es Valido..!");
                 return;
             }
         }
 
         if(_enviarprof == 'SI'){
             if(_emailprof.trim() == ''){
-                mensajesalertify("Ingrese Email..!", "W", "top-right", 3);
+                toastSweetAlert("top-end",3000,"warning","Ingrese Email..!");
             }
         }
         
@@ -2576,12 +2574,11 @@
             success: function(response){
                 
                 if(response.trim() == 'OK'){
-                    //mensajesalertify("Profesional agregado correctamente..!", "W", "top-center", 5);
-                    mensajesweetalert('top-center','success','Profesional agregado correctamente..!',false,2500);
+                    toastSweetAlert("top-end",3000,"success","Profesional agregado correctamente..!");
                     $("#modal-new-profesional").modal("hide");
 
                 }else{
-                    mensajesalertify("Profesional ya Existe..!", "W", "top-right", 3);
+                    toastSweetAlert("top-end",3000,"info","Profesional ya Existe..!");
                 }
             },								
             error: function (error){
