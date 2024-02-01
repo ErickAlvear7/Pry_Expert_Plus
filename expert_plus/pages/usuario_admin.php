@@ -419,8 +419,7 @@
 		_mensaje = $('input#mensaje').val();
 
 		if(_mensaje != ''){
-			//mensajesalertify(_mensaje+"..!","S","top-center",5);
-			mensajesweetalert("center","success",_mensaje,false,2800);  
+			toastSweetAlert("top-end",3000,"success",_mensaje); 
 		}
 		
 		$("#txtFechacaduca").flatpickr({
@@ -613,7 +612,7 @@
 			}
 
 			if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
-				mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
+				toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una Imagen..!");
 				return;
 			}
 
@@ -623,34 +622,34 @@
 			_respuesta = 'OK';
 
 			if(_nombre == ''){                        
-				mensajesweetalert("top-end","warning","Ingrese Nombre de Usuario",false,1800);
+				toastSweetAlert("top-end",3000,"warning","Ingrese Nombre de Usuario");
 				return;
 			}
 
 			if(_login == ''){                        
-				mensajesweetalert("top-end","warning","Ingrese Login/Email",false,1800);
+				toastSweetAlert("top-end",3000,"warning","Ingrese Login/Email");
 				return;
 			}
 			
 			var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
 			if(regex.test(_login.trim())){
 			}else{
-				mensajesweetalert("top-end","warning","Login/Email incorrecto",false,1800);
+				toastSweetAlert("top-end",3000,"warning","Login/Email incorrecto");
 				return;
 			}                    
 
 			if(_password == ''){                        
-				mensajesweetalert("top-end","warning","Ingrese Password",false,1800);
+				toastSweetAlert("top-end",3000,"warning","Ingrese Password");
 				return;
 			}
 
 			if(_paisid == '0'){                        
-				mensajesweetalert("top-end","warning","Seleccione Pais",false,1800);
+				toastSweetAlert("top-end",3000,"warning","Seleccione Pais");
 				return;
 			}
 			
 			if(_perfilid == '0'){                        
-				mensajesweetalert("top-end","warning","Seleccione Perfil",false,1800);
+				toastSweetAlert("top-end",3000,"warning","Seleccione Perfil");
 				return;
 			}
 			
@@ -738,7 +737,7 @@
 							}
 						});
 					}else{
-						mensajesweetalert("top-end","warning","Login/Email ya existe..!",false,1800);
+						toastSweetAlert("top-end",3000,"warning","Login/Email ya existe..!"); 
 						return;
 					}
 				});
@@ -857,7 +856,7 @@
 
 		$.post("codephp/reset_password.php", _parametros, function(response){
 			if(response.trim() == 'OK'){
-				mensajesweetalert("center","success","password actualizado con exito..!",false,1800);
+				toastSweetAlert("top-end",3000,"success","Password actualizado con exito..!");
 			}     
 		}); 			
 	}
