@@ -66,10 +66,10 @@ function toastSweetAlert(_position,_timer,_icon,_title){
         showConfirmButton: false,
         timer: _timer,
         timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-        }
+        // didOpen: (toast) => {
+        //     toast.onmouseenter = Swal.stopTimer;
+        //     toast.onmouseleave = Swal.resumeTimer;
+        // }
         });
         Toast.fire({
         icon: _icon,
