@@ -1,5 +1,6 @@
 //FUNCIONES ALERTIFY
 
+
 function mensajesalertify(_mensaje, _tipo, _position, _tiempo){
     alertify.set('notifier','position', _position);
     switch(_tipo){
@@ -66,13 +67,10 @@ function toastSweetAlert(_position,_timer,_icon,_title){
         showConfirmButton: false,
         timer: _timer,
         timerProgressBar: true,
-        // didOpen: (toast) => {
-        //     toast.onmouseenter = Swal.stopTimer;
-        //     toast.onmouseleave = Swal.resumeTimer;
-        // }
         });
         Toast.fire({
         icon: _icon,
-        title: _title
+        title: "<h5 style='color:rgb(52,152,219);'>" + _title + "</h5>"
     });
+
 }
