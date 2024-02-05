@@ -89,6 +89,7 @@
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
     $all_provincia = mysqli_query($con, $xSQL);
 
+    // Consulta de numero de agendamientos aceptados cancelados y atendidos
 ?>
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
@@ -105,12 +106,20 @@
                                     <div class="badge badge-lg badge-light-primary d-inline"><?php echo  $xEstado; ?></div>
                                 </div>
                                 <div class="fw-bolder mb-3">Resumen de Citas
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Numero de citas agendadas, canceladas y atnedidas en el ultimo mes."></i></div>
-                                
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Numero de citas agendadas, canceladas y atnedidas en el ultimo mes."></i></div>                               
                                 <div class="d-flex flex-wrap flex-center">
                                     <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3">
+                                        <?php
+                                            $xSQL ="SELECT estado_agenda AS Estado, COUNT(estado_agenda='A') AS Cantidad FROM `expert_agenda` ";
+                                            $xSQL .="WHERE titu_id=$xTituid AND estado_agenda='A' ";
+                                            $all_ResumAgendamiento = mysqli_query($con, $xSQL);
+                                                foreach ($all_ResumAgendamiento as $datos) {
+                                                    $xEstadoA = $datos['Estado'];
+                                                    $xCantidadA = $datos['Cantidad'];
+                                                }
+                                        ?>
                                         <div class="fs-4 fw-bolder text-gray-700">
-                                            <span class="w-75px">243</span>
+                                            <span class="w-75px"><?php echo  $xCantidadA; ?></span>
                                             <span class="svg-icon svg-icon-3 svg-icon-success">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                     <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="currentColor" />
@@ -119,11 +128,19 @@
                                             </span>
                                         </div>
                                         <div class="fw-bold text-muted">Agendadas</div>
-                                    </div>
-                                    
+                                    </div>                                    
                                     <div class="border border-gray-300 border-dashed rounded py-3 px-3 mx-4 mb-3">
+                                        <?php
+                                            $xSQL ="SELECT estado_agenda AS Estado, COUNT(estado_agenda='C') AS Cantidad FROM `expert_agenda` ";
+                                            $xSQL .="WHERE titu_id=$xTituid AND estado_agenda='C' ";
+                                            $all_ResumAgendamiento = mysqli_query($con, $xSQL);
+                                            foreach ($all_ResumAgendamiento as $datos) {
+                                                $xEstadoC = $datos['Estado'];
+                                                $xCantidadC = $datos['Cantidad'];
+                                            }
+                                        ?>
                                         <div class="fs-4 fw-bolder text-gray-700">
-                                            <span class="w-50px">56</span>
+                                            <span class="w-50px"><?php echo  $xCantidadC; ?></span>
                                             <span class="svg-icon svg-icon-3 svg-icon-danger">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                     <rect opacity="0.5" x="11" y="18" width="13" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
@@ -133,10 +150,21 @@
                                         </div>
                                         <div class="fw-bold text-muted">Canceladas</div>
                                     </div>
-                                    
+                                </div>
+
+                                <div class="d-flex flex-wrap flex-center">
                                     <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3">
+                                        <?php
+                                            $xSQL ="SELECT estado_agenda AS Estado, COUNT(estado_agenda='T') AS Cantidad FROM `expert_agenda` ";
+                                            $xSQL .="WHERE titu_id=$xTituid AND estado_agenda='T' ";
+                                            $all_ResumAgendamiento = mysqli_query($con, $xSQL);
+                                            foreach ($all_ResumAgendamiento as $datos) {
+                                                $xEstadoT = $datos['Estado'];
+                                                $xCantidadT = $datos['Cantidad'];
+                                            }
+                                        ?>
                                         <div class="fs-4 fw-bolder text-gray-700">
-                                            <span class="w-50px">188</span>
+                                            <span class="w-75px"><?php echo  $xCantidadT; ?></span>
                                             <span class="svg-icon svg-icon-3 svg-icon-success">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                     <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="currentColor" />
@@ -145,12 +173,32 @@
                                             </span>
                                         </div>
                                         <div class="fw-bold text-muted">Atendidas</div>
+                                    </div>                                    
+                                    <div class="border border-gray-300 border-dashed rounded py-3 px-3 mx-4 mb-3">
+                                        <?php
+                                            $xSQL ="SELECT estado_agenda AS Estado, COUNT(estado_agenda='S') AS Cantidad FROM `expert_agenda` ";
+                                            $xSQL .="WHERE titu_id=$xTituid AND estado_agenda='S' ";
+                                            $all_ResumAgendamiento = mysqli_query($con, $xSQL);
+                                            foreach ($all_ResumAgendamiento as $datos) {
+                                                $xEstadoS = $datos['Estado'];
+                                                $xCantidadS = $datos['Cantidad'];
+                                            }
+                                        ?>
+                                        <div class="fs-4 fw-bolder text-gray-700">
+                                            <span class="w-50px"><?php echo  $xCantidadS; ?></span>
+                                            <span class="svg-icon svg-icon-3 svg-icon-danger">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.5" x="11" y="18" width="13" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                                    <path d="M11.4343 15.4343L7.25 11.25C6.83579 10.8358 6.16421 10.8358 5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75L11.2929 18.2929C11.6834 18.6834 12.3166 18.6834 12.7071 18.2929L18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25C17.8358 10.8358 17.1642 10.8358 16.75 11.25L12.5657 15.4343C12.2533 15.7467 11.7467 15.7467 11.4343 15.4343Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <div class="fw-bold text-muted">Ausentes</div>
                                     </div>
                                 </div>
-                            </div>
-                            
+                            </div>                                                   
                             <div class="d-flex flex-stack fs-4 py-3">
-                                <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_titular" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Titular
+                                <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_titular" role="button" aria-expanded="false" aria-controls="view_datos_titular">Información Titular
                                 <span class="ms-2 rotate-180">
                                     <span class="svg-icon svg-icon-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -161,39 +209,32 @@
                                 <!-- <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit customer details">
                                     <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_details">Edit</a>
                                 </span> -->
-                            </div>
-                            
-                            <div class="separator"></div>
-                            <div id="view_datos_titular" class="collapse ">
+                            </div>        
+                            <!-- <div class="separator"></div> -->
+                            <div id="view_datos_titular" class="collapse">
                                 <div class="pb-5 fs-6">
-                                    
                                     <div class="fw-bolder mt-5">No. Documento</div>
-                                    <div class="text-gray-600"><?php echo $xNumDocumento; ?>
-                                        <br /><?php echo $xFechaNacimientoText; ?>
-                                        <br /><?php echo $xEdad; ?> 
-                                    </div>
-                                    
+                                    <div class="text-gray-600"><?php echo $xNumDocumento; ?></div>
                                     <div class="fw-bolder mt-5">Email</div>
                                     <div class="text-gray-600"><?php echo $xEmail; ?></div>
-                                    
-                                    <div class="fw-bolder mt-5">Cliente/Producto</div>
-                                    <div class="text-gray-600"><?php echo $xCiudad; ?>
+                                    <div class="fw-bolder mt-5">Fecha de Nacimiento</div>
+                                    <div class="text-gray-600"><?php echo $xFechaNacimientoText; ?></div>
+                                    <div class="fw-bolder mt-5">Ciudad</div>
+                                    <div class="text-gray-600"><?php echo $xCiudad; ?></div>
+                                    <div class="fw-bolder mt-5">Dirección</div>
+                                    <div class="text-gray-600"><?php echo $xDireccion; ?></div>
+                                    <div class="fw-bolder mt-5">Grupo/Producto</div>
+                                    <div class="text-gray-600"><?php echo $xGrupo; ?>
                                         <br /><?php echo $xProducto; ?>
-                                        <br /><?php echo $xGrupo; ?>
                                     </div>
-
-                                    <div class="fw-bolder mt-5">Direccion</div>
-                                    <div class="text-gray-600"><?php echo $xDireccion; ?>
-                                        <br /><?php echo $xCelular; ?>
-                                    </div>
-                                    
+                                    <div class="fw-bolder mt-5">Contacto</div>
+                                    <div class="text-gray-600"><?php echo $xCelular; ?></div> 
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="card mb-5 mb-xl-8">
 
+                    <div class="card mb-5 mb-xl-8">
                         <div class="card-header border-0">
                             <div class="card-title">
                                 <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_agenda" role="button" aria-expanded="false" aria-controls="view_datos_agenda">Ultimo Agendamiento
@@ -207,8 +248,6 @@
                                 </div> 
                             </div>
                         </div>
-
-                        <div class="separator"></div>
                         <div id="view_datos_agenda" class="collapse ">
                             <div class="card-body pt-2">
                                 <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6">
@@ -227,14 +266,24 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                
+                                </div>     
                                 <div class="py-2">
+                                    <?php 
+                                        $xSQL = "SELECT xpr.pres_nombre AS Prestadora, (SELECT ciudad  FROM `provincia_ciudad` pxc WHERE pxc.prov_id=xpr.prov_id) AS Ciudad, ";
+                                        $xSQL .="xpr.pres_sector AS Sector FROM `expert_agenda` xag INNER JOIN `expert_prestadora` xpr ON xag.pres_id=xpr.pres_id ";
+                                        $xSQL .="ORDER BY xag.fechacreacion DESC LIMIT 1 ";
+                                        $all_UltiAgendamiento = mysqli_query($con, $xSQL);
+                                        foreach ($all_UltiAgendamiento as $datos) {
+                                            $xAgnPrestador = $datos['Prestadora'];
+                                            $xAgnCiudad = $datos['Ciudad'];
+                                            $xAgnSector = $datos['Sector'];
+                                        }
+                                    ?>
                                     <div class="d-flex flex-stack">
                                         <div class="d-flex">
                                             <div class="d-flex flex-column">
                                                 <div class="fs-5 text-dark text-hover-primary fw-bolder">Prestrador</div>
-                                                <div class="fs-6 fw-bold text-muted">CLINICA AMERICANT ASSIST - NORTE</div>
+                                                <div class="fs-6 fw-bold text-muted"><?php echo  $xAgnPrestador; ?></div>
                                             </div>
                                         </div>
                                     </div>
@@ -242,8 +291,8 @@
                                     <div class="d-flex flex-stack">
                                         <div class="d-flex">
                                             <div class="d-flex flex-column">
-                                                <div class="fs-5 text-dark text-hover-primary fw-bolder">Fecha</div>
-                                                <div class="fs-6 fw-bold text-muted">2023-08-10</div>
+                                                <div class="fs-5 text-dark text-hover-primary fw-bolder">Ciudad</div>
+                                                <div class="fs-6 fw-bold text-muted"><?php echo  $xAgnCiudad; ?></div>
                                             </div>
                                         </div>
                                     </div>
@@ -251,19 +300,30 @@
                                     <div class="d-flex flex-stack">
                                         <div class="d-flex">
                                             <div class="d-flex flex-column">
-                                                <div class="fs-5 text-dark text-hover-primary fw-bolder">Hora</div>
-                                                <div class="fs-6 fw-bold text-muted">10:00 - 11:00</div>
+                                                <div class="fs-5 text-dark text-hover-primary fw-bolder">Sector</div>
+                                                <div class="fs-6 fw-bold text-muted"><?php echo  $xAgnSector; ?></div>
                                             </div>
                                         </div>
-                                    </div>                                
-                                    
+                                    </div>                                         
                                     <div class="separator separator-dashed my-5"></div>
-
+                                    <?php 
+                                            $xSQL = "SELECT (SELECT CONCAT(xpf.prof_nombres,' ',xpf.prof_apellidos) FROM `expert_profesional` xpf WHERE ";
+                                            $xSQL .="xpe.prof_id=xpf.prof_id) AS Profesional,(SELECT xes.espe_nombre AS Especialidad FROM `expert_especialidad` xes ";
+                                            $xSQL .="WHERE xag.espe_id=xes.espe_id) AS Especialidad,xag.observacion AS Observacion FROM `expert_agenda` xag ";
+                                            $xSQL .="INNER JOIN `expert_profesional_especi` xpe ON xag.pfes_id=xpe.pfes_id ";
+                                            $xSQL .="ORDER BY xag.fechacreacion DESC LIMIT 1 ";
+                                            $all_UltiAgendamiento = mysqli_query($con, $xSQL);
+                                            foreach ($all_UltiAgendamiento as $datos) {
+                                                $xAgnProfesional = $datos['Profesional'];
+                                                $xAgnEspecialidad = $datos['Especialidad'];
+                                                $xAgnObservacion = $datos['Observacion'];
+                                            }
+                                        ?>
                                     <div class="d-flex flex-stack">
                                         <div class="d-flex">
                                             <div class="d-flex flex-column">
                                                 <div class="fs-5 text-dark text-hover-primary fw-bolder">Profesional</div>
-                                                <div class="fs-6 fw-bold text-muted">JUAN PEREZ LOPEZ</div>
+                                                <div class="fs-6 fw-bold text-muted"><?php echo  $xAgnProfesional; ?></div>
                                             </div>
                                         </div>
                                     </div>
@@ -272,7 +332,7 @@
                                         <div class="d-flex">
                                             <div class="d-flex flex-column">
                                                 <div class="fs-5 text-dark text-hover-primary fw-bolder">Especialidad</div>
-                                                <div class="fs-6 fw-bold text-muted">BIOMETRIA HEMATICA - </div>
+                                                <div class="fs-6 fw-bold text-muted"><?php echo  $xAgnEspecialidad; ?></div>
                                             </div>
                                         </div>
                                     </div>
@@ -280,19 +340,43 @@
                                     <div class="d-flex flex-stack">
                                         <div class="d-flex">
                                             <div class="d-flex flex-column">
-                                                <div class="fs-5 text-dark text-hover-primary fw-bolder">Motivo</div>
-                                                <div class="fs-6 fw-bold text-muted">CHEQUEO GENERAL </div>
+                                                <div class="fs-5 text-dark text-hover-primary fw-bolder">Observacion</div>
+                                                <div class="fs-6 fw-bold text-muted"><?php echo  $xAgnObservacion; ?></div>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="separator separator-dashed my-2"></div>
-
+                                    <?php 
+                                            $xSQL = "SELECT DATE_FORMAT(xag.fecha_inicio,'%d/%m/%Y') AS Fecha, CONCAT(xag.hora_desde,'-',xag.hora_hasta) AS Hora, ";
+                                            $xSQL .="xag.estado_agenda AS Estado FROM `expert_agenda` xag ORDER BY xag.fechacreacion DESC LIMIT 1 ";
+                                            $all_UltiAgendamiento = mysqli_query($con, $xSQL);
+                                            foreach ($all_UltiAgendamiento as $datos) {
+                                                $xAgnFecha = $datos['Fecha'];
+                                                $xAgnHora = $datos['Hora'];
+                                                $xAgnEstado = $datos['Estado'];
+                                            }
+                                    ?> 
+                                    <div class="d-flex flex-stack">
+                                        <div class="d-flex">
+                                            <div class="d-flex flex-column">
+                                                <div class="fs-5 text-dark text-hover-primary fw-bolder">Fecha</div>
+                                                <div class="fs-6 fw-bold text-muted"><?php echo  $xAgnFecha; ?></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-stack">
+                                        <div class="d-flex">
+                                            <div class="d-flex flex-column">
+                                                <div class="fs-5 text-dark text-hover-primary fw-bolder">Hora</div>
+                                                <div class="fs-6 fw-bold text-muted"><?php echo  $xAgnHora; ?></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="d-flex flex-stack">
                                         <div class="d-flex">
                                             <div class="d-flex flex-column">
                                                 <div class="fs-5 text-dark text-hover-primary fw-bolder">Estado</div>
-                                                <div class="fs-6 text-primary fw-bold ">AGENDADO</div>
+                                                <div class="fs-6 text-primary fw-bold "><?php echo  $xAgnEstado; ?></div>
                                             </div>
                                         </div>
                                     </div>
@@ -301,7 +385,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="flex-lg-row-fluid ms-lg-15">
                     <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
                         <li class="nav-item">
@@ -315,82 +398,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-active-primary pb-4 " data-bs-toggle="tab" href="#tabHistorial">Historial Citas</a>
                         </li>
-
-                        <!-- <li class="nav-item ms-auto">
-                            <a href="#" class="btn btn-primary ps-7" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">Actions
-                                <span class="svg-icon svg-icon-2 me-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                    </svg>
-                                </span>
-                            </a>
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold py-4 w-250px fs-6" data-kt-menu="true">
-                                <div class="menu-item px-5">
-                                    <div class="menu-content text-muted pb-2 px-5 fs-7 text-uppercase">Payments</div>
-                                </div>
-                                <div class="menu-item px-5">
-                                    <a href="#" class="menu-link px-5">Create invoice</a>
-                                </div>
-                                <div class="menu-item px-5">
-                                    <a href="#" class="menu-link flex-stack px-5">Create payments
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a target name for future usage and reference"></i></a>
-                                </div>
-                                <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
-                                    <a href="#" class="menu-link px-5">
-                                        <span class="menu-title">Subscription</span>
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-5">Apps</a>
-                                        </div>
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-5">Billing</a>
-                                        </div>
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-5">Statements</a>
-                                        </div>
-                                        <div class="separator my-2"></div>
-                                        <div class="menu-item px-3">
-                                            <div class="menu-content px-3">
-                                                <label class="form-check form-switch form-check-custom form-check-solid">
-                                                    <input class="form-check-input w-30px h-20px" type="checkbox" value="" name="notifications" checked="checked" id="kt_user_menu_notifications" />
-                                                    <span class="form-check-label text-muted fs-6" for="kt_user_menu_notifications">Notifications</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="separator my-3"></div>
-                                <div class="menu-item px-5">
-                                    <div class="menu-content text-muted pb-2 px-5 fs-7 text-uppercase">Account</div>
-                                </div>
-                                <div class="menu-item px-5">
-                                    <a href="#" class="menu-link px-5">Reports</a>
-                                </div>
-                                <div class="menu-item px-5 my-1">
-                                    <a href="#" class="menu-link px-5">Account Settings</a>
-                                </div>
-                                <div class="menu-item px-5">
-                                    <a href="#" class="menu-link text-danger px-5">Delete customer</a>
-                                </div>
-                            </div>
-                        </li> -->
-
                     </ul>
-                    
-                    
                     <div class="tab-content" id="tabOpciones">
                         <!--DATOS AGENDAMIENTO-->
-                        <div class="tab-pane fade show active" id="tabTitular" role="tabpanel">
-                            
+                        <div class="tab-pane fade show active" id="tabTitular" role="tabpanel">            
                             <div class="card pt-4 mb-6 mb-xl-9">
                                 <div class="card-header border-0">
                                     <div class="card-title">
                                         <h2>Datos para Agendar</h2>
                                     </div>
                                 </div>
-
                                 <div class="card-body pt-0 pb-5">
                                     <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                         <div class="col">
@@ -410,13 +427,11 @@
                                                     <?php endforeach ?>
                                                 </select>                                                      
                                             </div>
-                                        </div>
-                                        
+                                        </div>                                      
                                         <div class="col">
                                             <div class="fv-row mb-7">
                                                 <label class="fs-6 fw-bold form-label mt-3">
                                                     <span class="required">Provincia</span>
-                                                    <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's email."></i> -->
                                                 </label>
                                                 <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tabTitular" class="form-select mb-2" disabled >
                                                     <option></option>
@@ -426,8 +441,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    
+                                    </div>                                  
                                     <div class="mb-5 fv-row">
                                         <label class="fs-6 fw-bold form-label mt-3">
                                             <span class="required">Prestador</span>
@@ -458,79 +472,13 @@
                                     <div class="mb-5 fv-row">
                                         <label class="fs-6 fw-bold form-label mt-3">
                                             <span class="required">Profesional</span>
-                                            <button type="button" id="btnDatosProfecional" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" data-kt-menu-placement="bottom-end" title="Datos del Profesional">
+                                            <button type="button" id="btnDatosProfesional" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" data-kt-menu-placement="bottom-end" title="Datos del Profesional">
                                                 <i class="bi bi-search"></i>
                                             </button>                                            
                                         </label>
                                         <select name="cboProfesional" id="cboProfesional" aria-label="Seleccione Profesional" data-control="select2" data-placeholder="Seleccione Profesional" data-dropdown-parent="#tabTitular" class="form-select mb-2">
                                             <option></option>
                                         </select> 
-                                    </div>
-                                </div>                                
-                            </div>
-                            
-                            <!-- <div class="card pt-4 mb-6 mb-xl-9">
-                                <div class="card-header border-0">
-                                    <div class="card-title flex-column">
-                                        <h2 class="mb-1">Two Step Authentication</h2>
-                                        <div class="fs-6 fw-bold text-muted">Keep your account extra secure with a second authentication step.</div>
-                                    </div>
-                                    <div class="card-toolbar">
-                                        <button type="button" class="btn btn-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                            <span class="svg-icon svg-icon-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path opacity="0.3" d="M21 10.7192H3C2.4 10.7192 2 11.1192 2 11.7192C2 12.3192 2.4 12.7192 3 12.7192H6V14.7192C6 18.0192 8.7 20.7192 12 20.7192C15.3 20.7192 18 18.0192 18 14.7192V12.7192H21C21.6 12.7192 22 12.3192 22 11.7192C22 11.1192 21.6 10.7192 21 10.7192Z" fill="currentColor" />
-                                                    <path d="M11.6 21.9192C11.4 21.9192 11.2 21.8192 11 21.7192C10.6 21.4192 10.5 20.7191 10.8 20.3191C11.7 19.1191 12.3 17.8191 12.7 16.3191C12.8 15.8191 13.4 15.4192 13.9 15.6192C14.4 15.7192 14.8 16.3191 14.6 16.8191C14.2 18.5191 13.4 20.1192 12.4 21.5192C12.2 21.7192 11.9 21.9192 11.6 21.9192ZM8.7 19.7192C10.2 18.1192 11 15.9192 11 13.7192V8.71917C11 8.11917 11.4 7.71917 12 7.71917C12.6 7.71917 13 8.11917 13 8.71917V13.0192C13 13.6192 13.4 14.0192 14 14.0192C14.6 14.0192 15 13.6192 15 13.0192V8.71917C15 7.01917 13.7 5.71917 12 5.71917C10.3 5.71917 9 7.01917 9 8.71917V13.7192C9 15.4192 8.4 17.1191 7.2 18.3191C6.8 18.7191 6.9 19.3192 7.3 19.7192C7.5 19.9192 7.7 20.0192 8 20.0192C8.3 20.0192 8.5 19.9192 8.7 19.7192ZM6 16.7192C6.5 16.7192 7 16.2192 7 15.7192V8.71917C7 8.11917 7.1 7.51918 7.3 6.91918C7.5 6.41918 7.2 5.8192 6.7 5.6192C6.2 5.4192 5.59999 5.71917 5.39999 6.21917C5.09999 7.01917 5 7.81917 5 8.71917V15.7192V15.8191C5 16.3191 5.5 16.7192 6 16.7192ZM9 4.71917C9.5 4.31917 10.1 4.11918 10.7 3.91918C11.2 3.81918 11.5 3.21917 11.4 2.71917C11.3 2.21917 10.7 1.91916 10.2 2.01916C9.4 2.21916 8.59999 2.6192 7.89999 3.1192C7.49999 3.4192 7.4 4.11916 7.7 4.51916C7.9 4.81916 8.2 4.91918 8.5 4.91918C8.6 4.91918 8.8 4.81917 9 4.71917ZM18.2 18.9192C18.7 17.2192 19 15.5192 19 13.7192V8.71917C19 5.71917 17.1 3.1192 14.3 2.1192C13.8 1.9192 13.2 2.21917 13 2.71917C12.8 3.21917 13.1 3.81916 13.6 4.01916C15.6 4.71916 17 6.61917 17 8.71917V13.7192C17 15.3192 16.8 16.8191 16.3 18.3191C16.1 18.8191 16.4 19.4192 16.9 19.6192C17 19.6192 17.1 19.6192 17.2 19.6192C17.7 19.6192 18 19.3192 18.2 18.9192Z" fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            Add Authentication Step
-                                        </button>
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-6 w-200px py-4" data-kt-menu="true">
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_add_auth_app">Use authenticator app</a>
-                                            </div>
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_add_one_time_password">Enable one-time password</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body pb-5">
-                                    <div class="d-flex flex-stack">
-                                        <div class="d-flex flex-column">
-                                            <span>SMS</span>
-                                            <span class="text-muted fs-6">+61 412 345 678</span>
-                                        </div>
-                                        <div class="d-flex justify-content-end align-items-center">
-                                            <button type="button" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto me-5" data-bs-toggle="modal" data-bs-target="#kt_modal_add_one_time_password">
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="currentColor" />
-                                                        <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
-                                            </button>
-                                            <button type="button" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" id="kt_users_delete_two_step">
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="currentColor" />
-                                                        <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="currentColor" />
-                                                        <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="separator separator-dashed my-5"></div>
-                                    <div class="text-gray-600">If you lose your mobile device or security key, you can
-                                    <a href='#' class="me-1">generate a backup code</a>to sign in to your account.</div>
-                                </div>
-                            </div> -->
-                            
-                            <div class="card pt-4 mb-6 mb-xl-9">
-                                <div class="card-header border-0">
-                                    <div class="card-title">
-                                        <h2 class="fw-bolder mb-0">Agendamientos Reservados</h2>
                                     </div>
                                     <div class="card-toolbar">
                                         <button class="btn btn-sm btn-flex btn-light-primary" id="btnNuevaAgenda" >
@@ -544,151 +492,8 @@
                                             Nuevo Agendamiento
                                         </button>
                                     </div>
-                                </div>
-                                
-                                <div class="card-body pt-0">
-                                    <div class="py-0" >
-                                        <div class="py-3 d-flex flex-stack flex-wrap">
-                                            <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#agendamiento1" role="button" aria-expanded="false" aria-controls="agendamiento1">
-                                                <div class="me-3 rotate-90">
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                        </svg>
-                                                    </span>
-                                                </div>
-
-                                                <img src="assets/media/svg/card-logos/mastercard.svg" class="w-40px me-3" alt="" />
-                                                
-                                                <div class="me-3">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="text-gray-800 fw-bolder">Mastercard</div>
-                                                        <div class="badge badge-light-primary ms-5">Primary</div>
-                                                    </div>
-                                                    <div class="text-muted">Expires Dec 2024</div>
-                                                </div>
-                                                
-                                            </div>
-                                            
-                                            <div class="d-flex my-3 ms-9">
-                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">
-                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit">
-                                                        <span class="svg-icon svg-icon-3">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="currentColor" />
-                                                                <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="currentColor" />
-                                                            </svg>
-                                                        </span>
-                                                    </span>
-                                                </a>
-                                                
-                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Delete" data-kt-customer-payment-method="delete">
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="currentColor" />
-                                                            <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="currentColor" />
-                                                            <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="currentColor" />
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                                
-                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px" data-bs-toggle="tooltip" title="More Options" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="currentColor" />
-                                                            <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="currentColor" />
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                                
-                                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold w-150px py-3" data-kt-menu="true">
-                                                    <div class="menu-item px-3">
-                                                        <a href="#" class="menu-link px-3" data-kt-payment-mehtod-action="set_as_primary">Set as Primary</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                        <div id="agendamiento1" class="collapse fs-6 ps-10" data-bs-parent="#agendamiento1">
-                                            <div class="d-flex flex-wrap py-5">
-                                                <div class="flex-equal me-5">
-                                                    <table class="table table-flush fw-bold gy-1">
-                                                        <tr>
-                                                            <td class="text-muted min-w-125px w-125px">Name</td>
-                                                            <td class="text-gray-800">Emma Smith</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted min-w-125px w-125px">Number</td>
-                                                            <td class="text-gray-800">**** 3769</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted min-w-125px w-125px">Expires</td>
-                                                            <td class="text-gray-800">12/2024</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted min-w-125px w-125px">Type</td>
-                                                            <td class="text-gray-800">Mastercard credit card</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted min-w-125px w-125px">Issuer</td>
-                                                            <td class="text-gray-800">VICBANK</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted min-w-125px w-125px">ID</td>
-                                                            <td class="text-gray-800">id_4325df90sdf8</td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <!--end::Col-->
-
-                                                <!--begin::Col-->
-                                                <div class="flex-equal">
-                                                    <table class="table table-flush fw-bold gy-1">
-                                                        <tr>
-                                                            <td class="text-muted min-w-125px w-125px">Billing address</td>
-                                                            <td class="text-gray-800">AU</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted min-w-125px w-125px">Phone</td>
-                                                            <td class="text-gray-800">No phone provided</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted min-w-125px w-125px">Email</td>
-                                                            <td class="text-gray-800">
-                                                                <a href="#" class="text-gray-900 text-hover-primary">smith@kpmg.com</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted min-w-125px w-125px">Origin</td>
-                                                            <td class="text-gray-800">Australia
-                                                            <div class="symbol symbol-20px symbol-circle ms-2">
-                                                                <img src="assets/media/flags/australia.svg" />
-                                                            </div></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted min-w-125px w-125px">CVC check</td>
-                                                            <td class="text-gray-800">Passed
-                                                                <span class="svg-icon svg-icon-2 svg-icon-success">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor" />
-                                                                        <path d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z" fill="currentColor" />
-                                                                    </svg>
-                                                                </span>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    
-                                    <div class="separator separator-dashed"></div>
-                                    
-
-                                </div>
-                            </div>
+                                </div>                                
+                            </div>                                                    
                         </div>
 
                         <!--DATOS BENEFICIARIO-->
@@ -2826,6 +2631,108 @@
                 </div>
             </div>
 
+<!-- Modal informacion profesional -->
+            <div class="modal fade" id="modal-profesionalAgenda" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+                    <div class="modal-content"> 
+                        <div class="modal-header">
+                            <h2 class="fw-bolder">Informacion Profecional</h2>
+                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                                <span class="svg-icon svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="modal-body py-lg-10 px-lg-10 mt-n3">
+                            <div class="card mb-1 mb-xl-1">
+                                <div class="card-header border-0">
+                                    <div class="card-title">
+                                        <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#modal-profesionalAgenda_info" role="button" aria-expanded="false" aria-controls="">Avatar Profesional
+                                            <span class="ms-2 rotate-180">
+                                                <span class="svg-icon svg-icon-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                                    </svg>
+                                                </span>
+                                            </span>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div id="modal-profesionalAgenda_info" class="collapse show">
+                                    <div class="card card-flush py-4">
+                                        <div class="card-body pt-0">
+                                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
+                                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/svg/files/blank-image.svg)" id="imgfileprofesional"></div>													
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-5 mb-xl-8">
+                                <div class="card-header border-0">
+                                    <div class="card-title">
+                                        <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#modal-profesionalAgenda_info2" role="button" aria-expanded="false" aria-controls="modal-profesionalAgenda_info2">Informacion
+                                            <span class="ms-2 rotate-180">
+                                                <span class="svg-icon svg-icon-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                                    </svg>
+                                                </span>
+                                            </span>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div id="modal-profesionalAgenda_info2" class="collapse show">
+                                    <div class="card card-flush py-2">
+                                        <div class="card-body pt-0">
+                                            <div class="row mb-4">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Profesional</label>
+                                                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtNombreProf" name="txtNombreProf" minlength="5" maxlength="100"  value="" readonly />
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Direccion</label>
+                                                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtDireccionProf" name="txtDireccionProf" minlength="5" maxlength="100" value="" readonly />
+                                                </div>
+                                            </div>
+                                            <!-- <div class="row mb-4">
+                                                <div class="col-md-12">
+                                                    <label class="form-label">Direccion</label>
+                                                    <textarea class="form-control mb-2" name="txtDireccion" id="txtDireccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);" readonly ></textarea>
+                                                </div>
+                                            </div> -->
+                                            <div class="row mb-4">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Telefono </label>
+                                                    <input type="text" class="form-control form-control-solid" name="txtTelefonoProf" id="txtTelefonoProf"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Oficina 1" value="" readonly />
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">celular</label>
+                                                    <input type="text" class="form-control form-control-solid" name="txtCelularProf" id="txtCelularProf"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Oficina 2" value="" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label class="form-label">Email</label>
+                                                    <input type="email" class="form-control form-control-solid text-lowercase" name="txtEmail" id="txtEmail"  minlength="5" maxlength="100"  placeholder="Ingrese Email" value=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <!-- <button type="button" id="btnSaveTit" class="btn btn-primary">Modificar</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="modal fade" id="kt_modal_add_schedule" tabindex="-1" aria-hidden="true">
                 <!--begin::Modal dialog-->
                 <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -3699,59 +3606,38 @@
                 });
             });
 
-            $('#btnDatosProfecional').click(function(){
+            $('#btnDatosProfesional').click(function(){
 
                 _profid = $('#cboProfesional').val();
-                alert(_profid);
                 if(_profid == ''){
                     mensajesalertify("Seleccione Profesional", "W", "top-center", 5);
                     return;
                 }
-
                 var _parametros = {
                     xxPaisid: _paisid,
                     xxEmprid: _emprid,
-                    xxPresid: _profid
+                    xxProfid: _profid
                 }                
 
-                var xrespuesta = $.post("codephp/get_datosprestadora.php", _parametros);
+                var xrespuesta = $.post("codephp/get_datosprofesionalagenda.php", _parametros);
                 xrespuesta.done(function(response){
-                    var json = JSON.parse(response);
-                    //console.log(json.Logo);
-                    if(json.Logo == ''){
-                        document.getElementById('imgfileprestador').style.backgroundImage="url(assets/media/svg/files/blank-image.svg)";    
+                    var json = JSON.parse(response);                    
+                    console.log(response);
+                    if(json[0]['Avatar'] == ''){
+                        document.getElementById('imgfileprofesional').style.backgroundImage="url(assets/media/svg/files/blank-image.svg)";    
                     }else{
-                        document.getElementById('imgfileprestador').style.backgroundImage="url(logos/" + json.Logo + ")";
+                        document.getElementById('imgfileprofesional').style.backgroundImage="url(logos/" + json[0]['Avatar'] + ")";
                     }
 
-                    $("#modal-prestador").find("input,textarea").val("");
-                    $("#modal-prestador").modal("show");
-                    $('#modal-prestador').modal('handleUpdate');
+                    $("#modal-profesionalAgenda").find("input,textarea").val("");
+                    $("#modal-profesionalAgenda").modal("show");
+                    $('#modal-profesionalAgenda').modal('handleUpdate');
 
-                    $('#txtTipoprestador').val(json.TipoPrestador);
-                    $('#txtSector').val(json.Sector);
-                    $('#txtDireccion').val(json.Direccion);
-                    $('#txtUrl').val(json.Url);
-                    $('#txtFono1').val(json.Fono1);
-                    $('#txtFono2').val(json.Fono2);
-                    $('#txtFono3').val(json.Fono3);
-                    $('#txtCelular1').val(json.Celu1);
-                    $('#txtCelular2').val(json.Celu2);
-                    $('#txtCelular3').val(json.Celu3);
-                    $('#txtEmail1').val(json.Email1);
-                    $('#txtEmail2').val(json.Email2);
-
-                    if(json.Enviar1 == 'SI'){                        
-                        $('#chkEnviar1').prop('checked','checked');
-                        var _span1 = document.getElementById("spanEnv1");
-                        _span1.innerHTML = '<span id="spanEnv1" class="form-check-label fw-bold" for="chkEnviar1"><strong>Enviar</strong></span>';                        
-                    }
-
-                    if(json.Enviar2 == 'SI'){
-                        $('#chkEnviar2').prop('checked','checked');
-                        var _span2 = document.getElementById("spanEnv2");
-                        _span2.innerHTML = '<span id="spanEnv1" class="form-check-label fw-bold" for="chkEnviar1"><strong>Enviar</strong></span>';                        
-                    }                    
+                    $('#txtNombreProf').val(json[0]['Nombres']);
+                    $('#txtTelefonoProf').val(json[0]['Telefono']);
+                    $('#txtCelularProf').val(json[0]['Celular']);
+                    $('#txtEmail').val(json[0]['Email']);
+                    $('#txtDireccionProf').val(json[0]['Direccion']);                   
 
                 });
             });
@@ -3785,7 +3671,7 @@
                     return;
                 }                  
 
-                $.redirect('?page=admincalendar&menuid=<?php echo $menuid; ?>', {'tituid': _tituid, 'beneid': 0, 'prodid': _prodid, 'grupid': _grupid, 'presaid': _cboprestaid, 'preeid': _cbopreeid, 'pfesid': _cboprofid, 'ciudid': _cbociudid }); //POR METODO POST
+                $.redirect('?page=calendartitular&menuid=<?php echo $menuid; ?>', {'tituid': _tituid, 'beneid': 0, 'prodid': _prodid, 'grupid': _grupid, 'presaid': _cboprestaid, 'preeid': _cbopreeid, 'pfesid': _cboprofid, 'ciudid': _cbociudid }); //POR METODO POST
 
             });
             
@@ -3794,6 +3680,10 @@
         //Desplazar-modal
         $("#modal-prestador").draggable({
             handle: ".modal-header"
-        });        
+        });     
+        
+        $("#modal-profesionalAgenda").draggable({
+            handle: ".modal-header"
+        });  
 
     </script>

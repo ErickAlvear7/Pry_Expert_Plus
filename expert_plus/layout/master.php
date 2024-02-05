@@ -102,6 +102,10 @@
 		$xRuta = '/../pages/agendacalendar.php';
 	}
 
+	if($page == 'calendartitular'){
+		$xRuta = '/../pages/agenda_titucalendar.php';
+	}
+
 	if($page == 'agendatitular_admin'){
 		$xRuta = '/../pages/titularagenda_admin.php';
 	}		
