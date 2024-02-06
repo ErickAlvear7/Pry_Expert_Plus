@@ -414,7 +414,7 @@
                                     </div>
                                 </div>
                             </div>                                
-                            <div class="fw-bold separator separator-dashed my-5"></div>
+                            <hr class="bg-dark border-1 border-top border-dark" />
                             <div class="d-flex flex-stack">
                                 <div class="d-flex">
                                     <div class="d-flex flex-column">
@@ -439,7 +439,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-bold separator separator-dashed my-5"></div>
+                            <hr class="bg-dark border-1 border-top border-dark" />
                             <div class="d-flex flex-stack">
                                 <div class="d-flex">
                                     <div class="d-flex flex-column">
