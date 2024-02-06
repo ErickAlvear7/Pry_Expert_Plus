@@ -89,6 +89,18 @@
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
     $all_provincia = mysqli_query($con, $xSQL);
 
+    $xSQL = "SELECT (SELECT CONCAT(xpf.prof_nombres,' ',xpf.prof_apellidos) FROM `expert_profesional` xpf WHERE ";
+    $xSQL .="xpe.prof_id=xpf.prof_id) AS Profesional,(SELECT xes.espe_nombre AS Especialidad FROM `expert_especialidad` xes ";
+    $xSQL .="WHERE xag.espe_id=xes.espe_id) AS Especialidad,xag.observacion AS Observacion FROM `expert_agenda` xag ";
+    $xSQL .="INNER JOIN `expert_profesional_especi` xpe ON xag.pfes_id=xpe.pfes_id ";
+    $xSQL .="ORDER BY xag.fechacreacion DESC LIMIT 1 ";
+    $all_UltiAgendamiento = mysqli_query($con, $xSQL);
+    foreach ($all_UltiAgendamiento as $datos) {
+        $xAgnProfesional = $datos['Profesional'];
+        $xAgnEspecialidad = $datos['Especialidad'];
+        $xAgnObservacion = $datos['Observacion'];
+    }
+
 ?>
      
 <div id="kt_content_container" class="container-xxl">
@@ -332,7 +344,7 @@
                                 <div class="d-flex">
                                     <div class="d-flex flex-column">
                                         <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-primary fs-2 me-2"></i>Prestrador</div>
-                                        <div class="fs-6 fw-bold text-muted">CLINICA AMERICANT ASSIST - NORTE</div>
+                                        <div class="fs-6 fw-bold text-muted"></div>
                                     </div>
                                 </div>
                             </div>
