@@ -89,6 +89,16 @@
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
     $all_provincia = mysqli_query($con, $xSQL);
 
+    $xSQL = "SELECT xpr.pres_nombre AS Prestadora, (SELECT ciudad  FROM `provincia_ciudad` pxc WHERE pxc.prov_id=xpr.prov_id) AS Ciudad, ";
+    $xSQL .="xpr.pres_sector AS Sector FROM `expert_agenda` xag INNER JOIN `expert_prestadora` xpr ON xag.pres_id=xpr.pres_id ";
+    $xSQL .="ORDER BY xag.fechacreacion DESC LIMIT 1 ";
+    $all_UltiAgendamiento = mysqli_query($con, $xSQL);
+    foreach ($all_UltiAgendamiento as $datos) {
+        $xAgnPrestador = $datos['Prestadora'];
+        $xAgnCiudad = $datos['Ciudad'];
+        $xAgnSector = $datos['Sector'];
+    }
+
     $xSQL = "SELECT (SELECT CONCAT(xpf.prof_nombres,' ',xpf.prof_apellidos) FROM `expert_profesional` xpf WHERE ";
     $xSQL .="xpe.prof_id=xpf.prof_id) AS Profesional,(SELECT xes.espe_nombre AS Especialidad FROM `expert_especialidad` xes ";
     $xSQL .="WHERE xag.espe_id=xes.espe_id) AS Especialidad,xag.observacion AS Observacion FROM `expert_agenda` xag ";
@@ -99,6 +109,32 @@
         $xAgnProfesional = $datos['Profesional'];
         $xAgnEspecialidad = $datos['Especialidad'];
         $xAgnObservacion = $datos['Observacion'];
+    }   
+
+
+    $xSQL = "SELECT DATE_FORMAT(xag.fecha_inicio,'%d/%m/%Y') AS Fecha, CONCAT(xag.hora_desde,'-',xag.hora_hasta) AS Hora, ";
+    $xSQL .="xag.estado_agenda AS Estado FROM `expert_agenda` xag ORDER BY xag.fechacreacion DESC LIMIT 1 ";
+    $all_UltiAgendamiento = mysqli_query($con, $xSQL);
+    foreach ($all_UltiAgendamiento as $datos) {
+        $xAgnFecha = $datos['Fecha'];
+        $xAgnHora = $datos['Hora'];
+        $xAgnEstado = $datos['Estado'];
+    }
+
+    $color = "";
+
+    if($xAgnEstado == 'A'){
+        $xAgnEstado = 'AGENDADO';
+        $color = 'fs-6 text-primary fw-bold';
+    }else if($xAgnEstado == 'C'){
+        $xAgnEstado = 'CANCELADO';
+        $color = 'fs-6 text-danger fw-bold';
+    }else if($xAgnEstado == 'T'){
+        $xAgnEstado = 'ATENDIDO';
+        $color = 'fs-6 text-success fw-bold';
+    }else if($xAgnEstado == 'S'){
+        $xAgnEstado = 'AUSENTE';
+        $color = 'fs-6 text-gray fw-bold';
     }
 
 ?>
@@ -338,29 +374,44 @@
                     </div>
                 </div>
                 <div id="view_datos_agenda" class="collapse ">
-                    <div class="card-body pt-2"> 
+                    <div class="card-body pt-2">
+                        <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6">
+                            <span class="svg-icon svg-icon-2tx svg-icon-primary me-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path opacity="0.3" d="M22 19V17C22 16.4 21.6 16 21 16H8V3C8 2.4 7.6 2 7 2H5C4.4 2 4 2.4 4 3V19C4 19.6 4.4 20 5 20H21C21.6 20 22 19.6 22 19Z" fill="currentColor" />
+                                    <path d="M20 5V21C20 21.6 19.6 22 19 22H17C16.4 22 16 21.6 16 21V8H8V4H19C19.6 4 20 4.4 20 5ZM3 8H4V4H3C2.4 4 2 4.4 2 5V7C2 7.6 2.4 8 3 8Z" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <div class="d-flex flex-stack flex-grow-1">
+                                <div class="fw-bold">
+                                    <div class="fs-6 text-gray-700 text-center">
+                                        <span>Los datos mostrados, pertenecen al ultimo agendamiento realizado, que puede estar en estado cancelado o atentdido</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
                         <div class="py-2">
                             <div class="d-flex flex-stack">
                                 <div class="d-flex">
                                     <div class="d-flex flex-column">
                                         <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-primary fs-2 me-2"></i>Prestrador</div>
-                                        <div class="fs-6 fw-bold text-muted"></div>
+                                        <div class="fs-6 fw-bold text-muted"><?php echo $xAgnPrestador; ?></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex flex-stack">
                                 <div class="d-flex">
                                     <div class="d-flex flex-column">
-                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-primary fs-2 me-2"></i>Fecha</div>
-                                        <div class="fs-6 fw-bold text-muted">2023-08-10</div>
+                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-primary fs-2 me-2"></i>Ciudad</div>
+                                        <div class="fs-6 fw-bold text-muted"><?php echo $xAgnCiudad; ?></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex flex-stack">
                                 <div class="d-flex">
                                     <div class="d-flex flex-column">
-                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-primary fs-2 me-2"></i>Hora</div>
-                                        <div class="fs-6 fw-bold text-muted">10:00 - 11:00</div>
+                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-primary fs-2 me-2"></i>Sector</div>
+                                        <div class="fs-6 fw-bold text-muted"><?php echo $xAgnSector; ?></div>
                                     </div>
                                 </div>
                             </div>                                
@@ -369,7 +420,7 @@
                                 <div class="d-flex">
                                     <div class="d-flex flex-column">
                                         <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-success fs-2 me-2"></i>Profesional</div>
-                                        <div class="fs-6 fw-bold text-muted">JUAN PEREZ LOPEZ</div>
+                                        <div class="fs-6 fw-bold text-muted"><?php echo $xAgnProfesional; ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -377,15 +428,15 @@
                                 <div class="d-flex">
                                     <div class="d-flex flex-column">
                                         <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-success fs-2 me-2"></i>Especialidad</div>
-                                        <div class="fs-6 fw-bold text-muted">BIOMETRIA HEMATICA - </div>
+                                        <div class="fs-6 fw-bold text-muted"><?php echo $xAgnEspecialidad; ?></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex flex-stack">
                                 <div class="d-flex">
                                     <div class="d-flex flex-column">
-                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-success fs-2 me-2"></i>Motivo</div>
-                                        <div class="fs-6 fw-bold text-muted">CHEQUEO GENERAL </div>
+                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-success fs-2 me-2"></i>Observacion</div>
+                                        <div class="fs-6 fw-bold text-muted"><?php echo $xAgnObservacion; ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -393,8 +444,24 @@
                             <div class="d-flex flex-stack">
                                 <div class="d-flex">
                                     <div class="d-flex flex-column">
+                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-gray fs-2 me-2"></i>Fecha</div>
+                                        <div class="fs-6 fw-bold text-muted"><?php echo  $xAgnFecha; ?></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-stack">
+                                <div class="d-flex">
+                                    <div class="d-flex flex-column">
+                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-gray fs-2 me-2"></i>Hora</div>
+                                        <div class="fs-6 fw-bold text-muted"><?php echo  $xAgnHora; ?></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-stack">
+                                <div class="d-flex">
+                                    <div class="d-flex flex-column">
                                         <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-gray fs-2 me-2"></i>Estado</div>
-                                        <div class="fs-6 text-primary fw-bold ">AGENDADO</div>
+                                        <div class="<?php echo $color; ?>"><?php echo  $xAgnEstado; ?></div>
                                     </div>
                                 </div>
                             </div>
