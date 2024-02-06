@@ -2731,889 +2731,902 @@
         
     </div>
 
-
-    <div class="modal fade" id="modal-prestador" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mw-650px">
-            <div class="modal-content">
-                <div class="modal-header" id="kt_modal-prestador_header">
-                    <h2 class="fw-bolder">Informacion Prestador</h2>
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                            </svg>
-                        </span>
-                    </div>
+<!--Modal Prestador-->
+<div class="modal fade" id="modal-prestador" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+        <div class="modal-content"> 
+            <div class="modal-header">
+                <h2 class="fw-bolder">Informacion Prestador</h2>
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
                 </div>
-                <div class="modal-body py-5 px-lg-17">
-                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="modal-prestador_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#modal-prestador_header" data-kt-scroll-wrappers="#modal-prestador_scroll" data-kt-scroll-offset="300px">
-                        <div class="fw-boldest fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#modal-prestador_info" role="button" aria-expanded="false" aria-controls="modal-prestador_info">Datos Generales
-                            <span class="ms-2 rotate-180">
-                                <span class="svg-icon svg-icon-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                    </svg>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10 mt-n3">
+                <div class="card mb-1 mb-xl-1">
+                    <div class="card-header border-0">
+                        <div class="card-title">
+                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_prestador" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
+                                <span class="ms-2 rotate-180">
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                        </svg>
+                                    </span>
                                 </span>
-                            </span>
+                            </div> 
                         </div>
-                        <div id="modal-prestador_info" class="collapse show">
-                            <div class="mb-7">
+                    </div>
+                    <div id="view_imagen_prestador" class="collapse">
+                        <div class="card card-flush py-4">
+                            <div class="card-body pt-0">
                                 <div class="mt-1">
                                     <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
                                         <div class="image-input-wrapper w-125px h-125px" id="imgfileprestador" style="background-image: url(assets/media/svg/files/blank-image.svg)"></div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row mb-8">
-                                <div class="col-xl-2">
-                                    <div class="fs-6 fw-bold mt-2 mb-3">Tipo:</div>
-                                </div>
-                                <div class="col-xl-10 fv-row">
-                                    <input type="text" class="form-control" id="txtTipoprestador" name="txtTipoprestador" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-5 mb-xl-8">
+                    <div class="card-header border-0">
+                        <div class="card-title">
+                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_prestador" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Prestador
+                                <span class="ms-2 rotate-180">
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                </span>
+                            </div> 
+                        </div>
+                    </div>
+                    <div id="view_datos_prestador" class="collapse show">
+                        <div class="card card-flush py-2">
+                            <div class="card-body pt-0">
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tipo</label>
+                                        <input type="text" class="form-control" id="txtTipoprestador" name="txtTipoprestador" readonly />
+                                    </div>
+                                    <div class="col-md-6">
+                                         <label class="form-label">Sector</label>
+                                         <input type="text" class="form-control" id="txtSector" name="txtSector" readonly />
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="row mb-8">
-                                <div class="col-xl-2">
-                                    <div class="fs-6 fw-bold mt-2 mb-3">Sector:</div>
-                                </div>
-                                <div class="col-xl-10 fv-row">
-                                    <input type="text" class="form-control" id="txtSector" name="txtSector" readonly />
-                                </div>
-                            </div>                                        
-
                         </div>
-
                         <div class="card-header border-0">
                             <div class="card-title">
                                 <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
                             </div>
                         </div>
-                        <div id="view_datos_direccion" class="card-body pt-0">
-                            <div class="py-0" >
-                                <div class="py-3 d-flex flex-stack flex-wrap">
-                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_direccion" role="button" aria-expanded="false" aria-controls="view_direccion">
-                                        <div class="me-3 rotate-90">
-                                            <span class="svg-icon svg-icon-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                </svg>
-                                            </span>
+                        <div class="card-body pt-0">
+                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_direccion" role="button" aria-expanded="false" aria-controls="view_direccion">
+                                    <div class="me-3 rotate-90">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" />
+                                    <div class="me-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-gray-800 fw-bolder">Direccion</div>
                                         </div>
-                                        <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" />
-                                        <div class="me-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="text-gray-800 fw-bolder">Direccion</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="view_direccion" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                <div class="d-flex flex-wrap py-5">
+                                    <div class="flex-equal me-5">
+                                        <div class="row mb-8">
+                                            <div class="col-md-2">
+                                                <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13); " readonly ></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-8">
+                                            <div class="col-md-2">
+                                                <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" readonly />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div id="view_direccion" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
-                                    <div class="d-flex flex-wrap py-5">
-                                        <div class="flex-equal me-5">
-                                            <div class="row mb-8">
-                                                <div class="col-xl-2">
-                                                    <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
-                                                </div>
-                                                <div class="col-xl-10 fv-row">
-                                                    <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13); " readonly ></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-8">
-                                                <div class="col-xl-2">
-                                                    <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
-                                                </div>
-                                                <div class="col-xl-10 fv-row">
-                                                    <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" readonly />
-                                                </div>
-                                            </div>
+                            </div>
+                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_telefonos" role="button" aria-expanded="false" aria-controls="view_telefonos">
+                                    <div class="me-3 rotate-90">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
+                                    <div class="me-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-gray-800 fw-bolder">Telefonos</div>
                                         </div>
                                     </div>
                                 </div>
-
-
-                                <div class="separator separator-dashed"></div>
-                                <div class="py-0">
-                                    <div class="py-3 d-flex flex-stack flex-wrap">
-                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_telefonos" role="button" aria-expanded="false" aria-controls="view_telefonos">
-                                            <div class="me-3 rotate-90">
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                            <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
-                                            <div class="me-3">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="text-gray-800 fw-bolder">Telefonos</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                            </div>
+                            <div id="view_telefonos" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                <div class="row mb-2">
+                                    <div class="col-md-4">
+                                        <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
+                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" value="" readonly />
                                     </div>
-
-                                    <div id="view_telefonos" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
-                                        <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" value="" readonly />
-                                            </div>
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" value="" readonly />
-                                            </div> 
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono3" id="txtFono3" value="" readonly />
-                                            </div>                                                        
+                                    <div class="col-md-4">
+                                        <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
+                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" value="" readonly />
+                                    </div> 
+                                    <div class="col-md-4">
+                                        <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
+                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono3" id="txtFono3" value="" readonly />
+                                    </div>                                                        
+                                </div>
+                                <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
+                                    <div class="col-md-4">
+                                        <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
+                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" value="" readonly />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
+                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" value="" readonly />
+                                    </div> 
+                                    <div class="col-md-4">
+                                        <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
+                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" value="" readonly />
+                                    </div>
+                                </div>                                                
+                            </div>
+                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_mails" role="button" aria-expanded="false" aria-controls="view_mails">
+                                    <div class="me-3 rotate-90">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <img src="assets/media/logos/email.png" class="w-20px me-3" />
+                                    <div class="me-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-gray-800 fw-bolder">E-mail</div>
                                         </div>
-                                        <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" value="" readonly />
-                                            </div>
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" value="" readonly />
-                                            </div> 
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" value="" readonly />
-                                            </div>
-                                        </div>                                                
                                     </div>
                                 </div>
-
-                                <div class="separator separator-dashed"></div>                                        
-                                <div class="py-0">
-                                    <div class="py-3 d-flex flex-stack flex-wrap">
-                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_mails" role="button" aria-expanded="false" aria-controls="view_mails">
-                                            <div class="me-3 rotate-90">
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
+                            </div>
+                            <div id="view_mails" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                               <div class="d-flex flex-wrap py-5">
+                                    <div class="flex-equal me-5">
+                                        <div class="row mb-8">
+                                            <div class="col-md-2">
+                                                <div class="fs-6 fw-bold mt-2 mb-3">Email 1:</div>
                                             </div>
-                                            <img src="assets/media/logos/email.png" class="w-20px me-3" />
-                                            <div class="me-3">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="text-gray-800 fw-bolder">E-mail</div>
-                                                </div>
+                                            <div class="col-md-7">
+                                               <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                                    <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" disabled />
+                                                    <span id="spanEnv1" class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>
+                                                </label>   
                                             </div>
                                         </div>
-                                    </div>
-                                    <div id="view_mails" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
-                                        <div class="d-flex flex-wrap gap-5">
-                                            <div class="fv-row w-100 flex-md-root">
-                                                <label class="form-label">Email 1</label>
-                                                <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
+                                        <div class="row mb-8">
+                                            <div class="col-md-2">
+                                                <div class="fs-6 fw-bold mt-2 mb-3">Email 2:</div>
                                             </div>
-                                            <label class="form-check form-switch form-check-custom form-check-solid">
-                                                <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" disabled />
-                                                <span id="spanEnv1" class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>
-                                            </label>                                                    
-                                        </div>
-                                        <div class="d-flex flex-wrap gap-5">
-                                            <div class="fv-row w-100 flex-md-root">
-                                                <label class="form-label">Email 2</label>
+                                            <div class="col-md-7">
                                                 <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
                                             </div>
-                                            <label class="form-check form-switch form-check-custom form-check-solid">
-                                                <input class="form-check-input" name="chkEnviar2" id="chkEnviar2" type="checkbox" disabled />
-                                                <span id="spanEnv2" class="form-check-label fw-bold text-muted" for="chkEnviar2">No Enviar</span>
-                                            </label>
-                                        </div>
+                                            <div class="col-md-3">
+                                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                                    <input class="form-check-input" name="chkEnviar2" id="chkEnviar2" type="checkbox" disabled />
+                                                    <span id="spanEnv2" class="form-check-label fw-bold text-muted" for="chkEnviar2">No Enviar</span>
+                                                </label>             
+                                            </div>
+                                        </div>   
                                     </div>
-                                </div>
+                               </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="modal-footer">
-                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
-                </div>
-
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="modal fade" id="kt_modal_add_schedule" tabindex="-1" aria-hidden="true">
-        <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered mw-650px">
-            <!--begin::Modal content-->
-            <div class="modal-content">
-                <!--begin::Modal header-->
-                <div class="modal-header">
-                    <!--begin::Modal title-->
-                    <h2 class="fw-bolder">Add an Event</h2>
-                    <!--end::Modal title-->
-                    <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
-                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </div>
-                    <!--end::Close-->
+<div class="modal fade" id="kt_modal_add_schedule" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header">
+                <!--begin::Modal title-->
+                <h2 class="fw-bolder">Add an Event</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
                 </div>
-                <!--end::Modal header-->
-                <!--begin::Modal body-->
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                    <!--begin::Form-->
-                    <form id="kt_modal_add_schedule_form" class="form" action="#">
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="required fs-6 fw-bold form-label mb-2">Event Name</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="text" class="form-control form-control-solid" name="event_name" value="" />
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="fs-6 fw-bold form-label mb-2">
-                                <span class="required">Date &amp; Time</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Select a date &amp; time."></i>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="Pick date &amp; time" name="event_datetime" id="kt_modal_add_schedule_datepicker" />
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="required fs-6 fw-bold form-label mb-2">Event Organiser</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="text" class="form-control form-control-solid" name="event_org" value="" />
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="required fs-6 fw-bold form-label mb-2">Send Event Details To</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input id="kt_modal_add_schedule_tagify" type="text" class="form-control form-control-solid" name="event_invitees" value="smith@kpmg.com, melody@altbox.com" />
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Actions-->
-                        <div class="text-center pt-15">
-                            <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
-                            <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                                <span class="indicator-label">Submit</span>
-                                <span class="indicator-progress">Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                            </button>
-                        </div>
-                        <!--end::Actions-->
-                    </form>
-                    <!--end::Form-->
-                </div>
-                <!--end::Modal body-->
+                <!--end::Close-->
             </div>
-            <!--end::Modal content-->
-        </div>
-        <!--end::Modal dialog-->
-    </div>
-
-    <div class="modal fade" id="kt_modal_add_task" tabindex="-1" aria-hidden="true">
-        <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered mw-650px">
-            <!--begin::Modal content-->
-            <div class="modal-content">
-                <!--begin::Modal header-->
-                <div class="modal-header">
-                    <!--begin::Modal title-->
-                    <h2 class="fw-bolder">Add a Task</h2>
-                    <!--end::Modal title-->
-                    <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
-                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
+            <!--end::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <!--begin::Form-->
+                <form id="kt_modal_add_schedule_form" class="form" action="#">
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7">
+                        <!--begin::Label-->
+                        <label class="required fs-6 fw-bold form-label mb-2">Event Name</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="text" class="form-control form-control-solid" name="event_name" value="" />
+                        <!--end::Input-->
                     </div>
-                    <!--end::Close-->
-                </div>
-                <!--end::Modal header-->
-                <!--begin::Modal body-->
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                    <!--begin::Form-->
-                    <form id="kt_modal_add_task_form" class="form" action="#">
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="required fs-6 fw-bold form-label mb-2">Task Name</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="text" class="form-control form-control-solid" name="task_name" value="" />
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="fs-6 fw-bold form-label mb-2">
-                                <span class="required">Task Due Date</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Select a due date."></i>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="Pick date" name="task_duedate" id="kt_modal_add_task_datepicker" />
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="fs-6 fw-bold form-label mb-2">Task Description</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <textarea class="form-control form-control-solid rounded-3"></textarea>
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Actions-->
-                        <div class="text-center pt-15">
-                            <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
-                            <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                                <span class="indicator-label">Submit</span>
-                                <span class="indicator-progress">Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                            </button>
-                        </div>
-                        <!--end::Actions-->
-                    </form>
-                    <!--end::Form-->
-                </div>
-                <!--end::Modal body-->
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-bold form-label mb-2">
+                            <span class="required">Date &amp; Time</span>
+                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Select a date &amp; time."></i>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input class="form-control form-control-solid" placeholder="Pick date &amp; time" name="event_datetime" id="kt_modal_add_schedule_datepicker" />
+                        <!--end::Input-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7">
+                        <!--begin::Label-->
+                        <label class="required fs-6 fw-bold form-label mb-2">Event Organiser</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="text" class="form-control form-control-solid" name="event_org" value="" />
+                        <!--end::Input-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7">
+                        <!--begin::Label-->
+                        <label class="required fs-6 fw-bold form-label mb-2">Send Event Details To</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input id="kt_modal_add_schedule_tagify" type="text" class="form-control form-control-solid" name="event_invitees" value="smith@kpmg.com, melody@altbox.com" />
+                        <!--end::Input-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
+                    <div class="text-center pt-15">
+                        <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
+                        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </form>
+                <!--end::Form-->
             </div>
-            <!--end::Modal content-->
+            <!--end::Modal body-->
         </div>
-        <!--end::Modal dialog-->
+        <!--end::Modal content-->
     </div>
+    <!--end::Modal dialog-->
+</div>
 
-    <div class="modal fade" id="kt_modal_update_email" tabindex="-1" aria-hidden="true">
-        <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered mw-650px">
-            <!--begin::Modal content-->
-            <div class="modal-content">
-                <!--begin::Modal header-->
-                <div class="modal-header">
-                    <!--begin::Modal title-->
-                    <h2 class="fw-bolder">Update Email Address</h2>
-                    <!--end::Modal title-->
-                    <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
-                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                        <span class="svg-icon svg-icon-1">
+<div class="modal fade" id="kt_modal_add_task" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header">
+                <!--begin::Modal title-->
+                <h2 class="fw-bolder">Add a Task</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--end::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <!--begin::Form-->
+                <form id="kt_modal_add_task_form" class="form" action="#">
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7">
+                        <!--begin::Label-->
+                        <label class="required fs-6 fw-bold form-label mb-2">Task Name</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="text" class="form-control form-control-solid" name="task_name" value="" />
+                        <!--end::Input-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-bold form-label mb-2">
+                            <span class="required">Task Due Date</span>
+                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Select a due date."></i>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input class="form-control form-control-solid" placeholder="Pick date" name="task_duedate" id="kt_modal_add_task_datepicker" />
+                        <!--end::Input-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-bold form-label mb-2">Task Description</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <textarea class="form-control form-control-solid rounded-3"></textarea>
+                        <!--end::Input-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
+                    <div class="text-center pt-15">
+                        <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
+                        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+
+<div class="modal fade" id="kt_modal_update_email" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header">
+                <!--begin::Modal title-->
+                <h2 class="fw-bolder">Update Email Address</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--end::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <!--begin::Form-->
+                <form id="kt_modal_update_email_form" class="form" action="#">
+                    <!--begin::Notice-->
+                    <!--begin::Notice-->
+                    <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6">
+                        <!--begin::Icon-->
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen044.svg-->
+                        <span class="svg-icon svg-icon-2tx svg-icon-primary me-4">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor" />
+                                <rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="currentColor" />
+                                <rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor" />
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                    </div>
-                    <!--end::Close-->
-                </div>
-                <!--end::Modal header-->
-                <!--begin::Modal body-->
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                    <!--begin::Form-->
-                    <form id="kt_modal_update_email_form" class="form" action="#">
-                        <!--begin::Notice-->
-                        <!--begin::Notice-->
-                        <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6">
-                            <!--begin::Icon-->
-                            <!--begin::Svg Icon | path: icons/duotune/general/gen044.svg-->
-                            <span class="svg-icon svg-icon-2tx svg-icon-primary me-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor" />
-                                    <rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="currentColor" />
-                                    <rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor" />
-                                </svg>
-                            </span>
-                            <!--end::Svg Icon-->
-                            <!--end::Icon-->
-                            <!--begin::Wrapper-->
-                            <div class="d-flex flex-stack flex-grow-1">
-                                <!--begin::Content-->
-                                <div class="fw-bold">
-                                    <div class="fs-6 text-gray-700">Please note that a valid email address is required to complete the email verification.</div>
-                                </div>
-                                <!--end::Content-->
+                        <!--end::Icon-->
+                        <!--begin::Wrapper-->
+                        <div class="d-flex flex-stack flex-grow-1">
+                            <!--begin::Content-->
+                            <div class="fw-bold">
+                                <div class="fs-6 text-gray-700">Please note that a valid email address is required to complete the email verification.</div>
                             </div>
-                            <!--end::Wrapper-->
+                            <!--end::Content-->
                         </div>
-                        <!--end::Notice-->
-                        <!--end::Notice-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="fs-6 fw-bold form-label mb-2">
-                                <span class="required">Email Address</span>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input class="form-control form-control-solid" placeholder="" name="profile_email" value="smith@kpmg.com" />
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Actions-->
-                        <div class="text-center pt-15">
-                            <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
-                            <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                                <span class="indicator-label">Submit</span>
-                                <span class="indicator-progress">Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                            </button>
-                        </div>
-                        <!--end::Actions-->
-                    </form>
-                    <!--end::Form-->
-                </div>
-                <!--end::Modal body-->
+                        <!--end::Wrapper-->
+                    </div>
+                    <!--end::Notice-->
+                    <!--end::Notice-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-bold form-label mb-2">
+                            <span class="required">Email Address</span>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input class="form-control form-control-solid" placeholder="" name="profile_email" value="smith@kpmg.com" />
+                        <!--end::Input-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
+                    <div class="text-center pt-15">
+                        <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
+                        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </form>
+                <!--end::Form-->
             </div>
-            <!--end::Modal content-->
+            <!--end::Modal body-->
         </div>
-        <!--end::Modal dialog-->
+        <!--end::Modal content-->
     </div>
+    <!--end::Modal dialog-->
+</div>
 
-    <div class="modal fade" id="kt_modal_update_password" tabindex="-1" aria-hidden="true">
-        <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered mw-650px">
-            <!--begin::Modal content-->
-            <div class="modal-content">
-                <!--begin::Modal header-->
-                <div class="modal-header">
-                    <!--begin::Modal title-->
-                    <h2 class="fw-bolder">Update Password</h2>
-                    <!--end::Modal title-->
-                    <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
-                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                        <span class="svg-icon svg-icon-1">
+<div class="modal fade" id="kt_modal_update_password" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header">
+                <!--begin::Modal title-->
+                <h2 class="fw-bolder">Update Password</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--end::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <!--begin::Form-->
+                <form id="kt_modal_update_password_form" class="form" action="#">
+                    <!--begin::Input group=-->
+                    <div class="fv-row mb-10">
+                        <label class="required form-label fs-6 mb-2">Current Password</label>
+                        <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="current_password" autocomplete="off" />
+                    </div>
+                    <!--end::Input group=-->
+                    <!--begin::Input group-->
+                    <div class="mb-10 fv-row" data-kt-password-meter="true">
+                        <!--begin::Wrapper-->
+                        <div class="mb-1">
+                            <!--begin::Label-->
+                            <label class="form-label fw-bold fs-6 mb-2">New Password</label>
+                            <!--end::Label-->
+                            <!--begin::Input wrapper-->
+                            <div class="position-relative mb-3">
+                                <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="new_password" autocomplete="off" />
+                                <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
+                                    <i class="bi bi-eye-slash fs-2"></i>
+                                    <i class="bi bi-eye fs-2 d-none"></i>
+                                </span>
+                            </div>
+                            <!--end::Input wrapper-->
+                            <!--begin::Meter-->
+                            <div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
+                            </div>
+                            <!--end::Meter-->
+                        </div>
+                        <!--end::Wrapper-->
+                        <!--begin::Hint-->
+                        <div class="text-muted">Use 8 or more characters with a mix of letters, numbers &amp; symbols.</div>
+                        <!--end::Hint-->
+                    </div>
+                    <!--end::Input group=-->
+                    <!--begin::Input group=-->
+                    <div class="fv-row mb-10">
+                        <label class="form-label fw-bold fs-6 mb-2">Confirm New Password</label>
+                        <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm_password" autocomplete="off" />
+                    </div>
+                    <!--end::Input group=-->
+                    <!--begin::Actions-->
+                    <div class="text-center pt-15">
+                        <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
+                        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+
+<div class="modal fade" id="kt_modal_update_role" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header">
+                <!--begin::Modal title-->
+                <h2 class="fw-bolder">Update User Role</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--end::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <!--begin::Form-->
+                <form id="kt_modal_update_role_form" class="form" action="#">
+                    <!--begin::Notice-->
+                    <!--begin::Notice-->
+                    <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6">
+                        <!--begin::Icon-->
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen044.svg-->
+                        <span class="svg-icon svg-icon-2tx svg-icon-primary me-4">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor" />
+                                <rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="currentColor" />
+                                <rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor" />
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                    </div>
-                    <!--end::Close-->
-                </div>
-                <!--end::Modal header-->
-                <!--begin::Modal body-->
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                    <!--begin::Form-->
-                    <form id="kt_modal_update_password_form" class="form" action="#">
-                        <!--begin::Input group=-->
-                        <div class="fv-row mb-10">
-                            <label class="required form-label fs-6 mb-2">Current Password</label>
-                            <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="current_password" autocomplete="off" />
+                        <!--end::Icon-->
+                        <!--begin::Wrapper-->
+                        <div class="d-flex flex-stack flex-grow-1">
+                            <!--begin::Content-->
+                            <div class="fw-bold">
+                                <div class="fs-6 text-gray-700">Please note that reducing a user role rank, that user will lose all priviledges that was assigned to the previous role.</div>
+                            </div>
+                            <!--end::Content-->
                         </div>
-                        <!--end::Input group=-->
-                        <!--begin::Input group-->
-                        <div class="mb-10 fv-row" data-kt-password-meter="true">
-                            <!--begin::Wrapper-->
-                            <div class="mb-1">
+                        <!--end::Wrapper-->
+                    </div>
+                    <!--end::Notice-->
+                    <!--end::Notice-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-bold form-label mb-5">
+                            <span class="required">Select a user role</span>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input row-->
+                        <div class="d-flex">
+                            <!--begin::Radio-->
+                            <div class="form-check form-check-custom form-check-solid">
+                                <!--begin::Input-->
+                                <input class="form-check-input me-3" name="user_role" type="radio" value="0" id="kt_modal_update_role_option_0" checked='checked' />
+                                <!--end::Input-->
                                 <!--begin::Label-->
-                                <label class="form-label fw-bold fs-6 mb-2">New Password</label>
+                                <label class="form-check-label" for="kt_modal_update_role_option_0">
+                                    <div class="fw-bolder text-gray-800">Administrator</div>
+                                    <div class="text-gray-600">Best for business owners and company administrators</div>
+                                </label>
                                 <!--end::Label-->
-                                <!--begin::Input wrapper-->
-                                <div class="position-relative mb-3">
-                                    <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="new_password" autocomplete="off" />
-                                    <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
-                                        <i class="bi bi-eye-slash fs-2"></i>
-                                        <i class="bi bi-eye fs-2 d-none"></i>
-                                    </span>
-                                </div>
-                                <!--end::Input wrapper-->
-                                <!--begin::Meter-->
-                                <div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
-                                    <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-                                    <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-                                    <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-                                    <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
-                                </div>
-                                <!--end::Meter-->
                             </div>
-                            <!--end::Wrapper-->
-                            <!--begin::Hint-->
-                            <div class="text-muted">Use 8 or more characters with a mix of letters, numbers &amp; symbols.</div>
-                            <!--end::Hint-->
+                            <!--end::Radio-->
                         </div>
-                        <!--end::Input group=-->
-                        <!--begin::Input group=-->
-                        <div class="fv-row mb-10">
-                            <label class="form-label fw-bold fs-6 mb-2">Confirm New Password</label>
-                            <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm_password" autocomplete="off" />
+                        <!--end::Input row-->
+                        <div class='separator separator-dashed my-5'></div>
+                        <!--begin::Input row-->
+                        <div class="d-flex">
+                            <!--begin::Radio-->
+                            <div class="form-check form-check-custom form-check-solid">
+                                <!--begin::Input-->
+                                <input class="form-check-input me-3" name="user_role" type="radio" value="1" id="kt_modal_update_role_option_1" />
+                                <!--end::Input-->
+                                <!--begin::Label-->
+                                <label class="form-check-label" for="kt_modal_update_role_option_1">
+                                    <div class="fw-bolder text-gray-800">Developer</div>
+                                    <div class="text-gray-600">Best for developers or people primarily using the API</div>
+                                </label>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Radio-->
                         </div>
-                        <!--end::Input group=-->
-                        <!--begin::Actions-->
-                        <div class="text-center pt-15">
-                            <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
-                            <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                                <span class="indicator-label">Submit</span>
-                                <span class="indicator-progress">Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                            </button>
+                        <!--end::Input row-->
+                        <div class='separator separator-dashed my-5'></div>
+                        <!--begin::Input row-->
+                        <div class="d-flex">
+                            <!--begin::Radio-->
+                            <div class="form-check form-check-custom form-check-solid">
+                                <!--begin::Input-->
+                                <input class="form-check-input me-3" name="user_role" type="radio" value="2" id="kt_modal_update_role_option_2" />
+                                <!--end::Input-->
+                                <!--begin::Label-->
+                                <label class="form-check-label" for="kt_modal_update_role_option_2">
+                                    <div class="fw-bolder text-gray-800">Analyst</div>
+                                    <div class="text-gray-600">Best for people who need full access to analytics data, but don't need to update business settings</div>
+                                </label>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Radio-->
                         </div>
-                        <!--end::Actions-->
-                    </form>
-                    <!--end::Form-->
-                </div>
-                <!--end::Modal body-->
-            </div>
-            <!--end::Modal content-->
-        </div>
-        <!--end::Modal dialog-->
-    </div>
-
-    <div class="modal fade" id="kt_modal_update_role" tabindex="-1" aria-hidden="true">
-        <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered mw-650px">
-            <!--begin::Modal content-->
-            <div class="modal-content">
-                <!--begin::Modal header-->
-                <div class="modal-header">
-                    <!--begin::Modal title-->
-                    <h2 class="fw-bolder">Update User Role</h2>
-                    <!--end::Modal title-->
-                    <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
-                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
+                        <!--end::Input row-->
+                        <div class='separator separator-dashed my-5'></div>
+                        <!--begin::Input row-->
+                        <div class="d-flex">
+                            <!--begin::Radio-->
+                            <div class="form-check form-check-custom form-check-solid">
+                                <!--begin::Input-->
+                                <input class="form-check-input me-3" name="user_role" type="radio" value="3" id="kt_modal_update_role_option_3" />
+                                <!--end::Input-->
+                                <!--begin::Label-->
+                                <label class="form-check-label" for="kt_modal_update_role_option_3">
+                                    <div class="fw-bolder text-gray-800">Support</div>
+                                    <div class="text-gray-600">Best for employees who regularly refund payments and respond to disputes</div>
+                                </label>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Radio-->
+                        </div>
+                        <!--end::Input row-->
+                        <div class='separator separator-dashed my-5'></div>
+                        <!--begin::Input row-->
+                        <div class="d-flex">
+                            <!--begin::Radio-->
+                            <div class="form-check form-check-custom form-check-solid">
+                                <!--begin::Input-->
+                                <input class="form-check-input me-3" name="user_role" type="radio" value="4" id="kt_modal_update_role_option_4" />
+                                <!--end::Input-->
+                                <!--begin::Label-->
+                                <label class="form-check-label" for="kt_modal_update_role_option_4">
+                                    <div class="fw-bolder text-gray-800">Trial</div>
+                                    <div class="text-gray-600">Best for people who need to preview content data, but don't need to make any updates</div>
+                                </label>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Radio-->
+                        </div>
+                        <!--end::Input row-->
                     </div>
-                    <!--end::Close-->
-                </div>
-                <!--end::Modal header-->
-                <!--begin::Modal body-->
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                    <!--begin::Form-->
-                    <form id="kt_modal_update_role_form" class="form" action="#">
-                        <!--begin::Notice-->
-                        <!--begin::Notice-->
-                        <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6">
-                            <!--begin::Icon-->
-                            <!--begin::Svg Icon | path: icons/duotune/general/gen044.svg-->
-                            <span class="svg-icon svg-icon-2tx svg-icon-primary me-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor" />
-                                    <rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="currentColor" />
-                                    <rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor" />
-                                </svg>
-                            </span>
-                            <!--end::Svg Icon-->
-                            <!--end::Icon-->
-                            <!--begin::Wrapper-->
-                            <div class="d-flex flex-stack flex-grow-1">
-                                <!--begin::Content-->
-                                <div class="fw-bold">
-                                    <div class="fs-6 text-gray-700">Please note that reducing a user role rank, that user will lose all priviledges that was assigned to the previous role.</div>
-                                </div>
-                                <!--end::Content-->
-                            </div>
-                            <!--end::Wrapper-->
-                        </div>
-                        <!--end::Notice-->
-                        <!--end::Notice-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="fs-6 fw-bold form-label mb-5">
-                                <span class="required">Select a user role</span>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input row-->
-                            <div class="d-flex">
-                                <!--begin::Radio-->
-                                <div class="form-check form-check-custom form-check-solid">
-                                    <!--begin::Input-->
-                                    <input class="form-check-input me-3" name="user_role" type="radio" value="0" id="kt_modal_update_role_option_0" checked='checked' />
-                                    <!--end::Input-->
-                                    <!--begin::Label-->
-                                    <label class="form-check-label" for="kt_modal_update_role_option_0">
-                                        <div class="fw-bolder text-gray-800">Administrator</div>
-                                        <div class="text-gray-600">Best for business owners and company administrators</div>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <!--end::Radio-->
-                            </div>
-                            <!--end::Input row-->
-                            <div class='separator separator-dashed my-5'></div>
-                            <!--begin::Input row-->
-                            <div class="d-flex">
-                                <!--begin::Radio-->
-                                <div class="form-check form-check-custom form-check-solid">
-                                    <!--begin::Input-->
-                                    <input class="form-check-input me-3" name="user_role" type="radio" value="1" id="kt_modal_update_role_option_1" />
-                                    <!--end::Input-->
-                                    <!--begin::Label-->
-                                    <label class="form-check-label" for="kt_modal_update_role_option_1">
-                                        <div class="fw-bolder text-gray-800">Developer</div>
-                                        <div class="text-gray-600">Best for developers or people primarily using the API</div>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <!--end::Radio-->
-                            </div>
-                            <!--end::Input row-->
-                            <div class='separator separator-dashed my-5'></div>
-                            <!--begin::Input row-->
-                            <div class="d-flex">
-                                <!--begin::Radio-->
-                                <div class="form-check form-check-custom form-check-solid">
-                                    <!--begin::Input-->
-                                    <input class="form-check-input me-3" name="user_role" type="radio" value="2" id="kt_modal_update_role_option_2" />
-                                    <!--end::Input-->
-                                    <!--begin::Label-->
-                                    <label class="form-check-label" for="kt_modal_update_role_option_2">
-                                        <div class="fw-bolder text-gray-800">Analyst</div>
-                                        <div class="text-gray-600">Best for people who need full access to analytics data, but don't need to update business settings</div>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <!--end::Radio-->
-                            </div>
-                            <!--end::Input row-->
-                            <div class='separator separator-dashed my-5'></div>
-                            <!--begin::Input row-->
-                            <div class="d-flex">
-                                <!--begin::Radio-->
-                                <div class="form-check form-check-custom form-check-solid">
-                                    <!--begin::Input-->
-                                    <input class="form-check-input me-3" name="user_role" type="radio" value="3" id="kt_modal_update_role_option_3" />
-                                    <!--end::Input-->
-                                    <!--begin::Label-->
-                                    <label class="form-check-label" for="kt_modal_update_role_option_3">
-                                        <div class="fw-bolder text-gray-800">Support</div>
-                                        <div class="text-gray-600">Best for employees who regularly refund payments and respond to disputes</div>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <!--end::Radio-->
-                            </div>
-                            <!--end::Input row-->
-                            <div class='separator separator-dashed my-5'></div>
-                            <!--begin::Input row-->
-                            <div class="d-flex">
-                                <!--begin::Radio-->
-                                <div class="form-check form-check-custom form-check-solid">
-                                    <!--begin::Input-->
-                                    <input class="form-check-input me-3" name="user_role" type="radio" value="4" id="kt_modal_update_role_option_4" />
-                                    <!--end::Input-->
-                                    <!--begin::Label-->
-                                    <label class="form-check-label" for="kt_modal_update_role_option_4">
-                                        <div class="fw-bolder text-gray-800">Trial</div>
-                                        <div class="text-gray-600">Best for people who need to preview content data, but don't need to make any updates</div>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <!--end::Radio-->
-                            </div>
-                            <!--end::Input row-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Actions-->
-                        <div class="text-center pt-15">
-                            <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
-                            <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                                <span class="indicator-label">Submit</span>
-                                <span class="indicator-progress">Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                            </button>
-                        </div>
-                        <!--end::Actions-->
-                    </form>
-                    <!--end::Form-->
-                </div>
-                <!--end::Modal body-->
-            </div>
-            <!--end::Modal content-->
-        </div>
-        <!--end::Modal dialog-->
-    </div>
-
-    <div class="modal fade" id="kt_modal_add_auth_app" tabindex="-1" aria-hidden="true">
-        <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered mw-650px">
-            <!--begin::Modal content-->
-            <div class="modal-content">
-                <!--begin::Modal header-->
-                <div class="modal-header">
-                    <!--begin::Modal title-->
-                    <h2 class="fw-bolder">Add Authenticator App</h2>
-                    <!--end::Modal title-->
-                    <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
-                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
+                    <div class="text-center pt-15">
+                        <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
+                        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
                     </div>
-                    <!--end::Close-->
+                    <!--end::Actions-->
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+
+<div class="modal fade" id="kt_modal_add_auth_app" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header">
+                <!--begin::Modal title-->
+                <h2 class="fw-bolder">Add Authenticator App</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
                 </div>
-                <!--end::Modal header-->
-                <!--begin::Modal body-->
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                    <!--begin::Content-->
-                    <div class="fw-bolder d-flex flex-column justify-content-center mb-5">
+                <!--end::Close-->
+            </div>
+            <!--end::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <!--begin::Content-->
+                <div class="fw-bolder d-flex flex-column justify-content-center mb-5">
+                    <!--begin::Label-->
+                    <div class="text-center mb-5" data-kt-add-auth-action="qr-code-label">Download the
+                    <a href="#">Authenticator app</a>, add a new account, then scan this barcode to set up your account.</div>
+                    <div class="text-center mb-5 d-none" data-kt-add-auth-action="text-code-label">Download the
+                    <a href="#">Authenticator app</a>, add a new account, then enter this code to set up your account.</div>
+                    <!--end::Label-->
+                    <!--begin::QR code-->
+                    <div class="d-flex flex-center" data-kt-add-auth-action="qr-code">
+                        <img src="assets/media/misc/qr.png" alt="Scan this QR code" />
+                    </div>
+                    <!--end::QR code-->
+                    <!--begin::Text code-->
+                    <div class="border rounded p-5 d-flex flex-center d-none" data-kt-add-auth-action="text-code">
+                        <div class="fs-1">gi2kdnb54is709j</div>
+                    </div>
+                    <!--end::Text code-->
+                </div>
+                <!--end::Content-->
+                <!--begin::Action-->
+                <div class="d-flex flex-center">
+                    <div class="btn btn-light-primary" data-kt-add-auth-action="text-code-button">Enter code manually</div>
+                    <div class="btn btn-light-primary d-none" data-kt-add-auth-action="qr-code-button">Scan barcode instead</div>
+                </div>
+                <!--end::Action-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+
+<div class="modal fade" id="kt_modal_add_one_time_password" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header">
+                <!--begin::Modal title-->
+                <h2 class="fw-bolder">Enable One Time Password</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--end::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <!--begin::Form-->
+                <form class="form" id="kt_modal_add_one_time_password_form">
+                    <!--begin::Label-->
+                    <div class="fw-bolder mb-9">Enter the new phone number to receive an SMS to when you log in.</div>
+                    <!--end::Label-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7">
                         <!--begin::Label-->
-                        <div class="text-center mb-5" data-kt-add-auth-action="qr-code-label">Download the
-                        <a href="#">Authenticator app</a>, add a new account, then scan this barcode to set up your account.</div>
-                        <div class="text-center mb-5 d-none" data-kt-add-auth-action="text-code-label">Download the
-                        <a href="#">Authenticator app</a>, add a new account, then enter this code to set up your account.</div>
+                        <label class="fs-6 fw-bold form-label mb-2">
+                            <span class="required">Mobile number</span>
+                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="A valid mobile number is required to receive the one-time password to validate your account login."></i>
+                        </label>
                         <!--end::Label-->
-                        <!--begin::QR code-->
-                        <div class="d-flex flex-center" data-kt-add-auth-action="qr-code">
-                            <img src="assets/media/misc/qr.png" alt="Scan this QR code" />
-                        </div>
-                        <!--end::QR code-->
-                        <!--begin::Text code-->
-                        <div class="border rounded p-5 d-flex flex-center d-none" data-kt-add-auth-action="text-code">
-                            <div class="fs-1">gi2kdnb54is709j</div>
-                        </div>
-                        <!--end::Text code-->
+                        <!--begin::Input-->
+                        <input type="text" class="form-control form-control-solid" name="otp_mobile_number" placeholder="+6123 456 789" value="" />
+                        <!--end::Input-->
                     </div>
-                    <!--end::Content-->
-                    <!--begin::Action-->
-                    <div class="d-flex flex-center">
-                        <div class="btn btn-light-primary" data-kt-add-auth-action="text-code-button">Enter code manually</div>
-                        <div class="btn btn-light-primary d-none" data-kt-add-auth-action="qr-code-button">Scan barcode instead</div>
-                    </div>
-                    <!--end::Action-->
-                </div>
-                <!--end::Modal body-->
-            </div>
-            <!--end::Modal content-->
-        </div>
-        <!--end::Modal dialog-->
-    </div>
-
-    <div class="modal fade" id="kt_modal_add_one_time_password" tabindex="-1" aria-hidden="true">
-        <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered mw-650px">
-            <!--begin::Modal content-->
-            <div class="modal-content">
-                <!--begin::Modal header-->
-                <div class="modal-header">
-                    <!--begin::Modal title-->
-                    <h2 class="fw-bolder">Enable One Time Password</h2>
-                    <!--end::Modal title-->
-                    <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
-                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </div>
-                    <!--end::Close-->
-                </div>
-                <!--end::Modal header-->
-                <!--begin::Modal body-->
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                    <!--begin::Form-->
-                    <form class="form" id="kt_modal_add_one_time_password_form">
+                    <!--end::Input group-->
+                    <!--begin::Separator-->
+                    <div class="separator saperator-dashed my-5"></div>
+                    <!--end::Separator-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7">
                         <!--begin::Label-->
-                        <div class="fw-bolder mb-9">Enter the new phone number to receive an SMS to when you log in.</div>
+                        <label class="fs-6 fw-bold form-label mb-2">
+                            <span class="required">Email</span>
+                        </label>
                         <!--end::Label-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="fs-6 fw-bold form-label mb-2">
-                                <span class="required">Mobile number</span>
-                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="A valid mobile number is required to receive the one-time password to validate your account login."></i>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="text" class="form-control form-control-solid" name="otp_mobile_number" placeholder="+6123 456 789" value="" />
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Separator-->
-                        <div class="separator saperator-dashed my-5"></div>
-                        <!--end::Separator-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="fs-6 fw-bold form-label mb-2">
-                                <span class="required">Email</span>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="email" class="form-control form-control-solid" name="otp_email" value="smith@kpmg.com" readonly="readonly" />
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="fs-6 fw-bold form-label mb-2">
-                                <span class="required">Confirm password</span>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="password" class="form-control form-control-solid" name="otp_confirm_password" value="" />
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Actions-->
-                        <div class="text-center pt-15">
-                            <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Cancel</button>
-                            <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                                <span class="indicator-label">Submit</span>
-                                <span class="indicator-progress">Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                            </button>
-                        </div>
-                        <!--end::Actions-->
-                    </form>
-                    <!--end::Form-->
-                </div>
-                <!--end::Modal body-->
+                        <!--begin::Input-->
+                        <input type="email" class="form-control form-control-solid" name="otp_email" value="smith@kpmg.com" readonly="readonly" />
+                        <!--end::Input-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-bold form-label mb-2">
+                            <span class="required">Confirm password</span>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="password" class="form-control form-control-solid" name="otp_confirm_password" value="" />
+                        <!--end::Input-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
+                    <div class="text-center pt-15">
+                        <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Cancel</button>
+                        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </form>
+                <!--end::Form-->
             </div>
-            <!--end::Modal content-->
+            <!--end::Modal body-->
         </div>
-        <!--end::Modal dialog-->
+        <!--end::Modal content-->
     </div>
+    <!--end::Modal dialog-->
+</div>
 
 </div>
 
