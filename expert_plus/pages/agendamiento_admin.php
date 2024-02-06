@@ -383,11 +383,10 @@
                                 </svg>
                             </span>
                             <div class="d-flex flex-stack flex-grow-1">
-                                <div class="fw-bold">
-                                    <div class="fs-6 text-gray-700 text-center">
-                                        <span>Los datos mostrados, pertenecen al ultimo agendamiento realizado, que puede estar en estado cancelado o atentdido</span>
-                                    </div>
-                                </div>
+                                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="
+                                     Los datos mostrados, pertenecen al ultimo agendamiento realizado, que puede estar en estado cancelado o atentdido">
+                                     <button class="btn btn-primary" type="button" disabled>Importante..!!</button>
+                                </span>
                             </div>
                         </div>   
                         <div class="py-2">
@@ -530,7 +529,7 @@
                             <div class="mb-5 fv-row">
                                 <label class="fs-6 fw-bold form-label mt-3">
                                     <span class="required">Prestador</span>
-                                    <button type="button" id="btnDatosPrestador" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" data-kt-menu-placement="bottom-end" title="Datos del Prestador">
+                                    <button type="button" id="btnDatosPrestador" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" data-kt-menu-placement="bottom-end" title="Datos del Prestador" data-bs-toggle="tooltip" data-bs-placement="right">
                                         <i class="bi bi-search"></i>
                                     </button>
                                 </label>
@@ -3728,10 +3727,10 @@
             $('#btnDatosPrestador').click(function(){
 
                 _presid = $('#cboPrestador').val();
-                alert(_presid);
+                //alert(_presid);
 
                 if(_presid == ''){
-                    mensajesalertify("Seleccione Prestador", "W", "top-center", 5);
+                    toastSweetAlert("top-end",3000,"warning","Seleccione Prestador..!!");
                     return;
                 }
 
