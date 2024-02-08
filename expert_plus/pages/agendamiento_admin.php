@@ -558,7 +558,7 @@
                             <div class="mb-5 fv-row">
                                 <label class="fs-6 fw-bold form-label mt-3">
                                     <span class="required">Profesional</span>
-                                    <button type="button" id="btnDatosProfesional" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" data-kt-menu-placement="bottom-end" title="Datos del Profesional">
+                                    <button type="button" id="btnDatosProfesional" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" data-kt-menu-placement="bottom-end" title="Datos del Profesional" data-bs-toggle="tooltip" data-bs-placement="right">
                                         <i class="bi bi-search"></i>
                                     </button>                                            
                                 </label>
@@ -568,199 +568,31 @@
                             </div>   
                         </div>                                
                     </div> 
-                    <div class="card pt-4 mb-6 mb-xl-9">
-                        <div class="card-header border-0">
-                            <div class="card-title">
-                                <h2 class="fw-bolder mb-0">Agendamientos Reservados</h2>
-                            </div>
-                            <div class="card-toolbar">
-                                <button class="btn btn-sm btn-flex btn-light-primary" id="btnNuevaAgenda" >
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
-                                            <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
-                                            <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                    Nuevo Agendamiento
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body pt-0">
-                            <div class="py-0" >
-                                <div class="py-3 d-flex flex-stack flex-wrap">
-                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#agendamiento1" role="button" aria-expanded="false" aria-controls="agendamiento1">
-                                        <div class="me-3 rotate-90">
-                                            <span class="svg-icon svg-icon-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                        <img src="assets/media/svg/card-logos/mastercard.svg" class="w-40px me-3" alt="" />
-                                        <div class="me-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="text-gray-800 fw-bolder">Mastercard</div>
-                                                <div class="badge badge-light-primary ms-5">Primary</div>
-                                            </div>
-                                            <div class="text-muted">Expires Dec 2024</div>
-                                        </div> 
-                                    </div>
-                                    <div class="d-flex my-3 ms-9">
-                                        <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">
-                                            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit">
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="currentColor" />
-                                                        <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Delete" data-kt-customer-payment-method="delete">
-                                            <span class="svg-icon svg-icon-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="currentColor" />
-                                                    <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="currentColor" />
-                                                    <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px" data-bs-toggle="tooltip" title="More Options" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                            <span class="svg-icon svg-icon-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="currentColor" />
-                                                    <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                        </a>
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold w-150px py-3" data-kt-menu="true">
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3" data-kt-payment-mehtod-action="set_as_primary">Set as Primary</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div id="agendamiento1" class="collapse fs-6 ps-10" data-bs-parent="#agendamiento1">
-                                    <div class="d-flex flex-wrap py-5">
-                                        <div class="flex-equal me-5">
-                                            <table class="table table-flush fw-bold gy-1">
-                                                <tr>
-                                                    <td class="text-muted min-w-125px w-125px">Name</td>
-                                                    <td class="text-gray-800">Emma Smith</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-muted min-w-125px w-125px">Number</td>
-                                                    <td class="text-gray-800">**** 3769</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-muted min-w-125px w-125px">Expires</td>
-                                                    <td class="text-gray-800">12/2024</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-muted min-w-125px w-125px">Type</td>
-                                                    <td class="text-gray-800">Mastercard credit card</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-muted min-w-125px w-125px">Issuer</td>
-                                                    <td class="text-gray-800">VICBANK</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-muted min-w-125px w-125px">ID</td>
-                                                    <td class="text-gray-800">id_4325df90sdf8</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <!--end::Col-->
-
-                                        <!--begin::Col-->
-                                        <div class="flex-equal">
-                                            <table class="table table-flush fw-bold gy-1">
-                                                <tr>
-                                                    <td class="text-muted min-w-125px w-125px">Billing address</td>
-                                                    <td class="text-gray-800">AU</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-muted min-w-125px w-125px">Phone</td>
-                                                    <td class="text-gray-800">No phone provided</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-muted min-w-125px w-125px">Email</td>
-                                                    <td class="text-gray-800">
-                                                        <a href="#" class="text-gray-900 text-hover-primary">smith@kpmg.com</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-muted min-w-125px w-125px">Origin</td>
-                                                    <td class="text-gray-800">Australia
-                                                    <div class="symbol symbol-20px symbol-circle ms-2">
-                                                        <img src="assets/media/flags/australia.svg" />
-                                                    </div></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-muted min-w-125px w-125px">CVC check</td>
-                                                    <td class="text-gray-800">Passed
-                                                        <span class="svg-icon svg-icon-2 svg-icon-success">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor" />
-                                                                <path d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z" fill="currentColor" />
-                                                            </svg>
-                                                        </span>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            
-                            <div class="separator separator-dashed"></div>
-                            
-
-                        </div>
+                    <div class="card-toolbar">
+                        <button class="btn btn-sm btn-flex btn-light-primary" id="btnNuevaAgenda" >
+                            <span class="svg-icon svg-icon-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                            Nuevo Agendamiento
+                        </button>
                     </div>
                 </div>
-
                 <!--DATOS BENEFICIARIO-->
                 <div class="tab-pane fade" id="tabBeneficiario" role="tabpanel">
-                    <!--begin::Card-->
                     <div class="card pt-4 mb-6 mb-xl-9">
-                        <!--begin::Card header-->
                         <div class="card-header border-0">
-                            <!--begin::Card title-->
                             <div class="card-title">
                                 <h2>Login Sessions</h2>
                             </div>
-                            <!--end::Card title-->
-                            <!--begin::Card toolbar-->
-                            <div class="card-toolbar">
-                                <!--begin::Filter-->
-                                <button type="button" class="btn btn-sm btn-flex btn-light-primary" id="kt_modal_sign_out_sesions">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr077.svg-->
-                                <span class="svg-icon svg-icon-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.3" x="4" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                        <path d="M5.86875 11.6927L7.62435 10.2297C8.09457 9.83785 8.12683 9.12683 7.69401 8.69401C7.3043 8.3043 6.67836 8.28591 6.26643 8.65206L3.34084 11.2526C2.89332 11.6504 2.89332 12.3496 3.34084 12.7474L6.26643 15.3479C6.67836 15.7141 7.3043 15.6957 7.69401 15.306C8.12683 14.8732 8.09458 14.1621 7.62435 13.7703L5.86875 12.3073C5.67684 12.1474 5.67684 11.8526 5.86875 11.6927Z" fill="currentColor" />
-                                        <path d="M8 5V6C8 6.55228 8.44772 7 9 7C9.55228 7 10 6.55228 10 6C10 5.44772 10.4477 5 11 5H18C18.5523 5 19 5.44772 19 6V18C19 18.5523 18.5523 19 18 19H11C10.4477 19 10 18.5523 10 18C10 17.4477 9.55228 17 9 17C8.44772 17 8 17.4477 8 18V19C8 20.1046 8.89543 21 10 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3H10C8.89543 3 8 3.89543 8 5Z" fill="#C4C4C4" />
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->Sign out all sessions</button>
-                                <!--end::Filter-->
-                            </div>
-                            <!--end::Card toolbar-->
                         </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
                         <div class="card-body pt-0 pb-5">
-                            <!--begin::Table wrapper-->
                             <div class="table-responsive">
-                                <!--begin::Table-->
                                 <table class="table align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
-                                    <!--begin::Table head-->
                                     <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
-                                        <!--begin::Table row-->
                                         <tr class="text-start text-muted text-uppercase gs-0">
                                             <th class="min-w-100px">Location</th>
                                             <th>Device</th>
@@ -768,474 +600,103 @@
                                             <th class="min-w-125px">Time</th>
                                             <th class="min-w-70px">Actions</th>
                                         </tr>
-                                        <!--end::Table row-->
+                                        
                                     </thead>
-                                    <!--end::Table head-->
-                                    <!--begin::Table body-->
                                     <tbody class="fs-6 fw-bold text-gray-600">
                                         <tr>
-                                            <!--begin::Invoice=-->
                                             <td>Australia</td>
-                                            <!--end::Invoice=-->
-                                            <!--begin::Status=-->
                                             <td>Chome - Windows</td>
-                                            <!--end::Status=-->
-                                            <!--begin::Amount=-->
                                             <td>207.26.18.342</td>
-                                            <!--end::Amount=-->
-                                            <!--begin::Date=-->
                                             <td>23 seconds ago</td>
-                                            <!--end::Date=-->
-                                            <!--begin::Action=-->
                                             <td>Current session</td>
-                                            <!--end::Action=-->
-                                        </tr>
-                                        <tr>
-                                            <!--begin::Invoice=-->
-                                            <td>Australia</td>
-                                            <!--end::Invoice=-->
-                                            <!--begin::Status=-->
-                                            <td>Safari - iOS</td>
-                                            <!--end::Status=-->
-                                            <!--begin::Amount=-->
-                                            <td>207.33.48.357</td>
-                                            <!--end::Amount=-->
-                                            <!--begin::Date=-->
-                                            <td>3 days ago</td>
-                                            <!--end::Date=-->
-                                            <!--begin::Action=-->
-                                            <td>
-                                                <a href="#" data-kt-users-sign-out="single_user">Sign out</a>
-                                            </td>
-                                            <!--end::Action=-->
-                                        </tr>
-                                        <tr>
-                                            <!--begin::Invoice=-->
-                                            <td>Australia</td>
-                                            <!--end::Invoice=-->
-                                            <!--begin::Status=-->
-                                            <td>Chrome - Windows</td>
-                                            <!--end::Status=-->
-                                            <!--begin::Amount=-->
-                                            <td>207.24.50.215</td>
-                                            <!--end::Amount=-->
-                                            <!--begin::Date=-->
-                                            <td>last week</td>
-                                            <!--end::Date=-->
-                                            <!--begin::Action=-->
-                                            <td>Expired</td>
-                                            <!--end::Action=-->
                                         </tr>
                                     </tbody>
-                                    <!--end::Table body-->
                                 </table>
-                                <!--end::Table-->
                             </div>
-                            <!--end::Table wrapper-->
                         </div>
-                        <!--end::Card body-->
                     </div>
-                    <!--end::Card-->
-                    <!--begin::Card-->
-                    <div class="card pt-4 mb-6 mb-xl-9">
-                        <!--begin::Card header-->
-                        <div class="card-header border-0">
-                            <!--begin::Card title-->
-                            <div class="card-title">
-                                <h2>Logs</h2>
-                            </div>
-                            <!--end::Card title-->
-                            <!--begin::Card toolbar-->
-                            <div class="card-toolbar">
-                                <!--begin::Button-->
-                                <button type="button" class="btn btn-sm btn-light-primary">
-                                <!--begin::Svg Icon | path: icons/duotune/files/fil021.svg-->
-                                <span class="svg-icon svg-icon-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path opacity="0.3" d="M19 15C20.7 15 22 13.7 22 12C22 10.3 20.7 9 19 9C18.9 9 18.9 9 18.8 9C18.9 8.7 19 8.3 19 8C19 6.3 17.7 5 16 5C15.4 5 14.8 5.2 14.3 5.5C13.4 4 11.8 3 10 3C7.2 3 5 5.2 5 8C5 8.3 5 8.7 5.1 9H5C3.3 9 2 10.3 2 12C2 13.7 3.3 15 5 15H19Z" fill="currentColor" />
-                                        <path d="M13 17.4V12C13 11.4 12.6 11 12 11C11.4 11 11 11.4 11 12V17.4H13Z" fill="currentColor" />
-                                        <path opacity="0.3" d="M8 17.4H16L12.7 20.7C12.3 21.1 11.7 21.1 11.3 20.7L8 17.4Z" fill="currentColor" />
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->Download Report</button>
-                                <!--end::Button-->
-                            </div>
-                            <!--end::Card toolbar-->
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body py-0">
-                            <!--begin::Table wrapper-->
-                            <div class="table-responsive">
-                                <!--begin::Table-->
-                                <table class="table align-middle table-row-dashed fw-bold text-gray-600 fs-6 gy-5" id="kt_table_users_logs">
-                                    <!--begin::Table body-->
-                                    <tbody>
-                                        <!--begin::Table row-->
-                                        <tr>
-                                            <!--begin::Badge=-->
-                                            <td class="min-w-70px">
-                                                <div class="badge badge-light-danger">500 ERR</div>
-                                            </td>
-                                            <!--end::Badge=-->
-                                            <!--begin::Status=-->
-                                            <td>POST /v1/invoice/in_5315_4014/invalid</td>
-                                            <!--end::Status=-->
-                                            <!--begin::Timestamp=-->
-                                            <td class="pe-0 text-end min-w-200px">10 Nov 2022, 10:30 am</td>
-                                            <!--end::Timestamp=-->
-                                        </tr>
-                                        <!--end::Table row-->
-                                        <!--begin::Table row-->
-                                        <tr>
-                                            <!--begin::Badge=-->
-                                            <td class="min-w-70px">
-                                                <div class="badge badge-light-success">200 OK</div>
-                                            </td>
-                                            <!--end::Badge=-->
-                                            <!--begin::Status=-->
-                                            <td>POST /v1/invoices/in_7445_4506/payment</td>
-                                            <!--end::Status=-->
-                                            <!--begin::Timestamp=-->
-                                            <td class="pe-0 text-end min-w-200px">25 Jul 2022, 11:30 am</td>
-                                            <!--end::Timestamp=-->
-                                        </tr>
-                                        <!--end::Table row-->
-                                        <!--begin::Table row-->
-                                        <tr>
-                                            <!--begin::Badge=-->
-                                            <td class="min-w-70px">
-                                                <div class="badge badge-light-success">200 OK</div>
-                                            </td>
-                                            <!--end::Badge=-->
-                                            <!--begin::Status=-->
-                                            <td>POST /v1/invoices/in_4996_5786/payment</td>
-                                            <!--end::Status=-->
-                                            <!--begin::Timestamp=-->
-                                            <td class="pe-0 text-end min-w-200px">25 Oct 2022, 6:05 pm</td>
-                                            <!--end::Timestamp=-->
-                                        </tr>
-                                        <!--end::Table row-->
-                                        <!--begin::Table row-->
-                                        <tr>
-                                            <!--begin::Badge=-->
-                                            <td class="min-w-70px">
-                                                <div class="badge badge-light-success">200 OK</div>
-                                            </td>
-                                            <!--end::Badge=-->
-                                            <!--begin::Status=-->
-                                            <td>POST /v1/invoices/in_3841_7630/payment</td>
-                                            <!--end::Status=-->
-                                            <!--begin::Timestamp=-->
-                                            <td class="pe-0 text-end min-w-200px">21 Feb 2022, 6:05 pm</td>
-                                            <!--end::Timestamp=-->
-                                        </tr>
-                                        <!--end::Table row-->
-                                        <!--begin::Table row-->
-                                        <tr>
-                                            <!--begin::Badge=-->
-                                            <td class="min-w-70px">
-                                                <div class="badge badge-light-success">200 OK</div>
-                                            </td>
-                                            <!--end::Badge=-->
-                                            <!--begin::Status=-->
-                                            <td>POST /v1/invoices/in_3822_2935/payment</td>
-                                            <!--end::Status=-->
-                                            <!--begin::Timestamp=-->
-                                            <td class="pe-0 text-end min-w-200px">10 Mar 2022, 8:43 pm</td>
-                                            <!--end::Timestamp=-->
-                                        </tr>
-                                        <!--end::Table row-->
-                                    </tbody>
-                                    <!--end::Table body-->
-                                </table>
-                                <!--end::Table-->
-                            </div>
-                            <!--end::Table wrapper-->
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Card-->
-                    <!--begin::Card-->
-                    <div class="card pt-4 mb-6 mb-xl-9">
-                        <!--begin::Card header-->
-                        <div class="card-header border-0">
-                            <!--begin::Card title-->
-                            <div class="card-title">
-                                <h2>Events</h2>
-                            </div>
-                            <!--end::Card title-->
-                            <!--begin::Card toolbar-->
-                            <div class="card-toolbar">
-                                <!--begin::Button-->
-                                <button type="button" class="btn btn-sm btn-light-primary">
-                                <!--begin::Svg Icon | path: icons/duotune/files/fil021.svg-->
-                                <span class="svg-icon svg-icon-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path opacity="0.3" d="M19 15C20.7 15 22 13.7 22 12C22 10.3 20.7 9 19 9C18.9 9 18.9 9 18.8 9C18.9 8.7 19 8.3 19 8C19 6.3 17.7 5 16 5C15.4 5 14.8 5.2 14.3 5.5C13.4 4 11.8 3 10 3C7.2 3 5 5.2 5 8C5 8.3 5 8.7 5.1 9H5C3.3 9 2 10.3 2 12C2 13.7 3.3 15 5 15H19Z" fill="currentColor" />
-                                        <path d="M13 17.4V12C13 11.4 12.6 11 12 11C11.4 11 11 11.4 11 12V17.4H13Z" fill="currentColor" />
-                                        <path opacity="0.3" d="M8 17.4H16L12.7 20.7C12.3 21.1 11.7 21.1 11.3 20.7L8 17.4Z" fill="currentColor" />
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->Download Report</button>
-                                <!--end::Button-->
-                            </div>
-                            <!--end::Card toolbar-->
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body py-0">
-                            <!--begin::Table-->
-                            <table class="table align-middle table-row-dashed fs-6 text-gray-600 fw-bold gy-5" id="kt_table_customers_events">
-                                <!--begin::Table body-->
-                                <tbody>
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Event=-->
-                                        <td class="min-w-400px">Invoice
-                                        <a href="#" class="fw-bolder text-gray-900 text-hover-primary me-1">#SEP-45656</a>status has changed from
-                                        <span class="badge badge-light-warning me-1">Pending</span>to
-                                        <span class="badge badge-light-info">In Progress</span></td>
-                                        <!--end::Event=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-gray-600 text-end min-w-200px">25 Oct 2022, 8:43 pm</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Event=-->
-                                        <td class="min-w-400px">
-                                        <a href="#" class="text-gray-600 text-hover-primary me-1">Max Smith</a>has made payment to
-                                        <a href="#" class="fw-bolder text-gray-900 text-hover-primary">#SDK-45670</a></td>
-                                        <!--end::Event=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-gray-600 text-end min-w-200px">24 Jun 2022, 9:23 pm</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Event=-->
-                                        <td class="min-w-400px">
-                                        <a href="#" class="text-gray-600 text-hover-primary me-1">Emma Smith</a>has made payment to
-                                        <a href="#" class="fw-bolder text-gray-900 text-hover-primary">#XRS-45670</a></td>
-                                        <!--end::Event=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-gray-600 text-end min-w-200px">20 Jun 2022, 11:30 am</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Event=-->
-                                        <td class="min-w-400px">Invoice
-                                        <a href="#" class="fw-bolder text-gray-900 text-hover-primary me-1">#KIO-45656</a>status has changed from
-                                        <span class="badge badge-light-succees me-1">In Transit</span>to
-                                        <span class="badge badge-light-success">Approved</span></td>
-                                        <!--end::Event=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-gray-600 text-end min-w-200px">22 Sep 2022, 11:30 am</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Event=-->
-                                        <td class="min-w-400px">
-                                        <a href="#" class="text-gray-600 text-hover-primary me-1">Max Smith</a>has made payment to
-                                        <a href="#" class="fw-bolder text-gray-900 text-hover-primary">#SDK-45670</a></td>
-                                        <!--end::Event=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-gray-600 text-end min-w-200px">19 Aug 2022, 5:30 pm</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Event=-->
-                                        <td class="min-w-400px">Invoice
-                                        <a href="#" class="fw-bolder text-gray-900 text-hover-primary me-1">#DER-45645</a>status has changed from
-                                        <span class="badge badge-light-info me-1">In Progress</span>to
-                                        <span class="badge badge-light-primary">In Transit</span></td>
-                                        <!--end::Event=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-gray-600 text-end min-w-200px">24 Jun 2022, 6:05 pm</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Event=-->
-                                        <td class="min-w-400px">Invoice
-                                        <a href="#" class="fw-bolder text-gray-900 text-hover-primary me-1">#LOP-45640</a>has been
-                                        <span class="badge badge-light-danger">Declined</span></td>
-                                        <!--end::Event=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-gray-600 text-end min-w-200px">10 Nov 2022, 8:43 pm</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Event=-->
-                                        <td class="min-w-400px">Invoice
-                                        <a href="#" class="fw-bolder text-gray-900 text-hover-primary me-1">#DER-45645</a>status has changed from
-                                        <span class="badge badge-light-info me-1">In Progress</span>to
-                                        <span class="badge badge-light-primary">In Transit</span></td>
-                                        <!--end::Event=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-gray-600 text-end min-w-200px">25 Jul 2022, 11:05 am</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Event=-->
-                                        <td class="min-w-400px">Invoice
-                                        <a href="#" class="fw-bolder text-gray-900 text-hover-primary me-1">#LOP-45640</a>has been
-                                        <span class="badge badge-light-danger">Declined</span></td>
-                                        <!--end::Event=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-gray-600 text-end min-w-200px">24 Jun 2022, 10:10 pm</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Event=-->
-                                        <td class="min-w-400px">
-                                        <a href="#" class="text-gray-600 text-hover-primary me-1">Sean Bean</a>has made payment to
-                                        <a href="#" class="fw-bolder text-gray-900 text-hover-primary">#XRS-45670</a></td>
-                                        <!--end::Event=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-gray-600 text-end min-w-200px">24 Jun 2022, 5:20 pm</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                </tbody>
-                                <!--end::Table body-->
-                            </table>
-                            <!--end::Table-->
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Card-->
                 </div>
-
                 <!--DATOS HISTORIAL-->
                 <div class="tab-pane fade " id="tabHistorial" role="tabpanel">
-                    <!--begin::Card-->
                     <div class="card card-flush mb-6 mb-xl-9">
-                        <!--begin::Card header-->
                         <div class="card-header mt-6">
-                            <!--begin::Card title-->
                             <div class="card-title flex-column">
                                 <h2 class="mb-1">User's Schedule</h2>
                                 <div class="fs-6 fw-bold text-muted">2 upcoming meetings</div>
                             </div>
-                            <!--end::Card title-->
-                            <!--begin::Card toolbar-->
                             <div class="card-toolbar">
                                 <button type="button" class="btn btn-light-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_schedule">
-                                <!--SVG file not found: media/icons/duotune/art/art008.svg-->
                                 Add Schedule</button>
                             </div>
-                            <!--end::Card toolbar-->
                         </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
                         <div class="card-body p-9 pt-4">
-                            <!--begin::Dates-->
                             <ul class="nav nav-pills d-flex flex-nowrap hover-scroll-x py-2">
-                                <!--begin::Date-->
                                 <li class="nav-item me-1">
                                     <a class="nav-link btn d-flex flex-column flex-center rounded-pill min-w-40px me-2 py-4 btn-active-primary" data-bs-toggle="tab" href="#kt_schedule_day_0">
                                         <span class="opacity-50 fs-7 fw-bold">Nov-2023</span>
                                         <span class="fs-6 fw-boldest">11</span>
                                     </a>
                                 </li>
-                                <!--end::Date-->
-                                <!--begin::Date-->
                                 <li class="nav-item me-1">
                                     <a class="nav-link btn d-flex flex-column flex-center rounded-pill min-w-40px me-2 py-4 btn-active-primary active" data-bs-toggle="tab" href="#kt_schedule_day_1">
                                         <span class="opacity-50 fs-7 fw-bold">Mo</span>
                                         <span class="fs-6 fw-boldest">22</span>
                                     </a>
                                 </li>
-                                <!--end::Date-->
-                                <!--begin::Date-->
                                 <li class="nav-item me-1">
                                     <a class="nav-link btn d-flex flex-column flex-center rounded-pill min-w-40px me-2 py-4 btn-active-primary" data-bs-toggle="tab" href="#kt_schedule_day_2">
                                         <span class="opacity-50 fs-7 fw-bold">Tu</span>
                                         <span class="fs-6 fw-boldest">23</span>
                                     </a>
                                 </li>
-                                <!--end::Date-->
-                                <!--begin::Date-->
                                 <li class="nav-item me-1">
                                     <a class="nav-link btn d-flex flex-column flex-center rounded-pill min-w-40px me-2 py-4 btn-active-primary" data-bs-toggle="tab" href="#kt_schedule_day_3">
                                         <span class="opacity-50 fs-7 fw-bold">We</span>
                                         <span class="fs-6 fw-boldest">24</span>
                                     </a>
                                 </li>
-                                <!--end::Date-->
-                                <!--begin::Date-->
                                 <li class="nav-item me-1">
                                     <a class="nav-link btn d-flex flex-column flex-center rounded-pill min-w-40px me-2 py-4 btn-active-primary" data-bs-toggle="tab" href="#kt_schedule_day_4">
                                         <span class="opacity-50 fs-7 fw-bold">Th</span>
                                         <span class="fs-6 fw-boldest">25</span>
                                     </a>
                                 </li>
-                                <!--end::Date-->
-                                <!--begin::Date-->
                                 <li class="nav-item me-1">
                                     <a class="nav-link btn d-flex flex-column flex-center rounded-pill min-w-40px me-2 py-4 btn-active-primary" data-bs-toggle="tab" href="#kt_schedule_day_5">
                                         <span class="opacity-50 fs-7 fw-bold">Fr</span>
                                         <span class="fs-6 fw-boldest">26</span>
                                     </a>
                                 </li>
-                                <!--end::Date-->
-                                <!--begin::Date-->
                                 <li class="nav-item me-1">
                                     <a class="nav-link btn d-flex flex-column flex-center rounded-pill min-w-40px me-2 py-4 btn-active-primary" data-bs-toggle="tab" href="#kt_schedule_day_6">
                                         <span class="opacity-50 fs-7 fw-bold">Sa</span>
                                         <span class="fs-6 fw-boldest">27</span>
                                     </a>
                                 </li>
-                                <!--end::Date-->
-                                <!--begin::Date-->
                                 <li class="nav-item me-1">
                                     <a class="nav-link btn d-flex flex-column flex-center rounded-pill min-w-40px me-2 py-4 btn-active-primary" data-bs-toggle="tab" href="#kt_schedule_day_7">
                                         <span class="opacity-50 fs-7 fw-bold">Su</span>
                                         <span class="fs-6 fw-boldest">28</span>
                                     </a>
                                 </li>
-                                <!--end::Date-->
-                                <!--begin::Date-->
                                 <li class="nav-item me-1">
                                     <a class="nav-link btn d-flex flex-column flex-center rounded-pill min-w-40px me-2 py-4 btn-active-primary" data-bs-toggle="tab" href="#kt_schedule_day_8">
                                         <span class="opacity-50 fs-7 fw-bold">Mo</span>
                                         <span class="fs-6 fw-boldest">29</span>
                                     </a>
                                 </li>
-                                <!--end::Date-->
-                                <!--begin::Date-->
                                 <li class="nav-item me-1">
                                     <a class="nav-link btn d-flex flex-column flex-center rounded-pill min-w-40px me-2 py-4 btn-active-primary" data-bs-toggle="tab" href="#kt_schedule_day_9">
                                         <span class="opacity-50 fs-7 fw-bold">Tu</span>
                                         <span class="fs-6 fw-boldest">30</span>
                                     </a>
                                 </li>
-                                <!--end::Date-->
-                                <!--begin::Date-->
                                 <li class="nav-item me-1">
                                     <a class="nav-link btn d-flex flex-column flex-center rounded-pill min-w-40px me-2 py-4 btn-active-primary" data-bs-toggle="tab" href="#kt_schedule_day_10">
                                         <span class="opacity-50 fs-7 fw-bold">We</span>
                                         <span class="fs-6 fw-boldest">31</span>
                                     </a>
                                 </li>
-                                <!--end::Date-->
                             </ul>
                             <!--end::Dates-->
                             <!--begin::Tab Content-->
@@ -2867,29 +2328,29 @@
                                 <div class="row mb-2">
                                     <div class="col-md-4">
                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" value="" readonly />
+                                        <input type="text" class="form-control mb-2" name="txtFono1" id="txtFono1" value="" readonly />
                                     </div>
                                     <div class="col-md-4">
                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" value="" readonly />
+                                        <input type="text" class="form-control mb-2" name="txtFono2" id="txtFono2" value="" readonly />
                                     </div> 
                                     <div class="col-md-4">
                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
-                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono3" id="txtFono3" value="" readonly />
+                                        <input type="text" class="form-control mb-2" name="txtFono3" id="txtFono3" value="" readonly />
                                     </div>                                                        
                                 </div>
                                 <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                     <div class="col-md-4">
                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
-                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" value="" readonly />
+                                        <input type="text" class="form-control mb-2" name="txtCelular1" id="txtCelular1" value="" readonly />
                                     </div>
                                     <div class="col-md-4">
                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
-                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" value="" readonly />
+                                        <input type="text" class="form-control mb-2" name="txtCelular2" id="txtCelular2" value="" readonly />
                                     </div> 
                                     <div class="col-md-4">
                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
-                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" value="" readonly />
+                                        <input type="text" class="form-control mb-2" name="txtCelular3" id="txtCelular3" value="" readonly />
                                     </div>
                                 </div>                                                
                             </div>
@@ -2954,6 +2415,190 @@
         </div>
     </div>
 </div>
+
+<!--Modal Profesional-->
+<div class="modal fade" id="modal-profesional" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+        <div class="modal-content"> 
+            <div class="modal-header">
+                <h2 class="fw-bolder">Informacion Profesional</h2>
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10 mt-n3">
+                <div class="card mb-1 mb-xl-1">
+                    <div class="card-header border-0">
+                        <div class="card-title">
+                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_profesional" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
+                                <span class="ms-2 rotate-180">
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                </span>
+                            </div> 
+                        </div>
+                    </div>
+                    <div id="view_imagen_profesional" class="collapse">
+                        <div class="card card-flush py-4">
+                            <div class="card-body pt-0">
+                                <div class="mt-1">
+                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
+                                        <div class="image-input-wrapper w-125px h-125px" id="imgfileprofesional" style="background-image: url(assets/media/svg/files/blank-image.svg)"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-5 mb-xl-8">
+                    <div class="card-header border-0">
+                        <div class="card-title">
+                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_prestador" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Profesional
+                                <span class="ms-2 rotate-180">
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                </span>
+                            </div> 
+                        </div>
+                    </div>
+                    <div id="view_datos_prestador" class="collapse show">
+                        <div class="card card-flush py-2">
+                            <div class="card-body pt-0">
+                                <div class="row mb-2">
+                                    <div class="col-md-12">
+                                        <label class="form-label">Nombres</label>
+                                        <input type="text" class="form-control" id="txtProfesional" name="txtProfesional" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header border-0">
+                            <div class="card-title">
+                                <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_direccion" role="button" aria-expanded="false" aria-controls="view_direccion">
+                                    <div class="me-3 rotate-90">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" />
+                                    <div class="me-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-gray-800 fw-bolder">Direccion</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="view_direccion" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                <div class="d-flex flex-wrap py-5">
+                                    <div class="flex-equal me-5">
+                                        <div class="row mb-8">
+                                            <div class="col-md-2">
+                                                <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <textarea class="form-control mb-2 text-uppercase" name="txtDireccionPro" id="txtDireccionPro" maxlength="250" readonly ></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_telefonos" role="button" aria-expanded="false" aria-controls="view_telefonos">
+                                    <div class="me-3 rotate-90">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
+                                    <div class="me-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="view_telefonos" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="fs-6 fw-bold mt-2 mb-3">Telefono:</div>
+                                        <input type="text" class="form-control mb-2" name="txtFonoPro" id="txtFonoPro" value="" readonly />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="fs-6 fw-bold mt-2 mb-3">Celular:</div>
+                                        <input type="text" class="form-control mb-2" name="txtCelPro" id="txtCelPro" value="" readonly />
+                                    </div>                                                        
+                                </div>                                               
+                            </div>
+                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_mails" role="button" aria-expanded="false" aria-controls="view_mails">
+                                    <div class="me-3 rotate-90">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <img src="assets/media/logos/email.png" class="w-20px me-3" />
+                                    <div class="me-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-gray-800 fw-bolder">E-mail</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="view_mails" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                               <div class="d-flex flex-wrap py-5">
+                                    <div class="flex-equal me-5">
+                                        <div class="row mb-8">
+                                            <div class="col-md-2">
+                                                <div class="fs-6 fw-bold mt-2 mb-3">Email 1:</div>
+                                            </div>
+                                            <div class="col-md-10">
+                                               <input type="email" name="txtEmailPro" id="txtEmailPro" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-2">
+                                                <div class="fs-6 fw-bold mt-2 mb-3">Email 2:</div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
+                                            </div>
+                                        </div>   
+                                    </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="modal fade" id="kt_modal_add_schedule" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
@@ -3828,7 +3473,45 @@
                 _respuesta.always(function() {
                 });
             });
-            
+
+            $('#btnDatosProfesional').click(function(){
+
+                var _profid = $('#cboProfesional').val();
+
+                if(_profid == ''){
+                    toastSweetAlert("top-end",3000,"warning","Seleccione Profesional..!");
+                    return;
+                }
+
+                var _parametros = {
+                    xxPaisid: _paisid,
+                    xxEmprid: _emprid,
+                    xxProfid: _profid
+                }   
+
+                var xrespuesta = $.post("codephp/get_datosprofesionalagenda.php", _parametros);
+                xrespuesta.done(function(response){
+                    var json = JSON.parse(response);                    
+                    //console.log(response);
+                    if(json[0]['Avatar'] == ''){
+                        document.getElementById('imgfileprofesional').style.backgroundImage="url(assets/media/svg/files/blank-image.svg)";    
+                    }else{
+                        document.getElementById('imgfileprofesional').style.backgroundImage="url(logos/" + json[0]['Avatar'] + ")";
+                    }
+
+                    $("#modal-profesional").find("input,textarea").val("");
+                    $('#modal-profesional').modal('handleUpdate');
+                    $("#modal-profesional").modal('show');
+                    $('#txtProfesional').val(json[0]['Nombres']);
+                    $('#txtFonoPro').val(json[0]['Telefono']);
+                    $('#txtCelPro').val(json[0]['Celular']);
+                    $('#txtEmailPro').val(json[0]['Email']);
+                    $('#txtDireccionPro').val(json[0]['Direccion']);  
+                }); 
+
+            });
+
+ 
             $('#btnNuevaAgenda').click(function(){
 
                 let _tituid = "<?php echo $xTituid; ?>";
@@ -3839,22 +3522,22 @@
                 let _cbociudid = $("#cboCiudad").val();
                 
                 if(_tituid == ''){
-                    mensajesalertify("No se ha seleccionado Cliente para Agendamiento", "W", "top-center", 5);
+                    toastSweetAlert("top-end",3000,"error","No se ha seleccionado Cliente para Agendamiento");
                     return;
                 }
                 
                 if(_cboprestaid == 0){
-                    mensajesalertify("Seleccione Prestador", "W", "top-center", 5);
+                    toastSweetAlert("top-end",3000,"warning","Seleccione Prestador..!");
                     return;
                 }
 
                 if(_cbopreeid == 0){
-                    mensajesalertify("Seleccione Especialidad", "W", "top-center", 5);
+                    toastSweetAlert("top-end",3000,"warning","Seleccione Especialidad..!");
                     return;
                 }
 
                 if(_cboprofid == 0){
-                    mensajesalertify("Seleccione Profesional", "W", "top-center", 5);
+                    toastSweetAlert("top-end",3000,"warning","Seleccione Profesional..!");
                     return;
                 }                  
 
@@ -3867,6 +3550,10 @@
         //Desplazar-modal
         $("#modal-prestador").draggable({
             handle: ".modal-header"
-        });        
+        });
+
+         $("#modal-profesional").draggable({
+            handle: ".modal-header"
+        });           
 
     </script>
