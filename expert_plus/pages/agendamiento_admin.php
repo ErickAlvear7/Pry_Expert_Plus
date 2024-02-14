@@ -137,6 +137,12 @@
         $color = 'fs-6 text-gray fw-bold';
     }
 
+
+    $xSQL  = "SELECT  ben.bene_id AS IdBene,CONCAT(ben.bene_nombres,' ',ben.bene_apellidos) as Nombres, ben.bene_numerodocumento AS Doumento,ben.bene_estado AS Estado,(SELECT ciudad FROM ";
+    $xSQL .= "`provincia_ciudad` ciu WHERE ben.bene_ciudad = ciu.prov_id AND ciu.pais_id=$xPaisid) as Ciudad,(SELECT pade_nombre FROM ";
+    $xSQL .= "`expert_parametro_detalle` det WHERE ben.bene_parentesco = det.pade_valorV) AS Parentesco FROM  `expert_beneficiario` ben ";
+    $xSQL .= "INNER JOIN `expert_productos` pro ON ben.prod_id = pro.prod_id WHERE ben.titu_id=$xTituid AND ben.pais_id=$xPaisid AND ben.prod_id=$xProdid AND pro.grup_id=$xGrupid ";
+    $all_beneficiarios = mysqli_query($con, $xSQL);
 ?>
      
 <div id="kt_content_container" class="container-xxl">
@@ -594,22 +600,33 @@
                                 <table class="table align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
                                     <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
                                         <tr class="text-start text-muted text-uppercase gs-0">
-                                            <th class="min-w-100px">Location</th>
-                                            <th>Device</th>
-                                            <th>IP Address</th>
-                                            <th class="min-w-125px">Time</th>
-                                            <th class="min-w-70px">Actions</th>
+                                            <th>Documento</th>
+                                            <th>Nombres</th>
+                                            <th>ciudad</th>
+                                            <th>Parentesco</th>
+                                            <th>Estado</th>
+                                            <th style="text-align: center;">OPCIONES</th>
                                         </tr>
                                         
                                     </thead>
                                     <tbody class="fs-6 fw-bold text-gray-600">
+                                        <?php 
+                                            foreach ($all_beneficiarios as $datos) {
+                                                $xIdbene = $datos['IdBene'];
+                                                $xDocumento = $datos['Doumento'];
+                                                $xNombres = $datos['Nombres'];
+                                                $xCiudad = $datos['Ciudad'];
+                                                $xParentesco = $datos['Parentesco'];
+                                                $xEstado = $datos['Estado'];
+                                        ?>
                                         <tr>
-                                            <td>Australia</td>
-                                            <td>Chome - Windows</td>
-                                            <td>207.26.18.342</td>
-                                            <td>23 seconds ago</td>
-                                            <td>Current session</td>
+                                            <td><?php echo $xDocumento; ?></td>
+                                            <td><?php echo $xNombres; ?></td>
+                                            <td><?php echo $xCiudad; ?></td>
+                                            <td><?php echo $xParentesco; ?></td>
+                                            <td><?php echo $xEstado; ?></td>
                                         </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
