@@ -393,7 +393,7 @@
                                                     <i class="fa fa-edit"></i>
                                                 </button> 
                                                 <button type="button" <?php echo $xDisabledEdit;?> id="btnAgendar_<?php echo $xPerid; ?>" name="btnAgendar" onclick="f_Agendar(<?php echo $xTituid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
-                                                    <i class="fa fa-user-plus"></i>
+                                                    <i class="fa fa-calendar-plus"></i>
                                                 </button> 
                                             </div>
                                         </div>

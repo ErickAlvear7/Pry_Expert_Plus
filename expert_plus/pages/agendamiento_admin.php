@@ -651,7 +651,7 @@
                                                 <div class="text-center">
                                                     <div class="btn-group">
                                                         <button id="btnEditar_" onclick="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
-                                                            <i class="fa fa-calendar"></i>
+                                                            <i class="fa fa-calendar-plus"></i>
                                                         </button>												 
                                                     </div>
                                                 </div>
