@@ -37,6 +37,7 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
+    $xClieid = $_POST['clieid'];
     $xTituid = $_POST['tituid'];
     $xProdid = $_POST['prodid'];
     $xGrupid = $_POST['grupid'];
@@ -89,6 +90,8 @@
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
     $all_provincia = mysqli_query($con, $xSQL);
 
+
+    //Consulta Ultimo Agendamiento
     $xSQL = "SELECT xpr.pres_nombre AS Prestadora, (SELECT ciudad  FROM `provincia_ciudad` pxc WHERE pxc.prov_id=xpr.prov_id) AS Ciudad, ";
     $xSQL .="xpr.pres_sector AS Sector FROM `expert_agenda` xag INNER JOIN `expert_prestadora` xpr ON xag.pres_id=xpr.pres_id ";
     $xSQL .="ORDER BY xag.fechacreacion DESC LIMIT 1 ";
@@ -488,6 +491,13 @@
                 <li class="nav-item">
                     <a class="nav-link text-active-primary pb-4 " data-bs-toggle="tab" href="#tabHistorial">Historial Citas</a>
                 </li>
+                <button type="button" id="btnRegresar" onclick="f_Regresar(<?php echo $xClieid; ?>,<?php echo $xProdid; ?>,<?php echo $xGrupid; ?>)" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
+                    <span class="svg-icon svg-icon-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                </button>
             </ul>
             <div class="tab-content" id="tabOpciones">
                 <div class="tab-pane fade show active" id="tabTitular" role="tabpanel">
@@ -592,12 +602,12 @@
                     <div class="card pt-4 mb-6 mb-xl-9">
                         <div class="card-header border-0">
                             <div class="card-title">
-                                <h2>Login Sessions</h2>
+                                <h2>Beneficiarios</h2>
                             </div>
                         </div>
                         <div class="card-body pt-0 pb-5">
                             <div class="table-responsive">
-                                <table class="table align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
+                                <table class="table table-hover align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
                                     <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
                                         <tr class="text-start text-muted text-uppercase gs-0">
                                             <th>Documento</th>
@@ -609,7 +619,7 @@
                                         </tr>
                                         
                                     </thead>
-                                    <tbody class="fs-6 fw-bold text-gray-600">
+                                    <tbody class="fs-6 fw-bold text-gray-600 text-uppercase">
                                         <?php 
                                             foreach ($all_beneficiarios as $datos) {
                                                 $xIdbene = $datos['IdBene'];
@@ -618,13 +628,34 @@
                                                 $xCiudad = $datos['Ciudad'];
                                                 $xParentesco = $datos['Parentesco'];
                                                 $xEstado = $datos['Estado'];
+
+                                                if($xEstado == 'A'){
+                                                    $xEstado = 'ACTIVO';
+                                                    $xTextColor = "badge badge-light-primary";
+                                                }else{
+                                                    $xEstado = 'INACTIVO';
+                                                    $xTextColor = "badge badge-light-danger";
+                                                }
                                         ?>
                                         <tr>
                                             <td><?php echo $xDocumento; ?></td>
                                             <td><?php echo $xNombres; ?></td>
                                             <td><?php echo $xCiudad; ?></td>
                                             <td><?php echo $xParentesco; ?></td>
-                                            <td><?php echo $xEstado; ?></td>
+                                            <td>
+                                                <div class="<?php echo $xTextColor; ?>">
+                                                    <?php echo $xEstado; ?>
+                                                </div>  
+                                            </td>
+                                            <td>
+                                                <div class="text-center">
+                                                    <div class="btn-group">
+                                                        <button id="btnEditar_" onclick="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </button>												 
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <?php } ?>
                                     </tbody>
@@ -3562,8 +3593,19 @@
 
             });
             
-        });        
+        });
         
+        //Regresar Pagina
+        function f_Regresar(_clieid,_prodid,_grupid){
+
+            $.redirect('?page=addtitular&menuid=<?php echo $menuid; ?>', {
+                'idclie': _clieid,
+                'idprod': _prodid,
+                'idgrup': _grupid
+            });
+
+        }
+                
         //Desplazar-modal
         $("#modal-prestador").draggable({
             handle: ".modal-header"
