@@ -112,6 +112,10 @@
 
 	if($page == 'agendar_titubeneadmin'){
 		$xRuta = '/../pages/titubeneagenda_admin.php';
+	}
+	
+	if($page == 'agendar_beneadmin'){
+		$xRuta = '/../pages/agendamiento_adminbene.php';
 	}	
 	
 	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";
