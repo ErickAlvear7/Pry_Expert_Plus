@@ -650,7 +650,7 @@
                                             <td>
                                                 <div class="text-center">
                                                     <div class="btn-group">
-                                                        <button id="btnEditar_" onclick="f_Agendar(<?php echo $xIdbene; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                        <button id="btnEditar_" onclick="f_Agendar(<?php echo $xIdbene; ?>,<?php echo $xClieid; ?>,<?php echo $xTituid; ?>,<?php echo $xProdid; ?>,<?php echo $xGrupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
                                                             <i class="fa fa-calendar-plus"></i>
                                                         </button>												 
                                                     </div>
@@ -3331,6 +3331,7 @@
         var _paisid = "<?php echo $xPaisid; ?>";
         var _emprid = "<?php echo $xEmprid; ?>";
         var _usuaid = "<?php echo $xUsuaid; ?>";
+        
         var _provincia = "<?php echo $xProvincia; ?>";
         var _ciudadid = "<?php echo $xCiudadid; ?>";
         var _avatar = "<?php echo $xAvatar; ?>";
@@ -3607,9 +3608,17 @@
     }
 
     //Agendamiento Beneficiario
-    function f_Agendar(_beneid){
+    function f_Agendar(_beneid,_clieid,_tituid,_prodid,_grupid){
 
-       $.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'clieid': _idclie, 'tituid': _tituid, 'prodid': _prodid, 'grupid': _grupid, 'agendaid': 0 });
+       $.redirect('?page=agendar_beneadmin&menuid=<?php echo $menuid; ?>', { 
+        'beneid': _beneid,
+        'clieid': _clieid, 
+        'tituid': _tituid, 
+        'prodid': _prodid, 
+        'grupid': _grupid, 
+        'agendaid': 0 
+    
+        });
     }    
     
             
