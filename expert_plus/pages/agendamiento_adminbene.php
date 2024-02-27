@@ -38,6 +38,7 @@
     $xUsuaid = $_SESSION["i_usuaid"];
 
     $xBeneid = $_POST['beneid'];
+    $xCiudadid = $_POST['ciudadid'];
     $xClieid = $_POST['clieid'];
     $xTituid = $_POST['tituid'];
     $xProdid = $_POST['prodid'];
@@ -485,9 +486,9 @@
                     <a class="nav-link text-active-primary pb-4 active" data-kt-countup-tabs="true" data-bs-toggle="tab" href="#tabTitular">Datos Agendamiento</a>
                 </li>                
 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tabBeneficiario">Datos Beneficiario</a>
-                </li>
+                </li> -->
 
                 <li class="nav-item">
                     <a class="nav-link text-active-primary pb-4 " data-bs-toggle="tab" href="#tabHistorial">Historial Citas</a>
@@ -518,7 +519,7 @@
                                         </label>
                                         <?php 
                                             $xSQL = "SELECT prov_id AS Codigo, ciudad AS Descripcion FROM `provincia_ciudad` ";
-                                            $xSQL .= "WHERE pais_id=$xPaisid AND provincia='$xProvincia' AND estado='A' ORDER BY ciudad ";
+                                            $xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY ciudad ";
                                             $all_ciudad = mysqli_query($con, $xSQL);
                                         ?>
                                         <select name="cboCiudad" id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tabTitular" class="form-select mb-2">
@@ -599,7 +600,7 @@
                     </div>
                 </div>
                 <!--DATOS BENEFICIARIO-->
-                <div class="tab-pane fade" id="tabBeneficiario" role="tabpanel">
+                <!-- <div class="tab-pane fade" id="tabBeneficiario" role="tabpanel">
                     <div class="card pt-4 mb-6 mb-xl-9">
                         <div class="card-header border-0">
                             <div class="card-title">
@@ -664,7 +665,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!--DATOS HISTORIAL-->
                 <div class="tab-pane fade " id="tabHistorial" role="tabpanel">
                     <div class="card card-flush mb-6 mb-xl-9">
@@ -2693,11 +2694,13 @@
         $('#cboProvincia').val(_provincia).change();
         $('#cboCiudad').val(_ciudadid).change();
 
-        $('#cboProvincia').change(function(){
-            
+
+        // COMBO CARGAR PROVINCIA EN BASE A UNA CIUDAD
+        $('#cboCiudad').change(function(){
+                
             _cboid = $(this).val(); //obtener el id seleccionado
 
-            $("#cboCiudad").empty();
+            $("#cboProvincia").empty();
             $("#cboEspecialidad").empty();
             $("#cboProfesional").empty();
 
@@ -2705,13 +2708,13 @@
                 "xxPaisid": _paisid,
                 "xxEmprid": _emprid,
                 "xxComboid": _cboid,
-                "xxOpcion": 0
+                "xxOpcion": 3
             }
 
             var _respuesta = $.post("codephp/cargar_combos.php", _parametros);
             _respuesta.done(function(response) {
                 //document.getElementById("city").className = "form-control";
-                $("#cboCiudad").html(response);
+                $("#cboProvincia").html(response);
                 
             });
             _respuesta.fail(function() {

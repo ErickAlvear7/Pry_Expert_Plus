@@ -141,8 +141,8 @@
     }
 
 
-    $xSQL  = "SELECT  ben.bene_id AS IdBene,CONCAT(ben.bene_nombres,' ',ben.bene_apellidos) as Nombres, ben.bene_numerodocumento AS Doumento,ben.bene_estado AS Estado,(SELECT ciudad FROM ";
-    $xSQL .= "`provincia_ciudad` ciu WHERE ben.bene_ciudad = ciu.prov_id AND ciu.pais_id=$xPaisid) as Ciudad,(SELECT pade_nombre FROM ";
+    $xSQL  = "SELECT  ben.bene_id AS IdBene,CONCAT(ben.bene_nombres,' ',ben.bene_apellidos) as Nombres,ben.bene_ciudad AS IdCiudad, ben.bene_numerodocumento AS Doumento,ben.bene_estado AS Estado,(SELECT ciudad FROM ";
+    $xSQL .= "`provincia_ciudad` ciu WHERE ben.bene_ciudad = ciu.prov_id AND ciu.pais_id=$xPaisid) as Ciudad,(SELECT prv.provincia FROM `provincia_ciudad` prv WHERE ben.bene_ciudad=prv.prov_id) AS Provincia,(SELECT pade_nombre FROM ";
     $xSQL .= "`expert_parametro_detalle` det WHERE ben.bene_parentesco = det.pade_valorV) AS Parentesco FROM  `expert_beneficiario` ben ";
     $xSQL .= "INNER JOIN `expert_productos` pro ON ben.prod_id = pro.prod_id WHERE ben.titu_id=$xTituid AND ben.pais_id=$xPaisid AND ben.prod_id=$xProdid AND pro.grup_id=$xGrupid ";
     $all_beneficiarios = mysqli_query($con, $xSQL);
@@ -517,7 +517,7 @@
                                         </label>
                                         <?php 
                                             $xSQL = "SELECT prov_id AS Codigo, ciudad AS Descripcion FROM `provincia_ciudad` ";
-                                            $xSQL .= "WHERE pais_id=$xPaisid AND provincia='$xProvincia' AND estado='A' ORDER BY ciudad ";
+                                            $xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY ciudad ";
                                             $all_ciudad = mysqli_query($con, $xSQL);
                                         ?>
                                         <select name="cboCiudad" id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tabTitular" class="form-select mb-2">
@@ -626,6 +626,8 @@
                                                 $xDocumento = $datos['Doumento'];
                                                 $xNombres = $datos['Nombres'];
                                                 $xCiudad = $datos['Ciudad'];
+                                                $xIdCiudad = $datos['IdCiudad'];
+                                                $xProv = $datos['Provincia'];
                                                 $xParentesco = $datos['Parentesco'];
                                                 $xEstado = $datos['Estado'];
 
@@ -650,7 +652,13 @@
                                             <td>
                                                 <div class="text-center">
                                                     <div class="btn-group">
-                                                        <button id="btnEditar_" onclick="f_Agendar(<?php echo $xIdbene; ?>,<?php echo $xClieid; ?>,<?php echo $xTituid; ?>,<?php echo $xProdid; ?>,<?php echo $xGrupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                        <button id="btnAgendar" onclick="f_Agendar(
+                                                            <?php echo $xIdbene; ?>,
+                                                            <?php echo $xIdCiudad; ?>,
+                                                            <?php echo $xClieid; ?>,
+                                                            <?php echo $xTituid; ?>,
+                                                            <?php echo $xProdid; ?>,
+                                                            <?php echo $xGrupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
                                                             <i class="fa fa-calendar-plus"></i>
                                                         </button>												 
                                                     </div>
@@ -3330,8 +3338,7 @@
 
         var _paisid = "<?php echo $xPaisid; ?>";
         var _emprid = "<?php echo $xEmprid; ?>";
-        var _usuaid = "<?php echo $xUsuaid; ?>";
-        
+        var _usuaid = "<?php echo $xUsuaid; ?>"; 
         var _provincia = "<?php echo $xProvincia; ?>";
         var _ciudadid = "<?php echo $xCiudadid; ?>";
         var _avatar = "<?php echo $xAvatar; ?>";
@@ -3363,11 +3370,14 @@
         $('#cboProvincia').val(_provincia).change();
         $('#cboCiudad').val(_ciudadid).change();
 
-        $('#cboProvincia').change(function(){
-            
+
+        // COMBO CARGAR PROVINCIA EN BASE A UNA CIUDAD
+
+        $('#cboCiudad').change(function(){
+                
             _cboid = $(this).val(); //obtener el id seleccionado
 
-            $("#cboCiudad").empty();
+            $("#cboProvincia").empty();
             $("#cboEspecialidad").empty();
             $("#cboProfesional").empty();
 
@@ -3375,13 +3385,13 @@
                 "xxPaisid": _paisid,
                 "xxEmprid": _emprid,
                 "xxComboid": _cboid,
-                "xxOpcion": 0
+                "xxOpcion": 3
             }
 
             var _respuesta = $.post("codephp/cargar_combos.php", _parametros);
             _respuesta.done(function(response) {
                 //document.getElementById("city").className = "form-control";
-                $("#cboCiudad").html(response);
+                $("#cboProvincia").html(response);
                 
             });
             _respuesta.fail(function() {
@@ -3390,6 +3400,8 @@
             });                
 
         }); 
+
+        //CARGAR COMBO PRESTADOR
 
         $('#cboCiudad').change(function(){
                     
@@ -3608,10 +3620,12 @@
     }
 
     //Agendamiento Beneficiario
-    function f_Agendar(_beneid,_clieid,_tituid,_prodid,_grupid){
+    function f_Agendar(_beneid,_ciudadid,_clieid,_tituid,_prodid,_grupid){
+        //debugger;
 
        $.redirect('?page=agendar_beneadmin&menuid=<?php echo $menuid; ?>', { 
         'beneid': _beneid,
+        'ciudadid': _ciudadid,
         'clieid': _clieid, 
         'tituid': _tituid, 
         'prodid': _prodid, 
