@@ -481,15 +481,13 @@
         <div class="flex-lg-row-fluid ms-lg-15">
             <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4 active" data-kt-countup-tabs="true" data-bs-toggle="tab" href="#tabTitular">Datos Agendamiento</a>
-                </li>                
-
-                <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tabBeneficiario">Datos Beneficiario</a>
+                    <a class="nav-link text-active-primary pb-4 active" data-kt-countup-tabs="true" data-bs-toggle="tab" href="#tabTitular">Agendamiento Titular</a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link text-active-primary pb-4 " data-bs-toggle="tab" href="#tabHistorial">Historial Citas</a>
+                </li>              
+                <li class="nav-item">
+                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tabBeneficiario">Beneficiarios</a>
                 </li>
                 <button type="button" id="btnRegresar" onclick="f_Regresar(<?php echo $xClieid; ?>,<?php echo $xProdid; ?>,<?php echo $xGrupid; ?>)" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
                     <span class="svg-icon svg-icon-2">

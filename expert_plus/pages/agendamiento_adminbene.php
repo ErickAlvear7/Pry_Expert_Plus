@@ -50,43 +50,40 @@
             header("Location: ./logout.php");
             exit();            
         }
-    }    
-
-    $xSQL = "SELECT per.pers_numerodocumento,per.pers_nombres,per.pers_apellidos,per.pers_imagen,(SELECT prv.provincia FROM `provincia_ciudad` prv WHERE per.pers_ciudad=prv.prov_id) AS provincia,(SELECT prv.ciudad FROM `provincia_ciudad` prv WHERE per.pers_ciudad=prv.prov_id) AS ciudad,";
-    $xSQL .= "(SELECT pro.prod_nombre FROM `expert_productos` pro WHERE pro.prod_id=tit.prod_id AND pro.pais_id=$xPaisid AND pro.empr_id=$xEmprid) AS producto, (SELECT gru.grup_nombre FROM `expert_grupos` gru WHERE gru.grup_id=tit.grup_id AND gru.pais_id=$xPaisid AND gru.empr_id=$xEmprid) AS grupo,";
-    $xSQL .= "per.pers_fechanacimiento,per.pers_direccion,per.pers_celular,per.pers_email,per.pers_estado,tit.prod_id,per.pers_ciudad FROM `expert_titular` tit INNER JOIN `expert_persona` per ON per.pers_id=tit.pers_id ";
-    $xSQL .= "WHERE tit.pais_id=$xPaisid AND tit.empr_id=$xEmprid AND tit.titu_id=$xTituid ";
-    $all_datos = mysqli_query($con, $xSQL);
-    foreach ($all_datos as $datos) {
-        $xNumDocumento = $datos['pers_numerodocumento'];
-        $xNombres = $datos['pers_nombres'];
-        $xApellidos = $datos['pers_apellidos'];
-        $xAvatar = $datos['pers_imagen'];
-        $xProvincia = $datos['provincia'];
+    } 
+    
+    $xSQL  = "SELECT ben.bene_numerodocumento AS Documento, CONCAT(ben.bene_nombres,' ', ben.bene_apellidos) AS Nombres,(SELECT ciu.ciudad ";
+    $xSQL .= "FROM `provincia_ciudad` ciu WHERE ciu.prov_id = ben.bene_ciudad) AS ciudad,(SELECT pro.provincia FROM `provincia_ciudad` pro ";
+    $xSQL .= "WHERE pro.prov_id = ben.bene_ciudad) AS Provincia, ben.bene_direccion AS Direccion,ben.bene_celular AS Celular,";
+    $xSQL .= "ben.bene_email AS Email,ben.bene_estado AS Estado,ben.bene_fechanacimiento AS Fecha FROM `expert_beneficiario` ben WHERE ben.bene_id=$xBeneid ";
+    $all_datosbene = mysqli_query($con, $xSQL);
+    foreach ($all_datosbene as $datos) {
+        $xDocumento = $datos['Documento'];
+        $xNombres = $datos['Nombres'];
         $xCiudad = $datos['ciudad'];
-        $xProducto = $datos['producto'];
-        $xGrupo = $datos['grupo'];
-        $xFechaNacimiento = $datos['pers_fechanacimiento'];
-        $xFechaNacimientoText = $datos['pers_fechanacimiento'];
-        $xDireccion = $datos['pers_direccion'];
-        $xCelular = $datos['pers_celular'];
-        $xEmail = $datos['pers_email'];
-        $xEstado = $datos['pers_estado'];
-        $xProduid = $datos['prod_id'];
-        $xCiudadid = $datos['pers_ciudad'];
+        $xProvincia = $datos['Provincia'];
+        $xDireccion = $datos['Direccion'];
+        $xCelular = $datos['Celular'];
+        $xEmail = $datos['Email'];
+        $xEstado = $datos['Estado'];
+        $xFecha = $datos['Fecha'];
+
+        if($xEmail == ''){
+            $xEmail = 'sinemail@gmail.com';
+        }
 
         if($xEstado == 'A'){
             $xEstado = 'ACTIVO'; 
         }else{
             $xEstado = 'INACTIVO';
         }
-   
-        $xFechaNacimiento = new DateTime($xFechaNacimiento);
-        $xFechaHoy = new DateTime(date("Y-m-d"));
-        $xDiferencia = $xFechaHoy->diff($xFechaNacimiento);
-        $xEdad =  $xDiferencia->format("%y");             
+
+        if($xFecha == '0000-00-00'){
+            $xFecha = 'sin fecha';
+        }
 
     }
+
 
     $xSQL = "SELECT DISTINCT provincia AS Descripcion FROM `provincia_ciudad` ";
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
@@ -143,11 +140,6 @@
     }
 
 
-    $xSQL  = "SELECT  ben.bene_id AS IdBene,CONCAT(ben.bene_nombres,' ',ben.bene_apellidos) as Nombres, ben.bene_numerodocumento AS Doumento,ben.bene_estado AS Estado,(SELECT ciudad FROM ";
-    $xSQL .= "`provincia_ciudad` ciu WHERE ben.bene_ciudad = ciu.prov_id AND ciu.pais_id=$xPaisid) as Ciudad,(SELECT pade_nombre FROM ";
-    $xSQL .= "`expert_parametro_detalle` det WHERE ben.bene_parentesco = det.pade_valorV) AS Parentesco FROM  `expert_beneficiario` ben ";
-    $xSQL .= "INNER JOIN `expert_productos` pro ON ben.prod_id = pro.prod_id WHERE ben.titu_id=$xTituid AND ben.pais_id=$xPaisid AND ben.prod_id=$xProdid AND pro.grup_id=$xGrupid ";
-    $all_beneficiarios = mysqli_query($con, $xSQL);
 ?>
      
 <div id="kt_content_container" class="container-xxl">
@@ -160,7 +152,7 @@
                             <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfiletitular"></div>
                         </div>
                         <div class="fs-4 fw-bolder text-gray-700 text-center mb-3">
-                             <span class="w-75px"><?php echo $xNombres . ' ' . $xApellidos; ?></span>
+                             <span class="w-75px"><?php echo $xNombres; ?></span>
                         </div>
                         <div class="mb-9">
                             <div class="badge badge-lg badge-light-primary d-inline"><?php echo $xEstado; ?></div>
@@ -298,7 +290,7 @@
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0">
                     <div class="card-title">
-                        <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_titular" role="button" aria-expanded="false" aria-controls="view_datos_agenda">Datos Titular
+                        <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_titular" role="button" aria-expanded="false" aria-controls="view_datos_agenda">Datos Beneficiario
                             <span class="ms-2 rotate-180">
                                 <span class="svg-icon svg-icon-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -317,7 +309,7 @@
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">No.Documento</h5>
                                     <div class="fw-bold">
-                                       <label><?php echo $xNumDocumento; ?></label>
+                                       <label><?php echo $xDocumento; ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -326,7 +318,7 @@
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Fecha de Nacimiento</h5>
                                     <div class="fw-bold">
-                                        <div class="text-gray-600"><?php echo $xFechaNacimientoText; ?></div>
+                                        <div class="text-gray-600"><?php echo $xFecha; ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -483,13 +475,8 @@
         <div class="flex-lg-row-fluid ms-lg-15">
             <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4 active" data-kt-countup-tabs="true" data-bs-toggle="tab" href="#tabTitular">Datos Agendamiento</a>
+                    <a class="nav-link text-active-primary pb-4 active" data-kt-countup-tabs="true" data-bs-toggle="tab" href="#tabTitular">Agendamiento Beneficiario</a>
                 </li>                
-
-                <!-- <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tabBeneficiario">Datos Beneficiario</a>
-                </li> -->
-
                 <li class="nav-item">
                     <a class="nav-link text-active-primary pb-4 " data-bs-toggle="tab" href="#tabHistorial">Historial Citas</a>
                 </li>
@@ -599,73 +586,6 @@
                         </button>
                     </div>
                 </div>
-                <!--DATOS BENEFICIARIO-->
-                <!-- <div class="tab-pane fade" id="tabBeneficiario" role="tabpanel">
-                    <div class="card pt-4 mb-6 mb-xl-9">
-                        <div class="card-header border-0">
-                            <div class="card-title">
-                                <h2>Beneficiarios</h2>
-                            </div>
-                        </div>
-                        <div class="card-body pt-0 pb-5">
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
-                                    <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
-                                        <tr class="text-start text-muted text-uppercase gs-0">
-                                            <th>Documento</th>
-                                            <th>Nombres</th>
-                                            <th>ciudad</th>
-                                            <th>Parentesco</th>
-                                            <th>Estado</th>
-                                            <th style="text-align: center;">OPCIONES</th>
-                                        </tr>
-                                        
-                                    </thead>
-                                    <tbody class="fs-6 fw-bold text-gray-600 text-uppercase">
-                                        <?php 
-                                            foreach ($all_beneficiarios as $datos) {
-                                                $xIdbene = $datos['IdBene'];
-                                                $xDocumento = $datos['Doumento'];
-                                                $xNombres = $datos['Nombres'];
-                                                $xCiudad = $datos['Ciudad'];
-                                                $xParentesco = $datos['Parentesco'];
-                                                $xEstado = $datos['Estado'];
-
-                                                if($xEstado == 'A'){
-                                                    $xEstado = 'ACTIVO';
-                                                    $xTextColor = "badge badge-light-primary";
-                                                }else{
-                                                    $xEstado = 'INACTIVO';
-                                                    $xTextColor = "badge badge-light-danger";
-                                                }
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $xDocumento; ?></td>
-                                            <td><?php echo $xNombres; ?></td>
-                                            <td><?php echo $xCiudad; ?></td>
-                                            <td><?php echo $xParentesco; ?></td>
-                                            <td>
-                                                <div class="<?php echo $xTextColor; ?>">
-                                                    <?php echo $xEstado; ?>
-                                                </div>  
-                                            </td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <div class="btn-group">
-                                                        <button id="btnEditar_" onclick="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
-                                                            <i class="fa fa-calendar-plus"></i>
-                                                        </button>												 
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
                 <!--DATOS HISTORIAL-->
                 <div class="tab-pane fade " id="tabHistorial" role="tabpanel">
                     <div class="card card-flush mb-6 mb-xl-9">
