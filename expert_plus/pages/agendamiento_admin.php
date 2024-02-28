@@ -474,6 +474,54 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="d-flex align-items-center mb-6">
+															<!--begin::Bullet-->
+                            <span data-kt-element="bullet" class="bullet bullet-vertical d-flex align-items-center min-h-70px mh-100 me-4 bg-success"></span>
+                            <div class="flex-grow-1 me-5">
+                                <!--begin::Time-->
+                                <div class="text-gray-800 fw-bold fs-2">Prestador
+                                <span class="text-gray-400 fw-bold fs-7">ASISTANET</span></div>
+                                <!--end::Time-->
+                                <!--begin::Description-->
+                                <div class="text-gray-700 fw-bold fs-6">Dashboard UI/UX Design Review</div>
+                                <!--end::Description-->
+                                <!--begin::Link-->
+                                <div class="text-gray-400 fw-bold fs-7">Lead by
+                                <!--begin::Name-->
+                                <a href="#" class="text-primary opacity-75-hover fw-bold">Lead by Bob</a>
+                                <!--end::Name--></div>
+                                <!--end::Link-->
+                            </div>
+                            <!--end::Info-->
+                            <!--begin::Action-->
+                            <a href="#" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#kt_modal_create_project">View</a>
+                            <!--end::Action-->
+                        </div>
+                        <div class="d-flex align-items-center mb-6">
+															<!--begin::Bullet-->
+                            <span data-kt-element="bullet" class="bullet bullet-vertical d-flex align-items-center min-h-70px mh-100 me-4 bg-info"></span>
+                            <!--end::Bullet-->
+                            <!--begin::Info-->
+                            <div class="flex-grow-1 me-5">
+                                <!--begin::Time-->
+                                <div class="text-gray-800 fw-bold fs-2">10:20 - 11:00
+                                <span class="text-gray-400 fw-bold fs-7">AM</span></div>
+                                <!--end::Time-->
+                                <!--begin::Description-->
+                                <div class="text-gray-700 fw-bold fs-6">9 Degree Project Estimation Meeting</div>
+                                <!--end::Description-->
+                                <!--begin::Link-->
+                                <div class="text-gray-400 fw-bold fs-7">Lead by
+                                <!--begin::Name-->
+                                <a href="#" class="text-primary opacity-75-hover fw-bold">Peter Marcus</a>
+                                <!--end::Name--></div>
+                                <!--end::Link-->
+                            </div>
+                            <!--end::Info-->
+                            <!--begin::Action-->
+                            <a href="#" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#kt_modal_create_project">View</a>
+                            <!--end::Action-->
+                        </div>
                     </div>
                 </div>
             </div>
