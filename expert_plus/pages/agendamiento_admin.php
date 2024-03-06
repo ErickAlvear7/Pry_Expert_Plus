@@ -398,114 +398,46 @@
                                 </span>
                             </div>
                         </div>   
-                        <div class="py-2">
-                            <div class="d-flex flex-stack">
-                                <div class="d-flex">
-                                    <div class="d-flex flex-column">
-                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-primary fs-2 me-2"></i>Prestrador</div>
-                                        <div class="fs-6 fw-bold text-muted"><?php echo $xAgnPrestador; ?></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-stack">
-                                <div class="d-flex">
-                                    <div class="d-flex flex-column">
-                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-primary fs-2 me-2"></i>Ciudad</div>
-                                        <div class="fs-6 fw-bold text-muted"><?php echo $xAgnCiudad; ?></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-stack">
-                                <div class="d-flex">
-                                    <div class="d-flex flex-column">
-                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-primary fs-2 me-2"></i>Sector</div>
-                                        <div class="fs-6 fw-bold text-muted"><?php echo $xAgnSector; ?></div>
-                                    </div>
-                                </div>
-                            </div>                                
-                            <hr class="bg-dark border-1 border-top border-dark" />
-                            <div class="d-flex flex-stack">
-                                <div class="d-flex">
-                                    <div class="d-flex flex-column">
-                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-success fs-2 me-2"></i>Profesional</div>
-                                        <div class="fs-6 fw-bold text-muted"><?php echo $xAgnProfesional; ?></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-stack">
-                                <div class="d-flex">
-                                    <div class="d-flex flex-column">
-                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-success fs-2 me-2"></i>Especialidad</div>
-                                        <div class="fs-6 fw-bold text-muted"><?php echo $xAgnEspecialidad; ?></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-stack">
-                                <div class="d-flex">
-                                    <div class="d-flex flex-column">
-                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-success fs-2 me-2"></i>Observacion</div>
-                                        <div class="fs-6 fw-bold text-muted"><?php echo $xAgnObservacion; ?></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="bg-dark border-1 border-top border-dark" />
-                            <div class="d-flex flex-stack">
-                                <div class="d-flex">
-                                    <div class="d-flex flex-column">
-                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-gray fs-2 me-2"></i>Fecha</div>
-                                        <div class="fs-6 fw-bold text-muted"><?php echo  $xAgnFecha; ?></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-stack">
-                                <div class="d-flex">
-                                    <div class="d-flex flex-column">
-                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-gray fs-2 me-2"></i>Hora</div>
-                                        <div class="fs-6 fw-bold text-muted"><?php echo  $xAgnHora; ?></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-stack">
-                                <div class="d-flex">
-                                    <div class="d-flex flex-column">
-                                        <div class="fs-5 text-dark fw-bolder"><i class="fa fa-genderless text-gray fs-2 me-2"></i>Estado</div>
-                                        <div class="<?php echo $color; ?>"><?php echo  $xAgnEstado; ?></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="d-flex align-items-center mb-6">
                             <span data-kt-element="bullet" class="bullet bullet-vertical d-flex align-items-center min-h-70px mh-100 me-4 bg-success"></span>
                             <div class="flex-grow-1 me-5">
-                                <div class="text-gray-800 fw-bold fs-2">Prestador
-                                <span class="text-primary fw-bold fs-7"><?php echo $xAgnPrestador; ?></span></div>
-                                <div class="text-gray-700 fw-bold fs-6">Ciudad/<?php echo $xAgnCiudad; ?></div>
-                                <div class="text-gray-700 fw-bold fs-6">Sector/
-                                <a href="#" class="opacity-75-hover fw-bold"><?php echo $xAgnSector; ?></a></div>
+                                <div class="text-gray-800 fw-bold fs-3">Prestador
+                                    <span class="text-primary fw-bold fs-7"><?php echo $xAgnPrestador; ?></span>
+                                </div>
+                                <div class="text-gray-800 fw-bold fs-3">Ciudad/
+                                    <span class="text-gray-600 fw-bold fs-7 text-uppercase"><?php echo $xAgnCiudad; ?></span>
+                                </div>
+                                <div class="text-gray-800 fw-bold fs-3">Sector/
+                                    <span class="text-gray-600 fw-bold fs-7"><?php echo $xAgnSector; ?></span>
+                                </div>
                             </div>
                             <a href="#" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#kt_modal_create_project">View</a>
                         </div>
                         <div class="d-flex align-items-center mb-6">
-                            <span data-kt-element="bullet" class="bullet bullet-vertical d-flex align-items-center min-h-70px mh-100 me-4 bg-info"></span>
+                            <span data-kt-element="bullet" class="bullet bullet-vertical d-flex align-items-center min-h-150px mh-100 me-4 bg-info"></span>
                             <div class="flex-grow-1 me-5">
-                                <div class="text-gray-800 fw-bold fs-2">10:20 - 11:00
-                                <span class="text-gray-400 fw-bold fs-7">AM</span></div>
-                                <div class="text-gray-700 fw-bold fs-6">9 Degree Project Estimation Meeting</div>
-                                <div class="text-gray-400 fw-bold fs-7">Lead by
-                                <a href="#" class="text-primary opacity-75-hover fw-bold">Peter Marcus</a></div>
+                                <div class="text-gray-800 fw-bold fs-3">Profesional</div>
+                                <span class="text-gray-600 fw-bold fs-7"><?php echo $xAgnProfesional; ?></span>
+                                <div class="text-gray-700 fw-bold fs-3">Especialidad</div>
+                                <span class="text-primary fw-bold fs-7"><?php echo $xAgnEspecialidad; ?></span>
+                                <div class="text-gray-800 fw-bold fs-3">Observacion</div>
+                                <span class="text-gray-600 fw-bold fs-7"><?php echo $xAgnObservacion; ?></span>
                             </div>
                             <a href="#" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#kt_modal_create_project">View</a>
                         </div>
                         <div class="d-flex align-items-center mb-6">
                             <span data-kt-element="bullet" class="bullet bullet-vertical d-flex align-items-center min-h-70px mh-100 me-4 bg-primary"></span>
                             <div class="flex-grow-1 me-5">
-                                <div class="text-gray-800 fw-bold fs-2">10:20 - 11:00
-                                <span class="text-gray-400 fw-bold fs-7">AM</span></div>
-                                <div class="text-gray-700 fw-bold fs-6">9 Degree Project Estimation Meeting</div>
-                                <div class="text-gray-400 fw-bold fs-7">Lead by
-                                <a href="#" class="text-primary opacity-75-hover fw-bold">Peter Marcus</a></div>
+                                <div class="text-gray-800 fw-bold fs-3">Fecha:
+                                    <span class="text-gray-600 fw-bold fs-7"><?php echo $xAgnFecha; ?></span>
+                                </div>
+                                <div class="text-gray-800 fw-bold fs-3">Hora:
+                                    <span class="text-gray-600 fw-bold fs-7"><?php echo $xAgnHora; ?></span>
+                                </div>
+                                <div class="text-gray-800 fw-bold fs-3">Estado/
+                                    <span class="<?php echo $color; ?> fw-bold fs-7"><?php echo $xAgnEstado; ?></span>
+                                </div>     
                             </div>
-                            <a href="#" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#kt_modal_create_project">View</a>
                         </div>
                     </div>
                 </div>
