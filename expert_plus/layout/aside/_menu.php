@@ -29,7 +29,7 @@
 		$page = 'admin_clienteproducto';
 	}
 
-	if($apge == 'agendar_titubeneadmin'){
+	if($page == 'agendar_titubeneadmin' || $page == 'calendartitular'){
 		$page = 'agendatitular_admin';
 	}
 	
@@ -65,7 +65,7 @@
 	$xSQL .= "men.menu_id AS MenuId,men.menu_descripcion AS Menu FROM `expert_usuarios` usu, `expert_perfil_menu_tarea` pmt, `expert_menu_tarea` mta, `expert_menu` men ";
 	$xSQL .= "WHERE usu.pais_id=$xPaisid AND usu.perf_id=pmt.perf_id AND pmt.meta_id=mta.meta_id AND mta.menu_id=men.menu_id AND pmt.meta_estado='A' ";
 	$xSQL .= "AND men.menu_estado='A' AND usu.usua_id=$xUsuaid AND usu.perf_id=$xPerfilid ORDER BY men.menu_orden";
-	
+
 	$all_menu = mysqli_query($con, $xSQL);
 
 

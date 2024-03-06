@@ -84,7 +84,12 @@
 	if($page == 'agendar_beneadmin'){
         $title = 'Agendar Beneficiario';
     	$descripcion = 'Datos del Beneficiario';
-	}	
+	}
+	
+	if($page == 'agendar_titubeneadmin'){
+        $title = 'Agendar Citas';
+    	$descripcion = 'Registro de agendamientos';
+	}
 
 	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";
 	$all_tareas = mysqli_query($con, $xSQL);	

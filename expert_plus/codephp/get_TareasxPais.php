@@ -19,7 +19,7 @@
             $xPerfilid = $_POST['xxPerfilid'];
             $xDatosTareas = [];
 
-            $xSQL = "SELECT DISTINCT mta.meta_id AS MentId,tar.tare_nombre AS Tarea,'SI' AS Ckeck,tar.tare_orden AS TareOrden ";
+            $xSQL = "SELECT DISTINCT mta.meta_id AS MentId,tar.tare_nombre AS Tarea,CASE pmt.meta_estado WHEN 'A' THEN 'SI' ELSE 'NO' END AS Ckeck,tar.tare_orden AS TareOrden ";
             $xSQL .= "FROM `expert_menu_tarea` mta, `expert_perfil_menu_tarea` pmt, `expert_tarea` tar ";
             $xSQL .= "WHERE pmt.meta_id=mta.meta_id AND mta.tare_id=tar.tare_id AND pmt.pais_id=$xPaisid AND pmt.perf_id=$xPerfilid ";
             $xSQL .= "UNION SELECT DISTINCT mta.meta_id AS MentId,tar.tare_nombre AS Tarea,'NO' AS Ckeck,tar.tare_orden AS TareOrden ";

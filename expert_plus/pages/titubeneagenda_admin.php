@@ -2520,7 +2520,7 @@
                             <div class="card mb-1 mb-xl-1">
                                 <div class="card-header border-0">
                                     <div class="card-title">
-                                        <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#modal-prestador_info" role="button" aria-expanded="false" aria-controls="">Logo Prestador
+                                        <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_prestador" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
                                             <span class="ms-2 rotate-180">
                                                 <span class="svg-icon svg-icon-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -2531,11 +2531,13 @@
                                         </div> 
                                     </div>
                                 </div>
-                                <div id="modal-prestador_info" class="collapse">
+                                <div id="view_imagen_prestador" class="collapse">
                                     <div class="card card-flush py-4">
                                         <div class="card-body pt-0">
-                                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
-                                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/svg/files/blank-image.svg)" id="imgfileprestador"></div>													
+                                            <div class="mt-1">
+                                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
+                                                    <div class="image-input-wrapper w-125px h-125px" id="imgfileprestador" style="background-image: url(assets/media/svg/files/blank-image.svg)"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -2544,7 +2546,7 @@
                             <div class="card mb-5 mb-xl-8">
                                 <div class="card-header border-0">
                                     <div class="card-title">
-                                        <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#modal-prestador_info2" role="button" aria-expanded="false" aria-controls="modal-prestador_info2">Informacion
+                                        <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_prestador" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Prestador
                                             <span class="ms-2 rotate-180">
                                                 <span class="svg-icon svg-icon-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -2555,69 +2557,163 @@
                                         </div> 
                                     </div>
                                 </div>
-                                <div id="modal-prestador_info2" class="collapse show">
+                                <div id="view_datos_prestador" class="collapse show">
                                     <div class="card card-flush py-2">
                                         <div class="card-body pt-0">
                                             <div class="row mb-4">
                                                 <div class="col-md-6">
                                                     <label class="form-label">Tipo</label>
-                                                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtTipoprestador" name="txtTipoprestador" minlength="5" maxlength="100"  value="" readonly />
+                                                    <input type="text" class="form-control" id="txtTipoprestador" name="txtTipoprestador" readonly />
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="form-label">Sector</label>
-                                                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtSector" name="txtSector" minlength="5" maxlength="100" value="" readonly />
+                                                    <input type="text" class="form-control" id="txtSector" name="txtSector" readonly />
                                                 </div>
                                             </div>
-                                            <div class="row mb-4">
-                                                <div class="col-md-12">
-                                                    <label class="form-label">Direccion</label>
-                                                    <textarea class="form-control mb-2" name="txtDireccion" id="txtDireccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);" readonly ></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="card-header border-0">
+                                        <div class="card-title">
+                                            <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="py-3 d-flex flex-stack flex-wrap">
+                                            <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_direccion" role="button" aria-expanded="false" aria-controls="view_direccion">
+                                                <div class="me-3 rotate-90">
+                                                    <span class="svg-icon svg-icon-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                                <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" />
+                                                <div class="me-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="text-gray-800 fw-bolder">Direccion</div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row mb-4">
-                                                <div class="col-md-4">
-                                                    <label class="form-label">Telefono 1</label>
-                                                    <input type="text" class="form-control form-control-solid" name="txtFono1" id="txtFono1"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Oficina 1" value="" readonly />
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="form-label">Telefono 2</label>
-                                                    <input type="text" class="form-control form-control-solid" name="txtFono2" id="txtFono2"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Oficina 2" value="" readonly />
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="form-label">Telefono 3</label>
-                                                    <input type="text" class="form-control form-control-solid" name="txtFono3" id="txtFono3"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Oficina 3" value="" readonly />
-                                                </div>
-                                            </div>
-                                            <div class="row mb-4">
-                                                <div class="col-md-4">
-                                                    <label class="form-label">Celular 1</label>
-                                                    <input type="text" class="form-control form-control-solid" name="txtCelular1" id="txtCelular1"  maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Celular 1" value="" readonly />
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="form-label">Celular 2</label>
-                                                    <input type="text" class="form-control form-control-solid" name="txtCelular2" id="txtCelular2"  maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Celular 2" value="" readonly />
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="form-label">Celular 3</label>
-                                                    <input type="text" class="form-control form-control-solid" name="txtCelular3" id="txtCelular3"  maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Celular 3" value="" readonly />
+                                        </div>
+                                        <div id="view_direccion" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                            <div class="d-flex flex-wrap py-5">
+                                                <div class="flex-equal me-5">
+                                                    <div class="row mb-8">
+                                                        <div class="col-md-2">
+                                                            <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13); " readonly ></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-8">
+                                                        <div class="col-md-2">
+                                                            <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" readonly />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row mb-4">
-                                                <div class="col-md-6">
-                                                    <label class="form-label">Email 1</label>
-                                                    <input type="email" class="form-control form-control-solid text-lowercase" name="txtEmail1" id="txtEmail1"  minlength="5" maxlength="100"  placeholder="Ingrese Email" value=""/>
+                                        </div>
+                                        <div class="py-3 d-flex flex-stack flex-wrap">
+                                            <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_telefonos" role="button" aria-expanded="false" aria-controls="view_telefonos">
+                                                <div class="me-3 rotate-90">
+                                                    <span class="svg-icon svg-icon-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                        </svg>
+                                                    </span>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <label class="form-label">Email 2</label>
-                                                    <input type="email" class="form-control form-control-solid text-lowercase" name="txtEmail2" id="txtEmail2"  minlength="5" maxlength="100" placeholder="Ingrese Email" value=""/>
+                                                <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
+                                                <div class="me-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <label class="form-label">URL</label>
-                                                    <input type="text" class="form-control mb-2" name="txtUrl" id="txtUrl" style="text-transform: uppercase;" maxlength="150" readonly />
+                                        </div>
+                                        <div id="view_telefonos" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                            <div class="row mb-2">
+                                                <div class="col-md-4">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
+                                                    <input type="text" class="form-control mb-2" name="txtFono1" id="txtFono1" value="" readonly />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
+                                                    <input type="text" class="form-control mb-2" name="txtFono2" id="txtFono2" value="" readonly />
+                                                </div> 
+                                                <div class="col-md-4">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
+                                                    <input type="text" class="form-control mb-2" name="txtFono3" id="txtFono3" value="" readonly />
+                                                </div>                                                        
+                                            </div>
+                                            <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
+                                                <div class="col-md-4">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
+                                                    <input type="text" class="form-control mb-2" name="txtCelular1" id="txtCelular1" value="" readonly />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
+                                                    <input type="text" class="form-control mb-2" name="txtCelular2" id="txtCelular2" value="" readonly />
+                                                </div> 
+                                                <div class="col-md-4">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
+                                                    <input type="text" class="form-control mb-2" name="txtCelular3" id="txtCelular3" value="" readonly />
+                                                </div>
+                                            </div>                                                
+                                        </div>
+                                        <div class="py-3 d-flex flex-stack flex-wrap">
+                                            <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_mails" role="button" aria-expanded="false" aria-controls="view_mails">
+                                                <div class="me-3 rotate-90">
+                                                    <span class="svg-icon svg-icon-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                                <img src="assets/media/logos/email.png" class="w-20px me-3" />
+                                                <div class="me-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="text-gray-800 fw-bolder">E-mail</div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div id="view_mails" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                        <div class="d-flex flex-wrap py-5">
+                                                <div class="flex-equal me-5">
+                                                    <div class="row mb-8">
+                                                        <div class="col-md-2">
+                                                            <div class="fs-6 fw-bold mt-2 mb-3">Email 1:</div>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                        <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="form-check form-switch form-check-custom form-check-solid">
+                                                                <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" disabled />
+                                                                <span id="spanEnv1" class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>
+                                                            </label>   
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-8">
+                                                        <div class="col-md-2">
+                                                            <div class="fs-6 fw-bold mt-2 mb-3">Email 2:</div>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="form-check form-switch form-check-custom form-check-solid">
+                                                                <input class="form-check-input" name="chkEnviar2" id="chkEnviar2" type="checkbox" disabled />
+                                                                <span id="spanEnv2" class="form-check-label fw-bold text-muted" for="chkEnviar2">No Enviar</span>
+                                                            </label>             
+                                                        </div>
+                                                    </div>   
+                                                </div>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -2625,7 +2721,6 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <!-- <button type="button" id="btnSaveTit" class="btn btn-primary">Modificar</button> -->
                         </div>
                     </div>
                 </div>
@@ -3507,7 +3602,8 @@
                 _presid = $('#cboPrestador').val();
                 //alert(_presid);
                 if(_presid == ''){
-                    mensajesalertify("Seleccione Prestador", "W", "top-center", 5);
+                    //mensajesalertify("Seleccione Prestador", "W", "top-center", 5);
+                    toastSweetAlert("top-end",3000,"warning","Seleccione Prestador..!!");
                     return;
                 }
 
