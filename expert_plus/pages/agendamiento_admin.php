@@ -91,7 +91,7 @@
     $all_provincia = mysqli_query($con, $xSQL);
 
 
-    //Consulta Ultimo Agendamiento
+    //CONSULTA PRESTADORA-CIUDAD-SECTOR 
     $xSQL = "SELECT xpr.pres_nombre AS Prestadora, (SELECT ciudad  FROM `provincia_ciudad` pxc WHERE pxc.prov_id=xpr.prov_id) AS Ciudad, ";
     $xSQL .="xpr.pres_sector AS Sector FROM `expert_agenda` xag INNER JOIN `expert_prestadora` xpr ON xag.pres_id=xpr.pres_id ";
     $xSQL .="ORDER BY xag.fechacreacion DESC LIMIT 1 ";
@@ -102,6 +102,7 @@
         $xAgnSector = $datos['Sector'];
     }
 
+    //COMNSULTA PROFESIONAL-ESPECIALIDAD-OBSERVACION
     $xSQL = "SELECT (SELECT CONCAT(xpf.prof_nombres,' ',xpf.prof_apellidos) FROM `expert_profesional` xpf WHERE ";
     $xSQL .="xpe.prof_id=xpf.prof_id) AS Profesional,(SELECT xes.espe_nombre AS Especialidad FROM `expert_especialidad` xes ";
     $xSQL .="WHERE xag.espe_id=xes.espe_id) AS Especialidad,xag.observacion AS Observacion FROM `expert_agenda` xag ";
@@ -114,7 +115,7 @@
         $xAgnObservacion = $datos['Observacion'];
     }   
 
-
+    //CONSULTA FECHA-HORA-ESTADO
     $xSQL = "SELECT DATE_FORMAT(xag.fecha_inicio,'%d/%m/%Y') AS Fecha, CONCAT(xag.hora_desde,'-',xag.hora_hasta) AS Hora, ";
     $xSQL .="xag.estado_agenda AS Estado FROM `expert_agenda` xag ORDER BY xag.fechacreacion DESC LIMIT 1 ";
     $all_UltiAgendamiento = mysqli_query($con, $xSQL);
@@ -140,7 +141,7 @@
         $color = 'fs-6 text-gray fw-bold';
     }
 
-
+    //CONSULTA BENEFICIARIOS DEL TITULAR
     $xSQL  = "SELECT  ben.bene_id AS IdBene,CONCAT(ben.bene_nombres,' ',ben.bene_apellidos) as Nombres,ben.bene_ciudad AS IdCiudad, ben.bene_numerodocumento AS Doumento,ben.bene_estado AS Estado,(SELECT ciudad FROM ";
     $xSQL .= "`provincia_ciudad` ciu WHERE ben.bene_ciudad = ciu.prov_id AND ciu.pais_id=$xPaisid) as Ciudad,(SELECT prv.provincia FROM `provincia_ciudad` prv WHERE ben.bene_ciudad=prv.prov_id) AS Provincia,(SELECT pade_nombre FROM ";
     $xSQL .= "`expert_parametro_detalle` det WHERE ben.bene_parentesco = det.pade_valorV) AS Parentesco FROM  `expert_beneficiario` ben ";
