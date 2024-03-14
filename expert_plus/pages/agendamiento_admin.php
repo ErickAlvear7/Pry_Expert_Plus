@@ -106,7 +106,7 @@
     //COMNSULTA PROFESIONAL-ESPECIALIDAD-OBSERVACION
     $xSQL = "SELECT (SELECT CONCAT(xpf.prof_nombres,' ',xpf.prof_apellidos) FROM `expert_profesional` xpf WHERE ";
     $xSQL .="xpe.prof_id=xpf.prof_id) AS Profesional,(SELECT xes.espe_nombre AS Especialidad FROM `expert_especialidad` xes ";
-    $xSQL .="WHERE xag.espe_id=xes.espe_id) AS Especialidad,xag.observacion AS Observacion FROM `expert_agenda` xag ";
+    $xSQL .="WHERE xag.espe_id=xes.espe_id) AS Especialidad,xag.observacion AS Observacion,xag.pfes_id AS Idproes FROM `expert_agenda` xag ";
     $xSQL .="INNER JOIN `expert_profesional_especi` xpe ON xag.pfes_id=xpe.pfes_id ";
     $xSQL .="ORDER BY xag.fechacreacion DESC LIMIT 1 ";
     $all_UltiAgendamiento = mysqli_query($con, $xSQL);
@@ -114,6 +114,7 @@
         $xAgnProfesional = $datos['Profesional'];
         $xAgnEspecialidad = $datos['Especialidad'];
         $xAgnObservacion = $datos['Observacion'];
+        $xIdProfesional = $datos['Idproes'];
     }   
 
     //CONSULTA FECHA-HORA-ESTADO
@@ -426,7 +427,7 @@
                                 <div class="text-gray-800 fw-bold fs-3">Observacion</div>
                                 <span class="text-gray-600 fw-bold fs-7"><?php echo $xAgnObservacion; ?></span>
                             </div>
-                            <a href="#" class="btn btn-sm btn-active-light-primary"><i class="fa fa-eye"></i></a>
+                            <a href="#" class="btn btn-sm btn-active-light-primary btnPro"><i class="fa fa-eye"></i></a>
                             <!-- <a href="#" class="btn btn-icon btn-active-light-primary"><i class="fa fa-eye"></i></a> -->
                         </div>
                         <div class="d-flex align-items-center mb-6">
@@ -2621,7 +2622,7 @@
         </div>
     </div>
 </div>
-<!--Modal Prestador Ultimo Agendamiento-->
+<!--Modal Prestador ver Ultimo Agendamiento-->
 <div class="modal fade" id="modal_prestador_ult" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content"> 
@@ -2683,11 +2684,11 @@
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <label class="form-label">Tipo</label>
-                                        <input type="text" class="form-control" id="txtTipoprestadorUlt" disabled />
+                                        <input type="text" class="form-control" id="txtTipoprestadorUlt" readonly />
                                     </div>
                                     <div class="col-md-6">
                                          <label class="form-label">Sector</label>
-                                         <input type="text" class="form-control" id="txtSectorUlt" disabled />
+                                         <input type="text" class="form-control" id="txtSectorUlt" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -2723,7 +2724,7 @@
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
                                             </div>
                                             <div class="col-md-10">
-                                                <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13); " readonly ></textarea>
+                                                <textarea class="form-control mb-2 text-uppercase" id="txtDireccionUlt" maxlength="250" onkeydown="return (event.keyCode!=13); " readonly ></textarea>
                                             </div>
                                         </div>
                                         <div class="row mb-8">
@@ -2731,7 +2732,7 @@
                                                 <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
                                             </div>
                                             <div class="col-md-10">
-                                                <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" readonly />
+                                                <input type="text" class="form-control mb-2 text-lowercase" id="txtUrlUlt" maxlength="150" readonly />
                                             </div>
                                         </div>
                                     </div>
@@ -2758,29 +2759,29 @@
                                 <div class="row mb-2">
                                     <div class="col-md-4">
                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                        <input type="text" class="form-control mb-2" name="txtFono1" id="txtFono1" value="" readonly />
+                                        <input type="text" class="form-control mb-2" id="txtFono1Ult" readonly />
                                     </div>
                                     <div class="col-md-4">
                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                        <input type="text" class="form-control mb-2" name="txtFono2" id="txtFono2" value="" readonly />
+                                        <input type="text" class="form-control mb-2"  id="txtFono2Ult" readonly />
                                     </div> 
                                     <div class="col-md-4">
                                         <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
-                                        <input type="text" class="form-control mb-2" name="txtFono3" id="txtFono3" value="" readonly />
+                                        <input type="text" class="form-control mb-2" id="txtFono3Ult" readonly />
                                     </div>                                                        
                                 </div>
                                 <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                     <div class="col-md-4">
                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
-                                        <input type="text" class="form-control mb-2" name="txtCelular1" id="txtCelular1" value="" readonly />
+                                        <input type="text" class="form-control mb-2" id="txtCelular1Ult" readonly />
                                     </div>
                                     <div class="col-md-4">
                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
-                                        <input type="text" class="form-control mb-2" name="txtCelular2" id="txtCelular2" value="" readonly />
+                                        <input type="text" class="form-control mb-2" id="txtCelular2Ult" readonly />
                                     </div> 
                                     <div class="col-md-4">
                                         <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
-                                        <input type="text" class="form-control mb-2" name="txtCelular3" id="txtCelular3" value="" readonly />
+                                        <input type="text" class="form-control mb-2" id="txtCelular3Ult"  readonly />
                                     </div>
                                 </div>                                                
                             </div>
@@ -2809,13 +2810,7 @@
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Email 1:</div>
                                             </div>
                                             <div class="col-md-7">
-                                               <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="form-check form-switch form-check-custom form-check-solid">
-                                                    <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" disabled />
-                                                    <span id="spanEnv1" class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>
-                                                </label>   
+                                               <input type="email" id="txtEmail1Ult" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" readonly />
                                             </div>
                                         </div>
                                         <div class="row mb-8">
@@ -2823,13 +2818,7 @@
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Email 2:</div>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="form-check form-switch form-check-custom form-check-solid">
-                                                    <input class="form-check-input" name="chkEnviar2" id="chkEnviar2" type="checkbox" disabled />
-                                                    <span id="spanEnv2" class="form-check-label fw-bold text-muted" for="chkEnviar2">No Enviar</span>
-                                                </label>             
+                                                <input type="email" name="txtEmail2" id="txtEmail2Ult" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" readonly />
                                             </div>
                                         </div>   
                                     </div>
@@ -2846,8 +2835,188 @@
     </div>
 </div>
 
-
-
+<!--Modal Profesional ver Ultimo Agendamiento-->
+<div class="modal fade" id="modal_profesional_ult" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
+        <div class="modal-content"> 
+            <div class="modal-header">
+                <h2 class="fw-bolder">Informacion Profesional</h2>
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10 mt-n3">
+                <div class="card mb-1 mb-xl-1">
+                    <div class="card-header border-0">
+                        <div class="card-title">
+                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_profesional" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
+                                <span class="ms-2 rotate-180">
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                </span>
+                            </div> 
+                        </div>
+                    </div>
+                    <div id="view_imagen_profesional" class="collapse">
+                        <div class="card card-flush py-4">
+                            <div class="card-body pt-0">
+                                <div class="mt-1">
+                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
+                                        <div class="image-input-wrapper w-125px h-125px" id="imgfileprofesional" style="background-image: url(assets/media/svg/files/blank-image.svg)"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-5 mb-xl-8">
+                    <div class="card-header border-0">
+                        <div class="card-title">
+                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_prestador" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Profesional
+                                <span class="ms-2 rotate-180">
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                </span>
+                            </div> 
+                        </div>
+                    </div>
+                    <div id="view_datos_prestador" class="collapse show">
+                        <div class="card card-flush py-2">
+                            <div class="card-body pt-0">
+                                <div class="row mb-2">
+                                    <div class="col-md-12">
+                                        <label class="form-label">Nombres</label>
+                                        <input type="text" class="form-control" id="txtProfesionalUlt" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header border-0">
+                            <div class="card-title">
+                                <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_direccion" role="button" aria-expanded="false" aria-controls="view_direccion">
+                                    <div class="me-3 rotate-90">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" />
+                                    <div class="me-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-gray-800 fw-bolder">Direccion</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="view_direccion" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                <div class="d-flex flex-wrap py-5">
+                                    <div class="flex-equal me-5">
+                                        <div class="row mb-8">
+                                            <div class="col-md-2">
+                                                <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <textarea class="form-control mb-2 text-uppercase" id="txtDireccionProUlt" maxlength="250" readonly ></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_telefonos" role="button" aria-expanded="false" aria-controls="view_telefonos">
+                                    <div class="me-3 rotate-90">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
+                                    <div class="me-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="view_telefonos" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="fs-6 fw-bold mt-2 mb-3">Telefono:</div>
+                                        <input type="text" class="form-control mb-2" id="txtFonoProUlt" readonly />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="fs-6 fw-bold mt-2 mb-3">Celular:</div>
+                                        <input type="text" class="form-control mb-2" id="txtCelProUlt" readonly />
+                                    </div>                                                        
+                                </div>                                               
+                            </div>
+                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_mails" role="button" aria-expanded="false" aria-controls="view_mails">
+                                    <div class="me-3 rotate-90">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <img src="assets/media/logos/email.png" class="w-20px me-3" />
+                                    <div class="me-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-gray-800 fw-bolder">E-mail</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="view_mails" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                               <div class="d-flex flex-wrap py-5">
+                                    <div class="flex-equal me-5">
+                                        <div class="row mb-8">
+                                            <div class="col-md-2">
+                                                <div class="fs-6 fw-bold mt-2 mb-3">Email 1:</div>
+                                            </div>
+                                            <div class="col-md-10">
+                                               <input type="email" id="txtEmailProUlt" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" readonly />
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-2">
+                                                <div class="fs-6 fw-bold mt-2 mb-3">Email 2:</div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <input type="email" id="txtEmail2Ult" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" readonly />
+                                            </div>
+                                        </div>   
+                                    </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div>
 
@@ -3160,12 +3329,56 @@
 
                 $('#txtTipoprestadorUlt').val(json.TipoPrestador);
                 $('#txtSectorUlt').val(json.Sector);
-            
+                $('#txtDireccionUlt').val(json.Direccion);
+                $('#txtUrlUlt').val(json.Url);
+                $('#txtFono1Ult').val(json.Fono1);
+                $('#txtFono2Ult').val(json.Fono2);
+                $('#txtFono3Ult').val(json.Fono3);
+                $('#txtCelular1Ult').val(json.Celu1);
+                $('#txtCelular2Ult').val(json.Celu2);
+                $('#txtCelular3Ult').val(json.Celu3);
+                $('#txtEmail1Ult').val(json.Email1);
+                $('#txtEmail2Ult').val(json.Email2);
 
             });
 
         $("#modal_prestador_ult").modal("show");
     });
+
+    //Modal Ver Profesional Ultimo Agendamiento
+    $(document).on("click",".btnPro",function(){
+
+        var _paisid = '<?php echo $xPaisid ?>';
+        var _emprid = '<?php echo $xEmprid?>';
+        var _profidult = '<?php echo $xIdProfesional ?>';
+
+        var _parametros = {
+            xxPaisid: _paisid,
+            xxEmprid: _emprid,
+            xxProfid: _profidult
+        }
+
+        var xrespuesta = $.post("codephp/get_datosprofesionalagenda.php", _parametros);
+        xrespuesta.done(function(response){
+            var json = JSON.parse(response);                    
+            //console.log(response);
+            // if(json[0]['Avatar'] == ''){
+            //     document.getElementById('imgfileprofesionalUlt').style.backgroundImage="url(assets/media/svg/files/blank-image.svg)";    
+            // }else{
+            //     document.getElementById('imgfileprofesionalUlt').style.backgroundImage="url(logos/" + json[0]['Avatar'] + ")";
+            // }
+
+            $('#txtProfesionalUlt').val(json[0]['Nombres']);
+            $('#txtFonoProUlt').val(json[0]['Telefono']);
+            $('#txtCelProUlt').val(json[0]['Celular']);
+            $('#txtEmailProUlt').val(json[0]['Email']);
+            $('#txtDireccionProUlt').val(json[0]['Direccion']);  
+        }); 
+
+
+        $("#modal_profesional_ult").modal("show");
+    });
+
 
     //Agendamiento Beneficiario
     function f_Agendar(_beneid,_ciudadid,_clieid,_tituid,_prodid,_grupid){
