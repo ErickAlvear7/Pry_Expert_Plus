@@ -414,8 +414,7 @@
                                     <span class="text-gray-600 fw-bold fs-7"><?php echo $xAgnSector; ?></span>
                                 </div>
                             </div>
-                            <!-- <a href="#" class="btn btn-icon btn-active-light-primary btnPres"><i class="fa fa-eye"></i></a> -->
-                            <a href="#" class="btn btn-sm btn-active-light-primary btnPres"><i class="fa fa-eye"></i></a>
+                            <a href="#" class="btn btn-sm btn-active-light-primary btnPres" title="Ver Prestador" data-bs-toggle="tooltip" data-bs-placement="right"><i class="fa fa-eye"></i></a>
                         </div>
                         <div class="d-flex align-items-center mb-6">
                             <span data-kt-element="bullet" class="bullet bullet-vertical d-flex align-items-center min-h-150px mh-100 me-4 bg-info"></span>
@@ -427,8 +426,7 @@
                                 <div class="text-gray-800 fw-bold fs-3">Observacion</div>
                                 <span class="text-gray-600 fw-bold fs-7"><?php echo $xAgnObservacion; ?></span>
                             </div>
-                            <a href="#" class="btn btn-sm btn-active-light-primary btnPro"><i class="fa fa-eye"></i></a>
-                            <!-- <a href="#" class="btn btn-icon btn-active-light-primary"><i class="fa fa-eye"></i></a> -->
+                            <a href="#" class="btn btn-sm btn-active-light-primary btnPro" title="Ver Profesional" data-bs-toggle="tooltip" data-bs-placement="right"><i class="fa fa-eye"></i></a>
                         </div>
                         <div class="d-flex align-items-center mb-6">
                             <span data-kt-element="bullet" class="bullet bullet-vertical d-flex align-items-center min-h-70px mh-100 me-4 bg-primary"></span>
