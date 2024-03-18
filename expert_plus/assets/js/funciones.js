@@ -70,7 +70,7 @@ function toastSweetAlert(_position,_timer,_icon,_title){
         });
         Toast.fire({
         icon: _icon,
-        title: "<h5 style='color:rgb(52,152,219);'>" + _title + "</h5>"
+        title: "<h5 style='color:#7B7D81;'>" + _title + "</h5>"
     });
 
 }

@@ -50,6 +50,7 @@
         }
     }    
 
+    //DATOS TITULAR
     $xSQL = "SELECT per.pers_numerodocumento,per.pers_nombres,per.pers_apellidos,per.pers_imagen,(SELECT prv.provincia FROM `provincia_ciudad` prv WHERE per.pers_ciudad=prv.prov_id) AS provincia,(SELECT prv.ciudad FROM `provincia_ciudad` prv WHERE per.pers_ciudad=prv.prov_id) AS ciudad,";
     $xSQL .= "(SELECT pro.prod_nombre FROM `expert_productos` pro WHERE pro.prod_id=tit.prod_id AND pro.pais_id=$xPaisid AND pro.empr_id=$xEmprid) AS producto, (SELECT gru.grup_nombre FROM `expert_grupos` gru WHERE gru.grup_id=tit.grup_id AND gru.pais_id=$xPaisid AND gru.empr_id=$xEmprid) AS grupo,";
     $xSQL .= "per.pers_fechanacimiento,per.pers_direccion,per.pers_celular,per.pers_email,per.pers_estado,tit.prod_id,per.pers_ciudad FROM `expert_titular` tit INNER JOIN `expert_persona` per ON per.pers_id=tit.pers_id ";
@@ -86,9 +87,12 @@
 
     }
 
-    $xSQL = "SELECT DISTINCT provincia AS Descripcion FROM `provincia_ciudad` ";
-	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
-    $all_provincia = mysqli_query($con, $xSQL);
+    //CONSULTA BENEFICIARIOS DEL TITULAR
+    $xSQL  = "SELECT  ben.bene_id AS IdBene,CONCAT(ben.bene_nombres,' ',ben.bene_apellidos) as Nombres,ben.bene_ciudad AS IdCiudad, ben.bene_numerodocumento AS Doumento,ben.bene_estado AS Estado,(SELECT ciudad FROM ";
+    $xSQL .= "`provincia_ciudad` ciu WHERE ben.bene_ciudad = ciu.prov_id AND ciu.pais_id=$xPaisid) as Ciudad,(SELECT prv.provincia FROM `provincia_ciudad` prv WHERE ben.bene_ciudad=prv.prov_id) AS Provincia,(SELECT pade_nombre FROM ";
+    $xSQL .= "`expert_parametro_detalle` det WHERE ben.bene_parentesco = det.pade_valorV) AS Parentesco FROM  `expert_beneficiario` ben ";
+    $xSQL .= "INNER JOIN `expert_productos` pro ON ben.prod_id = pro.prod_id WHERE ben.titu_id=$xTituid AND ben.pais_id=$xPaisid AND ben.prod_id=$xProdid AND pro.grup_id=$xGrupid ";
+    $all_beneficiarios = mysqli_query($con, $xSQL);
 
 
     //CONSULTA PRESTADORA-CIUDAD-SECTOR 
@@ -143,12 +147,13 @@
         $color = 'fs-6 text-gray fw-bold';
     }
 
-    //CONSULTA BENEFICIARIOS DEL TITULAR
-    $xSQL  = "SELECT  ben.bene_id AS IdBene,CONCAT(ben.bene_nombres,' ',ben.bene_apellidos) as Nombres,ben.bene_ciudad AS IdCiudad, ben.bene_numerodocumento AS Doumento,ben.bene_estado AS Estado,(SELECT ciudad FROM ";
-    $xSQL .= "`provincia_ciudad` ciu WHERE ben.bene_ciudad = ciu.prov_id AND ciu.pais_id=$xPaisid) as Ciudad,(SELECT prv.provincia FROM `provincia_ciudad` prv WHERE ben.bene_ciudad=prv.prov_id) AS Provincia,(SELECT pade_nombre FROM ";
-    $xSQL .= "`expert_parametro_detalle` det WHERE ben.bene_parentesco = det.pade_valorV) AS Parentesco FROM  `expert_beneficiario` ben ";
-    $xSQL .= "INNER JOIN `expert_productos` pro ON ben.prod_id = pro.prod_id WHERE ben.titu_id=$xTituid AND ben.pais_id=$xPaisid AND ben.prod_id=$xProdid AND pro.grup_id=$xGrupid ";
-    $all_beneficiarios = mysqli_query($con, $xSQL);
+    //SELECCONAR PROVINCIAS
+
+    $xSQL = "SELECT DISTINCT provincia AS Descripcion FROM `provincia_ciudad` ";
+	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
+    $all_provincia = mysqli_query($con, $xSQL);
+
+
 ?>
      
 <div id="kt_content_container" class="container-xxl">
