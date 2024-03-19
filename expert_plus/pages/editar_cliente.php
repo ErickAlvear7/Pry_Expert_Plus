@@ -592,8 +592,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnAgregar" class="btn btn-primary">Grabar</button>
+                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agregar</button>
             </div>
         </div>   
     </div>
@@ -853,17 +853,17 @@
         var _asistanu = $('#txtAsisAnu').val();
    
         if(_producto == ''){
-            mensajesalertify("Ingrese Producto..!!","W","top-right",3);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Producto..!!");
             return false;
         }
 
         if(_costo == 0){
-            mensajesalertify("Ingrese Costo..!!","W","top-right",3);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Costo..!!");
             return false;
         }
 
         if(_txtGrupo == ''){
-            mensajesalertify("Seleccione Grupo..!!","W","top-right",3);
+            toastSweetAlert("top-end",3000,"warning","Seleccione Grupo..!!");
             return false;
         }
 
@@ -909,11 +909,11 @@
                 //mensajesalertify('Agregado Correctamente..!', 'S', 'top-center', 3);
 
                 $('#modal_addproducto').modal('hide');
-                mensajesweetalert('top-center','success','Agregado Correctamente',false,2500);
+                toastSweetAlert("top-end",3000,"success","Agregado");
               
 
             }else{
-                mensajesalertify('Producto ya está Asignado..!', 'W', 'top-right', 3);
+                toastSweetAlert("top-end",3000,"error","Ya está Agregado..!!");
                 document.getElementById("chkCobertura").checked = false;
                 _cobertura = "NO";
                 $("#lblCobertura").text("Cobertura NO");
