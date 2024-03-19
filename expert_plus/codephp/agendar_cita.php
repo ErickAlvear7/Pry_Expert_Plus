@@ -155,10 +155,13 @@
                                         
                     $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
                     $xSQL .= "VALUES('Registro Agendado',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
-                    mysqli_query($con, $xSQL); 
-                    
+                    mysqli_query($con, $xSQL);
+
+                    $xSQL = "INSERT INTO `expert_historial_agenda`(pais_id,empr_id,agen_id,tipo_cliente,titu_id,bene_id,pres_id,espe_id,pfes_id,fecha_inicio,fecha_fin,codigo_dia,dia,hora_desde,hora_hasta,tipo_registro,motivo_registro,observacion,estado_agenda,codigo_agenda,fechacreacion,usuariocreacion,terminalcreacion) ";
+                    $xSQL .= "VALUES($xPaisid,$xEmprid,$xAgendaid,'$xTipoCliente',$xTituid,$xBeneid,$xPresid,$xEspeid,$xPfesid,'{$xFechaIni}','{$xFechaFin}',$xCodigoDia,'$xDia','{$xHoraDesde}','{$xHoraHasta}','$xTipoRegistro',$xMotivoRegistro,'$xObservacion','$xEstadoAgenda',$xCodigoAgenda,'{$xFecha}',$xUsuaid,'$xTerminal') ";
+    
                     $xAgendado = 111;
-                    $xAgendaid = 1503;
+                    //$xAgendaid = 1503;
                 }
             }else{
                 $xAgendaid = 0;

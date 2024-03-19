@@ -38,6 +38,7 @@
     $xUsuaid = $_SESSION["i_usuaid"];
 
     $xTituid = $_POST['tituid'];
+    $xBeneid = $_POST['beneid'];
     $xProdid = $_POST['prodid'];
     $xGrupid = $_POST['grupid'];
     $xAgendaid = $_POST['agendaid'];
@@ -3520,9 +3521,10 @@
 
             var _agendaid = "<?php echo $xAgendaid; ?>";
             if(_agendaid > 0){
-                alert('Mostrar resumen del agendamiento: ' + _agendaid);
+                
+                //alert('Mostrar resumen del agendamiento: ' + _agendaid);
                 //CREAR UN AJAX que CONSULTE LA AGENDA PARA UN RESUMEN
-                var xrespuesta = $.post("codephp/get_datosagendamiento.php", { xxAgendaid: _agendaid,xxPaisid:_paisid,xxEmprid: _emprid});
+                var xrespuesta = $.post("codephp/get_datosagendamiento.php", { "xxAgendaid": _agendaid, "xxPaisid" :_paisid, "xxEmprid" : _emprid});
                 xrespuesta.done(function(response){
 
                     var _datos = JSON.parse(response);

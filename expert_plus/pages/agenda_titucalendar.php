@@ -97,7 +97,7 @@
         $xIntervalo = $datos['intervalo'];
     }
 
-    $xTituid = 1;
+    /*$xTituid = 1;
     $xBeneid = 0;
     $xPresid = 6;
     $xPreeid = 3;
@@ -105,7 +105,7 @@
     $xProdid = 7;
     $xGrupid = 1;
     $xCiudid = 188;    
-    $xEspeid = 1;
+    $xEspeid = 1;*/
 
 
 ?>
@@ -1662,7 +1662,7 @@
                 var _respuesta = $.post("codephp/agendar_cita.php", _parametros);
                 _respuesta.done(function(response){
                     if(response >= 0){
-                        $.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'prodid': _prodid, 'grupid': _grupid, 'agendaid': response });
+                        $.redirect('?page=agendar_titubeneadmin&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'beneid': _beneid, 'prodid': _prodid, 'grupid': _grupid, 'agendaid': response });
                         
                     }else{
                         Swal.fire({
