@@ -83,7 +83,7 @@
             $xSQL = "SELECT * FROM `expert_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND espe_id=$xEspeid  ";
             $all_datos = mysqli_query($con, $xSQL);            
             foreach ($all_datos as $datos) {
-                $xEspecialidad = $ciudad['espe_nombre'];
+                $xEspecialidad = $datos['espe_nombre'];
             }
 
             $xSQL = "SELECT * FROM `expert_profesional_especi` pfe, `expert_profesional` pro WHERE pfe.pais_id=$xPaisid AND pfe.empr_id=$xEmprid AND pfe.pfes_id=$xPfesid AND  ";
@@ -104,7 +104,7 @@
                 'Ciudad'=> $xCiudad,
                 'Especialidad'=> $xEspecialidad,
                 'Profesional'=> $xProfesional,
-                'FechaInicio'=> $xLogoCab,
+                'FechaInicio'=> $xFechaInicio,
                 'FechaFin'=> $xFechaFin,
                 'Dia'=> $xDia,
                 'Observacion'=> $xObservacion,

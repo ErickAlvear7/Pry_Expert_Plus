@@ -1691,8 +1691,10 @@
                 let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
                 
                 element = arg.el;
+                console.log(arg.event.title);
+
                 //const popoverHtml = '<div class="fw-bolder mb-2">' + arg.event.extendedProps.description + '</div><div class="fs-7"><span class="fw-bold">Reserva:</span> ' + _fechareserva + '</div><div class="fs-7 mb-4"><span class="fw-bold">End:</span> ' + arg.event.id + '</div><div id="btnViewReserva" type="button" class="btn btn-sm btn-light-primary">View More</div>';
-                const popoverHtml = '<div class="fw-bolder mb-2">' + arg.event.extendedProps.description + '</div><div class="fs-7 mb-2"><span class="fw-bold">Reserva:</span> ' + _fechareserva + '</div><div class="fs-7"><span class="fw-bold">Hora Inicio:</span> ' + arg.event.extendedProps.horaini + '</div><div class="fs-7 mb-2"><span class="fw-bold">Hora Fin:</span> ' + arg.event.extendedProps.horafin + '</div><div class="fs-7"><span class="fw-bold">Agent:</span> ' + arg.event.extendedProps.username + '</div>';
+                const popoverHtml = '<div class="fw-bolder mb-2">' + arg.event.extendedProps.description + '</div><div class="fs-7 mb-2"><span class="fw-bold">Fecha Registro:</span> ' + _fechareserva + '</div><div class="fs-7"><span class="fw-bold">Hora Inicio:</span> ' + arg.event.extendedProps.horaini + '</div><div class="fs-7 mb-2"><span class="fw-bold">Hora Fin:</span> ' + arg.event.extendedProps.horafin + '</div><div class="fs-7"><span class="fw-bold">Operador@:</span> ' + arg.event.extendedProps.username + '</div>';
 
                 // Popover options
                 var options = {
@@ -1702,7 +1704,7 @@
                     placement: 'auto',
                     dismiss: true,
                     html: true,
-                    title: 'Reserva Temporal',
+                    title: arg.event.title,
                     content: popoverHtml,
                 }
 

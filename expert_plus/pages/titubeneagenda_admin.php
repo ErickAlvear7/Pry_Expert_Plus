@@ -442,7 +442,23 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>                                  
+                                    </div>
+
+                                    <div class="mb-5 fv-row">
+                                        <span class="required">Sector</span>
+                                        <select name="cboSector" id="cboSector" aria-label="Seleccione Sector" data-control="select2" data-placeholder="Seleccione Sector" data-dropdown-parent="#tabTitular" class="form-select mb-2">
+                                            <option></option>
+                                            <?php 
+                                            $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid ";
+                                            $xSQL .= "AND pca.paca_nombre='Tipo Sector' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                            $all_datos =  mysqli_query($con, $xSQL);
+                                            foreach ($all_datos as $datos){ ?>
+                                                <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                            <?php } ?>
+                                        </select>                                         
+                                    </div>
+
+
                                     <div class="mb-5 fv-row">
                                         <label class="fs-6 fw-bold form-label mt-3">
                                             <span class="required">Prestador</span>
@@ -451,15 +467,14 @@
                                             </button>
                                         </label>
                                         <?php 
-                                            $xSQL = "SELECT pres_id AS Codigo, pres_nombre AS Descripcion FROM `expert_prestadora` WHERE pais_id=$xPaisid and empr_id=$xEmprid AND prov_id=$xCiudadid AND pres_estado='A' ";
-                                            //file_put_contents('log_1seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
-                                            $all_prestadora = mysqli_query($con, $xSQL);
+                                            //$xSQL = "SELECT pres_id AS Codigo, pres_nombre AS Descripcion FROM `expert_prestadora` WHERE pais_id=$xPaisid and empr_id=$xEmprid AND prov_id=$xCiudadid AND pres_estado='A' ";
+                                            //$all_prestadora = mysqli_query($con, $xSQL);
                                         ?>                                        
                                         <select name="cboPrestador" id="cboPrestador" aria-label="Seleccione Prestador" data-control="select2" data-placeholder="Seleccione Prestador" data-dropdown-parent="#tabTitular" class="form-select mb-2">
                                             <option></option>
-                                            <?php foreach ($all_prestadora as $ciudad) : ?>
+                                            <!-- <?php foreach ($all_prestadora as $ciudad) : ?>
                                                 <option value="<?php echo $ciudad['Codigo'] ?>"><?php echo mb_strtoupper($ciudad['Descripcion']) ?></option>
-                                            <?php endforeach ?>                                            
+                                            <?php endforeach ?>                                             -->
                                         </select> 
                                     </div>
                                     <div class="mb-5 fv-row">
@@ -3549,6 +3564,7 @@
                 _cboid = $(this).val(); //obtener el id seleccionado
 
                 $("#cboProvincia").empty();
+                $("#cboPrestador").empty();
                 $("#cboEspecialidad").empty();
                 $("#cboProfesional").empty();
 
@@ -3572,9 +3588,33 @@
 
             }); 
 
-            $('#cboCiudad').change(function(){
+            $('#cboSector').change(function(){
+                _cboid = $(this).val();
+                _cbociudad = $('#cboCiudad').val();
+
+                var _parametros = {
+                    "xxPaisid": _paisid,
+                    "xxEmprid": _emprid,
+                    "xxCiudadid": _cbociudad,
+                    "xxSector": _cboid
+                }  
+                
+                var _respuesta = $.post("codephp/get_comboprestador.php", _parametros);
+                _respuesta.done(function(response) {
+                    //document.getElementById("city").className = "form-control";
+                    $("#cboPrestador").html(response);
+                    
+                });
+                _respuesta.fail(function() {
+                });
+                _respuesta.always(function() {
+                });                 
+
+            }); 
+
+            /*$('#cboCiudad').change(function(){
                         
-                _ciudadid = $(this).val(); //obtener el id seleccionado
+                _ciudadid = $(this).val(); 
 
                 $("#cboPrestador").empty();
                 $("#cboEspecialidad").empty();
@@ -3597,7 +3637,7 @@
                 _respuesta.always(function() {
                 });
 
-            }); 
+            });*/ 
 
             $('#btnDatosPrestador').click(function(){
 

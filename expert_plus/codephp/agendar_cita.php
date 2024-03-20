@@ -127,11 +127,13 @@
             }
 
             if($xBeneid != '0'){
-                $xSQL = "SELECT bene_numerodocumento,CONCAT(bene_nombres,' ',bene_apellidos) AS Paciente,bene_fechanacimiento `expert_beneficiario` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND titu_id=$xTituid AND bene_id=$xBeneid  ";
+                $xSQL = "SELECT bene_numerodocumento,CONCAT(bene_nombres,' ',bene_apellidos) AS Paciente,bene_fechanacimiento,bene_direccion,bene_celular `expert_beneficiario` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND titu_id=$xTituid AND bene_id=$xBeneid  ";
                 $all_datos = mysqli_query($con, $xSQL);
                 foreach ($all_datos as $datos) {
                     $xPaciente = $datos['Paciente'];
                     $xFechaNacimiento = $datos['pers_fechanacimiento'];
+                    $xDireccion = $datos['bene_direccion'];
+                    $xTelefono = $datos['bene_celular'];                    
                 }    
             }
 
@@ -159,6 +161,7 @@
 
                     $xSQL = "INSERT INTO `expert_historial_agenda`(pais_id,empr_id,agen_id,tipo_cliente,titu_id,bene_id,pres_id,espe_id,pfes_id,fecha_inicio,fecha_fin,codigo_dia,dia,hora_desde,hora_hasta,tipo_registro,motivo_registro,observacion,estado_agenda,codigo_agenda,fechacreacion,usuariocreacion,terminalcreacion) ";
                     $xSQL .= "VALUES($xPaisid,$xEmprid,$xAgendaid,'$xTipoCliente',$xTituid,$xBeneid,$xPresid,$xEspeid,$xPfesid,'{$xFechaIni}','{$xFechaFin}',$xCodigoDia,'$xDia','{$xHoraDesde}','{$xHoraHasta}','$xTipoRegistro',$xMotivoRegistro,'$xObservacion','$xEstadoAgenda',$xCodigoAgenda,'{$xFecha}',$xUsuaid,'$xTerminal') ";
+                    mysqli_query($con, $xSQL);
     
                     $xAgendado = 111;
                     //$xAgendaid = 1503;
