@@ -3518,7 +3518,7 @@
         <!--end::Modal dialog-->
     </div>
 
-    <!--MODAL AGENDA-->
+    <!--MODAL CALENDAR-->
     <div class="modal fade" id="modal_agenda" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-1000px">
             <div class="modal-content">
@@ -3542,8 +3542,81 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" id="" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agregar</button>
+                    <!-- <button type="button" id="" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agendar</button> -->
                 </div>
+            </div>
+        </div>
+    </div> 
+    
+     <!--MODAL PARA AGENDAR-->
+     <div class="modal fade" id="modal_new_agenda" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-700px">
+            <div class="modal-content">
+                <form class="form" action="#" id="modal_new_agenda_form">
+                    <div class="modal-header">
+                        <h2>TITULO</h2>
+                        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                            <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-body py-lg-10 px-lg-10">
+                        <div class="card card-flush py-4">
+                            <div class="card-body pt-0">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="required form-label">Tipo Registro</label>
+                                        <select name="cboTipoRegistro" id="cboTipoRegistro" aria-label="Seleccione Registro" data-control="select2" data-placeholder="Seleccione Registro" data-dropdown-parent="#modal_new_agenda_form" class="form-select mb-2">
+                                            <option value=""></option>
+                                            <option value="Agendar">Agendar</option>
+                                            <option value="Informacion">Informacion</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="required form-label">Motivo</label>
+                                        <select name="cboMotivo" id="cboMotivo" aria-label="Seleccione Motivo" data-control="select2" data-placeholder="Seleccione Motivo" data-dropdown-parent="#modal_new_agenda_form" class="form-select mb-2">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="required form-label">Observacion</label>
+                                        <textarea class="form-control mb-2 text-uppercase" name="txtObservacion" id="txtObservacion" maxlength="500" onkeydown="return (event.keyCode!=13);"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="required form-label">Fecha Inicio</label>
+                                        <input class="form-control form-control-solid" name="fecha_inicio" id="fecha_inicio" placeholder="Seleccione Fecha Inicio" disabled  />  
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="required form-label">Hora Inicio</label>
+                                        <input class="form-control form-control-solid" name="hora_inicio" id="hora_inicio"  placeholder="Seleccione Hora Inicio" />
+                                    </div>     
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="required form-label">Fecha Fin</label>
+                                        <input class="form-control form-control-solid" name="fecha_fin" id="fecha_fin" placeholder="Seleccione Fecha Fin" disabled /> 
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="required form-label">Hora Fin</label>
+                                        <input class="form-control form-control-solid" name="hora_fin" id="hora_fin" placeholder="Seleccione Hora Fin" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" id="" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agendar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>   
@@ -3565,6 +3638,18 @@
             var _cboprestaid = 0;
             var _cbopreeid = 0;
             var _cboprofid = 0;
+
+            var popover;
+            var popoverState = false; 
+
+            var data = {
+                id: '',
+                eventName: '',
+                eventDescription: '',
+                startDate: '',
+                endDate: '',
+                allDay: false
+            };  
 
             var _agendaid = "<?php echo $xAgendaid; ?>";
             if(_agendaid > 0){
@@ -3818,13 +3903,13 @@
 
                 var _presid = $('#cboPrestador').val();
                 var _espeid = $('#cboEspecialidad').val();
-                let _pfesid = $("#cboProfesional").val();
+                var _pfesid = $("#cboProfesional").val();
 
                 console.log(_presid);
                 console.log(_espeid);
                 console.log(_pfesid);
 
-                debugger;
+                //debugger;
 
                 var _parametros = {
 
@@ -3843,7 +3928,7 @@
                         var _hours = response;
                         var _jsonObj = JSON.stringify(response);
                         var _json = JSON.parse(_jsonObj);
-                        var _interval = _json[0].intervalo;
+                         _interval = _json[0].intervalo;
 
                         //console.log(_hours);
 
@@ -3915,6 +4000,309 @@
                 $("#modal_agenda").modal("show");
 
             });
+
+            // $('#myModal').modal('hide');
+            // $('#myModal').on('hidden.bs.modal', function () {
+            // // Load up a new modal...
+            //     $('#myModalNew').modal('show');
+            // });
+
+
+            function f_Selecc(info){
+
+                var _continuar = false;
+
+                var _dateactual = moment(info.date).format("YYYY-MM-DD");
+                var _dateselec = moment(info.startStr).format("YYYY-MM-DD");
+
+                if(_dateselec < _dateactual){
+                    toastSweetAlert("center-end",3000,"info","Seleccione una fecha superior o igual a la fecha en curso..!");
+                    return;
+                }
+
+                //validar que ha seleccionado solo el intervalo configurado
+                let _horaini = moment(info.startStr);
+                let _horafin = moment(info.endStr); 
+
+                let _mindiferen = _horafin.diff(_horaini, "m");
+                if(_mindiferen != parseInt(_interval) ){
+                    mensajesalertify("Seleccione correctamente el horario de atención, el intervalo configurado es de " + _interval + " minutos" , "W", "top-center", 5);
+                    return;
+                }
+
+                let _fechaactual = new Date();
+                let _daynow = _fechaactual.getDay();
+                let _diferenminuts = 0;
+
+                //let _hour = _fechaactual.getHours();
+                //let _min = _fechaactual.getMinutes();
+                //_min = _min < 10 ? '0' + _min : _min;
+                //let _horaactual = _hour + ':' + _min;
+                //let _timeselect = new Date(info.endStr);
+
+                let _horaactual = moment(_fechaactual);
+                //let _horaselect = moment(info.endStr);
+                let _horaselect = moment(info.startStr);
+
+                /*let _minuactual = _fechaactual.getMinutes();
+                let _minselect = new Date(info.startStr).getMinutes();
+
+                if(_minuactual > _minselect){
+                    _diferenminuts = _minuactual - _minselect;
+                }else{
+                    _diferenminuts = _minselect - _minuactual;
+                }*/
+
+                //_diferenminuts = _horaselect.diff(_horaactual, "m");
+                _diferenminuts = _horaactual.diff(_horaselect, "m");
+                //SUMAR 10 MINUTOS A LA DIFERENCIA, PARA DARLES 10 MINUTOS MAS
+                //_diferenminuts = moment(_diferenminuts).add(10,'m').format("HH:mm");
+
+                if(_diferenminuts > 5){
+                    // mensajesalertify("La hora seleccionada esta fuera del intervalo de..! " + _interval + " minutos" , "W", "top-center", 5);
+                    toastSweetAlert("center-end",3000,"error","La hora seleccionada esta fuera del intervalo de..! " + _interval + " minutos");
+                    return;
+                }
+
+                //alert('Current view: ' + info.view.type);
+                //alert('Dia: ' + info.view.dateEnv.weekText );
+                //alert('Date Now :'  +   dateactual) ;
+                //alert('Date Select :'  +   dateselec);
+
+                _timeinicio = moment(info.startStr).format("HH:mm");
+                _timefin = moment(info.endStr).format("HH:mm");
+
+                _dayselect = new Date(info.startStr).getDay();
+
+                switch(_dayselect){
+                    case 0:
+                        _dayname = 'DOMINGO';
+                        break;
+                    case 1:
+                        _dayname = 'LUNES';
+                        break;
+                    case 2:
+                        _dayname = 'MARTES';
+                        break;
+                    case 3:
+                        _dayname = 'MIERCOLES';
+                        break;
+                    case 4:
+                        _dayname = 'JUEVES'; 
+                        break;
+                    case 5:
+                        _dayname = 'VIERNES';
+                        break;
+                    case 6:
+                        _dayname = 'SABADO';
+                        break;
+                }                
+
+                $("#hora_inicio").prop('disabled','disabled');
+                $("#hora_fin").prop('disabled','disabled');             
+
+                var _parametros = {
+                    "xxPaisid" : _paisid,
+                    "xxEmprid" : _emprid,
+                    "xxPfesid" : _pfesid,
+                    "xxCodDia" : _dayselect,
+                    "xHini" : _timeinicio,
+                    "xHfin" : _timefin                    
+                }
+
+                _fechainicio = _dateselec + ' ' + _timeinicio;
+                _fechafin = _dateselec + ' ' + _timefin;
+
+                var _respuesta = $.post("codephp/get_horariodisponible.php", _parametros);
+                _respuesta.done(function(response) {
+                    if(response.trim() == 'OK'){
+                        _continuar = true;
+
+                        //validar la hora si esta con el tiempo adecuado para agendar, al menos con 1 hora de anticipacion
+                        if(_daynow == _dayselect ){
+                            if(_diferenminuts > 5){
+                                //$('#mycalendar').FullCalendar('unselect');
+                                //calendar.unselect();
+                                //var calendarEl = document.getElementById('mycalendar');
+                                //calendarEl.unselect();
+                                _continuar = false;
+                                // mensajesalertify("El horario seleccionado esta fuera del tiempo programado..!" , "W", "top-center", 5);
+                                toastSweetAlert("center-end",3000,"error","El horario seleccionado esta fuera del tiempo programado..!");
+                                return;   
+                            }
+                            /*if(_diferenminuts > 0 && _diferenminuts < 31){
+                                _continuar = false;
+                                mensajesalertify("El horario seleccionado esta fuera del tiempo programado..!" , "W", "top-center", 10);
+                                return;                             
+                            }*/
+                        }    
+                        
+                        if(_continuar){
+
+                            //BUSCAR SI NO EXISTE ALGUNA RESERVA ANTES
+                            var _buscareserva = {
+                                "xxPaisid" : _paisid,
+                                "xxEmprid" : _emprid,                
+                                "xxPresid" : _presid,
+                                "xxEspeid" : _espeid,
+                                "xxPfesid" : _pfesid,
+                                "xxCiudid" : _ciudid,
+                                "xxFechaInicio" : _fechainicio,
+                                "xxFechaFin" : _fechafin,
+                                "xxHoraDesde" : _timeinicio,
+                                "xxHoraHasta" : _timefin,
+                                "xxCodigoDia" : _dayselect,
+                                "xxDia" : _dayname,
+                                "xxUsuaId" : _usuaid
+                            }
+
+                            var _consreserva = $.post("codephp/consultar_reserva.php", _buscareserva);
+                            _consreserva.done(function(respreserva){
+                                
+                                if(respreserva == 0){
+                                    
+                                    f_LimpiarModal();
+
+                                    $("#fecha_inicio").val(_dateselec);
+                                    $("#fecha_fin").val(_dateselec);
+                                    $("#hora_inicio").val(_timeinicio);
+                                    $("#hora_fin").val(_timefin);
+
+                                    $("#modal_new_agenda").modal("show");                                     
+
+                                }else{
+                                    mensajesalertify("El horario no está disponible, se encuentra reservado..!" , "W", "top-center", 5);
+                                    return; 
+                                }
+                            });
+                        }
+                    }else{
+                        mensajesalertify("No existe configurado turno del día seleccionado" , "W", "top-center", 5);
+                        return;   
+                    }
+                });
+
+                if(info.view.type == 'dayGridMonth'){
+
+                    $.ajax({
+                        url: "codephp/get_turnoshorarios.php",
+                        type: "post",
+                        data: _parametros,
+                        dataType: "json",
+                        success: function(response){
+                            var _hours = response;
+                            var _jsonObj = JSON.stringify(response);
+                            var _json = JSON.parse(_jsonObj);
+
+                            for (var i = 0; i < _hours.length; i++) {
+                                if (_hours[i].daysOfWeek == _dayselect) {
+                                    _continuar = true;
+                                    break;
+                                }
+                            }                            
+
+                            if(_continuar){
+
+                                _interval = _json[0].intervalo;
+                                _timeinicio = _json[0].startTime;
+                                _timefin = _json[0].endTime;
+
+                                //let _todayDate = new Date().toISOString().slice(0, 10);
+
+                                let _fechainistr = _dateselec + ' ' + _timeinicio;
+                                let _fechainilst = new Date(_fechainistr);
+
+                                let _fechafinstr = _dateselec + ' ' + _timefin;
+                                let _fechafinlst = new Date(_fechafinstr);                            
+
+                                _timeinicio = moment(_fechainistr).format("HH:mm");
+                                _timefin = moment(_fechainistr).add(_interval,'m').format("HH:mm");
+
+                                $("#fecha_inicio").val(_dateactual);
+                                $("#fecha_fin").val(_dateactual);
+                                $("#hora_inicio").val(_timeinicio);
+                                $("#hora_fin").val(_timefin);
+
+                                $("#modal_new_agenda").modal("show");
+                            }else{
+                                mensajesalertify("Profesional no tiene definido horario el dia seleccionado..!", "W", "top-center", 5);
+                                return;                                
+                            }
+                        },								
+                        error: function (error){
+                            console.log(error);
+                        }                        
+                    });                 
+                }else{
+                            
+                }
+            }
+
+            function f_ViewDatos(arg){
+
+                hidePopovers();
+
+                let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
+
+                element = arg.el;
+                console.log(arg.event.title);
+
+                //const popoverHtml = '<div class="fw-bolder mb-2">' + arg.event.extendedProps.description + '</div><div class="fs-7"><span class="fw-bold">Reserva:</span> ' + _fechareserva + '</div><div class="fs-7 mb-4"><span class="fw-bold">End:</span> ' + arg.event.id + '</div><div id="btnViewReserva" type="button" class="btn btn-sm btn-light-primary">View More</div>';
+                const popoverHtml = '<div class="fw-bolder mb-2">' + arg.event.extendedProps.description + '</div><div class="fs-7 mb-2"><span class="fw-bold">Fecha Registro:</span> ' + _fechareserva + '</div><div class="fs-7"><span class="fw-bold">Hora Inicio:</span> ' + arg.event.extendedProps.horaini + '</div><div class="fs-7 mb-2"><span class="fw-bold">Hora Fin:</span> ' + arg.event.extendedProps.horafin + '</div><div class="fs-7"><span class="fw-bold">Operador@:</span> ' + arg.event.extendedProps.username + '</div>';
+
+                // Popover options
+                var options = {
+                    container: 'body',
+                    trigger: 'manual',
+                    boundary: 'window',
+                    placement: 'auto',
+                    dismiss: true,
+                    html: true,
+                    title: arg.event.title,
+                    content: popoverHtml,
+                }
+
+                // Initialize popover
+                popover = KTApp.initBootstrapPopover(element, options);
+
+                // Show popover
+                popover.show();
+                popoverState = true;
+            }
+
+            function f_ClickAgenda(arg){
+                
+                console.log(arg);
+                let _id = arg.event.id;
+                let _agenid = arg.event.extendedProps.usuariocreacion;
+                console.log(_agenid);
+                //alert('Borrar agenda, si es reservatmp elimina solo el usuario, si es agenda, mostrar form para cancelar');
+                /*$("#fecha_inicio").val(_dateactual);
+                $("#fecha_fin").val(_dateactual);
+                $("#hora_inicio").val(_timeinicio);
+                $("#hora_fin").val(_timefin);*/
+
+                let _usuaid = "<?php echo $xUsuaid; ?>";
+
+                if(_agenid == _usuaid){
+
+                    
+
+                }
+
+
+
+                let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
+
+                $("#modal_new_agenda").modal("show");
+            }
+
+            const hidePopovers = () => {
+                if (popoverState) {
+                    popover.dispose();
+                    popoverState = false;
+                }
+            }     
 
             //calendar
             
