@@ -3901,13 +3901,38 @@
 
             $('#btnCalendar').click(function(){
 
-                var _presid = $('#cboPrestador').val();
-                var _espeid = $('#cboEspecialidad').val();
-                var _pfesid = $("#cboProfesional").val();
+                 _presid = $('#cboPrestador').val();
+                 _espeid = $('#cboEspecialidad').val();
+                 _pfesid = $("#cboProfesional").val();
+                 _ciudid = $('#cboCiudad').val();
+                 _sectorid = $('#cboSector').val();
+                 
 
                 console.log(_presid);
                 console.log(_espeid);
                 console.log(_pfesid);
+                console.log(_ciudid);
+                console.log(_sectorid);
+
+                if(_sectorid == 0){
+                    toastSweetAlert("top-end",3000,"warning","Seleccione Sector..!!");
+                    return;
+                }
+
+                if(_presid == 0){
+                    toastSweetAlert("top-end",3000,"warning","Seleccione Prestador..!!");
+                    return;
+                }
+
+                if(_espeid == 0){
+                    toastSweetAlert("top-end",3000,"warning","Seleccione Especialidad..!!");
+                    return;
+                }
+
+                if(_pfesid == 0){
+                    toastSweetAlert("top-end",3000,"warning","Seleccione Profesional..!!");
+                    return;
+                }
 
                 //debugger;
 
@@ -4016,7 +4041,7 @@
                 var _dateselec = moment(info.startStr).format("YYYY-MM-DD");
 
                 if(_dateselec < _dateactual){
-                    toastSweetAlert("center-end",3000,"info","Seleccione una fecha superior o igual a la fecha en curso..!");
+                    toastSweetAlert("top-center",3000,"info","Seleccione una fecha superior o igual a la fecha en curso..!");
                     return;
                 }
 
@@ -4060,7 +4085,7 @@
 
                 if(_diferenminuts > 5){
                     // mensajesalertify("La hora seleccionada esta fuera del intervalo de..! " + _interval + " minutos" , "W", "top-center", 5);
-                    toastSweetAlert("center-end",3000,"error","La hora seleccionada esta fuera del intervalo de..! " + _interval + " minutos");
+                    toastSweetAlert("top-center",3000,"error","Hora fuera del intervalo de " + _interval + " minutos");
                     return;
                 }
 
@@ -4127,7 +4152,7 @@
                                 //calendarEl.unselect();
                                 _continuar = false;
                                 // mensajesalertify("El horario seleccionado esta fuera del tiempo programado..!" , "W", "top-center", 5);
-                                toastSweetAlert("center-end",3000,"error","El horario seleccionado esta fuera del tiempo programado..!");
+                                toastSweetAlert("top-center",3000,"error","Horario fuera del tiempo programado..!");
                                 return;   
                             }
                             /*if(_diferenminuts > 0 && _diferenminuts < 31){
