@@ -1662,6 +1662,7 @@
                 var _respuesta = $.post("codephp/agendar_cita.php", _parametros);
                 _respuesta.done(function(response){
                     if(response >= 0){
+                        
                         $.redirect('?page=agendar_titubeneadmin&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'beneid': _beneid, 'prodid': _prodid, 'grupid': _grupid, 'agendaid': response });
                         
                     }else{

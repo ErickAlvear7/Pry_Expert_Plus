@@ -3620,7 +3620,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" id="" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agendar</button>
+                        <button type="button" id="btnAgendar" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agendar</button>
                     </div>
                 </form>
             </div>
@@ -3656,26 +3656,6 @@
                 endDate: '',
                 allDay: false
             };  
-
-            var _agendaid = "<?php echo $xAgendaid; ?>";
-            if(_agendaid > 0){
-                
-                //alert('Mostrar resumen del agendamiento: ' + _agendaid);
-                //CREAR UN AJAX que CONSULTE LA AGENDA PARA UN RESUMEN
-                var xrespuesta = $.post("codephp/get_datosagendamiento.php", { "xxAgendaid": _agendaid, "xxPaisid" :_paisid, "xxEmprid" : _emprid});
-                xrespuesta.done(function(response){
-
-                    var _datos = JSON.parse(response);
-                    console.log(_datos);
-
-                    // _ciudadben = _datos[0].Ciudad;
-                    // _perenben = _datos[0].Parentesco;
-                    // _estadoben = _datos[0].Estado;
-                    // _estadoben = _datos[0].Estado;
-
-
-                    });
-            }            
 
             document.getElementById('imgfiletitular').style.backgroundImage="url(persona/" + _avatar + ")";
 
@@ -4041,6 +4021,7 @@
 
             function f_Selecc(info){
 
+                debugger;
                 var _continuar = false;
 
                 var _dateactual = moment(info.date).format("YYYY-MM-DD");
@@ -4199,6 +4180,7 @@
                                     $("#hora_inicio").val(_timeinicio);
                                     $("#hora_fin").val(_timefin);
 
+                                    $("#modal_agenda").modal("hide");
                                     $("#modal_new_agenda").modal("show");                                     
 
                                 }else{
@@ -4254,7 +4236,9 @@
                                 $("#hora_inicio").val(_timeinicio);
                                 $("#hora_fin").val(_timefin);
 
+                                $("#modal_new_agenda").modal("hide");
                                 $("#modal_new_agenda").modal("show");
+
                             }else{
                                 mensajesalertify("Profesional no tiene definido horario el dia seleccionado..!", "W", "top-center", 5);
                                 return;                                
@@ -4267,7 +4251,38 @@
                 }else{
                             
                 }
-            }
+            }     
+
+            $('#modal_new_agenda').on('hidden.bs.modal', function () {
+
+                var _parametros = {
+                    "xxPaisid" : _paisid,
+                    "xxEmprid" : _emprid,
+                    "xxPresid" : _presid,
+                    "xxEspeid" : _espeid,
+                    "xxPfesid" : _pfesid,
+                    "xxFechaInicio" : _fechainicio,
+                    "xxFechaFin" : _fechafin,
+                    "xxCodigoDia" : _dayselect
+                }                
+
+                var _respuesta = $.post("codephp/del_reservatmp.php", _parametros);
+                _respuesta.done(function(response){
+                    //$("#modal_agenda").modal("show");
+                });                
+            });            
+            
+            const f_LimpiarModal = () => {
+                $('#cboTipoRegistro').val('').change();
+                $('#cboMotivo').empty();
+                var _html = "<option value=''></option>";
+                $("#cboMotivo").html(_html);
+                $('#txtObservacion').val('');
+                $('#fecha_inicio').val('');
+                $('#hora_inicio').val('');
+                $('#fecha_fin').val('');
+                $('#hora_fin').val('');
+            }            
 
             function f_ViewDatos(arg){
 
@@ -4316,12 +4331,7 @@
                 let _usuaid = "<?php echo $xUsuaid; ?>";
 
                 if(_agenid == _usuaid){
-
-                    
-
                 }
-
-
 
                 let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
 
@@ -4337,7 +4347,7 @@
 
             //calendar
             
-            $('#btnNuevaAgenda').click(function(){
+            /*$('#btnNuevaAgenda').click(function(){
 
                 let _tituid = "<?php echo $xTituid; ?>";
                 let _prodid = "<?php echo $xProdid; ?>";
@@ -4368,7 +4378,131 @@
 
                 $.redirect('?page=calendartitular&menuid=<?php echo $menuid; ?>', {'tituid': _tituid, 'beneid': 0, 'prodid': _prodid, 'grupid': _grupid, 'presaid': _cboprestaid, 'preeid': _cbopreeid, 'pfesid': _cboprofid, 'ciudid': _cbociudid }); //POR METODO POST
 
-            });
+            });*/
+
+            $('#btnAgendar').click(function(){
+
+                var _tiporegistro = $('#cboTipoRegistro').val();
+                var _motivo = $('#cboMotivo').val();
+                var _observacion = $('#txtObservacion').val();
+                var _fechainicio = $('#fecha_inicio').val();
+                var _fechafinal = $('#fecha_fin').val();
+                var _horainicio = $('#hora_inicio').val();
+                var _horafin = $('#hora_fin').val();
+                var _tipocliente = "T";
+
+                if(_tiporegistro == ''){
+                    mensajesalertify("Seleccione Tipo de Registro ", "W", "top-center", 5);
+                    return;
+                }
+
+                if(_motivo == ''){
+                    mensajesalertify("Seleccione Motivo agenda ", "W", "top-center", 5);
+                    return;
+                }
+
+                if(_observacion == ''){
+                    mensajesalertify("Ingrese Observacion de la agenda ", "W", "top-center", 5);
+                    return;
+                }
+
+                let _fechaselect = _fechainicio + ' ' + _horainicio;
+                _fechaselect = new Date(_fechaselect);
+                let _fechacatual = new Date();
+
+                let _horaselect = moment(_fechaselect);
+                let _horaactual = moment(_fechacatual);
+
+                _diferenminuts = _horaactual.diff(_horaselect, "m");
+                //SUMAR 10 MINUTOS A LA DIFERENCIA, PARA DARLES 10 MINUTOS MAS
+                //_diferenminuts = moment(_diferenminuts).add(10,'m').format("HH:mm");
+
+                let _fechaAgenda = new Date(_fechaselect);
+                let _fechaView = new Date();
+
+                _fechaAgenda = moment(_fechaAgenda).format("YYYY-MM-DD");
+                _fechaView = moment(_fechaView).format("YYYY-MM-DD");
+
+                if(_fechaAgenda == _fechaView){
+
+                    if(_diferenminuts > 5){
+                        mensajesalertify("La hora seleccionada esta fuera del intervalo de..! " + _interval + " minutos" , "W", "top-center", 5);
+                        return;
+                    }
+                }
+
+                let _fechainiagenda = _fechainicio + ' ' + _horainicio;
+                let _fechafinagenda = _fechafinal + ' ' + _horafin;
+
+                if(parseInt(_beneid) > 0){
+                    _tipocliente = "B";
+                }
+
+                var _parametros = {
+                    "xxPaisid" : _paisid,
+                    "xxEmprid" : _emprid,
+                    "xxTipoCliente" : _tipocliente,
+                    "xxTituid" : _tituid,
+                    "xxBeneid" : _beneid,
+                    "xxCiudid" : _ciudid,
+                    "xxProdid" : _prodid,
+                    "xxGrupid" : _grupid,
+                    "xxPresid" : _presid,
+                    "xxEspeid" : _espeid,
+                    "xxPfesid" : _pfesid,
+                    "xxFechaIni" : _fechainiagenda,
+                    "xxFechaFin" : _fechafinagenda,
+                    "xxCodigoDia" : _dayselect,
+                    "xxDia" : _dayname,
+                    "xxHoraDesde" : _horainicio,
+                    "xxHoraHasta" : _horafin,
+                    "xxTipoRegistro" : _tiporegistro,
+                    "xxMotivoRegistro" : _motivo,
+                    "xxObservacion" : _observacion.toUpperCase(),
+                    "xxEstadoAgenda" : "A",
+                    "xxColor" : "#117A65",
+                    "xxTextColor" : "#060606",
+                    "xxUsuaid" : _usuaid,
+                }
+
+                var _respuesta = $.post("codephp/agendar_cita.php", _parametros);
+                _respuesta.done(function(response){
+                    if(response >= 0){
+                        
+                        //$.redirect('?page=agendar_titubeneadmin&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'beneid': _beneid, 'prodid': _prodid, 'grupid': _grupid, 'agendaid': response });
+                        var xrespuesta = $.post("codephp/get_datosagendamiento.php", { "xxAgendaid": _agendaid, "xxPaisid" :_paisid, "xxEmprid" : _emprid});
+                        xrespuesta.done(function(response){
+
+                            var _datos = JSON.parse(response);
+                            console.log(_datos);
+
+                            // _ciudadben = _datos[0].Ciudad;
+                            // _perenben = _datos[0].Parentesco;
+                            // _estadoben = _datos[0].Estado;
+                            // _estadoben = _datos[0].Estado;
+
+
+                        });                        
+                        
+                    }else{
+                        Swal.fire({
+                            text: "Error en el envio del correo, valide la informacion",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok,regresar!",
+                            customClass: {
+                                confirmButton: "btn btn-primary"
+                            }
+                        });
+                    }
+                    
+                });
+                _respuesta.fail(function() {
+                });
+                _respuesta.always(function() {
+                });
+
+            });   
             
         });        
         
