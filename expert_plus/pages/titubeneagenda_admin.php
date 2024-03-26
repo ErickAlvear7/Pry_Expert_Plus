@@ -4272,6 +4272,7 @@
                 });                
             });            
             
+            
             const f_LimpiarModal = () => {
                 $('#cboTipoRegistro').val('').change();
                 $('#cboMotivo').empty();
