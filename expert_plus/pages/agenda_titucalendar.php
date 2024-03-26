@@ -1152,7 +1152,7 @@
                     "daysOfWeek" : "[3]",
                     "startTime" : "08:00",
                     "endTime" : "16:00"
-                }
+                } 
             ]*/
 
             $.ajax({
