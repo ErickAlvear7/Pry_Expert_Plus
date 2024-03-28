@@ -91,6 +91,11 @@
     	$descripcion = 'Registro de agendamientos';
 	}
 
+	if($page == 'agendartitular.php'){
+        $title = 'Agendar Cita Titular';
+    	$descripcion = 'Calendario de Agendamiento';
+	}
+
 	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";
 	$all_tareas = mysqli_query($con, $xSQL);	
     foreach($all_tareas as $tareas){
