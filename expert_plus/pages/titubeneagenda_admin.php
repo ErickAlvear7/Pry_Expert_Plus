@@ -3573,7 +3573,7 @@
                     <div class="modal-body py-lg-10 px-lg-10">
                         <div class="card card-flush py-4">
                             <div class="card-body pt-0">
-                                <div class="row">
+                                <div class="row mb-2">
                                     <div class="col-md-6">
                                         <label class="required form-label">Tipo Registro</label>
                                         <select name="cboTipoRegistro" id="cboTipoRegistro" aria-label="Seleccione Registro" data-control="select2" data-placeholder="Seleccione Registro" data-dropdown-parent="#modal_new_agenda_form" class="form-select mb-2">
@@ -3589,30 +3589,30 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row mb-3">
                                     <div class="col-md-12">
                                         <label class="required form-label">Observacion</label>
-                                        <textarea class="form-control mb-2 text-uppercase" name="txtObservacion" id="txtObservacion" maxlength="500" onkeydown="return (event.keyCode!=13);"></textarea>
+                                        <textarea class="form-control text-uppercase" name="txtObservacion" id="txtObservacion" maxlength="500" row="1" onkeydown="return (event.keyCode!=13);"></textarea>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row mb-3">
                                     <div class="col-md-6">
-                                        <label class="required form-label">Fecha Inicio</label>
-                                        <input class="form-control form-control-solid" name="fecha_inicio" id="fecha_inicio" placeholder="Seleccione Fecha Inicio" disabled  />  
+                                        <label class="form-label">Fecha Inicio</label>
+                                        <input class="form-control form-control-solid" name="fecha_inicio" id="fecha_inicio" readonly  />  
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="required form-label">Hora Inicio</label>
-                                        <input class="form-control form-control-solid" name="hora_inicio" id="hora_inicio"  placeholder="Seleccione Hora Inicio" />
+                                        <label class="form-label">Hora Inicio</label>
+                                        <input class="form-control form-control-solid" name="hora_inicio" id="hora_inicio" readonly />
                                     </div>     
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label class="required form-label">Fecha Fin</label>
-                                        <input class="form-control form-control-solid" name="fecha_fin" id="fecha_fin" placeholder="Seleccione Fecha Fin" disabled /> 
+                                        <label class="form-label">Fecha Fin</label>
+                                        <input class="form-control form-control-solid" name="fecha_fin" id="fecha_fin" readonly /> 
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="required form-label">Hora Fin</label>
-                                        <input class="form-control form-control-solid" name="hora_fin" id="hora_fin" placeholder="Seleccione Hora Fin" />
+                                        <label class="form-label">Hora Fin</label>
+                                        <input class="form-control form-control-solid" name="hora_fin" id="hora_fin" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -3620,7 +3620,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" id="btnAgendar" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agendar</button>
+                        <button type="button" id="btnAgendar" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Agendar</button>
                     </div>
                 </form>
             </div>
@@ -3630,890 +3630,822 @@
 </div>
 
 
+<script>
 
-    <script>
+    $(document).ready(function(){
 
-        $(document).ready(function(){
+        var _paisid = "<?php echo $xPaisid; ?>";
+        var _emprid = "<?php echo $xEmprid; ?>";
+        var _usuaid = "<?php echo $xUsuaid; ?>";
+        var _provincia = "<?php echo $xProvincia; ?>";
+        var _ciudadid = "<?php echo $xCiudadid; ?>";
+        var _avatar = "<?php echo $xAvatar; ?>";
+        var _tituid = "<?php echo $xTituid; ?>";
+        var _prodid = "<?php echo $xProdid; ?>";
+        var _grupid = "<?php echo $xGrupid; ?>";
+        var _cboprestaid = 0;
+        var _cbopreeid = 0;
+        var _cboprofid = 0;
 
-            var _paisid = "<?php echo $xPaisid; ?>";
-            var _emprid = "<?php echo $xEmprid; ?>";
-            var _usuaid = "<?php echo $xUsuaid; ?>";
-            var _provincia = "<?php echo $xProvincia; ?>";
-            var _ciudadid = "<?php echo $xCiudadid; ?>";
-            var _avatar = "<?php echo $xAvatar; ?>";
-            var _cboprestaid = 0;
-            var _cbopreeid = 0;
-            var _cboprofid = 0;
+        var popover;
+        var popoverState = false; 
 
-            var popover;
-            var popoverState = false; 
+        var data = {
+            id: '',
+            eventName: '',
+            eventDescription: '',
+            startDate: '',
+            endDate: '',
+            allDay: false
+        };  
 
-            var data = {
-                id: '',
-                eventName: '',
-                eventDescription: '',
-                startDate: '',
-                endDate: '',
-                allDay: false
-            };  
+        document.getElementById('imgfiletitular').style.backgroundImage="url(persona/" + _avatar + ")";
 
-            document.getElementById('imgfiletitular').style.backgroundImage="url(persona/" + _avatar + ")";
+        $('#cboProvincia').val(_provincia).change();
+        $('#cboCiudad').val(_ciudadid).change();
 
-            $('#cboProvincia').val(_provincia).change();
-            $('#cboCiudad').val(_ciudadid).change();
-
-            $('#cboCiudad').change(function(){
-                
-                _cboid = $(this).val(); //obtener el id seleccionado
-
-                $("#cboProvincia").empty();
-                $("#cboPrestador").empty();
-                $("#cboEspecialidad").empty();
-                $("#cboProfesional").empty();
-
-                var _parametros = {
-                    "xxPaisid": _paisid,
-                    "xxEmprid": _emprid,
-                    "xxComboid": _cboid,
-                    "xxOpcion": 3
-                }
-
-                var _respuesta = $.post("codephp/cargar_combos.php", _parametros);
-                _respuesta.done(function(response) {
-                    //document.getElementById("city").className = "form-control";
-                    $("#cboProvincia").html(response);
-                    
-                });
-                _respuesta.fail(function() {
-                });
-                _respuesta.always(function() {
-                });                
-
-            }); 
-
-            $('#cboSector').change(function(){
-                _cboid = $(this).val();
-                _cbociudad = $('#cboCiudad').val();
-
-                var _parametros = {
-                    "xxPaisid": _paisid,
-                    "xxEmprid": _emprid,
-                    "xxCiudadid": _cbociudad,
-                    "xxSector": _cboid
-                }  
-                
-                var _respuesta = $.post("codephp/get_comboprestador.php", _parametros);
-                _respuesta.done(function(response) {
-                    //document.getElementById("city").className = "form-control";
-                    $("#cboPrestador").html(response);
-                    
-                });
-                _respuesta.fail(function() {
-                });
-                _respuesta.always(function() {
-                });                 
-
-            }); 
-
-            /*$('#cboCiudad').change(function(){
-                        
-                _ciudadid = $(this).val(); 
-
-                $("#cboPrestador").empty();
-                $("#cboEspecialidad").empty();
-                $("#cboProfesional").empty();
-
-                var _parametros = {
-                    xxPaisid: _paisid,
-                    xxEmprid: _emprid,
-                    xxCiudadid: _ciudadid
-                }
-
-                var _respuesta = $.post("codephp/get_comboprestador.php", _parametros);
-                _respuesta.done(function(response) {
-                    //document.getElementById("city").className = "form-control";
-                    $("#cboPrestador").html(response);
-                    
-                });
-                _respuesta.fail(function() {
-                });
-                _respuesta.always(function() {
-                });
-
-            });*/ 
-
-            $('#btnDatosPrestador').click(function(){
-
-                _presid = $('#cboPrestador').val();
-                //alert(_presid);
-                if(_presid == ''){
-                    //mensajesalertify("Seleccione Prestador", "W", "top-center", 5);
-                    toastSweetAlert("top-end",3000,"warning","Seleccione Prestador..!!");
-                    return;
-                }
-
-                var _parametros = {
-                    xxPaisid: _paisid,
-                    xxEmprid: _emprid,
-                    xxPresid: _presid
-                }                
-
-                var xrespuesta = $.post("codephp/get_datosprestadora.php", _parametros);
-                xrespuesta.done(function(response){
-                    var json = JSON.parse(response);
-                    //console.log(json.Logo);
-                    if(json.Logo == ''){
-                        document.getElementById('imgfileprestador').style.backgroundImage="url(assets/media/svg/files/blank-image.svg)";    
-                    }else{
-                        document.getElementById('imgfileprestador').style.backgroundImage="url(logos/" + json.Logo + ")";
-                    }
-
-                    $("#modal-prestador").find("input,textarea").val("");
-                    $("#modal-prestador").modal("show");
-                    $('#modal-prestador').modal('handleUpdate');
-
-                    $('#txtTipoprestador').val(json.TipoPrestador);
-                    $('#txtSector').val(json.Sector);
-                    $('#txtDireccion').val(json.Direccion);
-                    $('#txtUrl').val(json.Url);
-                    $('#txtFono1').val(json.Fono1);
-                    $('#txtFono2').val(json.Fono2);
-                    $('#txtFono3').val(json.Fono3);
-                    $('#txtCelular1').val(json.Celu1);
-                    $('#txtCelular2').val(json.Celu2);
-                    $('#txtCelular3').val(json.Celu3);
-                    $('#txtEmail1').val(json.Email1);
-                    $('#txtEmail2').val(json.Email2);
-
-                    if(json.Enviar1 == 'SI'){                        
-                        $('#chkEnviar1').prop('checked','checked');
-                        var _span1 = document.getElementById("spanEnv1");
-                        _span1.innerHTML = '<span id="spanEnv1" class="form-check-label fw-bold" for="chkEnviar1"><strong>Enviar</strong></span>';                        
-                    }
-
-                    if(json.Enviar2 == 'SI'){
-                        $('#chkEnviar2').prop('checked','checked');
-                        var _span2 = document.getElementById("spanEnv2");
-                        _span2.innerHTML = '<span id="spanEnv1" class="form-check-label fw-bold" for="chkEnviar1"><strong>Enviar</strong></span>';                        
-                    }                    
-
-                });
-            });
+        $('#cboCiudad').change(function(){
             
-            $('#cboPrestador').change(function(){
+            _cboid = $(this).val(); //obtener el id seleccionado
 
-                _cboprestaid = $(this).val();
+            $("#cboProvincia").empty();
+            $("#cboPrestador").empty();
+            $("#cboEspecialidad").empty();
+            $("#cboProfesional").empty();
 
-                $("#cboEspecialidad").empty();
-                $("#cboProfesional").empty();
+            var _parametros = {
+                "xxPaisid": _paisid,
+                "xxEmprid": _emprid,
+                "xxComboid": _cboid,
+                "xxOpcion": 3
+            }
 
-                var _parametros = {
-                    xxPaisid: _paisid,
-                    xxEmprid: _emprid,
-                    xxPrestaid: _cboprestaid
-                }
-
-                var _respuesta = $.post("codephp/get_comboespeciprestador.php", _parametros);
-                _respuesta.done(function(response) {
-                    $("#cboEspecialidad").html(response);
-                    
-                });
-                _respuesta.fail(function() {
-                });
-                _respuesta.always(function() {
-                });
-            });
-
-            $('#cboEspecialidad').change(function(){
-
-                _cbopreeid = $(this).val();
-
-                $("#cboProfesional").empty();
-
-                var _parametros = {
-                    xxPaisid: _paisid,
-                    xxEmprid: _emprid,
-                    xxPreeid: _cbopreeid
-                }
-
-                var _respuesta = $.post("codephp/get_comboprofesionalespeci.php", _parametros);
-                _respuesta.done(function(response) {
-                    $("#cboProfesional").html(response);
-                    
-                });
-                _respuesta.fail(function() {
-                });
-                _respuesta.always(function() {
-                });
-            });
-
-            $('#btnDatosProfesional').click(function(){
-
-                _profid = $('#cboProfesional').val();
-                if(_profid == ''){
-                    mensajesalertify("Seleccione Profesional", "W", "top-center", 5);
-                    return;
-                }
-                var _parametros = {
-                    xxPaisid: _paisid,
-                    xxEmprid: _emprid,
-                    xxProfid: _profid
-                }                
-
-                var xrespuesta = $.post("codephp/get_datosprofesionalagenda.php", _parametros);
-                xrespuesta.done(function(response){
-                    var json = JSON.parse(response);                    
-                    console.log(response);
-                    if(json[0]['Avatar'] == ''){
-                        document.getElementById('imgfileprofesional').style.backgroundImage="url(assets/media/svg/files/blank-image.svg)";    
-                    }else{
-                        document.getElementById('imgfileprofesional').style.backgroundImage="url(logos/" + json[0]['Avatar'] + ")";
-                    }
-
-                    $("#modal-profesionalAgenda").find("input,textarea").val("");
-                    $("#modal-profesionalAgenda").modal("show");
-                    $('#modal-profesionalAgenda').modal('handleUpdate');
-
-                    $('#txtNombreProf').val(json[0]['Nombres']);
-                    $('#txtTelefonoProf').val(json[0]['Telefono']);
-                    $('#txtCelularProf').val(json[0]['Celular']);
-                    $('#txtEmail').val(json[0]['Email']);
-                    $('#txtDireccionProf').val(json[0]['Direccion']);                   
-
-                });
-            });
-
-            //MODAL NUEVO AGENDAMIENTO
-
-            $('#btnCalendar').click(function(){
-
-                 _presid = $('#cboPrestador').val();
-                 _espeid = $('#cboEspecialidad').val();
-                 _pfesid = $("#cboProfesional").val();
-                 _ciudid = $('#cboCiudad').val();
-                 _sectorid = $('#cboSector').val();
-                 
-
-                console.log(_presid);
-                console.log(_espeid);
-                console.log(_pfesid);
-                console.log(_ciudid);
-                console.log(_sectorid);
-
-                if(_sectorid == 0){
-                    toastSweetAlert("top-end",3000,"warning","Seleccione Sector..!!");
-                    return;
-                }
-
-                if(_presid == 0){
-                    toastSweetAlert("top-end",3000,"warning","Seleccione Prestador..!!");
-                    return;
-                }
-
-                if(_espeid == 0){
-                    toastSweetAlert("top-end",3000,"warning","Seleccione Especialidad..!!");
-                    return;
-                }
-
-                if(_pfesid == 0){
-                    toastSweetAlert("top-end",3000,"warning","Seleccione Profesional..!!");
-                    return;
-                }
-
-                //debugger;
-
-                var _parametros = {
-
-                    "xxPaisid" : _paisid,
-                    "xxEmprid" : _emprid,
-                    "xxPfesid" : _pfesid
-                }  
+            var _respuesta = $.post("codephp/cargar_combos.php", _parametros);
+            _respuesta.done(function(response) {
+                $("#cboProvincia").html(response);
                 
+            });
+            _respuesta.fail(function() {
+            });
+            _respuesta.always(function() {
+            });                
+
+        }); 
+
+        $('#cboSector').change(function(){
+            _cboid = $(this).val();
+            _cbociudad = $('#cboCiudad').val();
+
+            var _parametros = {
+                "xxPaisid": _paisid,
+                "xxEmprid": _emprid,
+                "xxCiudadid": _cbociudad,
+                "xxSector": _cboid
+            }  
+            
+            var _respuesta = $.post("codephp/get_comboprestador.php", _parametros);
+            _respuesta.done(function(response) {
+                $("#cboPrestador").html(response);
+                
+            });
+            _respuesta.fail(function() {
+            });
+            _respuesta.always(function() {
+            });                 
+
+        }); 
+
+
+        $('#btnDatosPrestador').click(function(){
+
+            _presid = $('#cboPrestador').val();
+
+            if(_presid == ''){
+                toastSweetAlert("top-end",3000,"warning","Seleccione Prestador..!!");
+                return;
+            }
+
+            var _parametros = {
+                xxPaisid: _paisid,
+                xxEmprid: _emprid,
+                xxPresid: _presid
+            }                
+
+            var xrespuesta = $.post("codephp/get_datosprestadora.php", _parametros);
+            xrespuesta.done(function(response){
+                var json = JSON.parse(response);
+                //console.log(json.Logo);
+                if(json.Logo == ''){
+                    document.getElementById('imgfileprestador').style.backgroundImage="url(assets/media/svg/files/blank-image.svg)";    
+                }else{
+                    document.getElementById('imgfileprestador').style.backgroundImage="url(logos/" + json.Logo + ")";
+                }
+
+                $("#modal-prestador").find("input,textarea").val("");
+                $("#modal-prestador").modal("show");
+                $('#modal-prestador').modal('handleUpdate');
+
+                $('#txtTipoprestador').val(json.TipoPrestador);
+                $('#txtSector').val(json.Sector);
+                $('#txtDireccion').val(json.Direccion);
+                $('#txtUrl').val(json.Url);
+                $('#txtFono1').val(json.Fono1);
+                $('#txtFono2').val(json.Fono2);
+                $('#txtFono3').val(json.Fono3);
+                $('#txtCelular1').val(json.Celu1);
+                $('#txtCelular2').val(json.Celu2);
+                $('#txtCelular3').val(json.Celu3);
+                $('#txtEmail1').val(json.Email1);
+                $('#txtEmail2').val(json.Email2);
+
+                if(json.Enviar1 == 'SI'){                        
+                    $('#chkEnviar1').prop('checked','checked');
+                    var _span1 = document.getElementById("spanEnv1");
+                    _span1.innerHTML = '<span id="spanEnv1" class="form-check-label fw-bold" for="chkEnviar1"><strong>Enviar</strong></span>';                        
+                }
+
+                if(json.Enviar2 == 'SI'){
+                    $('#chkEnviar2').prop('checked','checked');
+                    var _span2 = document.getElementById("spanEnv2");
+                    _span2.innerHTML = '<span id="spanEnv1" class="form-check-label fw-bold" for="chkEnviar1"><strong>Enviar</strong></span>';                        
+                }                    
+
+            });
+        });
+        
+        $('#cboPrestador').change(function(){
+
+            _cboprestaid = $(this).val();
+
+            $("#cboEspecialidad").empty();
+            $("#cboProfesional").empty();
+
+            var _parametros = {
+                xxPaisid: _paisid,
+                xxEmprid: _emprid,
+                xxPrestaid: _cboprestaid
+            }
+
+            var _respuesta = $.post("codephp/get_comboespeciprestador.php", _parametros);
+            _respuesta.done(function(response) {
+                $("#cboEspecialidad").html(response);
+                
+            });
+            _respuesta.fail(function() {
+            });
+            _respuesta.always(function() {
+            });
+        });
+
+        $('#cboEspecialidad').change(function(){
+
+            _cbopreeid = $(this).val();
+
+            $("#cboProfesional").empty();
+
+            var _parametros = {
+                xxPaisid: _paisid,
+                xxEmprid: _emprid,
+                xxPreeid: _cbopreeid
+            }
+
+            var _respuesta = $.post("codephp/get_comboprofesionalespeci.php", _parametros);
+            _respuesta.done(function(response) {
+                $("#cboProfesional").html(response);
+                
+            });
+            _respuesta.fail(function() {
+            });
+            _respuesta.always(function() {
+            });
+        });
+
+        $('#btnDatosProfesional').click(function(){
+
+            _profid = $('#cboProfesional').val();
+            if(_profid == ''){
+                mensajesalertify("Seleccione Profesional", "W", "top-center", 5);
+                return;
+            }
+            var _parametros = {
+                xxPaisid: _paisid,
+                xxEmprid: _emprid,
+                xxProfid: _profid
+            }                
+
+            var xrespuesta = $.post("codephp/get_datosprofesionalagenda.php", _parametros);
+            xrespuesta.done(function(response){
+                var json = JSON.parse(response);                    
+                console.log(response);
+                if(json[0]['Avatar'] == ''){
+                    document.getElementById('imgfileprofesional').style.backgroundImage="url(assets/media/svg/files/blank-image.svg)";    
+                }else{
+                    document.getElementById('imgfileprofesional').style.backgroundImage="url(logos/" + json[0]['Avatar'] + ")";
+                }
+
+                $("#modal-profesionalAgenda").find("input,textarea").val("");
+                $("#modal-profesionalAgenda").modal("show");
+                $('#modal-profesionalAgenda').modal('handleUpdate');
+
+                $('#txtNombreProf').val(json[0]['Nombres']);
+                $('#txtTelefonoProf').val(json[0]['Telefono']);
+                $('#txtCelularProf').val(json[0]['Celular']);
+                $('#txtEmail').val(json[0]['Email']);
+                $('#txtDireccionProf').val(json[0]['Direccion']);                   
+
+            });
+        });
+
+        //MODAL NUEVO AGENDAMIENTO
+
+        $('#btnCalendar').click(function(){
+
+            //debugger;
+
+            _presid = $('#cboPrestador').val();
+            _espeid = $('#cboEspecialidad').val();
+            _pfesid = $("#cboProfesional").val();
+            _ciudid = $('#cboCiudad').val();
+            _sectorid = $('#cboSector').val();
+                
+
+            if(_sectorid == 0){
+                toastSweetAlert("top-end",3000,"warning","Seleccione Sector..!!");
+                return;
+            }
+
+            if(_presid == 0){
+                toastSweetAlert("top-end",3000,"warning","Seleccione Prestador..!!");
+                return;
+            }
+
+            if(_espeid == 0){
+                toastSweetAlert("top-end",3000,"warning","Seleccione Especialidad..!!");
+                return;
+            }
+
+            if(_pfesid == 0){
+                toastSweetAlert("top-end",3000,"warning","Seleccione Profesional..!!");
+                return;
+            }
+
+            //debugger;
+
+            var _parametros = {
+
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxPfesid" : _pfesid
+            }  
+            
+            $.ajax({
+                url: "codephp/get_turnoshorarios.php",
+                type: "post",
+                data: _parametros,
+                dataType: "json",
+                success: function(response){
+
+                    var _hours = response;
+                    var _jsonObj = JSON.stringify(response);
+                    var _json = JSON.parse(_jsonObj);
+                        _interval = _json[0].intervalo;
+                    
+                    var _slot = '00:' + _interval + ':00';                    
+                    
+                    var calendarEl = document.getElementById('mycalendar');
+
+                    //$('#mycalendar').fullCalendar();
+                    calendar = new FullCalendar.Calendar(calendarEl, {
+
+                        locale: 'es',
+                        initialView: 'timeGridWeek',
+                        //initialView: 'dayGridMonth',
+                        headerToolbar: {
+                            left: 'prev, next, today',
+                            center: 'title',
+                            //right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                            right: 'timeGridWeek,timeGridDay'
+                        },
+                        navLinks: true, // can click day/week names to navigate views
+                        editable: true,
+                        selectable: true,
+                        selectMirror: true,
+                        dayMaxEvents: true, // allow "more" link when too many events   
+                        select: function(arg) {
+                            f_Selecc(arg);
+                        },
+                        events: {
+                            url: 'codephp/get_reservacitas.php',
+                            method: 'POST',
+                            extraParams: {
+                                xxPaisid: _paisid,
+                                xxEmprid: _emprid,
+                                xxPresid: _presid,
+                                xxEspeid: _espeid,
+                                xxPfesid: _pfesid
+                            },
+                            failure: function() {
+                                alert('Existe un error en construccion JSON');
+                            }
+                        
+                        },
+                        datesSet: function(){
+                            hidePopovers();
+                        },
+                    
+                        eventClick: function (arg) {
+                            hidePopovers();
+                            f_ClickAgenda(arg);
+                        },
+                        eventMouseEnter: function (arg) {
+                            f_ViewDatos(arg);
+                            
+                        },
+                                                
+                        businessHours: _hours,
+                        slotDuration: _slot,
+                        slotMinutes: _interval
+                        
+                    });       
+                    calendar.render();             
+                },								
+                error: function (error){
+                    console.log(error);
+                }
+            });   
+            
+            $("#modal_agenda").modal("show");
+
+        });
+
+        // $('#myModal').modal('hide');
+        // $('#myModal').on('hidden.bs.modal', function () {
+        // // Load up a new modal...
+        //     $('#myModalNew').modal('show');
+        // });
+
+
+        function f_Selecc(info){
+
+            //debugger;
+            var _continuar = false;
+
+            var _dateactual = moment(info.date).format("YYYY-MM-DD");
+            var _dateselec = moment(info.startStr).format("YYYY-MM-DD");
+
+            if(_dateselec < _dateactual){
+                toastSweetAlert("top-center",3000,"info","Seleccione una fecha superior o igual a la fecha en curso..!");
+                return;
+            }
+
+            //validar que ha seleccionado solo el intervalo configurado
+            let _horaini = moment(info.startStr);
+            let _horafin = moment(info.endStr); 
+
+            let _mindiferen = _horafin.diff(_horaini, "m");
+            if(_mindiferen != parseInt(_interval) ){
+                mensajesalertify("Seleccione correctamente el horario de atención, el intervalo configurado es de " + _interval + " minutos" , "W", "top-center", 5);
+                return;
+            }
+
+            let _fechaactual = new Date();
+            let _daynow = _fechaactual.getDay();
+            let _diferenminuts = 0;
+
+            let _horaactual = moment(_fechaactual);
+            let _horaselect = moment(info.startStr);
+
+            _diferenminuts = _horaactual.diff(_horaselect, "m");
+            //SUMAR 10 MINUTOS A LA DIFERENCIA, PARA DARLES 10 MINUTOS MAS
+            //_diferenminuts = moment(_diferenminuts).add(10,'m').format("HH:mm");
+
+            if(_diferenminuts > 5){
+                toastSweetAlert("top-center",3000,"error","Hora fuera del intervalo de " + _interval + " minutos");
+                return;
+            }
+
+            _timeinicio = moment(info.startStr).format("HH:mm");
+            _timefin = moment(info.endStr).format("HH:mm");
+
+            _dayselect = new Date(info.startStr).getDay();
+
+            switch(_dayselect){
+                case 0:
+                    _dayname = 'DOMINGO';
+                    break;
+                case 1:
+                    _dayname = 'LUNES';
+                    break;
+                case 2:
+                    _dayname = 'MARTES';
+                    break;
+                case 3:
+                    _dayname = 'MIERCOLES';
+                    break;
+                case 4:
+                    _dayname = 'JUEVES'; 
+                    break;
+                case 5:
+                    _dayname = 'VIERNES';
+                    break;
+                case 6:
+                    _dayname = 'SABADO';
+                    break;
+            }                
+
+            $("#hora_inicio").prop('disabled','disabled');
+            $("#hora_fin").prop('disabled','disabled');             
+
+            var _parametros = {
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxPfesid" : _pfesid,
+                "xxCodDia" : _dayselect,
+                "xHini" : _timeinicio,
+                "xHfin" : _timefin                    
+            }
+
+            _fechainicio = _dateselec + ' ' + _timeinicio;
+            _fechafin = _dateselec + ' ' + _timefin;
+
+            var _respuesta = $.post("codephp/get_horariodisponible.php", _parametros);
+            _respuesta.done(function(response) {
+                if(response.trim() == 'OK'){
+                    _continuar = true;
+
+                    //validar la hora si esta con el tiempo adecuado para agendar, al menos con 1 hora de anticipacion
+                    if(_daynow == _dayselect ){
+                        if(_diferenminuts > 5){
+
+                            _continuar = false;
+
+                            toastSweetAlert("top-center",3000,"error","Horario fuera del tiempo programado..!");
+                            return;   
+                        }
+                    }    
+                    
+                    if(_continuar){
+
+                        //BUSCAR SI NO EXISTE ALGUNA RESERVA ANTES
+                        var _buscareserva = {
+                            "xxPaisid" : _paisid,
+                            "xxEmprid" : _emprid,                
+                            "xxPresid" : _presid,
+                            "xxEspeid" : _espeid,
+                            "xxPfesid" : _pfesid,
+                            "xxCiudid" : _ciudid,
+                            "xxFechaInicio" : _fechainicio,
+                            "xxFechaFin" : _fechafin,
+                            "xxHoraDesde" : _timeinicio,
+                            "xxHoraHasta" : _timefin,
+                            "xxCodigoDia" : _dayselect,
+                            "xxDia" : _dayname,
+                            "xxUsuaId" : _usuaid
+                        }
+
+                        var _consreserva = $.post("codephp/consultar_reserva.php", _buscareserva);
+                        _consreserva.done(function(respreserva){
+                            
+                            if(respreserva == 0){
+                                
+                                f_LimpiarModal();
+
+                                $("#fecha_inicio").val(_dateselec);
+                                $("#fecha_fin").val(_dateselec);
+                                $("#hora_inicio").val(_timeinicio);
+                                $("#hora_fin").val(_timefin);
+
+                                $("#modal_agenda").modal("hide");
+                                $("#modal_new_agenda").modal("show");                                     
+
+                            }else{
+                                mensajesalertify("El horario no está disponible, se encuentra reservado..!" , "W", "top-center", 5);
+                                return; 
+                            }
+                        });
+                    }
+                }else{
+                    mensajesalertify("No existe configurado turno del día seleccionado" , "W", "top-center", 5);
+                    return;   
+                }
+            });
+
+            if(info.view.type == 'dayGridMonth'){
+
                 $.ajax({
                     url: "codephp/get_turnoshorarios.php",
                     type: "post",
                     data: _parametros,
                     dataType: "json",
                     success: function(response){
-
                         var _hours = response;
                         var _jsonObj = JSON.stringify(response);
                         var _json = JSON.parse(_jsonObj);
-                         _interval = _json[0].intervalo;
 
-                        //console.log(_hours);
+                        for (var i = 0; i < _hours.length; i++) {
+                            if (_hours[i].daysOfWeek == _dayselect) {
+                                _continuar = true;
+                                break;
+                            }
+                        }                            
 
-                        
-                        var _slot = '00:' + _interval + ':00';                    
-                        
-                        var calendarEl = document.getElementById('mycalendar');
+                        if(_continuar){
 
-                        //$('#mycalendar').fullCalendar();
-                        calendar = new FullCalendar.Calendar(calendarEl, {
+                            _interval = _json[0].intervalo;
+                            _timeinicio = _json[0].startTime;
+                            _timefin = _json[0].endTime;
 
-                            locale: 'es',
-                            initialView: 'timeGridWeek',
-                            //initialView: 'dayGridMonth',
-                            headerToolbar: {
-                                left: 'prev, next, today',
-                                center: 'title',
-                                //right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                                right: 'timeGridWeek,timeGridDay'
-                            },
-                            navLinks: true, // can click day/week names to navigate views
-                            editable: true,
-                            selectable: true,
-                            selectMirror: true,
-                            dayMaxEvents: true, // allow "more" link when too many events   
-                            select: function(arg) {
-                                f_Selecc(arg);
-                            },
-                            events: {
-                                url: 'codephp/get_reservacitas.php',
-                                method: 'POST',
-                                extraParams: {
-                                    xxPaisid: _paisid,
-                                    xxEmprid: _emprid,
-                                    xxPresid: _presid,
-                                    xxEspeid: _espeid,
-                                    xxPfesid: _pfesid
-                                },
-                                failure: function() {
-                                    alert('Existe un error en construccion JSON');
-                                }
-                            
-                            },
-                            datesSet: function(){
-                                hidePopovers();
-                            },
-                      
-                            eventClick: function (arg) {
-                                hidePopovers();
-                                f_ClickAgenda(arg);
-                            },
-                            eventMouseEnter: function (arg) {
-                                f_ViewDatos(arg);
-                             
-                            },
-                                                 
-                            businessHours: _hours,
-                            slotDuration: _slot,
-                            slotMinutes: _interval
-                            
-                        });       
-                        calendar.render();             
+                            //let _todayDate = new Date().toISOString().slice(0, 10);
+
+                            let _fechainistr = _dateselec + ' ' + _timeinicio;
+                            let _fechainilst = new Date(_fechainistr);
+
+                            let _fechafinstr = _dateselec + ' ' + _timefin;
+                            let _fechafinlst = new Date(_fechafinstr);                            
+
+                            _timeinicio = moment(_fechainistr).format("HH:mm");
+                            _timefin = moment(_fechainistr).add(_interval,'m').format("HH:mm");
+
+                            $("#fecha_inicio").val(_dateactual);
+                            $("#fecha_fin").val(_dateactual);
+                            $("#hora_inicio").val(_timeinicio);
+                            $("#hora_fin").val(_timefin);
+
+                            $("#modal_new_agenda").modal("hide");
+                            $("#modal_new_agenda").modal("show");
+
+                        }else{
+                            mensajesalertify("Profesional no tiene definido horario el dia seleccionado..!", "W", "top-center", 5);
+                            return;                                
+                        }
                     },								
                     error: function (error){
                         console.log(error);
-                    }
-                });   
-               
-                $("#modal_agenda").modal("show");
+                    }                        
+                });                 
+            }else{
+                        
+            }
+        }     
 
-            });
+        $('#modal_new_agenda').on('hidden.bs.modal', function () {
 
-            // $('#myModal').modal('hide');
-            // $('#myModal').on('hidden.bs.modal', function () {
-            // // Load up a new modal...
-            //     $('#myModalNew').modal('show');
-            // });
+            var _parametros = {
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxPresid" : _presid,
+                "xxEspeid" : _espeid,
+                "xxPfesid" : _pfesid,
+                "xxFechaInicio" : _fechainicio,
+                "xxFechaFin" : _fechafin,
+                "xxCodigoDia" : _dayselect
+            }                
+
+            var _respuesta = $.post("codephp/del_reservatmp.php", _parametros);
+            _respuesta.done(function(response){
+                //$("#modal_agenda").modal("show");
+            });                
+        });            
+        
+        
+        const f_LimpiarModal = () => {
+            $('#cboTipoRegistro').val('').change();
+            $('#cboMotivo').empty();
+            var _html = "<option value=''></option>";
+            $("#cboMotivo").html(_html);
+            $('#txtObservacion').val('');
+            $('#fecha_inicio').val('');
+            $('#hora_inicio').val('');
+            $('#fecha_fin').val('');
+            $('#hora_fin').val('');
+        }            
+
+        function f_ViewDatos(arg){
+
+            hidePopovers();
+
+            let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
+
+            element = arg.el;
+            console.log(arg.event.title);
+
+            //const popoverHtml = '<div class="fw-bolder mb-2">' + arg.event.extendedProps.description + '</div><div class="fs-7"><span class="fw-bold">Reserva:</span> ' + _fechareserva + '</div><div class="fs-7 mb-4"><span class="fw-bold">End:</span> ' + arg.event.id + '</div><div id="btnViewReserva" type="button" class="btn btn-sm btn-light-primary">View More</div>';
+            const popoverHtml = '<div class="fw-bolder mb-2">' + arg.event.extendedProps.description + '</div><div class="fs-7 mb-2"><span class="fw-bold">Fecha Registro:</span> ' + _fechareserva + '</div><div class="fs-7"><span class="fw-bold">Hora Inicio:</span> ' + arg.event.extendedProps.horaini + '</div><div class="fs-7 mb-2"><span class="fw-bold">Hora Fin:</span> ' + arg.event.extendedProps.horafin + '</div><div class="fs-7"><span class="fw-bold">Operador@:</span> ' + arg.event.extendedProps.username + '</div>';
+
+            // Popover options
+            var options = {
+                container: 'body',
+                trigger: 'manual',
+                boundary: 'window',
+                placement: 'auto',
+                dismiss: true,
+                html: true,
+                title: arg.event.title,
+                content: popoverHtml,
+            }
+
+            // Initialize popover
+            popover = KTApp.initBootstrapPopover(element, options);
+
+            // Show popover
+            popover.show();
+            popoverState = true;
+        }
+
+        function f_ClickAgenda(arg){
+            
+            console.log(arg);
+            let _id = arg.event.id;
+            let _agenid = arg.event.extendedProps.usuariocreacion;
+            //console.log(_agenid);
+
+            let _usuaid = "<?php echo $xUsuaid; ?>";
+
+            if(_agenid == _usuaid){
+            }
+
+            let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
+
+            $("#modal_new_agenda").modal("show");
+        }
+
+        const hidePopovers = () => {
+            if (popoverState) {
+                popover.dispose();
+                popoverState = false;
+            }
+        }     
 
 
-            function f_Selecc(info){
+        $('#cboTipoRegistro').change(function(){
+                
+            _cboid = $(this).val(); //obtener el id seleccionado
+            $("#cboMotivo").empty();
 
-                debugger;
-                var _continuar = false;
-
-                var _dateactual = moment(info.date).format("YYYY-MM-DD");
-                var _dateselec = moment(info.startStr).format("YYYY-MM-DD");
-
-                if(_dateselec < _dateactual){
-                    toastSweetAlert("top-center",3000,"info","Seleccione una fecha superior o igual a la fecha en curso..!");
-                    return;
-                }
-
-                //validar que ha seleccionado solo el intervalo configurado
-                let _horaini = moment(info.startStr);
-                let _horafin = moment(info.endStr); 
-
-                let _mindiferen = _horafin.diff(_horaini, "m");
-                if(_mindiferen != parseInt(_interval) ){
-                    mensajesalertify("Seleccione correctamente el horario de atención, el intervalo configurado es de " + _interval + " minutos" , "W", "top-center", 5);
-                    return;
-                }
-
-                let _fechaactual = new Date();
-                let _daynow = _fechaactual.getDay();
-                let _diferenminuts = 0;
-
-                //let _hour = _fechaactual.getHours();
-                //let _min = _fechaactual.getMinutes();
-                //_min = _min < 10 ? '0' + _min : _min;
-                //let _horaactual = _hour + ':' + _min;
-                //let _timeselect = new Date(info.endStr);
-
-                let _horaactual = moment(_fechaactual);
-                //let _horaselect = moment(info.endStr);
-                let _horaselect = moment(info.startStr);
-
-                /*let _minuactual = _fechaactual.getMinutes();
-                let _minselect = new Date(info.startStr).getMinutes();
-
-                if(_minuactual > _minselect){
-                    _diferenminuts = _minuactual - _minselect;
-                }else{
-                    _diferenminuts = _minselect - _minuactual;
-                }*/
-
-                //_diferenminuts = _horaselect.diff(_horaactual, "m");
-                _diferenminuts = _horaactual.diff(_horaselect, "m");
-                //SUMAR 10 MINUTOS A LA DIFERENCIA, PARA DARLES 10 MINUTOS MAS
-                //_diferenminuts = moment(_diferenminuts).add(10,'m').format("HH:mm");
-
-                if(_diferenminuts > 5){
-                    // mensajesalertify("La hora seleccionada esta fuera del intervalo de..! " + _interval + " minutos" , "W", "top-center", 5);
-                    toastSweetAlert("top-center",3000,"error","Hora fuera del intervalo de " + _interval + " minutos");
-                    return;
-                }
-
-                //alert('Current view: ' + info.view.type);
-                //alert('Dia: ' + info.view.dateEnv.weekText );
-                //alert('Date Now :'  +   dateactual) ;
-                //alert('Date Select :'  +   dateselec);
-
-                _timeinicio = moment(info.startStr).format("HH:mm");
-                _timefin = moment(info.endStr).format("HH:mm");
-
-                _dayselect = new Date(info.startStr).getDay();
-
-                switch(_dayselect){
-                    case 0:
-                        _dayname = 'DOMINGO';
-                        break;
-                    case 1:
-                        _dayname = 'LUNES';
-                        break;
-                    case 2:
-                        _dayname = 'MARTES';
-                        break;
-                    case 3:
-                        _dayname = 'MIERCOLES';
-                        break;
-                    case 4:
-                        _dayname = 'JUEVES'; 
-                        break;
-                    case 5:
-                        _dayname = 'VIERNES';
-                        break;
-                    case 6:
-                        _dayname = 'SABADO';
-                        break;
-                }                
-
-                $("#hora_inicio").prop('disabled','disabled');
-                $("#hora_fin").prop('disabled','disabled');             
-
+            if(_cboid == 'Agendar'){
                 var _parametros = {
                     "xxPaisid" : _paisid,
                     "xxEmprid" : _emprid,
-                    "xxPfesid" : _pfesid,
-                    "xxCodDia" : _dayselect,
-                    "xHini" : _timeinicio,
-                    "xHfin" : _timefin                    
+                    "xxComboid" : _espeid,
+                    "xxOpcion" : 2
                 }
 
-                _fechainicio = _dateselec + ' ' + _timeinicio;
-                _fechafin = _dateselec + ' ' + _timefin;
-
-                var _respuesta = $.post("codephp/get_horariodisponible.php", _parametros);
+                var _respuesta = $.post("codephp/cargar_combos.php", _parametros);
                 _respuesta.done(function(response) {
-                    if(response.trim() == 'OK'){
-                        _continuar = true;
-
-                        //validar la hora si esta con el tiempo adecuado para agendar, al menos con 1 hora de anticipacion
-                        if(_daynow == _dayselect ){
-                            if(_diferenminuts > 5){
-                                //$('#mycalendar').FullCalendar('unselect');
-                                //calendar.unselect();
-                                //var calendarEl = document.getElementById('mycalendar');
-                                //calendarEl.unselect();
-                                _continuar = false;
-                                // mensajesalertify("El horario seleccionado esta fuera del tiempo programado..!" , "W", "top-center", 5);
-                                toastSweetAlert("top-center",3000,"error","Horario fuera del tiempo programado..!");
-                                return;   
-                            }
-                            /*if(_diferenminuts > 0 && _diferenminuts < 31){
-                                _continuar = false;
-                                mensajesalertify("El horario seleccionado esta fuera del tiempo programado..!" , "W", "top-center", 10);
-                                return;                             
-                            }*/
-                        }    
-                        
-                        if(_continuar){
-
-                            //BUSCAR SI NO EXISTE ALGUNA RESERVA ANTES
-                            var _buscareserva = {
-                                "xxPaisid" : _paisid,
-                                "xxEmprid" : _emprid,                
-                                "xxPresid" : _presid,
-                                "xxEspeid" : _espeid,
-                                "xxPfesid" : _pfesid,
-                                "xxCiudid" : _ciudid,
-                                "xxFechaInicio" : _fechainicio,
-                                "xxFechaFin" : _fechafin,
-                                "xxHoraDesde" : _timeinicio,
-                                "xxHoraHasta" : _timefin,
-                                "xxCodigoDia" : _dayselect,
-                                "xxDia" : _dayname,
-                                "xxUsuaId" : _usuaid
-                            }
-
-                            var _consreserva = $.post("codephp/consultar_reserva.php", _buscareserva);
-                            _consreserva.done(function(respreserva){
-                                
-                                if(respreserva == 0){
-                                    
-                                    f_LimpiarModal();
-
-                                    $("#fecha_inicio").val(_dateselec);
-                                    $("#fecha_fin").val(_dateselec);
-                                    $("#hora_inicio").val(_timeinicio);
-                                    $("#hora_fin").val(_timefin);
-
-                                    $("#modal_agenda").modal("hide");
-                                    $("#modal_new_agenda").modal("show");                                     
-
-                                }else{
-                                    mensajesalertify("El horario no está disponible, se encuentra reservado..!" , "W", "top-center", 5);
-                                    return; 
-                                }
-                            });
-                        }
-                    }else{
-                        mensajesalertify("No existe configurado turno del día seleccionado" , "W", "top-center", 5);
-                        return;   
-                    }
-                });
-
-                if(info.view.type == 'dayGridMonth'){
-
-                    $.ajax({
-                        url: "codephp/get_turnoshorarios.php",
-                        type: "post",
-                        data: _parametros,
-                        dataType: "json",
-                        success: function(response){
-                            var _hours = response;
-                            var _jsonObj = JSON.stringify(response);
-                            var _json = JSON.parse(_jsonObj);
-
-                            for (var i = 0; i < _hours.length; i++) {
-                                if (_hours[i].daysOfWeek == _dayselect) {
-                                    _continuar = true;
-                                    break;
-                                }
-                            }                            
-
-                            if(_continuar){
-
-                                _interval = _json[0].intervalo;
-                                _timeinicio = _json[0].startTime;
-                                _timefin = _json[0].endTime;
-
-                                //let _todayDate = new Date().toISOString().slice(0, 10);
-
-                                let _fechainistr = _dateselec + ' ' + _timeinicio;
-                                let _fechainilst = new Date(_fechainistr);
-
-                                let _fechafinstr = _dateselec + ' ' + _timefin;
-                                let _fechafinlst = new Date(_fechafinstr);                            
-
-                                _timeinicio = moment(_fechainistr).format("HH:mm");
-                                _timefin = moment(_fechainistr).add(_interval,'m').format("HH:mm");
-
-                                $("#fecha_inicio").val(_dateactual);
-                                $("#fecha_fin").val(_dateactual);
-                                $("#hora_inicio").val(_timeinicio);
-                                $("#hora_fin").val(_timefin);
-
-                                $("#modal_new_agenda").modal("hide");
-                                $("#modal_new_agenda").modal("show");
-
-                            }else{
-                                mensajesalertify("Profesional no tiene definido horario el dia seleccionado..!", "W", "top-center", 5);
-                                return;                                
-                            }
-                        },								
-                        error: function (error){
-                            console.log(error);
-                        }                        
-                    });                 
-                }else{
-                            
-                }
-            }     
-
-            $('#modal_new_agenda').on('hidden.bs.modal', function () {
-
-                var _parametros = {
-                    "xxPaisid" : _paisid,
-                    "xxEmprid" : _emprid,
-                    "xxPresid" : _presid,
-                    "xxEspeid" : _espeid,
-                    "xxPfesid" : _pfesid,
-                    "xxFechaInicio" : _fechainicio,
-                    "xxFechaFin" : _fechafin,
-                    "xxCodigoDia" : _dayselect
-                }                
-
-                var _respuesta = $.post("codephp/del_reservatmp.php", _parametros);
-                _respuesta.done(function(response){
-                    //$("#modal_agenda").modal("show");
-                });                
-            });            
-            
-            
-            const f_LimpiarModal = () => {
-                $('#cboTipoRegistro').val('').change();
-                $('#cboMotivo').empty();
-                var _html = "<option value=''></option>";
-                $("#cboMotivo").html(_html);
-                $('#txtObservacion').val('');
-                $('#fecha_inicio').val('');
-                $('#hora_inicio').val('');
-                $('#fecha_fin').val('');
-                $('#hora_fin').val('');
-            }            
-
-            function f_ViewDatos(arg){
-
-                hidePopovers();
-
-                let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
-
-                element = arg.el;
-                console.log(arg.event.title);
-
-                //const popoverHtml = '<div class="fw-bolder mb-2">' + arg.event.extendedProps.description + '</div><div class="fs-7"><span class="fw-bold">Reserva:</span> ' + _fechareserva + '</div><div class="fs-7 mb-4"><span class="fw-bold">End:</span> ' + arg.event.id + '</div><div id="btnViewReserva" type="button" class="btn btn-sm btn-light-primary">View More</div>';
-                const popoverHtml = '<div class="fw-bolder mb-2">' + arg.event.extendedProps.description + '</div><div class="fs-7 mb-2"><span class="fw-bold">Fecha Registro:</span> ' + _fechareserva + '</div><div class="fs-7"><span class="fw-bold">Hora Inicio:</span> ' + arg.event.extendedProps.horaini + '</div><div class="fs-7 mb-2"><span class="fw-bold">Hora Fin:</span> ' + arg.event.extendedProps.horafin + '</div><div class="fs-7"><span class="fw-bold">Operador@:</span> ' + arg.event.extendedProps.username + '</div>';
-
-                // Popover options
-                var options = {
-                    container: 'body',
-                    trigger: 'manual',
-                    boundary: 'window',
-                    placement: 'auto',
-                    dismiss: true,
-                    html: true,
-                    title: arg.event.title,
-                    content: popoverHtml,
-                }
-
-                // Initialize popover
-                popover = KTApp.initBootstrapPopover(element, options);
-
-                // Show popover
-                popover.show();
-                popoverState = true;
-            }
-
-            function f_ClickAgenda(arg){
-                
-                console.log(arg);
-                let _id = arg.event.id;
-                let _agenid = arg.event.extendedProps.usuariocreacion;
-                console.log(_agenid);
-                //alert('Borrar agenda, si es reservatmp elimina solo el usuario, si es agenda, mostrar form para cancelar');
-                /*$("#fecha_inicio").val(_dateactual);
-                $("#fecha_fin").val(_dateactual);
-                $("#hora_inicio").val(_timeinicio);
-                $("#hora_fin").val(_timefin);*/
-
-                let _usuaid = "<?php echo $xUsuaid; ?>";
-
-                if(_agenid == _usuaid){
-                }
-
-                let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
-
-                $("#modal_new_agenda").modal("show");
-            }
-
-            const hidePopovers = () => {
-                if (popoverState) {
-                    popover.dispose();
-                    popoverState = false;
-                }
-            }     
-
-            //calendar
-            
-            /*$('#btnNuevaAgenda').click(function(){
-
-                let _tituid = "<?php echo $xTituid; ?>";
-                let _prodid = "<?php echo $xProdid; ?>";
-                let _grupid = "<?php echo $xGrupid; ?>";
-
-                let _cboprofid = $("#cboProfesional").val();
-                let _cbociudid = $("#cboCiudad").val();
-                
-                if(_tituid == ''){
-                    mensajesalertify("No se ha seleccionado Cliente para Agendamiento", "W", "top-center", 5);
-                    return;
-                }
-                
-                if(_cboprestaid == 0){
-                    mensajesalertify("Seleccione Prestador", "W", "top-center", 5);
-                    return;
-                }
-
-                if(_cbopreeid == 0){
-                    mensajesalertify("Seleccione Especialidad", "W", "top-center", 5);
-                    return;
-                }
-
-                if(_cboprofid == 0){
-                    mensajesalertify("Seleccione Profesional", "W", "top-center", 5);
-                    return;
-                }                  
-
-                $.redirect('?page=calendartitular&menuid=<?php echo $menuid; ?>', {'tituid': _tituid, 'beneid': 0, 'prodid': _prodid, 'grupid': _grupid, 'presaid': _cboprestaid, 'preeid': _cbopreeid, 'pfesid': _cboprofid, 'ciudid': _cbociudid }); //POR METODO POST
-
-            });*/
-
-            $('#btnAgendar').click(function(){
-
-                var _tiporegistro = $('#cboTipoRegistro').val();
-                var _motivo = $('#cboMotivo').val();
-                var _observacion = $('#txtObservacion').val();
-                var _fechainicio = $('#fecha_inicio').val();
-                var _fechafinal = $('#fecha_fin').val();
-                var _horainicio = $('#hora_inicio').val();
-                var _horafin = $('#hora_fin').val();
-                var _tipocliente = "T";
-
-                if(_tiporegistro == ''){
-                    mensajesalertify("Seleccione Tipo de Registro ", "W", "top-center", 5);
-                    return;
-                }
-
-                if(_motivo == ''){
-                    mensajesalertify("Seleccione Motivo agenda ", "W", "top-center", 5);
-                    return;
-                }
-
-                if(_observacion == ''){
-                    mensajesalertify("Ingrese Observacion de la agenda ", "W", "top-center", 5);
-                    return;
-                }
-
-                let _fechaselect = _fechainicio + ' ' + _horainicio;
-                _fechaselect = new Date(_fechaselect);
-                let _fechacatual = new Date();
-
-                let _horaselect = moment(_fechaselect);
-                let _horaactual = moment(_fechacatual);
-
-                _diferenminuts = _horaactual.diff(_horaselect, "m");
-                //SUMAR 10 MINUTOS A LA DIFERENCIA, PARA DARLES 10 MINUTOS MAS
-                //_diferenminuts = moment(_diferenminuts).add(10,'m').format("HH:mm");
-
-                let _fechaAgenda = new Date(_fechaselect);
-                let _fechaView = new Date();
-
-                _fechaAgenda = moment(_fechaAgenda).format("YYYY-MM-DD");
-                _fechaView = moment(_fechaView).format("YYYY-MM-DD");
-
-                if(_fechaAgenda == _fechaView){
-
-                    if(_diferenminuts > 5){
-                        mensajesalertify("La hora seleccionada esta fuera del intervalo de..! " + _interval + " minutos" , "W", "top-center", 5);
-                        return;
-                    }
-                }
-
-                let _fechainiagenda = _fechainicio + ' ' + _horainicio;
-                let _fechafinagenda = _fechafinal + ' ' + _horafin;
-
-                if(parseInt(_beneid) > 0){
-                    _tipocliente = "B";
-                }
-
-                var _parametros = {
-                    "xxPaisid" : _paisid,
-                    "xxEmprid" : _emprid,
-                    "xxTipoCliente" : _tipocliente,
-                    "xxTituid" : _tituid,
-                    "xxBeneid" : _beneid,
-                    "xxCiudid" : _ciudid,
-                    "xxProdid" : _prodid,
-                    "xxGrupid" : _grupid,
-                    "xxPresid" : _presid,
-                    "xxEspeid" : _espeid,
-                    "xxPfesid" : _pfesid,
-                    "xxFechaIni" : _fechainiagenda,
-                    "xxFechaFin" : _fechafinagenda,
-                    "xxCodigoDia" : _dayselect,
-                    "xxDia" : _dayname,
-                    "xxHoraDesde" : _horainicio,
-                    "xxHoraHasta" : _horafin,
-                    "xxTipoRegistro" : _tiporegistro,
-                    "xxMotivoRegistro" : _motivo,
-                    "xxObservacion" : _observacion.toUpperCase(),
-                    "xxEstadoAgenda" : "A",
-                    "xxColor" : "#117A65",
-                    "xxTextColor" : "#060606",
-                    "xxUsuaid" : _usuaid,
-                }
-
-                var _respuesta = $.post("codephp/agendar_cita.php", _parametros);
-                _respuesta.done(function(response){
-                    if(response >= 0){
-                        
-                        //$.redirect('?page=agendar_titubeneadmin&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'beneid': _beneid, 'prodid': _prodid, 'grupid': _grupid, 'agendaid': response });
-                        var xrespuesta = $.post("codephp/get_datosagendamiento.php", { "xxAgendaid": _agendaid, "xxPaisid" :_paisid, "xxEmprid" : _emprid});
-                        xrespuesta.done(function(response){
-
-                            var _datos = JSON.parse(response);
-                            console.log(_datos);
-
-                            // _ciudadben = _datos[0].Ciudad;
-                            // _perenben = _datos[0].Parentesco;
-                            // _estadoben = _datos[0].Estado;
-                            // _estadoben = _datos[0].Estado;
-
-
-                        });                        
-                        
-                    }else{
-                        Swal.fire({
-                            text: "Error en el envio del correo, valide la informacion",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok,regresar!",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        });
-                    }
+                    $("#cboMotivo").html(response);
                     
                 });
                 _respuesta.fail(function() {
                 });
                 _respuesta.always(function() {
                 });
+            }else{ 
+                var _html = "<option value=''></option>";
+                _html += "<option value='Informacion'>Informacion</option>";
 
-            });   
-            
-        });        
-        
-        //Desplazar-modal
-        $("#modal-prestador").draggable({
-            handle: ".modal-header"
-        });     
-        
-        $("#modal-profesionalAgenda").draggable({
-            handle: ".modal-header"
+                $("#cboMotivo").html(_html);
+            }
+
+        }); 
+
+        //AGENDAR CITA
+        $('#btnAgendar').click(function(){
+
+            var _tiporegistro = $('#cboTipoRegistro').val();
+            var _motivo = $('#cboMotivo').val();
+            var _observacion = $('#txtObservacion').val();
+            var _fechainicio = $('#fecha_inicio').val();
+            var _fechafinal = $('#fecha_fin').val();
+            var _horainicio = $('#hora_inicio').val();
+            var _horafin = $('#hora_fin').val();
+            var _tipocliente = "T";
+           
+            var _beneid = 0;
+
+            if(_tiporegistro == ''){
+                toastSweetAlert("top-end",3000,"warning","Seleccione Tipo de Registro..!");
+                return;
+            }
+
+            if(_motivo == ''){
+                toastSweetAlert("top-end",3000,"warning","Seleccione Motivo Agenda..!");
+                return;
+            }
+
+            if(_observacion == ''){
+                toastSweetAlert("top-end",3000,"warning","Ingrese Observacion de la Agenda..!");
+                return;
+            }
+
+            let _fechaselect = _fechainicio + ' ' + _horainicio;
+            _fechaselect = new Date(_fechaselect);
+            let _fechacatual = new Date();
+
+            let _horaselect = moment(_fechaselect);
+            let _horaactual = moment(_fechacatual);
+
+            _diferenminuts = _horaactual.diff(_horaselect, "m");
+            //SUMAR 10 MINUTOS A LA DIFERENCIA, PARA DARLES 10 MINUTOS MAS
+            //_diferenminuts = moment(_diferenminuts).add(10,'m').format("HH:mm");
+
+            let _fechaAgenda = new Date(_fechaselect);
+            let _fechaView = new Date();
+
+            _fechaAgenda = moment(_fechaAgenda).format("YYYY-MM-DD");
+            _fechaView = moment(_fechaView).format("YYYY-MM-DD");
+
+            if(_fechaAgenda == _fechaView){
+
+                if(_diferenminuts > 5){
+                    toastSweetAlert("top-center",3000,"warning","La hora seleccionada esta fuera del intervalo de" + _interval + " minutos");
+                    return;
+                }
+            }
+
+            let _fechainiagenda = _fechainicio + ' ' + _horainicio;
+            let _fechafinagenda = _fechafinal + ' ' + _horafin;
+
+            if(parseInt(_beneid) > 0){
+                _tipocliente = "B";
+            }
+
+            var _parametros = {
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxTipoCliente" : _tipocliente,
+                "xxTituid" : _tituid,
+                "xxBeneid" : _beneid,
+                "xxCiudid" : _ciudid,
+                "xxProdid" : _prodid,
+                "xxGrupid" : _grupid,
+                "xxPresid" : _presid,
+                "xxEspeid" : _espeid,
+                "xxPfesid" : _pfesid,
+                "xxFechaIni" : _fechainiagenda,
+                "xxFechaFin" : _fechafinagenda,
+                "xxCodigoDia" : _dayselect,
+                "xxDia" : _dayname,
+                "xxHoraDesde" : _horainicio,
+                "xxHoraHasta" : _horafin,
+                "xxTipoRegistro" : _tiporegistro,
+                "xxMotivoRegistro" : _motivo,
+                "xxObservacion" : _observacion.toUpperCase(),
+                "xxEstadoAgenda" : "A",
+                "xxColor" : "#117A65",
+                "xxTextColor" : "#060606",
+                "xxUsuaid" : _usuaid,
+            }
+
+
+            var _respuesta = $.post("codephp/agendar_cita.php", _parametros);
+            _respuesta.done(function(response){
+                if(response >= 0){
+                    
+                    var xrespuesta = $.post("codephp/get_datosagendamiento.php", { "xxAgendaid": _agendaid, "xxPaisid" :_paisid, "xxEmprid" : _emprid});
+                    xrespuesta.done(function(response){
+
+                        var _datos = JSON.parse(response);
+                        console.log(_datos);
+
+                        // _ciudadben = _datos[0].Ciudad;
+                        // _perenben = _datos[0].Parentesco;
+                        // _estadoben = _datos[0].Estado;
+                        // _estadoben = _datos[0].Estado;
+
+
+                    });                        
+                    
+                }else{
+                    Swal.fire({
+                        text: "Error en el envio del correo, valide la informacion",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok,regresar!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+                
+            });
+            _respuesta.fail(function() {
+            });
+            _respuesta.always(function() {
+            });
+
         });  
+  
+    });    
+    
+    
+    
+    //Desplazar-modal
+    $("#modal-prestador").draggable({
+        handle: ".modal-header"
+    });     
+    
+    $("#modal-profesionalAgenda").draggable({
+        handle: ".modal-header"
+    });  
 
-    </script>
+</script>
