@@ -3889,8 +3889,6 @@
                 return;
             }
 
-            //debugger;
-
             var _parametros = {
 
                 "xxPaisid" : _paisid,
