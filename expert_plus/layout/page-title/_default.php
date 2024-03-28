@@ -91,8 +91,8 @@
     	$descripcion = 'Registro de agendamientos';
 	}
 
-	if($page == 'agendartitular.php'){
-        $title = 'Agendar Cita Titular';
+	if($page == 'agendartitular'){
+        $title = 'Agendar Titular';
     	$descripcion = 'Calendario de Agendamiento';
 	}
 

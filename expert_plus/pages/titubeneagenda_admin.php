@@ -3093,10 +3093,10 @@
             _espeid = $('#cboEspecialidad').val();
             _pfesid = $("#cboProfesional").val();
             _ciudid = $('#cboCiudad').val();
-            _sectorid = $('#cboSector').val();
+            _sectid = $('#cboSector').val();
                 
 
-            if(_sectorid == 0){
+            if(_sectid == 0){
                 toastSweetAlert("top-end",3000,"warning","Seleccione Sector..!!");
                 return;
             }
@@ -3118,7 +3118,17 @@
 
         
 
-            $.redirect('?page=agendartitular&menuid=<?php echo $menuid; ?>', {});
+            $.redirect('?page=agendartitular&menuid=<?php echo $menuid; ?>', {
+                'tituid': _tituid,
+                'presid': _presid,
+                'espeid': _espeid,
+                'profid': _pfesid,
+                'prodid': _prodid,
+                'grupid': _grupid,
+                'ciudid': _ciudid,
+                'sectid': _sectid,
+
+            });
             
 
         });
