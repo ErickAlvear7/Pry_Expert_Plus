@@ -48,7 +48,7 @@
     //DATOS TITULAR
     $xSQL = "SELECT CONCAT(per.pers_nombres, ' ', per.pers_apellidos) AS Nombres, per.pers_imagen AS Avatar,per.pers_estado AS Estado, ";
     $xSQL .="(SELECT UPPER(ciudad) FROM `provincia_ciudad` WHERE prov_id = $xCiudid) AS Ciudad FROM  `expert_persona` per INNER JOIN `expert_titular` tit ON per.pers_id = tit.pers_id WHERE tit.titu_id = $xTituid AND ";
-    $xSQL .="tit.prod_id = $xProdid AND tit.grup_id = $xGrupid ";
+    $xSQL .="tit.prod_id = $xProdid AND tit.grup_id = $xGrupid AND tit.pais_id = $xPaisid AND tit.empr_id = $xEmprid ";
     $all_titular = mysqli_query($con, $xSQL);
     foreach ($all_titular as $datos) {
 
@@ -80,6 +80,7 @@
 
     //DATOS PRESTADOR
     $xSQL = "SELECT pres_nombre AS Prestador, pres_tipoprestador AS Tipo, pres_sector AS Sector FROM `expert_prestadora` WHERE pres_id = $xPresid ";
+    $xSQL .="AND pais_id = $xPaisid AND empr_id = $xEmprid ";
     $all_prestador = mysqli_query($con, $xSQL);
     foreach ($all_prestador as $datos) {
 
@@ -91,6 +92,7 @@
 
      //DATOS ESPECIALIDAD
      $xSQL = "SELECT espe_nombre AS Especialidad, espe_descripcion AS Descripcion, espe_pvp AS Costo FROM `expert_especialidad` WHERE espe_id = $xEspeid ";
+     $xSQL .="AND pais_id = $xPaisid AND empr_id = $xEmprid";
      $all_especialidad = mysqli_query($con, $xSQL);
      foreach ($all_especialidad as $datos) {
 
