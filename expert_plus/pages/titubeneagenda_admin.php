@@ -38,7 +38,6 @@
     $xUsuaid = $_SESSION["i_usuaid"];
 
     $xTituid = $_POST['tituid'];
-    $xBeneid = $_POST['beneid'];
     $xProdid = $_POST['prodid'];
     $xGrupid = $_POST['grupid'];
     $xAgendaid = $_POST['agendaid'];
@@ -3126,7 +3125,6 @@
                 'prodid': _prodid,
                 'grupid': _grupid,
                 'ciudid': _ciudid,
-                'sectid': _sectid,
 
             });
             

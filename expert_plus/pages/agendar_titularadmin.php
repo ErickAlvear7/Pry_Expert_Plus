@@ -36,6 +36,7 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
+    //ID POST
     $xTituid = $_POST['tituid'];
     $xPresid = $_POST['presid'];
     $xEspeid = $_POST['espeid'];
@@ -43,7 +44,6 @@
     $xProdid = $_POST['prodid'];
     $xGrupid = $_POST['grupid'];
     $xCiudid = $_POST['ciudid'];
-    $xSectid = $_POST['sectid'];
 
     //DATOS TITULAR
     $xSQL = "SELECT CONCAT(per.pers_nombres, ' ', per.pers_apellidos) AS Nombres, per.pers_imagen AS Avatar,per.pers_estado AS Estado, ";
@@ -78,26 +78,60 @@
 
     }
 
+    //DATOS PRESTADOR
+    $xSQL = "SELECT pres_nombre AS Prestador, pres_tipoprestador AS Tipo, pres_sector AS Sector FROM `expert_prestadora` WHERE pres_id = $xPresid ";
+    $all_prestador = mysqli_query($con, $xSQL);
+    foreach ($all_prestador as $datos) {
+
+        $xPrestador = $datos['Prestador'];
+        $xTipo = $datos['Tipo'];
+        $xSector = $datos['Sector'];
+
+    }
+
+     //DATOS ESPECIALIDAD
+     $xSQL = "SELECT espe_nombre AS Especialidad, espe_descripcion AS Descripcion, espe_pvp AS Costo FROM `expert_especialidad` WHERE espe_id = $xEspeid ";
+     $all_especialidad = mysqli_query($con, $xSQL);
+     foreach ($all_especialidad as $datos) {
+
+        $xEspecialidad = $datos['Especialidad'];
+        $xDescripcion = $datos['Descripcion'];
+        $xCosto = $datos['Costo'];
+
+    }
+
+    //DATOS PROFESIONAL
+    $xSQL = " SELECT (SELECT CONCAT(pro.prof_nombres,' ',pro.prof_apellidos) FROM `expert_profesional` pro WHERE esp.prof_id = pro.prof_id) AS Profesional ";
+    $xSQL .= "FROM `expert_profesional_especi` esp WHERE esp.pfes_id = $xProfid AND esp.pais_id = $xPaisid AND esp.empr_id =$xEmprid  ";
+    $all_profesional = mysqli_query($con, $xSQL);
+    foreach ($all_profesional as $datos) {
+       $xProfesional = $datos['Profesional'];
+   }
+
     //INTERRVALOS DE ATENCION DEL PROFESIONAL
     $xSQL = "SELECT * FROM `expert_profesional_especi` ";
 	$xSQL .= "WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pfes_id=$xProfid  ";
-    $all_datos = mysqli_query($con, $xSQL);
-    foreach ($all_datos as $datos) {
+    $all_intervalo = mysqli_query($con, $xSQL);
+    foreach ($all_intervalo as $datos) {
         $xIntervalo = $datos['intervalo'];
     }
 
 ?>
 
 <div id="kt_content_container" class="container-xxl">
+    <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-1">
+        <button type="button" id="btnRegresar" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
+            <span class="svg-icon svg-icon-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
+                </svg>
+            </span>
+        </button>
+    </ul>   
     <div class="card mb-6">
         <div class="card-body pt-9 pb-0">
             <div class="d-flex flex-wrap flex-sm-nowrap">
                 <div class="me-7 mb-4">
-                    <!-- <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                         <img src="assets/media/avatars/300-1.jpg" alt="image" /> 
-                        
-                        <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div> 
-                    </div> -->
                     <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
                         <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfiletitular"></div>
                     </div>
@@ -190,26 +224,20 @@
             </div>
         </div>
     </div>
-    <div class="d-flex flex-wrap flex-stack mb-6">
-        <h3 class="fw-bolder my-2">My Campaigns
-        <span class="fs-6 text-gray-400 fw-bold ms-1">30 Days</span></h3>
-    </div>
     <div class="card mb-6">
        <div class="card-body pt-9 pb-0">
             <div class="container-fluid" id="mycalendar"></div>  
        </div>
-
-    </div>
-   
-
-   
+    </div> 
 </div>
+
 <script>
 
     $(document).ready(function(){
 
         var _paisid = "<?php echo $xPaisid; ?>";
         var _emprid = "<?php echo $xEmprid; ?>";
+        var _tituid = "<?php echo $xTituid; ?>";
         var _presid = "<?php echo $xPresid; ?>";
         var _espeid = "<?php echo $xEspeid; ?>";
         var _pfesid = "<?php echo $xProfid; ?>";
@@ -629,6 +657,16 @@
         //     $('#fecha_fin').val('');
         //     $('#hora_fin').val('');
         // }
+
+        $('#btnRegresar').click(function(){
+            $.redirect('?page=agendar_titubeneadmin&menuid=<?php echo $menuid; ?>', {
+               'tituid': _tituid,
+               'prodid': _prodid,
+               'grupid': _grupid,
+               'agendaid': 0,
+            });
+            
+        });
 
 
     });
