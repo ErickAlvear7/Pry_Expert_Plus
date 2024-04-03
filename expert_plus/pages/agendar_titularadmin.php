@@ -232,6 +232,77 @@
        </div>
     </div> 
 </div>
+<!--MODAL AGENDAMIENTO -->
+<div class="modal fade" id="modal_new_agenda" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+        <div id="modal_new_agenda_parent" class="modal-content">
+            <div class="modal-header">
+                <h2 class="fw-bold"><i class="fas fa-user"></i> <?php echo $xNombres; ?></h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div class="card-body pt-0">
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <label class="required fs-6 fw-bold form-label">Tipo Registro</label>
+                                <select name="cboTipoRegistro" id="cboTipoRegistro" aria-label="Seleccione Registro" data-control="select2" data-placeholder="Seleccione Registro" data-dropdown-parent="#modal_new_agenda_parent" class="form-select mb-2">
+                                    <option value=""></option>
+                                    <option value="Agendar">Agendar</option>
+                                    <option value="Informacion">Informacion</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="required fs-6 fw-bold form-label">Motivo</label>
+                                <select name="cboMotivo" id="cboMotivo" aria-label="Seleccione Motivo" data-control="select2" data-placeholder="Seleccione Motivo" data-dropdown-parent="#modal_new_agenda_parent" class="form-select mb-2">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                           <div class="col-md-12">
+                                <label class="required fs-6 fw-bold form-label">Observacion</label>
+                                <textarea class="form-control text-uppercase" name="txtObservacion" id="txtObservacion" maxlength="500" onkeydown="return (event.keyCode!=13);"></textarea>
+                           </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="fs-6 fw-bold form-label">Fecha Inicio</label>
+                                <input class="form-control form-control-solid" name="fecha_inicio" id="fecha_inicio" readonly />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="fs-6 fw-bold form-label">Hora Inicio</label>
+                                <input class="form-control form-control-solid" name="hora_inicio" id="hora_inicio" readonly />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="fs-6 fw-bold form-label">Fecha Fin</label>
+                                <input class="form-control form-control-solid" name="fecha_fin" id="fecha_fin" readonly />
+
+                            </div>
+                            <div class="col-md-6">
+                                <label class="fs-6 fw-bold form-label">Hora Fin</label>
+                                <input class="form-control form-control-solid" name="hora_fin" id="hora_fin" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnAgendar" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Agendar</button>
+            </div>
+        </div>
+    </div>
+</div>   
 
 <script>
 
@@ -648,17 +719,17 @@
                 }
         }
         
-        // const f_LimpiarModal = () => {
-        //     $('#cboTipoRegistro').val('').change();
-        //     $('#cboMotivo').empty();
-        //     var _html = "<option value=''></option>";
-        //     $("#cboMotivo").html(_html);
-        //     $('#txtObservacion').val('');
-        //     $('#fecha_inicio').val('');
-        //     $('#hora_inicio').val('');
-        //     $('#fecha_fin').val('');
-        //     $('#hora_fin').val('');
-        // }
+        const f_LimpiarModal = () => {
+            $('#cboTipoRegistro').val('').change();
+            $('#cboMotivo').empty();
+            var _html = "<option value=''></option>";
+            $("#cboMotivo").html(_html);
+            $('#txtObservacion').val('');
+            $('#fecha_inicio').val('');
+            $('#hora_inicio').val('');
+            $('#fecha_fin').val('');
+            $('#hora_fin').val('');
+        }
 
         $('#btnRegresar').click(function(){
             $.redirect('?page=agendar_titubeneadmin&menuid=<?php echo $menuid; ?>', {
@@ -668,6 +739,22 @@
                'agendaid': 0,
             });
             
+        });
+
+        //AGENDAR CITA
+        $('#btnAgendar').click(function(){
+
+            var _tiporegistro = $('#cboTipoRegistro').val();
+            var _motivo = $('#cboMotivo').val();
+            var _observacion = $('#txtObservacion').val();
+            var _fechainicio = $('#fecha_inicio').val();
+            var _fechafinal = $('#fecha_fin').val();
+            var _horainicio = $('#hora_inicio').val();
+            var _horafin = $('#hora_fin').val();
+            var _tipocliente = "T";
+
+
+
         });
 
 
