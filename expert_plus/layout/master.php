@@ -117,6 +117,10 @@
 	if($page == 'agendar_beneadmin'){
 		$xRuta = '/../pages/agendamiento_adminbene.php';
 	}	
+
+	if($page == 'agendartitular'){
+		$xRuta = '/../pages/agendar_titularadmin.php';
+	}	
 	
 	$xSQL = "SELECT * FROM `expert_tarea` WHERE empr_id=$xEmprid AND tare_pagina='$page' ";
 	$all_tareas = mysqli_query($con, $xSQL);	
