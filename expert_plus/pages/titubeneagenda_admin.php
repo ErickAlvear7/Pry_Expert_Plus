@@ -2871,6 +2871,7 @@
         var _tituid = "<?php echo $xTituid; ?>";
         var _prodid = "<?php echo $xProdid; ?>";
         var _grupid = "<?php echo $xGrupid; ?>";
+        var _agenid = "<?php echo $xAgendaid; ?>";
         var _cboprestaid = 0;
         var _cbopreeid = 0;
         var _cboprofid = 0;
@@ -3125,6 +3126,7 @@
                 'prodid': _prodid,
                 'grupid': _grupid,
                 'ciudid': _ciudid,
+                'agenid': _agenid,
 
             });
             

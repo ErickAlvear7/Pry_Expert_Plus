@@ -44,6 +44,7 @@
     $xProdid = $_POST['prodid'];
     $xGrupid = $_POST['grupid'];
     $xCiudid = $_POST['ciudid'];
+    $xAgendaid = $_POST['agenid'];
 
     //DATOS TITULAR
     $xSQL = "SELECT CONCAT(per.pers_nombres, ' ', per.pers_apellidos) AS Nombres, per.pers_imagen AS Avatar,per.pers_estado AS Estado, ";
