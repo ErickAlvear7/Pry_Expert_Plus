@@ -568,81 +568,6 @@
                         </button>
                     </div>
                 </div>
-                <!--DATOS BENEFICIARIO-->
-                <div class="tab-pane fade" id="tabBeneficiario" role="tabpanel">
-                    <div class="card pt-4 mb-6 mb-xl-9">
-                        <div class="card-header border-0">
-                            <div class="card-title">
-                                <h2>Beneficiarios</h2>
-                            </div>
-                        </div>
-                        <div class="card-body pt-0 pb-5">
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
-                                    <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
-                                        <tr class="text-start text-muted text-uppercase gs-0">
-                                            <th>Documento</th>
-                                            <th>Nombres</th>
-                                            <th>ciudad</th>
-                                            <th>Parentesco</th>
-                                            <th>Estado</th>
-                                            <th style="text-align: center;">OPCIONES</th>
-                                        </tr>
-                                        
-                                    </thead>
-                                    <tbody class="fs-6 fw-bold text-gray-600 text-uppercase">
-                                        <?php 
-                                            foreach ($all_beneficiarios as $datos) {
-                                                $xIdbene = $datos['IdBene'];
-                                                $xDocumento = $datos['Doumento'];
-                                                $xNombres = $datos['Nombres'];
-                                                $xCiudad = $datos['Ciudad'];
-                                                $xIdCiudad = $datos['IdCiudad'];
-                                                $xProv = $datos['Provincia'];
-                                                $xParentesco = $datos['Parentesco'];
-                                                $xEstado = $datos['Estado'];
-
-                                                if($xEstado == 'A'){
-                                                    $xEstado = 'ACTIVO';
-                                                    $xTextColor = "badge badge-light-primary";
-                                                }else{
-                                                    $xEstado = 'INACTIVO';
-                                                    $xTextColor = "badge badge-light-danger";
-                                                }
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $xDocumento; ?></td>
-                                            <td><?php echo $xNombres; ?></td>
-                                            <td><?php echo $xCiudad; ?></td>
-                                            <td><?php echo $xParentesco; ?></td>
-                                            <td>
-                                                <div class="<?php echo $xTextColor; ?>">
-                                                    <?php echo $xEstado; ?>
-                                                </div>  
-                                            </td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <div class="btn-group">
-                                                        <button id="btnAgendar" onclick="f_Agendar(
-                                                            <?php echo $xIdbene; ?>,
-                                                            <?php echo $xIdCiudad; ?>,
-                                                            <?php echo $xClieid; ?>,
-                                                            <?php echo $xTituid; ?>,
-                                                            <?php echo $xProdid; ?>,
-                                                            <?php echo $xGrupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
-                                                            <i class="fa fa-calendar-plus"></i>
-                                                        </button>												 
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!--DATOS HISTORIAL-->
                 <div class="tab-pane fade " id="tabHistorial" role="tabpanel">
                     <div class="card card-flush mb-6 mb-xl-9">
@@ -2212,814 +2137,887 @@
                     </div>
                     <!--end::Tasks-->
                 </div>
-            </div>
-            
-        </div>
-        
+                <!--DATOS BENEFICIARIO-->
+                <div class="tab-pane fade" id="tabBeneficiario" role="tabpanel">
+                    <div class="card pt-4 mb-6 mb-xl-9">
+                        <div class="card-header border-0">
+                            <div class="card-title">
+                                <h2>Beneficiarios</h2>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0 pb-5">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
+                                    <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
+                                        <tr class="text-start text-muted text-uppercase gs-0">
+                                            <th>Documento</th>
+                                            <th>Nombres</th>
+                                            <th>ciudad</th>
+                                            <th>Parentesco</th>
+                                            <th>Estado</th>
+                                            <th style="text-align: center;">OPCIONES</th>
+                                        </tr>
+                                        
+                                    </thead>
+                                    <tbody class="fs-6 fw-bold text-gray-600 text-uppercase">
+                                        <?php 
+                                            foreach ($all_beneficiarios as $datos) {
+                                                $xIdbene = $datos['IdBene'];
+                                                $xDocumento = $datos['Doumento'];
+                                                $xNombres = $datos['Nombres'];
+                                                $xCiudad = $datos['Ciudad'];
+                                                $xIdCiudad = $datos['IdCiudad'];
+                                                $xProv = $datos['Provincia'];
+                                                $xParentesco = $datos['Parentesco'];
+                                                $xEstado = $datos['Estado'];
+
+                                                if($xEstado == 'A'){
+                                                    $xEstado = 'ACTIVO';
+                                                    $xTextColor = "badge badge-light-primary";
+                                                }else{
+                                                    $xEstado = 'INACTIVO';
+                                                    $xTextColor = "badge badge-light-danger";
+                                                }
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $xDocumento; ?></td>
+                                            <td><?php echo $xNombres; ?></td>
+                                            <td><?php echo $xCiudad; ?></td>
+                                            <td><?php echo $xParentesco; ?></td>
+                                            <td>
+                                                <div class="<?php echo $xTextColor; ?>">
+                                                    <?php echo $xEstado; ?>
+                                                </div>  
+                                            </td>
+                                            <td>
+                                                <div class="text-center">
+                                                    <div class="btn-group">
+                                                        <button id="btnAgendar" onclick="f_Agendar(
+                                                            <?php echo $xIdbene; ?>,
+                                                            <?php echo $xIdCiudad; ?>,
+                                                            <?php echo $xClieid; ?>,
+                                                            <?php echo $xTituid; ?>,
+                                                            <?php echo $xProdid; ?>,
+                                                            <?php echo $xGrupid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar"  title='Agendar' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                            <i class="fa fa-calendar-plus"></i>
+                                                        </button>												 
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+            </div>   
+        </div>   
     </div>
 
-<!--Modal Prestador-->
-<div class="modal fade" id="modal-prestador" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
-        <div class="modal-content"> 
-            <div class="modal-header">
-                <h2 class="fw-bolder">Informacion Prestador</h2>
-                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
-            </div>
-            <div class="modal-body py-lg-10 px-lg-10 mt-n3">
-                <div class="card mb-1 mb-xl-1">
-                    <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_prestador" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div> 
-                        </div>
-                    </div>
-                    <div id="view_imagen_prestador" class="collapse">
-                        <div class="card card-flush py-4">
-                            <div class="card-body pt-0">
-                                <div class="mt-1">
-                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
-                                        <div class="image-input-wrapper w-125px h-125px" id="imgfileprestador" style="background-image: url(assets/media/svg/files/blank-image.svg)"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <!--Modal Prestador-->
+    <div class="modal fade" id="modal-prestador" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
+            <div class="modal-content"> 
+                <div class="modal-header">
+                    <h2 class="fw-bolder">Informacion Prestador</h2>
+                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                            </svg>
+                        </span>
                     </div>
                 </div>
-                <div class="card mb-5 mb-xl-8">
-                    <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_prestador" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Prestador
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div> 
-                        </div>
-                    </div>
-                    <div id="view_datos_prestador" class="collapse show">
-                        <div class="card card-flush py-2">
-                            <div class="card-body pt-0">
-                                <div class="row mb-4">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Tipo</label>
-                                        <input type="text" class="form-control" id="txtTipoprestador" name="txtTipoprestador" readonly />
-                                    </div>
-                                    <div class="col-md-6">
-                                         <label class="form-label">Sector</label>
-                                         <input type="text" class="form-control" id="txtSector" name="txtSector" readonly />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="modal-body py-lg-10 px-lg-10 mt-n3">
+                    <div class="card mb-1 mb-xl-1">
                         <div class="card-header border-0">
                             <div class="card-title">
-                                <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                                <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_prestador" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
+                                    <span class="ms-2 rotate-180">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </div> 
                             </div>
                         </div>
-                        <div class="card-body pt-0">
-                            <div class="py-3 d-flex flex-stack flex-wrap">
-                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_direccion" role="button" aria-expanded="false" aria-controls="view_direccion">
-                                    <div class="me-3 rotate-90">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" />
-                                    <div class="me-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-gray-800 fw-bolder">Direccion</div>
+                        <div id="view_imagen_prestador" class="collapse">
+                            <div class="card card-flush py-4">
+                                <div class="card-body pt-0">
+                                    <div class="mt-1">
+                                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
+                                            <div class="image-input-wrapper w-125px h-125px" id="imgfileprestador" style="background-image: url(assets/media/svg/files/blank-image.svg)"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div id="view_direccion" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                        </div>
+                    </div>
+                    <div class="card mb-5 mb-xl-8">
+                        <div class="card-header border-0">
+                            <div class="card-title">
+                                <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_prestador" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Prestador
+                                    <span class="ms-2 rotate-180">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </div> 
+                            </div>
+                        </div>
+                        <div id="view_datos_prestador" class="collapse show">
+                            <div class="card card-flush py-2">
+                                <div class="card-body pt-0">
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Tipo</label>
+                                            <input type="text" class="form-control" id="txtTipoprestador" name="txtTipoprestador" readonly />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Sector</label>
+                                            <input type="text" class="form-control" id="txtSector" name="txtSector" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-header border-0">
+                                <div class="card-title">
+                                    <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                                </div>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="py-3 d-flex flex-stack flex-wrap">
+                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_direccion" role="button" aria-expanded="false" aria-controls="view_direccion">
+                                        <div class="me-3 rotate-90">
+                                            <span class="svg-icon svg-icon-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" />
+                                        <div class="me-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-gray-800 fw-bolder">Direccion</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="view_direccion" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                    <div class="d-flex flex-wrap py-5">
+                                        <div class="flex-equal me-5">
+                                            <div class="row mb-8">
+                                                <div class="col-md-2">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13); " readonly ></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-8">
+                                                <div class="col-md-2">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="py-3 d-flex flex-stack flex-wrap">
+                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_telefonos" role="button" aria-expanded="false" aria-controls="view_telefonos">
+                                        <div class="me-3 rotate-90">
+                                            <span class="svg-icon svg-icon-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
+                                        <div class="me-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="view_telefonos" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                    <div class="row mb-2">
+                                        <div class="col-md-4">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
+                                            <input type="text" class="form-control mb-2" name="txtFono1" id="txtFono1" value="" readonly />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
+                                            <input type="text" class="form-control mb-2" name="txtFono2" id="txtFono2" value="" readonly />
+                                        </div> 
+                                        <div class="col-md-4">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
+                                            <input type="text" class="form-control mb-2" name="txtFono3" id="txtFono3" value="" readonly />
+                                        </div>                                                        
+                                    </div>
+                                    <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
+                                        <div class="col-md-4">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
+                                            <input type="text" class="form-control mb-2" name="txtCelular1" id="txtCelular1" value="" readonly />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
+                                            <input type="text" class="form-control mb-2" name="txtCelular2" id="txtCelular2" value="" readonly />
+                                        </div> 
+                                        <div class="col-md-4">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
+                                            <input type="text" class="form-control mb-2" name="txtCelular3" id="txtCelular3" value="" readonly />
+                                        </div>
+                                    </div>                                                
+                                </div>
+                                <div class="py-3 d-flex flex-stack flex-wrap">
+                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_mails" role="button" aria-expanded="false" aria-controls="view_mails">
+                                        <div class="me-3 rotate-90">
+                                            <span class="svg-icon svg-icon-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <img src="assets/media/logos/email.png" class="w-20px me-3" />
+                                        <div class="me-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-gray-800 fw-bolder">E-mail</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="view_mails" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
                                 <div class="d-flex flex-wrap py-5">
-                                    <div class="flex-equal me-5">
-                                        <div class="row mb-8">
-                                            <div class="col-md-2">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
+                                        <div class="flex-equal me-5">
+                                            <div class="row mb-8">
+                                                <div class="col-md-2">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Email 1:</div>
+                                                </div>
+                                                <div class="col-md-7">
+                                                <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="form-check form-switch form-check-custom form-check-solid">
+                                                        <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" disabled />
+                                                        <span id="spanEnv1" class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>
+                                                    </label>   
+                                                </div>
                                             </div>
-                                            <div class="col-md-10">
-                                                <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13); " readonly ></textarea>
-                                            </div>
+                                            <div class="row mb-8">
+                                                <div class="col-md-2">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Email 2:</div>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="form-check form-switch form-check-custom form-check-solid">
+                                                        <input class="form-check-input" name="chkEnviar2" id="chkEnviar2" type="checkbox" disabled />
+                                                        <span id="spanEnv2" class="form-check-label fw-bold text-muted" for="chkEnviar2">No Enviar</span>
+                                                    </label>             
+                                                </div>
+                                            </div>   
                                         </div>
-                                        <div class="row mb-8">
-                                            <div class="col-md-2">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
-                                            </div>
-                                            <div class="col-md-10">
-                                                <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" readonly />
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-                            <div class="py-3 d-flex flex-stack flex-wrap">
-                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_telefonos" role="button" aria-expanded="false" aria-controls="view_telefonos">
-                                    <div class="me-3 rotate-90">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
-                                    <div class="me-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-gray-800 fw-bolder">Telefonos</div>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-                            <div id="view_telefonos" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
-                                <div class="row mb-2">
-                                    <div class="col-md-4">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                        <input type="text" class="form-control mb-2" name="txtFono1" id="txtFono1" value="" readonly />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                        <input type="text" class="form-control mb-2" name="txtFono2" id="txtFono2" value="" readonly />
-                                    </div> 
-                                    <div class="col-md-4">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
-                                        <input type="text" class="form-control mb-2" name="txtFono3" id="txtFono3" value="" readonly />
-                                    </div>                                                        
-                                </div>
-                                <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
-                                    <div class="col-md-4">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
-                                        <input type="text" class="form-control mb-2" name="txtCelular1" id="txtCelular1" value="" readonly />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
-                                        <input type="text" class="form-control mb-2" name="txtCelular2" id="txtCelular2" value="" readonly />
-                                    </div> 
-                                    <div class="col-md-4">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
-                                        <input type="text" class="form-control mb-2" name="txtCelular3" id="txtCelular3" value="" readonly />
-                                    </div>
-                                </div>                                                
-                            </div>
-                            <div class="py-3 d-flex flex-stack flex-wrap">
-                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_mails" role="button" aria-expanded="false" aria-controls="view_mails">
-                                    <div class="me-3 rotate-90">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <img src="assets/media/logos/email.png" class="w-20px me-3" />
-                                    <div class="me-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-gray-800 fw-bolder">E-mail</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="view_mails" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
-                               <div class="d-flex flex-wrap py-5">
-                                    <div class="flex-equal me-5">
-                                        <div class="row mb-8">
-                                            <div class="col-md-2">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Email 1:</div>
-                                            </div>
-                                            <div class="col-md-7">
-                                               <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="form-check form-switch form-check-custom form-check-solid">
-                                                    <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" disabled />
-                                                    <span id="spanEnv1" class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>
-                                                </label>   
-                                            </div>
-                                        </div>
-                                        <div class="row mb-8">
-                                            <div class="col-md-2">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Email 2:</div>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="form-check form-switch form-check-custom form-check-solid">
-                                                    <input class="form-check-input" name="chkEnviar2" id="chkEnviar2" type="checkbox" disabled />
-                                                    <span id="spanEnv2" class="form-check-label fw-bold text-muted" for="chkEnviar2">No Enviar</span>
-                                                </label>             
-                                            </div>
-                                        </div>   
-                                    </div>
-                               </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!--Modal Profesional-->
-<div class="modal fade" id="modal-profesional" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
-        <div class="modal-content"> 
-            <div class="modal-header">
-                <h2 class="fw-bolder">Informacion Profesional</h2>
-                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
-            </div>
-            <div class="modal-body py-lg-10 px-lg-10 mt-n3">
-                <div class="card mb-1 mb-xl-1">
-                    <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_profesional" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div> 
-                        </div>
-                    </div>
-                    <div id="view_imagen_profesional" class="collapse">
-                        <div class="card card-flush py-4">
-                            <div class="card-body pt-0">
-                                <div class="mt-1">
-                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
-                                        <div class="image-input-wrapper w-125px h-125px" id="imgfileprofesional" style="background-image: url(assets/media/svg/files/blank-image.svg)"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <!--Modal Profesional-->
+    <div class="modal fade" id="modal-profesional" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
+            <div class="modal-content"> 
+                <div class="modal-header">
+                    <h2 class="fw-bolder">Informacion Profesional</h2>
+                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                            </svg>
+                        </span>
                     </div>
                 </div>
-                <div class="card mb-5 mb-xl-8">
-                    <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_prestador" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Profesional
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div> 
-                        </div>
-                    </div>
-                    <div id="view_datos_prestador" class="collapse show">
-                        <div class="card card-flush py-2">
-                            <div class="card-body pt-0">
-                                <div class="row mb-2">
-                                    <div class="col-md-12">
-                                        <label class="form-label">Nombres</label>
-                                        <input type="text" class="form-control" id="txtProfesional" name="txtProfesional" readonly />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="modal-body py-lg-10 px-lg-10 mt-n3">
+                    <div class="card mb-1 mb-xl-1">
                         <div class="card-header border-0">
                             <div class="card-title">
-                                <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                                <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_profesional" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
+                                    <span class="ms-2 rotate-180">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </div> 
                             </div>
                         </div>
-                        <div class="card-body pt-0">
-                            <div class="py-3 d-flex flex-stack flex-wrap">
-                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_direccion" role="button" aria-expanded="false" aria-controls="view_direccion">
-                                    <div class="me-3 rotate-90">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" />
-                                    <div class="me-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-gray-800 fw-bolder">Direccion</div>
+                        <div id="view_imagen_profesional" class="collapse">
+                            <div class="card card-flush py-4">
+                                <div class="card-body pt-0">
+                                    <div class="mt-1">
+                                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
+                                            <div class="image-input-wrapper w-125px h-125px" id="imgfileprofesional" style="background-image: url(assets/media/svg/files/blank-image.svg)"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div id="view_direccion" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                        </div>
+                    </div>
+                    <div class="card mb-5 mb-xl-8">
+                        <div class="card-header border-0">
+                            <div class="card-title">
+                                <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_prestador" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Profesional
+                                    <span class="ms-2 rotate-180">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </div> 
+                            </div>
+                        </div>
+                        <div id="view_datos_prestador" class="collapse show">
+                            <div class="card card-flush py-2">
+                                <div class="card-body pt-0">
+                                    <div class="row mb-2">
+                                        <div class="col-md-12">
+                                            <label class="form-label">Nombres</label>
+                                            <input type="text" class="form-control" id="txtProfesional" name="txtProfesional" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-header border-0">
+                                <div class="card-title">
+                                    <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                                </div>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="py-3 d-flex flex-stack flex-wrap">
+                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_direccion" role="button" aria-expanded="false" aria-controls="view_direccion">
+                                        <div class="me-3 rotate-90">
+                                            <span class="svg-icon svg-icon-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" />
+                                        <div class="me-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-gray-800 fw-bolder">Direccion</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="view_direccion" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                    <div class="d-flex flex-wrap py-5">
+                                        <div class="flex-equal me-5">
+                                            <div class="row mb-8">
+                                                <div class="col-md-2">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <textarea class="form-control mb-2 text-uppercase" name="txtDireccionPro" id="txtDireccionPro" maxlength="250" readonly ></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="py-3 d-flex flex-stack flex-wrap">
+                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_telefonos" role="button" aria-expanded="false" aria-controls="view_telefonos">
+                                        <div class="me-3 rotate-90">
+                                            <span class="svg-icon svg-icon-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
+                                        <div class="me-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="view_telefonos" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                    <div class="row mb-2">
+                                        <div class="col-md-6">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Telefono:</div>
+                                            <input type="text" class="form-control mb-2" name="txtFonoPro" id="txtFonoPro" value="" readonly />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Celular:</div>
+                                            <input type="text" class="form-control mb-2" name="txtCelPro" id="txtCelPro" value="" readonly />
+                                        </div>                                                        
+                                    </div>                                               
+                                </div>
+                                <div class="py-3 d-flex flex-stack flex-wrap">
+                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_mails" role="button" aria-expanded="false" aria-controls="view_mails">
+                                        <div class="me-3 rotate-90">
+                                            <span class="svg-icon svg-icon-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <img src="assets/media/logos/email.png" class="w-20px me-3" />
+                                        <div class="me-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-gray-800 fw-bolder">E-mail</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="view_mails" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
                                 <div class="d-flex flex-wrap py-5">
-                                    <div class="flex-equal me-5">
-                                        <div class="row mb-8">
-                                            <div class="col-md-2">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
+                                        <div class="flex-equal me-5">
+                                            <div class="row mb-8">
+                                                <div class="col-md-2">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Email 1:</div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                <input type="email" name="txtEmailPro" id="txtEmailPro" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
+                                                </div>
                                             </div>
-                                            <div class="col-md-10">
-                                                <textarea class="form-control mb-2 text-uppercase" name="txtDireccionPro" id="txtDireccionPro" maxlength="250" readonly ></textarea>
-                                            </div>
+                                            <div class="row mb-2">
+                                                <div class="col-md-2">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Email 2:</div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
+                                                </div>
+                                            </div>   
                                         </div>
-                                    </div>
                                 </div>
-                            </div>
-                            <div class="py-3 d-flex flex-stack flex-wrap">
-                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_telefonos" role="button" aria-expanded="false" aria-controls="view_telefonos">
-                                    <div class="me-3 rotate-90">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
-                                    <div class="me-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-gray-800 fw-bolder">Telefonos</div>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-                            <div id="view_telefonos" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
-                                <div class="row mb-2">
-                                    <div class="col-md-6">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Telefono:</div>
-                                        <input type="text" class="form-control mb-2" name="txtFonoPro" id="txtFonoPro" value="" readonly />
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Celular:</div>
-                                        <input type="text" class="form-control mb-2" name="txtCelPro" id="txtCelPro" value="" readonly />
-                                    </div>                                                        
-                                </div>                                               
-                            </div>
-                            <div class="py-3 d-flex flex-stack flex-wrap">
-                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_mails" role="button" aria-expanded="false" aria-controls="view_mails">
-                                    <div class="me-3 rotate-90">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <img src="assets/media/logos/email.png" class="w-20px me-3" />
-                                    <div class="me-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-gray-800 fw-bolder">E-mail</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="view_mails" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
-                               <div class="d-flex flex-wrap py-5">
-                                    <div class="flex-equal me-5">
-                                        <div class="row mb-8">
-                                            <div class="col-md-2">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Email 1:</div>
-                                            </div>
-                                            <div class="col-md-10">
-                                               <input type="email" name="txtEmailPro" id="txtEmailPro" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-md-2">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Email 2:</div>
-                                            </div>
-                                            <div class="col-md-10">
-                                                <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" readonly />
-                                            </div>
-                                        </div>   
-                                    </div>
-                               </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!--Modal Prestador ver Ultimo Agendamiento-->
-<div class="modal fade" id="modal_prestador_ult" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
-        <div class="modal-content"> 
-            <div class="modal-header">
-                <h2 class="fw-bolder">Informacion Prestador</h2>
-                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
-            </div>
-            <div class="modal-body py-lg-10 px-lg-10 mt-n3">
-                <div class="card mb-1 mb-xl-1">
-                    <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_prestador" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div> 
-                        </div>
-                    </div>
-                    <div id="view_imagen_prestador" class="collapse">
-                        <div class="card card-flush py-4">
-                            <div class="card-body pt-0">
-                                <div class="mt-1">
-                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
-                                        <div class="image-input-wrapper w-125px h-125px" id="imgfileprestador" style="background-image: url(assets/media/svg/files/blank-image.svg)"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <!--Modal Prestador ver Ultimo Agendamiento-->
+    <div class="modal fade" id="modal_prestador_ult" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
+            <div class="modal-content"> 
+                <div class="modal-header">
+                    <h2 class="fw-bolder">Informacion Prestador</h2>
+                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                            </svg>
+                        </span>
                     </div>
                 </div>
-                <div class="card mb-5 mb-xl-8">
-                    <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_prestador" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Prestador
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div> 
-                        </div>
-                    </div>
-                    <div id="view_datos_prestador" class="collapse show">
-                        <div class="card card-flush py-2">
-                            <div class="card-body pt-0">
-                                <div class="row mb-4">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Tipo</label>
-                                        <input type="text" class="form-control" id="txtTipoprestadorUlt" readonly />
-                                    </div>
-                                    <div class="col-md-6">
-                                         <label class="form-label">Sector</label>
-                                         <input type="text" class="form-control" id="txtSectorUlt" readonly />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="modal-body py-lg-10 px-lg-10 mt-n3">
+                    <div class="card mb-1 mb-xl-1">
                         <div class="card-header border-0">
                             <div class="card-title">
-                                <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                                <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_prestador" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
+                                    <span class="ms-2 rotate-180">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </div> 
                             </div>
                         </div>
-                        <div class="card-body pt-0">
-                            <div class="py-3 d-flex flex-stack flex-wrap">
-                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_direccion" role="button" aria-expanded="false" aria-controls="view_direccion">
-                                    <div class="me-3 rotate-90">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" />
-                                    <div class="me-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-gray-800 fw-bolder">Direccion</div>
+                        <div id="view_imagen_prestador" class="collapse">
+                            <div class="card card-flush py-4">
+                                <div class="card-body pt-0">
+                                    <div class="mt-1">
+                                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
+                                            <div class="image-input-wrapper w-125px h-125px" id="imgfileprestador" style="background-image: url(assets/media/svg/files/blank-image.svg)"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div id="view_direccion" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                        </div>
+                    </div>
+                    <div class="card mb-5 mb-xl-8">
+                        <div class="card-header border-0">
+                            <div class="card-title">
+                                <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_prestador" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Prestador
+                                    <span class="ms-2 rotate-180">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </div> 
+                            </div>
+                        </div>
+                        <div id="view_datos_prestador" class="collapse show">
+                            <div class="card card-flush py-2">
+                                <div class="card-body pt-0">
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Tipo</label>
+                                            <input type="text" class="form-control" id="txtTipoprestadorUlt" readonly />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Sector</label>
+                                            <input type="text" class="form-control" id="txtSectorUlt" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-header border-0">
+                                <div class="card-title">
+                                    <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                                </div>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="py-3 d-flex flex-stack flex-wrap">
+                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_direccion" role="button" aria-expanded="false" aria-controls="view_direccion">
+                                        <div class="me-3 rotate-90">
+                                            <span class="svg-icon svg-icon-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" />
+                                        <div class="me-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-gray-800 fw-bolder">Direccion</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="view_direccion" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                    <div class="d-flex flex-wrap py-5">
+                                        <div class="flex-equal me-5">
+                                            <div class="row mb-8">
+                                                <div class="col-md-2">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <textarea class="form-control mb-2 text-uppercase" id="txtDireccionUlt" maxlength="250" onkeydown="return (event.keyCode!=13); " readonly ></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-8">
+                                                <div class="col-md-2">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="text" class="form-control mb-2 text-lowercase" id="txtUrlUlt" maxlength="150" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="py-3 d-flex flex-stack flex-wrap">
+                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_telefonos" role="button" aria-expanded="false" aria-controls="view_telefonos">
+                                        <div class="me-3 rotate-90">
+                                            <span class="svg-icon svg-icon-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
+                                        <div class="me-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="view_telefonos" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                    <div class="row mb-2">
+                                        <div class="col-md-4">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
+                                            <input type="text" class="form-control mb-2" id="txtFono1Ult" readonly />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
+                                            <input type="text" class="form-control mb-2"  id="txtFono2Ult" readonly />
+                                        </div> 
+                                        <div class="col-md-4">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
+                                            <input type="text" class="form-control mb-2" id="txtFono3Ult" readonly />
+                                        </div>                                                        
+                                    </div>
+                                    <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
+                                        <div class="col-md-4">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
+                                            <input type="text" class="form-control mb-2" id="txtCelular1Ult" readonly />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
+                                            <input type="text" class="form-control mb-2" id="txtCelular2Ult" readonly />
+                                        </div> 
+                                        <div class="col-md-4">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
+                                            <input type="text" class="form-control mb-2" id="txtCelular3Ult"  readonly />
+                                        </div>
+                                    </div>                                                
+                                </div>
+                                <div class="py-3 d-flex flex-stack flex-wrap">
+                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_mails" role="button" aria-expanded="false" aria-controls="view_mails">
+                                        <div class="me-3 rotate-90">
+                                            <span class="svg-icon svg-icon-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <img src="assets/media/logos/email.png" class="w-20px me-3" />
+                                        <div class="me-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-gray-800 fw-bolder">E-mail</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="view_mails" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
                                 <div class="d-flex flex-wrap py-5">
-                                    <div class="flex-equal me-5">
-                                        <div class="row mb-8">
-                                            <div class="col-md-2">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
+                                        <div class="flex-equal me-5">
+                                            <div class="row mb-8">
+                                                <div class="col-md-2">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Email 1:</div>
+                                                </div>
+                                                <div class="col-md-7">
+                                                <input type="email" id="txtEmail1Ult" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" readonly />
+                                                </div>
                                             </div>
-                                            <div class="col-md-10">
-                                                <textarea class="form-control mb-2 text-uppercase" id="txtDireccionUlt" maxlength="250" onkeydown="return (event.keyCode!=13); " readonly ></textarea>
-                                            </div>
+                                            <div class="row mb-8">
+                                                <div class="col-md-2">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Email 2:</div>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <input type="email" name="txtEmail2" id="txtEmail2Ult" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" readonly />
+                                                </div>
+                                            </div>   
                                         </div>
-                                        <div class="row mb-8">
-                                            <div class="col-md-2">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
-                                            </div>
-                                            <div class="col-md-10">
-                                                <input type="text" class="form-control mb-2 text-lowercase" id="txtUrlUlt" maxlength="150" readonly />
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-                            <div class="py-3 d-flex flex-stack flex-wrap">
-                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_telefonos" role="button" aria-expanded="false" aria-controls="view_telefonos">
-                                    <div class="me-3 rotate-90">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
-                                    <div class="me-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-gray-800 fw-bolder">Telefonos</div>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-                            <div id="view_telefonos" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
-                                <div class="row mb-2">
-                                    <div class="col-md-4">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                        <input type="text" class="form-control mb-2" id="txtFono1Ult" readonly />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                        <input type="text" class="form-control mb-2"  id="txtFono2Ult" readonly />
-                                    </div> 
-                                    <div class="col-md-4">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
-                                        <input type="text" class="form-control mb-2" id="txtFono3Ult" readonly />
-                                    </div>                                                        
-                                </div>
-                                <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
-                                    <div class="col-md-4">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
-                                        <input type="text" class="form-control mb-2" id="txtCelular1Ult" readonly />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
-                                        <input type="text" class="form-control mb-2" id="txtCelular2Ult" readonly />
-                                    </div> 
-                                    <div class="col-md-4">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
-                                        <input type="text" class="form-control mb-2" id="txtCelular3Ult"  readonly />
-                                    </div>
-                                </div>                                                
-                            </div>
-                            <div class="py-3 d-flex flex-stack flex-wrap">
-                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_mails" role="button" aria-expanded="false" aria-controls="view_mails">
-                                    <div class="me-3 rotate-90">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <img src="assets/media/logos/email.png" class="w-20px me-3" />
-                                    <div class="me-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-gray-800 fw-bolder">E-mail</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="view_mails" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
-                               <div class="d-flex flex-wrap py-5">
-                                    <div class="flex-equal me-5">
-                                        <div class="row mb-8">
-                                            <div class="col-md-2">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Email 1:</div>
-                                            </div>
-                                            <div class="col-md-7">
-                                               <input type="email" id="txtEmail1Ult" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" readonly />
-                                            </div>
-                                        </div>
-                                        <div class="row mb-8">
-                                            <div class="col-md-2">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Email 2:</div>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <input type="email" name="txtEmail2" id="txtEmail2Ult" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" readonly />
-                                            </div>
-                                        </div>   
-                                    </div>
-                               </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!--Modal Profesional ver Ultimo Agendamiento-->
-<div class="modal fade" id="modal_profesional_ult" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
-        <div class="modal-content"> 
-            <div class="modal-header">
-                <h2 class="fw-bolder">Informacion Profesional</h2>
-                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
-            </div>
-            <div class="modal-body py-lg-10 px-lg-10 mt-n3">
-                <div class="card mb-1 mb-xl-1">
-                    <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_profesional" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div> 
-                        </div>
-                    </div>
-                    <div id="view_imagen_profesional" class="collapse">
-                        <div class="card card-flush py-4">
-                            <div class="card-body pt-0">
-                                <div class="mt-1">
-                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
-                                        <div class="image-input-wrapper w-125px h-125px" id="imgfileprofesional" style="background-image: url(assets/media/svg/files/blank-image.svg)"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <!--Modal Profesional ver Ultimo Agendamiento-->
+    <div class="modal fade" id="modal_profesional_ult" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
+            <div class="modal-content"> 
+                <div class="modal-header">
+                    <h2 class="fw-bolder">Informacion Profesional</h2>
+                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                            </svg>
+                        </span>
                     </div>
                 </div>
-                <div class="card mb-5 mb-xl-8">
-                    <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_prestador" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Profesional
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div> 
-                        </div>
-                    </div>
-                    <div id="view_datos_prestador" class="collapse show">
-                        <div class="card card-flush py-2">
-                            <div class="card-body pt-0">
-                                <div class="row mb-2">
-                                    <div class="col-md-12">
-                                        <label class="form-label">Nombres</label>
-                                        <input type="text" class="form-control" id="txtProfesionalUlt" readonly />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="modal-body py-lg-10 px-lg-10 mt-n3">
+                    <div class="card mb-1 mb-xl-1">
                         <div class="card-header border-0">
                             <div class="card-title">
-                                <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                                <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_profesional" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
+                                    <span class="ms-2 rotate-180">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </div> 
                             </div>
                         </div>
-                        <div class="card-body pt-0">
-                            <div class="py-3 d-flex flex-stack flex-wrap">
-                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_direccion" role="button" aria-expanded="false" aria-controls="view_direccion">
-                                    <div class="me-3 rotate-90">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" />
-                                    <div class="me-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-gray-800 fw-bolder">Direccion</div>
+                        <div id="view_imagen_profesional" class="collapse">
+                            <div class="card card-flush py-4">
+                                <div class="card-body pt-0">
+                                    <div class="mt-1">
+                                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
+                                            <div class="image-input-wrapper w-125px h-125px" id="imgfileprofesional" style="background-image: url(assets/media/svg/files/blank-image.svg)"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div id="view_direccion" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                        </div>
+                    </div>
+                    <div class="card mb-5 mb-xl-8">
+                        <div class="card-header border-0">
+                            <div class="card-title">
+                                <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_prestador" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Profesional
+                                    <span class="ms-2 rotate-180">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </div> 
+                            </div>
+                        </div>
+                        <div id="view_datos_prestador" class="collapse show">
+                            <div class="card card-flush py-2">
+                                <div class="card-body pt-0">
+                                    <div class="row mb-2">
+                                        <div class="col-md-12">
+                                            <label class="form-label">Nombres</label>
+                                            <input type="text" class="form-control" id="txtProfesionalUlt" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-header border-0">
+                                <div class="card-title">
+                                    <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                                </div>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="py-3 d-flex flex-stack flex-wrap">
+                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_direccion" role="button" aria-expanded="false" aria-controls="view_direccion">
+                                        <div class="me-3 rotate-90">
+                                            <span class="svg-icon svg-icon-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" />
+                                        <div class="me-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-gray-800 fw-bolder">Direccion</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="view_direccion" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                    <div class="d-flex flex-wrap py-5">
+                                        <div class="flex-equal me-5">
+                                            <div class="row mb-8">
+                                                <div class="col-md-2">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <textarea class="form-control mb-2 text-uppercase" id="txtDireccionProUlt" maxlength="250" readonly ></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="py-3 d-flex flex-stack flex-wrap">
+                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_telefonos" role="button" aria-expanded="false" aria-controls="view_telefonos">
+                                        <div class="me-3 rotate-90">
+                                            <span class="svg-icon svg-icon-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
+                                        <div class="me-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="view_telefonos" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
+                                    <div class="row mb-2">
+                                        <div class="col-md-6">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Telefono:</div>
+                                            <input type="text" class="form-control mb-2" id="txtFonoProUlt" readonly />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="fs-6 fw-bold mt-2 mb-3">Celular:</div>
+                                            <input type="text" class="form-control mb-2" id="txtCelProUlt" readonly />
+                                        </div>                                                        
+                                    </div>                                               
+                                </div>
+                                <div class="py-3 d-flex flex-stack flex-wrap">
+                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_mails" role="button" aria-expanded="false" aria-controls="view_mails">
+                                        <div class="me-3 rotate-90">
+                                            <span class="svg-icon svg-icon-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <img src="assets/media/logos/email.png" class="w-20px me-3" />
+                                        <div class="me-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-gray-800 fw-bolder">E-mail</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="view_mails" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
                                 <div class="d-flex flex-wrap py-5">
-                                    <div class="flex-equal me-5">
-                                        <div class="row mb-8">
-                                            <div class="col-md-2">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
+                                        <div class="flex-equal me-5">
+                                            <div class="row mb-8">
+                                                <div class="col-md-2">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Email 1:</div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                <input type="email" id="txtEmailProUlt" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" readonly />
+                                                </div>
                                             </div>
-                                            <div class="col-md-10">
-                                                <textarea class="form-control mb-2 text-uppercase" id="txtDireccionProUlt" maxlength="250" readonly ></textarea>
-                                            </div>
+                                            <div class="row mb-2">
+                                                <div class="col-md-2">
+                                                    <div class="fs-6 fw-bold mt-2 mb-3">Email 2:</div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="email" id="txtEmail2Ult" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" readonly />
+                                                </div>
+                                            </div>   
                                         </div>
-                                    </div>
                                 </div>
-                            </div>
-                            <div class="py-3 d-flex flex-stack flex-wrap">
-                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_telefonos" role="button" aria-expanded="false" aria-controls="view_telefonos">
-                                    <div class="me-3 rotate-90">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
-                                    <div class="me-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-gray-800 fw-bolder">Telefonos</div>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-                            <div id="view_telefonos" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
-                                <div class="row mb-2">
-                                    <div class="col-md-6">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Telefono:</div>
-                                        <input type="text" class="form-control mb-2" id="txtFonoProUlt" readonly />
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="fs-6 fw-bold mt-2 mb-3">Celular:</div>
-                                        <input type="text" class="form-control mb-2" id="txtCelProUlt" readonly />
-                                    </div>                                                        
-                                </div>                                               
-                            </div>
-                            <div class="py-3 d-flex flex-stack flex-wrap">
-                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_mails" role="button" aria-expanded="false" aria-controls="view_mails">
-                                    <div class="me-3 rotate-90">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <img src="assets/media/logos/email.png" class="w-20px me-3" />
-                                    <div class="me-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-gray-800 fw-bolder">E-mail</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="view_mails" class="collapse fs-6 ps-10" data-bs-parent="#view_datos_direccion">
-                               <div class="d-flex flex-wrap py-5">
-                                    <div class="flex-equal me-5">
-                                        <div class="row mb-8">
-                                            <div class="col-md-2">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Email 1:</div>
-                                            </div>
-                                            <div class="col-md-10">
-                                               <input type="email" id="txtEmailProUlt" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" readonly />
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-md-2">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Email 2:</div>
-                                            </div>
-                                            <div class="col-md-10">
-                                                <input type="email" id="txtEmail2Ult" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" readonly />
-                                            </div>
-                                        </div>   
-                                    </div>
-                               </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 </div>
 
