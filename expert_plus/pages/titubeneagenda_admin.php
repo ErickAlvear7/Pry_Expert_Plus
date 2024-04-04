@@ -342,9 +342,9 @@
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-filter-square text-primary fs-1 me-5"></i>
                                 <div class="d-flex flex-column">
-                                    <h5 class="text-gray-800 fw-bolder">Cuidad</h5>
+                                    <h5 class="text-gray-800 fw-bolder">Ciudad</h5>
                                     <div class="fw-bold">
-                                        <div class="text-gray-600"><?php echo $xCiudad; ?></div>
+                                        <div class="text-gray-600 text-uppercase"><?php echo $xCiudad; ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -473,40 +473,33 @@
                             </div>
                         </div>
                         <div class="card-body pt-0 pb-5">
-                            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                <div class="col">
-                                    <div class="fv-row mb-7">
-                                        <label class="fs-6 fw-bold form-label mt-3">
-                                            <span class="required">Ciudad</span>   
-                                        </label>
-                                        <?php 
-                                            $xSQL = "SELECT prov_id AS Codigo, ciudad AS Descripcion FROM `provincia_ciudad` ";
-                                            $xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY ciudad ";
-                                            $all_ciudad = mysqli_query($con, $xSQL);
-                                        ?>
-                                        <select name="cboCiudad" id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tabTitular" class="form-select mb-2">
-                                            <?php foreach ($all_ciudad as $ciudad) : ?>
-                                                <option value="<?php echo $ciudad['Codigo'] ?>"><?php echo mb_strtoupper($ciudad['Descripcion']) ?></option>
-                                            <?php endforeach ?>
-                                        </select>                                                      
-                                    </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <label class="fs-6 fw-bold form-label">Ciudad</label>
+                                    <?php 
+                                        $xSQL = "SELECT prov_id AS Codigo, ciudad AS Descripcion FROM `provincia_ciudad` ";
+                                        $xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY ciudad ";
+                                        $all_ciudad = mysqli_query($con, $xSQL);
+                                    ?>
+                                    <select name="cboCiudad" id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#tabTitular" class="form-select mb-2">
+                                        <?php foreach ($all_ciudad as $ciudad) : ?>
+                                            <option value="<?php echo $ciudad['Codigo'] ?>"><?php echo mb_strtoupper($ciudad['Descripcion']) ?></option>
+                                        <?php endforeach ?>
+                                    </select>  
                                 </div>
-                                <div class="col">
-                                    <div class="fv-row mb-7">
-                                        <label class="fs-6 fw-bold form-label mt-3">
-                                            <span class="required">Provincia</span>
-                                            <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's email."></i> -->
-                                        </label>
-                                        <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tabTitular" class="form-select mb-2"  >
-                                            <option></option>
-                                            <?php foreach ($all_provincia as $prov) : ?>
-                                                <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
-                                            <?php endforeach ?>
-                                        </select>
-                                    </div>
+                                <div class="col-md-6">
+                                    <label class="fs-6 fw-bold form-label">Provincia</label>
+                                    <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#tabTitular" class="form-select mb-2"  >
+                                        <option></option>
+                                        <?php foreach ($all_provincia as $prov) : ?>
+                                            <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
+                                        <?php endforeach ?>
+                                    </select>  
                                 </div>
-                                <div class="mb-5 fv-row">
-                                    <span class="required">Sector</span>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <label class="required fs-6 fw-bold form-label">Sector</label>
                                     <select name="cboSector" id="cboSector" aria-label="Seleccione Sector" data-control="select2" data-placeholder="Seleccione Sector" data-dropdown-parent="#tabTitular" class="form-select mb-2">
                                         <option></option>
                                         <?php 
@@ -516,29 +509,27 @@
                                         foreach ($all_datos as $datos){ ?>
                                             <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
                                         <?php } ?>
-                                    </select>                                         
+                                    </select>
                                 </div>
-                            </div>
-                            <div class="mb-5 fv-row">
-                                <label class="fs-6 fw-bold form-label mt-3">
-                                    <span class="required">Prestador</span>
+                                <div class="col-md-6">
+                                    <label class="required fs-6 fw-bold form-label">Prestador</label>
                                     <button type="button" id="btnDatosPrestador" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" data-kt-menu-placement="bottom-end" title="Datos del Prestador" data-bs-toggle="tooltip" data-bs-placement="right">
                                         <i class="bi bi-search"></i>
                                     </button>
-                                </label>
-                                <?php 
-                                    $xSQL = "SELECT pres_id AS Codigo, pres_nombre AS Descripcion FROM `expert_prestadora` WHERE pais_id=$xPaisid and empr_id=$xEmprid AND prov_id=$xCiudadid AND pres_estado='A' ";
-                                    //file_put_contents('log_1seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
-                                    $all_prestadora = mysqli_query($con, $xSQL);
-                                ?>                                        
-                                <select name="cboPrestador" id="cboPrestador" aria-label="Seleccione Prestador" data-control="select2" data-placeholder="Seleccione Prestador" data-dropdown-parent="#tabTitular" class="form-select mb-2">
-                                    <option></option>
-                                    <?php foreach ($all_prestadora as $ciudad) : ?>
-                                        <option value="<?php echo $ciudad['Codigo'] ?>"><?php echo mb_strtoupper($ciudad['Descripcion']) ?></option>
-                                    <?php endforeach ?>                                            
-                                </select> 
+                                    <?php 
+                                        $xSQL = "SELECT pres_id AS Codigo, pres_nombre AS Descripcion FROM `expert_prestadora` WHERE pais_id=$xPaisid and empr_id=$xEmprid AND prov_id=$xCiudadid AND pres_estado='A' ";
+                                        //file_put_contents('log_1seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
+                                        $all_prestadora = mysqli_query($con, $xSQL);
+                                    ?>                                        
+                                    <select name="cboPrestador" id="cboPrestador" aria-label="Seleccione Prestador" data-control="select2" data-placeholder="Seleccione Prestador" data-dropdown-parent="#tabTitular" class="form-select mb-2">
+                                        <option></option>
+                                        <?php foreach ($all_prestadora as $ciudad) : ?>
+                                            <option value="<?php echo $ciudad['Codigo'] ?>"><?php echo mb_strtoupper($ciudad['Descripcion']) ?></option>
+                                        <?php endforeach ?>                                            
+                                    </select> 
+                                </div>
                             </div>
-                            <div class="mb-5 fv-row">
+                            <div class="mb-4 fv-row">
                                 <label class="fs-6 fw-bold form-label mt-3">
                                     <span class="required">Especialidad</span>
                                 </label>
@@ -546,7 +537,7 @@
                                     <option></option>
                                 </select> 
                             </div>
-                            <div class="mb-5 fv-row">
+                            <div class="mb-4 fv-row">
                                 <label class="fs-6 fw-bold form-label mt-3">
                                     <span class="required">Profesional</span>
                                     <button type="button" id="btnDatosProfesional" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" data-kt-menu-placement="bottom-end" title="Datos del Profesional" data-bs-toggle="tooltip" data-bs-placement="right">
@@ -3245,17 +3236,86 @@
                 $("#modal-profesional").modal("show");
                 $('#modal-profesional').modal('handleUpdate');
 
-                $('#txtNombreProf').val(json[0]['Nombres']);
-                $('#txtTelefonoProf').val(json[0]['Telefono']);
-                $('#txtCelularProf').val(json[0]['Celular']);
-                $('#txtEmail').val(json[0]['Email']);
-                $('#txtDireccionProf').val(json[0]['Direccion']);                   
+                $('#txtProfesional').val(json[0]['Nombres']);
+                $('#txtDireccionPro').val(json[0]['Direccion']);     
+                $('#txtFonoPro').val(json[0]['Telefono']);
+                $('#txtCelPro').val(json[0]['Celular']);
+                $('#txtEmailPro').val(json[0]['Email']);
+                              
 
             });
         });
 
-        //REDIREC PARA AGENDAR TITULAR
+         //Modal Ver Prestador Ultimo Agendamiento
+        $(document).on("click",".btnPres",function(){
 
+            var _paisid = '<?php echo $xPaisid ?>';
+            var _emprid = '<?php echo $xEmprid?>';
+            var _presidult = '<?php echo $xPresId ?>';
+
+            var _parametros = {
+                xxPaisid: _paisid,
+                xxEmprid: _emprid,
+                xxPresid: _presidult
+            }   
+
+            var xrespuesta = $.post("codephp/get_datosprestadora.php", _parametros);
+                xrespuesta.done(function(response){
+                    var json = JSON.parse(response);
+
+                    $('#txtTipoprestadorUlt').val(json.TipoPrestador);
+                    $('#txtSectorUlt').val(json.Sector);
+                    $('#txtDireccionUlt').val(json.Direccion);
+                    $('#txtUrlUlt').val(json.Url);
+                    $('#txtFono1Ult').val(json.Fono1);
+                    $('#txtFono2Ult').val(json.Fono2);
+                    $('#txtFono3Ult').val(json.Fono3);
+                    $('#txtCelular1Ult').val(json.Celu1);
+                    $('#txtCelular2Ult').val(json.Celu2);
+                    $('#txtCelular3Ult').val(json.Celu3);
+                    $('#txtEmail1Ult').val(json.Email1);
+                    $('#txtEmail2Ult').val(json.Email2);
+
+                });
+
+            $("#modal_prestador_ult").modal("show");
+        });
+
+          //Modal Ver Profesional Ultimo Agendamiento
+        $(document).on("click",".btnPro",function(){
+
+            var _paisid = '<?php echo $xPaisid ?>';
+            var _emprid = '<?php echo $xEmprid?>';
+            var _profidult = '<?php echo $xIdProfesional ?>';
+
+            var _parametros = {
+                xxPaisid: _paisid,
+                xxEmprid: _emprid,
+                xxProfid: _profidult
+            }
+
+            var xrespuesta = $.post("codephp/get_datosprofesionalagenda.php", _parametros);
+            xrespuesta.done(function(response){
+                var json = JSON.parse(response);                    
+                //console.log(response);
+                // if(json[0]['Avatar'] == ''){
+                //     document.getElementById('imgfileprofesionalUlt').style.backgroundImage="url(assets/media/svg/files/blank-image.svg)";    
+                // }else{
+                //     document.getElementById('imgfileprofesionalUlt').style.backgroundImage="url(logos/" + json[0]['Avatar'] + ")";
+                // }
+
+                $('#txtProfesionalUlt').val(json[0]['Nombres']);
+                $('#txtFonoProUlt').val(json[0]['Telefono']);
+                $('#txtCelProUlt').val(json[0]['Celular']);
+                $('#txtEmailProUlt').val(json[0]['Email']);
+                $('#txtDireccionProUlt').val(json[0]['Direccion']);  
+            }); 
+
+
+            $("#modal_profesional_ult").modal("show");
+        });
+
+        //REDIREC PARA AGENDAR TITULAR
         $('#btnCalendar').click(function(){
 
             _presid = $('#cboPrestador').val();
@@ -3312,14 +3372,22 @@
     });    
     
     
-    
     //Desplazar-modal
     $("#modal-prestador").draggable({
         handle: ".modal-header"
     });     
     
-    $("#modal-profesionalAgenda").draggable({
+    $("#modal-profesional").draggable({
         handle: ".modal-header"
     });  
+
+    $("#modal_prestador_ult").draggable({
+        handle: ".modal-header"
+    }); 
+    
+    $("#modal_profesional_ult").draggable({
+        handle: ".modal-header"
+    });  
+
 
 </script>
