@@ -3319,11 +3319,13 @@
         $('#btnCalendar').click(function(){
 
             _presid = $('#cboPrestador').val();
-            _espeid = $('#cboEspecialidad').val();
+            _preeid = $('#cboEspecialidad').val();
             _pfesid = $("#cboProfesional").val();
             _ciudid = $('#cboCiudad').val();
             _sectid = $('#cboSector').val();
-                
+            
+            
+            alert(_preeid);
 
             if(_sectid == 0){
                 toastSweetAlert("top-end",3000,"warning","Seleccione Sector..!!");
@@ -3335,7 +3337,7 @@
                 return;
             }
 
-            if(_espeid == 0){
+            if(_preeid == 0){
                 toastSweetAlert("top-end",3000,"warning","Seleccione Especialidad..!!");
                 return;
             }
@@ -3345,17 +3347,15 @@
                 return;
             }
 
-        
-
             $.redirect('?page=agendartitular&menuid=<?php echo $menuid; ?>', {
                 'tituid': _tituid,
+                'beneid':0,
                 'presid': _presid,
-                'espeid': _espeid,
-                'profid': _pfesid,
+                'preeid': _preeid,
+                'pfesid': _pfesid,
                 'prodid': _prodid,
                 'grupid': _grupid,
-                'ciudid': _ciudid,
-                'agenid': _agenid,
+                'ciudid': _ciudid
 
             });
             

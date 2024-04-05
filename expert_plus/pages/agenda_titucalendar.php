@@ -39,7 +39,7 @@
 
     $xTituid = $_POST['tituid'];
     $xBeneid = $_POST['beneid'];
-    $xPresid = $_POST['presaid'];
+    $xPresid = $_POST['presid'];
     $xPreeid = $_POST['preeid'];
     $xPfesid = $_POST['pfesid'];
     $xProdid = $_POST['prodid'];
@@ -1469,7 +1469,7 @@
                 if(info.view.type == 'dayGridMonth'){
                 
                     $.ajax({
-                        url: "codephp/get_turnoshorarios.php",
+                        url: "codephp/get_turnoshorarios",
                         type: "post",
                         data: _parametros,
                         dataType: "json",

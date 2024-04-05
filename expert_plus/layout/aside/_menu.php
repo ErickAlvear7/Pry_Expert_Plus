@@ -29,7 +29,7 @@
 		$page = 'admin_clienteproducto';
 	}
 
-	if($page == 'agendar_titubeneadmin' || $page == 'calendartitular'){
+	if($page == 'agendar_titubeneadmin' || $page == 'calendartitular' || $page == 'agendartitular' ){
 		$page = 'agendatitular_admin';
 	}
 	

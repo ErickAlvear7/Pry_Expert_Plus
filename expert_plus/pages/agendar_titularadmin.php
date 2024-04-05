@@ -38,13 +38,19 @@
 
     //ID POST
     $xTituid = $_POST['tituid'];
+    $xBeneid = $_POST['beneid'];
     $xPresid = $_POST['presid'];
-    $xEspeid = $_POST['espeid'];
-    $xProfid = $_POST['profid'];
+    $xPreeid = $_POST['preeid'];
+    $xPfesid = $_POST['pfesid'];
     $xProdid = $_POST['prodid'];
     $xGrupid = $_POST['grupid'];
     $xCiudid = $_POST['ciudid'];
-    $xAgendaid = $_POST['agenid'];
+
+    $xSQL = "SELECT * FROM `expert_prestadora_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pree_id=$xPreeid ";
+    $all_datos = mysqli_query($con, $xSQL);
+    foreach ($all_datos as $datos) {
+        $xEspeid = $datos['espe_id'];
+    }    
 
     //DATOS TITULAR
     $xSQL = "SELECT CONCAT(per.pers_nombres, ' ', per.pers_apellidos) AS Nombres, per.pers_imagen AS Avatar,per.pers_estado AS Estado, ";
@@ -66,9 +72,9 @@
     }
 
     //DATOS PRODUCTO Y GRUPO
-    $xSQL = "SELECT pro.prod_nombre AS Producto, pro.prod_descripcion AS DescPro, gru.grup_nombre AS Grupo, gru.grup_descripcion AS ";
-    $xSQL .="DescGru FROM `expert_productos` pro INNER JOIN `expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.prod_id = $xProdid AND ";
-    $xSQL .="pro.grup_id = $xGrupid AND pro.pais_id = $xPaisid AND pro.empr_id = $xEmprid ";
+    $xSQL = "SELECT pro.prod_nombre AS Producto, pro.prod_descripcion AS DescPro, gru.grup_nombre AS Grupo, gru.grup_descripcion AS DescGru ";
+    $xSQL .= "FROM `expert_productos` pro INNER JOIN `expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.prod_id = $xProdid AND ";
+    $xSQL .= "pro.grup_id = $xGrupid AND pro.pais_id = $xPaisid AND pro.empr_id = $xEmprid ";
     $all_progru = mysqli_query($con, $xSQL);
     foreach ($all_progru as $datos) {
 
@@ -81,7 +87,7 @@
 
     //DATOS PRESTADOR
     $xSQL = "SELECT pres_nombre AS Prestador, pres_tipoprestador AS Tipo, pres_sector AS Sector FROM `expert_prestadora` WHERE pres_id = $xPresid ";
-    $xSQL .="AND pais_id = $xPaisid AND empr_id = $xEmprid ";
+    $xSQL .= "AND pais_id = $xPaisid AND empr_id = $xEmprid ";
     $all_prestador = mysqli_query($con, $xSQL);
     foreach ($all_prestador as $datos) {
 
@@ -93,7 +99,7 @@
 
      //DATOS ESPECIALIDAD
      $xSQL = "SELECT espe_nombre AS Especialidad, espe_descripcion AS Descripcion, espe_pvp AS Costo FROM `expert_especialidad` WHERE espe_id = $xEspeid ";
-     $xSQL .="AND pais_id = $xPaisid AND empr_id = $xEmprid";
+     $xSQL .= "AND pais_id = $xPaisid AND empr_id = $xEmprid";
      $all_especialidad = mysqli_query($con, $xSQL);
      foreach ($all_especialidad as $datos) {
 
@@ -105,7 +111,7 @@
 
     //DATOS PROFESIONAL
     $xSQL = " SELECT (SELECT CONCAT(pro.prof_nombres,' ',pro.prof_apellidos) FROM `expert_profesional` pro WHERE esp.prof_id = pro.prof_id) AS Profesional ";
-    $xSQL .= "FROM `expert_profesional_especi` esp WHERE esp.pfes_id = $xProfid AND esp.pais_id = $xPaisid AND esp.empr_id =$xEmprid  ";
+    $xSQL .= "FROM `expert_profesional_especi` esp WHERE esp.pfes_id = $xPfesid AND esp.pais_id = $xPaisid AND esp.empr_id =$xEmprid  ";
     $all_profesional = mysqli_query($con, $xSQL);
     foreach ($all_profesional as $datos) {
        $xProfesional = $datos['Profesional'];
@@ -113,7 +119,7 @@
 
     //INTERRVALOS DE ATENCION DEL PROFESIONAL
     $xSQL = "SELECT * FROM `expert_profesional_especi` ";
-	$xSQL .= "WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pfes_id=$xProfid  ";
+	$xSQL .= "WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pfes_id=$xPfesid  ";
     $all_intervalo = mysqli_query($con, $xSQL);
     foreach ($all_intervalo as $datos) {
         $xIntervalo = $datos['intervalo'];
@@ -185,6 +191,7 @@
                     <div class="d-flex flex-wrap flex-stack">
                         <div class="d-flex flex-column flex-grow-1 pe-8">
                             <div class="d-flex flex-wrap">
+
                                 <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                     <div class="d-flex align-items-center">
                                         <span class="svg-icon svg-icon-3 svg-icon-success me-2">
@@ -197,6 +204,7 @@
                                     </div>
                                     <div class="fw-bold fs-6 text-gray-400">Earnings</div>
                                 </div>
+
                                 <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                     <div class="d-flex align-items-center">
                                         <span class="svg-icon svg-icon-3 svg-icon-danger me-2">
@@ -204,10 +212,12 @@
                                                 <rect opacity="0.5" x="11" y="18" width="13" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
                                                 <path d="M11.4343 15.4343L7.25 11.25C6.83579 10.8358 6.16421 10.8358 5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75L11.2929 18.2929C11.6834 18.6834 12.3166 18.6834 12.7071 18.2929L18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25C17.8358 10.8358 17.1642 10.8358 16.75 11.25L12.5657 15.4343C12.2533 15.7467 11.7467 15.7467 11.4343 15.4343Z" fill="currentColor" />
                                             </svg>
+                                        </span>
                                         <div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="80">0</div>
                                     </div>
                                     <div class="fw-bold fs-6 text-gray-400">Projects</div>
                                 </div>
+
                                 <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                     <div class="d-flex align-items-center">
                                         <span class="svg-icon svg-icon-3 svg-icon-success me-2">
@@ -224,15 +234,18 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>          
+        </div>      
     </div>
-    <div class="card mb-6">
-       <div class="card-body pt-9 pb-0">
-            <div class="container-fluid" id="mycalendar"></div>  
-       </div>
-    </div> 
+
+    <div class="card-body">
+            <div id="mycalendar"></div> 
+    </div>       
+     
 </div>
+
+ 
+
 <!--MODAL AGENDAMIENTO -->
 <div class="modal fade" id="modal_new_agenda" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
@@ -314,7 +327,7 @@
         var _tituid = "<?php echo $xTituid; ?>";
         var _presid = "<?php echo $xPresid; ?>";
         var _espeid = "<?php echo $xEspeid; ?>";
-        var _pfesid = "<?php echo $xProfid; ?>";
+        var _pfesid = "<?php echo $xPfesid; ?>";
         var _prodid = "<?php echo $xProdid; ?>";
         var _grupid = "<?php echo $xGrupid; ?>";
         var _ciudid = "<?php echo $xCiudid; ?>";
@@ -350,8 +363,6 @@
             "xxPfesid" : _pfesid
         }           
             
-         
-
         $.ajax({
             url: "codephp/get_turnoshorarios.php",
             type: "post",
@@ -741,6 +752,37 @@
             });
             
         });
+
+        $('#cboTipoRegistro').change(function(){
+                    
+            _cboid = $(this).val(); //obtener el id seleccionado
+            $("#cboMotivo").empty();
+
+            if(_cboid == 'Agendar'){
+                var _parametros = {
+                    "xxPaisid" : _paisid,
+                    "xxEmprid" : _emprid,
+                    "xxPresid" : _presid,
+                    "xxEspeid" : _espeid                    
+                }
+
+                var _respuesta = $.post("codephp/cargar_motivos.php", _parametros);
+                _respuesta.done(function(response) {
+                    $("#cboMotivo").html(response);
+                    
+                });
+                _respuesta.fail(function() {
+                });
+                _respuesta.always(function() {
+                });
+            }else{ 
+                var _html = "<option value=''></option>";
+                _html += "<option value='Informacion'>Informacion</option>";
+
+                $("#cboMotivo").html(_html);
+            }
+
+        });         
 
         //AGENDAR CITA
         $('#btnAgendar').click(function(){
