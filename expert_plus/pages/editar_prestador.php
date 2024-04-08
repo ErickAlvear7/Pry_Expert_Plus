@@ -442,6 +442,7 @@
                                                 <?php 
                                         
                                                     foreach($all_especialidad as $especi){
+                                                        $xEspeid = $especi['espe_id'];
                                                         $xId = $especi['pree_id'];
                                                         $xEspecialidad = trim($especi['espe_nombre']);
                                                         $xPvp = trim($especi['pree_pvp']);
@@ -512,7 +513,10 @@
                                                                         </button>	
                                                                         <button id="btnPerson_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick='f_AgregarProfesional(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>,<?php echo $xId; ?>)' title='Agregar Profesional'data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class="fas fa-user"></i>
-                                                                        </button>	                                                                                                                             
+                                                                        </button>	
+                                                                        <button id="btnMotivos_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick='f_AgregarMotivos(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xPresid; ?>,<?php echo $xEspeid; ?>)' title='Agregar Motivos'data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                                            <i class="fas fa-book"></i>
+                                                                        </button>	                                                                                                                                                                                                      
                                                                     </div>
                                                                 </div>
                                                             </td>                                                                
@@ -530,6 +534,7 @@
         </div>
     </div>
 </div>
+
 <!--Modal Nueva Especialidad -->
 <div class="modal fade" id="modal-new-especialidad" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
@@ -595,6 +600,7 @@
         </div>
     </div>
 </div>
+
 <!--Modal Agregar Especialidad -->
 <div class="modal fade" id="modal-add-especialidad" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
@@ -647,6 +653,7 @@
         </div>
     </div>
 </div>  
+
 <!--Modal Editar Especialidad -->
 <div class="modal fade" id="modal-editar-especialidad" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
@@ -664,7 +671,7 @@
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-4">
-                    <div card-body pt-0">
+                    <div class="card-body pt-0">
                         <div class="row mb-4">
                             <div class="col-md-12">
                                  <label class="required form-label">Especialidad</label>
@@ -700,6 +707,7 @@
         </div>
     </div>
 </div>   
+
 <!--Modal Profesional /Configurar Horarios-->
 <div class="modal fade" id="modal_profesional" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
@@ -781,6 +789,7 @@
         </div>
     </div>
 </div>   
+
 <!--Modal Horarios -->             
 <div class="modal fade" id="modal_horarios" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
@@ -861,6 +870,7 @@
         </div>
     </div>
 </div>   
+
 <!--Modal Tipo Porfesion -->      
 <div class="modal fade" id="modal_new_tipoprofesion" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
@@ -990,8 +1000,9 @@
         </div>
     </div>
 </div>   
+
 <!--Modal Nuevo Profesional -->
-<div class="modal fade" id="modal-new-profesional"" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modal-new-profesional" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content"> 
             <div class="modal-header">
@@ -1224,6 +1235,62 @@
     </div>
 </div>  
 
+<!--Modal MOTIVOS ESPECIALIDAD-->
+<div class="modal fade" id="modal-motivos" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="mb-2">Motivos Especialidad</h2>
+                <h2 id="headerTitleMotivo" class="fs-6 fw-bold form-label mb-2"></h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-2 px-lg-10">
+                <div class="card card-flush pt-10 pb-n3">
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-md-10">
+                                 <label class="required form-label">Motivo Especialidad</label>
+                                 <textarea class="form-control mb-2 text-uppercase" name="txtmotivo" id="txtmotivo" maxlength="500" rows="1" onkeydown="return (event.keyCode!=13);"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group mt-5 mb-4">
+                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarMotivo">
+                                <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            Agregar Motivo
+                            </button>
+                        </div>
+                        <table id="tblMotivo" class="table table-hover align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
+                            <thead>
+                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                    <th>Motivo</th>
+                                    <th>Estado</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fw-bold text-gray-600"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>   
+
 <script>
     $(document).ready(function(){
 
@@ -1245,6 +1312,8 @@
         _logo  = "<?php echo $xLogo; ?>";
         _btnopctiontipo = 'Add';
         _selpreeid = 0;
+        _selpresid = 0;
+        _selespeid = 0;
 
         _logo = _logo == '' ? 'companyname.png' : _logo;
 
@@ -2033,7 +2102,7 @@
                 $('#tblProfesional').append(_output);
 
             }else{
-                toastSweetAlert("top-end",3000,"success","Profesional Agregado"); 
+                toastSweetAlert("top-end",3000,"error","Error en Ajax-grabar_profescionalespeci"); 
             }
 
             $("#cboTipoProfe").val(0).change(); 
@@ -2041,6 +2110,120 @@
 
         });	                
 
+    });
+
+    function f_AgregarMotivos(_paisid, _emprid, _preeid, _presid, _espeid){
+
+        var tb = document.getElementById('tblMotivo');
+            while(tb.rows.length > 1) {
+            tb.deleteRow(1);
+        }
+
+        _selpreeid = _preeid;
+        _selpresid = _presid;
+        _selespeid =  _espeid   
+
+        _selespecialidad = $('#txtEspeciPrestador' + _preeid).val();
+        document.getElementById("headerTitleMotivo").innerHTML = "Especialidad: " + _selespecialidad;
+
+        var _parametros = {
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxPresid" : _presid,
+            "xxEspeid" : _espeid,
+        }
+
+        $.ajax({
+            url: "codephp/get_datosmotivo.php",
+            type: "POST",
+            dataType: "json",
+            data: _parametros,
+            success: function(response){ 
+                $.each(response, function(i, item){
+
+                    _id = item.mtes_id;
+                    _motivo = item.motivos_especialidad;
+                    _estado = item.mtes_estado;
+                    _checked = '';
+                    _disabledbtn1 = 'disabled';
+
+                    if(_estado == "A"){
+                        _checked = "checked='checked'";
+                        _textcolor = "badge badge-light-primary";
+                    }else{
+                        _textcolor = "badge badge-light-danger";
+                    }
+
+                    if(_estado == 'A'){
+                        _estado = 'Activo';
+                    }else{
+                        _estado = 'Inactivo';
+                    }
+
+                    _output = '<tr id="trmot_' + _id + '">';
+                    _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _motivo + '</span><input type="hidden" id="txtMotivo_' + _id + '" value="' + _motivo + '" /></div></div></td>';
+                    _output += '<td id="tdmot_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="' + _textcolor + '">' + _estado + '</div></div></div></td>';
+                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
+                    _output += '<input class="form-check-input h-20px w-20px border-primary" ' +  _checked + ' type="checkbox" id="chkmoti' + _id + '" onchange="f_UpdateMotivo(';
+                    _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td></tr>';
+
+                    $('#tblMotivo').append(_output);
+
+                });
+
+                $("#modal-motivos").modal("show");
+                $('#modal-motivos').modal('handleUpdate');                           
+            },
+            error: function (error){
+                console.log(error);
+            }
+        });        
+
+    }
+
+    $('#btnAgregarMotivo').click(function(e){
+
+        var _motivo = $('#txtmotivo').val();
+        
+        if(_motivo == ''){
+            toastSweetAlert("top-end",3000,"warning","Ingrese Motivo..!"); 
+            return;
+        }                
+
+        var _parametros = {
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxUsuaid" : _usuaid,
+            "xxPresid" : _selpresid,
+            "xxEspeid" : _selespeid,
+            "xxMotivo" : _motivo
+        }	
+
+        var xrespuesta = $.post("codephp/grabar_motivoespecialidad.php", _parametros);
+        xrespuesta.done(function(response){
+            if(response > 0){
+
+                _id = response.trim();
+
+                _estado = 'Activo';
+                _checked = "checked='checked'";
+                _textcolor = "badge badge-light-primary";                
+
+                _output = '<tr id="trmot_' + _id + '">';
+                _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _motivo.toUpperCase() + '</span><input type="hidden" id="txtMotivo_' + _id + '" value="' + _motivo + '" /></div></div></td>';
+                _output += '<td id="tdmot_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="' + _textcolor + '">' + _estado + '</div></div></div></td>';
+                _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
+                _output += '<input class="form-check-input h-20px w-20px border-primary" ' +  _checked + ' type="checkbox" id="chkmoti' + _id + '" onchange="f_UpdateMotivo(';
+                _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td></tr>';
+
+                $('#tblMotivo').append(_output);
+
+            }else{
+                toastSweetAlert("top-end",3000,"error","Error en Ajax-grabar_motivoespecialidad"); 
+            }
+
+            $("#txtmotivo").val(''); 
+        });
     });
 
     function f_UpdateEstProf(_paisid, _emprid, _pfesid){
@@ -2081,6 +2264,39 @@
 
         });
     }
+
+    function f_UpdateMotivo(_paisid, _emprid, _motid){
+
+        let _usuaid = "<?php echo $xUsuaid; ?>";
+        let _check = $("#chkmoti" + _motid).is(":checked");
+        let _checked = "";
+        let _class = "badge badge-light-primary";
+        let _td = "tdmot_" + _motid;
+
+        if(_check){
+            _estado = "Activo";
+            _checked = "checked='checked'";
+        }else{                    
+            _estado = "Inactivo";
+            _class = "badge badge-light-danger";
+        }
+
+        var _changetd = document.getElementById(_td);
+        _changetd.innerHTML = '<div class="d-flex align-items-center"><div class="ms-0"><div class="' + _class + '">' + _estado + ' </div></div>';
+
+        var _parametros = {
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxUsuaid" : _usuaid,
+            "xxMotivoid" : _motid,
+            "xxEstado" : _estado
+        }	
+
+        var xrespuesta = $.post("codephp/update_estadomotivoespeci.php", _parametros);
+            xrespuesta.done(function(response){
+
+        });
+    }    
 
     function f_ConfHorario(_paisid, _emprid, _pfesid){
 
@@ -2287,7 +2503,7 @@
         _parametros = {
             "xxPaisid" : _paisid,
             "xxEmprid" : _paisid,
-            "xxTipoProfe" : _tipoprofe
+            "xxTipoProfe" : _tipoprofe  
         }
 
         $("#cboProfesional").empty();
@@ -2614,7 +2830,11 @@
 
     $("#modal_horarios").draggable({
         handle: ".modal-header"
-    });            
+    }); 
+    
+    $("#modal-motivos").draggable({
+        handle: ".modal-header"
+    });     
 
 </script>
 

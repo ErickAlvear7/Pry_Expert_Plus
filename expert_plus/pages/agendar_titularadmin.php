@@ -796,8 +796,6 @@
             var _horafin = $('#hora_fin').val();
             var _tipocliente = "T";
 
-
-
         });
 
 
