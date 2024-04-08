@@ -777,7 +777,7 @@
                 });
             }else{ 
                 var _html = "<option value=''></option>";
-                _html += "<option value='Informacion'>Informacion</option>";
+                //_html += "<option value='Informacion'>Informacion</option>";
 
                 $("#cboMotivo").html(_html);
             }
@@ -787,6 +787,8 @@
         //AGENDAR CITA
         $('#btnAgendar').click(function(){
 
+            //debugger;
+
             var _tiporegistro = $('#cboTipoRegistro').val();
             var _motivo = $('#cboMotivo').val();
             var _observacion = $('#txtObservacion').val();
@@ -795,6 +797,101 @@
             var _horainicio = $('#hora_inicio').val();
             var _horafin = $('#hora_fin').val();
             var _tipocliente = "T";
+
+
+            if(_tiporegistro == ''){
+                
+                toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Registro..!!");
+            }
+
+            if(_motivo == ''){
+                
+                toastSweetAlert("top-end",3000,"warning","Seleccione Motivo..!!");
+            }
+
+            if(_observacion == ''){
+                
+                toastSweetAlert("top-end",3000,"warning","Ingrese Observacion..!!");
+            }
+
+            
+            let _fechaselect = _fechainicio + ' ' + _horainicio;
+            _fechaselect = new Date(_fechaselect);
+            let _fechacatual = new Date();
+
+            let _horaselect = moment(_fechaselect);
+            let _horaactual = moment(_fechacatual);
+
+            _diferenminuts = _horaactual.diff(_horaselect, "m");
+            //SUMAR 10 MINUTOS A LA DIFERENCIA, PARA DARLES 10 MINUTOS MAS
+            //_diferenminuts = moment(_diferenminuts).add(10,'m').format("HH:mm");
+
+            let _fechaAgenda = new Date(_fechaselect);
+            let _fechaView = new Date();
+
+            _fechaAgenda = moment(_fechaAgenda).format("YYYY-MM-DD");
+            _fechaView = moment(_fechaView).format("YYYY-MM-DD");
+            
+            if(_fechaAgenda == _fechaView){
+
+                if(_diferenminuts > 5){
+                    toastSweetAlert("top-end",3000,"warning","Hora Fuera del Intervalo de"  + _interval + " minutos");
+                    return;
+                }
+            }
+
+            let _fechainiagenda = _fechainicio + ' ' + _horainicio;
+            let _fechafinagenda = _fechafinal + ' ' + _horafin;
+
+            var _parametros = {
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxTipoCliente" : _tipocliente,
+                "xxTituid" : _tituid,
+                "xxCiudid" : _ciudid,
+                "xxProdid" : _prodid,
+                "xxGrupid" : _grupid,
+                "xxPresid" : _presid,
+                "xxEspeid" : _espeid,
+                "xxPfesid" : _pfesid,
+                "xxFechaIni" : _fechainiagenda,
+                "xxFechaFin" : _fechafinagenda,
+                "xxCodigoDia" : _dayselect,
+                "xxDia" : _dayname,
+                "xxHoraDesde" : _horainicio,
+                "xxHoraHasta" : _horafin,
+                "xxTipoRegistro" : _tiporegistro,
+                "xxMotivoRegistro" : _motivo,
+                "xxObservacion" : _observacion.toUpperCase(),
+                "xxEstadoAgenda" : "A",
+                "xxColor" : "#117A65",
+                "xxTextColor" : "#060606",
+                "xxUsuaid" : _usuaid,
+            }
+
+            var _respuesta = $.post("codephp/agendar_cita.php", _parametros);
+            _respuesta.done(function(response){
+                if(response >= 0){
+                    
+                    $.redirect('?page=agendar_titubeneadmin&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'beneid': _beneid, 'prodid': _prodid, 'grupid': _grupid, 'agendaid': response });
+                    
+                }else{
+                    Swal.fire({
+                        text: "Error en el envio del correo, valide la informacion",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok,regresar!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+                
+            });
+            _respuesta.fail(function() {
+            });
+            _respuesta.always(function() {
+            });
 
         });
 
