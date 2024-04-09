@@ -667,8 +667,6 @@
 
         function f_ViewDatos(arg){
 
-            
-
             hidePopovers();
 
             let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
