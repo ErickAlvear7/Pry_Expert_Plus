@@ -316,7 +316,79 @@
             </div>
         </div>
     </div>
-</div>   
+</div> 
+
+<!--MODAL RESERVA -->
+<div class="modal fade" id="modal_new_reserva" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+        <div id="modal_new_reserva_parent" class="modal-content">
+            <div class="modal-header">
+                <h2 class="fw-bold"><i class="fas fa-user"></i></h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div class="card-body pt-0">
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <label class="required fs-6 fw-bold form-label">Tipo Registro</label>
+                                <select name="cboTipoRegistroRe" id="cboTipoRegistroRe" aria-label="Seleccione Registro" data-control="select2" data-placeholder="Seleccione Registro" data-dropdown-parent="#modal_new_reserva_parent" class="form-select mb-2">
+                                    <option value=""></option>
+                                    <option value="Agendar">Agendar</option>
+                                    <option value="Informacion">Informacion</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="required fs-6 fw-bold form-label">Motivo</label>
+                                <select name="cboMotivoRe" id="cboMotivoRe" aria-label="Seleccione Motivo" data-control="select2" data-placeholder="Seleccione Motivo" data-dropdown-parent="#modal_new_reserva_parent" class="form-select mb-2">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                           <div class="col-md-12">
+                                <label class="required fs-6 fw-bold form-label">Observacion</label>
+                                <textarea class="form-control text-uppercase" name="txtObservacionRe" id="txtObservacionRe" maxlength="500" onkeydown="return (event.keyCode!=13);"></textarea>
+                           </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="fs-6 fw-bold form-label">Fecha Inicio</label>
+                                <input class="form-control form-control-solid" name="fecha_iniciore" id="fecha_iniciore" disabled />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="fs-6 fw-bold form-label">Hora Inicio</label>
+                                <input class="form-control form-control-solid" name="hora_iniciore" id="hora_iniciore" disabled />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="fs-6 fw-bold form-label">Fecha Fin</label>
+                                <input class="form-control form-control-solid" name="fecha_finre" id="fecha_finre" disabled />
+
+                            </div>
+                            <div class="col-md-6">
+                                <label class="fs-6 fw-bold form-label">Hora Fin</label>
+                                <input class="form-control form-control-solid" name="hora_finre" id="hora_finre" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCancelarRe" class="btn btn-sm btn-light" data-bs-dismiss="modal"><i class="las la-close"></i>Cancelar Reserva</button>
+                <button type="button" id="btnAgendar" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Agendar</button>
+            </div>
+        </div>
+    </div>
+</div>  
 
 <script>
 
@@ -701,6 +773,8 @@
         function f_ClickAgenda(arg){
             
             console.log(arg);
+            f_LimpiarModalRe();
+            
             let _tipo = arg.event.title;
             let _id = arg.event.id;
             let _agenid = arg.event.extendedProps.usuariocreacion;
@@ -714,13 +788,24 @@
 
             if(_tipo == 'RESERVADO'){
                 
-                let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
+              _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
+              _fechainiciore = moment(arg.event.extendedProps._fechainicio).format("YYYY-MM-DD");
+              _fechafinre = moment(arg.event.extendedProps._fechafin).format("YYYY-MM-DD");
+              _horainiciore = arg.event.extendedProps.horaini;
+              _horafinere = arg.event.extendedProps.horafin;
+              _codigodiare = arg.event.extendedProps.codigo_dia;
+    
+
+               $('#fecha_iniciore').val(_fechainiciore);
+               $('#fecha_finre').val(_fechafinre);
+               $('#hora_iniciore').val(_horainiciore);
+               $('#hora_finre').val(_horafinere);
 
 
 
-                $("#modal_new_agenda").modal("show");
+                $("#modal_new_reserva").modal("show");
 
-
+ 
             }else if(_tipo == 'AGENDADO'){
 
 
@@ -739,6 +824,27 @@
 
         }
 
+        $('#modal_new_reserva').on('hidden.bs.modal', function () {
+
+            // var _parametros = {
+            //     "xxPaisid" : _paisid,
+            //     "xxEmprid" : _emprid,
+            //     "xxPresid" : _presid,
+            //     "xxEspeid" : _espeid,
+            //     "xxPfesid" : _pfesid,
+            //     "xxFechaInicio" : _fechainicio,
+            //     "xxFechaFin" : _fechafin,
+            //     "xxCodigoDia" : _dayselect
+            // }                
+
+            // var _respuesta = $.post("codephp/del_reservatmp.php", _parametros);
+            // _respuesta.done(function(response){
+            // });                
+        }); 
+
+
+
+
         const hidePopovers = () => {
                 if (popoverState) {
                     popover.dispose();
@@ -756,6 +862,17 @@
             $('#hora_inicio').val('');
             $('#fecha_fin').val('');
             $('#hora_fin').val('');
+        }
+
+        const f_LimpiarModalRe = () => {
+            $('#cboTipoRegistroRe').val('').change();
+            $('#cboMotivoRe').empty();
+           
+            // $('#txtObservacion').val('');
+            // $('#fecha_inicio').val('');
+            // $('#hora_inicio').val('');
+            // $('#fecha_fin').val('');
+            // $('#hora_fin').val('');
         }
 
         $('#btnRegresar').click(function(){
@@ -784,7 +901,9 @@
             var _respuesta = $.post("codephp/del_reservatmp.php", _parametros);
             _respuesta.done(function(response){
             });                
-        });        
+        }); 
+        
+        
 
         $('#cboTipoRegistro').change(function(){
                     
