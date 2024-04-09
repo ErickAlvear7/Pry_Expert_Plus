@@ -399,6 +399,7 @@
                     selectMirror: true,
                     dayMaxEvents: true, // allow "more" link when too many events   
                     select: function(arg) {
+                        hidePopovers();
                         f_Selecc(arg);
                     },
                     events: {
@@ -666,12 +667,14 @@
 
         function f_ViewDatos(arg){
 
+            
+
             hidePopovers();
 
             let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
 
             element = arg.el;
-            console.log(arg.event.title);
+            //console.log(arg.event.title);
 
             //const popoverHtml = '<div class="fw-bolder mb-2">' + arg.event.extendedProps.description + '</div><div class="fs-7"><span class="fw-bold">Reserva:</span> ' + _fechareserva + '</div><div class="fs-7 mb-4"><span class="fw-bold">End:</span> ' + arg.event.id + '</div><div id="btnViewReserva" type="button" class="btn btn-sm btn-light-primary">View More</div>';
             const popoverHtml = '<div class="fw-bolder mb-2">' + arg.event.extendedProps.description + '</div><div class="fs-7 mb-2"><span class="fw-bold">Fecha Registro:</span> ' + _fechareserva + '</div><div class="fs-7"><span class="fw-bold">Hora Inicio:</span> ' + arg.event.extendedProps.horaini + '</div><div class="fs-7 mb-2"><span class="fw-bold">Hora Fin:</span> ' + arg.event.extendedProps.horafin + '</div><div class="fs-7"><span class="fw-bold">Operador@:</span> ' + arg.event.extendedProps.username + '</div>';
@@ -698,16 +701,32 @@
 
         
         function f_ClickAgenda(arg){
-                
-            //console.log(arg);
+            
+            console.log(arg);
+            let _tipo = arg.event.title;
             let _id = arg.event.id;
             let _agenid = arg.event.extendedProps.usuariocreacion;
-            console.log(_agenid);
+
+            //console.log(_tipo);
             //alert('Borrar agenda, si es reservatmp elimina solo el usuario, si es agenda, mostrar form para cancelar');
             /*$("#fecha_inicio").val(_dateactual);
             $("#fecha_fin").val(_dateactual);
             $("#hora_inicio").val(_timeinicio);
             $("#hora_fin").val(_timefin);*/
+
+            if(_tipo == 'RESERVADO'){
+                
+                let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
+
+
+
+                $("#modal_new_agenda").modal("show");
+
+
+            }else if(_tipo == 'AGENDADO'){
+
+
+            }
 
             let _usuaid = "<?php echo $xUsuaid; ?>";
 
@@ -719,9 +738,7 @@
 
 
 
-            let _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
 
-            $("#modal_new_agenda").modal("show");
         }
 
         const hidePopovers = () => {
@@ -752,6 +769,24 @@
             });
             
         });
+
+        $('#modal_new_agenda').on('hidden.bs.modal', function () {
+
+            var _parametros = {
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxPresid" : _presid,
+                "xxEspeid" : _espeid,
+                "xxPfesid" : _pfesid,
+                "xxFechaInicio" : _fechainicio,
+                "xxFechaFin" : _fechafin,
+                "xxCodigoDia" : _dayselect
+            }                
+
+            var _respuesta = $.post("codephp/del_reservatmp.php", _parametros);
+            _respuesta.done(function(response){
+            });                
+        });        
 
         $('#cboTipoRegistro').change(function(){
                     
