@@ -29,7 +29,7 @@
             $xEmprid = $_POST['xxEmprid'];
             $xTipoCliente = $_POST['xxTipoCliente'];
             $xTituid = $_POST['xxTituid'];
-            //$xBeneid = $_POST['xxBeneid'];
+            $xBeneid = $_POST['xxBeneid'];
             $xCiudid = $_POST['xxCiudid'];
             $xProdid = $_POST['xxProdid'];
             $xGrupid = $_POST['xxGrupid'];
@@ -144,8 +144,8 @@
             } 
 
             if($xTipoRegistro == 'Agendar'){
-                $xSQL = "INSERT INTO `expert_agenda`(pais_id,empr_id,tipo_cliente,titu_id,prod_id,grup_id,pres_id,espe_id,pfes_id,fecha_inicio,fecha_fin,codigo_dia,dia,hora_desde,hora_hasta,tipo_registro,motivo_registro,observacion,estado_agenda,codigo_agenda,color,textcolor,fechacreacion,usuariocreacion,terminalcreacion) ";
-                $xSQL .= "VALUES($xPaisid,$xEmprid,'$xTipoCliente',$xTituid,$xProdid,$xGrupid,$xPresid,$xEspeid,$xPfesid,'{$xFechaIni}','{$xFechaFin}',$xCodigoDia,'$xDia','{$xHoraDesde}','{$xHoraHasta}','$xTipoRegistro',$xMotivoRegistro,'$xObservacion','$xEstadoAgenda',$xCodigoAgenda,'$xColor','$xTextColor','{$xFecha}',$xUsuaid,'$xTerminal') ";
+                $xSQL = "INSERT INTO `expert_agenda`(pais_id,empr_id,tipo_cliente,titu_id,bene_id,prod_id,grup_id,pres_id,espe_id,pfes_id,fecha_inicio,fecha_fin,codigo_dia,dia,hora_desde,hora_hasta,tipo_registro,motivo_registro,observacion,estado_agenda,codigo_agenda,color,textcolor,fechacreacion,usuariocreacion,terminalcreacion) ";
+                $xSQL .= "VALUES($xPaisid,$xEmprid,'$xTipoCliente',$xTituid,$xBeneid,$xProdid,$xGrupid,$xPresid,$xEspeid,$xPfesid,'{$xFechaIni}','{$xFechaFin}',$xCodigoDia,'$xDia','{$xHoraDesde}','{$xHoraHasta}','$xTipoRegistro',$xMotivoRegistro,'$xObservacion','$xEstadoAgenda',$xCodigoAgenda,'$xColor','$xTextColor','{$xFecha}',$xUsuaid,'$xTerminal') ";
                 if(mysqli_query($con, $xSQL)){
                     
                     $xAgendaid = mysqli_insert_id($con);
@@ -159,8 +159,8 @@
                     $xSQL .= "VALUES('Registro Agendado',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
                     mysqli_query($con, $xSQL);
 
-                    $xSQL = "INSERT INTO `expert_historial_agenda`(pais_id,empr_id,agen_id,tipo_cliente,titu_id,pres_id,espe_id,pfes_id,fecha_inicio,fecha_fin,codigo_dia,dia,hora_desde,hora_hasta,tipo_registro,motivo_registro,observacion,estado_agenda,codigo_agenda,fechacreacion,usuariocreacion,terminalcreacion) ";
-                    $xSQL .= "VALUES($xPaisid,$xEmprid,$xAgendaid,'$xTipoCliente',$xTituid,$xPresid,$xEspeid,$xPfesid,'{$xFechaIni}','{$xFechaFin}',$xCodigoDia,'$xDia','{$xHoraDesde}','{$xHoraHasta}','$xTipoRegistro',$xMotivoRegistro,'$xObservacion','$xEstadoAgenda',$xCodigoAgenda,'{$xFecha}',$xUsuaid,'$xTerminal') ";
+                    $xSQL = "INSERT INTO `expert_historial_agenda`(pais_id,empr_id,agen_id,tipo_cliente,titu_id,bene_id,pres_id,espe_id,pfes_id,fecha_inicio,fecha_fin,codigo_dia,dia,hora_desde,hora_hasta,tipo_registro,motivo_registro,observacion,estado_agenda,codigo_agenda,fechacreacion,usuariocreacion,terminalcreacion) ";
+                    $xSQL .= "VALUES($xPaisid,$xEmprid,$xAgendaid,'$xTipoCliente',$xTituid,$xBeneid,$xPresid,$xEspeid,$xPfesid,'{$xFechaIni}','{$xFechaFin}',$xCodigoDia,'$xDia','{$xHoraDesde}','{$xHoraHasta}','$xTipoRegistro',$xMotivoRegistro,'$xObservacion','$xEstadoAgenda',$xCodigoAgenda,'{$xFecha}',$xUsuaid,'$xTerminal') ";
                     mysqli_query($con, $xSQL);
     
                     $xAgendado = 111;

@@ -11,9 +11,10 @@
 
     $xRow = 0;
 
-    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxPresid']) and isset($_POST['xxEspeid']) and isset($_POST['xxPfesid']) and isset($_POST['xxFechaInicio']) and isset($_POST['xxFechaFin']) and isset($_POST['xxCodigoDia'])  ){
-        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxPresid']) <> '' and isset($_POST['xxEspeid']) <> '' and isset($_POST['xxPfesid']) <> '' and isset($_POST['xxFechaInicio']) <> '' and isset($_POST['xxFechaFin']) <> '' and isset($_POST['xxCodigoDia']) <> '' ){ 
+    if(isset($_POST['xxRsrvid']) and isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxPresid']) and isset($_POST['xxEspeid']) and isset($_POST['xxPfesid']) and isset($_POST['xxFechaInicio']) and isset($_POST['xxFechaFin']) and isset($_POST['xxCodigoDia'])  ){
+        if(isset($_POST['xxRsrvid']) and isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxPresid']) <> '' and isset($_POST['xxEspeid']) <> '' and isset($_POST['xxPfesid']) <> '' and isset($_POST['xxFechaInicio']) <> '' and isset($_POST['xxFechaFin']) <> '' and isset($_POST['xxCodigoDia']) <> '' ){ 
 
+            $xRsrvid =   $_POST['xxRsrvid'];
             $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
             $xPresid = $_POST['xxPresid'];
@@ -23,7 +24,7 @@
             $xFechaFin = $_POST['xxFechaFin'];
             $xCodigoDia = $_POST['xxCodigoDia'];
             
-            $xSQL = "DELETE FROM `expert_reserva_tmp` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pres_id=$xPresid AND espe_id=$xEspeid AND pfes_id=$xPfesid AND fecha_inicio='$xFechaInicio' AND fecha_fin='$xFechaFin' AND codigo_dia=$xCodigoDia ";
+            $xSQL = "DELETE FROM `expert_reserva_tmp` WHERE rsrv_id = $xRsrvid AND pais_id=$xPaisid AND empr_id=$xEmprid AND pres_id=$xPresid AND espe_id=$xEspeid AND pfes_id=$xPfesid AND fecha_inicio='$xFechaInicio' AND fecha_fin='$xFechaFin' AND codigo_dia=$xCodigoDia ";
             if(mysqli_query($con, $xSQL)){
                 $xRow = 1;
             }

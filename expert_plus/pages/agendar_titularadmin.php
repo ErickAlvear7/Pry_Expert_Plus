@@ -771,12 +771,12 @@
 
         
         function f_ClickAgenda(arg){
+            //debugger;
             
-            console.log(arg);
+            //console.log(arg);
             f_LimpiarModalRe();
             
             let _tipo = arg.event.title;
-            let _id = arg.event.id;
             let _agenid = arg.event.extendedProps.usuariocreacion;
 
             //console.log(_tipo);
@@ -787,13 +787,16 @@
             $("#hora_fin").val(_timefin);*/
 
             if(_tipo == 'RESERVADO'){
-                
+
+              _idrsrvid = arg.event.id;
               _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
               _fechainiciore = moment(arg.event.extendedProps._fechainicio).format("YYYY-MM-DD");
               _fechafinre = moment(arg.event.extendedProps._fechafin).format("YYYY-MM-DD");
               _horainiciore = arg.event.extendedProps.horaini;
               _horafinere = arg.event.extendedProps.horafin;
-              _codigodiare = arg.event.extendedProps.codigo_dia;
+              _dayselect = arg.event.extendedProps.codigo_dia;
+
+              //console.log(_id);
     
 
                $('#fecha_iniciore').val(_fechainiciore);
@@ -826,20 +829,25 @@
 
         $('#modal_new_reserva').on('hidden.bs.modal', function () {
 
-            // var _parametros = {
-            //     "xxPaisid" : _paisid,
-            //     "xxEmprid" : _emprid,
-            //     "xxPresid" : _presid,
-            //     "xxEspeid" : _espeid,
-            //     "xxPfesid" : _pfesid,
-            //     "xxFechaInicio" : _fechainicio,
-            //     "xxFechaFin" : _fechafin,
-            //     "xxCodigoDia" : _dayselect
-            // }                
+            //debugger;
+            var _parametros = {
+                "xxRsrvid":  _idrsrvid,
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxPresid" : _presid,
+                "xxEspeid" : _espeid,
+                "xxPfesid" : _pfesid,
+                "xxFechaInicio" : _fechainiciore,
+                "xxFechaFin" : _fechafinre,
+                "xxCodigoDia" : _dayselect
+            }                
 
-            // var _respuesta = $.post("codephp/del_reservatmp.php", _parametros);
-            // _respuesta.done(function(response){
-            // });                
+            var _respuesta = $.post("codephp/del_reservatmp.php", _parametros);
+            _respuesta.done(function(response){
+                if(response = 1){
+                    //redirect
+                }
+            });                
         }); 
 
 
@@ -949,6 +957,7 @@
             var _horainicio = $('#hora_inicio').val();
             var _horafin = $('#hora_fin').val();
             var _tipocliente = "T";
+            var _beneid = 0;
 
 
             if(_tiporegistro == ''){
@@ -1000,6 +1009,7 @@
                 "xxEmprid" : _emprid,
                 "xxTipoCliente" : _tipocliente,
                 "xxTituid" : _tituid,
+                "xxBeneid" : _beneid,
                 "xxCiudid" : _ciudid,
                 "xxProdid" : _prodid,
                 "xxGrupid" : _grupid,
@@ -1024,8 +1034,16 @@
             var _respuesta = $.post("codephp/agendar_cita.php", _parametros);
             _respuesta.done(function(response){
                 if(response >= 0){
-                    
+
+                    // Swal.fire({
+                    //     title: "Good job!",
+                    //     text: "You clicked the button!",
+                    //     icon: "success"
+                    // });
+
                     $.redirect('?page=agendar_titubeneadmin&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'beneid': _beneid, 'prodid': _prodid, 'grupid': _grupid, 'agendaid': response });
+                    
+                   
                     
                 }else{
                     Swal.fire({
@@ -1038,12 +1056,16 @@
                         }
                     });
                 }
+
+              
                 
             });
             _respuesta.fail(function() {
             });
             _respuesta.always(function() {
             });
+
+            
 
         });
 
