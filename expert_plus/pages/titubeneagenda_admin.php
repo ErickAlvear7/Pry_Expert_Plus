@@ -38,6 +38,7 @@
     $xUsuaid = $_SESSION["i_usuaid"];
 
     $xTituid = $_POST['tituid'];
+    $xBeneid = $_POST['beneid'];
     $xProdid = $_POST['prodid'];
     $xGrupid = $_POST['grupid'];
     $xAgendaid = $_POST['agendaid'];
@@ -3036,17 +3037,17 @@
         var _cbopreeid = 0;
         var _cboprofid = 0;
 
-        var popover;
-        var popoverState = false; 
+        // var popover;
+        // var popoverState = false; 
 
-        var data = {
-            id: '',
-            eventName: '',
-            eventDescription: '',
-            startDate: '',
-            endDate: '',
-            allDay: false
-        };  
+        // var data = {
+        //     id: '',
+        //     eventName: '',
+        //     eventDescription: '',
+        //     startDate: '',
+        //     endDate: '',
+        //     allDay: false
+        // };  
 
         document.getElementById('imgfiletitular').style.backgroundImage="url(persona/" + _avatar + ")";
 
@@ -3103,7 +3104,6 @@
             });                 
 
         }); 
-
 
         $('#btnDatosPrestador').click(function(){
 
@@ -3324,9 +3324,6 @@
             _ciudid = $('#cboCiudad').val();
             _sectid = $('#cboSector').val();
             
-            
-            alert(_preeid);
-
             if(_sectid == 0){
                 toastSweetAlert("top-end",3000,"warning","Seleccione Sector..!!");
                 return;

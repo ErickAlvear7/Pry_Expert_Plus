@@ -17,12 +17,12 @@
 
     $xRow = 0;
 
-    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxUsuaId']) and isset($_POST['xxPresid']) and isset($_POST['xxEspeid']) and isset($_POST['xxPfesid']) and isset($_POST['xxFechaInicio']) and isset($_POST['xxFechaFin']) and isset($_POST['xxCodigoDia'])  ){
-        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaId']) <> '' and isset($_POST['xxPresid']) <> '' and isset($_POST['xxEspeid']) <> '' and isset($_POST['xxPfesid']) <> '' and isset($_POST['xxFechaInicio']) <> '' and isset($_POST['xxFechaFin']) <> '' and isset($_POST['xxCodigoDia']) <> '' ){ 
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxPresid']) and isset($_POST['xxEspeid']) and isset($_POST['xxPfesid']) and isset($_POST['xxFechaInicio']) and isset($_POST['xxFechaFin']) and isset($_POST['xxCodigoDia'])  ){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxPresid']) <> '' and isset($_POST['xxEspeid']) <> '' and isset($_POST['xxPfesid']) <> '' and isset($_POST['xxFechaInicio']) <> '' and isset($_POST['xxFechaFin']) <> '' and isset($_POST['xxCodigoDia']) <> '' ){ 
 
             $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
-            $xUsuaid = $_POST['xxUsuaId'];
+            $xUsuaid = $_POST['xxUsuaid'];
             $xPresid = $_POST['xxPresid'];
             $xEspeid = $_POST['xxEspeid'];
             $xPfesid = $_POST['xxPfesid'];

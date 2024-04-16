@@ -323,7 +323,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div id="modal_new_reserva_parent" class="modal-content">
             <div class="modal-header">
-                <h2 class="fw-bold"><i class="fas fa-user"></i></h2>
+                <h2 class="fw-bold"><i class="fas fa-user"></i> <?php echo $xNombres; ?></h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -383,8 +383,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnCancelarRe" class="btn btn-sm btn-light" data-bs-dismiss="modal"><i class="las la-close"></i>Cancelar Reserva</button>
-                <button type="button" id="btnAgendar" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Agendar</button>
+                <button type="button" id="btnCancelarRe" class="btn btn-sm btn-light-danger" ><i class="las la-eraser"></i>Eliminar Reserva</button>
+                <button type="button" id="btnAgendarRe" class="btn btn-sm btn-light-primary" ><i class="las la-save"></i>Agendar</button>
             </div>
         </div>
     </div>
@@ -406,6 +406,7 @@
         var _usuaid = "<?php echo $xUsuaid; ?>";            
         var _interval = "<?php echo $xIntervalo; ?>";
 
+        var _idrsrvid = 0;
         var _dayselect = 0;
         var _fechainicio;
         var _fechafin;
@@ -561,12 +562,10 @@
             let _daynow = _fechaactual.getDay();
             let _diferenminuts = 0;
 
-
             let _horaactual = moment(_fechaactual);
             //let _horaselect = moment(info.endStr);
             let _horaselect = moment(info.startStr);
             
-
             //_diferenminuts = _horaselect.diff(_horaactual, "m");
             _diferenminuts = _horaactual.diff(_horaselect, "m");
             //SUMAR 10 MINUTOS A LA DIFERENCIA, PARA DARLES 10 MINUTOS MAS
@@ -633,7 +632,6 @@
                             mensajesalertify("El horario seleccionado esta fuera del tiempo programado..!" , "W", "top-center", 5);
                             return;   
                         }
-
                     }    
                     
                     if(_continuar){
@@ -652,7 +650,7 @@
                             "xxHoraHasta" : _timefin,
                             "xxCodigoDia" : _dayselect,
                             "xxDia" : _dayname,
-                            "xxUsuaId" : _usuaid
+                            "xxUsuaid" : _usuaid
                         }
 
                         var _consreserva = $.post("codephp/consultar_reserva.php", _buscareserva);
@@ -769,89 +767,98 @@
             popoverState = true;
         }
 
-        
         function f_ClickAgenda(arg){
-            //debugger;
-            
-            //console.log(arg);
+
+            let _continuar = true;
+            _idrsrvid = arg.event.id;
+
             f_LimpiarModalRe();
-            
+
             let _tipo = arg.event.title;
-            let _agenid = arg.event.extendedProps.usuariocreacion;
+            let _agenteid = arg.event.extendedProps.usuariocreacion;
+            let _fechaactual = new Date();
+            let _fechaselec = moment(arg.event.startStr).format("YYYY-MM-DD");
+            let _fechaactual_select = moment(_fechaactual).format("YYYY-MM-DD");
 
-            //console.log(_tipo);
-            //alert('Borrar agenda, si es reservatmp elimina solo el usuario, si es agenda, mostrar form para cancelar');
-            /*$("#fecha_inicio").val(_dateactual);
-            $("#fecha_fin").val(_dateactual);
-            $("#hora_inicio").val(_timeinicio);
-            $("#hora_fin").val(_timefin);*/
+            let _formattedDate = _fechaactual.toDateString() + ' ' + arg.event.extendedProps.horaini + ' GMT-0500';
+            let _fechaactual_new = new Date(_formattedDate);
 
-            if(_tipo == 'RESERVADO'){
+            let _formatedatefin = _fechaactual.toDateString() + ' ' + arg.event.extendedProps.horafin + ' GMT-0500';
+            let _fechafin_new = new Date(_formatedatefin);
 
-              _idrsrvid = arg.event.id;
-              _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
-              _fechainiciore = moment(arg.event.extendedProps._fechainicio).format("YYYY-MM-DD");
-              _fechafinre = moment(arg.event.extendedProps._fechafin).format("YYYY-MM-DD");
-              _horainiciore = arg.event.extendedProps.horaini;
-              _horafinere = arg.event.extendedProps.horafin;
-              _dayselect = arg.event.extendedProps.codigo_dia;
-
-              //console.log(_id);
-    
-
-               $('#fecha_iniciore').val(_fechainiciore);
-               $('#fecha_finre').val(_fechafinre);
-               $('#hora_iniciore').val(_horainiciore);
-               $('#hora_finre').val(_horafinere);
-
-
-
-                $("#modal_new_reserva").modal("show");
-
- 
-            }else if(_tipo == 'AGENDADO'){
-
-
+            if(_fechaselec < _fechaactual_select){
+                _continuar = false;
+                f_DelReserva();
+                return;
             }
 
-            let _usuaid = "<?php echo $xUsuaid; ?>";
+            if(_fechaselec == _fechaactual_select){
+                let _horaactual = moment(_fechaactual);
+                let _horaselect = moment(_fechaactual_new);
 
-            if(_agenid == _usuaid){
+                let _diferenminuts = _horaactual.diff(_horaselect, "m");
 
-                
+                if(_diferenminuts > 5){
+                    _continuar = false;
+                    f_DelReserva();
+                    return;
+                }
+            }
+            
+            if(_continuar){
+                if(_tipo == 'RESERVADO'){
 
+                    _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
+                    _fechainiciore = moment(arg.event.extendedProps._fechainicio).format("YYYY-MM-DD");
+                    _fechafinre = moment(arg.event.extendedProps._fechafin).format("YYYY-MM-DD");
+                    _horainiciore = moment(_fechaactual_new).format("HH:mm");
+                    _horafinre = moment(_fechafin_new).format("HH:mm");
+                    _dayselect = arg.event.extendedProps.codigo_dia;
+
+                    $('#fecha_iniciore').val(_fechainiciore);
+                    $('#fecha_finre').val(_fechafinre);
+                    $('#hora_iniciore').val(_horainiciore);
+                    $('#hora_finre').val(_horafinre);
+
+                    $("#modal_new_reserva").modal("show");
+
+                }
             }
 
+            if(_tipo == 'AGENDADO'){
+                let _usuaid = "<?php echo $xUsuaid; ?>";
 
-
+                if(_agenteid == _usuaid){
+                }
+            }            
 
         }
 
-        $('#modal_new_reserva').on('hidden.bs.modal', function () {
-
-            //debugger;
+        const f_DelReserva = () => {
             var _parametros = {
                 "xxRsrvid":  _idrsrvid,
                 "xxPaisid" : _paisid,
                 "xxEmprid" : _emprid,
-                "xxPresid" : _presid,
-                "xxEspeid" : _espeid,
-                "xxPfesid" : _pfesid,
-                "xxFechaInicio" : _fechainiciore,
-                "xxFechaFin" : _fechafinre,
-                "xxCodigoDia" : _dayselect
-            }                
-
-            var _respuesta = $.post("codephp/del_reservatmp.php", _parametros);
+                "xxUsuaid" : _usuaid
+            }
+            
+            var _respuesta = $.post("codephp/del_reservatmp_new.php", _parametros);
             _respuesta.done(function(response){
                 if(response = 1){
-                    //redirect
+                    calendar.getEventById(_idrsrvid).remove();
+                    Swal.fire({
+                        text: "Reserva elimina, por tiempo de validez finalizado ",
+                        icon: "warning",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
                 }
-            });                
-        }); 
+            });             
 
-
-
+        }        
 
         const hidePopovers = () => {
                 if (popoverState) {
@@ -875,12 +882,14 @@
         const f_LimpiarModalRe = () => {
             $('#cboTipoRegistroRe').val('').change();
             $('#cboMotivoRe').empty();
+            var _html = "<option value=''></option>";
+            $("#cboMotivoRe").html(_html);            
            
-            // $('#txtObservacion').val('');
-            // $('#fecha_inicio').val('');
-            // $('#hora_inicio').val('');
-            // $('#fecha_fin').val('');
-            // $('#hora_fin').val('');
+            $('#txtObservacionRe').val('');
+            $('#fecha_iniciore').val('');
+            $('#fecha_finre').val('');
+            $('#hora_iniciore').val('');
+            $('#hora_finre').val('');
         }
 
         $('#btnRegresar').click(function(){
@@ -903,7 +912,8 @@
                 "xxPfesid" : _pfesid,
                 "xxFechaInicio" : _fechainicio,
                 "xxFechaFin" : _fechafin,
-                "xxCodigoDia" : _dayselect
+                "xxCodigoDia" : _dayselect,
+                "xxUsuaid" : _usuaid
             }                
 
             var _respuesta = $.post("codephp/del_reservatmp.php", _parametros);
@@ -911,8 +921,6 @@
             });                
         }); 
         
-        
-
         $('#cboTipoRegistro').change(function(){
                     
             _cboid = $(this).val(); //obtener el id seleccionado
@@ -942,12 +950,39 @@
                 $("#cboMotivo").html(_html);
             }
 
-        });         
+        });
+        
+        $('#cboTipoRegistroRe').change(function(){
+                    
+            _cboid = $(this).val(); //obtener el id seleccionado
+            $("#cboMotivoRe").empty();
+
+            if(_cboid == 'Agendar'){
+                var _parametros = {
+                    "xxPaisid" : _paisid,
+                    "xxEmprid" : _emprid,
+                    "xxPresid" : _presid,
+                    "xxEspeid" : _espeid                    
+                }
+
+                var _respuesta = $.post("codephp/cargar_motivos.php", _parametros);
+                _respuesta.done(function(response) {
+                    $("#cboMotivoRe").html(response);
+                    
+                });
+                _respuesta.fail(function() {
+                });
+                _respuesta.always(function() {
+                });
+            }else{ 
+                var _html = "<option value=''></option>";
+                $("#cboMotivoRe").html(_html);
+            }
+
+        });        
 
         //AGENDAR CITA
         $('#btnAgendar').click(function(){
-
-            //debugger;
 
             var _tiporegistro = $('#cboTipoRegistro').val();
             var _motivo = $('#cboMotivo').val();
@@ -959,23 +994,24 @@
             var _tipocliente = "T";
             var _beneid = 0;
 
-
             if(_tiporegistro == ''){
                 
                 toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Registro..!!");
+                return;
             }
 
             if(_motivo == ''){
                 
                 toastSweetAlert("top-end",3000,"warning","Seleccione Motivo..!!");
+                return;
             }
 
             if(_observacion == ''){
                 
                 toastSweetAlert("top-end",3000,"warning","Ingrese Observacion..!!");
+                return;
             }
 
-            
             let _fechaselect = _fechainicio + ' ' + _horainicio;
             _fechaselect = new Date(_fechaselect);
             let _fechacatual = new Date();
@@ -992,7 +1028,7 @@
 
             _fechaAgenda = moment(_fechaAgenda).format("YYYY-MM-DD");
             _fechaView = moment(_fechaView).format("YYYY-MM-DD");
-            
+
             if(_fechaAgenda == _fechaView){
 
                 if(_diferenminuts > 5){
@@ -1035,16 +1071,7 @@
             _respuesta.done(function(response){
                 if(response >= 0){
 
-                    // Swal.fire({
-                    //     title: "Good job!",
-                    //     text: "You clicked the button!",
-                    //     icon: "success"
-                    // });
-
                     $.redirect('?page=agendar_titubeneadmin&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'beneid': _beneid, 'prodid': _prodid, 'grupid': _grupid, 'agendaid': response });
-                    
-                   
-                    
                 }else{
                     Swal.fire({
                         text: "Error en el envio del correo, valide la informacion",
@@ -1057,20 +1084,153 @@
                     });
                 }
 
-              
-                
             });
             _respuesta.fail(function() {
             });
             _respuesta.always(function() {
             });
+        });
 
+        $('#btnCancelarRe').click(function(){
+
+            var _parametros = {
+                "xxRsrvid":  _idrsrvid,
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxUsuaid" : _usuaid
+            }
             
+            var _respuesta = $.post("codephp/del_reservatmp_new.php", _parametros);
+            _respuesta.done(function(response){
+                if(response = 1){
+                    calendar.getEventById(_idrsrvid).remove();
+                }
+
+                $("#modal_new_reserva").modal("hide");
+            });            
+
+        });
+
+        //AGENDAR CITA RESERVADA
+        $('#btnAgendarRe').click(function(){
+
+            var _tiporegistro = $('#cboTipoRegistroRe').val();
+            var _motivo = $('#cboMotivoRe').val();
+            var _observacion = $('#txtObservacionRe').val();
+            var _fechainicio = $('#fecha_iniciore').val();
+            var _fechafinal = $('#fecha_finre').val();
+            var _horainicio = $('#hora_iniciore').val();
+            var _horafin = $('#hora_finre').val();
+            var _tipocliente = "T";
+            var _beneid = 0;
+
+            if(_tiporegistro == ''){
+                
+                toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Registro..!!");
+                return;
+            }
+
+            if(_motivo == ''){
+                
+                toastSweetAlert("top-end",3000,"warning","Seleccione Motivo..!!");
+                return;
+            }
+
+            if(_observacion == ''){
+                
+                toastSweetAlert("top-end",3000,"warning","Ingrese Observacion..!!");
+                return;
+            }
+
+            let _fechaselect = _fechainicio + ' ' + _horainicio;
+            _fechaselect = new Date(_fechaselect);
+            let _fechacatual = new Date();
+
+            let _horaselect = moment(_fechaselect);
+            let _horaactual = moment(_fechacatual);
+
+            _diferenminuts = _horaactual.diff(_horaselect, "m");
+            //SUMAR 10 MINUTOS A LA DIFERENCIA, PARA DARLES 10 MINUTOS MAS
+            //_diferenminuts = moment(_diferenminuts).add(10,'m').format("HH:mm");
+
+            let _fechaAgenda = new Date(_fechaselect);
+            let _fechaView = new Date();
+
+            _fechaAgenda = moment(_fechaAgenda).format("YYYY-MM-DD");
+            _fechaView = moment(_fechaView).format("YYYY-MM-DD");
+
+            if(_fechaAgenda == _fechaView){
+
+                if(_diferenminuts > 5){
+                    toastSweetAlert("top-end",3000,"warning","Hora Fuera del Intervalo de"  + _interval + " minutos");
+                    return;
+                }
+            }
+
+            console.log(_diferenminuts);
+            console.log(_interval);
+            
+            return;            
+
+            let _fechainiagenda = _fechainicio + ' ' + _horainicio;
+            let _fechafinagenda = _fechafinal + ' ' + _horafin;
+
+            var _parametros = {
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxTipoCliente" : _tipocliente,
+                "xxTituid" : _tituid,
+                "xxBeneid" : _beneid,
+                "xxCiudid" : _ciudid,
+                "xxProdid" : _prodid,
+                "xxGrupid" : _grupid,
+                "xxPresid" : _presid,
+                "xxEspeid" : _espeid,
+                "xxPfesid" : _pfesid,
+                "xxFechaIni" : _fechainiagenda,
+                "xxFechaFin" : _fechafinagenda,
+                "xxCodigoDia" : _dayselect,
+                "xxDia" : _dayname,
+                "xxHoraDesde" : _horainicio,
+                "xxHoraHasta" : _horafin,
+                "xxTipoRegistro" : _tiporegistro,
+                "xxMotivoRegistro" : _motivo,
+                "xxObservacion" : _observacion.toUpperCase(),
+                "xxEstadoAgenda" : "A",
+                "xxColor" : "#117A65",
+                "xxTextColor" : "#060606",
+                "xxUsuaid" : _usuaid,
+            }
+
+            var _respuesta = $.post("codephp/agendar_cita.php", _parametros);
+            _respuesta.done(function(response){
+                if(response >= 0){
+
+                    $.redirect('?page=agendar_titubeneadmin&menuid=<?php echo $menuid; ?>', { 'tituid': _tituid, 'beneid': _beneid, 'prodid': _prodid, 'grupid': _grupid, 'agendaid': response });
+                }else{
+                    Swal.fire({
+                        text: "Error en el envio del correo, valide la informacion",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+
+            });
+            _respuesta.fail(function() {
+            });
+            _respuesta.always(function() {
+            });            
 
         });
 
 
     });
+
+    
 
 
 </script>
