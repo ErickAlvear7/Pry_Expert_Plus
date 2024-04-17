@@ -141,6 +141,7 @@
                             
                         ?>
                         <?php 
+
                             $xCheking = '';
                             $xDisabledEdit = '';
                             $xTarget = '';

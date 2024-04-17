@@ -97,6 +97,7 @@
 	$xSQL .= "WHERE pais_id=$xPaisid AND estado='A' ORDER BY provincia ";
     $all_provincia = mysqli_query($con, $xSQL);
 
+       //CONSULTAS PARA ULTIMA CITA AGENDADA
        //CONSULTA PRESTADORA-CIUDAD-SECTOR 
     $xSQL = "SELECT xag.pres_id AS Idpres, xpr.pres_nombre AS Prestadora, (SELECT ciudad  FROM `provincia_ciudad` pxc WHERE pxc.prov_id=xpr.prov_id) AS Ciudad, ";
     $xSQL .="xpr.pres_sector AS Sector FROM `expert_agenda` xag INNER JOIN `expert_prestadora` xpr ON xag.pres_id=xpr.pres_id ";
