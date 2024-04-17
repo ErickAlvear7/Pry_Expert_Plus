@@ -809,8 +809,8 @@
                 if(_tipo == 'RESERVADO'){
 
                     _fechareserva = moment(arg.event.startStr).format("YYYY-MM-DD");
-                    _fechainiciore = moment(arg.event.extendedProps._fechainicio).format("YYYY-MM-DD");
-                    _fechafinre = moment(arg.event.extendedProps._fechafin).format("YYYY-MM-DD");
+                    _fechainiciore = moment(arg.event.start).format("YYYY-MM-DD");
+                    _fechafinre = moment(arg.event.end).format("YYYY-MM-DD");
                     _horainiciore = moment(_fechaactual_new).format("HH:mm");
                     _horafinre = moment(_fechafin_new).format("HH:mm");
                     _dayselect = arg.event.extendedProps.codigo_dia;

@@ -3050,6 +3050,18 @@
         //     allDay: false
         // };  
 
+        if(_agenid > 0){
+            var _respuesta = $.post("codephp/cargar_combos.php", "xxAgendaid": _agenid);
+            _respuesta.done(function(response) {
+                $("#cboProvincia").html(response);
+                
+            });
+            _respuesta.fail(function() {
+            });
+            _respuesta.always(function() {
+            });             
+        }
+
         document.getElementById('imgfiletitular').style.backgroundImage="url(persona/" + _avatar + ")";
 
         $('#cboProvincia').val(_provincia).change();
