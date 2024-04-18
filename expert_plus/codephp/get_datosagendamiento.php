@@ -23,7 +23,7 @@
                 $xTituid = $agenda['titu_id'];
                 $xBeneid = $agenda['bene_id'];
                 $xProdid = $agenda['prod_id'];
-                $xGroupid = $agenda['group_id'];
+                $xGroupid = $agenda['grup_id'];
                 $xPresid = $agenda['pres_id'];
                 $xEspeid = $agenda['espe_id'];
                 $xPfesid = $agenda['pfes_id'];
@@ -53,11 +53,11 @@
                 }                
             }
 
-            $xSQL = "SELECT * FROM `expert_productos` pro, `expert_cliente` cli WHERE pro.pais_id=$xPaisid AND pro.empr_id=$xEmprid AND pro.prod_id=$xProdid AND cli.clie.id=pro.clie_id ";
+            $xSQL = "SELECT * FROM `expert_productos` pro, `expert_cliente` cli WHERE pro.pais_id=$xPaisid AND pro.empr_id=$xEmprid AND pro.prod_id=$xProdid AND cli.clie_id=pro.clie_id ";
             $all_datos = mysqli_query($con, $xSQL);
             foreach ($all_datos as $datos) {
                 $xProducto = $datos['prod_nombre'];
-                $xLogoCab = $bene['clie_imgcab'];
+                $xLogoCab = $datos['clie_imgcab'];
             }
 
             if($xLogoCab == ''){

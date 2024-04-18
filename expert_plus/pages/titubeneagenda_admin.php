@@ -3050,16 +3050,46 @@
         //     allDay: false
         // };  
 
+        //OBTENER DATOS DE AGENDAMIENTO 
+
+        var _parametros = {
+            "xxPaisid": _paisid,
+            "xxEmprid": _emprid,
+            "xxAgendaid": _agenid   
+        }
+
         if(_agenid > 0){
-            var _respuesta = $.post("codephp/cargar_combos.php", "xxAgendaid": _agenid);
+            var _respuesta = $.post("codephp/get_datosagendamiento.php", _parametros);
             _respuesta.done(function(response) {
-                $("#cboProvincia").html(response);
+               
+                var _datos = JSON.parse(response);
+            
+                _documento = _datos['Documento'];
+                _nombres = _datos['Nombres'];
+
+
+                Swal.fire({
+                    title: "The Internet?",
+                    html:`
+                        <div class="card-header">
+                            <h3 class="card-title">${_nombres}</h3>
+                        </div>
+                    
+                    
+                    `,
+                    icon: "success"
+                });
+
+                //console.log(_documento);   
                 
             });
+
             _respuesta.fail(function() {
             });
+
             _respuesta.always(function() {
-            });             
+            });   
+                
         }
 
         document.getElementById('imgfiletitular').style.backgroundImage="url(persona/" + _avatar + ")";
