@@ -3066,21 +3066,68 @@
             
                 _documento = _datos['Documento'];
                 _nombres = _datos['Nombres'];
+                _producto = _datos['Producto'];
+                _logo = _datos['Logo'];
+                _prestadora = _datos['Prestadora'];
+                _ciudad = _datos['Ciudad'];
+                _especialidad = _datos['Especialidad'];
+                _profesional = _datos['Profesional'];
+                _fechainicio = _datos['FechaInicio'];
 
 
-                Swal.fire({
-                    title: "The Internet?",
-                    html:`
-                        <div class="card-header">
-                            <h3 class="card-title">${_nombres}</h3>
-                        </div>
+                // Swal.fire({
+                //     title: "Datos Agendamiento",
+                //     imageUrl: _logo,
+                //     imageWidth: 200,
+                //     imageHeight: 100,
+                //     html:`    
+                //         <div class="card-body">
+                //             <h3 class="card-title">Datos Agendamiento</h3>
+                //             <div class="row">
+                //                 <div class="col-md-5">
+                //                     <label class="form-label">Nombres:</label>
+                //                 </div>
+                //                 <div class="col-md-7">
+                //                     <label class="form-label">${_nombres}</label>
+                //                 </div>
+                //             </div>
+                //             <div class="row">
+                //                 <div class="col-md-5">
+                //                     <label class="form-label">Prestador:</label>
+                //                 </div>
+                //                 <div class="col-md-7">
+                //                     <label class="form-label">${_prestadora}</label>
+                //                 </div>
+                //             </div>
+                //             <div class="row">
+                //                 <div class="col-md-5">
+                //                     <label class="form-label">Ciudad:</label>
+                //                 </div>
+                //                 <div class="col-md-7">
+                //                     <label class="form-label">${_ciudad}</label>
+                //                 </div>
+                //             </div>
+                //             <div class="row">
+                //                 <div class="col-md-5">
+                //                     <label class="form-label">Especialidad:</label>
+                //                 </div>
+                //                 <div class="col-md-7">
+                //                     <label class="form-label">${_especialidad}</label>
+                //                 </div>
+                //             </div>
+                //             <div class="row">
+                //                 <div class="col-md-5">
+                //                     <label class="form-label">Profesional:</label>
+                //                 </div>
+                //                 <div class="col-md-7">
+                //                     <label class="form-label">${_profesional}</label>
+                //                 </div>
+                //             </div>
+                //         </div>     
                     
-                    
-                    `,
-                    icon: "success"
-                });
-
-                //console.log(_documento);   
+                //     `,
+                //     icon: "success"
+                // }); 
                 
             });
 
