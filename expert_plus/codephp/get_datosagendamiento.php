@@ -31,6 +31,8 @@
                 $xFechaInicio = $agenda['fecha_inicio'];
                 $xFechaFin = $agenda['fecha_fin'];
                 $xDia = $agenda['dia'];
+                $xHoraDesde = $agenda['hora_desde'];
+                $xHoraHasta = $agenda['hora_hasta'];
                 $xObservacion = $agenda['observacion'];
                 $xCodigoAgenda = $agenda['codigo_agenda'];
             }
@@ -107,6 +109,8 @@
                 'FechaInicio'=> $xFechaInicio,
                 'FechaFin'=> $xFechaFin,
                 'Dia'=> $xDia,
+                'HoraDesde' => $xHoraDesde,
+                'HoraHasta' => $xHoraHasta,
                 'Observacion'=> $xObservacion,
                 'CodigoAgenda'=> $xCodigoAgenda
             );             
