@@ -399,8 +399,8 @@
 				</div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnSave" class="btn btn-primary"><i class="las la-plus"></i></button> 
+                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnSave" class="btn btn-sm btn-light-primary"></button> 
             </div>
         </div>
     </div>
@@ -439,7 +439,8 @@
 			document.getElementById('imgfile').style.backgroundImage="url(img/default.png)";
 			$("#kt_modal_add_user").modal("show");				
 			$("#titulo").text("Nuevo Usuario");
-			$("#btnSave").text("Agregar");
+			//$("#btnSave").text("Grabar");
+			document.getElementById("btnSave").innerHTML = `<i class="las la-save">` + 'Grabar';
 			$("#chkCaducaPass").prop("checked", false);
 			$("#lblCaducaPass").text("NO");
 			$("#chkCamPass").prop("checked", false);
