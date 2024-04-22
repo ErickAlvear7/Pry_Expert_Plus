@@ -269,8 +269,8 @@
                                 <label class="required fs-6 fw-bold form-label">Tipo Registro</label>
                                 <select name="cboTipoRegistro" id="cboTipoRegistro" aria-label="Seleccione Registro" data-control="select2" data-placeholder="Seleccione Registro" data-dropdown-parent="#modal_new_agenda_parent" class="form-select mb-2">
                                     <option value=""></option>
-                                    <option value="Agendar">Agendar</option>
-                                    <option value="Informacion">Informacion</option>
+                                    <option value="Agendar">AGENDAR</option>
+                                    <option value="Informacion">INFORMACION</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
@@ -341,8 +341,8 @@
                                 <label class="required fs-6 fw-bold form-label">Tipo Registro</label>
                                 <select name="cboTipoRegistroRe" id="cboTipoRegistroRe" aria-label="Seleccione Registro" data-control="select2" data-placeholder="Seleccione Registro" data-dropdown-parent="#modal_new_reserva_parent" class="form-select mb-2">
                                     <option value=""></option>
-                                    <option value="Agendar">Agendar</option>
-                                    <option value="Informacion">Informacion</option>
+                                    <option value="Agendar">AGENDAR</option>
+                                    <option value="Informacion">INFORMACION</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
