@@ -205,10 +205,10 @@
 								<td class="text-end">
 									<div class="text-center">
 										<div class="btn-group">
-											<button id="btnReset_<?php echo $idusuario; ?>" onclick="f_ResetPass(<?php echo $idusuario; ?>,<?php echo $xEmprid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledReset;?> title='Resetear Password'>
+											<button id="btnReset_<?php echo $idusuario; ?>" onclick="f_ResetPass(<?php echo $idusuario; ?>,<?php echo $xEmprid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledReset;?> title='Resetear Password' data-bs-toggle="tooltip" data-bs-placement="left">
 												<i class='fa fa-key'></i>
 											</button>		
-											<button id="btnEditar_<?php echo $idusuario; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Usuario'>
+											<button id="btnEditar_<?php echo $idusuario; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Usuario' data-bs-toggle="tooltip" data-bs-placement="left">
 												<i class='fa fa-edit'></i>
 											</button>	                                                
 										</div>
@@ -399,7 +399,7 @@
 				</div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
                 <button type="button" id="btnSave" class="btn btn-sm btn-light-primary"></button> 
             </div>
         </div>
@@ -437,19 +437,17 @@
 			_avatar = '';
 
 			document.getElementById('imgfile').style.backgroundImage="url(img/default.png)";
-			$("#kt_modal_add_user").modal("show");				
+					
 			$("#titulo").text("Nuevo Usuario");
-			//$("#btnSave").text("Grabar");
-			document.getElementById("btnSave").innerHTML = `<i class="las la-save">` + 'Grabar';
+			document.getElementById("btnSave").innerHTML = `<i class="las la-save">` + ' ' + 'Grabar';
 			$("#chkCaducaPass").prop("checked", false);
 			$("#lblCaducaPass").text("NO");
 			$("#chkCamPass").prop("checked", false);
 			$("#lblCamPass").text("NO");
-			
 			$('#txtPassword').prop('readonly', false);
 			$('#content').css('display','none'); 
-			//$("#frm_datos").trigger("reset");
-			//$('#cboPerfil').val(0).change();      
+			$("#kt_modal_add_user").modal("show");	
+			    
 		});
 
 		$(document).on("click","#chkCaducaPass",function(){
@@ -619,34 +617,34 @@
 			_respuesta = 'OK';
 
 			if(_nombre == ''){                        
-				toastSweetAlert("top-end",3000,"warning","Ingrese Nombre de Usuario");
+				toastSweetAlert("top-end",3000,"warning","Ingrese Nombre..!!");
 				return;
 			}
 
 			if(_login == ''){                        
-				toastSweetAlert("top-end",3000,"warning","Ingrese Login/Email");
+				toastSweetAlert("top-end",3000,"warning","Ingrese Login/Email..!!");
 				return;
 			}
 			
 			var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
 			if(regex.test(_login.trim())){
 			}else{
-				toastSweetAlert("top-end",3000,"warning","Login/Email incorrecto");
+				toastSweetAlert("top-end",3000,"error","Login/Email incorrecto..!!");
 				return;
 			}                    
 
 			if(_password == ''){                        
-				toastSweetAlert("top-end",3000,"warning","Ingrese Password");
+				toastSweetAlert("top-end",3000,"warning","Ingrese Password..!!");
 				return;
 			}
 
 			if(_paisid == '0'){                        
-				toastSweetAlert("top-end",3000,"warning","Seleccione Pais");
+				toastSweetAlert("top-end",3000,"warning","Seleccione Pais..!!");
 				return;
 			}
 			
 			if(_perfilid == '0'){                        
-				toastSweetAlert("top-end",3000,"warning","Seleccione Perfil");
+				toastSweetAlert("top-end",3000,"warning","Seleccione Perfil..!!");
 				return;
 			}
 			
@@ -734,7 +732,7 @@
 							}
 						});
 					}else{
-						toastSweetAlert("top-end",3000,"warning","Login/Email ya existe..!"); 
+						toastSweetAlert("top-end",3000,"warning","Login/Email ya existe..!!"); 
 						return;
 					}
 				});
