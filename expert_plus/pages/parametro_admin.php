@@ -264,7 +264,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="closemodal" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
                 <button type="button" id="btnGuardar" class="btn btn-sm btn-light-primary" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-save"></i>Grabar</button>
             </div>
         </div>
@@ -422,6 +422,28 @@
                 }
             });
         }
+    });
+
+    // $('#modal_parametro').on('hidden.bs.modal', function () {
+    //     debugger;
+
+    //     _result.length = 0;
+    //     console.log(_result);
+    // });
+
+    $('#closemodal').click(function() {
+
+        $.each(_result,function(i,item){
+         
+            console.log(item);
+            delete(item.arrydetalle);
+
+            console.log(item);
+
+        }); 
+
+      
+       
     });
 
    
