@@ -119,7 +119,7 @@
 						<td>
                             <div class="text-center">
 								<div class="btn-group">
-									<button id="btnEditar_<?php echo $xPacaId;?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(<?php echo $xPacaId;?>)" <?php echo $xDisabledEdit;?>  title='Editar Parametro'>
+									<button id="btnEditar_<?php echo $xPacaId;?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" onclick="f_Editar(<?php echo $xPacaId;?>)" <?php echo $xDisabledEdit;?>  title='Editar Parametro' data-bs-toggle="tooltip" data-bs-placement="left">
 										<i class='fa fa-edit'></i>
 									</button>												 
 								</div>
@@ -134,7 +134,7 @@
 </div>
 
 
-<!--Modal Parametrod-->
+<!--Modal Parametro-->
 <div class="modal fade" id="modal_parametro" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
@@ -192,7 +192,7 @@
                                                 <span class="required">Parametro</span>
                                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nombre del parametro"></i>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid" id="txtNombrePara" name="txtNombrePara" minlength="5" maxlength="100" placeholder="Ingrese Nombre del Parametro" value="" />
+                                            <input type="text" class="form-control form-control-solid text-uppercase" id="txtNombrePara" name="txtNombrePara" minlength="5" maxlength="100" placeholder="Ingrese Nombre del Parametro" value="" />
                                         </div>
                                     </div>
                                     <div class="row g-9 mb-7">
@@ -201,7 +201,7 @@
                                                 <span class="required">Descripcion</span>
                                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique una descripcion del parametro"></i>
                                             </label>
-                                            <textarea class="form-control form-control-solid" name="txtDesc" id="txtDesc" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                                            <textarea class="form-control form-control-solid text-uppercase" name="txtDesc" id="txtDesc" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -215,21 +215,21 @@
                                             <span class="required">Detalle</span>
                                             <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nombre del detalle"></i>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />                       
+                                            <input type="text" class="form-control form-control-solid text-uppercase" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />                       
                                         </div>
                                         <div class="col-md-3 fv-row">
                                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                             <span class="required">Valor Texto</span>
                                             <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid" id="txtValorV" name="txtValorV" minlength="1" maxlength="50" placeholder="valor texto" value="" />                       
+                                            <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorV" name="txtValorV" minlength="1" maxlength="50" placeholder="valor texto" value="" />                       
                                         </div>
                                         <div class="col-md-3 fv-row">
                                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                             <span class="required">Valor Entero</span>
                                             <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valores enteros"></i>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" placeholder="valor entero" value="" />                       
+                                            <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" placeholder="valor entero" value="" />                       
                                         </div>
                                         <div class="col-md-2 fv-row">
                                             <button class="btn btn-sm btn-light-primary" id="btnAgregar">
@@ -264,7 +264,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="closemodal" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="closemodal" class="btn btn-sm btn-light" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
                 <button type="button" id="btnGuardar" class="btn btn-sm btn-light-primary" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-save"></i>Grabar</button>
             </div>
         </div>
@@ -282,8 +282,7 @@
         _mensaje = "<?php echo $mensaje; ?>";
 
         if(_mensaje != ''){
-            //mensajesweetalert("center","success",_mensaje,false,1900);  
-            mensajesalertify(_mensaje, 'S', 'top-center', 5);
+            toastSweetAlert("top-end",3000,"success",_mensaje);
         }
 			
        //abrir-modal-nuevo-parametro
@@ -317,25 +316,24 @@
 
         if($.trim($('#txtDetalle').val()).length == 0)
         {           
-            //mensajesweetalert("center","warning","Ingrese Detalle",false,1900);
-            mensajesalertify('Ingrese Detalle', 'W', 'top-center', 5);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Detalle..!!");
             return false;
         }
 
         if($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0 )
         {    
-            mensajesalertify('Ingrese Valor Texto o Valor Entero..!', 'W', 'top-center', 5);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Valor Texto o Entero..!");
             return false;
         }
 
         if($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0 )
         {    
-            mensajesalertify('Ingrese Solo Valor Texto o Valor Entero..!', 'W', 'top-center', 5);
+            toastSweetAlert("top-end",3000,"warning","Solo Valor Texto o Entero..!!");
             return false;
         }
 
-        _detalle = $.trim($('#txtDetalle').val());
-        _valorV =  $.trim($('#txtValorV').val());
+        _detalle = $.trim($('#txtDetalle').val()).toUpperCase();
+        _valorV =  $.trim($('#txtValorV').val()).toUpperCase();
 
         if($.trim($('#txtValorI').val()).length == 0){
             _valorI = 0;
@@ -360,7 +358,7 @@
                     $.each(_result,function(i,item){
                         if(item.arrydetalle.toUpperCase() == _detalle.toUpperCase())
                         {                  
-                            mensajesalertify('Nombre del Detalle ya Existe..!', 'W', 'top-center', 5);
+                            toastSweetAlert("top-end",3000,"warning","Detalle ya Existe..!!");
                             _continuar = false;
                             return false;
                         }else{
@@ -369,7 +367,7 @@
                                 {
                                     if(item.arryvalorv.toUpperCase() == _valorV.toUpperCase())
                                     {                               
-                                        mensajesalertify('Valor Texto de Parámetro ya Existe..!', 'W', 'top-center', 5);
+                                        toastSweetAlert("top-end",3000,"warning","Valor Texto ya Existe..!!");
                                         _continuar = false;
                                         return false;
                                     }else{
@@ -379,7 +377,7 @@
                                 {
                                     if(item.arryvalori == _valorI)
                                     {                               
-                                        mensajesalertify('Valor Entero de Parámetro ya Existe..!', 'W', 'top-center', 5);
+                                        toastSweetAlert("top-end",3000,"warning","Valor Entero ya Existe..!!");
                                         _continuar = false;
                                         return false;
                                     }else{
@@ -418,7 +416,7 @@
                         $("#txtValorI").val("");
                     }
                 }else{
-                    mensajesalertify('Nombre del Detalle y/o Valor Texto o Entero ya existe..!', 'W', 'top-center', 5);
+                    toastSweetAlert("top-end",3000,"warning","Detalle y/o Valor Texto o Entero ya existe..!!");
                 }
             });
         }
@@ -455,12 +453,12 @@
       var _descripcion = $.trim($("#txtDesc").val());
 
       if(_parametro == ''){                        
-        mensajesalertify('Ingrese Nombre del Parametro..!', 'W', 'top-center', 5);
+        toastSweetAlert("top-end",3000,"warning","Ingrese Parametro..!!");
         return;
       }
 
       if(_count == 0){
-        mensajesalertify('Ingrese al menos un Detalle..!', 'W', 'top-center', 5);
+        toastSweetAlert("top-end",3000,"warning","Ingrese Detalle del Parametro..!!");
         return;
       }
 
@@ -527,7 +525,7 @@
                     }
                 }); 
             }else{
-                mensajesalertify('Nombre del Parametro ya Existe..!', 'W', 'top-center', 5);
+                toastSweetAlert("top-end",3000,"warning","Parametro ya Existe..!!");
             }
         });
     }
