@@ -361,7 +361,7 @@
                     </div>
                 </div>
                 <div class="modal-footer"> 
-                    <button type="reset" class="btn btn-sm btn-light" data-kt-roles-modal-action="cancel">Cerrar</button>
+                    <button type="reset" class="btn btn-sm btn-light" data-kt-roles-modal-action="cancel"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
                     <button type="button" id="btnGrabarEdit" class="btn btn-sm btn-light-primary" onclick="f_GrabarEditar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-save"></i>Grabar</button>
                 </div>
             </div>
@@ -375,8 +375,8 @@
         _mensaje = $('input#mensaje').val();
 
         if(_mensaje != ''){
-            //mensajesalertify(_mensaje+"..!","S","top-center",5);
-            mensajesweetalert("center", "warning", _mensaje, false, 1800);  
+       
+            toastSweetAlert("top-end",3000,"warning",_mensaje);  
         }
 
         $("#btnNuevo").click(function(){
@@ -507,7 +507,7 @@
 
         if(_perfil == '')
         {       
-            mensajesweetalert("center","warning","Ingrese Nombre del Perfil..!",false,1800);  
+            toastSweetAlert("top-end",3000,"warning","Ingrese Perfil..!!");  
             return;
         }
 
@@ -524,7 +524,7 @@
         }
 
         if(_contar == 0){                        
-            mensajesweetalert("center","warning","Asigne al menos un permiso",false,1800);
+            toastSweetAlert("top-end",3000,"warning","Asigne minimo un permiso");
             return;
         }
 
@@ -578,7 +578,7 @@
                 });
 
             }else{
-                mensajesweetalert("center", "warning", "Nombre del Perfil ya Existe..!", false, 1800);
+                toastSweetAlert("top-end",3000,"warning","Perfil ya Existe..!");
             }
         });
 
@@ -599,7 +599,7 @@
 
         if(_perfil == '')
         {       
-            mensajesweetalert("center", "warning", "Ingrese Nombre del Perfil..!", false, 1800);  
+            toastSweetAlert("top-end",3000,"warning","Ingrese Perfil..!!");  
             return;
         }
 
@@ -652,7 +652,7 @@
                     });
 
                 }else{
-                    mensajesweetalert("center","warning","Nombre del Perfil ya Existe..!",false,1800);
+                    toastSweetAlert("top-end",3000,"warning","Perfil ya Existe..!!");
                 }
             });
         }else{
