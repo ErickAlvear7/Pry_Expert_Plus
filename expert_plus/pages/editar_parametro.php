@@ -106,7 +106,7 @@
                                     <span class="required">Parametro</span>
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Nombre del parametro"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" id="txtParaEdit" name="txtParaEdit" minlength="5" maxlength="100" value="<?php echo $xNomPaca; ?>" />
+                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtParaEdit" name="txtParaEdit" minlength="5" maxlength="100" value="<?php echo $xNomPaca; ?>" />
                             </div>
                         </div>
                         <div class="row g-9 mb-7">
@@ -115,7 +115,7 @@
                                     <span class="required">Descripcion</span>
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Descripcion del parametro"></i>
                                 </label>
-                                <textarea class="form-control form-control-solid" name="txtDescEdit" id="txtDescEdit" maxlength="150" onkeydown="return (event.keyCode!=13);"><?php echo $xDescPaca; ?></textarea>
+                                <textarea class="form-control form-control-solid text-uppercase" name="txtDescEdit" id="txtDescEdit" maxlength="150" onkeydown="return (event.keyCode!=13);"><?php echo $xDescPaca; ?></textarea>
                             </div>
                         </div>
                         <div class="card-toolbar d-flex align-self-end">
