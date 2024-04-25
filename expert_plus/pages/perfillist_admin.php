@@ -376,7 +376,7 @@
 
         if(_mensaje != ''){
        
-            toastSweetAlert("top-end",3000,"warning",_mensaje);  
+            toastSweetAlert("top-end",3000,"success",_mensaje);  
         }
 
         $("#btnNuevo").click(function(){
