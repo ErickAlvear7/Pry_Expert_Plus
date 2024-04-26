@@ -127,7 +127,7 @@
 		<div class="card-body py-4">
 			<table class="table align-middle table-row-dashed fs-6 gy-5 table-hover" id="kt_table_users" style="width: 100%;">
 				<thead>
-					<tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+					<tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0"">
 						<th style="display:none;">Id</th>
 						<th style="display:none;">Login</th>
 						<th>Usuario</th>

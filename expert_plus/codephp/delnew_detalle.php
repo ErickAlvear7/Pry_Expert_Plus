@@ -17,9 +17,9 @@
             $xPadeid = $_POST['xxPadeid'];
             $xEstado = $_POST['xxEstado'];
 
-            if($xEstado == 'Activo'){
+            if($xEstado == 'ACTIVO'){
                 $xSql = "UPDATE `expert_parametro_detalle` SET pade_estado='A' WHERE pade_id=$xPadeid ";
-            }else if($xEstado == 'Inactivo'){
+            }else if($xEstado == 'INACTIVO'){
                 $xSql = "UPDATE `expert_parametro_detalle` SET pade_estado='I' WHERE  pade_id=$xPadeid ";
             }
 

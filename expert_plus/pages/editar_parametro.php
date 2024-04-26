@@ -89,7 +89,7 @@
                         Detalle</a>
                     </li>
                 </ul>
-                <a href="?page=param_generales&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7">
+                <a href="?page=param_generales&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
                     <span class="svg-icon svg-icon-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
@@ -119,7 +119,7 @@
                             </div>
                         </div>
                         <div class="card-toolbar d-flex align-self-end">
-                           <button type="button" id="btnGuardarEdit" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $idpaca; ?>)" class="btn btn-primary">Guardar</button>
+                           <button type="button" id="btnGuardarEdit" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $idpaca; ?>)" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
                         </div>	
                     </div>
                 </div>
@@ -132,21 +132,21 @@
                                 <span class="required">Detalle</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del detalle"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />                       
+                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />                       
                             </div>
                                 <div class="col-md-3 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <span class="required">Valor Texto</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" id="txtValorV" name="txtValorV" minlength="1" maxlength="50" placeholder="valor texto" value="" />                       
+                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorV" name="txtValorV" minlength="1" maxlength="50" placeholder="valor texto" value="" />                       
                             </div>
                                 <div class="col-md-3 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <span class="required">Valor Entero</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valores enteros"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" placeholder="valor entero" value="" />                       
+                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" placeholder="valor entero" value="" />                       
                             </div>
                             <div class="col-md-2 fv-row">
                                 <button class="btn btn-sm btn-light-primary" id="btnAgregar">
@@ -174,12 +174,13 @@
                         <div class="mh-375px scroll-y me-n7 pe-7">
                             <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
                                 <thead>
-                                    <tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
+                                    <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                         <th style="display:none;">Id</th>
                                         <th>Detalle</th>
                                         <th>Valor Texto</th>
                                         <th>Valor entero</th>
                                         <th>Estado</th>
+                                        <th>Status</th>
                                         <th style="text-align: center;">Opciones</th>
                                     </tr>
                                 </thead>
@@ -198,9 +199,13 @@
                                         $xDisabledEdit = '';
 
                                         if($xPadeEstado == 'A'){
+                                            $xEstado = 'ACTIVO';
+                                            $xTextColor = "badge badge-light-primary";
                                             $xCheking = 'checked="checked"';
                                         
                                         }else{
+                                            $xEstado = 'INACTIVO';
+                                            $xTextColor = "badge badge-light-danger";
                                             $xDisabledEdit = 'disabled';
                                         }
 
@@ -217,6 +222,9 @@
                                         <td><?php echo $xPadeNom; ?></td>
                                         <td><?php echo $xPadeValorV; ?></td>
                                         <td><?php echo $xPadeValorI; ?></td>
+                                        <td id="td_<?php echo $xPadeId; ?>">
+                                            <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
+                                        </td>
                                         <td style="text-align:center">
                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                 <input <?php echo $xCheking; ?>  class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xPadeId; ?>" 
@@ -226,7 +234,7 @@
                                         <td>
                                             <div class="text-center">
                                                 <div class="btn-group">	
-                                                    <button type="button" id="btnEditar_<?php echo $xPadeId;?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit;?> title='Editar Detalle'>
+                                                    <button type="button" id="btnEditar_<?php echo $xPadeId;?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit;?> title='Editar Detalle' data-bs-toggle="tooltip" data-bs-placement="left">
                                                         <i class="fa fa-edit"></i>
                                                     </button> 
                                                 </div>
@@ -243,7 +251,8 @@
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="modal_detalle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--Modal detalle -->
+<!-- <div class="modal fade" id="modal_detalle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered mw-550px">
     <div class="modal-content">
         <div class="modal-header" id="parametro_header">
@@ -289,7 +298,59 @@
         </div>
     </div>
   </div>
-</div>
+</div> -->
+<!--Modal detalle -->
+<div class="modal fade" id="modal_detalle" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-700px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Editar Detalle</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div class="card-body pt-0">
+                        <div class="d-flex flex-column mb-7 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                <span class="required">Detalle</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Nombre del detalle"></i>
+                            </label>
+                            <input type="text" class="form-control form-control-solid text-uppercase" id="txtDetalleEdit" name="txtDetalleEdit" placeholder="Ingrese Detalle" minlength="2" maxlength="100" />
+                        </div>
+                        <div class="d-flex flex-column mb-7 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                <span class="required">Valor Texto</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
+                            </label>
+                            <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorVedit" name="txtValorVedit" placeholder="Ingrese Valor Texto" minlength="1" maxlength="50" />
+                        </div>
+                        <div class="d-flex flex-column mb-7 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                <span class="required">Valor Entero</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valores enteros"></i>
+                            </label>
+                            <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorIedit" name="txtValorIedit" placeholder="Ingrese Valor Entero" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnGuardar" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
+            </div>
+            <input type="hidden" id="txtDetalleold" name="txtDetalleold" />
+            <input type="hidden" id="txtValortexto" name="txtDetalleold" />
+            <input type="hidden" id="txtValorentero" name="txtValorentero" />
+        </div>
+    </div>
+</div>   
 
 
 <script>
@@ -309,24 +370,24 @@
        
         if($.trim($('#txtDetalle').val()).length == 0)
         {           
-            mensajesalertify('Ingrese Detalle..!', 'W', 'top-center', 5);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Detalle..!!");
             return false;          
         }
 
         if($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0 )
         {    
-            mensajesalertify('Ingrese Valor Texto o Valor Entero..!', 'W', 'top-center', 5);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Valor Texto o Entero..!!");
             return false;
         }
 
         if($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0 )
         {    
-            mensajesalertify('Ingrese Solo Valor Texto o Valor Entero..!', 'W', 'top-center', 5);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Solo Valor Texto o Entero..!!");
             return false;       
         }
 
-        var _detalle = $.trim($('#txtDetalle').val());
-        var _valorV =  $.trim($('#txtValorV').val());
+        var _detalle = $.trim($('#txtDetalle').val()).toUpperCase();
+        var _valorV =  $.trim($('#txtValorV').val()).toUpperCase();
 
         _ordendet++;
 
@@ -336,71 +397,73 @@
             _valorI = $.trim($('#txtValorI').val());
         }
 
-                 var _datosDetalle ={
-                    "xxPaisId" : _paisid,
+        var _datosDetalle ={
+            "xxPaisId" : _paisid,
+            "xxDetalle" : _detalle,
+            "xxValorV" : _valorV,
+            "xxValorI" : _valorI
+        }
+
+        var xrespuesta = $.post("codephp/consultar_detalle.php", _datosDetalle);
+        xrespuesta.done(function(response){
+            if(response == 0){
+
+                var _parametros ={
+                    "xxPacaId" : _pacaid,
                     "xxDetalle" : _detalle,
                     "xxValorV" : _valorV,
-                    "xxValorI" : _valorI
+                    "xxValorI" : _valorI,
+                    "xxEstado" : _estado,
+                    "xxOrden" : _ordendet                         
                 }
 
-                var xrespuesta = $.post("codephp/consultar_detalle.php", _datosDetalle);
-                xrespuesta.done(function(response){
-                    if(response == 0){
+                $.ajax({
+                    url: "codephp/grabar_detalle.php",
+                    type: "POST",
+                    dataType: "json",
+                    data: _parametros,          
+                    success: function(response){ 
+                        if(response != 0){
+                            _padeid = response;
+                            _padenom = _detalle;
+                            _padev = _valorV;
+                            _padei = _valorI;
+                            _padees = 'ACTIVO';
+                            _checked = "checked='checked'";
 
-                        var _parametros ={
-                            "xxPacaId" : _pacaid,
-                            "xxDetalle" : _detalle,
-                            "xxValorV" : _valorV,
-                            "xxValorI" : _valorI,
-                            "xxEstado" : _estado,
-                            "xxOrden" : _ordendet                         
-                        }
+                            var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                                            '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '"' +
+                                            '</div></td>';
+                            
+                            var _btnGrup = '<td><div class="text-center"><div class="btn-group">' +
+                                            '<button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
+                                            '<i class="fa fa-edit"></i></button></div></div></td>';
+                            
 
-                        $.ajax({
-							url: "codephp/grabar_detalle.php",
-							type: "POST",
-							dataType: "json",
-							data: _parametros,          
-							success: function(response){ 
-								if(response != 0){
-                                    _padeid = response;
-                                    _padenom = _detalle;
-                                    _padev = _valorV;
-                                    _padei = _valorI;
-                                    _checked = "checked='checked'";
+                            TableData = $('#kt_ecommerce_report_shipping_table').DataTable();  
+                            TableData.column(0).visible(0);
 
-                                    var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                                   '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '"' +
-                                                   '</div></td>';
-                                    
-                                    var _btnGrup = '<td><div class="text-center"><div class="btn-group">' +
-                                                   '<button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
-                                                   '<i class="fa fa-edit"></i></button></div></div></td>';
-                                    
+                            TableData.row.add([_padeid, _padenom, _padev, _padei, _estado,_btnChk,_btnGrup]).draw();
 
-                                    TableData = $('#kt_ecommerce_report_shipping_table').DataTable();  
-                                    TableData.column(0).visible(0);
+                            $("#txtDetalle").val("");
+                            $("#txtValorV").val("");
+                            $("#txtValorI").val("");
 
-                                    TableData.row.add([_padeid, _padenom, _padev, _padei, _btnChk,_btnGrup]).draw();
+                            $.redirect('?page=editparametro&menuid=<?php echo $menuid; ?>', {idparam: <?php echo $idpaca; ?>}); //POR METODO POST
 
-                                    $("#txtDetalle").val("");
-                                    $("#txtValorV").val("");
-                                    $("#txtValorI").val("");
-
-                                    $.redirect('?page=editparametro&menuid=<?php echo $menuid; ?>', {idparam: <?php echo $idpaca; ?>}); //POR METODO POST
-
-								}                                                                         
-							},
-							error: function (error){
-								console.log(error);
-							}                            
-						});
-
-                    }else{
-                        mensajesalertify('Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!', 'W', 'top-center', 5);
-                    }
-
+                        }                                                                         
+                    },
+                    error: function (error){
+                        console.log(error);
+                    }                            
                 });
+
+            }else{
+                toastSweetAlert("top-end",3000,"warning","Detalle ya Existe y/o Valor Texto o Entero..!!");
+
+            }
+
+        });
         
     });
 
@@ -467,12 +530,12 @@
        _paisid = '<?php echo  $xPaisid; ?>';
        var _consultar = 'NO';
 
-       var _nombre = $.trim($("#txtDetalleEdit").val());
-       var _valorV = $.trim($("#txtValorVedit").val());
+       var _nombre = $.trim($("#txtDetalleEdit").val()).toUpperCase();
+       var _valorV = $.trim($("#txtValorVedit").val()).toUpperCase();
        var _valorI = $.trim($('#txtValorI').val());
 
-       var _nombreold = $.trim($("#txtDetalleold").val());
-       var _valovold = $.trim($("#txtValortexto").val());
+       var _nombreold = $.trim($("#txtDetalleold").val()).toUpperCase();
+       var _valovold = $.trim($("#txtValortexto").val()).toUpperCase();
        var _valoriold = $.trim($("#txtValorentero").val());
 
        if($.trim($('#txtValorIedit').val()).length == 0){
@@ -482,7 +545,7 @@
         }
         
         if($.trim($('#txtValorentero').val()).length == 0){
-            var _valoriold = 0;
+            var _valoriold = '';
         }else{
             _valoriold = $.trim($('#txtValorentero').val());
         }        
@@ -505,19 +568,19 @@
 
        if($.trim($('#txtDetalleEdit').val()).length == 0)
         {           
-            mensajesalertify('Ingrese Detalle..!', 'W', 'top-center', 5);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Detalle..!!");
             return false;
         }
 
         if($.trim($('#txtValorVedit').val()).length == 0 && $.trim($('#txtValorIedit').val()).length == 0 )
         {    
-            mensajesalertify('Ingrese Valor Texto o Valor Entero..!', 'W', 'top-center', 5);        
+            toastSweetAlert("top-end",3000,"warning","Ingrese Valor Texto o Entero..!!");        
             return false;
         }
 
         if($.trim($('#txtValorVedit').val()).length > 0 && $.trim($('#txtValorIedit').val()).length > 0 )
         {    
-            mensajesalertify('Ingrese Solo Valor Texto o Valor Entero..!', 'W', 'top-center', 5);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Solo Valor Texto o Entero..!!");  
             return false;
         }
 
@@ -532,7 +595,7 @@
         }
 
         if(_consultar == 'SI'){
-            var xrespuesta = $.post("codephp/consultar_detalledit.php", _datosDetallee);
+            var xrespuesta = $.post("codephp/consultar_detalledit.php", _datosDetalle);
             xrespuesta.done(function(response){
                 if(response.trim() == 0){
 
@@ -553,6 +616,10 @@
                             _padenom = _nombre;
                             _padev = _valorV;
                             _padei = _valorI;
+                            _estado = 'ACTIVO';
+                            _class = "badge badge-light-primary";
+                            _status = '<div class="' + _class + '">' + _estado + ' </div>';
+
 
                             if(_padei == 0){
                                 _padei = '';
@@ -570,14 +637,14 @@
                             TableData = $('#kt_ecommerce_report_shipping_table').DataTable();  
                             TableData.column(0).visible(0);
 
-                            TableData.row(_fila).data([_padeid, _padenom, _padev, _padei, _btnChk, _btnGrup ]).draw();
+                            TableData.row(_fila).data([_padeid, _padenom, _padev, _padei,_status, _btnChk, _btnGrup ]).draw();
 
                             $("#modal_detalle").modal("hide");
                         }
                     }); 
             
                 }else{
-                    mensajesalertify('Nombre Detalle ya Existe y/o Valor Texto u Valor Entero..!', 'W', 'top-center', 5);
+                    toastSweetAlert("top-end",3000,"warning","Detalle ya Existe y/o Valor Texto o Entero..!!");
                 }
 
             });
@@ -599,20 +666,23 @@
                     _padenom = _nombre;
                     _padev = _valorV;
                     _padei = _valorI;
+                    _estado = 'ACTIVO'   
                     _checked = "checked='checked'";
+                    _class = "badge badge-light-primary";
+                    _status = '<div class="' + _class + '">' + _estado + ' </div>';
 
                     var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
                                     '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '"' +
                                     '</div></td>';
                     
                     var _btnGrup = '<td><div class="text-center"><div class="btn-group">' +
-                                    '<button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
+                                    '<button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="" title="Editar Detalle" data-bs-toggle="tooltip" data-bs-placement="right">' +
                                     '<i class="fa fa-edit"></i></button></div></div></td>';
 
                     TableData = $('#kt_ecommerce_report_shipping_table').DataTable();  
                     TableData.column(0).visible(0);
 
-                    TableData.row(_fila).data([_padeid, _padenom, _padev, _padei, _btnChk, _btnGrup ]).draw();
+                    TableData.row(_fila).data([_padeid, _padenom, _padev, _padei,_status, _btnChk, _btnGrup ]).draw();
 
                     $("#modal_detalle").modal("hide");
                 }
@@ -687,18 +757,24 @@
         let _check = $("#chk" + _padeid).is(":checked");
         let _checked = "";
         let _disabled = "";
+        let _td = "td_" + _padeid;
+        let _class = "badge badge-light-primary";
         let _btnedit = "btnEditar_" + _padeid;
 
         if(_check){
-            _estado = "Activo";
+            _estado = "ACTIVO";
             _disabled = "";
             _checked = "checked='checked'";
             $('#'+_btnedit).prop("disabled",false);                    
         }else{                    
-            _estado = "Inactivo";
+            _estado = "INACTIVO";
             _disabled = "disabled";
+            _class = "badge badge-light-danger";
             $('#'+_btnedit).prop("disabled",true);
         }
+
+        var _changetd = document.getElementById(_td);
+		_changetd.innerHTML = '<td><div class="' + _class + '">' + _estado + ' </div>';
 
         var _parametros = {
             "xxPadeid" : _padeid,

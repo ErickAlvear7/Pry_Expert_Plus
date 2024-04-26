@@ -70,7 +70,7 @@
 		<div class="card-body pt-0">
 			<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
 				<thead>
-					<tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
+					<tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
 					    <th style="display:none;">Id</th>
 						<th class="min-w-125px">Parametro</th>
 						<th class="min-w-125px">Descripcion</th>
