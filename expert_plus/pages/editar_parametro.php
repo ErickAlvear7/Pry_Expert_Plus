@@ -251,54 +251,7 @@
 		</div>
 	</div>
 </div>
-<!--Modal detalle -->
-<!-- <div class="modal fade" id="modal_detalle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered mw-550px">
-    <div class="modal-content">
-        <div class="modal-header" id="parametro_header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Detalle</h5>
-            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                <span class="svg-icon svg-icon-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                    </svg>
-                </span>
-            </div>
-        </div>
-        <div class="modal-body py-10 px-lg-17">
-            <div class="d-flex flex-column mb-7 fv-row">
-                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                    <span class="required">Detalle</span>
-                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Nombre del detalle"></i>
-                </label>
-                <input type="text" class="form-control form-control-solid" id="txtDetalleEdit" name="txtDetalleEdit"  minlength="2" maxlength="100" />
-            </div>
-            <div class="d-flex flex-column mb-7 fv-row">
-                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                    <span class="required">Valor Texto</span>
-                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
-                </label>
-                <input type="text" class="form-control form-control-solid" id="txtValorVedit" name="txtValorVedit" minlength="1" maxlength="50" />
-            </div>
-            <div class="d-flex flex-column mb-7 fv-row">
-                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                    <span class="required">Valor Entero</span>
-                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valores enteros"></i>
-                </label>
-                <input type="text" class="form-control form-control-solid" id="txtValorIedit" name="txtValorIedit" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnGuardar" class="btn btn-primary">Grabar</button>
-            </div>
-            <input type="hidden" id="txtDetalleold" name="txtDetalleold" />
-            <input type="hidden" id="txtValortexto" name="txtDetalleold" />
-            <input type="hidden" id="txtValorentero" name="txtValorentero" />
-        </div>
-    </div>
-  </div>
-</div> -->
+
 <!--Modal detalle -->
 <div class="modal fade" id="modal_detalle" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-700px">
@@ -360,6 +313,8 @@
         _parametroold = $('#txtParaEdit').val();
 
     });
+
+    //Agregar Detalle directo a la BDD 
 
     $('#btnAgregar').click(function(){
 
@@ -432,11 +387,11 @@
                             _checked = "checked='checked'";
 
                             var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                            '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '"' +
+                                            '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '" onchange="f_UpdateEstado(' + _padeid + ')" />' +
                                             '</div></td>';
                             
                             var _btnGrup = '<td><div class="text-center"><div class="btn-group">' +
-                                            '<button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
+                                            '<button type="button" id="btnEditar_'+_padeid+'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
                                             '<i class="fa fa-edit"></i></button></div></div></td>';
                             
 
@@ -627,17 +582,18 @@
                             _checked = "checked='checked'";
 
                             var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                                            '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '"' +
+                                            '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '" onchange="f_UpdateEstado(' + _padeid + ')" />' +
                                             '</div></td>';
                             
                             var _btnGrup = '<td><div class="text-center"><div class="btn-group">' +
-                                            '<button type="button" id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
+                                            '<button type="button" id="btnEditar_'+_padeid+'" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" id="">' +
                                             '<i class="fa fa-edit"></i></button></div></div></td>';
 
                             TableData = $('#kt_ecommerce_report_shipping_table').DataTable();  
                             TableData.column(0).visible(0);
 
                             TableData.row(_fila).data([_padeid, _padenom, _padev, _padei,_status, _btnChk, _btnGrup ]).draw();
+            
 
                             $("#modal_detalle").modal("hide");
                         }
