@@ -35,8 +35,8 @@
 	$xFechaActual = strftime('%Y-%m-%d', time());
 	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
 
-    $xSQL = "SELECT usu.usua_id AS Idusuario, CONCAT(usu.usua_nombres,' ',usu.usua_apellidos) AS Nombres, usu.usua_login AS Email, CASE usu.usua_estado WHEN 'A' THEN 'Activo' ";
-	$xSQL .= "ELSE 'Inactivo' END AS Estado, usu.usua_caducapass AS CaducaPass, usu.usua_avatarlogin AS LogoUser, (SELECT per.perf_descripcion FROM `expert_perfil` per WHERE per.pais_id=$xPaisid AND per.perf_id=usu.perf_id) AS Perfil FROM `expert_usuarios` usu WHERE usu.pais_id=$xPaisid AND usu.empr_id=$xEmprid AND usu.perf_id>1 ";
+    $xSQL = "SELECT usu.usua_id AS Idusuario, CONCAT(usu.usua_nombres,' ',usu.usua_apellidos) AS Nombres, usu.usua_login AS Email, CASE usu.usua_estado WHEN 'A' THEN 'ACTIVO' ";
+	$xSQL .= "ELSE 'INACTIVO' END AS Estado, usu.usua_caducapass AS CaducaPass, usu.usua_avatarlogin AS LogoUser, (SELECT per.perf_descripcion FROM `expert_perfil` per WHERE per.pais_id=$xPaisid AND per.perf_id=usu.perf_id) AS Perfil FROM `expert_usuarios` usu WHERE usu.pais_id=$xPaisid AND usu.empr_id=$xEmprid AND usu.perf_id>1 ";
 	$all_usuarios = mysqli_query($con, $xSQL);
 
 	$xSQL = "SELECT perf_descripcion AS Descripcion, perf_id AS Codigo,perf_observacion AS Observacion FROM `expert_perfil` ";
@@ -161,7 +161,7 @@
 								$xDisabledEdit = '';
 								$xDisabledReset = '';
 
-								if($estado == 'Activo'){
+								if($estado == 'ACTIVO'){
 									$cheking = 'checked="checked"';
 									$xTextColor = "badge badge-light-primary";
 								}else{
@@ -227,7 +227,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable  mw-900px">
         <div class="modal-content"> 
             <div class="modal-header">
-                <h2 id="titulo" class="fw-bolder"></h2>
+                <h2 id="titulo" class="fw-light text-primary fst-italic"></h2>
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -293,13 +293,13 @@
 										<label class="required form-label">Nombres
 											<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nombre del usuario"></i>
 										</label>
-										<input type="text" class="form-control form-control-solid text-uppercase" id="txtNombre" name="txtNombre" minlength="5" maxlength="100" placeholder="Ingrese Nombre" value="" />
+										<input type="text" class="form-control form-control-solid" id="txtNombre" name="txtNombre" minlength="5" maxlength="100" placeholder="Ingrese Nombre" value="" />
                                     </div>
                                     <div class="col-md-6">
 									    <label class="required form-label">Apellidos
 											<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el apellido del usuario"></i>
 										</label>
-										<input type="text" class="form-control form-control-solid text-uppercase" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" placeholder="Ingrese Apellido" />
+										<input type="text" class="form-control form-control-solid" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" placeholder="Ingrese Apellido" />
                                     </div>
                                 </div>
 								<div class="row">
@@ -808,13 +808,13 @@
 		let _btnedit = "btnEditar_" + _userid;
 
 		if(_check){
-			_estado = "Activo";
+			_estado = "ACTIVO";
 			_disabled = "";
 			_checked = "checked='checked'";
 			$('#'+_btnreset).prop("disabled",false);
 			$('#'+_btnedit).prop("disabled",false);                    
 		}else{                    
-			_estado = "Inactivo";
+			_estado = "INACTIVO";
 			_disabled = "disabled";
 			_class = "badge badge-light-danger";
 			$('#'+_btnreset).prop("disabled",true);

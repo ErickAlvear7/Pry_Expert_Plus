@@ -18,9 +18,9 @@
             $xEmprid = $_POST['xxEmprid'];
             $xEstado = $_POST['xxEstado'];
 
-            if($xEstado == 'Activo'){
+            if($xEstado == 'ACTIVO'){
                 $xSql = "UPDATE `expert_usuarios` SET usua_estado='A' WHERE empr_id=$xEmprid AND usua_id=$xUsuaid";
-            }else if($xEstado == 'Inactivo'){
+            }else if($xEstado == 'INACTIVO'){
                 $xSql = "UPDATE `expert_usuarios` SET usua_estado='I' WHERE empr_id=$xEmprid AND usua_id=$xUsuaid";
             }
 
