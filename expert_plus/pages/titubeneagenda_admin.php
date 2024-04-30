@@ -3139,13 +3139,12 @@
                 _especialidad = _datos['Especialidad'];
                 _profesional = _datos['Profesional'];
                 _fechainicio = _datos['FechaInicio'];
-                _horadesde = _datos['HoraDesde'];
-                _horahasta = _datos['HoraHasta'];
+                _fechafin = _datos['FechaFin'];
                 _codigo = _datos['CodigoAgenda'];
 
-                var  _fechaini = new Date(_fechainicio)
-                var _fechainicial = _fechaini.toLocaleDateString();
-
+                var _fechainicial = moment(_fechainicio).format('YYYY-MM-DD');
+                var _horade = moment(_fechainicio).format('HH:mm');
+                var _horaHa = moment(_fechafin).format('HH:mm');
 
                 $("#imgLocation").attr("src", _logo).width('20%').height('10%');
 
@@ -3156,8 +3155,8 @@
                 $('#txtProfCita').text(_profesional);
                 $('#txtCiudCita').text(_ciudad);
                 $('#txtPresCita').text(_prestadora);
-                $('#txtDesdeCita').text(_horadesde);
-                $('#txtHastaCita').text(_horahasta);
+                $('#txtDesdeCita').text(_horade);
+                $('#txtHastaCita').text(_horaHa);
                
 
                 $("#modal_cita").modal("show");

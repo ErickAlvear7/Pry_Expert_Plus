@@ -67,39 +67,10 @@
                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
                             <i class="bi bi-x fs-2"></i>
                         </span>
-                        <!-- <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remover Logo">
-                            <i class="bi bi-x fs-2"></i>
-                        </span> -->
                     </div>
                     <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                 </div>
             </div>
-
-            <!-- <div class="card card-flush py-4">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h2>Status</h2>
-                    </div>
-                    <div class="card-toolbar">
-                        <div class="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_product_status"></div>
-                    </div>
-                </div>
-                <div class="card-body pt-s0">
-                    <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
-                        <option></option>
-                        <option value="published" selected="selected">Published</option>
-                        <option value="draft">Draft</option>
-                        <option value="scheduled">Scheduled</option>
-                        <option value="inactive">Inactive</option>
-                    </select>
-                    <div class="text-muted fs-7">Set the product status.</div>
-                    <div class="d-none mt-10">
-                        <label for="kt_ecommerce_add_product_status_datepicker" class="form-label">Select publishing date and time</label>
-                        <input class="form-control" id="kt_ecommerce_add_product_status_datepicker" placeholder="Pick date &amp; time" />
-                    </div>
-                </div>
-            </div> -->
-
             <div class="card card-flush py-4">
                 <div class="card-header">
                     <div class="card-title">
@@ -116,15 +87,6 @@
                         </span>                                                                
                         Nueva Especialidad
                     </button>                           
-                    <!-- <button type="button" id="btnNuevoTipo" class="btn btn-light-primary btn-sm mb-10">
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                            </svg>
-                        </span>                                                                
-                        Nuevo Tipo Prestador
-                    </button>                              -->
                 </div>
             </div>
         </div>
@@ -375,50 +337,16 @@
                 </div>
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                     <div class="d-flex flex-column gap-7 gap-lg-10">
-                        <div class="card card-flush py-4">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h2>Datos Especialidad</h2>
-                                </div>
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="mb-10 fv-row">
-                                    <label class="required form-label">Especialidad</label>
-                                    <select name="cboEspecialidad" id="cboEspecialidad" aria-label="Seleccione Especialidad" data-control="select2" data-placeholder="Seleccione Especialidad" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2">
-                                        <option></option>
-                                        <?php 
-                                        $xSQL = "SELECT espe_id AS Codigo,espe_nombre AS NombreEspe FROM `expert_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND espe_estado='A' ";
-                                        $all_datos =  mysqli_query($con, $xSQL);
-                                        foreach ($all_datos as $datos){ ?>
-                                            <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['NombreEspe'] ?></option>
-                                        <?php } ?>                                                        
-                                    </select>                                             
-                                </div>
-                                <div class="mb-10 fv-row">
-
-                                    <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                        <div class="col">
-                                            <label class="form-label">Pvp</label>
-                                            <input type="number" name="txtPvp" id="txtPvp" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" disabled />
-                                        </div>
-                                        <div class="col">
-                                            <label class="form-label">Costo Red</label>
-                                            <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group mt-5">
-                                    <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
-                                        <span class="svg-icon svg-icon-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    Agregar Especialidad
-                                    </button>
-                                </div>                                        
-                            </div>
+                        <div class="form-group mt-2 mb-n2">
+                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAddEspe">
+                                <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                Agregar Especialidad
+                            </button>
                         </div>
                         <div class="card card-flush py-4">
                             <div class="card-header">
@@ -430,7 +358,7 @@
                                 <div class="d-flex flex-column gap-10">
                                     <table id="tblEspecialidad" class="table align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
                                         <thead>
-                                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                            <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                                 <th style="display: none;">Id</th>
                                                 <th>Especialidad</th>
                                                 <th>Pvp</th>
@@ -444,76 +372,11 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- <div class="card card-flush py-4">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h2>Shipping</h2>
-                                </div>
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="fv-row">
-                                    <div class="form-check form-check-custom form-check-solid mb-2">
-                                        <input class="form-check-input" type="checkbox" id="kt_ecommerce_add_product_shipping_checkbox" value="1" />
-                                        <label class="form-check-label">This is a physical product</label>
-                                    </div>
-                                    <div class="text-muted fs-7">Set if the product is a physical or digital item. Physical products may require shipping.</div>
-                                </div>
-                                <div id="kt_ecommerce_add_product_shipping" class="d-none mt-10">
-                                    <div class="mb-10 fv-row">
-                                        <label class="form-label">Weight</label>
-                                        <input type="text" name="weight" class="form-control mb-2" placeholder="Product weight" value="" />
-                                        <div class="text-muted fs-7">Set a product weight in kilograms (kg).</div>
-                                    </div>
-                                    <div class="fv-row">
-                                        <label class="form-label">Dimension</label>
-                                        <div class="d-flex flex-wrap flex-sm-nowrap gap-3">
-                                            <input type="number" name="width" class="form-control mb-2" placeholder="Width (w)" value="" />
-                                            <input type="number" name="height" class="form-control mb-2" placeholder="Height (h)" value="" />
-                                            <input type="number" name="length" class="form-control mb-2" placeholder="Lengtn (l)" value="" />
-                                        </div>
-                                        <div class="text-muted fs-7">Enter the product dimensions in centimeters (cm).</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card card-flush py-4">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h2>Meta Options</h2>
-                                </div>
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="mb-10">
-                                    <label class="form-label">Meta Tag Title</label>
-                                    <input type="text" class="form-control mb-2" name="meta_title" placeholder="Meta tag name" />
-                                    <div class="text-muted fs-7">Set a meta tag title. Recommended to be simple and precise keywords.</div>
-                                </div>
-                                <div class="mb-10">
-                                    <label class="form-label">Meta Tag Description</label>
-                                    <div id="kt_ecommerce_add_product_meta_description" name="kt_ecommerce_add_product_meta_description" class="min-h-100px mb-2"></div>
-                                    <div class="text-muted fs-7">Set a meta tag description to the product for increased SEO ranking.</div>
-                                </div>
-                                <div>
-                                    <label class="form-label">Meta Tag Keywords</label>
-                                    <input id="kt_ecommerce_add_product_meta_keywords" name="kt_ecommerce_add_product_meta_keywords" class="form-control mb-2" />
-                                    <div class="text-muted fs-7">Set a list of keywords that the product is related to. Separate the keywords by adding a comma
-                                    <code>,</code>between each keyword.</div>
-                                </div>
-                            </div>
-                        </div> -->
-
                     </div>
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancelar</a>
-                <button type="button" id="btnSave" class="btn btn-primary">
-                    <span class="indicator-label">Grabar</span>
-                    <span class="indicator-progress">Espere un momento...
-                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                </button>
+                <button type="button" id="btnSave" class="btn btn-primary"><i class="las la-save"></i>Grabar</button>
             </div>
         </div>
     </form>
@@ -668,6 +531,58 @@
                         </button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>  
+<!--Modal Agregar Especialidad -->
+<div class="modal fade" id="agregar_especialidad" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Datos Especialidad</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div class="card-body pt-0">
+                        <div class="mb-10 fv-row">
+                            <label class="required form-label">Especialidad</label>
+                            <select name="cboEspecialidad" id="cboEspecialidad" aria-label="Seleccione Especialidad" data-control="select2" data-placeholder="Seleccione Especialidad" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2">
+                                <option></option>
+                                <?php 
+                                $xSQL = "SELECT espe_id AS Codigo,espe_nombre AS NombreEspe FROM `expert_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND espe_estado='A' ";
+                                $all_datos =  mysqli_query($con, $xSQL);
+                                foreach ($all_datos as $datos){ ?>
+                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['NombreEspe'] ?></option>
+                                <?php } ?>                                                        
+                            </select>                                             
+                        </div>
+                        <div class="mb-10 fv-row">
+                            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                                <div class="col">
+                                    <label class="form-label">Pvp</label>
+                                    <input type="number" name="txtPvp" id="txtPvp" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" disabled />
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">Costo Red</label>
+                                    <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agregar</button>
             </div>
         </div>
     </div>
@@ -874,8 +789,18 @@
                 $('#chkEnviar2').prop('checked','');
                 _enviar2 = 'NO';
             }
-        });                
+        });  
+        
+        //Modal Especialidad
+        $("#btnAddEspe").click(function(){
+            
+            $("#agregar_especialidad").find("input,textarea").val("");
+            $("#agregar_especialidad").modal("show");
+            $('#agregar_especialidad').modal('handleUpdate');
+            $("#cboEspecialidad").val(0).change();    
+        }); 
 
+        //Agregar Especialidad
         $('#btnAgregar').click(function(e){
 
             var _cboespe = $('#cboEspecialidad').val();
@@ -884,7 +809,7 @@
             var _costo = $.trim($("#txtCosto").val());
 
             if(_especialidad == ''){
-                mensajesalertify('Seleccione Especialidad', 'W', 'top-center', 3);
+                toastSweetAlert("top-end",3000,"warning","Seleccione Especialidad..!!");
                 return;
             }
 
@@ -899,7 +824,7 @@
             $.each(_result,function(i,item){
                 if(item.arryid.toUpperCase() == _cboespe.toUpperCase())
                 {                  
-                    mensajesalertify('Especialidad ya esta agregada', 'W', 'top-center', 3);   
+                    toastSweetAlert("top-end",3000,"warning","Especialidad ya esta agregada..!!");   
                     $("#cboEspecialidad").val(0).change();
                     $("#txtPvp").val('0.00');
                     $("#txtCosto").val('0.00');                            
@@ -933,6 +858,7 @@
                 $("#cboEspecialidad").val(0).change();
                 $("#txtPvp").val('0.00');
                 $("#txtCosto").val('0.00');
+                $("#agregar_especialidad").modal("hide");
 
             }
         });
@@ -979,7 +905,7 @@
            _respuesta = 'OK';
 
            if(_provid == ''){
-               mensajesalertify("Seleccione Provincia..!", "W", "top-center", 3);
+               toastSweetAlert("top-end",3000,"warning","Seleccione Provincia..!!");
                return; 
            }
 
@@ -1189,6 +1115,10 @@
     //Desplazar-modal
     $("#modal-new-especialidad").draggable({
         handle: ".modal-header"
-    });             
+    });    
+    
+    $("#agregar_especialidad").draggable({
+        handle: ".modal-header"
+    });  
 
 </script>
