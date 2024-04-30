@@ -3158,7 +3158,7 @@
                 $('#txtDesdeCita').text(_horade);
                 $('#txtHastaCita').text(_horaHa);
                
-
+                toastSweetAlert("top-end",3500,"success","Cita Agendada");
                 $("#modal_cita").modal("show");
 
 
