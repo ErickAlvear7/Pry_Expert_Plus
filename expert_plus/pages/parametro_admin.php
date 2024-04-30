@@ -34,7 +34,7 @@
     $xUsuaid = $_SESSION["i_usuaid"];
 
     $xSQL = "SELECT paca_id AS Idpaca,paca_nombre AS Parametro,paca_descripcion AS Descrip, ";
-    $xSQL .= "CASE paca_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado ";
+    $xSQL .= "CASE paca_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado ";
     $xSQL .= "FROM `expert_parametro_cabecera` WHERE empr_id=$xEmprid AND pais_id=$xPaisid";
     $all_param = mysqli_query($con, $xSQL);
 
@@ -92,7 +92,7 @@
                        $xCheking = '';
                        $xDisabledEdit = '';
 
-                       if($xPacaEstado == 'Activo'){
+                       if($xPacaEstado == 'ACTIVO'){
                             $xCheking = 'checked="checked"';
                             $xTextColor = "badge badge-light-primary";
                         }else{
@@ -571,12 +571,12 @@
         let _btnedit = "btnEditar_" + _pacaid;
 
         if(_check){
-            _estado = "Activo";
+            _estado = "ACTIVO";
             _disabled = "";
             _checked = "checked='checked'";
             $('#'+_btnedit).prop("disabled",false);                    
         }else{                    
-            _estado = "Inactivo";
+            _estado = "INACTIVO";
             _disabled = "disabled";
             _class = "badge badge-light-danger";
             $('#'+_btnedit).prop("disabled",true);
