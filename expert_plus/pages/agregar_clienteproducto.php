@@ -407,11 +407,11 @@
                         <div class="row mb-7">
                             <div class="col-md-6">
                                 <label class="form-label">Asistencia Mes</label>
-                                <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" value="1" />   
+                                <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Asistencia Anual</label>
-                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" placeholder="1" value="1" />  
+                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
                             </div>
                         </div>
                         <div class="row border border-hover-primary py-lg-4 px-lg-20">
@@ -466,7 +466,27 @@
                         <span>Descripcion</span>
                     </label>
                     <textarea class="form-control mb-2 text-uppercase" name="txtDescGrupo" id="txtDescGrupo" maxlength="150" onkeydown="return(event.keyCode!=13);"></textarea>
-                </div>                         
+                </div> 
+                <div class="row mb-7">
+                    <div class="col-md-6">
+                        <label class="form-label">Secuencial Agenda</label>
+                        <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control mb-2" value="1"  />   
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Secuencial Cancelado</label>
+                        <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control mb-2" placeholder="1" value="1" />  
+                    </div>
+                </div>
+                <div class="row mb-7">
+                    <div class="col-md-6">
+                        <label class="form-label">Secuencial Atendido</label>
+                        <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control mb-2" value="1" />   
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Secuencial Ausente</label>
+                        <input type="number" name="txtnumausente" id="txtnumausente" class="form-control mb-2" placeholder="1" value="1" />  
+                    </div>
+                </div>                                          
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -511,6 +531,30 @@
 
         });
 
+        document.getElementById("txtnumagenda").addEventListener("change", function() {
+        let v = parseInt(this.value);
+        if (v < 1) this.value = 1;
+        if (v > 99999) this.value = 1;
+        });
+        
+        document.getElementById("txtnumcancelado").addEventListener("change", function() {
+            let v = parseInt(this.value);
+            if (v < 1) this.value = 1;
+            if (v > 99999) this.value = 1;
+        }); 
+        
+        document.getElementById("txtnumatendido").addEventListener("change", function() {
+            let v = parseInt(this.value);
+            if (v < 1) this.value = 1;
+            if (v > 99999) this.value = 1;
+        }); 
+        
+        document.getElementById("txtnumausente").addEventListener("change", function() {
+            let v = parseInt(this.value);
+            if (v < 1) this.value = 1;
+            if (v > 99999) this.value = 1;
+        });          
+
         // Modal nuevo grupo
 
         $("#btnNewGrupo").click(function(){
@@ -537,9 +581,7 @@
             }else{
                 _cobertura = "NO";
                 $("#lblCobertura").text("Cobertura NO");
-
             }    
-
         });
 
         $(document).on("click","#chkSistema",function(){
@@ -552,18 +594,14 @@
             }else{
                 _sistema = "NO";
                 $("#lblSistema").text("Sistema NO");
-
             }
-
         });       
-
     });
 
         //desplazar ventana modal
     $("#modal_new_grupo").draggable({
         handle: ".modal-header"
     }); 
-
 
     //Input type number change valor rangos
 
@@ -691,10 +729,8 @@
                     mensajesalertify("Producto ya existe..!!","W","top-right",3);
                     return false;
                 }
-
             });
         }
-
     });
 
         
@@ -734,8 +770,7 @@
             if(_extCab.trim() != '.png' && _extCab.trim() != '.jpg' && _extCab.trim() != 'jpeg'){
                 mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
                 return;
-            }   
-            
+            }               
         }
 
             //Imagen Pie
@@ -755,10 +790,8 @@
             if(_extPie.trim() != '.png' && _extPie.trim() != '.jpg' && _extPie.trim() != 'jpeg'){
                 mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
                 return;
-            }   
-            
+            }               
         }
-
 
         if(_cboProv == ''){
             mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
@@ -815,8 +848,7 @@
                 return;
             }
         }                    
-        
-        
+                
         if(_email1 != ''){
             var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
             if (regex.test(_email1.trim())){
@@ -835,7 +867,6 @@
             }  
         }
         
-
         var _parametros = {            
             "xxPaisId" : _idpais,
             "xxEmprId" : _idempr,
@@ -867,7 +898,6 @@
                 form_data.append('xxFileCab', _fileCab);
                 form_data.append('xxFilePie', _filePie);
 
-
                 $.ajax({
                     url: "codephp/grabar_clienteprod.php",
                     type: "post",                
@@ -890,22 +920,16 @@
                             });
 
                         }
-
                     },
                     error: function (error) {
                         console.log(error);
-                    }                                 
-
-                });
-            
+                    }
+                });            
             }else{
                 mensajesalertify("Cliente ya Existe..!!","W","top-right",3);
                 return false;
-
             }
-
         });
-
     }
 
     //Eliminar Producto en linea
@@ -923,11 +947,8 @@
             }else{
                 continuar = true;
             }
-
         });
-
     }
-
 
     //Desplazar-modal
 
@@ -941,19 +962,26 @@
 
         var _nombreGrupo = $.trim($("#txtGrupo").val());
         var _descGrupo = $.trim($("#txtDescGrupo").val());
+        var _numagenda = $("#txtnumagenda").val();
+        var _numcancela = $("#txtnumcancelado").val();
+        var _numatendido = $("#txtnumatendido").val();
+        var _numausente = $("#txtnumausente").val();        
 
         if(_nombreGrupo == ''){
             mensajesalertify("Ingrese Grupo..!!","W","top-right",3);
             return false;
         }
 
-
         var _parametros = {
             "xxPaisId" : _paisid,
             "xxEmprId" : _emprid,
             "xxUsuaId" : _usuaid,
             "xxGrupo" : _nombreGrupo,
-            "xxDesc" : _descGrupo
+            "xxDesc" : _descGrupo,
+            "xxNumagenda" : _numagenda,
+            "xxNumcancela" : _numcancela,
+            "xxNumatendido" : _numatendido,
+            "xxNumausente" : _numausente            
         }
 
         var xrespuesta = $.post("codephp/consultar_grupo.php", _parametros);
@@ -970,10 +998,8 @@
                         $("#txtDescGrupo").val("");
                         $("#cboGrupo").empty();
                         $("#cboGrupo").html(response);     
-                        $("#modal_new_grupo").modal("hide");
-                    
+                        $("#modal_new_grupo").modal("hide");                    
                     }
-
                 });
 
             }else  if(response.trim() == 'EXISTE'){
@@ -983,10 +1009,14 @@
                 $("#txtDescGrupo").val("");
                 
             }
-
         });
-
     }
-    
 
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }      
+    
 </script>
