@@ -139,7 +139,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Nuevo Parametro</h2>
+                <h2 class="fw-light text-primary fst-italic">Nuevo Parametro</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -192,7 +192,7 @@
                                                 <span class="required">Parametro</span>
                                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nombre del parametro"></i>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid text-uppercase" id="txtNombrePara" name="txtNombrePara" minlength="5" maxlength="100" placeholder="Ingrese Nombre del Parametro" value="" />
+                                            <input type="text" class="form-control form-control-solid" id="txtNombrePara" name="txtNombrePara" minlength="5" maxlength="100" placeholder="Ingrese Nombre del Parametro" value="" />
                                         </div>
                                     </div>
                                     <div class="row g-9 mb-7">
@@ -201,7 +201,7 @@
                                                 <span class="required">Descripcion</span>
                                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique una descripcion del parametro"></i>
                                             </label>
-                                            <textarea class="form-control form-control-solid text-uppercase" name="txtDesc" id="txtDesc" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                                            <textarea class="form-control form-control-solid" name="txtDesc" id="txtDesc" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -215,21 +215,21 @@
                                             <span class="required">Detalle</span>
                                             <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nombre del detalle"></i>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid text-uppercase" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />                       
+                                            <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />                       
                                         </div>
                                         <div class="col-md-3 fv-row">
                                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                             <span class="required">Valor Texto</span>
                                             <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorV" name="txtValorV" minlength="1" maxlength="50" placeholder="valor texto" value="" />                       
+                                            <input type="text" class="form-control form-control-solid" id="txtValorV" name="txtValorV" minlength="1" maxlength="50" placeholder="valor texto" value="" />                       
                                         </div>
                                         <div class="col-md-3 fv-row">
                                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                             <span class="required">Valor Entero</span>
                                             <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valores enteros"></i>
                                             </label>
-                                            <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" placeholder="valor entero" value="" />                       
+                                            <input type="text" class="form-control form-control-solid" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" placeholder="valor entero" value="" />                       
                                         </div>
                                         <div class="col-md-2 fv-row">
                                             <button class="btn btn-sm btn-light-primary" id="btnAgregar">
@@ -332,8 +332,8 @@
             return false;
         }
 
-        _detalle = $.trim($('#txtDetalle').val()).toUpperCase();
-        _valorV =  $.trim($('#txtValorV').val()).toUpperCase();
+        _detalle = $.trim($('#txtDetalle').val());
+        _valorV =  $.trim($('#txtValorV').val());
 
         if($.trim($('#txtValorI').val()).length == 0){
             _valorI = 0;
