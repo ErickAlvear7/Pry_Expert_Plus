@@ -106,7 +106,7 @@
                                     <span class="required">Parametro</span>
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Nombre del parametro"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtParaEdit" name="txtParaEdit" minlength="5" maxlength="100" value="<?php echo $xNomPaca; ?>" />
+                                <input type="text" class="form-control form-control-solid" id="txtParaEdit" name="txtParaEdit" minlength="5" maxlength="100" value="<?php echo $xNomPaca; ?>" />
                             </div>
                         </div>
                         <div class="row g-9 mb-7">
@@ -115,7 +115,7 @@
                                     <span class="required">Descripcion</span>
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Descripcion del parametro"></i>
                                 </label>
-                                <textarea class="form-control form-control-solid text-uppercase" name="txtDescEdit" id="txtDescEdit" maxlength="150" onkeydown="return (event.keyCode!=13);"><?php echo $xDescPaca; ?></textarea>
+                                <textarea class="form-control form-control-solid" name="txtDescEdit" id="txtDescEdit" maxlength="150" onkeydown="return (event.keyCode!=13);"><?php echo $xDescPaca; ?></textarea>
                             </div>
                         </div>
                         <div class="card-toolbar d-flex align-self-end">
@@ -132,21 +132,21 @@
                                 <span class="required">Detalle</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del detalle"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />                       
+                                <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />                       
                             </div>
                                 <div class="col-md-3 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <span class="required">Valor Texto</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorV" name="txtValorV" minlength="1" maxlength="50" placeholder="valor texto" value="" />                       
+                                <input type="text" class="form-control form-control-solid" id="txtValorV" name="txtValorV" minlength="1" maxlength="50" placeholder="valor texto" value="" />                       
                             </div>
                                 <div class="col-md-3 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <span class="required">Valor Entero</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valores enteros"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" placeholder="valor entero" value="" />                       
+                                <input type="text" class="form-control form-control-solid" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" placeholder="valor entero" value="" />                       
                             </div>
                             <div class="col-md-2 fv-row">
                                 <button class="btn btn-sm btn-light-primary" id="btnAgregar">
@@ -257,7 +257,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-700px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Editar Detalle</h2>
+                <h2 class="fw-light text-primary fst-italic">Editar Detalle</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -275,21 +275,21 @@
                                 <span class="required">Detalle</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Nombre del detalle"></i>
                             </label>
-                            <input type="text" class="form-control form-control-solid text-uppercase" id="txtDetalleEdit" name="txtDetalleEdit" placeholder="Ingrese Detalle" minlength="2" maxlength="100" />
+                            <input type="text" class="form-control form-control-solid" id="txtDetalleEdit" name="txtDetalleEdit" placeholder="Ingrese Detalle" minlength="2" maxlength="100" />
                         </div>
                         <div class="d-flex flex-column mb-7 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                 <span class="required">Valor Texto</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
                             </label>
-                            <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorVedit" name="txtValorVedit" placeholder="Ingrese Valor Texto" minlength="1" maxlength="50" />
+                            <input type="text" class="form-control form-control-solid" id="txtValorVedit" name="txtValorVedit" placeholder="Ingrese Valor Texto" minlength="1" maxlength="50" />
                         </div>
                         <div class="d-flex flex-column mb-7 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                 <span class="required">Valor Entero</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valores enteros"></i>
                             </label>
-                            <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorIedit" name="txtValorIedit" placeholder="Ingrese Valor Entero" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" />
+                            <input type="text" class="form-control form-control-solid" id="txtValorIedit" name="txtValorIedit" placeholder="Ingrese Valor Entero" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" />
                         </div>
                     </div>
                 </div>
@@ -341,8 +341,8 @@
             return false;       
         }
 
-        var _detalle = $.trim($('#txtDetalle').val()).toUpperCase();
-        var _valorV =  $.trim($('#txtValorV').val()).toUpperCase();
+        var _detalle = $.trim($('#txtDetalle').val());
+        var _valorV =  $.trim($('#txtValorV').val());
 
         _ordendet++;
 
@@ -485,12 +485,12 @@
        _paisid = '<?php echo  $xPaisid; ?>';
        var _consultar = 'NO';
 
-       var _nombre = $.trim($("#txtDetalleEdit").val()).toUpperCase();
-       var _valorV = $.trim($("#txtValorVedit").val()).toUpperCase();
+       var _nombre = $.trim($("#txtDetalleEdit").val());
+       var _valorV = $.trim($("#txtValorVedit").val());
        var _valorI = $.trim($('#txtValorI').val());
 
-       var _nombreold = $.trim($("#txtDetalleold").val()).toUpperCase();
-       var _valovold = $.trim($("#txtValortexto").val()).toUpperCase();
+       var _nombreold = $.trim($("#txtDetalleold").val());
+       var _valovold = $.trim($("#txtValortexto").val());
        var _valoriold = $.trim($("#txtValorentero").val());
 
        if($.trim($('#txtValorIedit').val()).length == 0){
@@ -653,7 +653,7 @@
         var _descripcion = $.trim($("#txtDescEdit").val());
 
         if(_parametro == ''){                        
-            mensajesalertify('Ingrese Nombre del Parametro..!', 'W', 'top-center', 5);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Parametro..!!");
             return;
         }
 
@@ -683,8 +683,7 @@
                         }
                     }); 
                 }else{
-                    //mensajesweetalert("center","warning","Nombre del Parametro ya Existe..!",false,1800);
-                    mensajesalertify('Nombre del Parametro ya Existe..!', 'W', 'top-center', 5);
+                    toastSweetAlert("top-end",3000,"warning","Parametro ya Existe..!!");
                 }
             });
         }else{

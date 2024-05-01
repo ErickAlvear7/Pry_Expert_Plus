@@ -19,9 +19,9 @@
             $xEmprid = $_POST['xxEmprid'];
             $xEstado = $_POST['xxEstado'];
 
-            if($xEstado == 'Activo'){
+            if($xEstado == 'ACTIVO'){
                 $xSql = "UPDATE `expert_parametro_cabecera` SET paca_estado='A' WHERE paca_id=$xPacaid AND pais_id=$xPaisid AND empr_id=$xEmprid ";
-            }else if($xEstado == 'Inactivo'){
+            }else if($xEstado == 'INACTIVO'){
                 $xSql = "UPDATE `expert_parametro_cabecera` SET paca_estado='I' WHERE  paca_id=$xPacaid AND pais_id=$xPaisid AND empr_id=$xEmprid ";
             }
 
