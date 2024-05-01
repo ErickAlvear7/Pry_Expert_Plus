@@ -68,7 +68,7 @@
 		    </div>                       
         </div>
 		<div class="card-body pt-0">
-			<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
+			<table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
 				<thead>
 					<tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
 					    <th style="display:none;">Id</th>
@@ -94,7 +94,7 @@
 
                        if($xPacaEstado == 'ACTIVO'){
                             $xCheking = 'checked="checked"';
-                            $xTextColor = "badge badge-light-primary";
+                            $xTextColor = "badge badge-light-success";
                         }else{
                             $xTextColor = "badge badge-light-danger";
                             $xDisabledEdit = 'disabled';
@@ -139,7 +139,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="fw-light text-primary fst-italic">Nuevo Parametro</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Parametro</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
