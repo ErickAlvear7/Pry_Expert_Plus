@@ -88,16 +88,16 @@
             </div>
         </div>
         <div class="card-body pt-0">
-            <table class="table table-hover align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
+            <table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="kt_ecommerce_products_table">
                 <thead>
-                    <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                        <th>Ciudad</th>
-                        <th>Prestador</th>
-                        <th>Sector</th>
-                        <th>Tipo Prestador</th>
-                        <th>Estado</th>
-                        <th>Status</th>
-                        <th style="text-align: center;">Opciones</th>
+                    <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                        <th class="min-w-125px">Ciudad</th>
+                        <th class="min-w-125px">Prestador</th>
+                        <th class="min-w-125px">Sector</th>
+                        <th class="min-w-125px">Tipo Prestador</th>
+                        <th class="min-w-125px">Estado</th>
+                        <th class="min-w-125px">Status</th>
+                        <th class="min-w-125px" style="text-align: center;">Opciones</th>
                     </tr>
                 </thead>
                 <tbody class="fw-bold text-gray-600">
@@ -117,11 +117,12 @@
 
                                 $chkEstado = '';
                                 $xDisabledEdit = '';
+                                $xTarget = '';
 
                                 if($xEstado == 'A'){
                                     $xEstado = 'ACTIVO';
                                     $chkEstado = 'checked="checked"';
-                                    $xTextColor = "badge badge-light-primary";
+                                    $xTextColor = "badge badge-light-success";
                                 }else{
                                     $xEstado = 'INACTIVO';
                                     $xTextColor = "badge badge-light-danger";
@@ -142,7 +143,7 @@
                                 </td>
                                 <td class="d-flex align-items-center">
                                     <a href="<?php echo $xUrl; ?>" <?php echo  $xTarget; ?> class="symbol symbol-50px">
-                                        <span class="symbol-label" style="background-image:url(logos/<?php echo $xLogo; ?>);"></span>
+                                        <span class="symbol-label"  tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUrl; ?>" style="background-image:url(logos/<?php echo $xLogo; ?>);"></span>
                                     </a>
                                     <span class="fw-bolder">&nbsp;<?php echo $xPrestador; ?></span>
                                 </td>
@@ -199,7 +200,7 @@
         let _usuaid = "<?php echo $xUsuaid; ?>";
         let _check = $("#chk" + _presid).is(":checked");
         let _checked = "";
-        let _class = "badge badge-light-primary";
+        let _class = "badge badge-light-success";
         let _td = "td_" + _presid;
         let _btnedit = "btnEditar_" + _presid;
 
