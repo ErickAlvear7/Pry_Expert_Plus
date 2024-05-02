@@ -25,6 +25,10 @@
             $xGrupo = trim(mb_strtoupper(safe($_POST['xxGrupo'])));
             $xDesc = trim(mb_strtoupper(safe($_POST['xxDesc'])));
 
+            $xNumagenda = $_POST['xxNumagenda'];
+            $xNumcancela = $_POST['xxNumcancela'];
+            $xNumatendido = $_POST['xxNumatendido'];
+            $xNumausente = $_POST['xxNumausente'];
 
             $xSQL = "INSERT INTO `expert_grupos`(pais_id,empr_id,grup_nombre,grup_descripcion,usuariocreacion,terminalcreacion,fechacreacion) ";
             $xSQL .= "VALUES($xPaisid,$xEmprid,'$xGrupo','$xDesc',$xUsuaid,'$xTerminal','{$xFecha}') ";

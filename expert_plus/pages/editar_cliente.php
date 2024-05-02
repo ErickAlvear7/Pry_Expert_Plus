@@ -510,7 +510,27 @@
                         <span>Descripcion</span>
                     </label>
                     <textarea class="form-control mb-2 text-uppercase" name="txtDescGrupo" id="txtDescGrupo" rows="1" maxlength="150" onkeydown="return(event.keyCode!=13);"></textarea>
-                </div>                         
+                </div>
+                <div class="row mb-7">
+                    <div class="col-md-6">
+                        <label class="form-label">Secuencial Agenda</label>
+                        <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Secuencial Cancelado</label>
+                        <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control mb-2" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
+                    </div>
+                </div>
+                <div class="row mb-7">
+                    <div class="col-md-6">
+                        <label class="form-label">Secuencial Atendido</label>
+                        <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Secuencial Ausente</label>
+                        <input type="number" name="txtnumausente" id="txtnumausente" class="form-control mb-2" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
+                    </div>
+                </div>                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -649,11 +669,11 @@
                         <div class="row mb-7">
                             <div class="col-md-6">
                                 <label class="form-label">Asistencia Mes</label>
-                                <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control mb-2" value="1" />  
+                                <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />  
                             </div>
                            <div class="col-md-6">
                                 <label class="form-label">Asistencia Anual</label>
-                                <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" value="1" />   
+                                <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
                            </div>
                         </div>
                         <div class="row border border-hover-primary py-lg-4 px-lg-10">
@@ -782,6 +802,31 @@
         if (v < 1) this.value = 1;
         if (v > 3) this.value = 3;
     });
+
+    document.getElementById("txtnumagenda").addEventListener("change", function() {
+        let v = parseInt(this.value);
+        if (v < 1) this.value = 1;
+        if (v > 99999) this.value = 1;
+    });
+    
+    document.getElementById("txtnumcancelado").addEventListener("change", function() {
+        let v = parseInt(this.value);
+        if (v < 1) this.value = 1;
+        if (v > 99999) this.value = 1;
+    }); 
+    
+    document.getElementById("txtnumatendido").addEventListener("change", function() {
+        let v = parseInt(this.value);
+        if (v < 1) this.value = 1;
+        if (v > 99999) this.value = 1;
+    }); 
+    
+    document.getElementById("txtnumausente").addEventListener("change", function() {
+        let v = parseInt(this.value);
+        if (v < 1) this.value = 1;
+        if (v > 99999) this.value = 1;
+    });     
+
 
     //check agragar producto
 
@@ -947,6 +992,10 @@
 
         var _nombreGrupo = $.trim($("#txtGrupo").val());
         var _descGrupo = $.trim($("#txtDescGrupo").val());
+        var _numagenda = $("#txtnumagenda").val();
+        var _numcancela = $("#txtnumcancelado").val();
+        var _numatendido = $("#txtnumatendido").val();
+        var _numausente = $("#txtnumausente").val();
 
         if(_nombreGrupo == ''){
             mensajesalertify("Ingrese Grupo..!!","W","top-right",3);
@@ -959,7 +1008,11 @@
             "xxEmprId" : _emprid,
             "xxUsuaId" : _usuaid,
             "xxGrupo" : _nombreGrupo,
-            "xxDesc" : _descGrupo
+            "xxDesc" : _descGrupo,
+            "xxNumagenda" : _numagenda,
+            "xxNumcancela" : _numcancela,
+            "xxNumatendido" : _numatendido,
+            "xxNumausente" : _numausente
         }
 
         var xrespuesta = $.post("codephp/consultar_grupo.php", _parametros);
@@ -986,14 +1039,10 @@
 
             }else  if(response.trim() == 'EXISTE'){
                 mensajesalertify('Grupo ya Existe', 'W', 'top-right', 3);
-
                 $("#txtGrupo").val("");
                 $("#txtDescGrupo").val("");
-                
             }
-
         });
-
     }
 
     //Update estado Producto
@@ -1111,7 +1160,6 @@
 
     });
 
-
     //Check editar producto-modal
 
     $(document).on("click","#chkCoberturaEdit",function(){
@@ -1123,7 +1171,6 @@
         }else{
             _coberedit = "NO";
             $(".txtcob").html("Cobertura NO");
-
         }   
     });
 
@@ -1132,17 +1179,13 @@
         if($("#chkSistemaEdit").is(":checked")){
             _sistedit = "SI";
             $(".txtsis").html("Sistema SI");
-
-                
         }else{
             _sistedit = "NO";
             $(".txtsis").html("Sistema NO");
-
         }    
     });
 
     $(document).on("click","#chkGerencialEdit",function(){
-
 
         if($("#chkGerencialEdit").is(":checked")){
             _gerenciedit = "SI";
@@ -1200,8 +1243,7 @@
             "xxAsisAnuedit" : _asisanuedit,
             "xxCobertura" : _cobedit,
             "xxSistema" : _sistedit,
-            "xxGerencial" : _gerenedit
-        
+            "xxGerencial" : _gerenedit        
         }
 
         var xrespuesta = $.post("codephp/grabar_editarproducto.php", _parametros);
@@ -1354,15 +1396,12 @@
             return;
         }
 
-
             //Log Pie
       
-
         var _logopie = document.getElementById("imgfilePie").style.backgroundImage;
         var _urlpie = _logopie.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
         _extpie = _urlpie.substring(_urlpie.length - 4);
      
-
         if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != 'jpeg'){
              _selecpie = 'SI';
         }  
@@ -1379,7 +1418,6 @@
             mensajesalertify("El archivo seleccionado en pie no es una Imagen..!", "W", "top-right", 3);
             return;
         }
-
 
         var form_data = new FormData();
         form_data.append('xxClieid', _idclie);            
@@ -1435,6 +1473,13 @@
 		});
     
    }
+
+   function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }   
 
 
 </script>
