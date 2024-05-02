@@ -125,17 +125,17 @@
 			</div>
 		</div>
 		<div class="card-body py-4">
-			<table class="table align-middle table-row-dashed fs-6 gy-5 table-hover" id="kt_table_users" style="width: 100%;">
+			<table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="kt_table_users" style="width: 100%;">
 				<thead>
 					<tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0"">
 						<th style="display:none;">Id</th>
 						<th style="display:none;">Login</th>
-						<th>Usuario</th>
-						<th>Pais</th>
-						<th>Perfil</th>
-						<th>Estado</th>
-						<th>Status</th>                                
-						<th style="text-align: center;">Opciones</th>
+						<th class="min-w-125px">Usuario</th>
+						<th class="min-w-125px">Pais</th>
+						<th class="min-w-125px">Perfil</th>
+						<th class="min-w-125px">Estado</th>
+						<th class="min-w-125px">Status</th>                                
+						<th class="min-w-125px" style="text-align: center;">Opciones</th>
 					</tr>
 				</thead>
 
@@ -163,7 +163,7 @@
 
 								if($estado == 'ACTIVO'){
 									$cheking = 'checked="checked"';
-									$xTextColor = "badge badge-light-primary";
+									$xTextColor = "badge badge-light-success";
 								}else{
 									$xTextColor = "badge badge-light-danger";
 									$xDisabledEdit = 'disabled';
@@ -227,7 +227,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable  mw-900px">
         <div class="modal-content"> 
             <div class="modal-header">
-                <h2 id="titulo" class="fw-light text-primary fst-italic"></h2>
+                <h2 id="titulo" class="badge badge-light-primary fw-light fs-2 fst-italic"></h2>
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -802,7 +802,7 @@
 		let _check = $("#chk" + _userid).is(":checked");
 		let _checked = "";
 		let _disabled = "";
-		let _class = "badge badge-light-primary";
+		let _class = "badge badge-light-success";
 		let _td = "td_" + _userid;
 		let _btnreset = "btnReset_" + _userid;
 		let _btnedit = "btnEditar_" + _userid;
@@ -851,7 +851,7 @@
 
 		$.post("codephp/reset_password.php", _parametros, function(response){
 			if(response.trim() == 'OK'){
-				toastSweetAlert("top-end",3000,"success","Password actualizado con exito..!");
+				toastSweetAlert("top-end",3000,"success","Password Actualizado");
 			}     
 		}); 			
 	}

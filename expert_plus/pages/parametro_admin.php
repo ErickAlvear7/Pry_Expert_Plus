@@ -245,9 +245,9 @@
                                     </div>
                                     <br/>
                                     <hr class="bg-primary border-2 border-top border-primary">
-                                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="tblDetalle" style="width: 100%;">
+                                    <table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="tblDetalle" style="width: 100%;">
                                         <thead>
-                                            <tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
+                                            <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                                 <th style="display:none;">Id</th>
                                                 <th class="min-w-125px">Detalle</th>
                                                 <th class="min-w-125px">Valor Texto</th>
@@ -566,7 +566,7 @@
         let _check = $("#chk" + _pacaid).is(":checked");
         let _checked = "";
 		let _disabled = "";
-        let _class = "badge badge-light-primary";
+        let _class = "badge badge-light-success";
         let _td = "td_" + _pacaid;
         let _btnedit = "btnEditar_" + _pacaid;
 

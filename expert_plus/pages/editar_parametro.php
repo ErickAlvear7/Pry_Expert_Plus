@@ -161,6 +161,8 @@
                             </div>
                         </div>
                         <br/>
+                        <hr class="bg-primary border-2 border-top border-primary">
+                        <br/>
                         <div class="d-flex align-items-center position-relative my-1">
                             <span class="svg-icon svg-icon-1 position-absolute ms-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -170,18 +172,17 @@
                             </span>
                             <input type="text" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Dato" />
                         </div>
-                        <hr class="bg-primary border-2 border-top border-primary">
                         <div class="mh-375px scroll-y me-n7 pe-7">
-                            <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
+                            <table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
                                 <thead>
                                     <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                         <th style="display:none;">Id</th>
-                                        <th>Detalle</th>
-                                        <th>Valor Texto</th>
-                                        <th>Valor entero</th>
-                                        <th>Estado</th>
-                                        <th>Status</th>
-                                        <th style="text-align: center;">Opciones</th>
+                                        <th class="min-w-125px">Detalle</th>
+                                        <th class="min-w-125px">Valor Texto</th>
+                                        <th class="min-w-125px">Valor entero</th>
+                                        <th class="min-w-125px">Estado</th>
+                                        <th class="min-w-125px">Status</th>
+                                        <th class="min-w-125px" style="text-align: center;">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody class="fw-bold text-gray-600">
@@ -200,7 +201,7 @@
 
                                         if($xPadeEstado == 'A'){
                                             $xEstado = 'ACTIVO';
-                                            $xTextColor = "badge badge-light-primary";
+                                            $xTextColor = "badge badge-light-success";
                                             $xCheking = 'checked="checked"';
                                         
                                         }else{
@@ -257,7 +258,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-700px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="fw-light text-primary fst-italic">Editar Detalle</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Detalle</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -268,7 +269,7 @@
                 </div>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
-                <div class="card card-flush py-4">
+                <div class="card card-flush py-2">
                     <div class="card-body pt-0">
                         <div class="d-flex flex-column mb-7 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
@@ -284,7 +285,7 @@
                             </label>
                             <input type="text" class="form-control form-control-solid" id="txtValorVedit" name="txtValorVedit" placeholder="Ingrese Valor Texto" minlength="1" maxlength="50" />
                         </div>
-                        <div class="d-flex flex-column mb-7 fv-row">
+                        <div class="d-flex flex-column mb-2 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                 <span class="required">Valor Entero</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valores enteros"></i>
@@ -347,7 +348,7 @@
         _ordendet++;
 
         if($.trim($('#txtValorI').val()).length == 0){
-            var _valorI = 0;
+            var _valorI = '';
         }else{
             _valorI = $.trim($('#txtValorI').val());
         }
@@ -383,7 +384,9 @@
                             _padenom = _detalle;
                             _padev = _valorV;
                             _padei = _valorI;
-                            _padees = 'ACTIVO';
+                            _estado = 'ACTIVO';
+                            _class = "badge badge-light-success";
+                            _status = '<div class="' + _class + '">' + _estado + ' </div>';
                             _checked = "checked='checked'";
 
                             var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
@@ -398,12 +401,13 @@
                             TableData = $('#kt_ecommerce_report_shipping_table').DataTable();  
                             TableData.column(0).visible(0);
 
-                            TableData.row.add([_padeid, _padenom, _padev, _padei, _estado,_btnChk,_btnGrup]).draw();
+                            TableData.row.add([_padeid, _padenom, _padev, _padei, _status,_btnChk,_btnGrup]).draw();
 
                             $("#txtDetalle").val("");
                             $("#txtValorV").val("");
                             $("#txtValorI").val("");
 
+                            toastSweetAlert("top-end",3000,"success","Detalle Agregado");
                             $.redirect('?page=editparametro&menuid=<?php echo $menuid; ?>', {idparam: <?php echo $idpaca; ?>}); //POR METODO POST
 
                         }                                                                         
@@ -572,7 +576,7 @@
                             _padev = _valorV;
                             _padei = _valorI;
                             _estado = 'ACTIVO';
-                            _class = "badge badge-light-primary";
+                            _class = "badge badge-light-success";
                             _status = '<div class="' + _class + '">' + _estado + ' </div>';
 
 
@@ -713,7 +717,7 @@
         let _checked = "";
         let _disabled = "";
         let _td = "td_" + _padeid;
-        let _class = "badge badge-light-primary";
+        let _class = "badge badge-light-success";
         let _btnedit = "btnEditar_" + _padeid;
 
         if(_check){
