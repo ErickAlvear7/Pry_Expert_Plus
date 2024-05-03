@@ -145,7 +145,7 @@
                                     <a href="<?php echo $xUrl; ?>" <?php echo  $xTarget; ?> class="symbol symbol-50px">
                                         <span class="symbol-label"  tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUrl; ?>" style="background-image:url(logos/<?php echo $xLogo; ?>);"></span>
                                     </a>
-                                    <span class="fw-bolder">&nbsp;<?php echo $xPrestador; ?></span>
+                                    <span class="fw-bolder">&nbsp;&nbsp;<?php echo $xPrestador; ?></span>
                                 </td>
                                 <td>
                                   <span class="fw-bolder"><?php echo $xSector; ?></span>
@@ -191,7 +191,7 @@
         _mensaje = $('input#mensaje').val();
 
         if(_mensaje != ''){					
-            mensajesalertify(_mensaje, "S", "top-center", 3);
+            toastSweetAlert("top-end",3000,"success",_mensaje);
         }
     });	
 

@@ -434,7 +434,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
                 <button type="button" id="btnSaveNew" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
             </div>
         </div>
@@ -570,7 +570,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
                 <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agregar</button>
             </div>
         </div>
@@ -594,9 +594,9 @@
             $("#cboCiudad").empty();
 
             var _parametros = {
-                xxPaisId: _paisid,
-                xxEmprId: _emprid,
-                xxComboId: _cboid,
+                xxPaisid: _paisid,
+                xxEmprid: _emprid,
+                xxComboid: _cboid,
                 xxOpcion: 0
             }
 
@@ -742,7 +742,7 @@
                     }
                 }else{
                     $('#chkEnviar1').prop('checked','');
-                    mensajesalertify("Email no es Valido", "W", "top-center", 3);
+                    toastSweetAlert("top-end",3000,"error","Email Invalido..!!");
                     _enviar1 = 'SI';
                     return;
                 }
@@ -770,7 +770,7 @@
                     }                            
                 }else{
                     $('#chkEnviar2').prop('checked','');
-                    mensajesalertify("Email no es Valido", "W", "top-center", 3);
+                    toastSweetAlert("top-end",3000,"error","Email Invalido..!!");
                     _enviar2 = 'NO';
                     return;
                 }
@@ -813,7 +813,7 @@
             $.each(_result,function(i,item){
                 if(item.arryid.toUpperCase() == _cboespe.toUpperCase())
                 {                  
-                    toastSweetAlert("top-end",3000,"warning","Especialidad ya agregada..!!");   
+                    toastSweetAlert("top-end",3000,"warning","Especialidad ya Existe..!!");   
                     $("#cboEspecialidad").val(0).change();
                     $("#txtPvp").val('0.00');
                     $("#txtCosto").val('0.00');                            
@@ -950,7 +950,7 @@
            {
                _valor = document.getElementById("txtCelular3").value;
                if( !(/^\d{10}$/.test(_valor)) ) {
-                   toastSweetAlert("top-end",3000,"error","Celular 3 incorrecto..!!");
+                   toastSweetAlert("top-end",3000,"error","Celular 3 Incorrecto..!!");
                    return;
                }
            }                    
@@ -960,7 +960,7 @@
            
                if (regex.test($('#txtEmail1').val().trim())) {
                }else{
-                   toastSweetAlert("top-end",3000,"error","Email 1 no es Valido..!!");
+                   toastSweetAlert("top-end",3000,"error","Email 1 Incorrecto..!!");
                    return;
                }
            }
@@ -970,7 +970,7 @@
            
                if (regex.test($('#txtEmail2').val().trim())) {
                }else{
-                   toastSweetAlert("top-end",3000,"error","Email2 no es Valido..!!");
+                   toastSweetAlert("top-end",3000,"error","Email 2 Incorrecto..!!");
                    return;
                }
            }
@@ -993,7 +993,7 @@
                 _ext = _ext.toLowerCase();   
 
                 if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
-                    toastSweetAlert("top-end",3000,"error","Archivo seleccionado no es una Imagen..!!");
+                    toastSweetAlert("top-end",3000,"error","Archivo no es una Imagen..!!");
                     return;
                 }
             }
@@ -1073,7 +1073,7 @@
                     });   
 
                 }else{
-                    mensajesweetalert("center", "warning", "Prestador ya Existe..!", false, 1800);
+                    toastSweetAlert("top-end",3000,"warning","Prestador ya Existe..!!");
                 }
             });                    
        });                
