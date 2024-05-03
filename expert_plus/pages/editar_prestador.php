@@ -618,7 +618,7 @@
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-4">
-                    <div card-body pt-0">
+                    <div class="card-body pt-0">
                         <div class="row mb-4">
                             <div class="col-md-12">
                                 <label class="required form-label">Especialidad</label>
