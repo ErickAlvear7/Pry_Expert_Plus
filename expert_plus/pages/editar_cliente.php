@@ -145,15 +145,9 @@
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <button type="button" id="btnNewGrupo" class="btn btn-light-primary btn-sm mb-10">
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                            </svg>
-                        </span>                                                                
-                        Nuevo Grupo
-                    </button>                                                      
+                    <button type="button" id="btnNewGrupo" class="btn btn-light-primary btn-sm mb-10"><i class="las la-plus-circle"></i>Nuevo Grupo</button>
+                    <button type="button" id="btnEditGrupo" class="btn btn-light-primary btn-sm mb-10"><i class="fa fa-envelope-open-text text-primary mr-5"></i>Editar Grupo</button>
+
                 </div>
             </div>
         </div>
@@ -482,6 +476,7 @@
         </div>
     </form>
 </div>
+
 <!--MODAL NUEVO GRUPO-->
 <div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -533,12 +528,107 @@
                 </div>                
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">Grabar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-primary" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" ><i class="las la-save"></i>Grabar</button>
             </div>
         </div>
     </div>
 </div>
+
+<!--MODAL EDITAR GRUPOS-->
+<div class="modal fade" id="modal_edit_grupo" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Editar Grupo</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body scroll-y mx-2 mx-xl-2 my-2">                
+                <div class="card-body pt-0">
+                    <table id="tblGrupo" class="table table-hover align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
+                        <thead>
+                            <tr class="text-start text-gray-400 fw-bolder fs-7 gs-0">
+                                <th>Grupo</th>
+                                <th>Secuencial Agenda</th>
+                                <th>Secuencial Cancela</th>
+                                <th>Estado</th>
+                                <th>Status</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="fw-bold text-gray-600">
+                            <?php 
+                                $xSQL = "SELECT * FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid  ";
+                                $all_grupos = mysqli_query($con, $xSQL);
+                                foreach($all_grupos as $grupo){
+                                    $xId = $grupo['grup_id'];
+                                    $xGrupo = $grupo['grup_nombre'];
+                                    $xEstado = trim($grupo['grup_estado']);
+                                    $xSecAgenda = $grupo['secuencial_agendado'];
+                                    $xSecCancela = $grupo['secuencial_cancelado'];
+
+                                    $xChkEstado = '';
+                                    $xDisabledEdit = '';
+    
+                                    if($xEstado == 'A'){
+                                            $xEstado = 'ACTIVO';
+                                        $xChkEstado = 'checked="checked"';
+                                        $xTextColor = "badge badge-light-primary";
+                                    }else{
+                                        $xEstado = 'INACTIVO';
+                                        $xTextColor = "badge badge-light-danger";
+                                        $xDisabledEdit = 'disabled';
+                                    }  
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $xGrupo; ?></td>
+                                        <td><?php echo $xSecAgenda; ?></td>
+                                        <td><?php echo $xSecCancela; ?></td>
+                                        <td id="td_<?php echo $xId; ?>">
+                                            <div class="<?php echo $xTextColor; ?>">
+                                                <?php echo $xEstado; ?>
+                                            </div>
+                                        </td>
+                                        
+                                        <td class="text-end">
+                                            <div class="text-center">
+                                                <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                    <input class="form-check-input h-20px w-20px border-primary" <?php echo $xChkEstado; ?> type="checkbox" id="chk<?php echo $xId; ?>" 
+                                                    onchange="f_UpdateEstGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>)" value="<?php echo $xId; ?>"/>
+                                                </div>
+                                            </div>
+                                        </td>
+                            
+                                        <td class="text-end">
+                                            <div class="text-center">
+                                                <div class="btn-group">
+                                                    <button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Grupo' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarGrupo(<?php echo $xId; ?>)">
+                                                    <i class='fa fa-edit'></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                        </tbody>
+                    </table>
+                </div>                
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>                
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--MODAL AGREGAR PRODUCTO-->
 <div class="modal fade" id="modal_addproducto" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
@@ -612,7 +702,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
                 <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agregar</button>
             </div>
         </div>   
@@ -744,6 +834,11 @@
 
             $("#modal_new_grupo").modal("show");
         });
+
+        $("#btnEditGrupo").click(function(){
+
+            $("#modal_edit_grupo").modal("show");
+        });        
 
         //Cambiar valor provincia
 
@@ -981,6 +1076,10 @@
         handle: ".modal-header"
     });
 
+    $("#modal_edit_grupo").draggable({
+        handle: ".modal-header"
+    });    
+
     $("#modal_addproducto").draggable({
         handle: ".modal-header"
     });
@@ -990,6 +1089,7 @@
     
     function f_GuardarGrupo(_paisid,_emprid,_usuaid){
 
+        debugger;
         var _nombreGrupo = $.trim($("#txtGrupo").val());
         var _descGrupo = $.trim($("#txtDescGrupo").val());
         var _numagenda = $("#txtnumagenda").val();

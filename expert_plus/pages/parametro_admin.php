@@ -264,7 +264,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="closemodal" class="btn btn-sm btn-light" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="closemodal" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
                 <button type="button" id="btnGuardar" class="btn btn-sm btn-light-primary" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-save"></i>Grabar</button>
             </div>
         </div>
