@@ -351,19 +351,19 @@
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <h2>Especialidades Asignadas</h2>
+                                    <h3 class="fw-bolder">Especialidades Asignadas</h2>
                                 </div>
                             </div>
                             <div class="card-body pt-0">
                                 <div class="d-flex flex-column gap-10">
-                                    <table id="tblEspecialidad" class="table align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
+                                    <table id="tblEspecialidad" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
                                         <thead>
                                             <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                                 <th style="display: none;">Id</th>
-                                                <th>Especialidad</th>
-                                                <th>Pvp</th>
-                                                <th>Costo</th>
-                                                <th>Opciones</th>
+                                                <th class="min-w-125px">Especialidad</th>
+                                                <th class="min-w-125px">Pvp</th>
+                                                <th class="min-w-125px">Costo</th>
+                                                <th class="min-w-125px">Opciones</th>
                                             </tr>
                                         </thead>
                                         <tbody class="fw-bold text-gray-600">
@@ -376,16 +376,17 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button type="button" id="btnSave" class="btn btn-primary"><i class="las la-save"></i>Grabar</button>
+                <button type="button" id="btnSave" class="btn btn-lg btn-light-primary"><i class="las la-save"></i>Grabar</button>
             </div>
         </div>
     </form>
 </div>
+<!--Modal Nueva Especialidad -->
 <div class="modal fade" id="modal-new-especialidad" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Nueva Especialidad</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nueva Especialidad</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -395,62 +396,50 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <form id="kt_modal_new_card_form" class="form">
-                    <div class="row mb-10">
-                        <div class="col-md-12 fv-row">
-                            <label class="required fs-6 fw-bold form-label mb-2">Tipo Especialidad</label>
-                            <div class="row fv-row">
-                                <div class="col-12">
-                                    <select name="cboTipoEspe" id="cboTipoEspe" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo" data-dropdown-parent="#kt_modal_new_card_form" class="form-select mb-2">
-                                        <option</option>
-                                        <?php 
-                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid ";
-                                        $xSQL .= "AND pca.paca_nombre='Tipo Especialidad' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                        $all_datos =  mysqli_query($con, $xSQL);
-                                        foreach ($all_datos as $datos){ ?>
-                                            <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['Descripcion']) ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-2">
+                    <div class="card-body pt-0" id="kt_modal_new_card_form">
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                 <label class="required form-label">Nombres</label>
+                                 <input type="text" class="form-control mb-2" maxlength="250" placeholder="Nombre Especialidad" name="txtEspecialidad" id="txtEspecialidad" />
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <label class="required form-label">Tipo Especialidad</label>
+                                <select name="cboTipoEspe" id="cboTipoEspe" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo" data-dropdown-parent="#kt_modal_new_card_form" class="form-select mb-2">
+                                    <option</option>
+                                    <?php 
+                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid ";
+                                    $xSQL .= "AND pca.paca_nombre='Tipo Especialidad' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                    $all_datos =  mysqli_query($con, $xSQL);
+                                    foreach ($all_datos as $datos){ ?>
+                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['Descripcion']) ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="required form-label">Precio (PVP)</label>
+                                <input type="number" name="txtPvpNew" id="txtPvpNew" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-label">Descripcion</label>
+                                <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex flex-column mb-7 fv-row">
-                        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                            <span class="required">Especialidad</span>
-                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre de la especialidad"></i>
-                        </label>
-                        <input type="text" class="form-control mb-2 text-uppercase" maxlength="250" placeholder="Nombre Especialidad" name="txtEspecialidad" id="txtEspecialidad" />
-                    </div>
-
-                    <div class="fv-row mb-15">
-                        <label class="fs-6 fw-bold form-label mb-2">
-                            <span>Descripcion</span>
-                        </label>
-                        <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
-                    </div>  
-                    
-                    <div class="d-flex flex-column mb-7 fv-row">
-                        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                            <span>Precio (PVP)</span>
-                        </label>
-                        <input type="number" name="txtPvpNew" id="txtPvpNew" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                    </div>                            
-
-                    <div class="text-center pt-15">
-                        <button type="reset" data-bs-dismiss="modal" class="btn btn-secondary">Cerrar</button>
-                        <button type="button" id="btnSaveNew" class="btn btn-primary">
-                            <span class="indicator-label">Grabar</span>
-                            <span class="indicator-progress">Espere un momento...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                    </div>
-                </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnSaveNew" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
             </div>
         </div>
     </div>
-</div>
+</div>  
 <div class="modal fade" id="modal-new-tipoprestador" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
@@ -540,7 +529,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Datos Especialidad</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Datos Especialidad</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -551,7 +540,7 @@
                 </div>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
-                <div class="card card-flush py-4">
+                <div class="card card-flush py-2">
                     <div class="card-body pt-0">
                         <div class="mb-10 fv-row">
                             <label class="required form-label">Especialidad</label>
@@ -565,7 +554,7 @@
                                 <?php } ?>                                                        
                             </select>                                             
                         </div>
-                        <div class="mb-10 fv-row">
+                        <div class="mb-2 fv-row">
                             <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                 <div class="col">
                                     <label class="form-label">Pvp</label>
@@ -581,7 +570,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
                 <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agregar</button>
             </div>
         </div>
@@ -605,9 +594,9 @@
             $("#cboCiudad").empty();
 
             var _parametros = {
-                xxPaisId: _paisid,
-                xxEmprId: _emprid,
-                xxComboId: _cboid,
+                xxPaisid: _paisid,
+                xxEmprid: _emprid,
+                xxComboid: _cboid,
                 xxOpcion: 0
             }
 
@@ -660,12 +649,12 @@
             var _pvpnew = $("#txtPvpNew").val();
 
             if(_cbotipoespe == '0'){
-                mensajesalertify('Seleccion Tipo Especialidad', 'W', 'top-center', 3);
+                toastSweetAlert("top-end",3000,"warning","Seleccion Tipo Especialidad..!!");
                 return;
             }
 
             if(_especialidad == ''){
-                mensajesalertify('Ingrese Especialidad', 'W', 'top-center', 3);
+                toastSweetAlert("top-end",3000,"warning","Ingrese Especialidad..!!");
                 return;
             }
 
@@ -685,10 +674,10 @@
             var xrespuesta = $.post("codephp/grabar_especialidad.php", _parametros);
             xrespuesta.done(function(response){
                 if(response.trim() == 'EXISTE'){
-                    mensajesalertify('Especialidad ya Existe', 'W', 'top-center', 3);
+                    toastSweetAlert("top-end",3000,"warning","Especialidad ya Existe..!!");
                 }else{
                     if(response.trim() != 'ERR'){
-                        mensajesalertify('Especialidad Agregada', 'S', 'top-center', 3);
+                        toastSweetAlert("top-end",3000,"success","Especialidad Agregada");
                         $("#cboEspecialidad").empty();
                         $("#cboEspecialidad").html(response);
                         $("#modal-new-especialidad").modal("hide");
@@ -703,12 +692,12 @@
             var _valorv = $.trim($("#txtValor").val());
 
             if(_tipoprestador == ''){
-                mensajesalertify('Ingrese Tipo Prestador', 'W', 'top-center', 3);
+                toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Prestador..!!");
                 return;
             }
 
             if(_valorv == ''){
-                mensajesalertify('Ingrese Valor', 'W', 'top-center', 3);
+                toastSweetAlert("top-end",3000,"warning","Ingrese Valor..!!");
                 return;
             }
 
@@ -723,10 +712,10 @@
             var xrespuesta = $.post("codephp/grabar_tipoprestador.php", _parametros);
             xrespuesta.done(function(response){
                 if(response.trim() == 'EXISTE'){
-                    mensajesalertify('Tipo Prestador/Valor ya Existe', 'W', 'top-center', 3);
+                    toastSweetAlert("top-end",3000,"warning","Tipo Prestador/Valor ya Existe..!!");
                 }else{
                     if(response.trim() != 'ERR'){
-                        mensajesalertify('Tipo Prestador Agregado', 'S', 'top-center', 3);
+                        toastSweetAlert("top-end",3000,"warning","Tipo Prestador Agregado");
                         $("#cboTipo").empty();
                         $("#cboTipo").html(response);
                         $("#modal-new-tipoprestador").modal("hide");
@@ -753,7 +742,7 @@
                     }
                 }else{
                     $('#chkEnviar1').prop('checked','');
-                    mensajesalertify("Email no es Valido", "W", "top-center", 3);
+                    toastSweetAlert("top-end",3000,"error","Email Invalido..!!");
                     _enviar1 = 'SI';
                     return;
                 }
@@ -781,7 +770,7 @@
                     }                            
                 }else{
                     $('#chkEnviar2').prop('checked','');
-                    mensajesalertify("Email no es Valido", "W", "top-center", 3);
+                    toastSweetAlert("top-end",3000,"error","Email Invalido..!!");
                     _enviar2 = 'NO';
                     return;
                 }
@@ -824,7 +813,7 @@
             $.each(_result,function(i,item){
                 if(item.arryid.toUpperCase() == _cboespe.toUpperCase())
                 {                  
-                    toastSweetAlert("top-end",3000,"warning","Especialidad ya esta agregada..!!");   
+                    toastSweetAlert("top-end",3000,"warning","Especialidad ya Existe..!!");   
                     $("#cboEspecialidad").val(0).change();
                     $("#txtPvp").val('0.00');
                     $("#txtCosto").val('0.00');                            
@@ -910,22 +899,22 @@
            }
 
            if(_ciudid == ''){
-               mensajesalertify("Seleccione Ciudad..!", "W", "top-center", 3);
+               toastSweetAlert("top-end",3000,"warning","Seleccione Ciudad..!!");
                return; 
            }
 
            if(_prestador == ''){
-               mensajesalertify("Ingrese Nombre del Prestador..!", "W", "top-center", 3);
+               toastSweetAlert("top-end",3000,"warning","Ingrese Prestador..!!");
                return;                         
            }
 
            if(_sector == ''){
-               mensajesalertify("Seleccione Sector..!", "W", "top-center", 3);
+               toastSweetAlert("top-end",3000,"warning","Seleccione Sector..!!");
                return; 
            }
            
            if(_tipopresta == ''){
-               mensajesalertify("Seleccione Tipo Prestador..!", "W", "top-center", 3);
+               toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Prestador..!!");
                return; 
            }                       
            
@@ -933,7 +922,7 @@
                try{
                    new URL(_url);
                }catch(err){
-                   mensajesalertify("Direccion URL Incorrecta..!", "W", "top-center", 3);
+                   toastSweetAlert("top-end",3000,"error","Direccion URL Incorrecta...!!");
                    return false;
                }
            }
@@ -943,7 +932,7 @@
            {
                _valor = document.getElementById("txtCelular1").value;
                if( !(/^\d{10}$/.test(_valor)) ) {
-                   mensajesalertify("Celular1 incorrecto..!" ,"W", "top-center", 3); 
+                   toastSweetAlert("top-end",3000,"error","Celular 1 incorrecto..!!");
                    return;
                }
            }                     
@@ -952,7 +941,7 @@
            {
                _valor = document.getElementById("txtCelular2").value;
                if( !(/^\d{10}$/.test(_valor)) ) {
-                   mensajesalertify("Celular1 incorrecto..!" ,"W", "top-center", 3); 
+                   toastSweetAlert("top-end",3000,"error","Celular 2 incorrecto..!!"); 
                    return;
                }
            }
@@ -961,7 +950,7 @@
            {
                _valor = document.getElementById("txtCelular3").value;
                if( !(/^\d{10}$/.test(_valor)) ) {
-                   mensajesalertify("Celular1 incorrecto..!" ,"W", "top-center", 3); 
+                   toastSweetAlert("top-end",3000,"error","Celular 3 Incorrecto..!!");
                    return;
                }
            }                    
@@ -971,7 +960,7 @@
            
                if (regex.test($('#txtEmail1').val().trim())) {
                }else{
-                   mensajesalertify("Email1 no es Valido", "W", "top-center", 3);
+                   toastSweetAlert("top-end",3000,"error","Email 1 Incorrecto..!!");
                    return;
                }
            }
@@ -981,13 +970,13 @@
            
                if (regex.test($('#txtEmail2').val().trim())) {
                }else{
-                   mensajesalertify("Email2 no es Valido", "W", "top-center", 3);
+                   toastSweetAlert("top-end",3000,"error","Email 2 Incorrecto..!!");
                    return;
                }
            }
 
            if(_result.length == 0){
-                mensajesalertify("Agregue la menos una Especialidad", "W", "top-right", 3);
+                toastSweetAlert("top-end",3000,"warning","Agregue una Especialidad..!!");
                 return;
            }
            
@@ -1004,7 +993,7 @@
                 _ext = _ext.toLowerCase();   
 
                 if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
-                    mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-center", 3);
+                    toastSweetAlert("top-end",3000,"error","Archivo no es una Imagen..!!");
                     return;
                 }
             }
@@ -1084,7 +1073,7 @@
                     });   
 
                 }else{
-                    mensajesweetalert("center", "warning", "Prestador ya Existe..!", false, 1800);
+                    toastSweetAlert("top-end",3000,"warning","Prestador ya Existe..!!");
                 }
             });                    
        });                
