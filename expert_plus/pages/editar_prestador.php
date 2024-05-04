@@ -425,16 +425,16 @@
                             <div class="card-body pt-0" id="kt_contacts_list_body">
                                 <div class="d-flex flex-column gap-10">
                                     <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
-                                        <table id="tblEspecialidad" class="table align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
+                                        <table id="tblEspecialidad" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
                                             <thead>
-                                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                                     <th style="display: none;">Id</th>
-                                                    <th>Especialidad</th>
-                                                    <th>Pvp</th>
-                                                    <th>Costo</th>
-                                                    <th>Estado</th>
-                                                    <th>Status</th>
-                                                    <th>Opciones</th>
+                                                    <th class="">Especialidad</th>
+                                                    <th class="">Pvp</th>
+                                                    <th class="">Costo</th>
+                                                    <th class="">Estado</th>
+                                                    <th class="">Status</th>
+                                                    <th class="">Opciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="fw-bold text-gray-600">
@@ -456,11 +456,11 @@
                                                             $xDisabledPerson = '';
                         
                                                             if($xEstado == 'A'){
-                                                                $xEstado = 'Activo';
+                                                                $xEstado = 'ACTIVO';
                                                                 $chkEstado = 'checked="checked"';
-                                                                $xTextColor = "badge badge-light-primary";
+                                                                $xTextColor = "badge badge-light-success";
                                                             }else{
-                                                                $xEstado = 'Inactivo';
+                                                                $xEstado = 'INACTIVO';
                                                                 $xTextColor = "badge badge-light-danger";
                                                                 $xDisabledEdit = 'disabled';
                                                                 $xDisabledPerson = 'disabled';
@@ -540,7 +540,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Nueva Especialidad</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nueva Especialidad</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -552,50 +552,44 @@
             </div>
             <div class="modal-body py-lg-5 px-lg-10">
                 <div class="card card-flush py-2">
-                    <div class="card-body pt-0">
-                        <form id="kt_modal_new_card_form" class="form">
-                            <div class="row mb-4">
-                               <div class="col-md-12">
-                                    <select name="cboTipoEspe" id="cboTipoEspe" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo" data-dropdown-parent="#kt_modal_new_card_form" class="form-select mb-2">
-                                        <option></option>
-                                        <?php 
-                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid ";
-                                        $xSQL .= "AND pca.paca_nombre='Tipo Especialidad' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                        $all_datos =  mysqli_query($con, $xSQL);
-                                        foreach ($all_datos as $datos){ ?>
-                                            <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                        <?php } ?>
-                                    </select>
-                               </div>
+                    <div class="card-body pt-0" id="kt_modal_new_card_form">
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                <label class="required form-label">Especialidad
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre de la especialidad"></i>
+                                </label>
+                                <input type="text" class="form-control mb-2" maxlength="250" placeholder="Nombre Especialidad" name="txtEspecialidad" id="txtEspecialidad" />     
                             </div>
-                            <div class="row mb-4">
-                                   <div class="col-md-12">
-                                        <label class="required form-label">Especialidad
-                                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre de la especialidad"></i>
-                                        </label>
-                                        <input type="text" class="form-control mb-2 text-uppercase" maxlength="250" placeholder="Nombre Especialidad" name="txtEspecialidad" id="txtEspecialidad" />
-                                   </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <label class="required form-label">Tipo Especialidad</label>
+                                <select name="cboTipoEspe" id="cboTipoEspe" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo" data-dropdown-parent="#kt_modal_new_card_form" class="form-select mb-2">
+                                    <option></option>
+                                    <?php 
+                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid ";
+                                    $xSQL .= "AND pca.paca_nombre='Tipo Especialidad' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                    $all_datos =  mysqli_query($con, $xSQL);
+                                    foreach ($all_datos as $datos){ ?>
+                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
-                            <div class="row mb-4">
-                                <div class="col-md-12">
-                                    <label class="form-label">Descripcion</label>
-                                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" maxlength="150" rows="1" onkeydown="return (event.keyCode!=13);"></textarea>
-                                </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Precio (PVP)</label>
+                                <input type="number" name="txtPvpNew" id="txtPvpNew" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
-                            <div class="row">
-                               <div class="col-md-12">
-                                    <label class="form-label">Precio (PVP)</label>
-                                    <input type="number" name="txtPvpNew" id="txtPvpNew" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                               </div>
-                            </div>
-                        </form>
-                    
+                        </div>
+                        <div class="row mb-2">
+                            <label class="form-label">Descripcion</label>
+                            <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" maxlength="150" rows="1" onkeydown="return (event.keyCode!=13);"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnSaveNew" class="btn btn-primary"><i class="las la-plus"></i>Agregar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnSaveNew" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
             </div>
         </div>
     </div>
@@ -606,7 +600,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Editar Especialidad-Asignada</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Especialidad Asignada</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -647,8 +641,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnAgregar" class="btn btn-primary"><i class="las la-plus"></i>Agregar</button> 
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agregar</button> 
             </div>
         </div>
     </div>
@@ -659,7 +653,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Editar Especialidad-Asignada</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Especialidad Asignada</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -701,8 +695,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnEditarEspe" onclick="f_GrabarEspe(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>)" class="btn btn-primary">Modificar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnEditarEspe" onclick="f_GrabarEspe(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>)" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
             </div>
         </div>
     </div>
@@ -710,11 +704,11 @@
 
 <!--Modal Profesional /Configurar Horarios-->
 <div class="modal fade" id="modal_profesional" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-1000px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="mb-2">Agregar Profesional/Configurar Horarios</h2>
-                <h2 id="headerTitle" class="fs-6 fw-bold form-label mb-2"></h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Profesional/Configurar Horarios</h2>
+                <h2 id="headerTitle" class="fs-6 fw-bold form-label text-primary"></h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -767,15 +761,15 @@
                             Agregar Profesional
                             </button>
                         </div>
-                        <table id="tblProfesional" class="table table-hover align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
+                        <table id="tblProfesional" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
                             <thead>
-                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                    <th>Profesional</th>
-                                    <th>Tipo_Profesion</th>
-                                    <th>Intervalo</th>
-                                    <th>Estado</th>
-                                    <th>Status</th>
-                                    <th>Opciones</th>
+                                <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                                    <th class="min-w-125px">Profesional</th>
+                                    <th class="min-w-125px">Tipo_Profesion</th>
+                                    <th class="min-w-125px">Intervalo</th>
+                                    <th class="min-w-125px">Estado</th>
+                                    <th class="min-w-125px">Status</th>
+                                    <th class="min-w-125px">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody class="fw-bold text-gray-600"></tbody>
@@ -784,7 +778,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
@@ -795,8 +789,8 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Configurar Horarios/Turnos</h2>
-                <h5 id="headertitu1"></h5>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Configurar Horarios/Turnos</h2>
+                <h5 class="text-primary" id="headertitu1"></h5>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -846,14 +840,14 @@
                          <div class="separator my-7"></div>
                         <h2>Turnos Asignados</h2>
                         <div class="mh-300px scroll-y me-n7 pe-7">
-                            <table id="tblHorarios" class="table table-hover align-middle table-row-dashed fs-6 gy-5 mt-3" style="width: 100%;">
+                            <table id="tblHorarios" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
                                 <thead>
-                                    <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                        <th>Dia</th>
+                                    <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                                        <th class="min-w-125px">Dia</th>
                                         <!-- <th>Intervalo</th> -->
-                                        <th>H.Desde</th>
-                                        <th>H.Hasta</th>
-                                        <th>Opciones</th>
+                                        <th class="min-w-125px">H.Desde</th>
+                                        <th class="min-w-125px">H.Hasta</th>
+                                        <th class="min-w-125px">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody class="fw-bold text-gray-600">
@@ -865,7 +859,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
@@ -876,7 +870,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Nuevo Tipo Profesional</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Tipo Profesional</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -894,7 +888,7 @@
                                 <label class="required form-label">Tipo Profesion
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Ingrese Tipo Profesion (Medico-Odontolo-Educador-Plomero-etc.."></i>
                                 </label>
-                                <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="150" placeholder="Tipo Profesion" name="txtTipoProfesion" id="txtTipoProfesion" />
+                                <input type="text" class="form-control mb-2" minlength="1" maxlength="150" placeholder="Tipo Profesion" name="txtTipoProfesion" id="txtTipoProfesion" />
                             </div>
                         </div>
                         <div class="row">
@@ -902,7 +896,7 @@
                                 <label class="required form-label">Valor/Codigo
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title=""></i>
                                 </label>
-                                <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="100" placeholder="Valor/Codigo" name="txtCodigoTipo" id="txtCodigoTipo" />
+                                <input type="text" class="form-control mb-2" minlength="1" maxlength="100" placeholder="Valor/Codigo" name="txtCodigoTipo" id="txtCodigoTipo" />
                             </div>
                         </div>
                         <div class="form-group my-5">
@@ -917,13 +911,13 @@
                             </button>
                         </div>
                         <div class="mh-300px scroll-y me-n7 pe-7">
-                            <table id="tblTipoProfesion" class="table align-middle table-row-dashed fs-6 gy-5 table-hover" style="width: 100%;">
+                            <table id="tblTipoProfesion" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
                                 <thead>
-                                    <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                                        <th>Tipo Profesion</th>
-                                        <th>Estado</th>
-                                        <th>Status</th>                                
-                                        <th>Opciones</th>
+                                    <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                                        <th class="min-w-125px">Tipo Profesion</th>
+                                        <th class="min-w-125px">Estado</th>
+                                        <th class="min-w-125px">Status</th>                                
+                                        <th class="min-w-125px">Opciones</th>
                                     </tr>
                                 </thead>
 
@@ -949,7 +943,7 @@
 
                                                 if($xEstado == 'A'){
                                                     $xChkSelecc = 'checked="checked"';
-                                                    $xTextColor = "badge badge-light-primary";
+                                                    $xTextColor = "badge badge-light-success";
                                                     $xEstadoTxt = 'ACTIVO';
                                                 }else{
                                                     $xTextColor = "badge badge-light-danger";
@@ -995,7 +989,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
@@ -1006,7 +1000,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content"> 
             <div class="modal-header">
-                <h2 class="fw-bolder">Nuevo Profesional</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Profesional</h2>
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1089,11 +1083,11 @@
                                 <div class="row mb-4">
                                    <div class="col-md-6">
                                        <label class="required form-label">Nombres</label>
-                                       <input type="text" name="txtNombresProf" id="txtNombresProf" class="form-control mb-2 text-uppercase" maxlength="100" placeholder="Nombres"  />
+                                       <input type="text" name="txtNombresProf" id="txtNombresProf" class="form-control mb-2" maxlength="100" placeholder="Nombres"  />
                                    </div>
                                    <div class="col-md-6">
                                        <label class="required form-label">Apellidos</label>
-                                       <input type="text" name="txtApellidosProf" id="txtApellidosProf" class="form-control mb-2 text-uppercase" maxlength="100" placeholder="Apellidos" />
+                                       <input type="text" name="txtApellidosProf" id="txtApellidosProf" class="form-control mb-2" maxlength="100" placeholder="Apellidos" />
                                    </div>
                                 </div>
                                 <div class="row">
@@ -1228,8 +1222,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnSaveProf" class="btn btn-primary"><i class="las la-plus"></i>Agregar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnSaveProf" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
             </div>
         </div>
     </div>
@@ -1589,9 +1583,9 @@
                     _id = response;
                     _output = '<tr id=row_' + _id + '>';
                     _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _especialidad + '</span><input type="hidden" id="txtEspecialidad' + _id + 'value="' + _especialidad +  '" /></div></div></td>';
-                    _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _pvp + '</span></div></div></td>';
-                    _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _costo + '</span></div></div></td>';
-                    _output += '<td id="td_' + _id + '"><div class="d-flex align-items-center"><div class="ms-5"><div class="badge badge-light-primary">Activo</div></div></div></td>';                        
+                    _output += '<td><div class=""><div class="ms-5"><span class="fw-bolder">' + _pvp + '</span></div></div></td>';
+                    _output += '<td><div class=""><div class="ms-5"><span class="fw-bolder">' + _costo + '</span></div></div></td>';
+                    _output += '<td id="td_' + _id + '"><div class=""><div class="ms-5"><div class="badge badge-light-success">ACTIVO</div></div></div></td>';                        
                     _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                     _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _cboespe + '" onchange="f_UpdateEstado(';
                     _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
@@ -2014,7 +2008,7 @@
 
                     if(_estado == "ACTIVO"){
                         _checked = "checked='checked'";
-                        _textcolor = "badge badge-light-primary";
+                        _textcolor = "badge badge-light-success";
                     }else{
                         _textcolor = "badge badge-light-danger";
                         _disabledbtn1 = 'disabled';
@@ -2231,18 +2225,18 @@
         let _usuaid = "<?php echo $xUsuaid; ?>";
         let _check = $("#chkprof" + _pfesid).is(":checked");
         let _checked = "";
-        let _class = "badge badge-light-primary";
+        let _class = "badge badge-light-success";
         let _td = "tdprof_" + _pfesid;
         let _btnhorario = "btnHorario_" + _pfesid;
         let _btnelimina = "btnDelProf_" + _pfesid;
 
         if(_check){
-            _estado = "Activo";
+            _estado = "ACTIVO";
             _checked = "checked='checked'";
             $('#'+_btnhorario).prop("disabled",false);
             $('#'+_btnelimina).prop("disabled",false);
         }else{                    
-            _estado = "Inactivo";
+            _estado = "INACTIVO";
             _class = "badge badge-light-danger";
             $('#'+_btnhorario).prop("disabled",true);
             $('#'+_btnelimina).prop("disabled",true);
@@ -2558,7 +2552,7 @@
         _btnopctiontipo = "Mod";
 
         const btn = document.getElementById('btnAgregarTipo');
-        btn.innerHTML = '<span class="svg-icon svg-icon-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">																					<path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="currentColor" />																					<path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="currentColor" /></svg></span>Modificar';
+        btn.innerHTML = '<span><i class="las la-pencil-alt">' + '\xa0' + ' Modificar</span>';
 
         _padeidact = $('#txtPadeid' + _padeid).val();
         _tipoprofeold = $('#txtTiprofe' + _padeid).val();
@@ -2575,16 +2569,16 @@
         let _usuaid = "<?php echo $xUsuaid; ?>";
         let _check = $("#chk" + _preeid).is(":checked");
         let _checked = "";
-        let _class = "badge badge-light-primary";
+        let _class = "badge badge-light-success";
         let _td = "td_" + _preeid;
         let _btnedit = "btnEditar_" + _preeid;
 
         if(_check){
-            _estado = "Activo";
+            _estado = "ACTIVO";
             _checked = "checked='checked'";
             $('#'+_btnedit).prop("disabled",false);
         }else{                    
-            _estado = "Inactivo";
+            _estado = "INACTIVO";
             _class = "badge badge-light-danger";
             $('#'+_btnedit).prop("disabled",true);
         }
