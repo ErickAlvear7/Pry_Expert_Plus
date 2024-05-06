@@ -432,7 +432,7 @@
                                                     <th class="min-w-125px">Especialidad</th>
                                                     <th>Pvp</th>
                                                     <th>Costo</th>
-                                                    <th>Estado</th>
+                                                    <th class="min-w-125px">Estado</th>
                                                     <th>Status</th>
                                                     <th class="min-w-125px" style="text-align: center;">Opciones</th>
                                                 </tr>
@@ -1344,6 +1344,7 @@
         $('#btnAddespe').click(function(){
 
             $("#modal-add-especialidad").modal("show");
+            $("#cboEspecialidad").val(0).change();
         });
 
         $("#btnNuevaEspe").click(function(){
@@ -1562,23 +1563,29 @@
 
                     _id = response;
                     _output = '<tr id=row_' + _id + '>';
-                    _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _especialidad + '</span><input type="hidden" id="txtEspecialidad' + _id + 'value="' + _especialidad +  '" /></div></div></td>';
-                    _output += '<td><div class=""><div class="ms-5"><span class="fw-bolder">' + _pvp + '</span></div></div></td>';
-                    _output += '<td><div class=""><div class="ms-5"><span class="fw-bolder">' + _costo + '</span></div></div></td>';
-                    _output += '<td id="td_' + _id + '"><div class=""><div class="ms-5"><div class="badge badge-light-success">ACTIVO</div></div></div></td>';                        
-                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
+                    _output += '<td>'+_especialidad +'<input type="hidden" id="txtEspeciPrestador' + _id + ' value="' + _especialidad +  '" /></td>';
+                    _output += '<td>' + _pvp + '</td>';
+                    _output += '<td>'+_costo+'</td>';
+                    _output += '<td id="td_' + _id + '"><div class="badge badge-light-success">ACTIVO</div></td>';                        
+                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">'; 
                     _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _cboespe + '" onchange="f_UpdateEstado(';
                     _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
-                    _output += '<td class=""><div class=""><div class="btn-group"><button id="btnEditar_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
-                    _output += 'title="Editar Especialidad Asiganada" ><i class="fa fa-edit"></i></button></div></div></td></tr>';
+                    _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEditar_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
+                    _output += 'title="Editar Especialidad"><i class="fa fa-edit"></i></button>';
+                    _output += '<button id="btnPerson_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarProfesional(' + _paisid + ',' + _emprid + ',' + _presid + ',' + _id + ') title="Agregar Profesional" data-bs-toggle="tooltip" data-bs-placement="left" >';
+                    _output += '<i class="fas fa-user"></i></button>';
+                    _output += '<button id="btnMotivos_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarMotivos(' + _paisid + ',' + _emprid + ',' + _id + ',' + _presid + ',' +_cboespe + ') title="Agregar Motivos" data-bs-toggle="tooltip" data-bs-placement="left" >';
+                    _output += '<i class="fas fa-book"></i></button>';
+                    _output += '</div></div></td></tr>';
 
                     $('#tblEspecialidad').append(_output);
+                    //console.log(_output);
 
-                    //mensajesalertify('Especialidad Agregada Correctamente..!', 'S', 'top-center', 3);
+                    //mensajesalertify('Especialidad Agregada Correctamente..!', 'S', 'top-center', 3); 
                     $("#modal-add-especialidad").modal("hide");
                     toastSweetAlert("top-end",3000,"success","Especialidad Agregada");
                 }else{
-                    toastSweetAlert("top-end",3000,"info","Especialidad ya está Asignada..!");
+                    toastSweetAlert("top-end",3000,"error","Duplicado..!");
                 }
 
                 $("#cboEspecialidad").val(0).change();
@@ -2564,7 +2571,7 @@
         }
 
         var _changetd = document.getElementById(_td);
-        _changetd.innerHTML = '<div class="d-flex align-items-center"><div class="ms-5"><div class="' + _class + '">' + _estado + ' </div></div>';
+        _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
 
         var _parametros = {
             "xxPaisid" : _paisid,
