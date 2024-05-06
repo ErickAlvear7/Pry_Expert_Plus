@@ -429,12 +429,12 @@
                                             <thead>
                                                 <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                                     <th style="display: none;">Id</th>
-                                                    <th class="">Especialidad</th>
-                                                    <th class="">Pvp</th>
-                                                    <th class="">Costo</th>
-                                                    <th class="">Estado</th>
-                                                    <th class="">Status</th>
-                                                    <th class="">Opciones</th>
+                                                    <th class="min-w-125px">Especialidad</th>
+                                                    <th>Pvp</th>
+                                                    <th>Costo</th>
+                                                    <th>Estado</th>
+                                                    <th>Status</th>
+                                                    <th class="min-w-125px" style="text-align: center;">Opciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="fw-bold text-gray-600">
@@ -468,34 +468,14 @@
                         
                                                         ?>
                                                         <tr id="row_<?php echo $xId; ?>">
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="ms-5">
-                                                                        <span class="fw-bolder"><?php echo $xEspecialidad; ?></span>
-                                                                        <input type="hidden" id="txtEspeciPrestador<?php echo $xId; ?>" value="<?php echo $xEspecialidad; ?>" />
-                                                                    </div>
-                                                                </div>
+                                                            <td>  
+                                                                <?php echo $xEspecialidad; ?>
+                                                                <input type="hidden" id="txtEspeciPrestador<?php echo $xId; ?>" value="<?php echo $xEspecialidad; ?>" />
                                                             </td>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="ms-5">
-                                                                        <span class="fw-bolder"><?php echo $xPvp; ?></span>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="ms-5">
-                                                                        <span class="fw-bolder"><?php echo $xCosto; ?></span>
-                                                                    </div>
-                                                                </div>
-                                                            </td>                                    
-                                                            <td id="td_<?php echo $xId; ?>">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="ms-5">
-                                                                        <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
-                                                                    </div>
-                                                                </div>
+                                                            <td> <?php echo $xPvp; ?></td>
+                                                            <td><?php echo $xCosto; ?> </td>                               
+                                                            <td id="td_<?php echo $xId; ?>"> 
+                                                                <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div> 
                                                             </td>
                                                             <td>
                                                                 <div class="text-center">
@@ -505,16 +485,16 @@
                                                                     </div>
                                                                 </div>
                                                             </td> 													
-                                                            <td class="">
-                                                                <div class="">
+                                                            <td>
+                                                                <div class="text-center">
                                                                     <div class="btn-group">
-                                                                        <button id="btnEditar_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Especialidad Asiganada' data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                                        <button id="btnEditar_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Especialidad' data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class='fa fa-edit'></i>
                                                                         </button>	
-                                                                        <button id="btnPerson_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick='f_AgregarProfesional(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>,<?php echo $xId; ?>)' title='Agregar Profesional'data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                                        <button id="btnPerson_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick='f_AgregarProfesional(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>,<?php echo $xId; ?>)' title='Agregar Profesional' data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class="fas fa-user"></i>
                                                                         </button>	
-                                                                        <button id="btnMotivos_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick='f_AgregarMotivos(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xPresid; ?>,<?php echo $xEspeid; ?>)' title='Agregar Motivos'data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                                        <button id="btnMotivos_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick='f_AgregarMotivos(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xPresid; ?>,<?php echo $xEspeid; ?>)' title='Agregar Motivos' data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class="fas fa-book"></i>
                                                                         </button>	                                                                                                                                                                                                      
                                                                     </div>

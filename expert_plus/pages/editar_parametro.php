@@ -177,12 +177,12 @@
                                 <thead>
                                     <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                         <th style="display:none;">Id</th>
-                                        <th class="min-w-125px">Detalle</th>
-                                        <th class="min-w-125px">Valor Texto</th>
-                                        <th class="min-w-125px">Valor entero</th>
-                                        <th class="min-w-125px">Estado</th>
-                                        <th class="min-w-125px">Status</th>
-                                        <th class="min-w-125px" style="text-align: center;">Opciones</th>
+                                        <th>Detalle</th>
+                                        <th>Valor Texto</th>
+                                        <th>Valor entero</th>
+                                        <th>Estado</th>
+                                        <th>Status</th>
+                                        <th style="text-align: center;">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody class="fw-bold text-gray-600">
@@ -226,7 +226,7 @@
                                         <td id="td_<?php echo $xPadeId; ?>">
                                             <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
                                         </td>
-                                        <td style="text-align:center">
+                                        <td class="text-center">
                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                 <input <?php echo $xCheking; ?>  class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xPadeId; ?>" 
                                                    onchange="f_UpdateEstado(<?php echo $xPadeId;?>)" value="<?php echo $xPadeId;?>" />

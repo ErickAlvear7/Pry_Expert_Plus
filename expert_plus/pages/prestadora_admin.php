@@ -91,13 +91,13 @@
             <table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="kt_ecommerce_products_table">
                 <thead>
                     <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
-                        <th class="min-w-125px">Ciudad</th>
+                        <th class="">Ciudad</th>
                         <th class="min-w-125px">Prestador</th>
-                        <th class="min-w-125px">Sector</th>
+                        <th>Sector</th>
                         <th class="min-w-125px">Tipo Prestador</th>
-                        <th class="min-w-125px">Estado</th>
-                        <th class="min-w-125px">Status</th>
-                        <th class="min-w-125px" style="text-align: center;">Opciones</th>
+                        <th>Estado</th>
+                        <th>Status</th>
+                        <th style="text-align: center;">Opciones</th>
                     </tr>
                 </thead>
                 <tbody class="fw-bold text-gray-600">
