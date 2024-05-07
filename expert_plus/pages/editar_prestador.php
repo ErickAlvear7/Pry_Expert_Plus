@@ -746,10 +746,10 @@
                                 <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                     <th class="min-w-125px">Profesional</th>
                                     <th class="min-w-125px">Tipo_Profesion</th>
-                                    <th class="min-w-125px">Intervalo</th>
+                                    <th>Intervalo</th>
                                     <th class="min-w-125px">Estado</th>
-                                    <th class="min-w-125px">Status</th>
-                                    <th class="min-w-125px">Opciones</th>
+                                    <th>Status</th>
+                                    <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody class="fw-bold text-gray-600"></tbody>
@@ -894,10 +894,10 @@
                             <table id="tblTipoProfesion" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
                                 <thead>
                                     <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
-                                        <th class="min-w-125px">Tipo Profesion</th>
-                                        <th class="min-w-125px">Estado</th>
-                                        <th class="min-w-125px">Status</th>                                
-                                        <th class="min-w-125px">Opciones</th>
+                                        <th class="max-w-125px">Tipo Profesion</th>
+                                        <th class="">Estado</th>
+                                        <th class="">Status</th>                                
+                                        <th class="">Opciones</th>
                                     </tr>
                                 </thead>
 
@@ -1214,8 +1214,8 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="mb-2">Motivos Especialidad</h2>
-                <h2 id="headerTitleMotivo" class="fs-6 fw-bold form-label mb-2"></h2>
+                <h2 class="mb-2 badge badge-light-primary fw-light fs-2 fst-italic">Motivos Especialidad</h2>
+                <h2 id="headerTitleMotivo" class="fs-6 fw-bold form-label mb-2 text-primary"></h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1231,7 +1231,7 @@
                         <div class="row">
                             <div class="col-md-10">
                                  <label class="required form-label">Motivo Especialidad</label>
-                                 <textarea class="form-control mb-2 text-uppercase" name="txtmotivo" id="txtmotivo" maxlength="500" rows="1" onkeydown="return (event.keyCode!=13);"></textarea>
+                                 <textarea class="form-control mb-2" name="txtmotivo" id="txtmotivo" maxlength="500" rows="1" onkeydown="return (event.keyCode!=13);"></textarea>
                             </div>
                         </div>
                         <div class="form-group mt-5 mb-4">
@@ -1245,11 +1245,11 @@
                             Agregar Motivo
                             </button>
                         </div>
-                        <table id="tblMotivo" class="table table-hover align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
+                        <table id="tblMotivo" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
                             <thead>
-                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                    <th>Motivo</th>
-                                    <th>Estado</th>
+                                <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                                    <th class="max-w-125px"">Motivo</th>
+                                    <th class="min-w-125px">Estado</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -1259,7 +1259,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
@@ -2040,6 +2040,7 @@
         var _profesional = $('#cboProfesional option:selected').text();
         var _profesion = $('#cboTipoProfe option:selected').text();
         var _intervalo = $('#txtIntervalo').val();
+        
 
         if(_profid == 0){
             toastSweetAlert("top-end",3000,"warning","Seleccione Profesional..!"); 
@@ -2070,7 +2071,7 @@
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _profesional + '</span><input type="hidden" id="txtProfesional_' + _id + '" value="' + _profesional +  '" /></div></div></td>';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _profesion + '</span></div></div></td>';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
-                _output += '<td id="tdprof_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="badge badge-light-primary">Activo</div></div></div></td>';
+                _output += '<td id="tdprof_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="badge badge-light-success">ACTIVO</div></div></div></td>';
                 _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                 _output += '<input class="form-check-input h-20px w-20px border-primary" type="checkbox" checked="checked" id="chkprof' + _id + '" onchange="f_UpdateEstProf(';
                 _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
@@ -2130,15 +2131,15 @@
 
                     if(_estado == "A"){
                         _checked = "checked='checked'";
-                        _textcolor = "badge badge-light-primary";
+                        _textcolor = "badge badge-light-success";
                     }else{
                         _textcolor = "badge badge-light-danger";
                     }
 
                     if(_estado == 'A'){
-                        _estado = 'Activo';
+                        _estado = 'ACTIVO';
                     }else{
-                        _estado = 'Inactivo';
+                        _estado = 'INACTIVO';
                     }
 
                     _output = '<tr id="trmot_' + _id + '">';
@@ -2186,9 +2187,9 @@
 
                 _id = response.trim();
 
-                _estado = 'Activo';
+                _estado = 'ACTIVO';
                 _checked = "checked='checked'";
-                _textcolor = "badge badge-light-primary";                
+                _textcolor = "badge badge-light-success";                
 
                 _output = '<tr id="trmot_' + _id + '">';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _motivo.toUpperCase() + '</span><input type="hidden" id="txtMotivo_' + _id + '" value="' + _motivo + '" /></div></div></td>';
@@ -2251,14 +2252,14 @@
         let _usuaid = "<?php echo $xUsuaid; ?>";
         let _check = $("#chkmoti" + _motid).is(":checked");
         let _checked = "";
-        let _class = "badge badge-light-primary";
+        let _class = "badge badge-light-success";
         let _td = "tdmot_" + _motid;
 
         if(_check){
-            _estado = "Activo";
+            _estado = "ACTIVO";
             _checked = "checked='checked'";
         }else{                    
-            _estado = "Inactivo";
+            _estado = "INACTIVO";
             _class = "badge badge-light-danger";
         }
 

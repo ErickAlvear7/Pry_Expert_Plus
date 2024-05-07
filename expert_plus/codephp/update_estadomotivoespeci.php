@@ -25,7 +25,7 @@
             $xMotivoid = $_POST['xxMotivoid'];
             $xEstado = safe($_POST['xxEstado']);
 
-            if($xEstado == 'Activo'){
+            if($xEstado == 'ACTIVO'){
                 $xEstado = 'A';
             }else{
                 $xEstado = 'I';
