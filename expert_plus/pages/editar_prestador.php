@@ -1394,12 +1394,12 @@
             var _pvpnew = $("#txtPvpNew").val();
 
             if(_cbotipoespe == ''){
-                toastSweetAlert("top-end",3000,"warning","Seleccion Tipo Especialidad");
+                toastSweetAlert("top-end",3000,"warning","Seleccion Tipo Especialidad..!!");
                 return;
             }
 
             if(_especialidad == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Especialidad");
+                toastSweetAlert("top-end",3000,"warning","Ingrese Especialidad..!!");
                 return;
             }
 
@@ -1419,10 +1419,10 @@
             var xrespuesta = $.post("codephp/grabar_especialidad.php", _parametros);
             xrespuesta.done(function(response){
                 if(response.trim() == 'EXISTE'){
-                    toastSweetAlert("top-end",3000,"info","Especialidad ya Existe..!!");
+                    toastSweetAlert("top-end",3000,"warning","Especialidad ya Existe..!!");
                 }else{
                     if(response.trim() != 'ERR'){
-                        toastSweetAlert("top-end",3000,"success","Nueva Especialidad Agregada");
+                        toastSweetAlert("top-end",3000,"success","Especialidad Agregada");
                         $("#cboEspecialidad").empty();
                         $("#cboEspecialidad").html(response);
                         $("#modal-new-especialidad").modal("hide");
@@ -1437,12 +1437,12 @@
             var _valorv = $.trim($("#txtValor").val());
 
             if(_tipoprestador == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Prestador");
+                toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Prestador..!!");
                 return;
             }
 
             if(_valorv == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Valor");
+                toastSweetAlert("top-end",3000,"warning","Ingrese Valor..!!");
                 return;
             }
 
@@ -1457,10 +1457,10 @@
             var xrespuesta = $.post("codephp/grabar_tipoprestador.php", _parametros);
             xrespuesta.done(function(response){
                 if(response.trim() == 'EXISTE'){
-                    toastSweetAlert("top-end",3000,"info","Tipo Prestador/Valor ya Existe");
+                    toastSweetAlert("top-end",3000,"info","Tipo Prestador/Valor ya Existe..!!");
                 }else{
                     if(response.trim() != 'ERR'){
-                        toastSweetAlert("top-end",3000,"success","Tipo Prestador Agregado");
+                        toastSweetAlert("top-end",3000,"success","Prestador Agregado");
                         $("#cboTipo").empty();
                         $("#cboTipo").html(response);
                         $("#modal-new-tipoprestador").modal("hide");
@@ -1487,7 +1487,7 @@
                     }
                 }else{
                     $('#chkEnviar1').prop('checked','');
-                    toastSweetAlert("top-end",3000,"error","Email no es Valido");
+                    toastSweetAlert("top-end",3000,"error","Email no es Valido..!!");
                     _enviar1 = 'SI';
                     return;
                 }
@@ -1515,7 +1515,7 @@
                     }                            
                 }else{
                     $('#chkEnviar2').prop('checked','');
-                    toastSweetAlert("top-end",3000,"error","Email no es Valido");
+                    toastSweetAlert("top-end",3000,"error","Email no es Valido..!!");
                     _enviar2 = 'NO';
                     return;
                 }
@@ -1585,7 +1585,7 @@
                     $("#modal-add-especialidad").modal("hide");
                     toastSweetAlert("top-end",3000,"success","Especialidad Agregada");
                 }else{
-                    toastSweetAlert("top-end",3000,"error","Duplicado..!");
+                    toastSweetAlert("top-end",3000,"error","Especialidad ya Existe..!!");
                 }
 
                 $("#cboEspecialidad").val(0).change();
@@ -1601,12 +1601,12 @@
             var _continuar = true;
 
             if(_tipoprofesion == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Profesion..!");
+                toastSweetAlert("top-end",3000,"warning","Ingrese Profesion..!!");
                 return;
             }
 
             if(_valcodigoprof == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Valor/Codigo Tipo Profesion..!");
+                toastSweetAlert("top-end",3000,"warning","Ingrese Valor/Codigo..!!");
                 return;
             }
 
@@ -1640,33 +1640,31 @@
                         if(_btnopctiontipo == 'Add'){
                             _output = '<tr id="tr_' + _padeid + '">';    
                             _output += '<td>' + _tipoprofesion.toUpperCase() + '<input type="hidden" id="txtPadeid' + _padeid + '" value="' + _padeid + '"/> <input type="hidden" id="txtTiprofe' + _padeid + '" value="' + _tipoprofesion + '"/> <input type="hidden" id="txtValor' + _padeid + '" value="' + _valcodigoprof  + '"/></td>';
-                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-primary">Activo</div></div></td>';
+                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-success">ACTIVO</div></div></td>';
                             _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                             _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _padeid + '" onchange="f_UpdateEstTipo(';
                             _output += _pacaid + ',' + _padeid + ')" value="' + _padeid + '"/></div></div></td>';
-                            _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
-                            _output += 'title="Editar Tipo Profesion" onclick="f_EditarTipo(' + _pacaid + ',' + _padeid + ')" ><i class="fa fa-edit"></i></button></div></div></td></tr>';
+                            _output += '<td><div class="btn-group"><button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
+                            _output += 'title="Editar Tipo Profesion" onclick="f_EditarTipo(' + _pacaid + ',' + _padeid + ')" ><i class="fa fa-edit"></i></button></div></td></tr>';
                         }else{
                             _output = '<td>' + _tipoprofesion.toUpperCase() + '<input type="hidden" id="txtPadeid'  + _padeid + '" value="' + _padeid + '"/> <input type="hidden" id="txtTiprofe'  + _padeid + '" value="' + _tipoprofesion + '"/> <input type="hidden" id="txtValor' + _padeid + '" value="' + _valcodigoprof  + '"/></td>';
-                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-primary">Activo</div></div></td>';
+                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-success">ACTIVO</div></div></td>';
                             _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                             _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _padeid + '" onchange="f_UpdateEstTipo(';
                             _output += _pacaid + ',' + _padeid + ')" value="' + _padeid + '"/></div></div></td>';
-                            _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
-                            _output += 'title="Editar Tipo Profesion" onclick="f_EditarTipo(' + _pacaid + ',' + _padeid + ')" ><i class="fa fa-edit"></i></button></div></div></td>';                                    
+                            _output += '<td><div class="btn-group"><button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
+                            _output += 'title="Editar Tipo Profesion" onclick="f_EditarTipo(' + _pacaid + ',' + _padeid + ')" ><i class="fa fa-edit"></i></button></div></td>';                                    
                         }
 
                         if(_btnopctiontipo == 'Add'){
                             $('#tblTipoProfesion').append(_output);
                             //_mensaje = "Tipo Profesion Agregada Correctamente..!";
-                            toastSweetAlert("top-end",3000,"success","Tipo Profesion Agregado Correctamente..!");
+                            toastSweetAlert("top-end",3000,"success","Profesional Agregado");
                         }else{
                             $('#tr_' + _padeid + '').html(_output);
                             //_mensaje = "Tipo Profesion Modificada Correctamente..!";
-                            toastSweetAlert("top-end",3000,"success","Tipo Profesion Modificado Correctamente..!");
+                            toastSweetAlert("top-end",3000,"success","Profesional Modificado");
                         }                                
-
-                        //toastSweetAlert("top-end",3000,"success",_mensaje);
 
                         //Listar Nuevamente los tipos de Profesion
                         var _parametros = {
@@ -1681,7 +1679,7 @@
                             $("#cboTipoProfesion").html(xresponse);
                         });                                
                     }else{
-                        toastSweetAlert("top-end",3000,"info","Tipo Profesion ya existe.!");                           
+                        toastSweetAlert("top-end",3000,"warning","Profesion ya Existe.!!");                           
                     }
 
                     $("#txtTipoProfesion").val('');
@@ -1756,7 +1754,7 @@
             }
 
             if(_prestador == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Nombre del Prestador..!"); 
+                toastSweetAlert("top-end",3000,"warning","Ingrese Prestador..!"); 
                 return;                         
             }
 
@@ -2356,10 +2354,10 @@
         var xrespuesta = $.post("codephp/consultar_horarioprofesional.php", _parametros);
             xrespuesta.done(function(response){
             if(response.trim() == 'OK'){
-                toastSweetAlert("top-end",3000,"error","Registro Eliminado..!");
+                toastSweetAlert("top-end",3000,"error","Registro Eliminado");
                 $('#trprof_' + _pfesid).remove();
             }else{
-                toastSweetAlert("top-end",3000,"info","El registro tiene horarios configurados..!");
+                toastSweetAlert("top-end",3000,"warning","El registro tiene horarios configurados..!!");
             }
         });
     }
@@ -2378,10 +2376,10 @@
         var xrespuesta = $.post("codephp/del_horarioprofesional.php", _parametros);
             xrespuesta.done(function(response){
             if(response.trim() == 'OK'){
-                toastSweetAlert("top-end",3000,"error","Registro Eliminado..!");
+                toastSweetAlert("top-end",3000,"error","Registro Eliminado");
                 $('#trhorario_' + _horaid).remove();
             }else{
-                toastSweetAlert("top-end",3000,"question","Hubo algun error, no se puedo eliminar..!");
+                toastSweetAlert("top-end",3000,"question","Hubo algun error, no se puedo eliminar..!!");
             }
         });
     }            
@@ -2422,7 +2420,7 @@
         var minutos_final = _horahasta.split(':').reduce((p, c) => parseInt(p) * 60 + parseInt(c));
         
         if (minutos_final < minutos_inicio){
-            toastSweetAlert("top-end",3000,"question","La Hora Inicio no puede ser mayor a la Hora Final..!");
+            toastSweetAlert("top-end",3000,"question","La Hora Inicio no puede ser mayor a la Hora Final..!!");
             return;
         } 
 
@@ -2468,7 +2466,7 @@
                 toastSweetAlert("top-end",3000,"success","Horario Agregado");
 
             }else{
-                toastSweetAlert("top-end",3000,"info","Dia - Turno/Horario ya existe..!");
+                toastSweetAlert("top-end",3000,"info","Dia - Turno/Horario ya Existe..!!");
             }
 
             $("#cboDias").val(0).change(); 
@@ -2629,7 +2627,7 @@
 
                 $('#row_' + _rowid + '').html(_output);
             }else{
-                toastSweetAlert("top-end",3000,"info","Especialidad ya está asignada..!");
+                toastSweetAlert("top-end",3000,"warning","Especialidad ya Existe..!!");
             }
         });	                
 
@@ -2655,7 +2653,7 @@
                 }
             }else{
                 $('#chkEnviarProf').prop('checked','');
-                toastSweetAlert("top-end",3000,"error","Email no es Valido");
+                toastSweetAlert("top-end",3000,"error","Email no es Valido..!!");
                 _enviarprof = 'SI';
                 return;
             }
@@ -2697,22 +2695,22 @@
         }
 
         if(_numdocumento == ''){
-            toastSweetAlert("top-end",3000,"warning","Ingrese Numero de Documento..!");
+            toastSweetAlert("top-end",3000,"warning","Ingrese Documento..!!");
             return;                    
         }
 
         if(_nombres == ''){
-            toastSweetAlert("top-end",3000,"warning","Ingrese Nombres..!");
+            toastSweetAlert("top-end",3000,"warning","Ingrese Nombres..!!");
             return;                    
         }
 
         if(_genero == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Genero..!");
+            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Genero..!!");
             return;                    
         }
 
         if(_tipoprof == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Profesion..!");
+            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Profesion..!!");
             return;                    
         }                 
 
@@ -2734,14 +2732,14 @@
         
             if (regex.test($('#txtEmailProf').val().trim())) {
             }else{
-                toastSweetAlert("top-end",3000,"error","Email no es Valido..!");
+                toastSweetAlert("top-end",3000,"error","Email no es Valido..!!");
                 return;
             }
         }
 
         if(_enviarprof == 'SI'){
             if(_emailprof.trim() == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Email..!");
+                toastSweetAlert("top-end",3000,"warning","Ingrese Email..!!");
             }
         }
         
@@ -2772,11 +2770,11 @@
             success: function(response){
                 
                 if(response.trim() == 'OK'){
-                    toastSweetAlert("top-end",3000,"success","Profesional agregado correctamente..!");
+                    toastSweetAlert("top-end",3000,"success","Profesional Agregado");
                     $("#modal-new-profesional").modal("hide");
 
                 }else{
-                    toastSweetAlert("top-end",3000,"info","Profesional ya Existe..!");
+                    toastSweetAlert("top-end",3000,"info","Profesional ya Existe..!!");
                 }
             },								
             error: function (error){
