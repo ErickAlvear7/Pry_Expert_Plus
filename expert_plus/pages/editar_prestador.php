@@ -850,7 +850,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Tipo Profesional</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Tipo Profesion</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -894,15 +894,15 @@
                             <table id="tblTipoProfesion" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
                                 <thead>
                                     <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
-                                        <th class="max-w-125px">Tipo Profesion</th>
-                                        <th class="">Estado</th>
-                                        <th class="">Status</th>                                
-                                        <th class="">Opciones</th>
+                                        <th class="min-w-125px">Tipo Profesion</th>
+                                        <th>Estado</th>
+                                        <th>Status</th>                                
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
 
                                 <?php 
-                                    $xSQL = "SELECT pca.paca_id,pde.pade_id,pde.pade_nombre,pde.pade_estado,pde.pade_valorV FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Profesion' AND pca.paca_estado='A' AND pde.pade_estado='A' ORDER BY pde.pade_orden ";
+                                    $xSQL = "SELECT pca.paca_id,pde.pade_id,pde.pade_nombre,pde.pade_estado,pde.pade_valorV FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Profesion' ORDER BY pde.pade_orden ";
                                     $all_tipos = mysqli_query($con, $xSQL);
                                 ?>
                                 <tbody class="text-gray-600 fw-bold">
@@ -948,13 +948,13 @@
                                                     <div class="text-center">
                                                         <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                             <input <?php echo $xChkSelecc; ?> class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chktipo<?php echo $xPadeid; ?>" 
-                                                                onchange="f_UpdateEstTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)" />
+                                                                onchange="f_UpdateEstTipo(<?php echo $xPadeid; ?>)" />
                                                         </div>
                                                     </div>
                                                 </td> 													
                                                 <td>
                                                     <div class="btn-group">
-                                                        <button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Tipo Profesion' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)">
+                                                        <button id="btnEdiTipo_<?php echo $xPadeid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Tipo Profesion' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)">
                                                             <i class='fa fa-edit'></i>
                                                         </button>	                                                
                                                     </div>
@@ -1057,7 +1057,7 @@
                                         </div>
                                     <div class="col-md-6">
                                         <label class="required form-label">Numero Documento</label>
-                                        <input type="text" name="txtNumDocumento" id="txtNumDocumento" class="form-control mb-2" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Numero Documento"  />
+                                        <input type="text" name="txtNumDocumento" id="txtNumDocumento" class="form-control mb-2" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Numero Documento"  />
                                     </div>
                                 </div>
                                 <div class="row mb-4">
@@ -1130,7 +1130,7 @@
                             <div id="direccion_profesional" class="collapse fs-6 ps-12" data-bs-parent="#datos_profesional">
                                 <div class="row mb-4">
                                     <div class="col-md-12">
-                                        <textarea class="form-control mb-2 text-uppercase" name="txtDireccionProf" id="txtDireccionProf" rows="1" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDireccion; ?> </textarea>
+                                        <textarea class="form-control mb-2" name="txtDireccionProf" id="txtDireccionProf" rows="1" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDireccion; ?> </textarea>
                                     </div>
                                 </div>
                             </div>
@@ -1158,7 +1158,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="fs-6 fw-bold mt-3 mb-3">Telefono</div>
-                                        <input type="text" class="form-control mb-3" name="txtFonoProf" id="txtFonoProf" maxlength="9" placeholder="029999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                        <input type="text" class="form-control mb-3" name="txtFonoProf" id="txtFonoProf" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                     </div>
                                     <div class="col-md-6">
                                         <div class="fs-6 fw-bold mt-3 mb-3">Celular</div>
@@ -1662,7 +1662,6 @@
                             toastSweetAlert("top-end",3000,"success","Profesional Agregado");
                         }else{
                             $('#tr_' + _padeid + '').html(_output);
-                            //_mensaje = "Tipo Profesion Modificada Correctamente..!";
                             toastSweetAlert("top-end",3000,"success","Profesional Modificado");
                         }                                
 
@@ -2245,6 +2244,39 @@
         });
     }
 
+    //Cambiar estado Nuevo Tipo Profesion Modal
+    function f_UpdateEstTipo(_padeid){  
+        var _check = $("#chktipo" + _padeid).is(":checked");
+        var _checked = '';
+        var _class = '';
+        var _td = 'td_' + _padeid;
+        var _estado = 'ACTIVO';
+        var _btnedit = 'btnEdiTipo_' + _padeid;
+
+        if(_check){
+            _checked = "checked='checked'";
+            _class = 'badge badge-light-success';
+            $('#'+_btnedit).prop('disabled',false);  
+        }else{
+            _estado = 'INACTIVO';
+            _class = 'badge badge-light-danger';
+            $('#'+_btnedit).prop('disabled',true);
+        }
+        
+        var _changetd = document.getElementById(_td);
+        _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
+
+        var _parametros = {
+            "xxPadeid" : _padeid,
+            "xxEstado" : _estado,
+        }
+
+        var xrespuesta = $.post("codephp/update_tipoprofesion.php", _parametros);
+            xrespuesta.done(function(response){
+
+        });
+    }
+
     function f_UpdateMotivo(_paisid, _emprid, _motid){
 
         let _usuaid = "<?php echo $xUsuaid; ?>";
@@ -2679,6 +2711,7 @@
         var _celular = $.trim($("#txtCelularProf").val());
         var _emailprof = $.trim($("#txtEmailProf").val());
         var _selecc = 'NO'; 
+        var _continuar = true;
         
         var _imgfile = document.getElementById("imgfileprof").style.backgroundImage;
         var _url = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
@@ -2699,20 +2732,40 @@
             return;                    
         }
 
+        if(_numdocumento.length < 10){
+            toastSweetAlert("top-end",3000,"error","Documento Incorrecto..!!");
+            return;                    
+        }
+
         if(_nombres == ''){
             toastSweetAlert("top-end",3000,"warning","Ingrese Nombres..!!");
             return;                    
         }
 
         if(_genero == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Genero..!!");
+            toastSweetAlert("top-end",3000,"warning","Seleccione Genero..!!");
             return;                    
         }
 
         if(_tipoprof == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Profesion..!!");
+            toastSweetAlert("top-end",3000,"warning","Seleccione Profesion..!!");
+       
             return;                    
-        }                 
+        }  
+        
+        if(_telefono != ''){
+            if(_telefono.length < 7){
+                toastSweetAlert("top-end",3000,"error","Telefono Incorrecto..!!");
+                return; 
+            }
+        }
+
+        if(_celular != ''){
+            if(_celular.length < 10){
+                toastSweetAlert("top-end",3000,"error","Celular Incorrecto..!!");
+                return; 
+            }
+        }
 
         if(_selecc == 'SI'){
             var _imagen = document.getElementById("imgavatar");
@@ -2722,7 +2775,7 @@
             _ext = _ext.toLowerCase();   
 
             if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
-                toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una Imagen..!");
+                toastSweetAlert("top-end",3000,"error","Archivo no es Imagen..!!");
                 return;
             }                    
         }
@@ -2732,7 +2785,7 @@
         
             if (regex.test($('#txtEmailProf').val().trim())) {
             }else{
-                toastSweetAlert("top-end",3000,"error","Email no es Valido..!!");
+                toastSweetAlert("top-end",3000,"error","Email Incorrecto..!!");
                 return;
             }
         }
@@ -2742,6 +2795,7 @@
                 toastSweetAlert("top-end",3000,"warning","Ingrese Email..!!");
             }
         }
+
         
         form_data = new FormData();                    
         form_data.append('xxPaisid', _paisid);
@@ -2774,7 +2828,7 @@
                     $("#modal-new-profesional").modal("hide");
 
                 }else{
-                    toastSweetAlert("top-end",3000,"info","Profesional ya Existe..!!");
+                    toastSweetAlert("top-end",3000,"warning","Profesional ya Existe..!!");
                 }
             },								
             error: function (error){
