@@ -322,15 +322,15 @@
                                         <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono1; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono1; ?>" />
                                             </div>
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono2; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono2; ?>" />
                                             </div> 
                                             <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono3; ?>" />
+                                                <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono3" id="txtFono3" maxlength="9" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono3; ?>" />
                                             </div>                                                        
                                         </div>
                                         <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
@@ -454,6 +454,7 @@
                                                             $chkEstado = '';
                                                             $xDisabledEdit = '';
                                                             $xDisabledPerson = '';
+                                                            $xDisabledMotivos = '';
                         
                                                             if($xEstado == 'A'){
                                                                 $xEstado = 'ACTIVO';
@@ -464,6 +465,7 @@
                                                                 $xTextColor = "badge badge-light-danger";
                                                                 $xDisabledEdit = 'disabled';
                                                                 $xDisabledPerson = 'disabled';
+                                                                $xDisabledMotivos = 'disabled';
                                                             }
                         
                                                         ?>
@@ -494,7 +496,7 @@
                                                                         <button id="btnPerson_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick='f_AgregarProfesional(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>,<?php echo $xId; ?>)' title='Agregar Profesional' data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class="fas fa-user"></i>
                                                                         </button>	
-                                                                        <button id="btnMotivos_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick='f_AgregarMotivos(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xPresid; ?>,<?php echo $xEspeid; ?>)' title='Agregar Motivos' data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                                        <button id="btnMotivos_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledMotivos; ?> onclick='f_AgregarMotivos(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xPresid; ?>,<?php echo $xEspeid; ?>)' title='Agregar Motivos' data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class="fas fa-book"></i>
                                                                         </button>	                                                                                                                                                                                                      
                                                                     </div>
@@ -1779,7 +1781,7 @@
             if(_telefono1 != '')
             {
                 _valor = document.getElementById("txtFono1").value;
-                if( !(/^\d{9}$/.test(_valor)) ) {
+                if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
                     toastSweetAlert("top-end",3000,"error","Telefono 1 incorrecto..!"); 
                     return;
                 }
@@ -1788,7 +1790,7 @@
             if(_telefono2 != '')
             {
                 _valor = document.getElementById("txtFono2").value;
-                if( !(/^\d{9}$/.test(_valor)) ) {
+                if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
                     toastSweetAlert("top-end",3000,"error","Telefono 2 incorrecto..!");  
                     return;
                 }
@@ -1796,8 +1798,9 @@
 
             if(_telefono3 != '')
             {
-                _valor = document.getElementById("txtFono3").value;
-                if( !(/^\d{9}$/.test(_valor)) ) {
+            
+               _valor = document.getElementById("txtFono3").value;
+                if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
                     toastSweetAlert("top-end",3000,"error","Telefono 3 incorrecto..!");  
                     return;
                 }
@@ -2582,6 +2585,7 @@
 
     }
 
+    //Update estado Especialidades 
     function f_UpdateEstado(_paisid, _emprid, _preeid){
         
         let _usuaid = "<?php echo $xUsuaid; ?>";
@@ -2590,15 +2594,22 @@
         let _class = "badge badge-light-success";
         let _td = "td_" + _preeid;
         let _btnedit = "btnEditar_" + _preeid;
+        let _btnper = "btnPerson_" + _preeid;
+        let _btnmot = "btnMotivos_" + _preeid;
+        
 
         if(_check){
             _estado = "ACTIVO";
             _checked = "checked='checked'";
             $('#'+_btnedit).prop("disabled",false);
+            $('#'+_btnper).prop("disabled",false);
+            $('#'+_btnmot).prop("disabled",false);
         }else{                    
             _estado = "INACTIVO";
             _class = "badge badge-light-danger";
             $('#'+_btnedit).prop("disabled",true);
+            $('#'+_btnper).prop("disabled",true);
+            $('#'+_btnmot).prop("disabled",true);
         }
 
         var _changetd = document.getElementById(_td);
