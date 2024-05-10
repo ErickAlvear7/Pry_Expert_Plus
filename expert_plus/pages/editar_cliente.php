@@ -362,15 +362,7 @@
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                     <div class="d-flex flex-stack fs-4 py-3 mb-2">
                         <div class="d-flex justify-content-start">
-                            <a href="#" class="btn btn-light-primary btn-sm" id="btnAgregarprod">
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>                                       
-                            Agregar Producto
-                            </a>
+                            <button type="button" id="btnAgregarprod" class="btn btn-light-primary btn-sm mb-10"><i class="las la-plus-circle"></i>Agregar Producto</button>
                         </div>
                     </div>
                     <div class="d-flex flex-column gap-7 gap-lg-10">
