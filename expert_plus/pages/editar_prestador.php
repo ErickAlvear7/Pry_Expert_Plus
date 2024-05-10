@@ -523,14 +523,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nueva Especialidad</h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-5 px-lg-10">
                 <div class="card card-flush py-2">
@@ -583,14 +576,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Especialidad Asignada</h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-4">
@@ -636,14 +622,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Especialidad Asignada</h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-4">
@@ -691,14 +670,7 @@
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Profesional/Configurar Horarios</h2>
                 <h2 id="headerTitle" class="fs-6 fw-bold form-label text-primary"></h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-2 px-lg-10">
                 <div class="card card-flush pt-10 pb-n3">
@@ -773,14 +745,7 @@
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Configurar Horarios/Turnos</h2>
                 <h5 class="text-primary" id="headertitu1"></h5>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-2">
@@ -853,14 +818,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Tipo Profesion</h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-4">
@@ -870,7 +828,7 @@
                                 <label class="required form-label">Tipo Profesion
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Ingrese Tipo Profesion (Medico-Odontolo-Educador-Plomero-etc.."></i>
                                 </label>
-                                <input type="text" class="form-control mb-2" minlength="1" maxlength="150" placeholder="Tipo Profesion" name="txtTipoProfesion" id="txtTipoProfesion" />
+                                <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="150" placeholder="Tipo Profesion" name="txtTipoProfesion" id="txtTipoProfesion" />
                             </div>
                         </div>
                         <div class="row">
@@ -878,7 +836,7 @@
                                 <label class="required form-label">Valor/Codigo
                                     
                                 </label>
-                                <input type="text" class="form-control mb-2" minlength="1" maxlength="100" placeholder="Valor/Codigo" name="txtCodigoTipo" id="txtCodigoTipo" />
+                                <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="100" placeholder="Valor/Codigo" name="txtCodigoTipo" id="txtCodigoTipo" />
                             </div>
                         </div>
                         <div class="form-group my-5">
@@ -983,14 +941,7 @@
         <div class="modal-content"> 
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Profesional</h2>
-                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-10 px-lg-10 mt-n3">
                 <div class="card mb-1 mb-xl-1">
@@ -1053,13 +1004,13 @@
                                         <select name="cboTipoDoc" id="cboTipoDoc" aria-label="Seleccione Tipo Documento" data-control="select2" data-placeholder="Seleccione Tipo Documento" data-dropdown-parent="#modal_select" class="form-select mb-2" >
                                             <option></option>
                                             <?php foreach ($all_parametro as $parametro) : ?>
-                                                <option value="<?php echo $parametro['Codigo'] ?>"><?php echo $parametro['Descripcion']; ?></option>
+                                                <option value="<?php echo $parametro['Codigo'] ?>"><?php echo mb_strtoupper($parametro['Descripcion']); ?></option>
                                             <?php endforeach ?>
                                         </select>
                                         </div>
                                     <div class="col-md-6">
                                         <label class="required form-label">Numero Documento</label>
-                                        <input type="text" name="txtNumDocumento" id="txtNumDocumento" class="form-control mb-2" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Numero Documento"  />
+                                        <input type="text" name="txtNumDocumento" id="txtNumDocumento" class="form-control mb-2" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Numero Documento"  />
                                     </div>
                                 </div>
                                 <div class="row mb-4">
@@ -1218,14 +1169,7 @@
             <div class="modal-header">
                 <h2 class="mb-2 badge badge-light-primary fw-light fs-2 fst-italic">Motivos Especialidad</h2>
                 <h2 id="headerTitleMotivo" class="fs-6 fw-bold form-label mb-2 text-primary"></h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-2 px-lg-10">
                 <div class="card card-flush pt-10 pb-n3">
@@ -1646,7 +1590,7 @@
                         if(_btnopctiontipo == 'Add'){
                             _output = '<tr id="tr_' + _padeid + '">';    
                             _output += '<td>' + _tipoprofesion.toUpperCase() + '<input type="hidden" id="txtPadeid' + _padeid + '" value="' + _padeid + '"/> <input type="hidden" id="txtTiprofe' + _padeid + '" value="' + _tipoprofesion + '"/> <input type="hidden" id="txtValor' + _padeid + '" value="' + _valcodigoprof  + '"/></td>';
-                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-success">ACTIVO</div></div></td>';
+                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-primary">ACTIVO</div></div></td>';
                             _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                             _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _padeid + '" onchange="f_UpdateEstTipo(';
                             _output += _pacaid + ',' + _padeid + ')" value="' + _padeid + '"/></div></div></td>';
@@ -1657,7 +1601,7 @@
 
                         }else{
                             _output = '<td>' + _tipoprofesion.toUpperCase() + '<input type="hidden" id="txtPadeid'  + _padeid + '" value="' + _padeid + '"/> <input type="hidden" id="txtTiprofe'  + _padeid + '" value="' + _tipoprofesion + '"/> <input type="hidden" id="txtValor' + _padeid + '" value="' + _valcodigoprof  + '"/></td>';
-                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-success">ACTIVO</div></div></td>';
+                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-primary">ACTIVO</div></div></td>';
                             _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                             _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _padeid + '" onchange="f_UpdateEstTipo(';
                             _output += _pacaid + ',' + _padeid + ')" value="' + _padeid + '"/></div></div></td>';
@@ -2078,7 +2022,7 @@
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _profesional + '</span><input type="hidden" id="txtProfesional_' + _id + '" value="' + _profesional +  '" /></div></div></td>';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _profesion + '</span></div></div></td>';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
-                _output += '<td id="tdprof_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="badge badge-light-success">ACTIVO</div></div></div></td>';
+                _output += '<td id="tdprof_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="badge badge-light-primary">ACTIVO</div></div></div></td>';
                 _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                 _output += '<input class="form-check-input h-20px w-20px border-primary" type="checkbox" checked="checked" id="chkprof' + _id + '" onchange="f_UpdateEstProf(';
                 _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
@@ -2138,7 +2082,7 @@
 
                     if(_estado == "A"){
                         _checked = "checked='checked'";
-                        _textcolor = "badge badge-light-success";
+                        _textcolor = "badge badge-light-primary";
                     }else{
                         _textcolor = "badge badge-light-danger";
                     }
@@ -2196,7 +2140,7 @@
 
                 _estado = 'ACTIVO';
                 _checked = "checked='checked'";
-                _textcolor = "badge badge-light-success";                
+                _textcolor = "badge badge-light-primary";                
 
                 _output = '<tr id="trmot_' + _id + '">';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _motivo.toUpperCase() + '</span><input type="hidden" id="txtMotivo_' + _id + '" value="' + _motivo + '" /></div></div></td>';
@@ -2268,7 +2212,7 @@
 
         if(_check){
             _checked = "checked='checked'";
-            _class = 'badge badge-light-success';
+            _class = 'badge badge-light-primary';
             $('#'+_btnedit).prop('disabled',false); 
         }else{
             _estado = 'INACTIVO';
@@ -2295,7 +2239,7 @@
         let _usuaid = "<?php echo $xUsuaid; ?>";
         let _check = $("#chkmoti" + _motid).is(":checked");
         let _checked = "";
-        let _class = "badge badge-light-success";
+        let _class = "badge badge-light-primary";
         let _td = "tdmot_" + _motid;
 
         if(_check){
@@ -2668,7 +2612,7 @@
                 _output = '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _especialidad + '</span><input type="hidden" id="txtEspeciPrestador' + _rowid + '" value="' + _especialidad + '"/></div></div></td>';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _pvp + '</span></div></div></td>';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _costo + '</span></div></div></td>';
-                _output += '<td id="td_' + _rowid + '"><div class="d-flex align-items-center"><div class="ms-5"><div class="badge badge-light-primary">Activo</div></div></div></td>';                        
+                _output += '<td id="td_' + _rowid + '"><div class="d-flex align-items-center"><div class="ms-5"><div class="badge badge-light-primary">ACTIVO</div></div></div></td>';                        
                 _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                 _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _rowid + '" onchange="f_UpdateEstado(';
                 _output += _paisid + ',' + _emprid + ',' + _rowid + ')" value="' + _rowid + '"/></div></div></td>';
@@ -2753,9 +2697,12 @@
             return;                    
         }
 
-        if(_numdocumento.length < 10){
-            toastSweetAlert("top-end",3000,"error","Documento Incorrecto..!!");
-            return;                    
+        if(_numdocumento != ''){
+            _valor = document.getElementById("txtNumDocumento").value;
+            if( !(/^(\d{10}|\d{13})$/.test(_valor)) ) {
+                toastSweetAlert("top-end",3000,"error","Documento Incorrecto..!");  
+                return;
+		    }                
         }
 
         if(_nombres == ''){
@@ -2774,19 +2721,24 @@
             return;                    
         }  
         
-        if(_telefono != ''){
-            if(_telefono.length < 7){
-                toastSweetAlert("top-end",3000,"error","Telefono Incorrecto..!!");
-                return; 
-            }
-        }
 
-        if(_celular != ''){
-            if(_celular.length < 10){
-                toastSweetAlert("top-end",3000,"error","Celular Incorrecto..!!");
-                return; 
+        if(_telefono != '')
+        {
+            _valor = document.getElementById("txtFonoProf").value;
+            if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
+                toastSweetAlert("top-end",3000,"error","Telefono Incorrecto..!");  
+                return;
             }
-        }
+        }   
+
+        if(_celular != '')
+		{
+			_valor = document.getElementById("txtCelularProf").value;
+			if( !(/^\d{10}$/.test(_valor)) ) {
+				toastSweetAlert("top-end",3000,"error","Celular Incorrecto..!"); 
+				return;
+			}
+		}
 
         if(_selecc == 'SI'){
             var _imagen = document.getElementById("imgavatar");

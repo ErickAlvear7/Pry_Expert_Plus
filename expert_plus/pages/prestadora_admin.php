@@ -200,7 +200,7 @@
         let _usuaid = "<?php echo $xUsuaid; ?>";
         let _check = $("#chk" + _presid).is(":checked");
         let _checked = "";
-        let _class = "badge badge-light-success";
+        let _class = "badge badge-light-primary";
         let _td = "td_" + _presid;
         let _btnedit = "btnEditar_" + _presid;
 

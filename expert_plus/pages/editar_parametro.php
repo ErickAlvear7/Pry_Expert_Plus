@@ -201,7 +201,7 @@
 
                                             if($xPadeEstado == 'A'){
                                                 $xEstado = 'ACTIVO';
-                                                $xTextColor = "badge badge-light-success";
+                                                $xTextColor = "badge badge-light-primary";
                                                 $xCheking = 'checked="checked"';
                                             
                                             }else{
@@ -386,7 +386,7 @@
                             _padev = _valorV;
                             _padei = _valorI;
                             _estado = 'ACTIVO';
-                            _class = "badge badge-light-success";
+                            _class = "badge badge-light-primary";
                             _status = '<div class="' + _class + '">' + _estado + ' </div>';
                             _checked = "checked='checked'";
 
@@ -577,7 +577,7 @@
                             _padev = _valorV;
                             _padei = _valorI;
                             _estado = 'ACTIVO';
-                            _class = "badge badge-light-success";
+                            _class = "badge badge-light-primary";
                             _status = '<div class="' + _class + '">' + _estado + ' </div>';
 
 
@@ -718,7 +718,7 @@
         let _checked = "";
         let _disabled = "";
         let _td = "td_" + _padeid;
-        let _class = "badge badge-light-success";
+        let _class = "badge badge-light-primary";
         let _btnedit = "btnEditar_" + _padeid;
 
         if(_check){
