@@ -876,7 +876,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label class="required form-label">Valor/Codigo
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title=""></i>
+                                    
                                 </label>
                                 <input type="text" class="form-control mb-2" minlength="1" maxlength="100" placeholder="Valor/Codigo" name="txtCodigoTipo" id="txtCodigoTipo" />
                             </div>
@@ -950,7 +950,7 @@
                                                     <div class="text-center">
                                                         <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                             <input <?php echo $xChkSelecc; ?> class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chktipo<?php echo $xPadeid; ?>" 
-                                                                onchange="f_UpdateEstTipo(<?php echo $xPadeid; ?>)" />
+                                                                onchange="f_UpdateEstTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)" />
                                                         </div>
                                                     </div>
                                                 </td> 													
@@ -1633,9 +1633,13 @@
                 var xrespuesta = $.post("codephp/grabar_tipoprofesion.php", _parametros);
                 xrespuesta.done(function(response){
 
+                    console.log(response);
                     var json = JSON.parse(response);
                     var _pacaid = json.Pacaid;
                     var _padeid = json.Padeid;
+
+                    console.log(_pacaid);
+                    console.log(_padeid);
 
                     if(_padeid > 0){
 
@@ -1648,6 +1652,9 @@
                             _output += _pacaid + ',' + _padeid + ')" value="' + _padeid + '"/></div></div></td>';
                             _output += '<td><div class="btn-group"><button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
                             _output += 'title="Editar Tipo Profesion" onclick="f_EditarTipo(' + _pacaid + ',' + _padeid + ')" ><i class="fa fa-edit"></i></button></div></td></tr>';
+                            
+                            console.log(_output);
+
                         }else{
                             _output = '<td>' + _tipoprofesion.toUpperCase() + '<input type="hidden" id="txtPadeid'  + _padeid + '" value="' + _padeid + '"/> <input type="hidden" id="txtTiprofe'  + _padeid + '" value="' + _tipoprofesion + '"/> <input type="hidden" id="txtValor' + _padeid + '" value="' + _valcodigoprof  + '"/></td>';
                             _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-success">ACTIVO</div></div></td>';
@@ -2248,7 +2255,10 @@
     }
 
     //Cambiar estado Nuevo Tipo Profesion Modal
-    function f_UpdateEstTipo(_padeid){  
+    function f_UpdateEstTipo(_pacaid, _padeid){  
+
+        alert(_padeid);
+        debugger;
         var _check = $("#chktipo" + _padeid).is(":checked");
         var _checked = '';
         var _class = '';
@@ -2259,7 +2269,7 @@
         if(_check){
             _checked = "checked='checked'";
             _class = 'badge badge-light-success';
-            $('#'+_btnedit).prop('disabled',false);  
+            $('#'+_btnedit).prop('disabled',false); 
         }else{
             _estado = 'INACTIVO';
             _class = 'badge badge-light-danger';
