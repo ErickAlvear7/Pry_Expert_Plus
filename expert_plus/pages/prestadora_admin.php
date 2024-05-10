@@ -122,7 +122,7 @@
                                 if($xEstado == 'A'){
                                     $xEstado = 'ACTIVO';
                                     $chkEstado = 'checked="checked"';
-                                    $xTextColor = "badge badge-light-success";
+                                    $xTextColor = "badge badge-light-primary";
                                 }else{
                                     $xEstado = 'INACTIVO';
                                     $xTextColor = "badge badge-light-danger";

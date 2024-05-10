@@ -146,7 +146,7 @@
                 </div>
                 <div class="card-body pt-0">
                     <button type="button" id="btnNewGrupo" class="btn btn-light-primary btn-sm mb-10"><i class="las la-plus-circle"></i>Nuevo Grupo</button>
-                    <button type="button" id="btnEditGrupo" class="btn btn-light-primary btn-sm mb-10"><i class="fa fa-envelope-open-text text-primary mr-5"></i>Editar Grupo</button>
+                    <button type="button" id="btnEditGrupo" class="btn btn-light-primary btn-sm mb-10"><i class="las la-pencil-alt"></i>Editar Grupo</button>
 
                 </div>
             </div>
@@ -591,7 +591,7 @@
                                         <td><?php echo $xGrupo; ?></td>
                                         <td><?php echo $xSecAgenda; ?></td>
                                         <td><?php echo $xSecCancela; ?></td>
-                                        <td id="td_<?php echo $xId; ?>">
+                                        <td id="tdgru_<?php echo $xId; ?>">
                                             <div class="<?php echo $xTextColor; ?>">
                                                 <?php echo $xEstado; ?>
                                             </div>
@@ -600,8 +600,8 @@
                                         <td class="text-end">
                                             <div class="text-center">
                                                 <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                    <input class="form-check-input h-20px w-20px border-primary" <?php echo $xChkEstado; ?> type="checkbox" id="chk<?php echo $xId; ?>" 
-                                                    onchange="f_UpdateEstGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>)" value="<?php echo $xId; ?>"/>
+                                                    <input class="form-check-input h-20px w-20px border-primary" <?php echo $xChkEstado; ?> type="checkbox" id="chkgru<?php echo $xId; ?>" 
+                                                    onchange="f_UpdateEstGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xUsuaid; ?>)" value="<?php echo $xId; ?>"/>
                                                 </div>
                                             </div>
                                         </td>
@@ -609,8 +609,8 @@
                                         <td class="text-end">
                                             <div class="text-center">
                                                 <div class="btn-group">
-                                                    <button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Grupo' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarGrupo(<?php echo $xId; ?>)">
-                                                    <i class='fa fa-edit'></i>
+                                                    <button id="btnEditargru_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Grupo' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarGrupo(<?php echo $xId; ?>)">
+                                                        <i class='fa fa-edit'></i>
                                                     </button>
                                                 </div>
                                             </div>
@@ -1185,6 +1185,42 @@
         var xrespuesta = $.post("codephp/update_estadoproducto.php", _parametros);
         xrespuesta.done(function(response){
         });	
+
+    }
+
+    function f_UpdateEstGrupo(_paisid, _emprid, _id, _usuaid){
+
+        let _check= $('#chkgru'+_id).is(':checked');
+        let _checked = "";
+        let _class = "badge badge-light-primary";
+        let _td = "tdgru_" + _id;
+        let _btnedit = "btnEditargru_" + _id;
+        let _estado;
+
+        if(_check){
+            _estado = 'ACTIVO';
+            _checked = "checked='checked'";
+            $('#'+_btnedit).prop("disabled",false);
+        }else{
+            _estado = 'INACTIVO';
+            _class = "badge badge-light-danger";
+            $('#'+_btnedit).prop("disabled",true);
+        }
+
+        var _changetd = document.getElementById(_td);
+        _changetd.innerHTML = '<div class="' + _class + '">'+_estado+'</div>';
+
+        _parametros = {
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxGrupoid" : _id,
+            "xxUsuaid" : _usuaid,
+            "xxEstado" : _estado
+        } 
+
+        var xrespuesta = $.post("codephp/update_estadogrupo.php", _parametros);
+            xrespuesta.done(function(response){
+        });        
 
     }
 

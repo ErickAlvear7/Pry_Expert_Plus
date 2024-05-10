@@ -458,7 +458,7 @@
                                                             if($xEstado == 'A'){
                                                                 $xEstado = 'ACTIVO';
                                                                 $chkEstado = 'checked="checked"';
-                                                                $xTextColor = "badge badge-light-success";
+                                                                $xTextColor = "badge badge-light-primary";
                                                             }else{
                                                                 $xEstado = 'INACTIVO';
                                                                 $xTextColor = "badge badge-light-danger";
@@ -943,7 +943,7 @@
 
                                                 if($xEstado == 'A'){
                                                     $xChkSelecc = 'checked="checked"';
-                                                    $xTextColor = "badge badge-light-success";
+                                                    $xTextColor = "badge badge-light-primary";
                                                     $xEstadoTxt = 'ACTIVO';
                                                 }else{
                                                     $xTextColor = "badge badge-light-danger";
@@ -1585,7 +1585,7 @@
                     _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _especialidad + '</span><input type="hidden" id="txtEspecialidad' + _id + 'value="' + _especialidad +  '" /></div></div></td>';
                     _output += '<td><div class=""><div class="ms-5"><span class="fw-bolder">' + _pvp + '</span></div></div></td>';
                     _output += '<td><div class=""><div class="ms-5"><span class="fw-bolder">' + _costo + '</span></div></div></td>';
-                    _output += '<td id="td_' + _id + '"><div class=""><div class="ms-5"><div class="badge badge-light-success">ACTIVO</div></div></div></td>';                        
+                    _output += '<td id="td_' + _id + '"><div class=""><div class="ms-5"><div class="badge badge-light-primary">ACTIVO</div></div></div></td>';                        
                     _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                     _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _cboespe + '" onchange="f_UpdateEstado(';
                     _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
@@ -2008,7 +2008,7 @@
 
                     if(_estado == "ACTIVO"){
                         _checked = "checked='checked'";
-                        _textcolor = "badge badge-light-success";
+                        _textcolor = "badge badge-light-primary";
                     }else{
                         _textcolor = "badge badge-light-danger";
                         _disabledbtn1 = 'disabled';
@@ -2225,7 +2225,7 @@
         let _usuaid = "<?php echo $xUsuaid; ?>";
         let _check = $("#chkprof" + _pfesid).is(":checked");
         let _checked = "";
-        let _class = "badge badge-light-success";
+        let _class = "badge badge-light-primary";
         let _td = "tdprof_" + _pfesid;
         let _btnhorario = "btnHorario_" + _pfesid;
         let _btnelimina = "btnDelProf_" + _pfesid;
@@ -2569,7 +2569,7 @@
         let _usuaid = "<?php echo $xUsuaid; ?>";
         let _check = $("#chk" + _preeid).is(":checked");
         let _checked = "";
-        let _class = "badge badge-light-success";
+        let _class = "badge badge-light-primary";
         let _td = "td_" + _preeid;
         let _btnedit = "btnEditar_" + _preeid;
 
