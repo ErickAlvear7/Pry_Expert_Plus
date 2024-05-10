@@ -1865,14 +1865,14 @@
             var _pos = _urlimg.trim().indexOf('.');
             var _ext = _urlimg.trim().substr(_pos, 5);
 
-            if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
+            if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
                 var _imagen = document.getElementById("imglogo");
                 var _file = _imagen.files[0];
                 var _fullPath = document.getElementById('imglogo').value;
                 _ext = _fullPath.substring(_fullPath.length - 4);
                 _ext = _ext.toLowerCase();   
 
-                if(_ext.trim() == '.png' || _ext.trim() == '.jpg' || _ext.trim() == 'jpeg'){
+                if(_ext.trim() == '.png' || _ext.trim() == '.jpg' || _ext.trim() == '.jpeg' || _ext.trim() == 'jpeg' ){
                     _cambiarlogo = 'SI';
                 }else{
                     toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una Imagen..!"); 
