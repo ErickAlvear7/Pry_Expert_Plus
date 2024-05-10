@@ -322,15 +322,15 @@
                                         <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono1; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono1; ?>" />
                                             </div>
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono2; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono2; ?>" />
                                             </div> 
                                             <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="10" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono3; ?>" />
+                                                <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono3" id="txtFono3" maxlength="9" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono3; ?>" />
                                             </div>                                                        
                                         </div>
                                         <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
@@ -429,12 +429,12 @@
                                             <thead>
                                                 <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                                     <th style="display: none;">Id</th>
-                                                    <th class="">Especialidad</th>
-                                                    <th class="">Pvp</th>
-                                                    <th class="">Costo</th>
-                                                    <th class="">Estado</th>
-                                                    <th class="">Status</th>
-                                                    <th class="">Opciones</th>
+                                                    <th class="min-w-125px">Especialidad</th>
+                                                    <th>Pvp</th>
+                                                    <th>Costo</th>
+                                                    <th class="min-w-125px">Estado</th>
+                                                    <th>Status</th>
+                                                    <th class="min-w-125px" style="text-align: center;">Opciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="fw-bold text-gray-600">
@@ -454,6 +454,7 @@
                                                             $chkEstado = '';
                                                             $xDisabledEdit = '';
                                                             $xDisabledPerson = '';
+                                                            $xDisabledMotivos = '';
                         
                                                             if($xEstado == 'A'){
                                                                 $xEstado = 'ACTIVO';
@@ -464,38 +465,19 @@
                                                                 $xTextColor = "badge badge-light-danger";
                                                                 $xDisabledEdit = 'disabled';
                                                                 $xDisabledPerson = 'disabled';
+                                                                $xDisabledMotivos = 'disabled';
                                                             }
                         
                                                         ?>
                                                         <tr id="row_<?php echo $xId; ?>">
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="ms-5">
-                                                                        <span class="fw-bolder"><?php echo $xEspecialidad; ?></span>
-                                                                        <input type="hidden" id="txtEspeciPrestador<?php echo $xId; ?>" value="<?php echo $xEspecialidad; ?>" />
-                                                                    </div>
-                                                                </div>
+                                                            <td>  
+                                                                <?php echo $xEspecialidad; ?>
+                                                                <input type="hidden" id="txtEspeciPrestador<?php echo $xId; ?>" value="<?php echo $xEspecialidad; ?>" />
                                                             </td>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="ms-5">
-                                                                        <span class="fw-bolder"><?php echo $xPvp; ?></span>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="ms-5">
-                                                                        <span class="fw-bolder"><?php echo $xCosto; ?></span>
-                                                                    </div>
-                                                                </div>
-                                                            </td>                                    
-                                                            <td id="td_<?php echo $xId; ?>">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="ms-5">
-                                                                        <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
-                                                                    </div>
-                                                                </div>
+                                                            <td> <?php echo $xPvp; ?></td>
+                                                            <td><?php echo $xCosto; ?> </td>                               
+                                                            <td id="td_<?php echo $xId; ?>"> 
+                                                                <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div> 
                                                             </td>
                                                             <td>
                                                                 <div class="text-center">
@@ -505,16 +487,16 @@
                                                                     </div>
                                                                 </div>
                                                             </td> 													
-                                                            <td class="">
-                                                                <div class="">
+                                                            <td>
+                                                                <div class="text-center">
                                                                     <div class="btn-group">
-                                                                        <button id="btnEditar_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Especialidad Asiganada' data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                                        <button id="btnEditar_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Especialidad' data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class='fa fa-edit'></i>
                                                                         </button>	
-                                                                        <button id="btnPerson_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick='f_AgregarProfesional(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>,<?php echo $xId; ?>)' title='Agregar Profesional'data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                                        <button id="btnPerson_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick='f_AgregarProfesional(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>,<?php echo $xId; ?>)' title='Agregar Profesional' data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class="fas fa-user"></i>
                                                                         </button>	
-                                                                        <button id="btnMotivos_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick='f_AgregarMotivos(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xPresid; ?>,<?php echo $xEspeid; ?>)' title='Agregar Motivos'data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                                        <button id="btnMotivos_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledMotivos; ?> onclick='f_AgregarMotivos(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xPresid; ?>,<?php echo $xEspeid; ?>)' title='Agregar Motivos' data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class="fas fa-book"></i>
                                                                         </button>	                                                                                                                                                                                                      
                                                                     </div>
@@ -766,10 +748,10 @@
                                 <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                     <th class="min-w-125px">Profesional</th>
                                     <th class="min-w-125px">Tipo_Profesion</th>
-                                    <th class="min-w-125px">Intervalo</th>
+                                    <th>Intervalo</th>
                                     <th class="min-w-125px">Estado</th>
-                                    <th class="min-w-125px">Status</th>
-                                    <th class="min-w-125px">Opciones</th>
+                                    <th>Status</th>
+                                    <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody class="fw-bold text-gray-600"></tbody>
@@ -870,7 +852,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Tipo Profesional</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Tipo Profesion</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -915,14 +897,14 @@
                                 <thead>
                                     <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-125px">Tipo Profesion</th>
-                                        <th class="min-w-125px">Estado</th>
-                                        <th class="min-w-125px">Status</th>                                
-                                        <th class="min-w-125px">Opciones</th>
+                                        <th>Estado</th>
+                                        <th>Status</th>                                
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
 
                                 <?php 
-                                    $xSQL = "SELECT pca.paca_id,pde.pade_id,pde.pade_nombre,pde.pade_estado,pde.pade_valorV FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Profesion' AND pca.paca_estado='A' AND pde.pade_estado='A' ORDER BY pde.pade_orden ";
+                                    $xSQL = "SELECT pca.paca_id,pde.pade_id,pde.pade_nombre,pde.pade_estado,pde.pade_valorV FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Profesion' ORDER BY pde.pade_orden ";
                                     $all_tipos = mysqli_query($con, $xSQL);
                                 ?>
                                 <tbody class="text-gray-600 fw-bold">
@@ -968,13 +950,13 @@
                                                     <div class="text-center">
                                                         <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                             <input <?php echo $xChkSelecc; ?> class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chktipo<?php echo $xPadeid; ?>" 
-                                                                onchange="f_UpdateEstTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)" />
+                                                                onchange="f_UpdateEstTipo(<?php echo $xPadeid; ?>)" />
                                                         </div>
                                                     </div>
                                                 </td> 													
                                                 <td>
                                                     <div class="btn-group">
-                                                        <button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Tipo Profesion' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)">
+                                                        <button id="btnEdiTipo_<?php echo $xPadeid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Tipo Profesion' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)">
                                                             <i class='fa fa-edit'></i>
                                                         </button>	                                                
                                                     </div>
@@ -1077,7 +1059,7 @@
                                         </div>
                                     <div class="col-md-6">
                                         <label class="required form-label">Numero Documento</label>
-                                        <input type="text" name="txtNumDocumento" id="txtNumDocumento" class="form-control mb-2" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Numero Documento"  />
+                                        <input type="text" name="txtNumDocumento" id="txtNumDocumento" class="form-control mb-2" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Numero Documento"  />
                                     </div>
                                 </div>
                                 <div class="row mb-4">
@@ -1150,7 +1132,7 @@
                             <div id="direccion_profesional" class="collapse fs-6 ps-12" data-bs-parent="#datos_profesional">
                                 <div class="row mb-4">
                                     <div class="col-md-12">
-                                        <textarea class="form-control mb-2 text-uppercase" name="txtDireccionProf" id="txtDireccionProf" rows="1" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDireccion; ?> </textarea>
+                                        <textarea class="form-control mb-2" name="txtDireccionProf" id="txtDireccionProf" rows="1" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDireccion; ?> </textarea>
                                     </div>
                                 </div>
                             </div>
@@ -1178,7 +1160,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="fs-6 fw-bold mt-3 mb-3">Telefono</div>
-                                        <input type="text" class="form-control mb-3" name="txtFonoProf" id="txtFonoProf" maxlength="9" placeholder="029999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                        <input type="text" class="form-control mb-3" name="txtFonoProf" id="txtFonoProf" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                     </div>
                                     <div class="col-md-6">
                                         <div class="fs-6 fw-bold mt-3 mb-3">Celular</div>
@@ -1234,8 +1216,8 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="mb-2">Motivos Especialidad</h2>
-                <h2 id="headerTitleMotivo" class="fs-6 fw-bold form-label mb-2"></h2>
+                <h2 class="mb-2 badge badge-light-primary fw-light fs-2 fst-italic">Motivos Especialidad</h2>
+                <h2 id="headerTitleMotivo" class="fs-6 fw-bold form-label mb-2 text-primary"></h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1251,7 +1233,7 @@
                         <div class="row">
                             <div class="col-md-10">
                                  <label class="required form-label">Motivo Especialidad</label>
-                                 <textarea class="form-control mb-2 text-uppercase" name="txtmotivo" id="txtmotivo" maxlength="500" rows="1" onkeydown="return (event.keyCode!=13);"></textarea>
+                                 <textarea class="form-control mb-2" name="txtmotivo" id="txtmotivo" maxlength="500" rows="1" onkeydown="return (event.keyCode!=13);"></textarea>
                             </div>
                         </div>
                         <div class="form-group mt-5 mb-4">
@@ -1265,11 +1247,11 @@
                             Agregar Motivo
                             </button>
                         </div>
-                        <table id="tblMotivo" class="table table-hover align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
+                        <table id="tblMotivo" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
                             <thead>
-                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                    <th>Motivo</th>
-                                    <th>Estado</th>
+                                <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                                    <th class="max-w-125px"">Motivo</th>
+                                    <th class="min-w-125px">Estado</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -1279,7 +1261,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
@@ -1364,6 +1346,7 @@
         $('#btnAddespe').click(function(){
 
             $("#modal-add-especialidad").modal("show");
+            $("#cboEspecialidad").val(0).change();
         });
 
         $("#btnNuevaEspe").click(function(){
@@ -1413,12 +1396,12 @@
             var _pvpnew = $("#txtPvpNew").val();
 
             if(_cbotipoespe == ''){
-                toastSweetAlert("top-end",3000,"warning","Seleccion Tipo Especialidad");
+                toastSweetAlert("top-end",3000,"warning","Seleccion Tipo Especialidad..!!");
                 return;
             }
 
             if(_especialidad == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Especialidad");
+                toastSweetAlert("top-end",3000,"warning","Ingrese Especialidad..!!");
                 return;
             }
 
@@ -1438,10 +1421,10 @@
             var xrespuesta = $.post("codephp/grabar_especialidad.php", _parametros);
             xrespuesta.done(function(response){
                 if(response.trim() == 'EXISTE'){
-                    toastSweetAlert("top-end",3000,"info","Especialidad ya Existe..!!");
+                    toastSweetAlert("top-end",3000,"warning","Especialidad ya Existe..!!");
                 }else{
                     if(response.trim() != 'ERR'){
-                        toastSweetAlert("top-end",3000,"success","Nueva Especialidad Agregada");
+                        toastSweetAlert("top-end",3000,"success","Especialidad Agregada");
                         $("#cboEspecialidad").empty();
                         $("#cboEspecialidad").html(response);
                         $("#modal-new-especialidad").modal("hide");
@@ -1456,12 +1439,12 @@
             var _valorv = $.trim($("#txtValor").val());
 
             if(_tipoprestador == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Prestador");
+                toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Prestador..!!");
                 return;
             }
 
             if(_valorv == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Valor");
+                toastSweetAlert("top-end",3000,"warning","Ingrese Valor..!!");
                 return;
             }
 
@@ -1476,10 +1459,10 @@
             var xrespuesta = $.post("codephp/grabar_tipoprestador.php", _parametros);
             xrespuesta.done(function(response){
                 if(response.trim() == 'EXISTE'){
-                    toastSweetAlert("top-end",3000,"info","Tipo Prestador/Valor ya Existe");
+                    toastSweetAlert("top-end",3000,"info","Tipo Prestador/Valor ya Existe..!!");
                 }else{
                     if(response.trim() != 'ERR'){
-                        toastSweetAlert("top-end",3000,"success","Tipo Prestador Agregado");
+                        toastSweetAlert("top-end",3000,"success","Prestador Agregado");
                         $("#cboTipo").empty();
                         $("#cboTipo").html(response);
                         $("#modal-new-tipoprestador").modal("hide");
@@ -1506,7 +1489,7 @@
                     }
                 }else{
                     $('#chkEnviar1').prop('checked','');
-                    toastSweetAlert("top-end",3000,"error","Email no es Valido");
+                    toastSweetAlert("top-end",3000,"error","Email no es Valido..!!");
                     _enviar1 = 'SI';
                     return;
                 }
@@ -1534,7 +1517,7 @@
                     }                            
                 }else{
                     $('#chkEnviar2').prop('checked','');
-                    toastSweetAlert("top-end",3000,"error","Email no es Valido");
+                    toastSweetAlert("top-end",3000,"error","Email no es Valido..!!");
                     _enviar2 = 'NO';
                     return;
                 }
@@ -1589,16 +1572,22 @@
                     _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                     _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _cboespe + '" onchange="f_UpdateEstado(';
                     _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
-                    _output += '<td class=""><div class=""><div class="btn-group"><button id="btnEditar_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
-                    _output += 'title="Editar Especialidad Asiganada" ><i class="fa fa-edit"></i></button></div></div></td></tr>';
+                    _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEditar_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
+                    _output += 'title="Editar Especialidad"><i class="fa fa-edit"></i></button>';
+                    _output += '<button id="btnPerson_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarProfesional(' + _paisid + ',' + _emprid + ',' + _presid + ',' + _id + ') title="Agregar Profesional" data-bs-toggle="tooltip" data-bs-placement="left" >';
+                    _output += '<i class="fas fa-user"></i></button>';
+                    _output += '<button id="btnMotivos_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarMotivos(' + _paisid + ',' + _emprid + ',' + _id + ',' + _presid + ',' +_cboespe + ') title="Agregar Motivos" data-bs-toggle="tooltip" data-bs-placement="left" >';
+                    _output += '<i class="fas fa-book"></i></button>';
+                    _output += '</div></div></td></tr>';
 
                     $('#tblEspecialidad').append(_output);
+                    //console.log(_output);
 
-                    //mensajesalertify('Especialidad Agregada Correctamente..!', 'S', 'top-center', 3);
+                    //mensajesalertify('Especialidad Agregada Correctamente..!', 'S', 'top-center', 3); 
                     $("#modal-add-especialidad").modal("hide");
                     toastSweetAlert("top-end",3000,"success","Especialidad Agregada");
                 }else{
-                    toastSweetAlert("top-end",3000,"info","Especialidad ya está Asignada..!");
+                    toastSweetAlert("top-end",3000,"error","Especialidad ya Existe..!!");
                 }
 
                 $("#cboEspecialidad").val(0).change();
@@ -1614,12 +1603,12 @@
             var _continuar = true;
 
             if(_tipoprofesion == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Profesion..!");
+                toastSweetAlert("top-end",3000,"warning","Ingrese Profesion..!!");
                 return;
             }
 
             if(_valcodigoprof == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Valor/Codigo Tipo Profesion..!");
+                toastSweetAlert("top-end",3000,"warning","Ingrese Valor/Codigo..!!");
                 return;
             }
 
@@ -1653,33 +1642,30 @@
                         if(_btnopctiontipo == 'Add'){
                             _output = '<tr id="tr_' + _padeid + '">';    
                             _output += '<td>' + _tipoprofesion.toUpperCase() + '<input type="hidden" id="txtPadeid' + _padeid + '" value="' + _padeid + '"/> <input type="hidden" id="txtTiprofe' + _padeid + '" value="' + _tipoprofesion + '"/> <input type="hidden" id="txtValor' + _padeid + '" value="' + _valcodigoprof  + '"/></td>';
-                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-primary">Activo</div></div></td>';
+                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-success">ACTIVO</div></div></td>';
                             _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                             _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _padeid + '" onchange="f_UpdateEstTipo(';
                             _output += _pacaid + ',' + _padeid + ')" value="' + _padeid + '"/></div></div></td>';
-                            _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
-                            _output += 'title="Editar Tipo Profesion" onclick="f_EditarTipo(' + _pacaid + ',' + _padeid + ')" ><i class="fa fa-edit"></i></button></div></div></td></tr>';
+                            _output += '<td><div class="btn-group"><button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
+                            _output += 'title="Editar Tipo Profesion" onclick="f_EditarTipo(' + _pacaid + ',' + _padeid + ')" ><i class="fa fa-edit"></i></button></div></td></tr>';
                         }else{
                             _output = '<td>' + _tipoprofesion.toUpperCase() + '<input type="hidden" id="txtPadeid'  + _padeid + '" value="' + _padeid + '"/> <input type="hidden" id="txtTiprofe'  + _padeid + '" value="' + _tipoprofesion + '"/> <input type="hidden" id="txtValor' + _padeid + '" value="' + _valcodigoprof  + '"/></td>';
-                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-primary">Activo</div></div></td>';
+                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-success">ACTIVO</div></div></td>';
                             _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                             _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _padeid + '" onchange="f_UpdateEstTipo(';
                             _output += _pacaid + ',' + _padeid + ')" value="' + _padeid + '"/></div></div></td>';
-                            _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
-                            _output += 'title="Editar Tipo Profesion" onclick="f_EditarTipo(' + _pacaid + ',' + _padeid + ')" ><i class="fa fa-edit"></i></button></div></div></td>';                                    
+                            _output += '<td><div class="btn-group"><button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
+                            _output += 'title="Editar Tipo Profesion" onclick="f_EditarTipo(' + _pacaid + ',' + _padeid + ')" ><i class="fa fa-edit"></i></button></div></td>';                                    
                         }
 
                         if(_btnopctiontipo == 'Add'){
                             $('#tblTipoProfesion').append(_output);
                             //_mensaje = "Tipo Profesion Agregada Correctamente..!";
-                            toastSweetAlert("top-end",3000,"success","Tipo Profesion Agregado Correctamente..!");
+                            toastSweetAlert("top-end",3000,"success","Profesional Agregado");
                         }else{
                             $('#tr_' + _padeid + '').html(_output);
-                            //_mensaje = "Tipo Profesion Modificada Correctamente..!";
-                            toastSweetAlert("top-end",3000,"success","Tipo Profesion Modificado Correctamente..!");
+                            toastSweetAlert("top-end",3000,"success","Profesional Modificado");
                         }                                
-
-                        //toastSweetAlert("top-end",3000,"success",_mensaje);
 
                         //Listar Nuevamente los tipos de Profesion
                         var _parametros = {
@@ -1694,7 +1680,7 @@
                             $("#cboTipoProfesion").html(xresponse);
                         });                                
                     }else{
-                        toastSweetAlert("top-end",3000,"info","Tipo Profesion ya existe.!");                           
+                        toastSweetAlert("top-end",3000,"warning","Profesion ya Existe.!!");                           
                     }
 
                     $("#txtTipoProfesion").val('');
@@ -1769,7 +1755,7 @@
             }
 
             if(_prestador == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Nombre del Prestador..!"); 
+                toastSweetAlert("top-end",3000,"warning","Ingrese Prestador..!"); 
                 return;                         
             }
 
@@ -1795,7 +1781,7 @@
             if(_telefono1 != '')
             {
                 _valor = document.getElementById("txtFono1").value;
-                if( !(/^\d{9}$/.test(_valor)) ) {
+                if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
                     toastSweetAlert("top-end",3000,"error","Telefono 1 incorrecto..!"); 
                     return;
                 }
@@ -1804,7 +1790,7 @@
             if(_telefono2 != '')
             {
                 _valor = document.getElementById("txtFono2").value;
-                if( !(/^\d{9}$/.test(_valor)) ) {
+                if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
                     toastSweetAlert("top-end",3000,"error","Telefono 2 incorrecto..!");  
                     return;
                 }
@@ -1812,8 +1798,9 @@
 
             if(_telefono3 != '')
             {
-                _valor = document.getElementById("txtFono3").value;
-                if( !(/^\d{9}$/.test(_valor)) ) {
+            
+               _valor = document.getElementById("txtFono3").value;
+                if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
                     toastSweetAlert("top-end",3000,"error","Telefono 3 incorrecto..!");  
                     return;
                 }
@@ -2053,6 +2040,7 @@
         var _profesional = $('#cboProfesional option:selected').text();
         var _profesion = $('#cboTipoProfe option:selected').text();
         var _intervalo = $('#txtIntervalo').val();
+        
 
         if(_profid == 0){
             toastSweetAlert("top-end",3000,"warning","Seleccione Profesional..!"); 
@@ -2083,7 +2071,7 @@
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _profesional + '</span><input type="hidden" id="txtProfesional_' + _id + '" value="' + _profesional +  '" /></div></div></td>';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _profesion + '</span></div></div></td>';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
-                _output += '<td id="tdprof_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="badge badge-light-primary">Activo</div></div></div></td>';
+                _output += '<td id="tdprof_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="badge badge-light-success">ACTIVO</div></div></div></td>';
                 _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                 _output += '<input class="form-check-input h-20px w-20px border-primary" type="checkbox" checked="checked" id="chkprof' + _id + '" onchange="f_UpdateEstProf(';
                 _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
@@ -2143,15 +2131,15 @@
 
                     if(_estado == "A"){
                         _checked = "checked='checked'";
-                        _textcolor = "badge badge-light-primary";
+                        _textcolor = "badge badge-light-success";
                     }else{
                         _textcolor = "badge badge-light-danger";
                     }
 
                     if(_estado == 'A'){
-                        _estado = 'Activo';
+                        _estado = 'ACTIVO';
                     }else{
-                        _estado = 'Inactivo';
+                        _estado = 'INACTIVO';
                     }
 
                     _output = '<tr id="trmot_' + _id + '">';
@@ -2199,9 +2187,9 @@
 
                 _id = response.trim();
 
-                _estado = 'Activo';
+                _estado = 'ACTIVO';
                 _checked = "checked='checked'";
-                _textcolor = "badge badge-light-primary";                
+                _textcolor = "badge badge-light-success";                
 
                 _output = '<tr id="trmot_' + _id + '">';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _motivo.toUpperCase() + '</span><input type="hidden" id="txtMotivo_' + _id + '" value="' + _motivo + '" /></div></div></td>';
@@ -2259,19 +2247,52 @@
         });
     }
 
+    //Cambiar estado Nuevo Tipo Profesion Modal
+    function f_UpdateEstTipo(_padeid){  
+        var _check = $("#chktipo" + _padeid).is(":checked");
+        var _checked = '';
+        var _class = '';
+        var _td = 'td_' + _padeid;
+        var _estado = 'ACTIVO';
+        var _btnedit = 'btnEdiTipo_' + _padeid;
+
+        if(_check){
+            _checked = "checked='checked'";
+            _class = 'badge badge-light-success';
+            $('#'+_btnedit).prop('disabled',false);  
+        }else{
+            _estado = 'INACTIVO';
+            _class = 'badge badge-light-danger';
+            $('#'+_btnedit).prop('disabled',true);
+        }
+        
+        var _changetd = document.getElementById(_td);
+        _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
+
+        var _parametros = {
+            "xxPadeid" : _padeid,
+            "xxEstado" : _estado,
+        }
+
+        var xrespuesta = $.post("codephp/update_tipoprofesion.php", _parametros);
+            xrespuesta.done(function(response){
+
+        });
+    }
+
     function f_UpdateMotivo(_paisid, _emprid, _motid){
 
         let _usuaid = "<?php echo $xUsuaid; ?>";
         let _check = $("#chkmoti" + _motid).is(":checked");
         let _checked = "";
-        let _class = "badge badge-light-primary";
+        let _class = "badge badge-light-success";
         let _td = "tdmot_" + _motid;
 
         if(_check){
-            _estado = "Activo";
+            _estado = "ACTIVO";
             _checked = "checked='checked'";
         }else{                    
-            _estado = "Inactivo";
+            _estado = "INACTIVO";
             _class = "badge badge-light-danger";
         }
 
@@ -2368,10 +2389,10 @@
         var xrespuesta = $.post("codephp/consultar_horarioprofesional.php", _parametros);
             xrespuesta.done(function(response){
             if(response.trim() == 'OK'){
-                toastSweetAlert("top-end",3000,"error","Registro Eliminado..!");
+                toastSweetAlert("top-end",3000,"error","Registro Eliminado");
                 $('#trprof_' + _pfesid).remove();
             }else{
-                toastSweetAlert("top-end",3000,"info","El registro tiene horarios configurados..!");
+                toastSweetAlert("top-end",3000,"warning","El registro tiene horarios configurados..!!");
             }
         });
     }
@@ -2390,10 +2411,10 @@
         var xrespuesta = $.post("codephp/del_horarioprofesional.php", _parametros);
             xrespuesta.done(function(response){
             if(response.trim() == 'OK'){
-                toastSweetAlert("top-end",3000,"error","Registro Eliminado..!");
+                toastSweetAlert("top-end",3000,"error","Registro Eliminado");
                 $('#trhorario_' + _horaid).remove();
             }else{
-                toastSweetAlert("top-end",3000,"question","Hubo algun error, no se puedo eliminar..!");
+                toastSweetAlert("top-end",3000,"question","Hubo algun error, no se puedo eliminar..!!");
             }
         });
     }            
@@ -2434,7 +2455,7 @@
         var minutos_final = _horahasta.split(':').reduce((p, c) => parseInt(p) * 60 + parseInt(c));
         
         if (minutos_final < minutos_inicio){
-            toastSweetAlert("top-end",3000,"question","La Hora Inicio no puede ser mayor a la Hora Final..!");
+            toastSweetAlert("top-end",3000,"question","La Hora Inicio no puede ser mayor a la Hora Final..!!");
             return;
         } 
 
@@ -2480,7 +2501,7 @@
                 toastSweetAlert("top-end",3000,"success","Horario Agregado");
 
             }else{
-                toastSweetAlert("top-end",3000,"info","Dia - Turno/Horario ya existe..!");
+                toastSweetAlert("top-end",3000,"info","Dia - Turno/Horario ya Existe..!!");
             }
 
             $("#cboDias").val(0).change(); 
@@ -2564,6 +2585,7 @@
 
     }
 
+    //Update estado Especialidades 
     function f_UpdateEstado(_paisid, _emprid, _preeid){
         
         let _usuaid = "<?php echo $xUsuaid; ?>";
@@ -2572,19 +2594,26 @@
         let _class = "badge badge-light-primary";
         let _td = "td_" + _preeid;
         let _btnedit = "btnEditar_" + _preeid;
+        let _btnper = "btnPerson_" + _preeid;
+        let _btnmot = "btnMotivos_" + _preeid;
+        
 
         if(_check){
             _estado = "ACTIVO";
             _checked = "checked='checked'";
             $('#'+_btnedit).prop("disabled",false);
+            $('#'+_btnper).prop("disabled",false);
+            $('#'+_btnmot).prop("disabled",false);
         }else{                    
             _estado = "INACTIVO";
             _class = "badge badge-light-danger";
             $('#'+_btnedit).prop("disabled",true);
+            $('#'+_btnper).prop("disabled",true);
+            $('#'+_btnmot).prop("disabled",true);
         }
 
         var _changetd = document.getElementById(_td);
-        _changetd.innerHTML = '<div class="d-flex align-items-center"><div class="ms-5"><div class="' + _class + '">' + _estado + ' </div></div>';
+        _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
 
         var _parametros = {
             "xxPaisid" : _paisid,
@@ -2641,7 +2670,7 @@
 
                 $('#row_' + _rowid + '').html(_output);
             }else{
-                toastSweetAlert("top-end",3000,"info","Especialidad ya está asignada..!");
+                toastSweetAlert("top-end",3000,"warning","Especialidad ya Existe..!!");
             }
         });	                
 
@@ -2667,7 +2696,7 @@
                 }
             }else{
                 $('#chkEnviarProf').prop('checked','');
-                toastSweetAlert("top-end",3000,"error","Email no es Valido");
+                toastSweetAlert("top-end",3000,"error","Email no es Valido..!!");
                 _enviarprof = 'SI';
                 return;
             }
@@ -2693,6 +2722,7 @@
         var _celular = $.trim($("#txtCelularProf").val());
         var _emailprof = $.trim($("#txtEmailProf").val());
         var _selecc = 'NO'; 
+        var _continuar = true;
         
         var _imgfile = document.getElementById("imgfileprof").style.backgroundImage;
         var _url = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
@@ -2709,24 +2739,44 @@
         }
 
         if(_numdocumento == ''){
-            toastSweetAlert("top-end",3000,"warning","Ingrese Numero de Documento..!");
+            toastSweetAlert("top-end",3000,"warning","Ingrese Documento..!!");
+            return;                    
+        }
+
+        if(_numdocumento.length < 10){
+            toastSweetAlert("top-end",3000,"error","Documento Incorrecto..!!");
             return;                    
         }
 
         if(_nombres == ''){
-            toastSweetAlert("top-end",3000,"warning","Ingrese Nombres..!");
+            toastSweetAlert("top-end",3000,"warning","Ingrese Nombres..!!");
             return;                    
         }
 
         if(_genero == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Genero..!");
+            toastSweetAlert("top-end",3000,"warning","Seleccione Genero..!!");
             return;                    
         }
 
         if(_tipoprof == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Profesion..!");
+            toastSweetAlert("top-end",3000,"warning","Seleccione Profesion..!!");
+       
             return;                    
-        }                 
+        }  
+        
+        if(_telefono != ''){
+            if(_telefono.length < 7){
+                toastSweetAlert("top-end",3000,"error","Telefono Incorrecto..!!");
+                return; 
+            }
+        }
+
+        if(_celular != ''){
+            if(_celular.length < 10){
+                toastSweetAlert("top-end",3000,"error","Celular Incorrecto..!!");
+                return; 
+            }
+        }
 
         if(_selecc == 'SI'){
             var _imagen = document.getElementById("imgavatar");
@@ -2736,7 +2786,7 @@
             _ext = _ext.toLowerCase();   
 
             if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
-                toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una Imagen..!");
+                toastSweetAlert("top-end",3000,"error","Archivo no es Imagen..!!");
                 return;
             }                    
         }
@@ -2746,16 +2796,17 @@
         
             if (regex.test($('#txtEmailProf').val().trim())) {
             }else{
-                toastSweetAlert("top-end",3000,"error","Email no es Valido..!");
+                toastSweetAlert("top-end",3000,"error","Email Incorrecto..!!");
                 return;
             }
         }
 
         if(_enviarprof == 'SI'){
             if(_emailprof.trim() == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Email..!");
+                toastSweetAlert("top-end",3000,"warning","Ingrese Email..!!");
             }
         }
+
         
         form_data = new FormData();                    
         form_data.append('xxPaisid', _paisid);
@@ -2784,11 +2835,11 @@
             success: function(response){
                 
                 if(response.trim() == 'OK'){
-                    toastSweetAlert("top-end",3000,"success","Profesional agregado correctamente..!");
+                    toastSweetAlert("top-end",3000,"success","Profesional Agregado");
                     $("#modal-new-profesional").modal("hide");
 
                 }else{
-                    toastSweetAlert("top-end",3000,"info","Profesional ya Existe..!");
+                    toastSweetAlert("top-end",3000,"warning","Profesional ya Existe..!!");
                 }
             },								
             error: function (error){

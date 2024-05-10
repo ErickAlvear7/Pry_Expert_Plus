@@ -75,8 +75,8 @@
 						<th class="min-w-125px">Parametro</th>
 						<th class="min-w-125px">Descripcion</th>
 						<th class="min-w-125px">Estado</th>
-						<th class="min-w-125px">Status</th>
-                        <th class="min-w-125px" style="text-align: center;">Opciones</th>
+						<th>Status</th>
+                        <th style="text-align: center;">Opciones</th>
 					</tr>
 				</thead>
 				<tbody class="fw-bold text-gray-600">

@@ -131,11 +131,11 @@
 						<th style="display:none;">Id</th>
 						<th style="display:none;">Login</th>
 						<th class="min-w-125px">Usuario</th>
-						<th class="min-w-125px">Pais</th>
-						<th class="min-w-125px">Perfil</th>
-						<th class="min-w-125px">Estado</th>
-						<th class="min-w-125px">Status</th>                                
-						<th class="min-w-125px" style="text-align: center;">Opciones</th>
+						<th>Pais</th>
+						<th>Perfil</th>
+						<th>Estado</th>
+						<th>Status</th>                                
+						<th style="text-align: center;">Opciones</th>
 					</tr>
 				</thead>
 
@@ -188,7 +188,7 @@
 										<span><?php echo $login; ?></span>
 									</div>
 								</td>
-								<td><?php echo $usu['Pais']; ?></td>
+								<td>Ecuador</td>
 								<td><?php echo $perfil; ?></td>
 								<td id="td_<?php echo $idusuario; ?>">
 									<div class="<?php echo $xTextColor; ?>"><?php echo $estado; ?></div>

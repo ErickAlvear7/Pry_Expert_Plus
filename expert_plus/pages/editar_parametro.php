@@ -124,127 +124,128 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="kt_ecommerce_settings_store" role="tabpanel">
-                    <br/>
-                    <div class="card-body pt-0">
-                        <div class="row g-9 mb-7">
-                            <div class="col-md-4 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required">Detalle</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del detalle"></i>
-                                </label>
-                                <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />                       
-                            </div>
-                                <div class="col-md-3 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required">Valor Texto</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
-                                </label>
-                                <input type="text" class="form-control form-control-solid" id="txtValorV" name="txtValorV" minlength="1" maxlength="50" placeholder="valor texto" value="" />                       
-                            </div>
-                                <div class="col-md-3 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required">Valor Entero</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valores enteros"></i>
-                                </label>
-                                <input type="text" class="form-control form-control-solid" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" placeholder="valor entero" value="" />                       
-                            </div>
-                            <div class="col-md-2 fv-row">
-                                <button class="btn btn-sm btn-light-primary" id="btnAgregar">
-                                        <span class="svg-icon svg-icon-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
-                                                <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    Agregar    
-                                </button>
+                    <div class="card">
+                        <div class="card-header border-0 pt-6">
+                            <div class="row g-9 mb-7">
+                                <div class="col-md-4 fv-row">
+                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Detalle</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del detalle"></i>
+                                    </label>
+                                    <input type="text" class="form-control form-control-solid" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="100" placeholder="nombre del detalle" value="" />                       
+                                </div>
+                                    <div class="col-md-3 fv-row">
+                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Valor Texto</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valor en texto"></i>
+                                    </label>
+                                    <input type="text" class="form-control form-control-solid" id="txtValorV" name="txtValorV" minlength="1" maxlength="50" placeholder="valor texto" value="" />                       
+                                </div>
+                                    <div class="col-md-3 fv-row">
+                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Valor Entero</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="solo valores enteros"></i>
+                                    </label>
+                                    <input type="text" class="form-control form-control-solid" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" placeholder="valor entero" value="" />                       
+                                </div>
+                                <div class="col-md-2 fv-row">
+                                    <button class="btn btn-sm btn-light-primary" id="btnAgregar">
+                                            <span class="svg-icon svg-icon-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
+                                                    <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        Agregar    
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <br/>
                         <hr class="bg-primary border-2 border-top border-primary">
-                        <br/>
-                        <div class="d-flex align-items-center position-relative my-1">
-                            <span class="svg-icon svg-icon-1 position-absolute ms-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
-                                    <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
-                                </svg>
-                            </span>
-                            <input type="text" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Dato" />
-                        </div>
-                        <div class="mh-375px scroll-y me-n7 pe-7">
-                            <table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
-                                <thead>
-                                    <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
-                                        <th style="display:none;">Id</th>
-                                        <th class="min-w-125px">Detalle</th>
-                                        <th class="min-w-125px">Valor Texto</th>
-                                        <th class="min-w-125px">Valor entero</th>
-                                        <th class="min-w-125px">Estado</th>
-                                        <th class="min-w-125px">Status</th>
-                                        <th class="min-w-125px" style="text-align: center;">Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="fw-bold text-gray-600">
-                                    <?php 
-                                    foreach($all_pade as $pade){
+                        <div class="card-body pt-0">
+                            <div class="d-flex align-items-center position-relative my-1">
+                                <span class="svg-icon svg-icon-1 position-absolute ms-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                        <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <input type="text" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Buscar Dato" />
+                            </div>
+                            <div class="mh-375px scroll-y me-n7 pe-7">
+                                <table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="kt_ecommerce_report_shipping_table" style="width: 100%;">
+                                    <thead>
+                                        <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                                            <th style="display:none;">Id</th>
+                                            <th class="min-w-125px">Detalle</th>
+                                            <th class="min-w-125px">Valor Texto</th>
+                                            <th class="min-w-125px">Valor entero</th>
+                                            <th class="min-w-125px">Estado</th>
+                                            <th>Status</th>
+                                            <th style="text-align: center;">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="fw-bold text-gray-600">
+                                        <?php 
+                                        foreach($all_pade as $pade){
 
-                                        $xPadeId = $pade['Idpade'];
-                                        $xPadeNom = $pade['Detalle'];
-                                        $xPadeValorV = $pade['ValorV'];
-                                        $xPadeValorI = $pade['ValorI'];
-                                        $xPadeEstado = $pade['Estado'];
-                                    ?>
-                                    <?php 
-                                        $xCheking = '';
-                                        $xDisabledEdit = '';
-
-                                        if($xPadeEstado == 'A'){
-                                            $xEstado = 'ACTIVO';
-                                            $xTextColor = "badge badge-light-success";
-                                            $xCheking = 'checked="checked"';
-                                        
-                                        }else{
-                                            $xEstado = 'INACTIVO';
-                                            $xTextColor = "badge badge-light-danger";
-                                            $xDisabledEdit = 'disabled';
-                                        }
-
-                                        if($xPadeValorI == 0){
-                                            $xPadeValorI = '';
-                                        
-                                        }
-                                        
+                                            $xPadeId = $pade['Idpade'];
+                                            $xPadeNom = $pade['Detalle'];
+                                            $xPadeValorV = $pade['ValorV'];
+                                            $xPadeValorI = $pade['ValorI'];
+                                            $xPadeEstado = $pade['Estado'];
                                         ?>
-                                    <tr id="row_<?php echo $xPadeId; ?>">
-                                        <td style="display: none;">
-                                            <?php echo $xPadeId; ?>
-                                        </td>               
-                                        <td><?php echo $xPadeNom; ?></td>
-                                        <td><?php echo $xPadeValorV; ?></td>
-                                        <td><?php echo $xPadeValorI; ?></td>
-                                        <td id="td_<?php echo $xPadeId; ?>">
-                                            <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
-                                        </td>
-                                        <td style="text-align:center">
-                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input <?php echo $xCheking; ?>  class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xPadeId; ?>" 
-                                                   onchange="f_UpdateEstado(<?php echo $xPadeId;?>)" value="<?php echo $xPadeId;?>" />
-                                            </div>
-                                        </td> 
-                                        <td>
-                                            <div class="text-center">
-                                                <div class="btn-group">	
-                                                    <button type="button" id="btnEditar_<?php echo $xPadeId;?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit;?> title='Editar Detalle' data-bs-toggle="tooltip" data-bs-placement="left">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button> 
+                                        <?php 
+                                            $xCheking = '';
+                                            $xDisabledEdit = '';
+
+                                            if($xPadeEstado == 'A'){
+                                                $xEstado = 'ACTIVO';
+                                                $xTextColor = "badge badge-light-success";
+                                                $xCheking = 'checked="checked"';
+                                            
+                                            }else{
+                                                $xEstado = 'INACTIVO';
+                                                $xTextColor = "badge badge-light-danger";
+                                                $xDisabledEdit = 'disabled';
+                                            }
+
+                                            if($xPadeValorI == 0){
+                                                $xPadeValorI = '';
+                                            
+                                            }
+                                            
+                                            ?>
+                                        <tr id="row_<?php echo $xPadeId; ?>">
+                                            <td style="display: none;">
+                                                <?php echo $xPadeId; ?>
+                                            </td>               
+                                            <td><?php echo $xPadeNom; ?></td>
+                                            <td><?php echo $xPadeValorV; ?></td>
+                                            <td><?php echo $xPadeValorI; ?></td>
+                                            <td id="td_<?php echo $xPadeId; ?>">
+                                                <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                    <input <?php echo $xCheking; ?>  class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk<?php echo $xPadeId; ?>" 
+                                                    onchange="f_UpdateEstado(<?php echo $xPadeId;?>)" value="<?php echo $xPadeId;?>" />
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <?php }?>
-                                </tbody>
-                            </table>
+                                            </td> 
+                                            <td>
+                                                <div class="text-center">
+                                                    <div class="btn-group">	
+                                                        <button type="button" id="btnEditar_<?php echo $xPadeId;?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit;?> title='Editar Detalle' data-bs-toggle="tooltip" data-bs-placement="left">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button> 
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <?php }?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>     
                 </div>
@@ -297,7 +298,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnGuardar" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
+                <button type="button" id="btnGuardar" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
             </div>
             <input type="hidden" id="txtDetalleold" name="txtDetalleold" />
             <input type="hidden" id="txtValortexto" name="txtDetalleold" />
@@ -389,7 +390,7 @@
                             _status = '<div class="' + _class + '">' + _estado + ' </div>';
                             _checked = "checked='checked'";
 
-                            var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                            var _btnChk = '<td class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
                                             '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '" onchange="f_UpdateEstado(' + _padeid + ')" />' +
                                             '</div></td>';
                             
@@ -585,7 +586,7 @@
                             }
                             _checked = "checked='checked'";
 
-                            var _btnChk = '<td style="text-align:center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
+                            var _btnChk = '<td class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">' +
                                             '<input ' + _checked + ' class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chk' + _padeid + '" onchange="f_UpdateEstado(' + _padeid + ')" />' +
                                             '</div></td>';
                             
