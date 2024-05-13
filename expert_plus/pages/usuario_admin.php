@@ -127,7 +127,7 @@
 		<div class="card-body py-4">
 			<table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="kt_table_users" style="width: 100%;">
 				<thead>
-					<tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0"">
+					<tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
 						<th style="display:none;">Id</th>
 						<th style="display:none;">Login</th>
 						<th class="min-w-125px">Usuario</th>
@@ -232,20 +232,25 @@
             </div>
             <div class="modal-body py-lg-10 px-lg-10 mt-n3">
                 <div class="card mb-1 mb-xl-1">
-                    <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_avatar" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div> 
-                        </div>
-                    </div>
-                    <div id="view_avatar" class="collapse">
+					<div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_avatar">
+						<div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+							<span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+									<rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+								</svg>
+							</span>
+							<span class="svg-icon toggle-off svg-icon-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+									<rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+									<rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+								</svg>
+							</span>
+						</div>
+						<h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Avatar</h4>
+					</div>
+                    <div id="view_avatar" class="collapse fs-6 ms-1">
                         <div class="card card-flush py-4">
                             <div class="card-body pt-0">
 								<div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('img/default.png')">
@@ -265,20 +270,25 @@
                     </div>
                 </div>
                 <div class="card mb-1 mb-xl-1">
-                    <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_usuario" role="button" aria-expanded="false" aria-controls="view_datos_titular">Informacion
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div> 
-                        </div>
-                    </div>
-                    <div id="view_datos_usuario" class="collapse show">
+					<div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_datos_usuario">
+						<div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+							<span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+									<rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+								</svg>
+							</span>
+							<span class="svg-icon toggle-off svg-icon-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+									<rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+									<rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+								</svg>
+							</span>
+						</div>
+						<h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Datos Usuario</h4>
+					</div>
+                    <div id="view_datos_usuario" class="collapse show fs-6 ms-1">
                         <div class="card card-flush py-4">
                             <div class="card-body pt-0">
                                 <div class="row mb-4">
@@ -314,19 +324,24 @@
                     </div>
                 </div>
 				<div class="card mb-1 mb-xl-8">
-				    <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_perfiles" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Perfiles
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div> 
-                        </div>
-                    </div>
+                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_perfiles">
+						<div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+							<span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+									<rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+								</svg>
+							</span>
+							<span class="svg-icon toggle-off svg-icon-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+									<rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+									<rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+								</svg>
+							</span>
+						</div>
+						<h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Perfiles</h4>
+					</div>
 					<div id="view_perfiles" class="collapse show">
 						<div class="card card-flush py-4">
 						    <div class="card-body pt-0">

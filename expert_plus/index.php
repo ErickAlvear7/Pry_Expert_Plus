@@ -78,6 +78,8 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Page Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
+		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		
 		<link href="assets/sweetalert2/css/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 		<link href="assets/alertify/css/alertify.min.css" rel="stylesheet" type="text/css" />
