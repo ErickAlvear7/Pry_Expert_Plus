@@ -78,13 +78,7 @@
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <button type="button" id="btnNuevaEspe" class="btn btn-light-primary btn-sm mb-10">
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                            </svg>
-                        </span>                                                                
+                    <button type="button" id="btnNuevaEspe" class="btn btn-light-primary btn-sm mb-10"><i class="fa fa-plus-circle" aria-hidden="true"></i>                                                          
                         Nueva Especialidad
                     </button>                           
                 </div>
@@ -338,13 +332,7 @@
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                     <div class="d-flex flex-column gap-7 gap-lg-10">
                         <div class="form-group mt-2 mb-n2">
-                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAddEspe">
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>
+                            <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm mb-2" id="btnAddEspe"><i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 Agregar Especialidad
                             </button>
                         </div>
@@ -376,14 +364,14 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button type="button" id="btnSave" class="btn btn-lg btn-light-primary"><i class="las la-save"></i>Grabar</button>
+                <button type="button" id="btnSave" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
             </div>
         </div>
     </form>
 </div>
 <!--Modal Nueva Especialidad -->
 <div class="modal fade" id="modal-new-especialidad" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nueva Especialidad</h2>

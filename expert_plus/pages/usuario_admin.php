@@ -76,12 +76,8 @@
 			</div>				
 			<div class="card-toolbar">
 				<div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-					<button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-					<span class="svg-icon svg-icon-2">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-							<path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor" />
-						</svg>
-					</span>
+					<button type="button" class="btn btn-light-primary btn-sm me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+				    <i class="fa fa-filter" aria-hidden="true"></i>
 					Filtrar</button>
 					<div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
 						<div class="px-7 py-5">
@@ -102,23 +98,17 @@
 								<label class="form-label fs-6 fw-bold">Estado:</label>
 								<select class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="--Seleccione Estado--" data-allow-clear="true" data-kt-user-table-filter="two-step" data-hide-search="true">
 									<option></option>
-									<option value="Activo">Activo</option>
-									<option value="Inactivo">Inactivo</option>
+									<option value="Activo">ACTIVO</option>
+									<option value="Inactivo">INACTIVO</option>
 								</select>
 							</div>
 							<div class="d-flex justify-content-end">
-								<button type="reset" class="btn btn-light btn-active-light-primary fw-bold me-2 px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="reset">Cancelar</button>
-								<button type="submit" class="btn btn-primary fw-bold px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="filter">Aplicar</button>
+								<button type="reset" class="btn btn-sm btn-light-danger me-2" data-kt-menu-dismiss="true" data-kt-user-table-filter="reset"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+								<button type="submit" class="btn btn-sm btn-light-primary" data-kt-menu-dismiss="true" data-kt-user-table-filter="filter"><i class="fa fa-check" aria-hidden="true"></i>Aplicar</button>
 							</div>
 						</div>
 					</div>
-					<button type="button" class="btn btn-primary" id="btnNuevo">
-						<span class="svg-icon svg-icon-2">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
-								<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
-							</svg>
-						</span>
+					<button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm" id="btnNuevo"><i class="fa fa-plus-circle" aria-hidden="true"></i>
 						Nuevo Usuario
 					</button>
 				</div>
