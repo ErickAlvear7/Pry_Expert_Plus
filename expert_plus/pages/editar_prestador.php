@@ -118,35 +118,21 @@
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <button type="button" id="btnNuevaEspe" class="btn btn-light-primary btn-sm mb-10">
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                            </svg>
-                        </span>
-                        Nueva Especialidad
-                    </button>
-                    <button type="button" id="btnNuevaProfesion" class="btn btn-light-primary btn-sm mb-10">
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                            </svg>
-                        </span>                                                                
-                        Nuevo Tipo Profesion
-                    </button>                                 
-                    <div class="separator my-7"></div>
-                    <button type="button" id="btnNuevoProfesional" class="btn btn-primary w-100" >
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M20 14H18V10H20C20.6 10 21 10.4 21 11V13C21 13.6 20.6 14 20 14ZM21 19V17C21 16.4 20.6 16 20 16H18V20H20C20.6 20 21 19.6 21 19ZM21 7V5C21 4.4 20.6 4 20 4H18V8H20C20.6 8 21 7.6 21 7Z" fill="currentColor" />
-                                <path opacity="0.3" d="M17 22H3C2.4 22 2 21.6 2 21V3C2 2.4 2.4 2 3 2H17C17.6 2 18 2.4 18 3V21C18 21.6 17.6 22 17 22ZM10 7C8.9 7 8 7.9 8 9C8 10.1 8.9 11 10 11C11.1 11 12 10.1 12 9C12 7.9 11.1 7 10 7ZM13.3 16C14 16 14.5 15.3 14.3 14.7C13.7 13.2 12 12 10.1 12C8.10001 12 6.49999 13.1 5.89999 14.7C5.59999 15.3 6.19999 16 7.39999 16H13.3Z" fill="currentColor" />
-                            </svg>
-                        </span>
-                        Nuevo Profesional
-                    </button>    
-                    <div class="separator my-7"></div>
+                    <div class="d-grid gap-2">
+                        <button type="button" id="btnNuevaEspe" class="btn btn-light-primary btn-sm mb-10">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            Nueva Especialidad
+                        </button>
+                        <button type="button" id="btnNuevaProfesion" class="btn btn-light-primary btn-sm mb-10">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>                                                               
+                            Nuevo Tipo Profesion
+                        </button>                                 
+                        
+                        <button type="button" id="btnNuevoProfesional" class="btn btn-light-primary btn-sm mb-10" >
+                            <i class="fa fa-user-plus" aria-hidden="true"></i>
+                            Nuevo Profesional
+                        </button>    
+                    </div>  
                 </div>
             </div>
         </div>
@@ -396,25 +382,18 @@
                     </div>
                     <div class="d-flex justify-content-end">
                         <!--<a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancelar</a>-->
-                        <button type="button" id="btnSave" class="btn btn-primary"><i class="las la-save"></i>
-                            <span class="indicator-label">Grabar</span>
-                            <span class="indicator-progress">Espere un momento...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        <button type="button" id="btnSave" class="btn btn-sm btn-primary"><i class="las la-save"></i>
+                           Grabar
                         </button>
                     </div>                            
                 </div>
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                     <div class="d-flex flex-column gap-7 gap-lg-10">
                         <div class="d-flex justify-content-start">
-                            <a href="#" class="btn btn-light-primary btn-sm" id="btnAddespe">
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>                                       
-                            Agregar Especialidad
-                            </a>
+                            <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm mb-1" id="btnAddespe">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                Agregar Especialidad
+                            </button>
                         </div>
                         <div class="card card-flush py-4">
                             <div class="card-header">
@@ -841,12 +820,7 @@
                         </div>
                         <div class="form-group my-5">
                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarTipo">
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 Agregar
                             </button>
                         </div>
@@ -1306,7 +1280,7 @@
             
             //$("#modal_new_tipoprofesion").find("input,textarea").val("");
             const btn = document.getElementById('btnAgregarTipo');
-            btn.innerHTML = '<span class="svg-icon svg-icon-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" /><rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" /></svg></span>Agregar';
+            btn.innerHTML = '<i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar';
 
             $("#txtTipoProfesion").val('');
             $("#txtCodigoTipo").val('');
@@ -1644,7 +1618,7 @@
             $('#txtTipoProfesion').val('');
             $('#txtCodigoTipo').val('');
             const btn = document.getElementById('btnAgregarTipo');
-            btn.innerHTML = '<span class="svg-icon svg-icon-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" /><rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" /></svg></span>Agregar';
+            btn.innerHTML = '<i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar';
 
         });
 
@@ -2527,7 +2501,7 @@
         _btnopctiontipo = "Mod";
 
         const btn = document.getElementById('btnAgregarTipo');
-        btn.innerHTML = '<span><i class="las la-pencil-alt">' + '\xa0' + ' Modificar</span>';
+        btn.innerHTML = '<i class="las la-pencil-alt"></i>Modificar';
 
         _padeidact = $('#txtPadeid' + _padeid).val();
         _tipoprofeold = $('#txtTiprofe' + _padeid).val();

@@ -364,7 +364,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button type="button" id="btnSave" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
+                <button type="button" id="btnSave" class="btn btn-sm btn-primary"><i class="las la-save"></i>Grabar</button>
             </div>
         </div>
     </form>

@@ -119,7 +119,7 @@
                             </div>
                         </div>
                         <div class="card-toolbar d-flex align-self-end">
-                           <button type="button" id="btnGuardarEdit" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $idpaca; ?>)" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
+                           <button type="button" id="btnGuardarEdit" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $idpaca; ?>)" class="btn btn-sm btn-primary"><i class="las la-save"></i>Grabar</button>
                         </div>	
                     </div>
                 </div>

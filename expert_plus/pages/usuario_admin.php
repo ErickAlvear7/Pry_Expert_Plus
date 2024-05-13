@@ -437,7 +437,7 @@
 			document.getElementById('imgfile').style.backgroundImage="url(img/default.png)";
 					
 			$("#titulo").text("Nuevo Usuario");
-			document.getElementById("btnSave").innerHTML = `<i class="las la-save">` + '\xa0' + 'Grabar';
+			document.getElementById("btnSave").innerHTML = '<i class="las la-save"></i>Grabar';
 			$("#chkCaducaPass").prop("checked", false);
 			$("#lblCaducaPass").text("NO");
 			$("#chkCamPass").prop("checked", false);
@@ -565,7 +565,7 @@
 				}                            
 			}); 
 					
-			document.getElementById("btnSave").innerHTML = '<span><i class="las la-pencil-alt">' + '\xa0' + ' Modificar</span>';
+			document.getElementById("btnSave").innerHTML = '<i class="las la-pencil-alt"></i>Modificar';
 			$('#txtPassword').prop('readonly', true);
 			$("#kt_modal_add_user").modal("show");
 		});			
