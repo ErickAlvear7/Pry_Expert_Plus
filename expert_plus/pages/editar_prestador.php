@@ -92,47 +92,81 @@
         <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
             <div class="card card-flush py-4">
                 <div class="card-header">
-                    <div class="card-title">
-                        <h2>Logo Prestador</h2>
+                    <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_logo">
+                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <span class="svg-icon toggle-off svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Avatar</h4>
                     </div>
                 </div>
-                <div class="card-body text-center pt-0">
-                    <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
-                        <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfile"></div>
-                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
-                            <i class="bi bi-pencil-fill fs-7"></i>
-                            <input type="file" name="imglogo" id="imglogo" accept=".png, .jpg, .jpeg" />
-                            <input type="hidden" name="avatar_remove" />
-                        </label>
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
-                            <i class="bi bi-x fs-2"></i>
-                        </span>
+                <div id="view_logo" class="collapse fs-6 ms-1">
+                    <div class="card-body text-center pt-0">
+                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                            <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfile"></div>
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
+                                <i class="bi bi-pencil-fill fs-7"></i>
+                                <input type="file" name="imglogo" id="imglogo" accept=".png, .jpg, .jpeg" />
+                                <input type="hidden" name="avatar_remove" />
+                            </label>
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                        </div>
+                        <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                     </div>
-                    <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                 </div>
             </div>
             <div class="card card-flush py-4">
                 <div class="card-header">
-                    <div class="card-title">
-                        <h2>Opciones</h2>
+                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_opciones">														<!--begin::Icon-->
+                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <span class="svg-icon toggle-off svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Opciones</h4>
                     </div>
                 </div>
-                <div class="card-body pt-0">
-                    <div class="d-grid gap-2">
-                        <button type="button" id="btnNuevaEspe" class="btn btn-light-primary btn-sm mb-10">
-                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                            Nueva Especialidad
-                        </button>
-                        <button type="button" id="btnNuevaProfesion" class="btn btn-light-primary btn-sm mb-10">
-                            <i class="fa fa-plus-circle" aria-hidden="true"></i>                                                               
-                            Nuevo Tipo Profesion
-                        </button>                                 
-                        
-                        <button type="button" id="btnNuevoProfesional" class="btn btn-light-primary btn-sm mb-10" >
-                            <i class="fa fa-user-plus" aria-hidden="true"></i>
-                            Nuevo Profesional
-                        </button>    
-                    </div>  
+                <div id="view_opciones" class="collapse show fs-6 ms-1">
+                    <div class="card-body pt-0">
+                        <div class="d-grid gap-2">
+                            <button type="button" id="btnNuevaEspe" class="btn btn-light-primary btn-sm mb-10">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                Nueva Especialidad
+                            </button>
+                            <button type="button" id="btnNuevaProfesion" class="btn btn-light-primary btn-sm mb-10">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>                                                               
+                                Nuevo Tipo Profesion
+                            </button>                                 
+                            
+                            <button type="button" id="btnNuevoProfesional" class="btn btn-light-primary btn-sm mb-10" >
+                                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                Nuevo Profesional
+                            </button>    
+                        </div>  
+                    </div>
                 </div>
             </div>
         </div>
