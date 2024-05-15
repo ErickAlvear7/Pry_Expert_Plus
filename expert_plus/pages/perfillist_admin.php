@@ -60,11 +60,11 @@
                         <div class="card card-flush h-md-100">
                         <div class="card-header">
                             <div class="card-title">
-                                <h2><?php echo $perfil['Perfil']; ?></h2>
+                                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic"><?php echo $perfil['Perfil']; ?></h2>
                             </div>
                         </div>
                         <div class="card-body pt-1">
-                            <div class="fw-bolder text-gray-600 mb-5">Total Usuarios con el perfil: <?php echo $xTotal; ?></div>
+                            <div class="fw-bolder text-gray-800 mb-5">Total Usuarios con el perfil: <?php echo $xTotal; ?></div>
 
                             <?php if($perfil['perf_detalle1'] != '') { ?>
                                 <div class="d-flex align-items-center py-2">
@@ -98,9 +98,18 @@
 
                         </div>
                         <div class="card-footer flex-wrap pt-0">
-                            <a href="../../demo1/dist/apps/user-management/roles/view.html" class="btn btn-light btn-active-primary my-1 me-2">Ver Perfil</a>
-                            <!-- <button type="button" class="btn btn-light btn-active-light-primary my-1" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role-<?php echo $perfil['Id']; ?>">Editar Perfil</button> -->
-                            <button type="button" class="btn btn-light btn-active-light-primary my-1" onclick="f_Editar(<?php echo $perfil['Id']; ?>,'<?php echo $xNamePerfil; ?>','<?php echo $perfil['Descripcion']; ?>')">Editar Perfil</button>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="d-grid gap-2">
+                                        <button type="button" class="btn btn-primary btn-sm" onclick="f_VerPerfil(<?php echo $perfil['Id']; ?>)"><i class="fa fa-eye" aria-hidden="true"></i>Ver Perfi</button>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="d-grid gap-2">
+                                        <button type="button" class="btn btn-light-primary btn-sm" onclick="f_Editar(<?php echo $perfil['Id']; ?>,'<?php echo $xNamePerfil; ?>','<?php echo $perfil['Descripcion']; ?>')"><i class="las la-pencil-alt" aria-hidden="true"></i>Editar Perfil</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div> 
                     </div>
                 </div>
@@ -108,163 +117,163 @@
             <?php }
                 ?>                          
 
-        <div class="ol-md-4">
+        <!-- <div class="col-md-4">
             <div class="card h-md-100">
                 <div class="card-body d-flex flex-center">
-                    <!-- <button type="button" class="btn btn-clear d-flex flex-column flex-center" data-bs-toggle="modal" data-bs-target="#kt_modal_add_role">
-                        <img src="assets/media/illustrations/sketchy-1/4.png" alt="" class="mw-100 mh-150px mb-7" />
-                        <div class="fw-bolder fs-3 text-gray-600 text-hover-primary">Agregar Nuevo Perfil</div>
-                    </button> -->
+                   <img src="assets/media/illustrations/sketchy-1/4.png" alt="" class="card-img-top" />
                     <button type="button" class="btn btn-clear d-flex flex-column flex-center" id="btnNuevo">
-                        <img src="assets/media/illustrations/sketchy-1/4.png" alt="" class="mw-100 mh-150px mb-7" />
-                        <div class="fw-bolder fs-3 text-gray-600 text-hover-primary">Agregar Nuevo Perfil</div>
+                       
+                        <div class="fw-bolder fs-3 text-primary"><i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>Agregar Nuevo Perfil</div>
                     </button>
+                </div>
+            </div>
+        </div> -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="assets/media/illustrations/sketchy-1/4.png" class="card-img-top" alt="..." height="200">
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm" id="btnNuevo"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        Nuevo Perfil
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
  
-              
+    <!--Agregar Perfil -->     
     <div class="modal fade" id="kt_modal_add_role" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mw-750px">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title">Nuevo Perfil</h2>                            
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-roles-modal-action="close">                                
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                            </svg>
-                        </span>
-                    </div>
+                    <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Perfil</h2>                            
+                    <i class="fa fa-window-close fa-2x" aria-hidden="true" data-kt-roles-modal-action="close"></i>
                 </div>
-                
-                <div class="modal-body scroll-y mx-lg-5 my-7">
-                    <div class="flex-lg-row-fluid ms-lg-15">
-                        <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
-                            <li class="nav-item">
-                                <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#tabperfiles">Accesos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tabdetalles">Caracteristicas</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="tabperfiles" role="tabpanel">
-                                <form id="kt_modal_add_role_form" class="form" >
-                                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_role_header" data-kt-scroll-wrappers="#kt_modal_add_role_scroll" data-kt-scroll-offset="300px">
-                                        <div class="fv-row mb-10">
-                                            <label class="fs-5 fw-bolder form-label mb-2">
-                                                <span class="required">Nombre Perfil</span>
-                                            </label>
-                                            <input class="form-control form-control-solid" name="txtPerfil" id="txtPerfil" maxlength="150" placeholder="Ingrese nombre del perfil" />
-                                        </div>
-                                        <div class="fv-row mb-10">
-                                            <label class="fs-5 fw-bolder form-label mb-2">
-                                                <span>Observacion</span>
-                                            </label>
-                                            <input class="form-control form-control-solid" name="txtObservacion" id="txtObservacion" maxlength="150" placeholder="Breve descripcion..." />
-                                        </div>                                                
-                                        <div class="fv-row">
-                                            <label class="fs-5 fw-bolder form-label mb-2">Accesos Permitidos</label>
-                                            <div class="table-responsive">
-                                                <table id="tblTareas" class="table align-middle table-row-dashed fs-6 gy-5" >
-                                                    <tbody class="text-gray-600 fw-bold">
-                                                        <tr>
-                                                            <td class="text-gray-800">Acceso Total
-                                                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Conceder Permisos de Administrador"></i>
-                                                            </td>
-                                                            <td>
-                                                                <label class="form-check form-check-custom form-check-solid me-9">
-                                                                    <input class="form-check-input" type="checkbox" value="" id="kt_roles_select_all" />
-                                                                    <span class="form-check-label" for="kt_roles_select_all">Todos</span>
-                                                                </label>
-                                                            </td>
-                                                        </tr>
-
-                                                        <?php
-
-                                                            $xSQL = "SELECT DISTINCT mta.meta_id AS MentId,tar.tare_nombre AS Tarea,'NO' AS Ckeck FROM `expert_menu_tarea` mta, `expert_perfil_menu_tarea` pmt, `expert_tarea` tar ";
-                                                            $xSQL .= "WHERE pmt.meta_id=mta.meta_id AND mta.tare_id=tar.tare_id AND  pmt.pais_id=$xPaisid ";
-                                                            $xSQL .= " ORDER BY tar.tare_orden ";
-                                                            $all_tareas = mysqli_query($con, $xSQL);
-                                                            foreach ($all_tareas as $tareas){ ?>
+                <div class="modal-body py-lg-10 px-lg-10">
+                    <div class="card card-flush py-4">
+                       <div class="card-body pt-0">
+                            <div class="flex-lg-row-fluid ms-lg-15">
+                                <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#tabperfiles">Accesos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tabdetalles">Caracteristicas</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="tabperfiles" role="tabpanel">
+                                        <form id="kt_modal_add_role_form" class="form" >
+                                            <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_role_header" data-kt-scroll-wrappers="#kt_modal_add_role_scroll" data-kt-scroll-offset="300px">
+                                                <div class="fv-row mb-10">
+                                                    <label class="fs-5 fw-bolder form-label mb-2">
+                                                        <span class="required">Nombre Perfil</span>
+                                                    </label>
+                                                    <input class="form-control form-control-solid" name="txtPerfil" id="txtPerfil" maxlength="150" placeholder="Ingrese nombre del perfil" />
+                                                </div>
+                                                <div class="fv-row mb-10">
+                                                    <label class="fs-5 fw-bolder form-label mb-2">
+                                                        <span>Observacion</span>
+                                                    </label>
+                                                    <input class="form-control form-control-solid" name="txtObservacion" id="txtObservacion" maxlength="150" placeholder="Breve descripcion..." />
+                                                </div>                                                
+                                                <div class="fv-row">
+                                                    <label class="fs-5 fw-bolder form-label mb-2">Accesos Permitidos</label>
+                                                    <div class="table-responsive">
+                                                        <table id="tblTareas" class="table align-middle table-row-dashed fs-6 gy-5" >
+                                                            <tbody class="text-gray-600 fw-bold">
                                                                 <tr>
-                                                                    <td class="text-gray-800"><?php echo $tareas['Tarea']; ?></td>
+                                                                    <td class="text-gray-800">Acceso Total
+                                                                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Conceder Permisos de Administrador"></i>
+                                                                    </td>
                                                                     <td>
-                                                                        <div class="d-flex">
-                                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                                <input class="form-check-input chkTarea" type="checkbox" name="chkTarea<?php echo $tareas['MentId']; ?>" id="chk<?php echo $tareas['MentId']; ?>" value="<?php echo $tareas['MentId']; ?>" />
-                                                                            </label>
-                                                                        </div>
+                                                                        <label class="form-check form-check-custom form-check-solid me-9">
+                                                                            <input class="form-check-input" type="checkbox" value="" id="kt_roles_select_all" />
+                                                                            <span class="form-check-label" for="kt_roles_select_all">Todos</span>
+                                                                        </label>
                                                                     </td>
                                                                 </tr>
-                                                            <?php } ?> 	
 
-                                                    </tbody>
-                                                </table>
+                                                                <?php
+
+                                                                    $xSQL = "SELECT DISTINCT mta.meta_id AS MentId,tar.tare_nombre AS Tarea,'NO' AS Ckeck FROM `expert_menu_tarea` mta, `expert_perfil_menu_tarea` pmt, `expert_tarea` tar ";
+                                                                    $xSQL .= "WHERE pmt.meta_id=mta.meta_id AND mta.tare_id=tar.tare_id AND  pmt.pais_id=$xPaisid ";
+                                                                    $xSQL .= " ORDER BY tar.tare_orden ";
+                                                                    $all_tareas = mysqli_query($con, $xSQL);
+                                                                    foreach ($all_tareas as $tareas){ ?>
+                                                                        <tr>
+                                                                            <td class="text-gray-800"><?php echo $tareas['Tarea']; ?></td>
+                                                                            <td>
+                                                                                <div class="d-flex">
+                                                                                    <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                                                        <input class="form-check-input chkTarea" type="checkbox" name="chkTarea<?php echo $tareas['MentId']; ?>" id="chk<?php echo $tareas['MentId']; ?>" value="<?php echo $tareas['MentId']; ?>" />
+                                                                                    </label>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    <?php } ?> 	
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade" id="tabdetalles" role="tabpanel">
+                                        <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_role_header" data-kt-scroll-wrappers="#kt_modal_add_role_scroll" data-kt-scroll-offset="300px">
+                                            <div class="fv-row mb-10">
+                                                <label class="fs-5 fw-bolder form-label mb-2">
+                                                    <span>Caracteristica 1</span>
+                                                </label>
+                                                <input class="form-control form-control-solid" name="txtDetalle1" id="txtDetalle1" maxlength="100" placeholder="Permite el control de..." />
+                                            </div>
+                                            <div class="fv-row mb-10">
+                                                <label class="fs-5 fw-bolder form-label mb-2">
+                                                    <span>Caracteristica 2</span>
+                                                </label>
+                                                <input class="form-control form-control-solid" name="txtDetalle2" id="txtDetalle2" maxlength="100" placeholder="Permite el control de..." />
+                                            </div>
+                                            <div class="fv-row mb-10">
+                                                <label class="fs-5 fw-bolder form-label mb-2">
+                                                    <span>Caracteristica 3</span>
+                                                </label>
+                                                <input class="form-control form-control-solid" name="txtDetalle3" id="txtDetalle3" maxlength="100" placeholder="Permite el control de..." />
+                                            </div>
+                                            <div class="fv-row mb-10">
+                                                <label class="fs-5 fw-bolder form-label mb-2">
+                                                    <span>Caracteristica 4</span>
+                                                </label>
+                                                <input class="form-control form-control-solid" name="txtDetalle4" id="txtDetalle4" maxlength="100" placeholder="Permite el control de..." />
+                                            </div>
+                                            <div class="fv-row mb-10">
+                                                <label class="fs-5 fw-bolder form-label mb-2">
+                                                    <span>Caracteristica 5</span>
+                                                </label>
+                                                <input class="form-control form-control-solid" name="txtDetalle5" id="txtDetalle5" maxlength="100" placeholder="Permite el control de..." />
+                                            </div>                                                                                                                                                                                
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane fade" id="tabdetalles" role="tabpanel">
-                                <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_role_header" data-kt-scroll-wrappers="#kt_modal_add_role_scroll" data-kt-scroll-offset="300px">
-                                    <div class="fv-row mb-10">
-                                        <label class="fs-5 fw-bolder form-label mb-2">
-                                            <span>Caracteristica 1</span>
-                                        </label>
-                                        <input class="form-control form-control-solid" name="txtDetalle1" id="txtDetalle1" maxlength="100" placeholder="Permite el control de..." />
-                                    </div>
-                                    <div class="fv-row mb-10">
-                                        <label class="fs-5 fw-bolder form-label mb-2">
-                                            <span>Caracteristica 2</span>
-                                        </label>
-                                        <input class="form-control form-control-solid" name="txtDetalle2" id="txtDetalle2" maxlength="100" placeholder="Permite el control de..." />
-                                    </div>
-                                    <div class="fv-row mb-10">
-                                        <label class="fs-5 fw-bolder form-label mb-2">
-                                            <span>Caracteristica 3</span>
-                                        </label>
-                                        <input class="form-control form-control-solid" name="txtDetalle3" id="txtDetalle3" maxlength="100" placeholder="Permite el control de..." />
-                                    </div>
-                                    <div class="fv-row mb-10">
-                                        <label class="fs-5 fw-bolder form-label mb-2">
-                                            <span>Caracteristica 4</span>
-                                        </label>
-                                        <input class="form-control form-control-solid" name="txtDetalle4" id="txtDetalle4" maxlength="100" placeholder="Permite el control de..." />
-                                    </div>
-                                    <div class="fv-row mb-10">
-                                        <label class="fs-5 fw-bolder form-label mb-2">
-                                            <span>Caracteristica 5</span>
-                                        </label>
-                                        <input class="form-control form-control-solid" name="txtDetalle5" id="txtDetalle5" maxlength="100" placeholder="Permite el control de..." />
-                                    </div>                                                                                                                                                                                
+                                    </div>                                 
                                 </div>
                             </div>
-                            <div class="text-center pt-15">
-                                <button type="reset" class="btn btn-light me-3" data-kt-roles-modal-action="cancel">Cancelar</button>
-                                <button type="button" class="btn btn-primary" id="btnGrabar" class="btn btn-primary" onclick="f_Grabar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-save"></i>
-                                    <span class="indicator-label">Grabar</span>
-                                    <span class="indicator-progress">Por favor espere...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                </button>
-                            </div>                                    
-                        </div>
-                    </div>
+                       </div>
+                   </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-sm btn-light-danger" data-kt-roles-modal-action="cancel"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                    <button type="button" class="btn btn-sm btn-light-primary" id="btnGrabar" onclick="f_Grabar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-save"></i>Grabar</button>
                 </div>
             </div>
         </div>
     </div>
 
-    
    <!--Editar Perfil -->
     <div class="modal fade" id="kt_modal_update_role" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Editar Perfil</h2>
+                    <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Perfil</h2>
                     <i class="fa fa-window-close fa-2x" aria-hidden="true" data-kt-roles-modal-action="close"></i>
                 </div>
                 <div class="modal-body py-lg-10 px-lg-10">
@@ -360,6 +369,7 @@
             </div>
         </div>
     </div> 
+
 </div>
        
 <script>
