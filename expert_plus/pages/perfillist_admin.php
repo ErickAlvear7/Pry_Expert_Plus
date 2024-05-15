@@ -101,7 +101,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="d-grid gap-2">
-                                        <button type="button" class="btn btn-primary btn-sm" onclick="f_VerPerfil(<?php echo $perfil['Id']; ?>)"><i class="fa fa-eye" aria-hidden="true"></i>Ver Perfi</button>
+                                        <button type="button" class="btn btn-primary btn-sm" onclick="f_VerPerfil(<?php echo $perfil['Id']; ?>)"><i class="fa fa-eye" aria-hidden="true"></i>Ver Perfil</button>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -117,17 +117,6 @@
             <?php }
                 ?>                          
 
-        <!-- <div class="col-md-4">
-            <div class="card h-md-100">
-                <div class="card-body d-flex flex-center">
-                   <img src="assets/media/illustrations/sketchy-1/4.png" alt="" class="card-img-top" />
-                    <button type="button" class="btn btn-clear d-flex flex-column flex-center" id="btnNuevo">
-                       
-                        <div class="fw-bolder fs-3 text-primary"><i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>Agregar Nuevo Perfil</div>
-                    </button>
-                </div>
-            </div>
-        </div> -->
         <div class="col-md-4">
             <div class="card">
                 <img src="assets/media/illustrations/sketchy-1/4.png" class="card-img-top" alt="..." height="200">
@@ -370,6 +359,107 @@
         </div>
     </div> 
 
+    <!--Ver Perfil -->
+    <div class="modal fade" id="kt_modal_view_role" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Ver Perfil</h2>
+                    <i class="fa fa-window-close fa-2x" aria-hidden="true" data-kt-roles-modal-action="close"></i>
+                </div>
+                <div class="modal-body py-lg-10 px-lg-10">
+                    <div class="card card-flush py-4">
+                        <div class="card-body pt-0">
+                            <div class="flex-lg-row-fluid ms-lg-15">
+                                <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#tabeditperfil">Accesos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tabeditdetalles">Caracteristicas</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="tabeditperfil" role="tabpanel">
+                                        <form id="kt_modal_update_role_form" class="form" >
+                                            <div class="fv-row mb-10">
+                                                <label class="fs-5 fw-bolder form-label mb-2">
+                                                    <span class="required">Nombre Perfil</span>
+                                                </label>
+                                                <input class="form-control form-control-solid" name="txtPerfilview" id="txtPerfilview" maxlength="150" placeholder="Ingrese nombre del perfil" />
+                                            </div>
+                                            <div class="fv-row mb-10">
+                                                <label class="fs-5 fw-bolder form-label mb-2">
+                                                    <span>Observacion</span>
+                                                </label>
+                                                <input class="form-control form-control-solid" name="txtObservacioview" id="txtObservacioview" maxlength="150" placeholder="Breve descripcion..." />
+                                            </div>                                                    
+                                            <div class="fv-row">
+                                                <label class="fs-5 fw-bolder form-label mb-2">Accesos Permitidos</label>
+                                                <div class="table-responsive">
+                                                    <table id="tblTareasEdit" class="table align-middle table-row-dashed fs-6 gy-5" >
+                                                        <tbody class="text-gray-600 fw-bold" id="tbodyPermisosview">
+                                                            <tr>
+                                                                <td class="text-gray-800">Acceso Total
+                                                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Conceder Permisos de Administrador"></i>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="form-check form-check-custom form-check-solid me-9">
+                                                                        <input class="form-check-input" type="checkbox" value="" id="kt_roles_select_all" />
+                                                                        <span class="form-check-label" for="kt_roles_select_all">Todos</span>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>  
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade" id="tabeditdetalles" role="tabpanel">
+                                        <div class="fv-row mb-10">
+                                            <label class="fs-5 fw-bolder form-label mb-2">
+                                                <span>Caracteristica 1</span>
+                                            </label>
+                                            <input class="form-control form-control-solid" name="txtDetalleview1" id="txtDetalleview1" maxlength="100" placeholder="Permite el control de..." />
+                                        </div>
+                                        <div class="fv-row mb-10">
+                                            <label class="fs-5 fw-bolder form-label mb-2">
+                                                <span>Caracteristica 2</span>
+                                            </label>
+                                            <input class="form-control form-control-solid" name="txtDetalleview2" id="txtDetalleview2" maxlength="100" placeholder="Permite el control de..." />
+                                        </div>
+                                        <div class="fv-row mb-10">
+                                            <label class="fs-5 fw-bolder form-label mb-2">
+                                                <span>Caracteristica 3</span>
+                                            </label>
+                                            <input class="form-control form-control-solid" name="txtDetalleview3" id="txtDetalleview3" maxlength="100" placeholder="Permite el control de..." />
+                                        </div>
+                                        <div class="fv-row mb-10">
+                                            <label class="fs-5 fw-bolder form-label mb-2">
+                                                <span>Caracteristica 4</span>
+                                            </label>
+                                            <input class="form-control form-control-solid" name="txtDetalleview4" id="txtDetalleview4" maxlength="100" placeholder="Permite el control de..." />
+                                        </div>
+                                        <div class="fv-row mb-10">
+                                            <label class="fs-5 fw-bolder form-label mb-2">
+                                                <span>Caracteristica 5</span>
+                                            </label>
+                                            <input class="form-control form-control-solid" name="txtDetalleview5" id="txtDetalleview5" maxlength="100" placeholder="Permite el control de..." />
+                                        </div>                                                                                                                                                                                  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"> 
+                    <button type="reset" class="btn btn-sm btn-light-danger" data-kt-roles-modal-action="cancel"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div> 
+
 </div>
        
 <script>
@@ -468,6 +558,44 @@
             $("#txtObservacionedit").val(_descripcion);
 
         });   
+    }
+
+    //ver perfil
+    function f_VerPerfil(_idperf){
+       
+        var _emprid = "<?php echo $xEmprid; ?>";
+        var _paisid = "<?php echo $xPaisid; ?>";  
+
+        var _detalle1view,_detalle2view,_detalle3view,_detalle4view,_detalle5view;
+
+        var tbodyview = document.getElementById('tbodyPermisosview');
+        document.getElementById("tbodyPermisosview").innerHTML = '';
+
+         //console.log(tbodyview);
+
+         var xresponse = $.post("codephp/get_DatosPerfil.php",{ xxPaisid: _paisid, xxEmprid: _emprid, xxPerfilid: _idperf })
+
+            xresponse.done(function(respuesta){
+                
+                var arraydatos = JSON.parse(respuesta);
+                
+                $.each(arraydatos,function(i,item){
+                    _detalle1view =  arraydatos[i].Detalle1;
+                    _detalle2view =  arraydatos[i].Detalle2;
+                    _detalle3view =  arraydatos[i].Detalle3;
+                    _detalle4view =  arraydatos[i].Detalle4;
+                    _detalle5view =  arraydatos[i].Detalle5;                 
+
+                    $("#txtDetalleview1").val(_detalle1view);
+                    $("#txtDetalleview2").val(_detalle2view);
+                    $("#txtDetalleview3").val(_detalle3view);
+                    $("#txtDetalleview4").val(_detalle4view);
+                    $("#txtDetalleview5").val(_detalle5view);                        
+                });
+            });
+
+        $("#kt_modal_view_role").modal("show");
+        
     }
 
     function f_ChkEdit(_paisid, _idperfil, _idmeta, _emprid, _sicheck){
