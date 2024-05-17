@@ -100,7 +100,7 @@
        //CONSULTAS PARA ULTIMA CITA AGENDADA
        //CONSULTA PRESTADORA-CIUDAD-SECTOR 
     $xSQL = "SELECT xag.pres_id AS Idpres, xpr.pres_nombre AS Prestadora, (SELECT ciudad  FROM `provincia_ciudad` pxc WHERE pxc.prov_id=xpr.prov_id) AS Ciudad, ";
-    $xSQL .="xpr.pres_sector AS Sector FROM `expert_agenda` xag INNER JOIN `expert_prestadora` xpr ON xag.pres_id=xpr.pres_id WHERE xag.agen_id=$xAgendaid ";
+    $xSQL .="xpr.pres_sector AS Sector FROM `expert_agenda` xag INNER JOIN `expert_prestadora` xpr ON xag.pres_id=xpr.pres_id WHERE xag.pais_id = $xPaisid AND xag.empr_id =$xEmprid AND xag.titu_id=$xTituid ";
     $xSQL .="ORDER BY xag.fechacreacion DESC LIMIT 1 ";
     $all_UltiPrestador = mysqli_query($con, $xSQL);
     foreach ($all_UltiPrestador as $datos) {
@@ -114,7 +114,7 @@
     $xSQL = "SELECT (SELECT CONCAT(xpf.prof_nombres,' ',xpf.prof_apellidos) FROM `expert_profesional` xpf WHERE ";
     $xSQL .="xpe.prof_id=xpf.prof_id) AS Profesional,(SELECT xes.espe_nombre AS Especialidad FROM `expert_especialidad` xes ";
     $xSQL .="WHERE xag.espe_id=xes.espe_id) AS Especialidad,xag.observacion AS Observacion,xag.pfes_id AS Idproes FROM `expert_agenda` xag ";
-    $xSQL .="INNER JOIN `expert_profesional_especi` xpe ON xag.pfes_id=xpe.pfes_id WHERE xag.agen_id=$xAgendaid ";
+    $xSQL .="INNER JOIN `expert_profesional_especi` xpe ON xag.pfes_id=xpe.pfes_id WHERE xag.pais_id = $xPaisid AND xag.empr_id =$xEmprid AND xag.titu_id=$xTituid ";
     $xSQL .="ORDER BY xag.fechacreacion DESC LIMIT 1 ";
     $all_UltiProfesional = mysqli_query($con, $xSQL);
     foreach ($all_UltiProfesional as $datos) {
@@ -126,7 +126,7 @@
     
         //CONSULTA FECHA-HORA-ESTADO
     $xSQL = "SELECT DATE_FORMAT(xag.fecha_inicio,'%d/%m/%Y') AS Fecha, CONCAT(xag.hora_desde,'-',xag.hora_hasta) AS Hora, ";
-    $xSQL .="xag.estado_agenda AS Estado FROM `expert_agenda` xag WHERE xag.agen_id=$xAgendaid ORDER BY xag.fechacreacion DESC LIMIT 1 ";
+    $xSQL .="xag.estado_agenda AS Estado FROM `expert_agenda` xag WHERE xag.pais_id = $xPaisid AND xag.empr_id =$xEmprid AND xag.titu_id=$xTituid ORDER BY xag.fechacreacion DESC LIMIT 1 ";
     $all_UltiFecha = mysqli_query($con, $xSQL);
     foreach ($all_UltiFecha as $datos) {
         $xAgnFecha = $datos['Fecha'];

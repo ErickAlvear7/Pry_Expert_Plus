@@ -151,7 +151,7 @@
                                 $xDisabledEdit = 'disabled';
                             }
 
-                            //SELECT ULTIMA AGENDA
+                            
                         ?>
                 
                         <tr>
@@ -167,13 +167,13 @@
                             <td>
                                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                                     <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chkestado" 
-                                        onchange="f_UpdateEstado(<?php echo $xTituid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" value=""/>
+                                        onchange="f_UpdateEstado(<?php echo $xTituid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" value=""/>
                                 </div>
                             </td>
                             <td>
                                 <div class="text-center">
                                     <div class="btn-group">
-                                        <button id="btnAgendar" onclick="f_Agendar(<?php echo $xTituid;?>,<?php echo $xProdid;?>,<?php echo $xGrupid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit;?> title='Agendar Cita' data-bs-toggle="tooltip" data-bs-placement="left">
+                                        <button id="btnAgendar_<?php echo $xTituid;?>" onclick="f_Agendar(<?php echo $xTituid;?>,<?php echo $xProdid;?>,<?php echo $xGrupid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit;?> title='Agendar Cita' data-bs-toggle="tooltip" data-bs-placement="left">
                                            <i class="fa fa-user-md" aria-hidden="true"></i>
                                         </button>												 
                                     </div>
@@ -212,31 +212,30 @@
 
     //Update Estado cliente
 
-    function f_UpdateEstado(_clieid, _emprid,_paisid,_usuaid){
+    function f_UpdateEstado(_tituid, _emprid,_paisid,_usuaid){
 
-
-        var _check = $("#chk" + _clieid).is(":checked");
+        var _check = $("#chk" + _tituid).is(":checked");
         var _checked = "";
         var _class = "badge badge-light-primary";
-        var _td = "td_" + _clieid;
-        var _btnedit = "btnEditar_" + _clieid;
+        var _td = "td_" + _tituid;
+        var _btnagen = "btnAgendar_" + _tituid;
 
         if(_check){
             var _estado = 'ACTIVO';
             _checked = "checked='checked'";
-            $('#'+_btnedit).prop("disabled",false);
+            $('#'+_btnagen).prop("disabled",false);
             
         }else{
             _estado = 'INACTIVO';
             _class = "badge badge-light-danger";
-            $('#'+_btnedit).prop("disabled",true);
+            $('#'+_btnagen).prop("disabled",true);
         }
 
         var _changetd = document.getElementById(_td);
             _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
 
             var _parametros = {
-                "xxClieid" : _clieid,
+                "xxClieid" : _tituid,
                 "xxEmprid" : _emprid,
                 "xxPaisid" : _paisid,
                 "xxUsuaid" : _usuaid,

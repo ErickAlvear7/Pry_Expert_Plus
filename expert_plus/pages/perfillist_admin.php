@@ -99,11 +99,11 @@
                         </div>
                         <div class="card-footer flex-wrap pt-0">
                             <div class="row">
-                                <div class="col">
+                                <!-- <div class="col">
                                     <div class="d-grid gap-2">
                                         <button type="button" class="btn btn-primary btn-sm" onclick="f_VerPerfil(<?php echo $perfil['Id']; ?>)"><i class="fa fa-eye" aria-hidden="true"></i>Ver Perfil</button>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col">
                                     <div class="d-grid gap-2">
                                         <button type="button" class="btn btn-light-primary btn-sm" onclick="f_Editar(<?php echo $perfil['Id']; ?>,'<?php echo $xNamePerfil; ?>','<?php echo $perfil['Descripcion']; ?>')"><i class="las la-pencil-alt" aria-hidden="true"></i>Editar Perfil</button>
@@ -360,7 +360,7 @@
     </div> 
 
     <!--Ver Perfil -->
-    <div class="modal fade" id="kt_modal_view_role" tabindex="-1" aria-hidden="true">
+    <!-- <div class="modal fade" id="kt_modal_view_role" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
             <div class="modal-content">
                 <div class="modal-header">
@@ -458,7 +458,7 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>  -->
 
 </div>
        
