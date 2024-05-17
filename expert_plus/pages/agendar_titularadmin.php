@@ -130,11 +130,7 @@
 <div id="kt_content_container" class="container-xxl">
     <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-1">
         <button type="button" id="btnRegresar" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
-            <span class="svg-icon svg-icon-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
-                </svg>
-            </span>
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
         </button>
     </ul>   
     <div class="card mb-6">
@@ -251,15 +247,8 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div id="modal_new_agenda_parent" class="modal-content">
             <div class="modal-header">
-                <h2 class="fw-bold"><i class="fas fa-user"></i> <?php echo $xNombres; ?></h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Angendar Cita</h2>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-4">
@@ -289,30 +278,30 @@
                         <div class="row mb-4">
                             <div class="col-md-6">
                                 <label class="fs-6 fw-bold form-label">Fecha Inicio</label>
-                                <input class="form-control form-control-solid" name="fecha_inicio" id="fecha_inicio" readonly />
+                                <input class="form-control form-control-solid" name="fecha_inicio" id="fecha_inicio" disabled />
                             </div>
                             <div class="col-md-6">
                                 <label class="fs-6 fw-bold form-label">Hora Inicio</label>
-                                <input class="form-control form-control-solid" name="hora_inicio" id="hora_inicio" readonly />
+                                <input class="form-control form-control-solid" name="hora_inicio" id="hora_inicio" disabled />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="fs-6 fw-bold form-label">Fecha Fin</label>
-                                <input class="form-control form-control-solid" name="fecha_fin" id="fecha_fin" readonly />
+                                <input class="form-control form-control-solid" name="fecha_fin" id="fecha_fin" disabled />
 
                             </div>
                             <div class="col-md-6">
                                 <label class="fs-6 fw-bold form-label">Hora Fin</label>
-                                <input class="form-control form-control-solid" name="hora_fin" id="hora_fin" readonly />
+                                <input class="form-control form-control-solid" name="hora_fin" id="hora_fin" disabled />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnAgendar" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Agendar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnAgendar" class="btn btn-sm btn-light-primary"><i class="fa fa-check"></i>Agendar</button>
             </div>
         </div>
     </div>
@@ -323,15 +312,8 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div id="modal_new_reserva_parent" class="modal-content">
             <div class="modal-header">
-                <h2 class="fw-bold"><i class="fas fa-user"></i> <?php echo $xNombres; ?></h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Reserva Cita</h2>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-4">
@@ -384,7 +366,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="btnCancelarRe" class="btn btn-sm btn-light-danger" ><i class="las la-eraser"></i>Eliminar Reserva</button>
-                <button type="button" id="btnAgendarRe" class="btn btn-sm btn-light-primary" ><i class="las la-save"></i>Agendar</button>
+                <button type="button" id="btnAgendarRe" class="btn btn-sm btn-light-primary" ><i class="fa fa-check"></i>Agendar</button>
             </div>
         </div>
     </div>
@@ -1230,7 +1212,14 @@
 
     });
 
+    //Desplazar-modal
+    $("#modal_new_agenda").draggable({
+        handle: ".modal-header"
+    });     
     
+    $("#modal_new_reserva").draggable({
+        handle: ".modal-header"
+    });
 
 
 </script>

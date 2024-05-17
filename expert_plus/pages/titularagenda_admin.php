@@ -40,12 +40,20 @@
         
         $xCriterio = $_POST["txtcriterio"];
 
+        // $xDatos = "OK";
+        // $xSQL = "SELECT per.pers_numerodocumento AS Documento,(SELECT prv.ciudad FROM `provincia_ciudad` prv WHERE prv.prov_id=per.pers_ciudad) AS Ciudad,";
+        // $xSQL .= "CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Titular,(SELECT pro.prod_nombre FROM `expert_productos` pro WHERE pro.prod_id=tit.prod_id) AS Producto,";
+        // $xSQL .= "CASE tit.titu_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado,tit.titu_id AS Tituid,tit.prod_id AS Prodid,";
+        // $xSQL .= "tit.grup_id AS Grupid FROM `expert_persona` per INNER JOIN `expert_titular` tit ON tit.pers_id=per.pers_id ";
+        // $xSQL .= "WHERE per.pers_estado='A' AND CONCAT(per.pers_apellidos,' ',per.pers_nombres) LIKE '%$xCriterio%' OR per.pers_numerodocumento LIKE '$xCriterio%' ";
+        // $all_datos = mysqli_query($con, $xSQL);
+
         $xDatos = "OK";
-        $xSQL = "SELECT per.pers_numerodocumento AS Documento,(SELECT prv.ciudad FROM `provincia_ciudad` prv WHERE prv.prov_id=per.pers_ciudad) AS Ciudad,";
-        $xSQL .= "CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Titular,(SELECT pro.prod_nombre FROM `expert_productos` pro WHERE pro.prod_id=tit.prod_id) AS Producto,";
-        $xSQL .= "CASE tit.titu_estado WHEN 'A' THEN 'Activo' ELSE 'Inactivo' END AS Estado,tit.titu_id AS Tituid,tit.prod_id AS Prodid,";
-        $xSQL .= "tit.grup_id AS Grupid FROM `expert_persona` per INNER JOIN `expert_titular` tit ON tit.pers_id=per.pers_id ";
-        $xSQL .= "WHERE per.pers_estado='A' AND CONCAT(per.pers_apellidos,' ',per.pers_nombres) LIKE '%$xCriterio%' OR per.pers_numerodocumento LIKE '$xCriterio%' ";
+        $xSQL = "SELECT per.pers_numerodocumento AS Documento,(SELECT prv.ciudad FROM `provincia_ciudad` prv WHERE prv.prov_id=per.pers_ciudad) AS Ciudad, ";
+        $xSQL .= "CONCAT(per.pers_nombres,' ',per.pers_apellidos) AS Titular,(SELECT pro.prod_nombre FROM `expert_productos` pro WHERE pro.prod_id=tit.prod_id) AS Producto, ";
+        $xSQL .= "(SELECT cli.clie_nombre FROM `expert_cliente` cli WHERE cli.clie_id = pro.clie_id) AS Cliente,CASE tit.titu_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado, ";
+        $xSQL .= "tit.titu_id AS Tituid,tit.prod_id AS Prodid,tit.grup_id AS Grupid FROM `expert_persona` per INNER JOIN `expert_titular`tit  ON tit.pers_id = per.pers_id INNER JOIN `expert_productos` pro ";
+        $xSQL .= "ON tit.prod_id = pro.prod_id INNER JOIN `expert_cliente` cli ON pro.clie_id = cli.clie_id WHERE per.pers_estado='A' AND CONCAT(per.pers_apellidos,' ',per.pers_nombres) LIKE '%$xCriterio%' OR per.pers_numerodocumento LIKE '$xCriterio%' ";
         $all_datos = mysqli_query($con, $xSQL);
     }
 
@@ -53,7 +61,6 @@
 
 <div id="kt_content_container" class="container-xxl">
     <input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
-
     <form  method="post" enctype="multipart/form-data">
         <div class="card">
             <div class="card-header border-0 pt-6">
@@ -66,17 +73,15 @@
                             <input type="text" class="form-control" id="txtcriterio" name="txtcriterio" placeholder="Buscar por Cedula/Apellidos" />
                         </div>
                         <div class="col-xl-2 fv-row">
-                            <button type="submit" name="btnBuscar" id="btnBuscar" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto"  title="Buscar">
-                            <i class="bi bi-search"></i>
+                            <button type="submit" name="btnBuscar" id="btnBuscar" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto pt-3" title="Buscar" data-bs-toggle="tooltip" data-bs-placement="right">
+                                <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
-                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
-    
     <div class="card">
         <div class="card-header border-0 pt-6">
             <div class="card-title">
@@ -99,25 +104,16 @@
                         <option value="Inactivo">Inactivo</option>
                     </select>
                 </div>
-                <!-- <a href="?page=addclienteprod&menuid=<?php echo $menuid; ?>" class="btn btn-primary">
-                    <span class="svg-icon svg-icon-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
-                            <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
-                        </svg>
-                    </span>
-                    Nuevo Titular
-                </a> -->
             </div>                       
         </div>
         <div class="card-body pt-0">
-            <table class="table table-hover align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
+            <table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="kt_ecommerce_products_table">
                 <thead>
-                    <tr class="text-start text-gray-800 fw-bolder fs-7 gs-0 text-uppercase">
-                        <th>Documento</th>
+                    <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                         <th>Ciudad</th>
                         <th>Titular</th>
-                        <th>Cliente/Producto</th>
+                        <th>Cliente</th>
+                        <th>Producto</th>
                         <th>Estado</th>
                         <th>Status</th> 
                         <th style="text-align: center;">Opciones</th>
@@ -130,10 +126,11 @@
                     <tbody class="fw-bold text-gray-600">
                         <?php foreach($all_datos as $datos){ 
                             
-                            $xDocumento = $datos['Documento'];
+                            //$xDocumento = $datos['Documento'];
                             $xCiudad = $datos['Ciudad'];
                             $xTitular = $datos['Titular'];
-                            $xClienteProd = $datos['Producto'];
+                            $xCliente = $datos['Cliente'];
+                            $xProducto = $datos['Producto'];
                             $xTituid = $datos['Tituid'];
                             $xProdid = $datos['Prodid'];
                             $xGrupid = $datos['Grupid'];
@@ -146,20 +143,22 @@
                             $xDisabledEdit = '';
                             $xTarget = '';
 
-                            if($xEstado == 'Activo'){
+                            if($xEstado == 'ACTIVO'){
                                 $xCheking = 'checked="checked"';
                                 $xTextColor = "badge badge-light-primary";
                             }else{
                                 $xTextColor = "badge badge-light-danger";
                                 $xDisabledEdit = 'disabled';
                             }
+
+                            
                         ?>
                 
                         <tr>
-                            <td><?php echo $xDocumento; ?></td>
-                            <td><?php echo $xCiudad; ?></td>
+                            <td class="text-uppercase"><?php echo $xCiudad; ?></td>
                             <td><?php echo $xTitular; ?></td>
-                            <td><?php echo $xClienteProd; ?></td>
+                            <td><?php echo $xCliente; ?></td>
+                            <td><?php echo $xProducto; ?></td>
                             <td id="td_<?php echo $xTituid; ?>">
                                 <div class="<?php echo $xTextColor; ?>">
                                     <?php echo $xEstado; ?>
@@ -168,14 +167,14 @@
                             <td>
                                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                                     <input <?php echo $xCheking; ?> class="form-check-input h-20px w-20px border-primary btnEstado" type="checkbox" id="chkestado" 
-                                        onchange="f_UpdateEstado(<?php echo $xTituid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" value=""/>
+                                        onchange="f_UpdateEstado(<?php echo $xTituid; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" value=""/>
                                 </div>
                             </td>
                             <td>
                                 <div class="text-center">
                                     <div class="btn-group">
-                                        <button id="btnAgendar" onclick="f_Agendar(<?php echo $xTituid;?>,<?php echo $xProdid;?>,<?php echo $xGrupid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit;?> title='Agendar Cita' data-bs-toggle="tooltip" data-bs-placement="left">
-                                            <i class="fa fa-hospital"></i>
+                                        <button id="btnAgendar_<?php echo $xTituid;?>" onclick="f_Agendar(<?php echo $xTituid;?>,<?php echo $xProdid;?>,<?php echo $xGrupid;?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit;?> title='Agendar Cita' data-bs-toggle="tooltip" data-bs-placement="left">
+                                           <i class="fa fa-user-md" aria-hidden="true"></i>
                                         </button>												 
                                     </div>
                                 </div>
@@ -213,31 +212,30 @@
 
     //Update Estado cliente
 
-    function f_UpdateEstado(_clieid, _emprid,_paisid,_usuaid){
+    function f_UpdateEstado(_tituid, _emprid,_paisid,_usuaid){
 
-
-        var _check = $("#chk" + _clieid).is(":checked");
+        var _check = $("#chk" + _tituid).is(":checked");
         var _checked = "";
         var _class = "badge badge-light-primary";
-        var _td = "td_" + _clieid;
-        var _btnedit = "btnEditar_" + _clieid;
+        var _td = "td_" + _tituid;
+        var _btnagen = "btnAgendar_" + _tituid;
 
         if(_check){
             var _estado = 'ACTIVO';
             _checked = "checked='checked'";
-            $('#'+_btnedit).prop("disabled",false);
+            $('#'+_btnagen).prop("disabled",false);
             
         }else{
             _estado = 'INACTIVO';
             _class = "badge badge-light-danger";
-            $('#'+_btnedit).prop("disabled",true);
+            $('#'+_btnagen).prop("disabled",true);
         }
 
         var _changetd = document.getElementById(_td);
             _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
 
             var _parametros = {
-                "xxClieid" : _clieid,
+                "xxClieid" : _tituid,
                 "xxEmprid" : _emprid,
                 "xxPaisid" : _paisid,
                 "xxUsuaid" : _usuaid,

@@ -76,12 +76,8 @@
 			</div>				
 			<div class="card-toolbar">
 				<div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-					<button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-					<span class="svg-icon svg-icon-2">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-							<path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor" />
-						</svg>
-					</span>
+					<button type="button" class="btn btn-light-primary btn-sm me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+				    <i class="fa fa-filter" aria-hidden="true"></i>
 					Filtrar</button>
 					<div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
 						<div class="px-7 py-5">
@@ -102,23 +98,17 @@
 								<label class="form-label fs-6 fw-bold">Estado:</label>
 								<select class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="--Seleccione Estado--" data-allow-clear="true" data-kt-user-table-filter="two-step" data-hide-search="true">
 									<option></option>
-									<option value="Activo">Activo</option>
-									<option value="Inactivo">Inactivo</option>
+									<option value="Activo">ACTIVO</option>
+									<option value="Inactivo">INACTIVO</option>
 								</select>
 							</div>
 							<div class="d-flex justify-content-end">
-								<button type="reset" class="btn btn-light btn-active-light-primary fw-bold me-2 px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="reset">Cancelar</button>
-								<button type="submit" class="btn btn-primary fw-bold px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="filter">Aplicar</button>
+								<button type="reset" class="btn btn-sm btn-light-danger me-2" data-kt-menu-dismiss="true" data-kt-user-table-filter="reset"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+								<button type="submit" class="btn btn-sm btn-light-primary" data-kt-menu-dismiss="true" data-kt-user-table-filter="filter"><i class="fa fa-check" aria-hidden="true"></i>Aplicar</button>
 							</div>
 						</div>
 					</div>
-					<button type="button" class="btn btn-primary" id="btnNuevo">
-						<span class="svg-icon svg-icon-2">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
-								<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
-							</svg>
-						</span>
+					<button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm" id="btnNuevo"><i class="fa fa-plus-circle" aria-hidden="true"></i>
 						Nuevo Usuario
 					</button>
 				</div>
@@ -127,7 +117,7 @@
 		<div class="card-body py-4">
 			<table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="kt_table_users" style="width: 100%;">
 				<thead>
-					<tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0"">
+					<tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
 						<th style="display:none;">Id</th>
 						<th style="display:none;">Login</th>
 						<th class="min-w-125px">Usuario</th>
@@ -163,7 +153,7 @@
 
 								if($estado == 'ACTIVO'){
 									$cheking = 'checked="checked"';
-									$xTextColor = "badge badge-light-success";
+									$xTextColor = "badge badge-light-primary";
 								}else{
 									$xTextColor = "badge badge-light-danger";
 									$xDisabledEdit = 'disabled';
@@ -228,31 +218,29 @@
         <div class="modal-content"> 
             <div class="modal-header">
                 <h2 id="titulo" class="badge badge-light-primary fw-light fs-2 fst-italic"></h2>
-                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+				<i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-10 px-lg-10 mt-n3">
                 <div class="card mb-1 mb-xl-1">
-                    <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_avatar" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div> 
-                        </div>
-                    </div>
-                    <div id="view_avatar" class="collapse">
+					<div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_avatar">
+						<div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+							<span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+									<rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+								</svg>
+							</span>
+							<span class="svg-icon toggle-off svg-icon-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+									<rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+									<rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+								</svg>
+							</span>
+						</div>
+						<h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Avatar</h4>
+					</div>
+                    <div id="view_avatar" class="collapse fs-6 ms-1">
                         <div class="card card-flush py-4">
                             <div class="card-body pt-0">
 								<div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('img/default.png')">
@@ -272,20 +260,25 @@
                     </div>
                 </div>
                 <div class="card mb-1 mb-xl-1">
-                    <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_usuario" role="button" aria-expanded="false" aria-controls="view_datos_titular">Informacion
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div> 
-                        </div>
-                    </div>
-                    <div id="view_datos_usuario" class="collapse show">
+					<div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_datos_usuario">
+						<div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+							<span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+									<rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+								</svg>
+							</span>
+							<span class="svg-icon toggle-off svg-icon-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+									<rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+									<rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+								</svg>
+							</span>
+						</div>
+						<h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Datos Usuario</h4>
+					</div>
+                    <div id="view_datos_usuario" class="collapse show fs-6 ms-1">
                         <div class="card card-flush py-4">
                             <div class="card-body pt-0">
                                 <div class="row mb-4">
@@ -321,19 +314,24 @@
                     </div>
                 </div>
 				<div class="card mb-1 mb-xl-8">
-				    <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_perfiles" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Perfiles
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div> 
-                        </div>
-                    </div>
+                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_perfiles">
+						<div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+							<span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+									<rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+								</svg>
+							</span>
+							<span class="svg-icon toggle-off svg-icon-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+									<rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+									<rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+								</svg>
+							</span>
+						</div>
+						<h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Perfiles</h4>
+					</div>
 					<div id="view_perfiles" class="collapse show">
 						<div class="card card-flush py-4">
 						    <div class="card-body pt-0">
@@ -439,7 +437,7 @@
 			document.getElementById('imgfile').style.backgroundImage="url(img/default.png)";
 					
 			$("#titulo").text("Nuevo Usuario");
-			document.getElementById("btnSave").innerHTML = `<i class="las la-save">` + '\xa0' + 'Grabar';
+			document.getElementById("btnSave").innerHTML = '<i class="las la-save"></i>Grabar';
 			$("#chkCaducaPass").prop("checked", false);
 			$("#lblCaducaPass").text("NO");
 			$("#chkCamPass").prop("checked", false);
@@ -567,7 +565,7 @@
 				}                            
 			}); 
 					
-			document.getElementById("btnSave").innerHTML = '<span><i class="las la-pencil-alt">' + '\xa0' + ' Modificar</span>';
+			document.getElementById("btnSave").innerHTML = '<i class="las la-pencil-alt"></i>Modificar';
 			$('#txtPassword').prop('readonly', true);
 			$("#kt_modal_add_user").modal("show");
 		});			
@@ -800,7 +798,7 @@
 		let _check = $("#chk" + _userid).is(":checked");
 		let _checked = "";
 		let _disabled = "";
-		let _class = "badge badge-light-success";
+		let _class = "badge badge-light-primary";
 		let _td = "td_" + _userid;
 		let _btnreset = "btnReset_" + _userid;
 		let _btnedit = "btnEditar_" + _userid;

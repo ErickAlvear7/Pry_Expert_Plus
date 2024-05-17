@@ -119,7 +119,7 @@
                             </div>
                         </div>
                         <div class="card-toolbar d-flex align-self-end">
-                           <button type="button" id="btnGuardarEdit" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $idpaca; ?>)" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
+                           <button type="button" id="btnGuardarEdit" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $idpaca; ?>)" class="btn btn-sm btn-primary"><i class="las la-save"></i>Grabar</button>
                         </div>	
                     </div>
                 </div>
@@ -149,15 +149,9 @@
                                     <input type="text" class="form-control form-control-solid" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" placeholder="valor entero" value="" />                       
                                 </div>
                                 <div class="col-md-2 fv-row">
-                                    <button class="btn btn-sm btn-light-primary" id="btnAgregar">
-                                            <span class="svg-icon svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
-                                                    <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                        Agregar    
-                                    </button>
+                                <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm mb-2" id="btnAgregar"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                    Agregar
+                                </button>
                                 </div>
                             </div>
                         </div>
@@ -201,7 +195,7 @@
 
                                             if($xPadeEstado == 'A'){
                                                 $xEstado = 'ACTIVO';
-                                                $xTextColor = "badge badge-light-success";
+                                                $xTextColor = "badge badge-light-primary";
                                                 $xCheking = 'checked="checked"';
                                             
                                             }else{
@@ -386,7 +380,7 @@
                             _padev = _valorV;
                             _padei = _valorI;
                             _estado = 'ACTIVO';
-                            _class = "badge badge-light-success";
+                            _class = "badge badge-light-primary";
                             _status = '<div class="' + _class + '">' + _estado + ' </div>';
                             _checked = "checked='checked'";
 
@@ -577,7 +571,7 @@
                             _padev = _valorV;
                             _padei = _valorI;
                             _estado = 'ACTIVO';
-                            _class = "badge badge-light-success";
+                            _class = "badge badge-light-primary";
                             _status = '<div class="' + _class + '">' + _estado + ' </div>';
 
 
@@ -718,7 +712,7 @@
         let _checked = "";
         let _disabled = "";
         let _td = "td_" + _padeid;
-        let _class = "badge badge-light-success";
+        let _class = "badge badge-light-primary";
         let _btnedit = "btnEditar_" + _padeid;
 
         if(_check){

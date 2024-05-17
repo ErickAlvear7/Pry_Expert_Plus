@@ -92,61 +92,81 @@
         <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
             <div class="card card-flush py-4">
                 <div class="card-header">
-                    <div class="card-title">
-                        <h2>Logo Prestador</h2>
+                    <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_logo">
+                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <span class="svg-icon toggle-off svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Avatar</h4>
                     </div>
                 </div>
-                <div class="card-body text-center pt-0">
-                    <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
-                        <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfile"></div>
-                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
-                            <i class="bi bi-pencil-fill fs-7"></i>
-                            <input type="file" name="imglogo" id="imglogo" accept=".png, .jpg, .jpeg" />
-                            <input type="hidden" name="avatar_remove" />
-                        </label>
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
-                            <i class="bi bi-x fs-2"></i>
-                        </span>
+                <div id="view_logo" class="collapse fs-6 ms-1">
+                    <div class="card-body text-center pt-0">
+                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                            <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfile"></div>
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
+                                <i class="bi bi-pencil-fill fs-7"></i>
+                                <input type="file" name="imglogo" id="imglogo" accept=".png, .jpg, .jpeg" />
+                                <input type="hidden" name="avatar_remove" />
+                            </label>
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                        </div>
+                        <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                     </div>
-                    <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                 </div>
             </div>
             <div class="card card-flush py-4">
                 <div class="card-header">
-                    <div class="card-title">
-                        <h2>Opciones</h2>
+                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_opciones">														<!--begin::Icon-->
+                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <span class="svg-icon toggle-off svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Opciones</h4>
                     </div>
                 </div>
-                <div class="card-body pt-0">
-                    <button type="button" id="btnNuevaEspe" class="btn btn-light-primary btn-sm mb-10">
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                            </svg>
-                        </span>
-                        Nueva Especialidad
-                    </button>
-                    <button type="button" id="btnNuevaProfesion" class="btn btn-light-primary btn-sm mb-10">
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                            </svg>
-                        </span>                                                                
-                        Nuevo Tipo Profesion
-                    </button>                                 
-                    <div class="separator my-7"></div>
-                    <button type="button" id="btnNuevoProfesional" class="btn btn-primary w-100" >
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M20 14H18V10H20C20.6 10 21 10.4 21 11V13C21 13.6 20.6 14 20 14ZM21 19V17C21 16.4 20.6 16 20 16H18V20H20C20.6 20 21 19.6 21 19ZM21 7V5C21 4.4 20.6 4 20 4H18V8H20C20.6 8 21 7.6 21 7Z" fill="currentColor" />
-                                <path opacity="0.3" d="M17 22H3C2.4 22 2 21.6 2 21V3C2 2.4 2.4 2 3 2H17C17.6 2 18 2.4 18 3V21C18 21.6 17.6 22 17 22ZM10 7C8.9 7 8 7.9 8 9C8 10.1 8.9 11 10 11C11.1 11 12 10.1 12 9C12 7.9 11.1 7 10 7ZM13.3 16C14 16 14.5 15.3 14.3 14.7C13.7 13.2 12 12 10.1 12C8.10001 12 6.49999 13.1 5.89999 14.7C5.59999 15.3 6.19999 16 7.39999 16H13.3Z" fill="currentColor" />
-                            </svg>
-                        </span>
-                        Nuevo Profesional
-                    </button>    
-                    <div class="separator my-7"></div>
+                <div id="view_opciones" class="collapse show fs-6 ms-1">
+                    <div class="card-body pt-0">
+                        <div class="d-grid gap-2">
+                            <button type="button" id="btnNuevaEspe" class="btn btn-light-primary btn-sm mb-10">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                Nueva Especialidad
+                            </button>
+                            <button type="button" id="btnNuevaProfesion" class="btn btn-light-primary btn-sm mb-10">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>                                                               
+                                Nuevo Tipo Profesion
+                            </button>                                 
+                            
+                            <button type="button" id="btnNuevoProfesional" class="btn btn-light-primary btn-sm mb-10" >
+                                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                Nuevo Profesional
+                            </button>    
+                        </div>  
+                    </div>
                 </div>
             </div>
         </div>
@@ -396,25 +416,18 @@
                     </div>
                     <div class="d-flex justify-content-end">
                         <!--<a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancelar</a>-->
-                        <button type="button" id="btnSave" class="btn btn-primary"><i class="las la-save"></i>
-                            <span class="indicator-label">Grabar</span>
-                            <span class="indicator-progress">Espere un momento...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        <button type="button" id="btnSave" class="btn btn-sm btn-primary"><i class="las la-save"></i>
+                           Grabar
                         </button>
                     </div>                            
                 </div>
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                     <div class="d-flex flex-column gap-7 gap-lg-10">
                         <div class="d-flex justify-content-start">
-                            <a href="#" class="btn btn-light-primary btn-sm" id="btnAddespe">
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>                                       
-                            Agregar Especialidad
-                            </a>
+                            <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm mb-1" id="btnAddespe">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                Agregar Especialidad
+                            </button>
                         </div>
                         <div class="card card-flush py-4">
                             <div class="card-header">
@@ -523,14 +536,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nueva Especialidad</h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-5 px-lg-10">
                 <div class="card card-flush py-2">
@@ -583,14 +589,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Especialidad Asignada</h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-4">
@@ -636,14 +635,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Especialidad Asignada</h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-4">
@@ -691,14 +683,7 @@
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Profesional/Configurar Horarios</h2>
                 <h2 id="headerTitle" class="fs-6 fw-bold form-label text-primary"></h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-2 px-lg-10">
                 <div class="card card-flush pt-10 pb-n3">
@@ -773,14 +758,7 @@
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Configurar Horarios/Turnos</h2>
                 <h5 class="text-primary" id="headertitu1"></h5>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-2">
@@ -853,14 +831,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Tipo Profesion</h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-4">
@@ -870,7 +841,7 @@
                                 <label class="required form-label">Tipo Profesion
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Ingrese Tipo Profesion (Medico-Odontolo-Educador-Plomero-etc.."></i>
                                 </label>
-                                <input type="text" class="form-control mb-2" minlength="1" maxlength="150" placeholder="Tipo Profesion" name="txtTipoProfesion" id="txtTipoProfesion" />
+                                <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="150" placeholder="Tipo Profesion" name="txtTipoProfesion" id="txtTipoProfesion" />
                             </div>
                         </div>
                         <div class="row">
@@ -878,17 +849,12 @@
                                 <label class="required form-label">Valor/Codigo
                                     
                                 </label>
-                                <input type="text" class="form-control mb-2" minlength="1" maxlength="100" placeholder="Valor/Codigo" name="txtCodigoTipo" id="txtCodigoTipo" />
+                                <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="100" placeholder="Valor/Codigo" name="txtCodigoTipo" id="txtCodigoTipo" />
                             </div>
                         </div>
                         <div class="form-group my-5">
                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarTipo">
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 Agregar
                             </button>
                         </div>
@@ -983,14 +949,7 @@
         <div class="modal-content"> 
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Profesional</h2>
-                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-10 px-lg-10 mt-n3">
                 <div class="card mb-1 mb-xl-1">
@@ -1053,13 +1012,13 @@
                                         <select name="cboTipoDoc" id="cboTipoDoc" aria-label="Seleccione Tipo Documento" data-control="select2" data-placeholder="Seleccione Tipo Documento" data-dropdown-parent="#modal_select" class="form-select mb-2" >
                                             <option></option>
                                             <?php foreach ($all_parametro as $parametro) : ?>
-                                                <option value="<?php echo $parametro['Codigo'] ?>"><?php echo $parametro['Descripcion']; ?></option>
+                                                <option value="<?php echo $parametro['Codigo'] ?>"><?php echo mb_strtoupper($parametro['Descripcion']); ?></option>
                                             <?php endforeach ?>
                                         </select>
                                         </div>
                                     <div class="col-md-6">
                                         <label class="required form-label">Numero Documento</label>
-                                        <input type="text" name="txtNumDocumento" id="txtNumDocumento" class="form-control mb-2" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Numero Documento"  />
+                                        <input type="text" name="txtNumDocumento" id="txtNumDocumento" class="form-control mb-2" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Numero Documento"  />
                                     </div>
                                 </div>
                                 <div class="row mb-4">
@@ -1218,14 +1177,7 @@
             <div class="modal-header">
                 <h2 class="mb-2 badge badge-light-primary fw-light fs-2 fst-italic">Motivos Especialidad</h2>
                 <h2 id="headerTitleMotivo" class="fs-6 fw-bold form-label mb-2 text-primary"></h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body py-lg-2 px-lg-10">
                 <div class="card card-flush pt-10 pb-n3">
@@ -1362,7 +1314,7 @@
             
             //$("#modal_new_tipoprofesion").find("input,textarea").val("");
             const btn = document.getElementById('btnAgregarTipo');
-            btn.innerHTML = '<span class="svg-icon svg-icon-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" /><rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" /></svg></span>Agregar';
+            btn.innerHTML = '<i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar';
 
             $("#txtTipoProfesion").val('');
             $("#txtCodigoTipo").val('');
@@ -1646,7 +1598,7 @@
                         if(_btnopctiontipo == 'Add'){
                             _output = '<tr id="tr_' + _padeid + '">';    
                             _output += '<td>' + _tipoprofesion.toUpperCase() + '<input type="hidden" id="txtPadeid' + _padeid + '" value="' + _padeid + '"/> <input type="hidden" id="txtTiprofe' + _padeid + '" value="' + _tipoprofesion + '"/> <input type="hidden" id="txtValor' + _padeid + '" value="' + _valcodigoprof  + '"/></td>';
-                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-success">ACTIVO</div></div></td>';
+                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-primary">ACTIVO</div></div></td>';
                             _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                             _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _padeid + '" onchange="f_UpdateEstTipo(';
                             _output += _pacaid + ',' + _padeid + ')" value="' + _padeid + '"/></div></div></td>';
@@ -1657,7 +1609,7 @@
 
                         }else{
                             _output = '<td>' + _tipoprofesion.toUpperCase() + '<input type="hidden" id="txtPadeid'  + _padeid + '" value="' + _padeid + '"/> <input type="hidden" id="txtTiprofe'  + _padeid + '" value="' + _tipoprofesion + '"/> <input type="hidden" id="txtValor' + _padeid + '" value="' + _valcodigoprof  + '"/></td>';
-                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-success">ACTIVO</div></div></td>';
+                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-primary">ACTIVO</div></div></td>';
                             _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                             _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _padeid + '" onchange="f_UpdateEstTipo(';
                             _output += _pacaid + ',' + _padeid + ')" value="' + _padeid + '"/></div></div></td>';
@@ -1700,7 +1652,7 @@
             $('#txtTipoProfesion').val('');
             $('#txtCodigoTipo').val('');
             const btn = document.getElementById('btnAgregarTipo');
-            btn.innerHTML = '<span class="svg-icon svg-icon-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" /><rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" /></svg></span>Agregar';
+            btn.innerHTML = '<i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar';
 
         });
 
@@ -2078,7 +2030,7 @@
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _profesional + '</span><input type="hidden" id="txtProfesional_' + _id + '" value="' + _profesional +  '" /></div></div></td>';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _profesion + '</span></div></div></td>';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
-                _output += '<td id="tdprof_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="badge badge-light-success">ACTIVO</div></div></div></td>';
+                _output += '<td id="tdprof_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="badge badge-light-primary">ACTIVO</div></div></div></td>';
                 _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                 _output += '<input class="form-check-input h-20px w-20px border-primary" type="checkbox" checked="checked" id="chkprof' + _id + '" onchange="f_UpdateEstProf(';
                 _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
@@ -2138,7 +2090,7 @@
 
                     if(_estado == "A"){
                         _checked = "checked='checked'";
-                        _textcolor = "badge badge-light-success";
+                        _textcolor = "badge badge-light-primary";
                     }else{
                         _textcolor = "badge badge-light-danger";
                     }
@@ -2196,7 +2148,7 @@
 
                 _estado = 'ACTIVO';
                 _checked = "checked='checked'";
-                _textcolor = "badge badge-light-success";                
+                _textcolor = "badge badge-light-primary";                
 
                 _output = '<tr id="trmot_' + _id + '">';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _motivo.toUpperCase() + '</span><input type="hidden" id="txtMotivo_' + _id + '" value="' + _motivo + '" /></div></div></td>';
@@ -2268,7 +2220,7 @@
 
         if(_check){
             _checked = "checked='checked'";
-            _class = 'badge badge-light-success';
+            _class = 'badge badge-light-primary';
             $('#'+_btnedit).prop('disabled',false); 
         }else{
             _estado = 'INACTIVO';
@@ -2295,7 +2247,7 @@
         let _usuaid = "<?php echo $xUsuaid; ?>";
         let _check = $("#chkmoti" + _motid).is(":checked");
         let _checked = "";
-        let _class = "badge badge-light-success";
+        let _class = "badge badge-light-primary";
         let _td = "tdmot_" + _motid;
 
         if(_check){
@@ -2583,7 +2535,7 @@
         _btnopctiontipo = "Mod";
 
         const btn = document.getElementById('btnAgregarTipo');
-        btn.innerHTML = '<span><i class="las la-pencil-alt">' + '\xa0' + ' Modificar</span>';
+        btn.innerHTML = '<i class="las la-pencil-alt"></i>Modificar';
 
         _padeidact = $('#txtPadeid' + _padeid).val();
         _tipoprofeold = $('#txtTiprofe' + _padeid).val();
@@ -2668,7 +2620,7 @@
                 _output = '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _especialidad + '</span><input type="hidden" id="txtEspeciPrestador' + _rowid + '" value="' + _especialidad + '"/></div></div></td>';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _pvp + '</span></div></div></td>';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _costo + '</span></div></div></td>';
-                _output += '<td id="td_' + _rowid + '"><div class="d-flex align-items-center"><div class="ms-5"><div class="badge badge-light-primary">Activo</div></div></div></td>';                        
+                _output += '<td id="td_' + _rowid + '"><div class="d-flex align-items-center"><div class="ms-5"><div class="badge badge-light-primary">ACTIVO</div></div></div></td>';                        
                 _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                 _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _rowid + '" onchange="f_UpdateEstado(';
                 _output += _paisid + ',' + _emprid + ',' + _rowid + ')" value="' + _rowid + '"/></div></div></td>';
@@ -2753,9 +2705,12 @@
             return;                    
         }
 
-        if(_numdocumento.length < 10){
-            toastSweetAlert("top-end",3000,"error","Documento Incorrecto..!!");
-            return;                    
+        if(_numdocumento != ''){
+            _valor = document.getElementById("txtNumDocumento").value;
+            if( !(/^(\d{10}|\d{13})$/.test(_valor)) ) {
+                toastSweetAlert("top-end",3000,"error","Documento Incorrecto..!");  
+                return;
+		    }                
         }
 
         if(_nombres == ''){
@@ -2774,19 +2729,24 @@
             return;                    
         }  
         
-        if(_telefono != ''){
-            if(_telefono.length < 7){
-                toastSweetAlert("top-end",3000,"error","Telefono Incorrecto..!!");
-                return; 
-            }
-        }
 
-        if(_celular != ''){
-            if(_celular.length < 10){
-                toastSweetAlert("top-end",3000,"error","Celular Incorrecto..!!");
-                return; 
+        if(_telefono != '')
+        {
+            _valor = document.getElementById("txtFonoProf").value;
+            if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
+                toastSweetAlert("top-end",3000,"error","Telefono Incorrecto..!");  
+                return;
             }
-        }
+        }   
+
+        if(_celular != '')
+		{
+			_valor = document.getElementById("txtCelularProf").value;
+			if( !(/^\d{10}$/.test(_valor)) ) {
+				toastSweetAlert("top-end",3000,"error","Celular Incorrecto..!"); 
+				return;
+			}
+		}
 
         if(_selecc == 'SI'){
             var _imagen = document.getElementById("imgavatar");
