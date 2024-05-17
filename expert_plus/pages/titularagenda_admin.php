@@ -150,6 +150,8 @@
                                 $xTextColor = "badge badge-light-danger";
                                 $xDisabledEdit = 'disabled';
                             }
+
+                            //SELECT ULTIMA AGENDA
                         ?>
                 
                         <tr>
