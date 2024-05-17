@@ -1638,8 +1638,8 @@
                     var _pacaid = json.Pacaid;
                     var _padeid = json.Padeid;
 
-                    console.log(_pacaid);
-                    console.log(_padeid);
+                    //console.log(_pacaid);
+                    //console.log(_padeid);
 
                     if(_padeid > 0){
 

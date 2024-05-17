@@ -15,28 +15,23 @@
     $resultado = "ERR";
     $xRow = 0;  
 
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxGrupo'])){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxGrupo']) <> ''){    
 
-    if(isset($_POST['xxPaisId']) and isset($_POST['xxEmprId']) and isset($_POST['xxGrupo'])){
-        if(isset($_POST['xxPaisId']) <> '' and isset($_POST['xxEmprId']) <> '' and isset($_POST['xxGrupo']) <> ''){    
-
-            $xPaisid= $_POST['xxPaisId'];
-            $xEmprid = $_POST['xxEmprId'];
+            $xPaisid= $_POST['xxPaisid'];
+            $xEmprid = $_POST['xxEmprid'];
             $xGrupo = trim(mb_strtoupper(safe($_POST['xxGrupo'])));
 
-            $xSQL = "SELECT * FROM `expert_grupos` gru WHERE gru.pais_id=$xPaisid AND gru.empr_id=$xEmprid AND gru.grup_nombre='$xGrupo' ";
-            $all_param = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
+            $xSQL = "SELECT * FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND grup_nombre='$xGrupo' ";
+            $all_param = mysqli_query($con, $xSQL);
             $xRow = mysqli_num_rows($all_param);
 
             if($xRow == 0){
-
                 $resultado ="OK";
-
             }else{
-
                 $resultado ="EXISTE";
             }
-            
-        }       
+        }
     }
 
     mysqli_close($con);

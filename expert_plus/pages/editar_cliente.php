@@ -532,7 +532,7 @@
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Editar Grupo</h2>
+                <h2>Lista de Grupos / Editar Datos</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -542,76 +542,120 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body scroll-y mx-2 mx-xl-2 my-2">                
-                <div class="card-body pt-0">
-                    <table id="tblGrupo" class="table table-hover align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
-                        <thead>
-                            <tr class="text-start text-gray-400 fw-bolder fs-7 gs-0">
-                                <th>Grupo</th>
-                                <th>Secuencial Agenda</th>
-                                <th>Secuencial Cancela</th>
-                                <th>Estado</th>
-                                <th>Status</th>
-                                <th>Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody class="fw-bold text-gray-600">
-                            <?php 
-                                $xSQL = "SELECT * FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid  ";
-                                $all_grupos = mysqli_query($con, $xSQL);
-                                foreach($all_grupos as $grupo){
-                                    $xId = $grupo['grup_id'];
-                                    $xGrupo = $grupo['grup_nombre'];
-                                    $xEstado = trim($grupo['grup_estado']);
-                                    $xSecAgenda = $grupo['secuencial_agendado'];
-                                    $xSecCancela = $grupo['secuencial_cancelado'];
-
-                                    $xChkEstado = '';
-                                    $xDisabledEdit = '';
-    
-                                    if($xEstado == 'A'){
-                                            $xEstado = 'ACTIVO';
-                                        $xChkEstado = 'checked="checked"';
-                                        $xTextColor = "badge badge-light-primary";
-                                    }else{
-                                        $xEstado = 'INACTIVO';
-                                        $xTextColor = "badge badge-light-danger";
-                                        $xDisabledEdit = 'disabled';
-                                    }  
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $xGrupo; ?></td>
-                                        <td><?php echo $xSecAgenda; ?></td>
-                                        <td><?php echo $xSecCancela; ?></td>
-                                        <td id="tdgru_<?php echo $xId; ?>">
-                                            <div class="<?php echo $xTextColor; ?>">
-                                                <?php echo $xEstado; ?>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="text-end">
-                                            <div class="text-center">
-                                                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                    <input class="form-check-input h-20px w-20px border-primary" <?php echo $xChkEstado; ?> type="checkbox" id="chkgru<?php echo $xId; ?>" 
-                                                    onchange="f_UpdateEstGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xUsuaid; ?>)" value="<?php echo $xId; ?>"/>
-                                                </div>
-                                            </div>
-                                        </td>
+            <div class="modal-body py-lg-10 px-lg-10">   
+                <div class="card card-flush py-4">             
+                    <div class="card-body pt-0">                    
+                        <div id="divcampos" style="display: none;" >
+                            <input type="hidden" class="form-control mb-2 " maxlength="80" placeholder="ID" name="txteditargrupoid" id="txteditargrupoid" />
+                            <div class="d-flex flex-column mb-7 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                    <span class="required">Grupo</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
+                                </label>
+                                <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txteditarGrupo" id="txteditarGrupo" />
+                            </div>
                             
-                                        <td class="text-end">
-                                            <div class="text-center">
-                                                <div class="btn-group">
-                                                    <button id="btnEditargru_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Grupo' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarGrupo(<?php echo $xId; ?>)">
-                                                        <i class='fa fa-edit'></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
+                            <div class="row mb-7">
+                                <div class="col-md-6">
+                                    <label class="form-label">Secuencial Agenda</label>
+                                    <input type="number" name="txteditarnumagenda" id="txteditarnumagenda" class="form-control mb-2" value="0" onkeypress="return isNumberKey(event)" />   
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Secuencial Cancelado</label>
+                                    <input type="number" name="txteditarnumcancelado" id="txteditarnumcancelado" class="form-control mb-2"  value="0" onkeypress="return isNumberKey(event)" />  
+                                </div>
+                            </div>
+
+                            <div class="form-group my-5">
+                                <button type="button" id="btneditargrupo" onclick="f_ModificarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
+                            </div>
+
+                        </div>
+
+                        <div class="mh-300px scroll-y me-n7 pe-7">
+                            <table id="tblGrupo" class="table table-hover align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
+                                <thead>
+                                    <tr class="text-start text-gray-400 fw-bolder fs-7 gs-0">
+                                        <th>Grupo</th>
+                                        <th>Secuencial Agenda</th>
+                                        <th>Secuencial Cancela</th>
+                                        <th>Estado</th>
+                                        <th>Status</th>
+                                        <th>Opciones</th>
                                     </tr>
-                                <?php } ?>
-                        </tbody>
-                    </table>
-                </div>                
+                                </thead>
+                                <tbody class="fw-bold text-gray-600">
+                                    <?php 
+                                        $xSQL = "SELECT * FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid  ";
+                                        $all_grupos = mysqli_query($con, $xSQL);
+                                        foreach($all_grupos as $grupo){
+                                            $xId = $grupo['grup_id'];
+                                            $xGrupo = $grupo['grup_nombre'];
+                                            $xEstado = trim($grupo['grup_estado']);
+                                            $xSecAgenda = $grupo['secuencial_agendado'];
+                                            $xSecCancela = $grupo['secuencial_cancelado'];
+
+                                            $xChkEstado = '';
+                                            $xDisabledEdit = '';
+            
+                                            if($xEstado == 'A'){
+                                                    $xEstado = 'ACTIVO';
+                                                $xChkEstado = 'checked="checked"';
+                                                $xTextColor = "badge badge-light-primary";
+                                            }else{
+                                                $xEstado = 'INACTIVO';
+                                                $xTextColor = "badge badge-light-danger";
+                                                $xDisabledEdit = 'disabled';
+                                            }  
+                                            ?>
+                                            <tr id="trgru_<?php echo $xId; ?>">
+                                                <td>
+                                                    <?php echo $xGrupo; ?>
+                                                    <input type="hidden" id="txtgrupoid<?php echo $xId; ?>" value="<?php echo $xId; ?>" />
+                                                    <input type="hidden" id="txtgrupo<?php echo $xId; ?>" value="<?php echo $xGrupo; ?>" />
+                                                </td>
+                                                
+                                                <td>
+                                                    <?php echo $xSecAgenda; ?>
+                                                    <input type="hidden" id="txtsecagenda<?php echo $xId; ?>" value="<?php echo $xSecAgenda; ?>" />
+                                                </td>
+
+                                                <td>
+                                                    <?php echo $xSecCancela; ?>
+                                                    <input type="hidden" id="txtseccancela<?php echo $xId; ?>" value="<?php echo $xSecCancela; ?>" />
+                                                </td>
+
+                                                <td id="tdgru_<?php echo $xId; ?>">
+                                                    <div class="<?php echo $xTextColor; ?>">
+                                                        <?php echo $xEstado; ?>
+                                                    </div>
+                                                </td>
+                                                
+                                                <td class="text-end">
+                                                    <div class="text-center">
+                                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                            <input class="form-check-input h-20px w-20px border-primary" <?php echo $xChkEstado; ?> type="checkbox" id="chkgru<?php echo $xId; ?>" 
+                                                            onchange="f_UpdateEstGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xUsuaid; ?>)" value="<?php echo $xId; ?>"/>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                    
+                                                <td class="text-end">
+                                                    <div class="text-center">
+                                                        <div class="btn-group">
+                                                            <button id="btnEditargru_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Grupo' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarGrupo(<?php echo $xId; ?>)">
+                                                                <i class='fa fa-edit'></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="modal-footer">
@@ -829,6 +873,7 @@
 
         $("#btnEditGrupo").click(function(){
 
+            $('#divcampos').hide();
             $("#modal_edit_grupo").modal("show");
         });        
 
@@ -909,6 +954,18 @@
     }); 
     
     document.getElementById("txtnumausente").addEventListener("change", function() {
+        let v = parseInt(this.value);
+        if (v < 1) this.value = 1;
+        if (v > 99999) this.value = 1;
+    });    
+    
+    document.getElementById("txteditarnumagenda").addEventListener("change", function() {
+        let v = parseInt(this.value);
+        if (v < 1) this.value = 1;
+        if (v > 99999) this.value = 1;
+    });     
+
+    document.getElementById("txteditarnumcancelado").addEventListener("change", function() {
         let v = parseInt(this.value);
         if (v < 1) this.value = 1;
         if (v > 99999) this.value = 1;
@@ -1216,6 +1273,117 @@
 
     }
 
+    function f_EditarGrupo(_idgrupo){
+
+        $('#divcampos').show();
+
+        _id = $('#txtgrupoid' + _idgrupo).val();
+        _grupoold = $('#txtgrupo' + _idgrupo).val();
+        _secuenagenda = $('#txtsecagenda' + _idgrupo).val();
+        _secuencancela = $('#txtseccancela' + _idgrupo).val();
+
+        $('#txteditargrupoid').val(_id);
+        $('#txteditarGrupo').val(_grupoold);
+        $('#txteditarnumagenda').val(_secuenagenda);
+        $('#txteditarnumcancelado').val(_secuencancela);
+
+    }
+
+    function f_ModificarGrupo(_paisid,_emprid){
+
+        _usuaid = '<?php echo $xUsuaid; ?>';
+
+        _grupoid = $('#txteditargrupoid').val();
+        _gruponew = $('#txteditarGrupo').val();
+        _agendanew = $('#txteditarnumagenda').val();
+        _cancelanew = $('#txteditarnumcancelado').val();
+
+        _continuar = true;
+
+        if(_gruponew != _grupoold){
+
+            _parametros = {
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxGrupo" : _gruponew
+            }  
+
+            var xrespuesta = $.post("codephp/consultar_grupo.php", _parametros );
+            xrespuesta.done(function(response){
+                if(response.trim() == 'OK'){
+                    _parametros = {
+                        "xxPaisid" : _paisid,
+                        "xxEmprid" : _emprid,
+                        "xxGrupoid" : _grupoid,
+                        "xxGrupo" : _gruponew,
+                        "xxSecuenAgenda" : _agendanew,
+                        "xxSecuenCancela" : _cancelanew,
+                        "xxUsuaid" : _usuaid,
+                    }      
+                    var xresult = $.post("codephp/update_grupo.php", _parametros );   
+                    xresult.done(function(response){           
+
+                        if(response.trim() == 'OK'){
+                            _output = '<td>' + _gruponew.toUpperCase() + '<input type="hidden" id="txtgrupoid'  + _grupoid + '" value="' + _grupoid + '"/> <input type="hidden" id="txtgrupo'  + _grupoid + '" value="' + _gruponew + '"/></td>';
+                            _output += '<td>' + _agendanew + '<input type="hidden" id="txtsecagenda'  + _grupoid + '" value="' + _agendanew + '"/></td>';
+                            _output += '<td>' + _cancelanew + '<input type="hidden" id="txtseccancela'  + _grupoid + '" value="' + _cancelanew + '"/></td>';
+                            _output += '<td id="tdgru_' + _grupoid + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
+                            _output += '<td class="text-end"><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
+                            _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chkgru' + _grupoid + '" onchange="f_UpdateEstGrupo(';
+                            _output += _paisid + ',' + _emprid + ',' + _grupoid + ')" value="' + _grupoid + '"/></div></div></td>';
+                            _output += '<td class="text-end"><div class="text-center"><div class="btn-group"><button id="btnEditargru_' + _grupoid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
+                            _output += 'title="Editar Grupo" onclick="f_EditarGrupo(' + _grupoid + ')" ><i class="fa fa-edit"></i></button></div></div></td>';
+
+                            console.log(_output);
+
+                            $('#trgru_' + _grupoid + '').html(_output);
+
+                        }
+                    });
+                }else{
+                    toastSweetAlert("top-end",3000,"warning","Nombre de Grupo ya Existe...!");
+                }
+            });
+        }else{
+            _parametros = {
+                    "xxPaisid" : _paisid,
+                    "xxEmprid" : _emprid,
+                    "xxGrupoid" : _grupoid,
+                    "xxGrupo" : _gruponew,
+                    "xxSecuenAgenda" : _agendanew,
+                    "xxSecuenCancela" : _cancelanew,
+                    "xxUsuaid" : _usuaid,
+            }
+            var xresult = $.post("codephp/update_grupo.php", _parametros );   
+            xresult.done(function(response){           
+                
+                if(response.trim() == 'OK'){
+                    _output = '<td>' + _gruponew.toUpperCase() + '<input type="hidden" id="txtgrupoid'  + _grupoid + '" value="' + _grupoid + '"/> <input type="hidden" id="txtgrupo'  + _grupoid + '" value="' + _gruponew + '"/></td>';
+                    _output += '<td>' + _agendanew + '<input type="hidden" id="txtsecagenda'  + _grupoid + '" value="' + _agendanew + '"/></td>';
+                    _output += '<td>' + _cancelanew + '<input type="hidden" id="txtseccancela'  + _grupoid + '" value="' + _cancelanew + '"/></td>';
+                    _output += '<td id="tdgru_' + _grupoid + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
+                    _output += '<td class="text-end"><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
+                    _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chkgru' + _grupoid + '" onchange="f_UpdateEstGrupo(';
+                    _output += _paisid + ',' + _emprid + ',' + _grupoid + ')" value="' + _grupoid + '"/></div></div></td>';
+                    _output += '<td class="text-end"><div class="text-center"><div class="btn-group"><button id="btnEditargru_' + _grupoid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
+                    _output += 'title="Editar Grupo" onclick="f_EditarGrupo(' + _grupoid + ')" ><i class="fa fa-edit"></i></button></div></div></td>';
+
+                    console.log(_output);
+
+                    $('#trgru_' + _grupoid + '').html(_output);
+
+                }
+            });
+        }
+
+        $('#txteditargrupoid').val(0);
+        $('#txteditarGrupo').val('');
+        $('#txteditarnumagenda').val(0);
+        $('#txteditarnumcancelado').val(0);
+
+        $('#divcampos').hide();
+    }
+
     //cargar datos ventana modal para editar producto
 
     $(document).on("click",".btnEditar",function(){
@@ -1230,7 +1398,6 @@
 
         var xrespuesta = $.post("codephp/get_datosproductos.php", { xxProid: _rowid,xxPaisid:_paisid,xxEmprid: _emprid  });
         xrespuesta.done(function(response){
-
 
             var _datos = JSON.parse(response);
 
