@@ -240,8 +240,6 @@
      
 </div>
 
- 
-
 <!--MODAL AGENDAMIENTO -->
 <div class="modal fade" id="modal_new_agenda" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">

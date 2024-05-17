@@ -73,6 +73,10 @@
             foreach ($all_datos as $datos) {
                 $xPrestadora = $datos['pres_nombre'];
                 $xCiudpresta = $datos['prov_id'];
+                $xDirecpresta = $datos['pres_direccion'];
+                $xFono1presta = $datos['pres_fono1'];
+                $xFono2presta = $datos['pres_fono2'];
+                $xFono3presta = $datos['pres_fono3'];
 
                 $xSQL = "SELECT * FROM `provincia_ciudad` WHERE prov_id=$xCiudpresta  ";
                 $all_ciudad = mysqli_query($con, $xSQL);
@@ -102,6 +106,10 @@
                 'Producto'=> $xProducto,
                 'Logo'=> $xLogoCab,
                 'Prestadora'=> $xPrestadora,
+                'DireccionPresta'=> $xDirecpresta,
+                'Fono1Presta'=> $xFono1presta,
+                'Fono2Presta'=> $xFono2presta,
+                'Fono3Presta'=> $xFono3presta,
                 'Provincia'=> $xProvincia,
                 'Ciudad'=> $xCiudad,
                 'Especialidad'=> $xEspecialidad,

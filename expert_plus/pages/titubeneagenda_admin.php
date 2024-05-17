@@ -3023,15 +3023,23 @@
                                     <label class="form-label text-primary">Fecha Cita:</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <span class="" id="txtFechaCita"></span>
+                                    <span class="" id="txtFechaCita"/>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="form-label text-primary">Hora Cita:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <span class="" id="txtHoraCita"/>
+                                </div>
+                            </div>  
                             <div class="row">
                                 <div class="col-md-4">
                                     <label class="form-label text-primary">Codigo:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span class="" id="txtCodCita"></span>
+                                    <span class="" id="txtCodCita"/>
                                 </div>
                             </div>
                             <div class="row">
@@ -3039,7 +3047,7 @@
                                     <label class="form-label text-primary">Especialidad:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span class="" id="txtEspeCita"></span>
+                                    <span class="" id="txtEspeCita"/>
                                 </div>
                             </div>
                             <div class="row">
@@ -3047,7 +3055,7 @@
                                     <label class="form-label text-primary">Profesional:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span class="" id="txtProfCita"></span>
+                                    <span class="" id="txtProfCita"/>
                                 </div>
                             </div>
                             <div class="row">
@@ -3055,7 +3063,7 @@
                                     <label class="form-label text-primary">Ciudad:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span class="text-uppercase" id="txtCiudCita"></span>
+                                    <span class="text-uppercase" id="txtCiudCita" />
                                 </div>
                             </div>
                             <div class="row">
@@ -3063,25 +3071,26 @@
                                     <label class="form-label text-primary">Prestador:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span class="" id="txtPresCita"></span>
+                                    <span class="" id="txtPresCita"/>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label class="form-label text-primary">Hora Desde:</label>
+                                    <label class="form-label text-primary">Direccion:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span class="" id="txtDesdeCita"></span>
+                                    <span class="" id="txtDirecPresta"/>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label class="form-label text-primary">Hora Hasta:</label>
+                                    <label class="form-label text-primary">Telefonos:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span class="" id="txtHastaCita"></span>
+                                    <span class="" id="txtFono1Presta"/>
                                 </div>
-                            </div>     
+                            </div>
+                          
                         </div>
                     </div>
                 </div>
@@ -3139,12 +3148,16 @@
             _respuesta.done(function(response) {
                
                 var _datos = JSON.parse(response);
-            
+
                 _documento = _datos['Documento'];
                 _nombres = _datos['Nombres'];
                 _producto = _datos['Producto'];
                 _logo = _datos['Logo'];
                 _prestadora = _datos['Prestadora'];
+                _direcpresta = _datos['DireccionPresta'];
+                _fono1presta = _datos['Fono1Presta'];
+                _fono2presta = _datos['Fono2Presta'];
+                _fono3presta = _datos['Fono3Presta'];
                 _ciudad = _datos['Ciudad'];
                 _especialidad = _datos['Especialidad'];
                 _profesional = _datos['Profesional'];
@@ -3156,7 +3169,14 @@
                 var _horade = moment(_fechainicio).format('HH:mm');
                 var _horaHa = moment(_fechafin).format('HH:mm');
 
-                $("#imgLocation").attr("src", _logo).width('20%').height('10%');
+                if(_fono2presta != ''){
+                   
+                    var _fono2 = '-' + _fono2presta;
+                }else{
+                    _fono2 = '';
+                }
+
+                $("#imgLocation").attr("src", _logo).width('25%').height('15%');
 
                 $("#txtFechaCita").text(_fechainicial);
                 $("#txtNombreCita").text(_nombres);
@@ -3164,9 +3184,11 @@
                 $('#txtEspeCita').text(_especialidad);
                 $('#txtProfCita').text(_profesional);
                 $('#txtCiudCita').text(_ciudad);
-                $('#txtPresCita').text(_prestadora);
-                $('#txtDesdeCita').text(_horade);
-                $('#txtHastaCita').text(_horaHa);
+                $('#txtPresCita').text(_prestadora);    
+                $('#txtDirecPresta').text(_direcpresta);
+                $('#txtFono1Presta').text(_fono1presta + _fono2);
+                $('#txtHoraCita').text(_horade + '-' + _horaHa );
+                //$('#txtHastaCita').text(_horaHa);
                
                 toastSweetAlert("top-end",3500,"success","Cita Agendada");
                 $("#modal_cita").modal("show");
