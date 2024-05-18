@@ -52,62 +52,107 @@
         <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
             <div class="card card-flush py-4">
                 <div class="card-header">
-                    <div class="card-title">
-                        <h2>Logo Cabecera</h2>
+                    <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_logo_cabecera">
+                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <span class="svg-icon toggle-off svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Logo Cabecera</h4>
                     </div>
                 </div>
-                <div class="card-body text-center pt-0">
-                    <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
-                        <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfileCab"></div>
-                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
-                            <i class="bi bi-pencil-fill fs-7"></i>
-                            <input type="file" name="avatar" id="logoCab" accept=".png, .jpg, .jpeg" />
-                            <input type="hidden" name="avatar_remove" />
-                        </label>
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
-                            <i class="bi bi-x fs-2"></i>
-                        </span>
+                <div id="view_logo_cabecera" class="collapse fs-6 ms-1">
+                    <div class="card-body text-center pt-0">
+                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                            <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfileCab"></div>
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
+                                <i class="bi bi-pencil-fill fs-7"></i>
+                                <input type="file" name="avatar" id="logoCab" accept=".png, .jpg, .jpeg" />
+                                <input type="hidden" name="avatar_remove" />
+                            </label>
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                        </div>
+                        <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                     </div>
-                    <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                 </div>
             </div>
             <div class="card card-flush py-4">
                 <div class="card-header">
-                    <div class="card-title">
-                        <h2>Logo Pie</h2>
+                    <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_logo_pie">
+                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <span class="svg-icon toggle-off svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Logo Pie</h4>
                     </div>
                 </div>
-                <div class="card-body text-center pt-0">
-                    <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
-                        <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfilePie"></div>
-                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
-                            <i class="bi bi-pencil-fill fs-7"></i>
-                            <input type="file" name="avatar" id="logoPie" accept=".png, .jpg, .jpeg" />
-                            <input type="hidden" name="avatar_remove" />
-                        </label>
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
-                            <i class="bi bi-x fs-2"></i>
-                        </span>
+                <div id="view_logo_pie" class="collapse fs-6 ms-1">
+                    <div class="card-body text-center pt-0">
+                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                            <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfilePie"></div>
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
+                                <i class="bi bi-pencil-fill fs-7"></i>
+                                <input type="file" name="avatar" id="logoPie" accept=".png, .jpg, .jpeg" />
+                                <input type="hidden" name="avatar_remove" />
+                            </label>
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                        </div>
+                        <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                     </div>
-                    <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                 </div>
             </div>
             <div class="card card-flush py-4">
                 <div class="card-header">
-                    <div class="card-title">
-                        <h2>Opciones</h2>
+                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_opciones">														<!--begin::Icon-->
+                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <span class="svg-icon toggle-off svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Opciones</h4>
                     </div>
                 </div>
-                <div class="card-body pt-0">
-                    <button type="button" id="btnNewGrupo" class="btn btn-light-primary btn-sm mb-10">
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                            </svg>
-                        </span>                                                                
-                        Nuevo Grupo
-                    </button>                                                      
+                <div id="view_opciones" class="collapse show fs-6 ms-1">
+                    <div class="card-body pt-0">
+                        <button type="button" id="btnNewGrupo" class="btn btn-light-primary btn-sm">
+                            <i class="fa fa-plus-circle"></i>Nuevo Grupo                                                               
+                        </button>                                                      
+                    </div>
                 </div>
             </div>
         </div>
@@ -120,11 +165,7 @@
                     <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Productos</a>
                 </li>
                 <a href="?page=admin_clienteproducto&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
-                    <span class="svg-icon svg-icon-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
-                        </svg>
-                    </span>
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
                 </a>
             </ul>
             <div class="tab-content">
@@ -181,7 +222,7 @@
                             <div id="kt_customer_view_payment_method" class="card-body pt-0">
                                 <div class="py-0" data-kt-customer-payment-method="row">
                                     <div class="py-3 d-flex flex-stack flex-wrap">
-                                        <div class="d-flex align-items-center collapsible rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_1" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_1">
+                                        <div class="d-flex align-items-center  collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_1" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_1">
                                             <div class="me-3 rotate-90">
                                                 <span class="svg-icon svg-icon-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -189,7 +230,7 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" alt="" />
+                                            <i class="fa fa-location-arrow fa-2x me-2" style="color:#F46D55;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">Direccion</div>
@@ -231,7 +272,8 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
+                                            <!-- <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" /> -->
+                                            <i class="fa fa-phone fa-2x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">Telefonos</div>
@@ -281,7 +323,7 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <img src="assets/media/logos/email.png" class="w-20px me-3" alt="" />
+                                            <i class="fa fa-envelope fa-2x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">E-mail</div>
@@ -311,14 +353,8 @@
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                     <div class="d-flex flex-column gap-7 gap-lg-10">
                         <div class="form-group mt-2 mb-n2">
-                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAddProd">
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>
-                            Agregar Producto
+                            <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm mb-2" id="btnAddProd">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar Producto
                             </button>
                         </div>  
                         <div class="card card-flush py-4">
@@ -364,7 +400,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Agregar Producto</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Producto</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -439,7 +475,7 @@
     </div>
 </div>
 <!--MODAL NUEVO GRUPO -->
-<div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
+<!-- <div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
             <div class="modal-header">
@@ -494,7 +530,68 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+<!--MODAL NUEVO GRUPO -->
+<div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Grupo</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div class="card-body pt-0">
+                        <div class="d-flex flex-column mb-7 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                <span class="required">Grupo</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
+                            </label>
+                            <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
+                        </div>
+                        <div class="fv-row mb-15">
+                            <label class="fs-6 fw-bold form-label mb-2">
+                                <span>Descripcion</span>
+                            </label>
+                            <textarea class="form-control mb-2 text-uppercase" name="txtDescGrupo" id="txtDescGrupo" maxlength="150" onkeydown="return(event.keyCode!=13);"></textarea>
+                        </div> 
+                        <div class="row mb-7">
+                            <div class="col-md-6">
+                                <label class="form-label">Secuencial Agenda</label>
+                                <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control mb-2" value="1"  />   
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Secuencial Cancelado</label>
+                                <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control mb-2" placeholder="1" value="1" />  
+                            </div>
+                        </div>
+                        <div class="row mb-7">
+                            <div class="col-md-6">
+                                <label class="form-label">Secuencial Atendido</label>
+                                <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control mb-2" value="1" />   
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Secuencial Ausente</label>
+                                <input type="number" name="txtnumausente" id="txtnumausente" class="form-control mb-2" placeholder="1" value="1" />  
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
+            </div>
+        </div>
+    </div>
+</div>  
 
 <script>
     
@@ -639,17 +736,17 @@
 
         
         if(_producto == ''){
-            mensajesalertify("Ingrese Producto..!!","W","top-right",3);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Producto..!!");
             return false;
         }
 
         if(_costo == 0){
-            mensajesalertify("Ingrese Costo..!!","W","top-right",3);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Costo..!!");
             return false;
         }
 
         if(_txtGrupo == ''){
-            mensajesalertify("Seleccione Grupo..!!","W","top-right",3);
+            toastSweetAlert("top-end",3000,"warning","Seleccione Grupo..!!");
             return false;
         }
 
@@ -668,7 +765,7 @@
                     $.each(_result,function(i,item){
 
                         if(item.arryproducto.toUpperCase() == _producto.toUpperCase()){
-                            mensajesalertify("Producto ya Existe..!!","W","top-right",3);
+                            toastSweetAlert("top-end",3000,"warning","Producto ya Existe..!!");
                             _continuar = false;
                             return false;
                         }else{
@@ -726,7 +823,7 @@
                     }
                     
                 }else{
-                    mensajesalertify("Producto ya existe..!!","W","top-right",3);
+                    toastSweetAlert("top-end",3000,"warning","Producto ya Existe..!!");
                     return false;
                 }
             });
@@ -768,7 +865,7 @@
             _extCab = _extCab.toLowerCase();
 
             if(_extCab.trim() != '.png' && _extCab.trim() != '.jpg' && _extCab.trim() != 'jpeg'){
-                mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
+                toastSweetAlert("top-end",3000,"error","Archivo no es Imagen..!!");
                 return;
             }               
         }
@@ -788,28 +885,28 @@
             _extPie = _extPie.toLowerCase();
 
             if(_extPie.trim() != '.png' && _extPie.trim() != '.jpg' && _extPie.trim() != 'jpeg'){
-                mensajesalertify("El archivo seleccionado no es una Imagen..!", "W", "top-right", 3);
+                toastSweetAlert("top-end",3000,"error","Archivo no es Imagen..!!");
                 return;
             }               
         }
 
         if(_cboProv == ''){
-            mensajesalertify("Seleccione Provincia..!!","W","top-right",3);
+            toastSweetAlert("top-end",3000,"warning","Seleccione Provincia..!!");
             return false;
         }
 
         if(_cboIdProv == 0){
-            mensajesalertify("Seleccione Ciudad..!!","W","top-right",3);
+            toastSweetAlert("top-end",3000,"warning","Seleccione Ciudad..!!");
             return false;
         }
 
         if(_cliente == ''){
-            mensajesalertify("Ingrese Nombre del Cliente..!!","W","top-right",3);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Nombre..!!");
             return false;
         }
 
         if(_count == 0){
-            mensajesalertify("Ingrese al menos un Producto..!!","W","top-right",3);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Producto..!!");
             return false;
         }
 
@@ -817,7 +914,7 @@
             try{
                 new URL(_url);
             }catch(err){
-                mensajesalertify("Direccion URL Incorrecta..!", "W", "top-right", 3);
+                toastSweetAlert("top-end",3000,"error","Direccion URL Incorrecta..!!");
                 return false;
             }
         }

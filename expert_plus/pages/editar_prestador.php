@@ -108,7 +108,7 @@
                                 </svg>
                             </span>
                         </div>
-                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Avatar</h4>
+                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Logo</h4>
                     </div>
                 </div>
                 <div id="view_logo" class="collapse fs-6 ms-1">
@@ -179,11 +179,7 @@
                     <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Especialidad Prestador</a>
                 </li>
                 <a href="?page=prestador_admin&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
-                    <span class="svg-icon svg-icon-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
-                        </svg>
-                    </span>
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
                 </a>
             </ul>
             <div class="tab-content">
@@ -536,7 +532,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nueva Especialidad</h2>
-                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
             </div>
             <div class="modal-body py-lg-5 px-lg-10">
                 <div class="card card-flush py-2">
@@ -589,7 +592,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Especialidad Asignada</h2>
-                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-4">
@@ -635,7 +645,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Especialidad Asignada</h2>
-                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-4">
@@ -683,7 +700,14 @@
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Profesional/Configurar Horarios</h2>
                 <h2 id="headerTitle" class="fs-6 fw-bold form-label text-primary"></h2>
-                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
             </div>
             <div class="modal-body py-lg-2 px-lg-10">
                 <div class="card card-flush pt-10 pb-n3">
@@ -719,13 +743,7 @@
                         </div>
                         <div class="form-group mt-5 mb-4">
                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarProfesional">
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>
-                            Agregar Profesional
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar Profesional
                             </button>
                         </div>
                         <table id="tblProfesional" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
@@ -756,9 +774,16 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Configurar Horarios/Turnos</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Configurar Horarios-Turnos</h2>
                 <h5 class="text-primary" id="headertitu1"></h5>
-                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-2">
@@ -788,13 +813,7 @@
                         </div>
                          <div class="form-group my-5">
                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarHorario">
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>
-                            Agregar Horario
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar Horario
                             </button>
                         </div>
                          <div class="separator my-7"></div>
@@ -831,7 +850,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Tipo Profesion</h2>
-                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-4">
@@ -949,24 +975,38 @@
         <div class="modal-content"> 
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Profesional</h2>
-                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
             </div>
             <div class="modal-body py-lg-10 px-lg-10 mt-n3">
                 <div class="card mb-1 mb-xl-1">
                     <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_avatar" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
+                        <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_avatar">
+                            <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
                                 </span>
-                            </div> 
+                                <span class="svg-icon toggle-off svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                        <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Avatar</h4>
                         </div>
                     </div>
-                    <div id="view_avatar" class="collapse">
+                    <div id="view_avatar" class="collapse fs-6 ms-1">
                         <div class="card card-flush py-4">
                             <div class="card-body pt-0">
                                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
@@ -987,19 +1027,26 @@
                 </div>
                 <div class="card mb-1 mb-xl-1">
                     <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_informacion" role="button" aria-expanded="false" aria-controls="view_datos_titular">Informacion
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
+                        <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_datos_profesional">														<!--begin::Icon-->
+                            <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
                                 </span>
-                            </div> 
+                                <span class="svg-icon toggle-off svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                        <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Datos Profesional</h4>
                         </div>
                     </div>
-                    <div id="view_informacion" class="collapse show">
+                    <div id="view_datos_profesional" class="collapse show fs-6 ms-1">
                         <div class="card card-flush py-2">
                             <div id="modal_select" class="card-body pt-0">
                                 <div class="row mb-4">
@@ -1065,97 +1112,115 @@
                 </div>
                 <div class="card mb-1 mb-xl-1">
                    <div class="card-header border-0">
-                       <div class="card-title">
-                           <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
-                       </div>
+                        <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_informacion_profesional">														<!--begin::Icon-->
+                            <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <span class="svg-icon toggle-off svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                        <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Informacion Profesional</h4>
+                        </div>
                    </div>
-                   <div id="datos_profesional" class="card-body pt-0">
-                        <div class="py-0" data-kt-customer-payment-method="row">
-                            <div class="py-3 d-flex flex-stack flex-wrap">
-                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#direccion_profesional" role="button" aria-expanded="false" aria-controls="direccion_profesional">
-                                    <div class="me-3 rotate-90">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
+                   <div id="view_informacion_profesional" class="collapse show fs-6 ms-1">
+                        <div class="card card-flush py-4">
+                            <div class="card-body pt-0">
+
+                                <div class="py-0" data-kt-customer-payment-method="row">
+                                    <div class="py-3 d-flex flex-stack flex-wrap">
+                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#direccion_profesional" role="button" aria-expanded="false" aria-controls="direccion_profesional">
+                                            <div class="me-3 rotate-90">
+                                                <span class="svg-icon svg-icon-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                            <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" alt="" />
+                                            <div class="me-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="text-gray-800 fw-bolder">Direccion</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" alt="" />
-                                    <div class="me-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-gray-800 fw-bolder">Direccion</div>
+                                    <div id="direccion_profesional" class="collapse fs-6 ps-12" data-bs-parent="#datos_profesional">
+                                        <div class="row mb-4">
+                                            <div class="col-md-12">
+                                                <textarea class="form-control mb-2" name="txtDireccionProf" id="txtDireccionProf" rows="1" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDireccion; ?> </textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="direccion_profesional" class="collapse fs-6 ps-12" data-bs-parent="#datos_profesional">
-                                <div class="row mb-4">
-                                    <div class="col-md-12">
-                                        <textarea class="form-control mb-2" name="txtDireccionProf" id="txtDireccionProf" rows="1" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDireccion; ?> </textarea>
+                                <div class="py-0" data-kt-customer-payment-method="row">
+                                    <div class="py-3 d-flex flex-stack flex-wrap">
+                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#telefono_profesional" role="button" aria-expanded="false" aria-controls="telefono_profesional">
+                                            <div class="me-3 rotate-90">
+                                                <span class="svg-icon svg-icon-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                            <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
+                                            <div class="me-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="separator separator-dashed"></div>
-                        <div class="py-0" data-kt-customer-payment-method="row">
-                            <div class="py-3 d-flex flex-stack flex-wrap">
-                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#telefono_profesional" role="button" aria-expanded="false" aria-controls="telefono_profesional">
-                                    <div class="me-3 rotate-90">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
-                                    <div class="me-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                    <div id="telefono_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="fs-6 fw-bold mt-3 mb-3">Telefono</div>
+                                                <input type="text" class="form-control mb-3" name="txtFonoProf" id="txtFonoProf" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="fs-6 fw-bold mt-3 mb-3">Celular</div>
+                                                <input type="text" class="form-control mb-3" name="txtCelularProf" id="txtCelularProf" maxlength="10" placeholder="099999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="telefono_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="fs-6 fw-bold mt-3 mb-3">Telefono</div>
-                                        <input type="text" class="form-control mb-3" name="txtFonoProf" id="txtFonoProf" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="fs-6 fw-bold mt-3 mb-3">Celular</div>
-                                        <input type="text" class="form-control mb-3" name="txtCelularProf" id="txtCelularProf" maxlength="10" placeholder="099999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="separator separator-dashed"></div> 
-                        <div class="py-0" data-kt-customer-payment-method="row">
-                            <div class="py-3 d-flex flex-stack flex-wrap">
-                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#email_profesional" role="button" aria-expanded="false" aria-controls="email_profesional">
-                                    <div class="me-3 rotate-90">
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <img src="assets/media/logos/email.png" class="w-20px me-3" alt="" />
-                                    <div class="me-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="text-gray-800 fw-bolder">E-mail</div>
+                                <div class="py-0" data-kt-customer-payment-method="row">
+                                    <div class="py-3 d-flex flex-stack flex-wrap">
+                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#email_profesional" role="button" aria-expanded="false" aria-controls="email_profesional">
+                                            <div class="me-3 rotate-90">
+                                                <span class="svg-icon svg-icon-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                            <img src="assets/media/logos/email.png" class="w-20px me-3" alt="" />
+                                            <div class="me-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="text-gray-800 fw-bolder">E-mail</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div id="email_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
-                                <div class="d-flex flex-wrap gap-5">
-                                    <div class="fv-row w-100 flex-md-root">
-                                        <input type="email" name="txtEmailProf" id="txtEmailProf" maxlength="100" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" />
+                                    <div id="email_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
+                                        <div class="d-flex flex-wrap gap-5">
+                                            <div class="fv-row w-100 flex-md-root">
+                                                <input type="email" name="txtEmailProf" id="txtEmailProf" maxlength="100" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" />
+                                            </div>
+                                            <label class="form-check form-switch form-check-custom form-check-solid">
+                                                <input class="form-check-input" name="chkEnviarProf" id="chkEnviarProf" type="checkbox" />
+                                                <span id="spanEnvProf" class="form-check-label fw-bold text-muted" for="chkEnviarProf">No Enviar </span>
+                                            </label>                                                    
+                                        </div>
                                     </div>
-                                    <label class="form-check form-switch form-check-custom form-check-solid">
-                                        <input class="form-check-input" name="chkEnviarProf" id="chkEnviarProf" type="checkbox" />
-                                        <span id="spanEnvProf" class="form-check-label fw-bold text-muted" for="chkEnviarProf">No Enviar </span>
-                                    </label>                                                    
                                 </div>
                             </div>
                         </div>
@@ -1177,7 +1242,14 @@
             <div class="modal-header">
                 <h2 class="mb-2 badge badge-light-primary fw-light fs-2 fst-italic">Motivos Especialidad</h2>
                 <h2 id="headerTitleMotivo" class="fs-6 fw-bold form-label mb-2 text-primary"></h2>
-                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
             </div>
             <div class="modal-body py-lg-2 px-lg-10">
                 <div class="card card-flush pt-10 pb-n3">
@@ -1190,13 +1262,7 @@
                         </div>
                         <div class="form-group mt-5 mb-4">
                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarMotivo">
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>
-                            Agregar Motivo
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Motivo
                             </button>
                         </div>
                         <table id="tblMotivo" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">

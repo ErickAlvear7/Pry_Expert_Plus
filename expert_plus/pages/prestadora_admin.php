@@ -71,9 +71,9 @@
                 <div class="w-100 mw-150px">
                     <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Estado" data-kt-ecommerce-product-filter="status">                                    
                         <option></option>
-                        <option value="all">TODOS</option>
-                        <option value="Activo">ACTIVO</option>
-                        <option value="Inactivo">INACTIVO</option>
+                        <option value="all">Todos</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
                     </select>
                 </div>
                 <a href="?page=addprestador&menuid=<?php echo $menuid; ?>" class="btn btn-light-primary btn-sm">
