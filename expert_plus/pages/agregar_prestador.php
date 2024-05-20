@@ -111,9 +111,11 @@
                 </div>
                 <div id="view_opciones" class="collapse show fs-6 ms-1">
                     <div class="card-body pt-0">
-                        <button type="button" id="btnNuevaEspe" class="btn btn-light-primary btn-sm mb-10"><i class="fa fa-plus-circle" aria-hidden="true"></i>                                                          
-                            Nueva Especialidad
-                        </button>                           
+                        <div class="d-grid gap-2">
+                            <button type="button" id="btnNuevaEspe" class="btn btn-light-primary btn-sm mb-10"><i class="fa fa-plus-circle" aria-hidden="true"></i>                                                          
+                                Nueva Especialidad
+                            </button> 
+                        </div>                          
                     </div>
                 </div>
             </div>
@@ -187,7 +189,7 @@
                                                 $xSQL .= "AND pca.paca_nombre='Tipo Sector' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
                                                 $all_datos =  mysqli_query($con, $xSQL);
                                                 foreach ($all_datos as $datos){ ?>
-                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['Descripcion']); ?></option>
                                                 <?php } ?>
                                             </select>                                                      
                                         </div>
@@ -230,7 +232,7 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <i class="fa fa-location-arrow fa-2x me-2" style="color:#F46D55;" aria-hidden="true"></i>
+                                            <i class="fa fa-location-arrow fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">Direccion</div>
@@ -272,7 +274,7 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <i class="fa fa-phone fa-2x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
+                                            <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">Telefonos</div>
@@ -299,7 +301,7 @@
                                         <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="0999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                             </div>
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
@@ -324,7 +326,7 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <i class="fa fa-envelope fa-2x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                            <i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">E-mail</div>
@@ -937,13 +939,40 @@
                    return false;
                }
            }
+
+           if(_telefono1 != '')
+	        {
+                _valor = document.getElementById("txtFono1").value;
+                if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
+                    toastSweetAlert("top-end",3000,"error","Telefono 1 Incorrecto..!");  
+                    return;
+                }
+            } 
+
+            if(_telefono2 != '')
+	        {
+                _valor = document.getElementById("txtFono2").value;
+                if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
+                    toastSweetAlert("top-end",3000,"error","Telefono 2 Incorrecto..!");  
+                    return;
+                }
+            } 
+
+            if(_telefono3 != '')
+	        {
+                _valor = document.getElementById("txtFono3").value;
+                if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
+                    toastSweetAlert("top-end",3000,"error","Telefono 3 Incorrecto..!");  
+                    return;
+                }
+            } 
            
            
            if(_celular1 != '')
            {
                _valor = document.getElementById("txtCelular1").value;
                if( !(/^\d{10}$/.test(_valor)) ) {
-                   toastSweetAlert("top-end",3000,"error","Celular 1 incorrecto..!!");
+                   toastSweetAlert("top-end",3000,"error","Celular 1 Incorrecto..!!");
                    return;
                }
            }                     
@@ -952,7 +981,7 @@
            {
                _valor = document.getElementById("txtCelular2").value;
                if( !(/^\d{10}$/.test(_valor)) ) {
-                   toastSweetAlert("top-end",3000,"error","Celular 2 incorrecto..!!"); 
+                   toastSweetAlert("top-end",3000,"error","Celular 2 Incorrecto..!!"); 
                    return;
                }
            }

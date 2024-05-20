@@ -152,16 +152,16 @@
                 <div id="view_opciones" class="collapse show fs-6 ms-1">
                     <div class="card-body pt-0">
                         <div class="d-grid gap-2">
-                            <button type="button" id="btnNuevaEspe" class="btn btn-light-primary btn-sm mb-10">
+                            <button type="button" id="btnNuevaEspe" class="btn btn-light-primary btn-sm mb-5">
                                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 Nueva Especialidad
                             </button>
-                            <button type="button" id="btnNuevaProfesion" class="btn btn-light-primary btn-sm mb-10">
+                            <button type="button" id="btnNuevaProfesion" class="btn btn-light-primary btn-sm mb-5">
                                 <i class="fa fa-plus-circle" aria-hidden="true"></i>                                                               
                                 Nuevo Tipo Profesion
                             </button>                                 
                             
-                            <button type="button" id="btnNuevoProfesional" class="btn btn-light-primary btn-sm mb-10" >
+                            <button type="button" id="btnNuevoProfesional" class="btn btn-light-primary btn-sm mb-5" >
                                 <i class="fa fa-user-plus" aria-hidden="true"></i>
                                 Nuevo Profesional
                             </button>    
@@ -241,7 +241,7 @@
                                                 $xSQL .= "AND pca.paca_nombre='Tipo Sector' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
                                                 $all_datos =  mysqli_query($con, $xSQL);
                                                 foreach ($all_datos as $datos){ ?>
-                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['Descripcion']); ?></option>
                                                 <?php } ?>
                                             </select>                                                      
                                         </div>
@@ -259,7 +259,7 @@
                                                 $xSQL .= "AND pca.paca_nombre='Tipo Prestador' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
                                                 $all_datos =  mysqli_query($con, $xSQL);
                                                 foreach ($all_datos as $datos){ ?>
-                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['Descripcion']); ?></option>
                                                 <?php } ?>                                                        
                                             </select>                                                      
                                         </div>
@@ -284,7 +284,7 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" alt="" />
+                                            <i class="fa fa-location-arrow fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">Direccion</div>
@@ -326,7 +326,7 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
+                                            <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">Telefonos</div>
@@ -376,7 +376,7 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <img src="assets/media/logos/email.png" class="w-20px me-3" alt="" />
+                                            <i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">E-mail</div>
@@ -1145,7 +1145,7 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <img src="assets/media/logos/ubicacion.png" class="w-20px me-3" alt="" />
+                                            <i class="fa fa-location-arrow fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">Direccion</div>
@@ -1171,7 +1171,7 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
+                                            <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">Telefonos</div>
@@ -1202,7 +1202,7 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <img src="assets/media/logos/email.png" class="w-20px me-3" alt="" />
+                                            <i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">E-mail</div>
@@ -2468,7 +2468,7 @@
         // }
 
         if(_horadesde == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccion Hora Inicio..!");
+            toastSweetAlert("top-end",3000,"warning","Seleccione Hora Inicio..!");
             return;
         }
 
