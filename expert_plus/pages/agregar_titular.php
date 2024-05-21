@@ -131,42 +131,44 @@
         <div class="w-100 flex-lg-row-auto w-lg-300px mb-7 me-7 me-lg-10">
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0">
-                    <div class="card-title">
-                        <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_detalle" role="button" aria-expanded="false" aria-controls="view_datos_detalle">Detalle Cliente
-                            <span class="ms-2 rotate-180">
-                                <span class="svg-icon svg-icon-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                    </svg>
-                                </span>
+                    <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_datos_cliente">
+                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
                             </span>
-                        </div> 
+                            <span class="svg-icon toggle-off svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Datos Cliente</h4>
                     </div>
                 </div>
-                <div class="separator"></div>
-                <div id="view_datos_detalle" class="collapse show">
+                <div id="view_datos_cliente" class="collapse fs-6 ms-1">
                     <div class="card-body pt-2">
                         <div class="d-flex flex-column gap-10">
                             <div class="d-flex align-items-center">							
-                                <i class="bi bi-filter-square text-primary fs-1 me-5"></i>
+                                <i class="fa fa-building fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Empresa</h5>
-                                    <div class="fw-bold">
-                                    <label><?php echo $Nombre; ?></label>
-                                    </div>
+                                    <label class="text-gray-700"><?php echo $Nombre; ?></label>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-envelope-check text-primary fs-1 me-5"></i>
+                                <i class="fa fa-envelope fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Email</h5>
-                                    <div class="fw-bold">
-                                        <div class="text-gray-600"><?php echo $Email1; ?></div>
-                                    </div>
+                                    <label class="text-gray-700"><?php echo $Email1; ?></label>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">							
-                                <i class="bi bi-telephone-outbound text-primary fs-1 me-5"></i>
+                                <i class="fa fa-phone fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Telefonos</h5>
                                     <div class="text-gray-600">Telefono 1:&nbsp;<?php echo $Telefono1; ?></div>
@@ -181,66 +183,66 @@
             </div>  
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0">
-                    <div class="card-title">
-                        <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_producto" role="button" aria-expanded="false" aria-controls="view_datos_producto">Detalle Producto
-                            <span class="ms-2 rotate-180">
-                                <span class="svg-icon svg-icon-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                    </svg>
-                                </span>
+                    <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_datos_producto">
+                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
                             </span>
-                        </div> 
+                            <span class="svg-icon toggle-off svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Datos Producto</h4>
                     </div>
                 </div>
-                <div class="separator"></div>
-                <div id="view_datos_producto" class="collapse show">
+                <div id="view_datos_producto" class="collapse fs-6 ms-1">
                     <div class="card-body pt-2">
                         <div class="d-flex flex-column gap-10">
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-briefcase-fill text-primary fs-1 me-5"></i>
+                                <i class="fa fa-users fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Grupo</h5>
-                                    <div class="fw-bold">
-                                        <label class="badge badge-light-success"><?php echo $NomGrupo; ?></label>
-                                    </div>
+                                    <label class="text-gray-700 text-uppercase"><?php echo $NomGrupo; ?></label>  
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">							
-                                <i class="bi bi-bag-plus text-primary fs-1 me-5"></i>
+                                <i class="fa fa-briefcase fs-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Producto</h5>
-                                    <div class="fw-bold">
-                                    <label class="badge badge-light-success"><?php echo $NomProd; ?></label>
-                                    </div>
+                                    <label class="text-gray-700 text-uppercase"><?php echo $NomProd; ?></label>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-bank2 text-primary fs-1 me-5"></i>
+                                <i class="fa fa-university fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Costo</h5>
-                                    <div class="fw-bold">
-                                    <label class="badge badge-light-success">$<?php echo $Costo; ?></label>
-                                    </div>
+                                    <label class="text-gray-700 text-uppercase">$<?php echo $Costo; ?></label>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-globe2 text-primary fs-1 me-5"></i>
+                                <i class="fa fa-globe fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Cobertura</h5>
                                     <div class="fw-bold">
-                                    <input <?php echo $xChekCober; ?> class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
-                                    <label class="badge badge-light-success"><?php echo $Cobertura; ?></label>
+                                        <input <?php echo $xChekCober; ?> class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
+                                        <label class="badge badge-light-primary"><?php echo $Cobertura; ?></label>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-grid-1x2-fill text-primary fs-1 me-5"></i>
+                                <i class="fa fa-cogs fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Sistema</h5>
                                     <div class="fw-bold">
-                                    <input <?php echo $xChekSis; ?> class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
-                                    <label class="badge badge-light-success"><?php echo $Sistema; ?></label>
+                                        <input <?php echo $xChekSis; ?> class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
+                                        <label class="badge badge-light-primary"><?php echo $Sistema; ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -250,36 +252,43 @@
             </div>
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0">
-                    <div class="card-title">
-                        <h2>Opciones</h2>
+                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_opciones">														<!--begin::Icon-->
+                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <span class="svg-icon toggle-off svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Opciones</h4>
                     </div>
                 </div>
-                <div class="separator"></div>
-                <div class="card-body pt-2">
-                    <button type="button" id="btnNewParen" class="btn btn-light-primary btn-sm mb-10">
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                            </svg>
-                        </span>                                                                
-                        Nuevo Parentesco
-                    </button>
+                <div id="view_opciones" class="collapse show fs-6 ms-1">
+                    <div class="card-body pt-2">
+                        <div class="d-grid gap-2">
+                            <button type="button" id="btnNewParen" class="btn btn-light-primary btn-sm mb-2">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>                                                               
+                                Nuevo Parentesco
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">
             <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n4">     
                 <div class="d-flex justify-content-start">
-                    <a href="#" class="btn btn-light-primary btn-sm" id="btnAgregartitu">
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                            </svg>
-                        </span>                                       
-                    Agregar Titular
-                    </a>
+                    <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm mb-2" id="btnAgregartitu"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        Agregar Titular
+                    </button>
                 </div>
                 <button type="button" id="btnRegresar" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
                     <span class="svg-icon svg-icon-2">
@@ -307,11 +316,11 @@
                     </div>
                     <br>
                     <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
-                        <table class="table table-hover align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_edit_order_product_table">
+                        <table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="kt_ecommerce_edit_order_product_table">
                             <thead>
-                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                     <th>Ciudad</th>
-                                    <th>Nombres</th>
+                                    <th class="min-w-125px">Nombres</th>
                                     <th>Estado</th>
                                     <th>Status</th>
                                     <th style="text-align: center;">Opciones</th>
@@ -408,11 +417,12 @@
         </div>
     </form>
 </div>
+<!--Modal Nuevo Parentesco-->
 <div class="modal fade" id="modal_new_paren" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-700px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Nuevo Parentesco</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Parentesco</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -422,29 +432,33 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                    <span class="required">Detalle</span>
-                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del detalle"></i>
-                    </label>
-                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="80" placeholder="nombre del detalle" value="" />
-                </div>
-                <div class="fv-row mb-15">
-                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                    <span class="required">Valor Texto</span>
-                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="valor texto ejemplo FFF"></i>
-                    </label>
-                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorV" name="txtValorV" minlength="3" maxlength="3" placeholder="valor texto" value="" />
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-2">
+                    <div class="card-body pt-0">
+                        <div class="d-flex flex-column mb-4 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="required">Detalle</span>
+                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del detalle"></i>
+                            </label>
+                            <input type="text" class="form-control mb-2" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="80" placeholder="nombre del detalle" value="" />
+                        </div>
+                        <div class="fv-row mb-2">
+                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="required">Valor Texto</span>
+                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="valor texto ejemplo FFF"></i>
+                            </label>
+                            <input type="text" class="form-control" id="txtValorV" name="txtValorV" minlength="3" maxlength="3" placeholder="valor texto" value="" />
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnGuardar" onclick="f_GuardarParen(<?php echo $xPacaid; ?>,<?php echo $xOrdenDet; ?>)" class="btn btn-primary">Grabar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnGuardar" onclick="f_GuardarParen(<?php echo $xPacaid; ?>,<?php echo $xOrdenDet; ?>)" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>    
             </div>
         </div>
     </div>
-</div>
+</div>   
 <!--Modal Crear Titular-->
 <div class="modal fade" id="kt_modal_create_app" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
