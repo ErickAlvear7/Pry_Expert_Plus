@@ -3520,7 +3520,6 @@
                 $('#txtDireccionProUlt').val(json[0]['Direccion']);  
             }); 
 
-
             $("#modal_profesional_ult").modal("show");
         });
 
@@ -3532,6 +3531,8 @@
             _pfesid = $("#cboProfesional").val();
             _ciudid = $('#cboCiudad').val();
             _sectid = $('#cboSector').val();
+
+            _grupoid = "<?php echo $xGrupid; ?> ";
             
             if(_sectid == 0){
                 toastSweetAlert("top-end",3000,"warning","Seleccione Sector..!!");
@@ -3544,27 +3545,38 @@
             }
 
             if(_preeid == 0){
-                toastSweetAlert("top-end",3000,"warning","Seleccione Especialidad..!!");
+                toastSweetAlert("top-end",3000,"warning","Seleccione Especialidad..!");
                 return;
             }
 
             if(_pfesid == 0){
-                toastSweetAlert("top-end",3000,"warning","Seleccione Profesional..!!");
+                toastSweetAlert("top-end",3000,"warning","Seleccione Profesional..!");
                 return;
             }
 
-            $.redirect('?page=agendartitular&menuid=<?php echo $menuid; ?>', {
-                'tituid': _tituid,
-                'beneid':0,
-                'presid': _presid,
-                'preeid': _preeid,
-                'pfesid': _pfesid,
-                'prodid': _prodid,
-                'grupid': _grupid,
-                'ciudid': _ciudid
+            var _parametros = {
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxGrupoid" : _grupoid
+            }            
 
+            var xrespuesta = $.post("codephp/consultar_grupoid.php", _parametros);
+            xrespuesta.done(function(response){
+                if(response == 0){
+                    toastSweetAlert("top-center",3000,"warning","Configure Secuencial para Agendar ..!");
+                }else{
+                    $.redirect('?page=agendartitular&menuid=<?php echo $menuid; ?>', {
+                        'tituid': _tituid,
+                        'beneid':0,
+                        'presid': _presid,
+                        'preeid': _preeid,
+                        'pfesid': _pfesid,
+                        'prodid': _prodid,
+                        'grupid': _grupid,
+                        'ciudid': _ciudid
+                    });                    
+                }
             });
-            
 
         });
 
