@@ -92,62 +92,120 @@
         <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
             <div class="card card-flush py-4">
                 <div class="card-header">
-                    <div class="card-title">
-                        <h2>Logo Cabecera</h2>
+                    <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_logo_cabecera">
+                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <span class="svg-icon toggle-off svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Logo Cabecera</h4>
                     </div>
                 </div>
-                <div class="card-body text-center pt-0">
-                    <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
-                        <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfileCab"></div>
-                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
-                            <i class="bi bi-pencil-fill fs-7"></i>
-                            <input type="file" name="avatar" id="logoCab" accept=".png, .jpg, .jpeg" />
-                            <input type="hidden" name="avatar_remove" />
-                        </label>
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
-                            <i class="bi bi-x fs-2"></i>
-                        </span>
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remover Logo">
-                            <i class="bi bi-x fs-2"></i>
-                        </span>
+                <div id="view_logo_cabecera" class="collapse fs-6 ms-1">
+                    <div class="card-body text-center pt-0">
+                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                            <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfileCab"></div>
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
+                                <i class="bi bi-pencil-fill fs-7"></i>
+                                <input type="file" name="avatar" id="logoCab" accept=".png, .jpg, .jpeg" />
+                                <input type="hidden" name="avatar_remove" />
+                            </label>
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remover Logo">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                        </div>
+                        <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                     </div>
-                    <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                 </div>
             </div>
             <div class="card card-flush py-4">
                 <div class="card-header">
-                    <div class="card-title">
-                        <h2>Logo Pie</h2>
+                    <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_logo_pie">
+                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <span class="svg-icon toggle-off svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Logo Pie</h4>
                     </div>
                 </div>
-                <div class="card-body text-center pt-0">
-                    <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
-                        <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfilePie"></div>
-                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
-                            <i class="bi bi-pencil-fill fs-7"></i>
-                            <input type="file" name="avatar" id="logoPie" accept=".png, .jpg, .jpeg" />
-                            <input type="hidden" name="avatar_remove" />
-                        </label>
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
-                            <i class="bi bi-x fs-2"></i>
-                        </span>
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remover Logo">
-                            <i class="bi bi-x fs-2"></i>
-                        </span>
+                <div id="view_logo_pie" class="collapse fs-6 ms-1">
+                    <div class="card-body text-center pt-0">
+                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                            <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfilePie"></div>
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
+                                <i class="bi bi-pencil-fill fs-7"></i>
+                                <input type="file" name="avatar" id="logoPie" accept=".png, .jpg, .jpeg" />
+                                <input type="hidden" name="avatar_remove" />
+                            </label>
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remover Logo">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                        </div>
+                        <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                     </div>
-                    <div class="text-muted fs-7">Imagenes aceptadas (*jpg,*.png y *.jpeg) </div>
                 </div>
             </div>
             <div class="card card-flush py-4">
                 <div class="card-header">
-                    <div class="card-title">
-                        <h2>Opciones</h2>
+                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_opciones">														<!--begin::Icon-->
+                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <span class="svg-icon toggle-off svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Opciones</h4>
                     </div>
                 </div>
-                <div class="card-body pt-0">
-                    <button type="button" id="btnNewGrupo" class="btn btn-light-primary btn-sm mb-10"><i class="las la-plus-circle"></i>Nuevo Grupo</button>
-                    <button type="button" id="btnEditGrupo" class="btn btn-light-primary btn-sm mb-10"><i class="las la-pencil-alt"></i>Editar Grupo</button>
-
+                <div id="view_opciones" class="collapse show fs-6 ms-1">
+                    <div class="card-body pt-0">
+                        <div class="d-grid gap-2">
+                            <button type="button" id="btnNewGrupo" class="btn btn-light-primary btn-sm mb-5">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                Nuevo Grupo
+                            </button>
+                            <button type="button" id="btnEditGrupo" class="btn btn-light-primary btn-sm mb-5">
+                                <i class="las la-pencil-alt" aria-hidden="true"></i>                                                               
+                                Editar Grupo
+                            </button>                                  
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -160,11 +218,7 @@
                     <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Productos</a>
                 </li>
                 <a href="?page=admin_clienteproducto&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
-                    <span class="svg-icon svg-icon-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
-                        </svg>
-                    </span>
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
                 </a>
             </ul>
             <div class="tab-content">
@@ -234,7 +288,7 @@
                                     				</svg>
                                     			</span>
                                     		</div>
-                                    		<img src="assets/media/logos/ubicacion.png" class="w-20px me-3" alt="" />
+                                    		<i class="fa fa-location-arrow fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
                                     		<div class="me-3">
                                     			<div class="d-flex align-items-center">
                                     				<div class="text-gray-800 fw-bolder">Direccion</div>
@@ -276,7 +330,7 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" />
+                                            <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">Telefonos</div>
@@ -327,7 +381,7 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <img src="assets/media/logos/email.png" class="w-20px me-3" alt="" />
+                                            <i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">E-mail</div>
@@ -354,7 +408,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
-                		<button type="button" id="btnGrabar" class="btn btn-primary"><i class="las la-save"></i>
+                		<button type="button" id="btnGrabar" class="btn btn-primary btn-sm"><i class="las la-save"></i>
                 			<span class="indicator-label">Grabar</span>
                 		</button>
             	   </div>
@@ -362,7 +416,7 @@
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                     <div class="d-flex flex-stack fs-4 py-3 mb-2">
                         <div class="d-flex justify-content-start">
-                            <button type="button" id="btnAgregarprod" class="btn btn-light-primary btn-sm mb-10"><i class="las la-plus-circle"></i>Agregar Producto</button>
+                            <button type="button" id="btnAgregarprod" class="btn btn-light-primary btn-sm mb-2"><i class="fa fa-plus-circle"></i>Agregar Producto</button>
                         </div>
                     </div>
                     <div class="d-flex flex-column gap-7 gap-lg-10">
@@ -375,14 +429,14 @@
                             <div class="card-body pt-0">
                                 <div class="d-flex flex-column gap-10">
                                     <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
-                                        <table class="table table-hover align-middle table-row-dashed fs-6 gy-5" id="tblProducto">
+                                        <table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="tblProducto">
                                             <thead>
-                                                <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                                     <th style="display:none;">Id</th>
-                                                    <th>Grupo</th>
-                                                    <th>Producto</th>
-                                                    <th>Costo</th>
-                                                    <th>Estado</th>
+                                                    <th class="min-w-125px">Grupo</th>
+                                                    <th class="min-w-125px">Producto</th>
+                                                    <th class="min-w-125px">Costo</th>
+                                                    <th class="min-w-125px">Estado</th>
                                                     <th>Status</th>
                                                     <th style="text-align: center;">Opciones</th>
                                                 </tr>
@@ -405,7 +459,6 @@
 
                                                     ?>  
                                                     <?php 
-
                                                         $xCheking = '';
                                                         $xDisabledEdit = '';
 
@@ -471,10 +524,10 @@
 
 <!--MODAL NUEVO GRUPO-->
 <div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Nuevo Grupo</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Grupo</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -484,55 +537,59 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                        <span class="required">Grupo</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
-                    </label>
-                    <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div class="card-body pt-0">
+                        <div class="d-flex flex-column mb-7 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                <span class="required">Grupo</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
+                            </label>
+                            <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
+                        </div>
+                        <div class="fv-row mb-15">
+                            <label class="fs-6 fw-bold form-label mb-2">
+                                <span>Descripcion</span>
+                            </label>
+                            <textarea class="form-control mb-2 text-uppercase" name="txtDescGrupo" id="txtDescGrupo" rows="1" maxlength="150" onkeydown="return(event.keyCode!=13);"></textarea>
+                        </div>
+                        <div class="row mb-7">
+                            <div class="col-md-6">
+                                <label class="form-label">Secuencial Agenda</label>
+                                <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Secuencial Cancelado</label>
+                                <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control mb-2" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label">Secuencial Atendido</label>
+                                <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Secuencial Ausente</label>
+                                <input type="number" name="txtnumausente" id="txtnumausente" class="form-control mb-2" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
+                            </div>
+                        </div> 
+                    </div>
                 </div>
-                <div class="fv-row mb-15">
-                    <label class="fs-6 fw-bold form-label mb-2">
-                        <span>Descripcion</span>
-                    </label>
-                    <textarea class="form-control mb-2 text-uppercase" name="txtDescGrupo" id="txtDescGrupo" rows="1" maxlength="150" onkeydown="return(event.keyCode!=13);"></textarea>
-                </div>
-                <div class="row mb-7">
-                    <div class="col-md-6">
-                        <label class="form-label">Secuencial Agenda</label>
-                        <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Secuencial Cancelado</label>
-                        <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control mb-2" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
-                    </div>
-                </div>
-                <div class="row mb-7">
-                    <div class="col-md-6">
-                        <label class="form-label">Secuencial Atendido</label>
-                        <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Secuencial Ausente</label>
-                        <input type="number" name="txtnumausente" id="txtnumausente" class="form-control mb-2" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
-                    </div>
-                </div>                
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+               <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
                 <button type="button" class="btn btn-sm btn-light-primary" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" ><i class="las la-save"></i>Grabar</button>
             </div>
         </div>
     </div>
-</div>
+</div>  
 
 <!--MODAL EDITAR GRUPOS-->
 <div class="modal fade" id="modal_edit_grupo" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Lista de Grupos / Editar Datos</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Lista de Grupos / Editar Datos</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -542,9 +599,9 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body py-lg-10 px-lg-10">   
-                <div class="card card-flush py-4">             
-                    <div class="card-body pt-0">                    
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-2">
+                    <div class="card-body pt-0">
                         <div id="divcampos" style="display: none;" >
                             <input type="hidden" class="form-control mb-2 " maxlength="80" placeholder="ID" name="txteditargrupoid" id="txteditargrupoid" />
                             <div class="d-flex flex-column mb-7 fv-row">
@@ -554,7 +611,6 @@
                                 </label>
                                 <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txteditarGrupo" id="txteditarGrupo" />
                             </div>
-                            
                             <div class="row mb-7">
                                 <div class="col-md-6">
                                     <label class="form-label">Secuencial Agenda</label>
@@ -569,17 +625,15 @@
                             <div class="form-group my-5">
                                 <button type="button" id="btneditargrupo" onclick="f_ModificarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
                             </div>
-
                         </div>
-
                         <div class="mh-300px scroll-y me-n7 pe-7">
-                            <table id="tblGrupo" class="table table-hover align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
+                            <table id="tblGrupo" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
                                 <thead>
-                                    <tr class="text-start text-gray-400 fw-bolder fs-7 gs-0">
-                                        <th>Grupo</th>
+                                    <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                                        <th class="min-w-125px">Grupo</th>
                                         <th>Secuencial Agenda</th>
                                         <th>Secuencial Cancela</th>
-                                        <th>Estado</th>
+                                        <th class="min-w-125px">Estado</th>
                                         <th>Status</th>
                                         <th>Opciones</th>
                                     </tr>
@@ -609,7 +663,7 @@
                                             }  
                                             ?>
                                             <tr id="trgru_<?php echo $xId; ?>">
-                                                <td>
+                                                <td class="text-uppercase">
                                                     <?php echo $xGrupo; ?>
                                                     <input type="hidden" id="txtgrupoid<?php echo $xId; ?>" value="<?php echo $xId; ?>" />
                                                     <input type="hidden" id="txtgrupo<?php echo $xId; ?>" value="<?php echo $xGrupo; ?>" />
@@ -657,20 +711,19 @@
                     </div>
                 </div>
             </div>
-
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>                
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
-</div>
+</div>  
 
 <!--MODAL AGREGAR PRODUCTO-->
 <div class="modal fade" id="modal_addproducto" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Agregar Producto</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Producto</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -749,7 +802,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Editar Producto</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Producto</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -826,8 +879,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-primary">Modificar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
             </div>
         </div>
     </div>
@@ -1138,7 +1191,7 @@
     
     function f_GuardarGrupo(_paisid,_emprid,_usuaid){
 
-        debugger;
+        //debugger;
         var _nombreGrupo = $.trim($("#txtGrupo").val());
         var _descGrupo = $.trim($("#txtDescGrupo").val());
         var _numagenda = $("#txtnumagenda").val();
@@ -1147,7 +1200,7 @@
         var _numausente = $("#txtnumausente").val();
 
         if(_nombreGrupo == ''){
-            mensajesalertify("Ingrese Grupo..!!","W","top-right",3);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Grupo..!!");
             return false;
         }
 
@@ -1172,7 +1225,7 @@
                     xrespuesta.done(function(response){
                     if(response.trim() != 'ERR'){
 
-                        mensajesalertify('Nuevo Grupo Agregado', 'S', 'top-center', 3); 
+                        toastSweetAlert("top-end",3000,"success","Grupo Agregado"); 
                         
                         $("#txtGrupo").val("");
                         $("#txtDescGrupo").val("");
@@ -1187,7 +1240,7 @@
                 });
 
             }else  if(response.trim() == 'EXISTE'){
-                mensajesalertify('Grupo ya Existe', 'W', 'top-right', 3);
+                toastSweetAlert("top-end",3000,"warning","Grupo ya Existe..!!");
                 $("#txtGrupo").val("");
                 $("#txtDescGrupo").val("");
             }
@@ -1341,7 +1394,7 @@
                         }
                     });
                 }else{
-                    toastSweetAlert("top-end",3000,"warning","Nombre de Grupo ya Existe...!");
+                    toastSweetAlert("top-end",3000,"warning","Grupo ya Existe..!!");
                 }
             });
         }else{
@@ -1514,13 +1567,13 @@
 
 
         if(_prodedit == ''){
-            mensajesalertify("Ingrese Producto..!!","W","top-right",3);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Producto..!!");
             return false;
 
         }
 
         if(_costoedit == 0){
-            mensajesalertify("Ingrese Costo..!!","W","top-right",3);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Costo..!!");
             return false;
         }
 
@@ -1567,7 +1620,7 @@
                 $("#modal_editproducto").modal("hide");
 
             }else{
-                mensajesalertify("Producto ya está asignado..!", "W", "top-right", 3);
+                toastSweetAlert("top-end",3000,"warning","Producto ya Existe..!!");
             }
 
         });   
@@ -1587,9 +1640,9 @@
         var _desc = $.trim($("#txtDesc").val()); 
         var _direc = $.trim($("#txtDireccion").val()); 
         var _url = $.trim($("#txtUrl").val()); 
-        var _tel1 = $.trim($("#txtFono1").val()); 
-        var _tel2 = $.trim($("#txtFono2").val()); 
-        var _tel3 = $.trim($("#txtFono3").val()); 
+        var _telefono1 = $.trim($("#txtFono1").val()); 
+        var _telefono2 = $.trim($("#txtFono2").val()); 
+        var _telefono3 = $.trim($("#txtFono3").val()); 
         var _cel1 = $.trim($("#txtCelular1").val()); 
         var _cel2 = $.trim($("#txtCelular2").val()); 
         var _cel3 = $.trim($("#txtCelular3").val()); 
@@ -1601,21 +1654,48 @@
       
 
         if(_cboCiudad == ''){
-            mensajesalertify("Seleccione Ciudad..!", "W", "top-right", 3);
+            toastSweetAlert("top-end",3000,"warning","Seleccione Ciudad..!!");
             return; 
         }
 
 
         if(_cliente == ''){
-            mensajesalertify("Ingrese Nombre del Cliente..!!","W","top-right",3);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Cliente..!!");
             return false;
         }
+
+        if(_telefono1 != '')
+	    {
+            _valor = document.getElementById("txtFono1").value;
+            if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
+                toastSweetAlert("top-end",3000,"error","Telefono 1 Incorrecto..!!");  
+                return;
+            }
+	    } 
+
+         if(_telefono2 != '')
+	    {
+            _valor = document.getElementById("txtFono2").value;
+            if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
+                toastSweetAlert("top-end",3000,"error","Telefono 2 Incorrecto..!!");  
+                return;
+            }
+	    } 
+
+         if(_telefono3 != '')
+	    {
+            _valor = document.getElementById("txtFono3").value;
+            if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
+                toastSweetAlert("top-end",3000,"error","Telefono 3 Incorrecto..!!");  
+                return;
+            }
+	    } 
         
         if(_cel1 != '')
         {
             _valor = document.getElementById("txtCelular1").value;
             if( !(/^\d{10}$/.test(_valor)) ) {
-                mensajesalertify("Celular 1 incorrecto..!" ,"W", "top-right", 3); 
+                toastSweetAlert("top-end",3000,"error","Celular 1 Incorrecto..!!");
                 return;
             }
         }                     
@@ -1624,7 +1704,7 @@
         {
             _valor = document.getElementById("txtCelular2").value;
             if( !(/^\d{10}$/.test(_valor)) ) {
-                mensajesalertify("Celular 2 incorrecto..!" ,"W", "top-right", 3); 
+                toastSweetAlert("top-end",3000,"error","Celular 2 Incorrecto..!!"); 
                 return;
             }
         }
@@ -1633,7 +1713,7 @@
         {
             _valor = document.getElementById("txtCelular3").value;
             if( !(/^\d{10}$/.test(_valor)) ) {
-                mensajesalertify("Celular 3 incorrecto..!" ,"W", "top-right", 3); 
+                toastSweetAlert("top-end",3000,"error","Celular 3 Incorrecto..!!");
                 return;
             }
         }
@@ -1642,7 +1722,7 @@
             try{
                 new URL(_url);
             }catch(err){
-                mensajesalertify("Direccion URL Incorrecta..!", "W", "top-right", 3);
+                toastSweetAlert("top-end",3000,"error","Direccion URL Incorrecta..!!");
                 return false;
             }
         }
@@ -1652,7 +1732,7 @@
         
             if (regex.test($('#txtEmail1').val().trim())) {
             }else{
-                mensajesalertify("Email 1 no es Valido..!", "W", "top-right", 3);
+                toastSweetAlert("top-end",3000,"error","Email 1 Incorrecto..!!");
                 return;
             }
         }
@@ -1662,7 +1742,7 @@
         
             if (regex.test($('#txtEmail2').val().trim())) {
             }else{
-                mensajesalertify("Email 2 no es Valido..!", "W", "top-right", 3);
+                toastSweetAlert("top-end",3000,"error","Email 2 Incorrecto..!!");
                 return;
             }
         }
@@ -1686,8 +1766,7 @@
         }
 
         if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != 'jpeg'){
-            //mensajesweetalert("center","warning","El archivo seleccionado no es una Imagen..!",false,1800);
-            mensajesalertify("El archivo seleccionado en cabecera no es una Imagen..!", "W", "top-right", 3);
+            toastSweetAlert("top-end",3000,"error","Cabecera no es Imagen..!!");
             return;
         }
 
@@ -1710,7 +1789,7 @@
         }
 
         if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != 'jpeg'){
-            mensajesalertify("El archivo seleccionado en pie no es una Imagen..!", "W", "top-right", 3);
+            toastSweetAlert("top-end",3000,"error","Pie no es Imagen..!!");
             return;
         }
 
@@ -1726,9 +1805,9 @@
         form_data.append('xxDescrip', _desc);
         form_data.append('xxDirec', _direc);
         form_data.append('xxUrl', _url);
-        form_data.append('xxFono1', _tel1);
-        form_data.append('xxFono2', _tel2);
-        form_data.append('xxFono3', _tel3);
+        form_data.append('xxFono1', _telefono1);
+        form_data.append('xxFono2', _telefono2);
+        form_data.append('xxFono3', _telefono3);
         form_data.append('xxCel1', _cel1);
         form_data.append('xxCel2', _cel2);
         form_data.append('xxCel3', _cel3);
@@ -1748,9 +1827,9 @@
             dataType: "json",
             success: function(response){
                 if(response == 'OK'){
-                    $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito..!'}); //POR METODO POST
+                    $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito'}); //POR METODO POST
                 }else{
-                    mensajesalertify("Cliente ya Existe..!", "W", "top-right", 3);
+                    toastSweetAlert("top-end",3000,"warning","Cliente ya Existe..!!");
                 }
             },
             error: function (error) {

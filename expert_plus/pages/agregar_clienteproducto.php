@@ -149,9 +149,11 @@
                 </div>
                 <div id="view_opciones" class="collapse show fs-6 ms-1">
                     <div class="card-body pt-0">
-                        <button type="button" id="btnNewGrupo" class="btn btn-light-primary btn-sm">
-                            <i class="fa fa-plus-circle"></i>Nuevo Grupo                                                               
-                        </button>                                                      
+                        <div class="d-grid gap-2">
+                            <button type="button" id="btnNewGrupo" class="btn btn-light-primary btn-sm">
+                                <i class="fa fa-plus-circle"></i>Nuevo Grupo                                                               
+                            </button>
+                        </div>                                                      
                     </div>
                 </div>
             </div>
@@ -323,7 +325,7 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <i class="fa fa-envelope fa-2x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                            <i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">E-mail</div>
@@ -387,7 +389,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button type="button" id="btnGrabar" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary">
+                <button type="button" id="btnGrabar" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary btn-sm"><i class="las la-save"></i>
                     <span class="indicator-label">Grabar</span>
                 </button>
             </div>
@@ -840,9 +842,9 @@
         var _desc = $.trim($("#txtDesc").val());
         var _direc = $.trim($("#txtDireccion").val()); 
         var _url = $.trim($("#txtUrl").val()); 
-        var _tel1 = $.trim($("#txtFono1").val()); 
-        var _tel2 = $.trim($("#txtFono2").val()); 
-        var _tel3 = $.trim($("#txtFono3").val()); 
+        var _telefono1 = $.trim($("#txtFono1").val()); 
+        var _telefono2 = $.trim($("#txtFono2").val()); 
+        var _telefono3 = $.trim($("#txtFono3").val()); 
         var _cel1 = $.trim($("#txtCelular1").val()); 
         var _cel2 = $.trim($("#txtCelular2").val()); 
         var _cel3 = $.trim($("#txtCelular3").val()); 
@@ -918,12 +920,39 @@
                 return false;
             }
         }
+
+        if(_telefono1 != '')
+        {
+            _valor = document.getElementById("txtFono1").value;
+            if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
+                toastSweetAlert("top-end",3000,"error","Telefono 1 Incorrecto..!!");  
+                return;
+            }
+        } 
+        
+        if(_telefono2 != '')
+        {
+            _valor = document.getElementById("txtFono2").value;
+            if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
+                toastSweetAlert("top-end",3000,"error","Telefono 2 Incorrecto..!!");  
+                return;
+            }
+        }  
+
+        if(_telefono3 != '')
+        {
+            _valor = document.getElementById("txtFono3").value;
+            if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
+                toastSweetAlert("top-end",3000,"error","Telefono 2 Incorrecto..!!");  
+                return;
+            }
+        }  
         
         if(_cel1 != '')
         {
             _valor = document.getElementById("txtCelular1").value;
             if( !(/^\d{10}$/.test(_valor)) ) {
-                mensajesalertify("Celular 1 incorrecto..!" ,"W", "top-right", 3); 
+                toastSweetAlert("top-end",3000,"error","Celular 1 Incorrecto..!!");  
                 return;
             }
         }                     
@@ -932,7 +961,7 @@
         {
             _valor = document.getElementById("txtCelular2").value;
             if( !(/^\d{10}$/.test(_valor)) ) {
-                mensajesalertify("Celular 2 incorrecto..!" ,"W", "top-right", 3); 
+                toastSweetAlert("top-end",3000,"error","Celular 2 Incorrecto..!!");  
                 return;
             }
         }
@@ -941,7 +970,7 @@
         {
             _valor = document.getElementById("txtCelular3").value;
             if( !(/^\d{10}$/.test(_valor)) ) {
-                mensajesalertify("Celular 3 incorrecto..!" ,"W", "top-right", 3); 
+                toastSweetAlert("top-end",3000,"error","Celular 3 Incorrecto..!!");  
                 return;
             }
         }                    
@@ -950,7 +979,7 @@
             var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
             if (regex.test(_email1.trim())){
             }else{
-                mensajesalertify("Email 1 Incorrecto..!!","W","top-right",3);
+                toastSweetAlert("top-end",3000,"error","Email 1 Incorrecto..!!");  
                 return false;
             }  
         }
@@ -959,7 +988,7 @@
             var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
             if (regex.test(_email2.trim())){
             }else{
-                mensajesalertify("Email 2 Incorrecto..!!","W","top-right",3);
+                toastSweetAlert("top-end",3000,"error","Email 2 Incorrecto..!!");  
                 return false;
             }  
         }
@@ -984,9 +1013,9 @@
                 form_data.append('xxDescrip', _desc);
                 form_data.append('xxDirec', _direc);
                 form_data.append('xxUrl', _url);
-                form_data.append('xxTel1', _tel1);
-                form_data.append('xxTel2', _tel2);
-                form_data.append('xxTel3', _tel3);
+                form_data.append('xxTel1', _telefono1);
+                form_data.append('xxTel2', _telefono2);
+                form_data.append('xxTel3', _telefono3);
                 form_data.append('xxCel1', _cel1);
                 form_data.append('xxCel2', _cel2);
                 form_data.append('xxCel3', _cel3);
@@ -1010,7 +1039,7 @@
                                         
                                 if(response.trim() == 'OK'){
 
-                                    $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
+                                    $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito'}); //POR METODO POST
                         
                                 }
 
@@ -1023,7 +1052,7 @@
                     }
                 });            
             }else{
-                mensajesalertify("Cliente ya Existe..!!","W","top-right",3);
+                toastSweetAlert("top-end",3000,"warning","Cliente ya Existe..!!");  
                 return false;
             }
         });
@@ -1065,7 +1094,7 @@
         var _numausente = $("#txtnumausente").val();        
 
         if(_nombreGrupo == ''){
-            mensajesalertify("Ingrese Grupo..!!","W","top-right",3);
+            toastSweetAlert("top-end",3000,"warning","Ingrese Grupo..!!");  
             return false;
         }
 
@@ -1089,7 +1118,8 @@
                     xrespuesta.done(function(response){
                     if(response.trim() != 'ERR'){
 
-                        mensajesalertify('Nuevo Grupo Agregado', 'S', 'top-center', 3); 
+                        toastSweetAlert("top-end",3000,"success","Grupo Agregado");  
+                        
                         
                         $("#txtGrupo").val("");
                         $("#txtDescGrupo").val("");
@@ -1100,7 +1130,7 @@
                 });
 
             }else  if(response.trim() == 'EXISTE'){
-                mensajesalertify('Grupo ya Existe', 'W', 'top-right', 3);
+                toastSweetAlert("top-end",3000,"warning","Grupo ya Existe..!!");  
 
                 $("#txtGrupo").val("");
                 $("#txtDescGrupo").val("");
