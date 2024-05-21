@@ -230,7 +230,7 @@
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <i class="fa fa-location-arrow fa-2x me-2" style="color:#F46D55;" aria-hidden="true"></i>
+                                            <i class="fa fa-location-arrow fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">Direccion</div>
@@ -273,7 +273,7 @@
                                                 </span>
                                             </div>
                                             <!-- <img src="assets/media/logos/telefono.png" class="w-20px me-3" alt="" /> -->
-                                            <i class="fa fa-phone fa-2x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
+                                            <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">Telefonos</div>

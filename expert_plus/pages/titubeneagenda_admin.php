@@ -3023,7 +3023,7 @@
                                     <label class="form-label text-primary">Fecha Cita:</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <span class="" id="txtFechaCita"/>
+                                    <span class="" id="txtFechaCita"></span>
                                 </div>
                             </div>
                             <div class="row">
@@ -3031,7 +3031,7 @@
                                     <label class="form-label text-primary">Hora Cita:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span class="" id="txtHoraCita"/>
+                                    <span class="" id="txtHoraCita"></span>
                                 </div>
                             </div>  
                             <div class="row">
@@ -3039,7 +3039,7 @@
                                     <label class="form-label text-primary">Codigo:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span class="" id="txtCodCita"/>
+                                    <span class="" id="txtCodCita"></span>
                                 </div>
                             </div>
                             <div class="row">
@@ -3047,7 +3047,7 @@
                                     <label class="form-label text-primary">Especialidad:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span class="" id="txtEspeCita"/>
+                                    <span class="" id="txtEspeCita"></span>
                                 </div>
                             </div>
                             <div class="row">
@@ -3055,7 +3055,7 @@
                                     <label class="form-label text-primary">Profesional:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span class="" id="txtProfCita"/>
+                                    <span class="" id="txtProfCita"></span>
                                 </div>
                             </div>
                             <div class="row">
@@ -3063,7 +3063,7 @@
                                     <label class="form-label text-primary">Ciudad:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span class="text-uppercase" id="txtCiudCita" />
+                                    <span class="text-uppercase" id="txtCiudCita"></span>
                                 </div>
                             </div>
                             <div class="row">
@@ -3071,7 +3071,7 @@
                                     <label class="form-label text-primary">Prestador:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span class="" id="txtPresCita"/>
+                                    <span class="" id="txtPresCita"></span>
                                 </div>
                             </div>
                             <div class="row">
@@ -3079,7 +3079,7 @@
                                     <label class="form-label text-primary">Direccion:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span class="" id="txtDirecPresta"/>
+                                    <span class="" id="txtDirecPresta"></span>
                                 </div>
                             </div>
                             <div class="row">
@@ -3087,7 +3087,7 @@
                                     <label class="form-label text-primary">Telefonos:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span class="" id="txtFono1Presta"/>
+                                    <span class="" id="txtFono1Presta"></span>
                                 </div>
                             </div>
                           
