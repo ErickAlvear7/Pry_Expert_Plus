@@ -477,9 +477,9 @@
             <div class="modal-body py-lg-10 px-lg-2">
                 <!--begin::Stepper-->
                 <div class="stepper stepper-pills flex-xl-row flex-row-fluid" id="kt_modal_create_app_stepper">
-                    <div class="d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px">
+                    <div class="card mb-1 mb-xl-1">
                         <!--begin::Nav-->
-                        <div class="stepper-nav ps-lg-10">
+                        <div class="stepper-nav ps-lg-5 mb-4">
                             <!--begin::Step 1-->
                             <div class="stepper-item current" data-kt-stepper-element="nav">
                                 <div class="stepper-line w-40px"></div>
@@ -505,7 +505,7 @@
                         </div>
                     </div>
                     <!--begin::Content-->
-                    <div class="flex-row-fluid py-lg-5 px-lg-15">
+                    <div class="card mb-1 mb-xl-1">
                         <form class="form" novalidate="novalidate" id="kt_modal_create_app_form">
                             <!--begin::Step 1-->
                             <div class="current" data-kt-stepper-element="content">
@@ -513,19 +513,26 @@
                                     <div class="container-fluid">
                                         <div class="card mb-1 mb-xl-1">
                                             <div class="card-header border-0">
-                                                <div class="card-title">
-                                                    <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_titular" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Foto Titular
-                                                        <span class="ms-2 rotate-180">
-                                                            <span class="svg-icon svg-icon-3">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                    <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                                                </svg>
-                                                            </span>
+                                                <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_avatar">
+                                                    <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                                            </svg>
                                                         </span>
-                                                    </div> 
+                                                        <span class="svg-icon toggle-off svg-icon-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Avatar</h4>
                                                 </div>
                                             </div>
-                                            <div id="view_imagen_titular" class="collapse ">
+                                            <div id="view_avatar" class="collapse fs-6 ms-1">
                                                 <div class="card card-flush py-4">
                                                     <div class="card-body pt-0">
                                                         <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
