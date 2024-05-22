@@ -222,6 +222,9 @@
                                     <h5 class="text-gray-800 fw-bolder">Grupo</h5>
                                     <div class="fw-bold">
                                         <label class="text-gray-600"><?php echo $xGrupo; ?></label>
+                                        <button type="button" id="btnConfgrupo" onclick="f_SetGrupo()" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Configurar Secuencial Grupo" >
+                                            <i class="far fa-sun" aria-hidden="true"></i>
+                                        </button>                                        
                                     </div>
                                 </div>
                             </div>
@@ -370,7 +373,7 @@
                                     <span class="text-gray-600 fw-bold fs-7"><?php echo $xAgnSector; ?></span>
                                 </div>
                             </div>
-                            <a href="#" class="btn btn-sm btn-active-light-primary btnPres" title="Ver Prestador" data-bs-toggle="tooltip" data-bs-placement="right"><i class="fa fa-eye"></i></a>
+                            <a href="#" class="btn btn-sm btn-active-light-primary btnPres" title="Ver Prestador" data-bs-toggle="tooltip" data-bs-placement="right"><i class="far fa-sun"></i></a>
                         </div>
                         <div class="d-flex align-items-center mb-6">
                             <span data-kt-element="bullet" class="bullet bullet-vertical d-flex align-items-center min-h-150px mh-100 me-4 bg-info"></span>
