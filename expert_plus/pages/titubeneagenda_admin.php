@@ -194,55 +194,6 @@
             </div>
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0">
-                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_grupo">														<!--begin::Icon-->
-                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
-                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
-                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
-                                </svg>
-                            </span>
-                            <span class="svg-icon toggle-off svg-icon-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
-                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
-                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
-                                </svg>
-                            </span>
-                        </div>
-                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Grupo-Producto</h4>
-                    </div> 
-                </div>
-                <div id="view_grupo" class="collapse show fs-6 ms-1">
-                    <div class="card-body pt-2">
-                        <div class="d-flex flex-column gap-10">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-briefcase-fill text-primary fs-1 me-5"></i>
-                                <div class="d-flex flex-column">
-                                    <h5 class="text-gray-800 fw-bolder">Grupo</h5>
-                                    <div class="fw-bold">
-                                        <label class="text-gray-600"><?php echo $xGrupo; ?></label>
-                                        <button type="button" id="btnConfgrupo" onclick="f_SetGrupo()" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Configurar Secuencial Grupo" >
-                                            <i class="far fa-sun" aria-hidden="true"></i>
-                                        </button>                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center">							
-                                <i class="bi bi-bag-plus text-primary fs-1 me-5"></i>
-                                <div class="d-flex flex-column">
-                                    <h5 class="text-gray-800 fw-bolder">Producto</h5>
-                                    <div class="fw-bold">
-                                       <label class="text-gray-600"><?php echo $xProducto; ?></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-5 mb-xl-8">
-                <div class="card-header border-0">
                     <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_titular">
                         <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
                             <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
@@ -266,7 +217,7 @@
                     <div class="card-body pt-2">
                        <div class="d-flex flex-column gap-10">
                             <div class="d-flex align-items-center">							
-                                <i class="bi bi-filter-square text-primary fs-1 me-5"></i>
+                                <i class="fa fa-address-card fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">No.Documento</h5>
                                     <div class="fw-bold">
@@ -275,7 +226,7 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-filter-square text-primary fs-1 me-5"></i>
+                                <i class="fa fa-calendar fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Fecha de Nacimiento</h5>
                                     <div class="fw-bold">
@@ -284,7 +235,7 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-envelope-check text-primary fs-1 me-5"></i>
+                                <i class="fa fa-envelope fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Email</h5>
                                     <div class="fw-bold">
@@ -293,7 +244,7 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-filter-square text-primary fs-1 me-5"></i>
+                                <i class="fa fa-map-marker fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Ciudad</h5>
                                     <div class="fw-bold">
@@ -302,7 +253,7 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-filter-square text-primary fs-1 me-5"></i>
+                                <i class="fa fa-location-arrow fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
                                 <div class="d-flex flex-column">
                                     <h5 class="text-gray-800 fw-bolder">Direccion</h5>
                                     <div class="fw-bold">
@@ -311,12 +262,62 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">							
-                                <i class="bi bi-telephone-outbound text-primary fs-1 me-5"></i>
+                                <i class="fa fa-phone fa-1x me-2 fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
                                 <div class="d-flex flex-column">
                                 <h5 class="text-gray-800 fw-bolder">Telefono</h5>
                                     <div class="fw-bold">
                                         <div class="text-gray-600"><?php echo $xCelular; ?></div>
                                     </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-5 mb-xl-8">
+                <div class="card-header border-0">
+                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_grupo">														<!--begin::Icon-->
+                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <span class="svg-icon toggle-off svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </div>
+                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Grupo-Producto</h4>
+                    </div> 
+                </div>
+                <div id="view_grupo" class="collapse show fs-6 ms-1">
+                    <div class="card-body pt-2">
+                        <div class="d-flex flex-column gap-10">
+                            <div class="d-flex align-items-center">
+                                <i class="fa fa-users fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
+                                <div class="d-flex flex-column">
+                                    <h5 class="text-gray-800 fw-bolder">Grupo</h5>
+                                    <div class="fw-bold">
+                                        <label class="text-gray-600 text-uppercase"><?php echo $xGrupo; ?></label>
+                                        <!-- <button type="button" id="btnConfgrupo" onclick="f_SetGrupo()" class="btn btn-icon btn-light-primary" title="Configurar Secuencial Grupo" > -->
+                                        <!-- </button>
+                                        <!-- <i class="fa fa-cogs fa-1x ms-6 " id="btnGrupo" style="color:#55C4F4;" aria-hidden="true" title="Grupo" data-bs-toggle="tooltip" data-bs-placement="right"></i> -->
+                                        <a href="#" id="btnGrupo" class="fa fa-cogs fa-1x ms-6" title="Grupo" data-bs-toggle="tooltip" data-bs-placement="right"></a>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">							
+                                <i class="fa fa-briefcase fs-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
+                                <div class="d-flex flex-column">
+                                    <h5 class="text-gray-800 fw-bolder">Producto</h5>
+                                    <div class="fw-bold">
+                                       <label class="text-gray-600 text-uppercase"><?php echo $xProducto; ?></label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -3102,6 +3103,68 @@
                 </div>
             </div>
         </div>
+    </div> 
+    
+    <!--Modal Grupo-->
+    <div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Grupo</h2>
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="modal-body py-lg-10 px-lg-10">
+                    <div class="card card-flush py-4">
+                        <div class="card-body pt-0">
+                            <div class="d-flex flex-column mb-7 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                    <span class="required">Grupo</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
+                                </label>
+                                <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
+                            </div>
+                            <div class="fv-row mb-15">
+                                <label class="fs-6 fw-bold form-label mb-2">
+                                    <span>Descripcion</span>
+                                </label>
+                                <textarea class="form-control mb-2 text-uppercase" name="txtDescGrupo" id="txtDescGrupo" rows="1" maxlength="150" onkeydown="return(event.keyCode!=13);"></textarea>
+                            </div>
+                            <div class="row mb-7">
+                                <div class="col-md-6">
+                                    <label class="form-label">Secuencial Agenda</label>
+                                    <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Secuencial Cancelado</label>
+                                    <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control mb-2" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label">Secuencial Atendido</label>
+                                    <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Secuencial Ausente</label>
+                                    <input type="number" name="txtnumausente" id="txtnumausente" class="form-control mb-2" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                    <button type="button" class="btn btn-sm btn-light-primary" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" ><i class="las la-save"></i>Grabar</button>
+                </div>
+            </div>
+        </div>
     </div>  
 
 </div>
@@ -3589,6 +3652,10 @@
                
             });
         });
+
+        $('#btnGrupo').click(function(){
+            $("#modal_new_grupo").modal("show");
+        });
   
     });    
     
@@ -3612,7 +3679,8 @@
 
     $("#modal_cita").draggable({
         handle: ".modal-header"
-    });  
+    });
+      
 
 
 </script>
