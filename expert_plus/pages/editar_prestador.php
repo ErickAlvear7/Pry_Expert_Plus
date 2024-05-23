@@ -1112,7 +1112,7 @@
                 </div>
                 <div class="card mb-1 mb-xl-1">
                    <div class="card-header border-0">
-                        <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_informacion_profesional">														<!--begin::Icon-->
+                        <div class="d-flex align-items-center collapsible py-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_informacion_profesional">
                             <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
                                 <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1128,13 +1128,12 @@
                                     </svg>
                                 </span>
                             </div>
-                            <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Informacion Profesional</h4>
+                            <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Direccion-Telefonos-Email</h4>
                         </div>
                    </div>
-                   <div id="view_informacion_profesional" class="collapse show fs-6 ms-1">
-                        <div class="card card-flush py-4">
+                   <div id="view_informacion_profesional" class="collapse fs-6 ms-1">
+                        <div class="card card-flush py-2">
                             <div class="card-body pt-0">
-
                                 <div class="py-0" data-kt-customer-payment-method="row">
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#direccion_profesional" role="button" aria-expanded="false" aria-controls="direccion_profesional">

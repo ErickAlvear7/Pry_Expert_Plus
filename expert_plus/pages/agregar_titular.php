@@ -464,7 +464,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Agregar Titular</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Titular-Beneficiario</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -511,7 +511,7 @@
                             <div class="current" data-kt-stepper-element="content">
                                 <div class="w-100">
                                     <div class="container-fluid">
-                                        <div class="card mb-1 mb-xl-1">
+                                        <div class="card mb-1 mb-xl-2">
                                             <div class="card-header border-0">
                                                 <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_avatar">
                                                     <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
@@ -551,22 +551,29 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card mb-1 mb-xl-1">
+                                        <div class="card mb-1 mb-xl-2">
                                             <div class="card-header border-0">
-                                                <div class="card-title">
-                                                    <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_titular" role="button" aria-expanded="false" aria-controls="view_datos_titular">Datos Titular
-                                                        <span class="ms-2 rotate-180">
-                                                            <span class="svg-icon svg-icon-3">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                    <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                                                </svg>
-                                                            </span>
+                                                <div class="d-flex align-items-center collapsible py-1 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_datos_titular">														<!--begin::Icon-->
+                                                    <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                                            </svg>
                                                         </span>
-                                                    </div> 
+                                                        <span class="svg-icon toggle-off svg-icon-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Datos Titular</h4>
                                                 </div>
                                             </div>
                                             <div id="view_datos_titular" class="collapse show ">
-                                                <div class="card card-flush py-4">
+                                                <div class="card card-flush py-1">
                                                     <div class="card-body pt-0">
                                                         <div class="row mb-3">
                                                             <div class="col-md-6">
@@ -629,7 +636,7 @@
                                                                 <input type="date" id="txtFechaNacimiento" class="form-control mb-2" value="" />
                                                             </div>
                                                         </div>
-                                                        <div class="row mb-3">
+                                                        <div class="row">
                                                             <div class="col-md-6">
                                                                 <label class="required form-label">Provincia</label>
                                                                 <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#view_datos_titular" class="form-select mb-2" >
@@ -646,66 +653,136 @@
                                                                 </select>    
                                                             </div>  
                                                         </div>
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-12">
-                                                                <label class="form-label">Direccion</label>
-                                                                <textarea class="form-control mb-2" id="txtDireccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-4 mb-xl-2">
+                                            <div class="card-header border-0">
+                                                <div class="d-flex align-items-center collapsible py-1 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_informacion_titular">
+                                                    <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                                            </svg>
+                                                        </span>
+                                                        <span class="svg-icon toggle-off svg-icon-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Direccion-Telefonos-Email</h4>
+                                                </div>
+                                            </div>
+                                            <div id="view_informacion_titular" class="collapse fs-6 ms-1">
+                                                <div class="card card-flush py-1">
+                                                    <div class="card-body pt-0">
+                                                        <div class="py-0" data-kt-customer-payment-method="row">
+                                                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#direccion_profesional" role="button" aria-expanded="false" aria-controls="direccion_profesional">
+                                                                    <div class="me-3 rotate-90">
+                                                                        <span class="svg-icon svg-icon-3">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                                            </svg>
+                                                                        </span>
+                                                                    </div>
+                                                                    <i class="fa fa-location-arrow fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
+                                                                    <div class="me-3">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="text-gray-800 fw-bolder">Direccion</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="direccion_profesional" class="collapse fs-6 ps-12" data-bs-parent="#datos_profesional">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-md-12">
+                                                                        <textarea class="form-control mb-2" id="txtDireccion" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-4">
-                                                                <label class="form-label">Telefono Casa</label>
-                                                                <input type="text" id="txtTelCasa" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                                        <div class="py-0" data-kt-customer-payment-method="row">
+                                                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#telefono_profesional" role="button" aria-expanded="false" aria-controls="telefono_profesional">
+                                                                    <div class="me-3 rotate-90">
+                                                                        <span class="svg-icon svg-icon-3">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                                            </svg>
+                                                                        </span>
+                                                                    </div>
+                                                                    <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
+                                                                    <div class="me-3">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-4">
-                                                                <label class="form-label">Telefono Oficina</label>
-                                                                <input type="text" id="txtTelOfi" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>   
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label class="form-label">Telefono Celular</label>
-                                                                <input type="text" id="txtCelular" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />  
+                                                            <div id="telefono_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <div class="fs-6 fw-bold mt-3 mb-3">Telefono 1</div>
+                                                                        <input type="text" id="txtTelCasa" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="fs-6 fw-bold mt-3 mb-3">Telefono 2</div>
+                                                                        <input type="text" id="txtTelOfi" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="fs-6 fw-bold mt-3 mb-3">Celular</div>
+                                                                        <input type="text" id="txtCelular" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                    <label class="form-label">Email</label>
-                                                                    <input type="email" id="txtEmail" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
+                                                        <div class="py-0" data-kt-customer-payment-method="row">
+                                                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#email_profesional" role="button" aria-expanded="false" aria-controls="email_profesional">
+                                                                    <div class="me-3 rotate-90">
+                                                                        <span class="svg-icon svg-icon-3">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                                            </svg>
+                                                                        </span>
+                                                                    </div>
+                                                                    <i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                                                    <div class="me-3">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="text-gray-800 fw-bolder">E-mail</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-4">
-                                                                <label class="form-label">Inicio Cobertura</label>
-                                                                <input type="date" id="txtIniCobertura" class="form-control mb-2" />
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label class="form-label">Fin Cobertura</label>
-                                                                <input type="date" id="txtFinCobertura" class="form-control mb-2" />
+                                                            <div id="email_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
+                                                                <div class="d-flex flex-wrap gap-5">
+                                                                    <div class="fv-row w-100 flex-md-root">
+                                                                        <input type="email" id="txtEmail" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
+                                                                    </div>                                                   
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- <div class="fv-row">
-                                        <div class="fv-row">
-                                            <label class="d-flex flex-stack mb-5 cursor-pointer">
-                                                <span class="d-flex align-items-center me-2">
-                                                    <span class="d-flex flex-column-md-4">
-                                                        <span class="fw-bolder fs-5">Desea Agreagar un Beneficiario..?</span>
-                                                    </span>
-                                                </span>
-                                            </label>
-                                            <span class="form-check form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="checkbox" id="chkCambiar" name="category" value="1" />
-                                                <label class="form-check-label lblTxt" id="lblTexto"></label>
-                                            </span>
+                                        <div class="card mb-1 mb-xl-1">
+                                            <div class="card-header border-0">
+                                                <div class="fv-row">
+                                                    <label class="form-check form-switch form-check-custom form-check-solid">
+                                                        <h5 class="form-check-label mx-3">Desea Agregar un Beneficiario..?</h5>
+                                                        <input class="form-check-input" type="checkbox" id="chkCambiar" name="category" value="1" />
+                                                        <h5 class="form-check-label" id="lblTexto"></h5>
+                                                    </label> 
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div> -->
-                                    <div class="fv-row">
-                                        <label class="form-check form-switch form-check-custom form-check-solid">
-                                            <h5 class="form-check-label mx-3">Desea Agregar un Beneficiario..?</h5>
-                                            <input class="form-check-input" type="checkbox" id="chkCambiar" name="category" value="1" />
-                                            <h5 class="form-check-label" id="lblTexto"></h5>
-                                        </label> 
                                     </div>
                                 </div>
                             </div>
@@ -713,23 +790,61 @@
                             <div data-kt-stepper-element="content">
                                 <div class="w-100">
                                     <div class="container-fluid">
-                                        <div class="card mb-5 mb-xl-8">
+                                        <div class="card mb-1 mb-xl-2">
                                             <div class="card-header border-0">
-                                                <div class="card-title">
-                                                    <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_beneficiario" role="button" aria-expanded="false" aria-controls="view_datos_beneficiario">Datos Beneficiario
-                                                        <span class="ms-2 rotate-180">
-                                                            <span class="svg-icon svg-icon-3">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                    <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                                                </svg>
-                                                            </span>
+                                                <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_datos_beneficiario">														<!--begin::Icon-->
+                                                    <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                                            </svg>
                                                         </span>
-                                                    </div> 
+                                                        <span class="svg-icon toggle-off svg-icon-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Datos Beneficiario</h4>
                                                 </div>
                                             </div>
-                                            <div id="view_datos_beneficiario" class="collapse show">
-                                                <div class="card card-flush py-4">
+                                            <div id="view_datos_beneficiario" class="collapse show fs-6 ms-1">
+                                                <div class="card card-flush py-1">
                                                     <div class="card-body pt-0">
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-6">
+                                                                <label class="required form-label">Provincia</label>
+                                                                <select  id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#view_datos_beneficiario" class="form-select mb-2" >
+                                                                        <option></option>
+                                                                        <?php foreach ($all_provincia as $prov) : ?>
+                                                                            <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
+                                                                        <?php endforeach ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="required form-label">Ciudad</label>
+                                                                <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#view_datos_beneficiario" class="form-select mb-2">
+                                                                        <option></option>
+                                                                </select>  
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-4">
+                                                                <label class="required form-label">Nombres</label>
+                                                                <input type="text" class="form-control mb-2" id="txtNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="required form-label">Apellidos</label>
+                                                                <input type="text" class="form-control mb-2" id="txtApellidoBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Fecha de Nacimiento</label>
+                                                                <input type="date" id="txtFechaNacimientoBe" class="form-control mb-2" value="" />
+                                                            </div>
+                                                        </div>
                                                         <div class="row mb-3">
                                                             <div class="col-md-6">
                                                                 <label class="required form-label">Parentesco</label>
@@ -790,123 +905,181 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-4">
-                                                                <label class="required form-label">Nombres</label>
-                                                                <input type="text" class="form-control mb-2" id="txtNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label class="required form-label">Apellidos</label>
-                                                                <input type="text" class="form-control mb-2" id="txtApellidoBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label class="form-label">Fecha de Nacimiento</label>
-                                                                <input type="date" id="txtFechaNacimientoBe" class="form-control mb-2" value="" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-6">
-                                                                <label class="required form-label">Provincia</label>
-                                                                <select  id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#view_datos_beneficiario" class="form-select mb-2" >
-                                                                        <option></option>
-                                                                        <?php foreach ($all_provincia as $prov) : ?>
-                                                                            <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
-                                                                        <?php endforeach ?>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <label class="required form-label">Ciudad</label>
-                                                                <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#view_datos_beneficiario" class="form-select mb-2">
-                                                                        <option></option>
-                                                                </select>  
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-12">
-                                                                <label class="form-label">Direccion</label>
-                                                                <textarea class="form-control mb-2" id="txtDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea> 
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-3">
-                                                                <label class="form-label">Telefono Casa</label>
-                                                                <input type="text" id="txtTelCasaBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <label class="form-label">Telefono Oficina</label>
-                                                                <input type="text" id="txtTelOfiBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>      
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <label class="form-label">Telefono Celular</label>
-                                                                <input type="text" id="txtCelularBe" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />  
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <label class="form-label">Email</label>
-                                                                <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="mi@gmail.com" minlength="1" maxlength="80" />   
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="form-group mt-5">
-                                                                <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregar">
-                                                                    <span class="svg-icon svg-icon-2">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                            <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                                                            <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-                                                                        </svg>
-                                                                    </span>
-                                                                Agregar
-                                                                </button>
-                                                            </div>  
-                                                        </div>
                                                     </div> 
                                                </div>
-                                               <div class="card card-flush py-4">
+                                            </div>
+                                        </div>
+                                        <div class="card mb-1 mb-xl-1">
+                                            <div class="card-header border-0">
+                                                <div class="d-flex align-items-center collapsible py-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_info_beneficiario">
+                                                    <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                                            </svg>
+                                                        </span>
+                                                        <span class="svg-icon toggle-off svg-icon-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Direccion-Telefonos-Email</h4>
+                                                </div>
+                                            </div>
+                                            <div id="view_info_beneficiario" class="collapse fs-6 ms-1">
+                                                <div class="card card-flush py-2">
                                                     <div class="card-body pt-0">
-                                                        <div class="d-flex flex-column gap-10">
-                                                            <table class="table align-middle table-row-dashed fs-6 gy-5" id="tblBeneficiario">
-                                                                <thead>
-                                                                    <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                                        <th>Ciudad</th>
-                                                                        <th>Nombres</th>
-                                                                        <th>Parentesco</th>
-                                                                        <th class="text-center">Opciones</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody class="fw-bold text-gray-600">
-                                                                </tbody>
-                                                            </table>
+                                                        <div class="py-0" data-kt-customer-payment-method="row">
+                                                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#direccion_profesional" role="button" aria-expanded="false" aria-controls="direccion_profesional">
+                                                                    <div class="me-3 rotate-90">
+                                                                        <span class="svg-icon svg-icon-3">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                                            </svg>
+                                                                        </span>
+                                                                    </div>
+                                                                    <i class="fa fa-location-arrow fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
+                                                                    <div class="me-3">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="text-gray-800 fw-bolder">Direccion</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="direccion_profesional" class="collapse fs-6 ps-12" data-bs-parent="#datos_profesional">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-md-12">
+                                                                        <textarea class="form-control mb-2" id="txtDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea> 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="py-0" data-kt-customer-payment-method="row">
+                                                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#telefono_profesional" role="button" aria-expanded="false" aria-controls="telefono_profesional">
+                                                                    <div class="me-3 rotate-90">
+                                                                        <span class="svg-icon svg-icon-3">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                                            </svg>
+                                                                        </span>
+                                                                    </div>
+                                                                    <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
+                                                                    <div class="me-3">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="telefono_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <div class="fs-6 fw-bold mt-3 mb-3">Telefono 1</div>
+                                                                        <input type="text" id="txtTelCasaBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="fs-6 fw-bold mt-3 mb-3">Telefono 2</div>
+                                                                        <input type="text" id="txtTelOfiBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="fs-6 fw-bold mt-3 mb-3">Celular</div>
+                                                                        <input type="text" id="txtCelularBe" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="py-0" data-kt-customer-payment-method="row">
+                                                            <div class="py-3 d-flex flex-stack flex-wrap">
+                                                                <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#email_profesional" role="button" aria-expanded="false" aria-controls="email_profesional">
+                                                                    <div class="me-3 rotate-90">
+                                                                        <span class="svg-icon svg-icon-3">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                                            </svg>
+                                                                        </span>
+                                                                    </div>
+                                                                    <i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                                                    <div class="me-3">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="text-gray-800 fw-bolder">E-mail</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="email_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
+                                                                <div class="d-flex flex-wrap gap-5">
+                                                                    <div class="fv-row w-100 flex-md-root">
+                                                                       <input type="email" id="txtEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="mi@gmail.com" minlength="1" maxlength="80" />
+                                                                    </div>                                                   
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                     </div>
+                                        <div class="card mb-1 mb-xl-1">
+                                            <div class="card-header border-0">
+                                                <div class="form-group mt-5 mb-4">
+                                                    <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm mb-2" id="btnAgregar"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                                        Agregar Beneficiario
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card card-flush py-2">
+                                                <div class="card-body pt-0">
+                                                    <table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="tblBeneficiario">
+                                                        <thead>
+                                                            <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                                                                <th>Ciudad</th>
+                                                                <th>Nombres</th>
+                                                                <th>Parentesco</th>
+                                                                <th class="text-center">Opciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="fw-bold text-gray-600">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!--begin::Actions botones-->
-                            <div class="d-flex flex-stack pt-10">
-                                <div class="me-2">
-                                    <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
-                                    <span class="svg-icon svg-icon-3 me-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="currentColor" />
-                                            <path d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->Back</button>
-                                </div>
-                                <div>
-                                    <button type="button" id="btnGrabar" class="btn btn-primary"><i class="las la-save"></i>
-                                        <span class="indicator-label">Grabar</span>
-                                    </button>
-                                    <button type="button" id="continuar" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue
-                                        <span class="svg-icon svg-icon-3 ms-1 me-0">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="currentColor" />
-                                                <path d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </button>
+                            <div class="card card-flush py-2">
+                                <div class="card-body pt-0">
+                                    <div class="d-flex flex-stack pt-10">
+                                        <div class="me-2">
+                                            <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
+                                            <span class="svg-icon svg-icon-3 me-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="currentColor" />
+                                                    <path d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->Back</button>
+                                        </div>
+                                        <div>
+                                            <button type="button" id="btnGrabar" class="btn btn-primary"><i class="las la-save"></i>
+                                                <span class="indicator-label">Grabar</span>
+                                            </button>
+                                            <button type="button" id="continuar" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue
+                                                <span class="svg-icon svg-icon-3 ms-1 me-0">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="currentColor" />
+                                                        <path d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z" fill="currentColor" />
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
