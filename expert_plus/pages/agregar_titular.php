@@ -291,11 +291,7 @@
                     </button>
                 </div>
                 <button type="button" id="btnRegresar" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
-                    <span class="svg-icon svg-icon-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
-                        </svg>
-                    </span>
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
                 </button>
             </ul>
             <div class="card card-flush py-4">
@@ -533,7 +529,7 @@
                                                 </div>
                                             </div>
                                             <div id="view_avatar" class="collapse fs-6 ms-1">
-                                                <div class="card card-flush py-4">
+                                                <div class="card card-flush py-2">
                                                     <div class="card-body pt-0">
                                                         <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
                                                             <div class="image-input-wrapper w-150px h-150px" id="imgAvatar" style="background-image: url(assets/media/svg/avatars/Addimg.svg);"></div>
@@ -577,6 +573,23 @@
                                                     <div class="card-body pt-0">
                                                         <div class="row mb-3">
                                                             <div class="col-md-6">
+                                                                <label class="required form-label">Provincia</label>
+                                                                <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#view_datos_titular" class="form-select mb-2" >
+                                                                        <option></option>
+                                                                        <?php foreach ($all_provincia as $prov) : ?>
+                                                                            <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
+                                                                        <?php endforeach ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="required form-label">Ciudad</label>
+                                                                <select id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#view_datos_titular" class="form-select mb-2">
+                                                                        <option></option>
+                                                                </select>    
+                                                            </div>  
+                                                        </div>
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-5">
                                                                 <label class="required form-label">Tipo Documento</label>
                                                                 <select class="form-select mb-2" id="cboDocumento" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
                                                                     <option></option>
@@ -589,8 +602,6 @@
                                                                     <?php }?>
                                                                 </select>
                                                             </div>
-                                                        </div>
-                                                        <div class="row mb-3">
                                                             <div class="col-md-3">
                                                                 <label class="required form-label">Nro. Documento</label>
                                                                 <input type="text" id="txtDocumento" class="form-control mb-2" value="" minlength="10" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"  />
@@ -608,7 +619,23 @@
                                                                     <?php }?> 
                                                                 </select>
                                                             </div>
-                                                            <div class="col-md-5">
+                                                        </div>
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-4">
+                                                                <label class="required form-label">Nombres</label>
+                                                                <input type="text" id="txtNombre" class="form-control mb-2" maxlength="80" placeholder="Ingrese Nombres" />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="required form-label">Apellidos</label>
+                                                                <input type="text" id="txtApellido" class="form-control mb-2" maxlength="80" placeholder="Ingrese Apellidos" />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Fecha de Nacimiento</label>
+                                                                <input type="date" id="txtFechaNacimiento" class="form-control mb-2" value="" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
                                                                 <label class="form-label">Estado Civil</label>
                                                                 <select class="form-select mb-2" id="cboEstadoCivil" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
                                                                     <option></option>
@@ -621,38 +648,15 @@
                                                                     <?php }?>                   
                                                                 </select>
                                                             </div>
-                                                        </div>
-                                                        <div class="row mb-3">
                                                             <div class="col-md-4">
-                                                                <label class="required form-label">Nombres</label>
-                                                                <input type="text" id="txtNombre" class="form-control mb-2" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />
+                                                                <label class="form-label">Inicio Cobertura</label>
+                                                                <input type="date" id="txtIniCobertura" class="form-control mb-2" />
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <label class="required form-label">Apellidos</label>
-                                                                <input type="text" id="txtApellido" class="form-control mb-2" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />
+                                                                <label class="form-label">Fin Cobertura</label>
+                                                                <input type="date" id="txtFinCobertura" class="form-control mb-2" />
                                                             </div>
-                                                            <div class="col-md-4">
-                                                                <label class="form-label">Fecha de Nacimiento</label>
-                                                                <input type="date" id="txtFechaNacimiento" class="form-control mb-2" value="" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <label class="required form-label">Provincia</label>
-                                                                <select name="cboProvincia" id="cboProvincia" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#view_datos_titular" class="form-select mb-2" >
-                                                                        <option></option>
-                                                                        <?php foreach ($all_provincia as $prov) : ?>
-                                                                            <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
-                                                                        <?php endforeach ?>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <label class="required form-label">Ciudad</label>
-                                                                <select id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#view_datos_titular" class="form-select mb-2">
-                                                                        <option></option>
-                                                                </select>    
-                                                            </div>  
-                                                        </div>
+                                                        </div>  
                                                     </div>
                                                 </div>
                                             </div>
@@ -772,11 +776,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card mb-1 mb-xl-1">
+                                        <div class="card mb-1 mb-xl-1 mt-10">
                                             <div class="card-header border-0">
                                                 <div class="fv-row">
                                                     <label class="form-check form-switch form-check-custom form-check-solid">
-                                                        <h5 class="form-check-label mx-3">Desea Agregar un Beneficiario..?</h5>
+                                                        <h5 class="form-check-label mx-3 fw-light text-primary fst-italic">Desea Agregar un Beneficiario..?</h5>
                                                         <input class="form-check-input" type="checkbox" id="chkCambiar" name="category" value="1" />
                                                         <h5 class="form-check-label" id="lblTexto"></h5>
                                                     </label> 
@@ -1057,26 +1061,18 @@
                                 <div class="card-body pt-0">
                                     <div class="d-flex flex-stack pt-10">
                                         <div class="me-2">
-                                            <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
-                                            <span class="svg-icon svg-icon-3 me-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="currentColor" />
-                                                    <path d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z" fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon-->Back</button>
+                                            <button type="button" class="btn btn-light-primary btn-sm mb-2" data-kt-stepper-action="previous" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="right">
+                                               <i class="fa fa-reply fa-2x" aria-hidden="true"></i>
+                                            </button>
                                         </div>
                                         <div>
-                                            <button type="button" id="btnGrabar" class="btn btn-primary"><i class="las la-save"></i>
+                                            <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar
+                                            </button>
+                                            <button type="button" id="btnGrabar" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>
                                                 <span class="indicator-label">Grabar</span>
                                             </button>
-                                            <button type="button" id="continuar" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue
-                                                <span class="svg-icon svg-icon-3 ms-1 me-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="currentColor" />
-                                                        <path d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
+                                            <button type="button" id="continuar" class="btn btn-sm btn-light-primary" data-kt-stepper-action="next"  title="Continuar" data-bs-toggle="tooltip" data-bs-placement="right">
+                                                <i class="fa fa-share fa-2x" aria-hidden="true"></i>
                                             </button>
                                         </div>
                                     </div>
