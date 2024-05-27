@@ -481,8 +481,8 @@
 
                                                 <tr id="row_<?php echo $xProdid; ?>">
                                                     <td style="display: none;"><?php echo $xProdid; ?></td>
-                                                    <td><?php echo $xGrupo; ?></td>
-                                                    <td><?php echo $xProducto; ?></td>
+                                                    <td class="text-uppercase"><?php echo $xGrupo; ?></td>
+                                                    <td class="text-uppercase"><?php echo $xProducto; ?></td>
                                                     <td><?php echo $xCosto; ?></td>
                                                     <td id="td_<?php echo $xProdid; ?>">   
                                                         <div class="<?php echo $xTextColor; ?>">
@@ -524,7 +524,7 @@
 
 <!--MODAL NUEVO GRUPO-->
 <div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-750px">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Grupo</h2>
