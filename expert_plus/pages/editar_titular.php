@@ -121,7 +121,7 @@
                 <div id="view_avatar" class="collapse fs-6 ms-1">
                     <div class="card-body">
                         <div class="d-flex flex-center flex-column py-2">
-                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true"  style="background-image: url(assets/media/svg/files/user1.png);">
+                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
                                 <div class="image-input-wrapper w-150px h-150px" id="imgfiletitular"></div>
                             </div>
                             <label class="fs-3 text-gray-800 fw-bolder mb-3"><?php echo $xPersona; ?></label>
@@ -713,7 +713,7 @@
 
         _avatartitu = '<?php echo $xImagen; ?>';
 
-        //document.getElementById('imgfiletitular').style.backgroundImage="url(persona/" + _avatartitu + ")";
+        document.getElementById('imgfiletitular').style.backgroundImage="url(persona/" + _avatartitu + ")";
 
         var _mensaje = $('input#mensaje').val();
 
