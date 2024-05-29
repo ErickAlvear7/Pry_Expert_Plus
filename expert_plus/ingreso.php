@@ -130,7 +130,8 @@
 		<?php
 			}
 		?>			
-
+		<!-- CAMBIOS REALIZADOS -->
+		
 		<style>
 		
 			.imagen{
