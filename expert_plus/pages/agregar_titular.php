@@ -301,7 +301,7 @@
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <div class="d-flex align-items-center position-relative mb-n7">
+                    <div class="d-flex align-items-center position-relative mb-1">
                         <span class="svg-icon svg-icon-1 position-absolute ms-4">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
@@ -568,7 +568,7 @@
                                                     <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Datos Titular</h4>
                                                 </div>
                                             </div>
-                                            <div id="view_datos_titular" class="collapse show ">
+                                            <div id="view_datos_titular" class="collapse show fs-6 ms-1">
                                                 <div class="card card-flush py-1">
                                                     <div class="card-body pt-0">
                                                         <div class="row mb-3">

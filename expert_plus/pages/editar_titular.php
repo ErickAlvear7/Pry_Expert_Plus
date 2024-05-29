@@ -156,31 +156,33 @@
                 </div>
                 <div id="view_titular" class="collapse fs-6 ms-1">
                     <div class="card-body pt-2">
-                        <div class="d-flex flex-column gap-10">
-                            <div class="d-flex align-items-center">							
-                                <i class="fa fa-address-card fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
-                                <div class="d-flex flex-column">
-                                    <h5 class="text-gray-800 fw-bolder">No.Documento</h5>
-                                    <div class="fw-bold">
-                                        <label><?php echo $xDocumento; ?></label>
+                        <div class="d-grid gap-2">
+                            <div class="d-flex flex-column gap-10">
+                                <div class="d-flex align-items-center">							
+                                    <i class="fa fa-address-card fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
+                                    <div class="d-flex flex-column">
+                                        <h5 class="text-gray-800 fw-bolder">No.Documento</h5>
+                                        <div class="fw-bold">
+                                            <label><?php echo $xDocumento; ?></label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <i class="fa fa-map-marker fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
-                                <div class="d-flex flex-column">
-                                    <h5 class="text-gray-800 fw-bolder">Ciudad</h5>
-                                    <div class="fw-bold">
-                                        <div class="text-gray-600 text-uppercase"><?php echo $xCiuper; ?></div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fa fa-map-marker fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
+                                    <div class="d-flex flex-column">
+                                        <h5 class="text-gray-800 fw-bolder">Ciudad</h5>
+                                        <div class="fw-bold">
+                                            <div class="text-gray-600 text-uppercase"><?php echo $xCiuper; ?></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <i class="fa fa-calendar fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
-                                <div class="d-flex flex-column">
-                                    <h5 class="text-gray-800 fw-bolder">Fecha de Nacimiento</h5>
-                                    <div class="fw-bold">
-                                        <div class="text-gray-600"><?php echo $xFecha; ?></div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fa fa-calendar fa-2x me-5" style="color:#55C4F4;" aria-hidden="true"></i>
+                                    <div class="d-flex flex-column">
+                                        <h5 class="text-gray-800 fw-bolder">Fecha de Nacimiento</h5>
+                                        <div class="fw-bold">
+                                            <div class="text-gray-600"><?php echo $xFecha; ?></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -231,11 +233,7 @@
                     </button>
                 </div>
                 <button type="button" id="btnRegresar" onclick="f_Regresar(<?php echo $clieid; ?>,<?php echo $prodid; ?>,<?php echo $grupid; ?>)" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
-                    <span class="svg-icon svg-icon-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor" />
-                        </svg>
-                    </span>
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
                 </button>
             </div>
             <div class="card pt-4 mb-6 mb-xl-9">                    
@@ -246,15 +244,14 @@
                 </div>
                 <div class="card-body pt-0 pb-5">
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle table-row-dashed gy-5" id="tblBeneficiario">
+                        <table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="tblBeneficiario">
                             <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
-                                <tr class="text-start text-muted text-uppercase gs-0">
-                                    <th class="min-w-90px">CIUDAD</th>
-                                    <th>NOMBRES</th>
-                                    <th>DOCUMENTO</th>
-                                    <th>PARENTESCO</th>
-                                    <th>ESTADO</th>
-                                    <th>ESTATUS</th>
+                                <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                                    <th class="class="min-w-125px"">Ciudad</th>
+                                    <th class="min-w-125px">Nombres</th>
+                                    <th class="min-w-125px">Parentesco</th>
+                                    <th class="min-w-125px">Estado</th>
+                                    <th>Status</th>
                                     <th style="text-align: center;">OPCIONES</th>
                                 </tr>
                             </thead>
@@ -306,7 +303,6 @@
                                 <tr id="row_<?php echo $xBeneid; ?>">
                                     <td class="text-uppercase"><?php echo $xCiubene; ?></td>
                                     <td><?php echo $xBeneficiario; ?></td>
-                                    <td><?php echo $xDocu; ?></td>
                                     <td><?php echo $xPareben; ?></td>
                                     <td id="td_<?php echo $xBeneid; ?>">
                                         <div class="<?php echo $xTextColor; ?>">
@@ -346,7 +342,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content"> 
             <div class="modal-header">
-                <h2 class="fw-bolder">Editar Titular</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Titular</h2>
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -359,20 +355,27 @@
             <div class="modal-body py-lg-10 px-lg-10 mt-n3">
                 <div class="card mb-1 mb-xl-1">
                     <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_imagen_titular" role="button" aria-expanded="false" aria-controls="view_imagen_titular">Avatar
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
+                        <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_avatar">
+                            <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
                                 </span>
-                            </div> 
+                                <span class="svg-icon toggle-off svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                        <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Avatar</h4>
                         </div>
                     </div>
-                    <div id="view_imagen_titular" class="collapse">
-                        <div class="card card-flush py-4">
+                    <div id="view_avatar" class="collapse fs-6 ms-1">
+                        <div class="card card-flush py-2">
                             <div class="card-body pt-0">
                                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('img/account.png')">
                                     <div class="image-input-wrapper w-125px h-125px" style="background-image: url(img/account.png);" id="imgfile"></div>
@@ -390,57 +393,153 @@
                         </div>
                     </div>
                 </div>
-                <div class="card mb-5 mb-xl-8">
+                <div class="card mb-1 mb-xl-1">
                     <div class="card-header border-0">
-                        <div class="card-title">
-                            <div class="fw-bolder collapsible collapsed rotate" data-bs-toggle="collapse" href="#view_datos_titular" role="button" aria-expanded="false" aria-controls="view_datos_titular">Informacion
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
+                        <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_datos_titular">														<!--begin::Icon-->
+                            <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
                                 </span>
-                            </div> 
+                                <span class="svg-icon toggle-off svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                        <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Ddatos Titular</h4>
                         </div>
                     </div>
-                    <div id="view_datos_titular" class="collapse show">
-                        <div class="card card-flush py-2">
+                    <div id="view_datos_titular" class="collapse show fs-6 ms-1">
+                        <div class="card card-flush py-1">
                             <div class="card-body pt-0">
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <label class="required form-label">Nombres</label>
-                                        <input type="text" class="form-control form-control-solid text-uppercase" id="txtNombre" name="txtNombre" minlength="5" maxlength="100"  value="" />
+                                        <input type="text" class="form-control mb-1" id="txtNombre" name="txtNombre" minlength="5" maxlength="100"  value="" />
                                     </div>
                                     <div class="col-md-6">
                                         <label class="required form-label">Apellidos</label>
-                                        <input type="text" class="form-control form-control-solid text-uppercase" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" value="" />
+                                        <input type="text" class="form-control mb-1" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" value="" />
                                     </div>
                                 </div>
-                                <div class="row mb-4">
-                                    <div class="col-md-12">
-                                        <label class="form-label">Direccion</label>
-                                        <textarea class="form-control mb-2" id="txtDireccion" placeholder="Ingrese Direccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-2 mb-xl-8">
+                    <div class="card-header border-0">
+                        <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_informacion_titular">														<!--begin::Icon-->
+                            <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <span class="svg-icon toggle-off svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                        <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Direccion-Telefonos-Email</h4>
+                        </div>
+                    </div>
+                    <div id="view_informacion_titular" class="collapse show fs-6 ms-1">
+                        <div class="card card-flush py-1">
+                            <div class="card-body pt-0">
+                                <div class="py-0" data-kt-customer-payment-method="row">
+                                    <div class="py-3 d-flex flex-stack flex-wrap">
+                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#direccion_profesional" role="button" aria-expanded="false" aria-controls="direccion_profesional">
+                                            <div class="me-3 rotate-90">
+                                                <span class="svg-icon svg-icon-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                            <i class="fa fa-location-arrow fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
+                                            <div class="me-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="text-gray-800 fw-bolder">Direccion</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="direccion_profesional" class="collapse fs-6 ps-12" data-bs-parent="#datos_profesional">
+                                        <div class="row mb-4">
+                                            <div class="col-md-12">
+                                                <textarea class="form-control mb-2" id="txtDireccion" placeholder="Ingrese Direccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Telefono Casa</label>
-                                        <input type="text" class="form-control form-control-solid" id="txtTelcasa"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Casa" value=""/>
+                                <div class="py-0" data-kt-customer-payment-method="row">
+                                    <div class="py-3 d-flex flex-stack flex-wrap">
+                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#telefono_profesional" role="button" aria-expanded="false" aria-controls="telefono_profesional">
+                                            <div class="me-3 rotate-90">
+                                                <span class="svg-icon svg-icon-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                            <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
+                                            <div class="me-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Telefono Oficina</label>
-                                        <input type="text" class="form-control form-control-solid" id="txtTelofi"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Telefono Oficina" value=""/>
+                                    <div id="telefono_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="fs-6 fw-bold mt-3 mb-3">Telefono 1</div>
+                                                <input type="text" class="form-control form-control-solid" id="txtTelcasa"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="" value=""/>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="fs-6 fw-bold mt-3 mb-3">Telefono 2</div>
+                                                <input type="text" class="form-control form-control-solid" id="txtTelofi"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="" value=""/>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="fs-6 fw-bold mt-3 mb-3">Celular</div>
+                                                <input type="text" class="form-control form-control-solid" id="txtCel"  maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="" value=""/>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Celular</label>
-                                        <input type="text" class="form-control form-control-solid" id="txtCel"  maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Ingrese Celular" value=""/>
+                                <div class="py-0" data-kt-customer-payment-method="row">
+                                    <div class="py-3 d-flex flex-stack flex-wrap">
+                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#email_profesional" role="button" aria-expanded="false" aria-controls="email_profesional">
+                                            <div class="me-3 rotate-90">
+                                                <span class="svg-icon svg-icon-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                            <i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                            <div class="me-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="text-gray-800 fw-bolder">E-mail</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Email</label>
-                                        <input type="email" class="form-control form-control-solid text-lowercase" id="txtEmail"  minlength="5" maxlength="100" placeholder="Ingrese Email" value=""/>
+                                    <div id="email_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
+                                        <div class="d-flex flex-wrap gap-5">
+                                            <div class="fv-row w-100 flex-md-root">
+                                                <input type="email" class="form-control form-control-solid text-lowercase" id="txtEmail"  minlength="5" maxlength="100" placeholder="Ingrese Email" value=""/>
+                                            </div>                                                   
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -449,8 +548,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnSaveTit" class="btn btn-primary">Modificar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnSaveTit" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
             </div>
         </div>
     </div>
@@ -523,10 +622,10 @@
 </div>
 <!--Modal Agregar Parentesco-Beneficiario -->
 <div class="modal fade" id="modal_new_paren" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-700px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Nuevo Parentesco</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Parentesco</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -536,25 +635,28 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                    <span class="required">Detalle</span>
-                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del detalle"></i>
-                    </label>
-                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="80" placeholder="nombre del detalle" value="" />
-                </div>
-                <div class="fv-row mb-15">
-                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                    <span class="required">Valor Texto</span>
-                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="valor texto ejemplo FFF"></i>
-                    </label>
-                    <input type="text" class="form-control form-control-solid text-uppercase" id="txtValorV" name="txtValorV" minlength="3" maxlength="3" placeholder="valor texto" value="" />
+            <div class="modal-body py-lg-5 px-lg-10">
+                <div class="card card-flush py-2">
+                    <div class="card-body pt-0">
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label class="required form-label">Detalle</label>
+                                <input type="text" class="form-control" id="txtDetalle" name="txtDetalle" minlength="2" maxlength="80" placeholder="nombre del detalle" value="" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="required form-label">Valor Texto</label>
+                                <input type="text" class="form-control" id="txtValorV" name="txtValorV" minlength="3" maxlength="3" placeholder="valor texto" value="" />
+                            </div>
+                        </div>
+                     
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnGuardar" onclick="f_GuardarParen(<?php echo $xPacaid; ?>,<?php echo $xOrdenDet; ?>)" class="btn btn-primary">Grabar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-primary" id="btnGuardar" onclick="f_GuardarParen(<?php echo $xPacaid; ?>,<?php echo $xOrdenDet; ?>)"><i class="las la-save"></i>Grabar</button>
             </div>
         </div>
     </div>
@@ -575,123 +677,50 @@
                 </div>
             </div>
             <div class="modal-body py-lg-10 px-lg-10">
-                <div id="view_data" class="card card-flush py-4">
-                    <div class="card-body pt-0">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label class="required form-label">Parentesco</label>
-                                <select class="form-select mb-2" id="cboParentesco" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Parentesco">
-                                    <option></option>
-                                    <?php
-                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Parentesco' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
-                                        $all_datos =  mysqli_query($con, $xSQL);
-                                        foreach($all_datos as $datos){?>
-                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                    <?php }?>                   
-                                </select>
+                <div id="view_data" class="card mb-1 mb-xl-1">
+                    <div class="card-header border-0">
+                        <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_2_1">														<!--begin::Icon-->
+                            <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <span class="svg-icon toggle-off svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                        <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
                             </div>
-                            <div class="col-md-6">
-                                <label class="required form-label">Tipo Documento</label>
-                                <select class="form-select mb-2" id="cboAddDocumentoBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Tipo Documento">
-                                    <option></option>
-                                    <?php
-                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                    $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Documento' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                    $all_datos =  mysqli_query($con, $xSQL);
-                                    foreach($all_datos as $datos){?>
-                                    <option value="<?php echo $datos['Codigo'] ?>"<?php if($datos == 'Cedula') 'selected="selected"' ?>><?php echo $datos['Descripcion'] ?></option>
-                                    <?php }?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                           <div class="col-md-3">
-                                <label class="required form-label">Nro. Documento</label>
-                                <input type="text" class="form-control mb-2" id="txtAddDocumentoBe" value="" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                           </div>
-                           <div class="col-md-4">
-                                <label class="required form-label">Genero</label>
-                                <select class="form-select mb-2" id="cboAddGeneroBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Genero">
-                                    <option></option>
-                                    <?php
-                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Tipo Genero' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
-                                        $all_datos =  mysqli_query($con, $xSQL);
-                                        foreach($all_datos as $datos){?>
-                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                    <?php }?> 
-                                </select>
-                           </div>
-                           <div class="col-md-5">
-                                <label class="form-label">Estado Civil</label>
-                                <select class="form-select mb-2" id="cboAddEstadoCivilBe" data-control="select2" data-hide-search="true" data-placeholder="Seleccione Estado Civil">
-                                    <option></option>
-                                    <?php
-                                        $xSQL = "SELECT pde.pade_valorV AS Codigo,UPPER(pde.pade_nombre) AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca ";
-                                        $xSQL .="WHERE pca.pais_id=$xPaisid AND pca.paca_nombre='Estado Civil' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ORDER BY pde.pade_nombre ";
-                                        $all_datos =  mysqli_query($con, $xSQL);
-                                        foreach($all_datos as $datos){?>
-                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
-                                    <?php }?>                   
-                                </select>
-                           </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <label class="required form-label">Nombres</label>
-                                <input type="text" class="form-control mb-2" id="txtAddNombreBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Nombres" />   
-                            </div>
-                            <div class="col-md-4">
-                                <label class="required form-label">Apellidos</label>
-                                <input type="text" class="form-control mb-2" id="txtAddApellidoBe" value="" style="text-transform: uppercase;" maxlength="80" placeholder="Ingrese Apellidos" />  
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label">Fecha de Nacimiento</label>
-                                <input type="date" id="txtAddFechaNacimientoBe" class="form-control mb-2" value="" />   
+                            <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Datos Beneficiario</h4>
+                        </div> 
+                    </div>
+                    <div id="view_avatar" class="collapse show fs-6 ms-1">
+                        <div class="card card-flush py-1">
+                            <div class="card-body pt-0">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="required form-label">Provincia</label>
+                                        <select id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#view_data" class="form-select mb-2" >
+                                                <option></option>
+                                                <?php foreach ($all_provincia as $prov) : ?>
+                                                    <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
+                                                <?php endforeach ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="required form-label">Ciudad</label>
+                                        <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#view_data" class="form-select mb-2">
+                                                <option></option>
+                                        </select> 
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                           <div class="col-md-6">
-                                <label class="required form-label">Provincia</label>
-                                <select id="cboProvinciaBe" aria-label="Seleccione Provincia" data-control="select2" data-placeholder="Seleccione Provincia" data-dropdown-parent="#view_data" class="form-select mb-2" >
-                                        <option></option>
-                                        <?php foreach ($all_provincia as $prov) : ?>
-                                            <option value="<?php echo $prov['Descripcion'] ?>"><?php echo mb_strtoupper($prov['Descripcion']) ?></option>
-                                        <?php endforeach ?>
-                                </select>
-                           </div>
-                           <div class="col-md-6">
-                                <label class="required form-label">Ciudad</label>
-                                <select id="cboCiudadBe" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#view_data" class="form-select mb-2">
-                                        <option></option>
-                                </select> 
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-12">
-                                <label class="form-label">Direccion</label>
-                                <textarea class="form-control mb-2" id="txtAddDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea> 
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label class="form-label">Telefono Casa</label>
-                                <input type="text" id="txtAddTelCasaBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Telefono Oficina</label>
-                                <input type="text" id="txtAddTelOfiBe" class="form-control mb-2 col-md-1" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Telefono Celular</label>
-                                <input type="text" id="txtAddCelularBe" class="form-control mb-2 col-md-1" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" id="txtAddEmailBe" class="form-control mb-2 col-md-1 text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
