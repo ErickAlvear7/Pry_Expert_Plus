@@ -131,20 +131,22 @@
 			}
 		?>			
 
+		<style>
+		
+			.imagen{
+				margin: 15px;
+			}
+			
+			img {
+				width: 300px; 
+				height: 300px ; 
+				margin: 10px; }
+			
+		</style>
+
 
 	</head>
-	<style>
-	
-    .imagen{
-		margin: 15px;
-	}
-	
-	img {
-		width: 300px; 
-		height: 300px ; 
-		margin: 10px; }
-		
-	</style>
+
 	<body id="kt_body" class="<?php if($mode == 'dark'){ echo ''; }else{ echo 'bg-dark'; } ?>">
 		<div class="d-flex flex-column flex-root">
 			<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(assets/media/illustrations/sketchy-1/<?php if($mode == 'dark'){ echo '14.png'; }else{ echo '14-dark.png'; } ?>">
@@ -195,43 +197,46 @@
 		<script src="assets/js/custom/authentication/sign-in/general.js"></script>
 		<!-- <script src="assets/redirect/js/redirect.js"></script> -->
 		<script src="assets/js/funciones.js"></script>
+
+		<script>
+	
+			$('#kt_sign_in_form').submit(function(e){
+			e.preventDefault();
+
+
+			var _usuario = $.trim($("#email").val()); 
+			var _password = $.trim($("#password").val()); 
+
+			if(_usuario == ''){
+				mensajesweetalert("center","warning","Ingrese usuario..!",false,1800);
+				return false; 
+			}
+
+			if(_password == ''){
+				mensajesweetalert("center","warning","Ingrese pasword..!",false,1800);
+				return false; 
+			}
+
+			$.post("ingreso.php", {usuario:_usuario, password:_password} , function(response){
+
+				if(response == 'ERR'){
+						
+						mensajesweetalert("center","warning","Usuario y/o Password incorrecto!",false,1800);             
+						$("#email").val('');
+						$("#password").val(''); 
+						
+					}else{
+						//window.location.href = "index.php";
+						$(location).attr('href', 'http://localhost:8080/proyecto-expert+/expert_plus/?page=index');
+						//$.redirect('?page=index'); 
+					}
+
+				});
+			});
+	</script>		
 		
+
 	</body>
 </html>
-<script>
-	
-	$('#kt_sign_in_form').submit(function(e){
-		e.preventDefault();
 
-
-		var _usuario = $.trim($("#email").val()); 
-		var _password = $.trim($("#password").val()); 
-
-		if(_usuario == ''){
-			mensajesweetalert("center","warning","Ingrese usuario..!",false,1800);
-			return false; 
-		}
-
-		if(_password == ''){
-			mensajesweetalert("center","warning","Ingrese pasword..!",false,1800);
-			return false; 
-		}
-
-		   $.post("ingreso.php", {usuario:_usuario, password:_password} , function(response){
-
-			   if(response == 'ERR'){
-                    
-					mensajesweetalert("center","warning","Usuario y/o Password incorrecto!",false,1800);             
-                    $("#email").val('');
-                    $("#password").val(''); 
-					
-                }else{
-                    //window.location.href = "index.php";
-                    $(location).attr('href', 'http://localhost:8080/proyecto-expert+/expert_plus/?page=index');
-					//$.redirect('?page=index'); 
-                }
-
-			});
-		});
-</script>
 

@@ -481,8 +481,8 @@
 
                                                 <tr id="row_<?php echo $xProdid; ?>">
                                                     <td style="display: none;"><?php echo $xProdid; ?></td>
-                                                    <td><?php echo $xGrupo; ?></td>
-                                                    <td><?php echo $xProducto; ?></td>
+                                                    <td class="text-uppercase"><?php echo $xGrupo; ?></td>
+                                                    <td class="text-uppercase"><?php echo $xProducto; ?></td>
                                                     <td><?php echo $xCosto; ?></td>
                                                     <td id="td_<?php echo $xProdid; ?>">   
                                                         <div class="<?php echo $xTextColor; ?>">
@@ -522,67 +522,67 @@
     </form>
 </div>
 
-    <!--MODAL NUEVO GRUPO-->
-    <div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Grupo</h2>
-                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-                <div class="modal-body py-lg-10 px-lg-10">
-                    <div class="card card-flush py-4">
-                        <div class="card-body pt-0">
-                            <div class="d-flex flex-column mb-7 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                    <span class="required">Grupo</span>
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
-                                </label>
-                                <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
-                            </div>
-                            <div class="fv-row mb-15">
-                                <label class="fs-6 fw-bold form-label mb-2">
-                                    <span>Descripcion</span>
-                                </label>
-                                <textarea class="form-control mb-2 text-uppercase" name="txtDescGrupo" id="txtDescGrupo" rows="1" maxlength="150" onkeydown="return(event.keyCode!=13);"></textarea>
-                            </div>
-                            <div class="row mb-7">
-                                <div class="col-md-6">
-                                    <label class="form-label">Secuencial Agenda</label>
-                                    <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Secuencial Cancelado</label>
-                                    <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control mb-2" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label class="form-label">Secuencial Atendido</label>
-                                    <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Secuencial Ausente</label>
-                                    <input type="number" name="txtnumausente" id="txtnumausente" class="form-control mb-2" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
-                                </div>
-                            </div> 
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                    <button type="button" class="btn btn-sm btn-light-primary" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" ><i class="las la-save"></i>Grabar</button>
+<!--MODAL NUEVO GRUPO-->
+<div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Grupo</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
                 </div>
             </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div class="card-body pt-0">
+                        <div class="d-flex flex-column mb-7 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                <span class="required">Grupo</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
+                            </label>
+                            <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
+                        </div>
+                        <div class="fv-row mb-15">
+                            <label class="fs-6 fw-bold form-label mb-2">
+                                <span>Descripcion</span>
+                            </label>
+                            <textarea class="form-control mb-2 text-uppercase" name="txtDescGrupo" id="txtDescGrupo" rows="1" maxlength="150" onkeydown="return(event.keyCode!=13);"></textarea>
+                        </div>
+                        <div class="row mb-7">
+                            <div class="col-md-6">
+                                <label class="form-label">Secuencial Agenda</label>
+                                <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Secuencial Cancelado</label>
+                                <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control mb-2" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label">Secuencial Atendido</label>
+                                <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Secuencial Ausente</label>
+                                <input type="number" name="txtnumausente" id="txtnumausente" class="form-control mb-2" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-primary" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" ><i class="las la-save"></i>Grabar</button>
+            </div>
         </div>
-    </div>  
+    </div>
+</div>  
 
     <!--MODAL EDITAR GRUPOS-->
     <div class="modal fade" id="modal_edit_grupo" tabindex="-1" aria-hidden="true">

@@ -775,7 +775,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Configurar Horarios-Turnos</h2>
-                <h5 class="text-primary" id="headertitu1"></h5>
+                <h5 class="text-primary fw-light" id="headertitu1"></h5>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -789,24 +789,24 @@
                 <div class="card card-flush py-2">
                     <div class="card-body pt-0">
                         <div class="row">
-                            <div class="col-md-4">
-                                 <label class="required form-label">Dia</label>
+                            <div class="col-md-2">
+                                 <label class="required form-label">Seleccione Dia</label>
                                    <?php	
                                         $xSQL = "SELECT pde.pade_valorI AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Dias Semana' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
                                         $all_dias = mysqli_query($con, $xSQL);    
                                     ?>
-                                    <select name="cboDias" id="cboDias" aria-label="Seleccione Dia" data-control="select2" data-placeholder="Seleccione Dia" data-dropdown-parent="#modal_horarios" class="form-select mb-2" >
+                                    <select name="cboDias" id="cboDias" aria-label="Seleccione Dia" data-control="select2" data-placeholder="Dia" data-dropdown-parent="#modal_horarios" class="form-select mb-2" >
                                         <option></option>
                                         <?php foreach ($all_dias as $dias) : ?>
                                             <option value="<?php echo $dias['Codigo'] ?>"><?php echo $dias['Descripcion']; ?></option>
                                         <?php endforeach ?>
                                     </select>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                  <label class="required form-label">Hora Desde</label>
                                  <input class="form-control form-control-solid" name="txtHoraDesde" id="txtHoraDesde" placeholder="Hora Inicio" />
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                  <label class="required form-label">Hora Hasta</label>
                                   <input class="form-control form-control-solid" name="txtHoraHasta" id="txtHoraHasta" placeholder="Hora Hasta" />
                             </div>
