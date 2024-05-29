@@ -1,8 +1,8 @@
 
 <?php
 	
-	//error_reporting(E_ALL);
-    ini_set('display_errors', 0);
+	error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 
    	//file_put_contents('log_seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
 
@@ -176,6 +176,7 @@
                         <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Avatar</h4>
                     </div>  
                 </div>
+
                 <div id="view_avatar" class="collapse fs-6 ms-1">
                     <div class="card-body">
                         <div class="d-flex flex-center flex-column py-2">
@@ -192,6 +193,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0">
                     <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_titular">
@@ -213,6 +215,7 @@
                         <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Datos Titular</h4>
                     </div>
                 </div>
+
                 <div id="view_titular" class="collapse fs-6 ms-1">
                     <div class="card-body pt-2">
                        <div class="d-flex flex-column gap-10">
@@ -274,6 +277,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0">
                     <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_grupo">														<!--begin::Icon-->
@@ -295,6 +299,7 @@
                         <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Grupo-Producto</h4>
                     </div> 
                 </div>
+
                 <div id="view_grupo" class="collapse show fs-6 ms-1">
                     <div class="card-body pt-2">
                         <div class="d-flex flex-column gap-10">
@@ -304,9 +309,6 @@
                                     <h5 class="text-gray-800 fw-bolder">Grupo</h5>
                                     <div class="fw-bold">
                                         <label class="text-gray-600 text-uppercase"><?php echo $xGrupo; ?></label>
-                                        <!-- <button type="button" id="btnConfgrupo" onclick="f_SetGrupo()" class="btn btn-icon btn-light-primary" title="Configurar Secuencial Grupo" > -->
-                                        <!-- </button>
-                                        <!-- <i class="fa fa-cogs fa-1x ms-6 " id="btnGrupo" style="color:#55C4F4;" aria-hidden="true" title="Grupo" data-bs-toggle="tooltip" data-bs-placement="right"></i> -->
                                         <a href="#" id="btnGrupo" class="fa fa-cogs fa-1x ms-6" title="Grupo" data-bs-toggle="tooltip" data-bs-placement="right"></a>                                        
                                     </div>
                                 </div>
@@ -324,6 +326,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0">
                     <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_agenda">
@@ -345,6 +348,7 @@
                         <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Ultima Agenda</h4>
                     </div>
                 </div>
+
                 <div id="view_agenda" class="collapse fs-6 ms-1">
                     <div class="card-body pt-2">
                         <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6">
@@ -406,6 +410,7 @@
                 </div>
             </div>
         </div>
+
         <div class="flex-lg-row-fluid ms-lg-15">
             <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
                 <li class="nav-item">
@@ -421,6 +426,7 @@
                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
                 </button>
             </ul>
+
             <div class="tab-content" id="tabOpciones">
                 <div class="tab-pane fade show active" id="tabTitular" role="tabpanel">
                     <div class="card pt-4 mb-6 mb-xl-9">
@@ -2158,8 +2164,11 @@
                     </div>
                 </div>   
             </div>   
-        </div>   
+        </div>
+
     </div>
+
+</div>
 
     <!--Modal Prestador-->
     <div class="modal fade" id="modal-prestador" tabindex="-1" aria-hidden="true">
@@ -2624,6 +2633,7 @@
             </div>
         </div>
     </div>
+
     <!--Modal Prestador ver Ultimo Agendamiento-->
     <div class="modal fade" id="modal_prestador_ult" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
@@ -2829,6 +2839,7 @@
             </div>
         </div>
     </div>
+
     <!--Modal Profesional ver Ultimo Agendamiento-->
     <div class="modal fade" id="modal_profesional_ult" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
@@ -3104,13 +3115,13 @@
             </div>
         </div>
     </div> 
-    
+
     <!--Modal Grupo-->
     <div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Grupo</h2>
+                    <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Configurar Secuencial</h2>
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                         <span class="svg-icon svg-icon-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -3123,19 +3134,6 @@
                 <div class="modal-body py-lg-10 px-lg-10">
                     <div class="card card-flush py-4">
                         <div class="card-body pt-0">
-                            <div class="d-flex flex-column mb-7 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                    <span class="required">Grupo</span>
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
-                                </label>
-                                <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
-                            </div>
-                            <div class="fv-row mb-15">
-                                <label class="fs-6 fw-bold form-label mb-2">
-                                    <span>Descripcion</span>
-                                </label>
-                                <textarea class="form-control mb-2 text-uppercase" name="txtDescGrupo" id="txtDescGrupo" rows="1" maxlength="150" onkeydown="return(event.keyCode!=13);"></textarea>
-                            </div>
                             <div class="row mb-7">
                                 <div class="col-md-6">
                                     <label class="form-label">Secuencial Agenda</label>
@@ -3161,13 +3159,13 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                    <button type="button" class="btn btn-sm btn-light-primary" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" ><i class="las la-save"></i>Grabar</button>
+                    <button type="button" class="btn btn-sm btn-light-primary" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xGrupid; ?>,<?php echo $xUsuaid; ?>)" ><i class="las la-save"></i>Grabar</button>
                 </div>
             </div>
         </div>
-    </div>  
+    </div>      
+    
 
-</div>
 
 
 
@@ -3654,11 +3652,68 @@
         });
 
         $('#btnGrupo').click(function(){
-            $("#modal_new_grupo").modal("show");
+
+            _grupoid = "<?php echo $xGrupid; ?> ";
+
+            var _parametros = {
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxGrupoid" : _grupoid
+            }            
+
+            var xrespuesta = $.post("codephp/get_grupoid.php", _parametros);
+            xrespuesta.done(function(response){
+                
+                var _json = JSON.parse(response);
+
+                $('#txtnumagenda').val(_json[0].secuencial_agendado);
+                $('#txtnumcancelado').val(_json[0].secuencial_cancelado);
+                $('#txtnumatendido').val(_json[0].secuencial_atendido);
+                $('#txtnumausente').val(_json[0].secuencial_ausente);
+
+                $("#modal_new_grupo").modal("show");
+            });
+            
+            
         });
-  
+
+        function f_GuardarGrupo(_paisid, emprid, grupo_id, usua_id){
+
+            _agendasecuen = $('#txtnumagenda').val();
+            _cancelasecuen = $('#txtnumcancelado').val();
+            _atendidosecuen = $('#txtnumatendido').val();
+            _ausentesecuen = $('#txtnumausente').val();
+
+            _parametros = {
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxGrupoid" : _grupoid,
+                "xxGrupo" : "",
+                "xxSecuenAgenda" : _agendasecuen,
+                "xxSecuenCancela" : _cancelasecuen,
+                "xxSecuenAtendido" : _cancelasecuen,
+                "xxSecuenAusente" : _cancelasecuen,
+                "xxUsuaid" : _usuaid,
+            }
+            var xresult = $.post("codephp/update_grupoid.php", _parametros );
+            xresult.done(function(response){ 
+                if(response.trim() == 'OK'){
+                    toastSweetAlert("top-center",3000,"warning","Datos Actualizados..!");
+                }else{
+                    toastSweetAlert("top-center",3000,"warning","Ocurrio un error en el ajax..!");
+                }
+            });
+        }  
+
     });    
+
+    document.getElementById("txtnumagenda").addEventListener("change", function() {
+        let v = parseInt(this.value);
+        if (v < 1) this.value = 1;
+        if (v > 99999) this.value = 1;
+        });     
     
+   
     
     //Desplazar-modal
     $("#modal-prestador").draggable({

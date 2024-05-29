@@ -207,7 +207,7 @@
 
     function f_Agendar(_tituid, _prodid, _grupid){
 
-       $.redirect('?page=agendar_titubeneadmin&menuid=<?php echo $menuid; ?>',{'tituid': _tituid, 'prodid': _prodid, 'grupid': _grupid, 'agendaid': 0  }); //POR METODO POST
+       $.redirect('?page=agendar_titubeneadmin&menuid=<?php echo $menuid; ?>',{'tituid': _tituid, 'beneid': 0, 'prodid': _prodid, 'grupid': _grupid, 'agendaid': 0  }); //POR METODO POST
     }
 
     //Update Estado cliente
