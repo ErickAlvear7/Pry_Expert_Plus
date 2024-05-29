@@ -524,7 +524,7 @@
 
 <!--MODAL NUEVO GRUPO-->
 <div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-750px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Grupo</h2>
@@ -584,307 +584,307 @@
     </div>
 </div>  
 
-<!--MODAL EDITAR GRUPOS-->
-<div class="modal fade" id="modal_edit_grupo" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Lista de Grupos / Editar Datos</h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
+    <!--MODAL EDITAR GRUPOS-->
+    <div class="modal fade" id="modal_edit_grupo" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Lista de Grupos / Editar Datos</h2>
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="modal-body py-lg-10 px-lg-10">
+                    <div class="card card-flush py-2">
+                        <div class="card-body pt-0">
+                            <div id="divcampos" style="display: none;" >
+                                <input type="hidden" class="form-control mb-2 " maxlength="80" placeholder="ID" name="txteditargrupoid" id="txteditargrupoid" />
+                                <div class="d-flex flex-column mb-7 fv-row">
+                                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                        <span class="required">Grupo</span>
+                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
+                                    </label>
+                                    <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txteditarGrupo" id="txteditarGrupo" />
+                                </div>
+                                <div class="row mb-7">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Secuencial Agenda</label>
+                                        <input type="number" name="txteditarnumagenda" id="txteditarnumagenda" class="form-control mb-2" value="0" onkeypress="return isNumberKey(event)" />   
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Secuencial Cancelado</label>
+                                        <input type="number" name="txteditarnumcancelado" id="txteditarnumcancelado" class="form-control mb-2"  value="0" onkeypress="return isNumberKey(event)" />  
+                                    </div>
+                                </div>
+
+                                <div class="form-group my-5">
+                                    <button type="button" id="btneditargrupo" onclick="f_ModificarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
+                                </div>
+                            </div>
+                            <div class="mh-300px scroll-y me-n7 pe-7">
+                                <table id="tblGrupo" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
+                                    <thead>
+                                        <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                                            <th class="min-w-125px">Grupo</th>
+                                            <th>Secuencial Agenda</th>
+                                            <th>Secuencial Cancela</th>
+                                            <th class="min-w-125px">Estado</th>
+                                            <th>Status</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="fw-bold text-gray-600">
+                                        <?php 
+                                            $xSQL = "SELECT * FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid  ";
+                                            $all_grupos = mysqli_query($con, $xSQL);
+                                            foreach($all_grupos as $grupo){
+                                                $xId = $grupo['grup_id'];
+                                                $xGrupo = $grupo['grup_nombre'];
+                                                $xEstado = trim($grupo['grup_estado']);
+                                                $xSecAgenda = $grupo['secuencial_agendado'];
+                                                $xSecCancela = $grupo['secuencial_cancelado'];
+
+                                                $xChkEstado = '';
+                                                $xDisabledEdit = '';
+                
+                                                if($xEstado == 'A'){
+                                                        $xEstado = 'ACTIVO';
+                                                    $xChkEstado = 'checked="checked"';
+                                                    $xTextColor = "badge badge-light-primary";
+                                                }else{
+                                                    $xEstado = 'INACTIVO';
+                                                    $xTextColor = "badge badge-light-danger";
+                                                    $xDisabledEdit = 'disabled';
+                                                }  
+                                                ?>
+                                                <tr id="trgru_<?php echo $xId; ?>">
+                                                    <td class="text-uppercase">
+                                                        <?php echo $xGrupo; ?>
+                                                        <input type="hidden" id="txtgrupoid<?php echo $xId; ?>" value="<?php echo $xId; ?>" />
+                                                        <input type="hidden" id="txtgrupo<?php echo $xId; ?>" value="<?php echo $xGrupo; ?>" />
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <?php echo $xSecAgenda; ?>
+                                                        <input type="hidden" id="txtsecagenda<?php echo $xId; ?>" value="<?php echo $xSecAgenda; ?>" />
+                                                    </td>
+
+                                                    <td>
+                                                        <?php echo $xSecCancela; ?>
+                                                        <input type="hidden" id="txtseccancela<?php echo $xId; ?>" value="<?php echo $xSecCancela; ?>" />
+                                                    </td>
+
+                                                    <td id="tdgru_<?php echo $xId; ?>">
+                                                        <div class="<?php echo $xTextColor; ?>">
+                                                            <?php echo $xEstado; ?>
+                                                        </div>
+                                                    </td>
+                                                    
+                                                    <td class="text-end">
+                                                        <div class="text-center">
+                                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                                <input class="form-check-input h-20px w-20px border-primary" <?php echo $xChkEstado; ?> type="checkbox" id="chkgru<?php echo $xId; ?>" 
+                                                                onchange="f_UpdateEstGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xUsuaid; ?>)" value="<?php echo $xId; ?>"/>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                        
+                                                    <td class="text-end">
+                                                        <div class="text-center">
+                                                            <div class="btn-group">
+                                                                <button id="btnEditargru_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Grupo' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarGrupo(<?php echo $xId; ?>)">
+                                                                    <i class='fa fa-edit'></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
                 </div>
             </div>
-            <div class="modal-body py-lg-10 px-lg-10">
-                <div class="card card-flush py-2">
-                    <div class="card-body pt-0">
-                        <div id="divcampos" style="display: none;" >
-                            <input type="hidden" class="form-control mb-2 " maxlength="80" placeholder="ID" name="txteditargrupoid" id="txteditargrupoid" />
-                            <div class="d-flex flex-column mb-7 fv-row">
-                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                                    <span class="required">Grupo</span>
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
-                                </label>
-                                <input type="text" class="form-control mb-2 text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txteditarGrupo" id="txteditarGrupo" />
+        </div>
+    </div>  
+
+    <!--MODAL AGREGAR PRODUCTO-->
+    <div class="modal fade" id="modal_addproducto" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Producto</h2>
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="modal-body py-lg-10 px-lg-10">
+                    <div class="card card-flush py-4">
+                        <div class="card-body pt-0">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="required form-label">Producto</label>
+                                    <input class="form-control mb-2 text-uppercase" type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="form-label">Descripcion</label>
+                                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="required form-label">Costo</label>
+                                    <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="required form-label">Grupo</label>
+                                    <select name="cboGrupo" id="cboGrupo" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#modal_addproducto" class="form-select mb-2" >
+                                        <option></option>
+                                        <?php foreach ($all_grupos as $datos) : ?>
+                                            <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['NombreGrupo']) ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
                             </div>
                             <div class="row mb-7">
                                 <div class="col-md-6">
-                                    <label class="form-label">Secuencial Agenda</label>
-                                    <input type="number" name="txteditarnumagenda" id="txteditarnumagenda" class="form-control mb-2" value="0" onkeypress="return isNumberKey(event)" />   
+                                    <label class="form-label">Asistencia Mes</label>
+                                    <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" value="1" />   
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Secuencial Cancelado</label>
-                                    <input type="number" name="txteditarnumcancelado" id="txteditarnumcancelado" class="form-control mb-2"  value="0" onkeypress="return isNumberKey(event)" />  
+                                    <label class="form-label">Asistencia Anual</label>
+                                    <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" placeholder="1" value="1" />  
                                 </div>
                             </div>
-
-                            <div class="form-group my-5">
-                                <button type="button" id="btneditargrupo" onclick="f_ModificarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
+                            <div class="row border border-hover-primary py-lg-4 px-lg-20">
+                                <div class="col-md-6">
+                                    <label class="form-check form-switch form-check-custom form-check-solid">
+                                        <input class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
+                                        <h5 class="form-check-label" id="lblCobertura" for="chkEnviar1">Cobertura NO</h5>
+                                    </label>  
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-check form-switch form-check-custom form-check-solid">
+                                        <input class="form-check-input" name="chkSistema" id="chkSistema" type="checkbox" />
+                                        <h5 class="form-check-label" id="lblSistema" for="chkEnviar1">Sistema NO</h5>
+                                    </label>   
+                                </div>
                             </div>
-                        </div>
-                        <div class="mh-300px scroll-y me-n7 pe-7">
-                            <table id="tblGrupo" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
-                                <thead>
-                                    <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
-                                        <th class="min-w-125px">Grupo</th>
-                                        <th>Secuencial Agenda</th>
-                                        <th>Secuencial Cancela</th>
-                                        <th class="min-w-125px">Estado</th>
-                                        <th>Status</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="fw-bold text-gray-600">
-                                    <?php 
-                                        $xSQL = "SELECT * FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid  ";
-                                        $all_grupos = mysqli_query($con, $xSQL);
-                                        foreach($all_grupos as $grupo){
-                                            $xId = $grupo['grup_id'];
-                                            $xGrupo = $grupo['grup_nombre'];
-                                            $xEstado = trim($grupo['grup_estado']);
-                                            $xSecAgenda = $grupo['secuencial_agendado'];
-                                            $xSecCancela = $grupo['secuencial_cancelado'];
-
-                                            $xChkEstado = '';
-                                            $xDisabledEdit = '';
-            
-                                            if($xEstado == 'A'){
-                                                    $xEstado = 'ACTIVO';
-                                                $xChkEstado = 'checked="checked"';
-                                                $xTextColor = "badge badge-light-primary";
-                                            }else{
-                                                $xEstado = 'INACTIVO';
-                                                $xTextColor = "badge badge-light-danger";
-                                                $xDisabledEdit = 'disabled';
-                                            }  
-                                            ?>
-                                            <tr id="trgru_<?php echo $xId; ?>">
-                                                <td class="text-uppercase">
-                                                    <?php echo $xGrupo; ?>
-                                                    <input type="hidden" id="txtgrupoid<?php echo $xId; ?>" value="<?php echo $xId; ?>" />
-                                                    <input type="hidden" id="txtgrupo<?php echo $xId; ?>" value="<?php echo $xGrupo; ?>" />
-                                                </td>
-                                                
-                                                <td>
-                                                    <?php echo $xSecAgenda; ?>
-                                                    <input type="hidden" id="txtsecagenda<?php echo $xId; ?>" value="<?php echo $xSecAgenda; ?>" />
-                                                </td>
-
-                                                <td>
-                                                    <?php echo $xSecCancela; ?>
-                                                    <input type="hidden" id="txtseccancela<?php echo $xId; ?>" value="<?php echo $xSecCancela; ?>" />
-                                                </td>
-
-                                                <td id="tdgru_<?php echo $xId; ?>">
-                                                    <div class="<?php echo $xTextColor; ?>">
-                                                        <?php echo $xEstado; ?>
-                                                    </div>
-                                                </td>
-                                                
-                                                <td class="text-end">
-                                                    <div class="text-center">
-                                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                            <input class="form-check-input h-20px w-20px border-primary" <?php echo $xChkEstado; ?> type="checkbox" id="chkgru<?php echo $xId; ?>" 
-                                                            onchange="f_UpdateEstGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xUsuaid; ?>)" value="<?php echo $xId; ?>"/>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                    
-                                                <td class="text-end">
-                                                    <div class="text-center">
-                                                        <div class="btn-group">
-                                                            <button id="btnEditargru_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Grupo' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarGrupo(<?php echo $xId; ?>)">
-                                                                <i class='fa fa-edit'></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
+                        </div>   
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                    <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agregar</button>
+                </div>
+            </div>   
         </div>
     </div>
-</div>  
-
-<!--MODAL AGREGAR PRODUCTO-->
-<div class="modal fade" id="modal_addproducto" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Producto</h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
+    <!--MODAL EDITAR PRODUCTO-->
+    <div class="modal fade" id="modal_editproducto" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Producto</h2>
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                            </svg>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-body py-lg-10 px-lg-10">
-                <div class="card card-flush py-4">
-                    <div class="card-body pt-0">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="required form-label">Producto</label>
-                                <input class="form-control mb-2 text-uppercase" type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
+                <div class="modal-body py-lg-10 px-lg-10">
+                    <div class="card card-flush py-4">
+                        <div class="card-body pt-0">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="required form-label">Producto</label>
+                                    <input class="form-control mb-2 text-uppercase" type="text" name="txtProductoEdit" id="txtProductoEdit" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="form-label">Descripcion</label>
-                                <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="form-label">Descripcion</label>
+                                    <textarea class="form-control mb-2 text-uppercase" name="txtDescripcionEdit" id="txtDescripcionEdit" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
+                                </div>    
                             </div>
-                        </div>
-                        <div class="row">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="required form-label">Costo</label>
+                                    <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="required form-label">Grupo</label>
+                                    <select name="cboGrupoEdit" id="cboGrupoEdit" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
+                                        <option></option>
+                                        <?php 
+                                            $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND grup_estado='A' ";
+                                            $all_datos =  mysqli_query($con, $xSQL);
+                                            foreach ($all_datos as $dato){ ?>
+                                                <option value="<?php echo $dato['Codigo'] ?>"><?php echo $dato['NombreGrupo'] ?></option>
+                                            <?php } ?>  
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <div class="col-md-6">
+                                    <label class="form-label">Asistencia Mes</label>
+                                    <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />  
+                                </div>
                             <div class="col-md-6">
-                                <label class="required form-label">Costo</label>
-                                <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                    <label class="form-label">Asistencia Anual</label>
+                                    <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
                             </div>
-                            <div class="col-md-6">
-                                <label class="required form-label">Grupo</label>
-                                <select name="cboGrupo" id="cboGrupo" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#modal_addproducto" class="form-select mb-2" >
-                                    <option></option>
-                                    <?php foreach ($all_grupos as $datos) : ?>
-                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['NombreGrupo']) ?></option>
-                                    <?php endforeach ?>
-                                </select>
                             </div>
-                        </div>
-                        <div class="row mb-7">
-                            <div class="col-md-6">
-                                <label class="form-label">Asistencia Mes</label>
-                                <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" value="1" />   
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Asistencia Anual</label>
-                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" placeholder="1" value="1" />  
-                            </div>
-                        </div>
-                        <div class="row border border-hover-primary py-lg-4 px-lg-20">
-                            <div class="col-md-6">
-                                <label class="form-check form-switch form-check-custom form-check-solid">
-                                    <input class="form-check-input" name="chkCobertura" id="chkCobertura" type="checkbox" />
-                                    <h5 class="form-check-label" id="lblCobertura" for="chkEnviar1">Cobertura NO</h5>
-                                </label>  
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-check form-switch form-check-custom form-check-solid">
-                                    <input class="form-check-input" name="chkSistema" id="chkSistema" type="checkbox" />
-                                    <h5 class="form-check-label" id="lblSistema" for="chkEnviar1">Sistema NO</h5>
-                                </label>   
-                            </div>
-                        </div>
-                    </div>   
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agregar</button>
-            </div>
-        </div>   
-    </div>
-</div>
-<!--MODAL EDITAR PRODUCTO-->
-<div class="modal fade" id="modal_editproducto" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Producto</h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
-            </div>
-            <div class="modal-body py-lg-10 px-lg-10">
-                <div class="card card-flush py-4">
-                    <div class="card-body pt-0">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="required form-label">Producto</label>
-                                <input class="form-control mb-2 text-uppercase" type="text" name="txtProductoEdit" id="txtProductoEdit" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="form-label">Descripcion</label>
-                                <textarea class="form-control mb-2 text-uppercase" name="txtDescripcionEdit" id="txtDescripcionEdit" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
-                            </div>    
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label class="required form-label">Costo</label>
-                                <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                            </div>
-                            <div class="col-md-6">
-                                <label class="required form-label">Grupo</label>
-                                <select name="cboGrupoEdit" id="cboGrupoEdit" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2" >
-                                    <option></option>
-                                    <?php 
-                                        $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND grup_estado='A' ";
-                                        $all_datos =  mysqli_query($con, $xSQL);
-                                        foreach ($all_datos as $dato){ ?>
-                                            <option value="<?php echo $dato['Codigo'] ?>"><?php echo $dato['NombreGrupo'] ?></option>
-                                        <?php } ?>  
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row mb-7">
-                            <div class="col-md-6">
-                                <label class="form-label">Asistencia Mes</label>
-                                <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />  
-                            </div>
-                           <div class="col-md-6">
-                                <label class="form-label">Asistencia Anual</label>
-                                <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
-                           </div>
-                        </div>
-                        <div class="row border border-hover-primary py-lg-4 px-lg-10">
-                            <div class="col-md-4">    
-                                <label class="form-check form-switch form-check-custom form-check-solid">
-                                    <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
-                                    <h5 class="form-check-label txtcob" id="lblCoberturaEdit"></h5>
-                                </label> 
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-check form-switch form-check-custom form-check-solid">
-                                    <input class="form-check-input" name="chkSistemaEdit" id="chkSistemaEdit" type="checkbox" />
-                                    <h5 class="form-check-label txtsis"></h5>
-                                </label> 
-                            </div>
-                            <div class="col-md-4">   
-                                <label class="form-check form-switch form-check-custom form-check-solid">
-                                    <input class="form-check-input" name="chkGerencialEdit" id="chkGerencialEdit" type="checkbox" />
-                                    <h5 class="form-check-label txtger"></h5>
-                                </label> 
+                            <div class="row border border-hover-primary py-lg-4 px-lg-10">
+                                <div class="col-md-4">    
+                                    <label class="form-check form-switch form-check-custom form-check-solid">
+                                        <input class="form-check-input" name="chkCoberturaEdit" id="chkCoberturaEdit" type="checkbox" />
+                                        <h5 class="form-check-label txtcob" id="lblCoberturaEdit"></h5>
+                                    </label> 
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-check form-switch form-check-custom form-check-solid">
+                                        <input class="form-check-input" name="chkSistemaEdit" id="chkSistemaEdit" type="checkbox" />
+                                        <h5 class="form-check-label txtsis"></h5>
+                                    </label> 
+                                </div>
+                                <div class="col-md-4">   
+                                    <label class="form-check form-switch form-check-custom form-check-solid">
+                                        <input class="form-check-input" name="chkGerencialEdit" id="chkGerencialEdit" type="checkbox" />
+                                        <h5 class="form-check-label txtger"></h5>
+                                    </label> 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                    <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>   
+    </div>   
 
 <script>
 
