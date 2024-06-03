@@ -544,17 +544,23 @@
             <div class="modal-body py-lg-5 px-lg-10">
                 <div class="card card-flush py-2">
                     <div class="card-body pt-0" id="kt_modal_new_card_form">
-                        <div class="row mb-2">
+                        <div class="row mb-5">
                             <div class="col-md-12">
-                                <label class="required form-label">Especialidad
+                                <label class="required form-label">Nombre Especialidad
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre de la especialidad"></i>
                                 </label>
-                                <input type="text" class="form-control mb-2" maxlength="250" placeholder="Nombre Especialidad" name="txtEspecialidad" id="txtEspecialidad" />     
+                                <input type="text" class="form-control" maxlength="250" placeholder="Ingrese Especialidad" name="txtEspecialidad" id="txtEspecialidad" />     
                             </div>
                         </div>
+                        <div class="row mb-12">
+                            <label class="form-label">Descripcion</label>
+                            <textarea class="form-control" name="txtDescripcion" id="txtDescripcion" maxlength="150" rows="1" onkeydown="return (event.keyCode!=13);"></textarea>
+                        </div>
                         <div class="row mb-2">
+                            <div class="col-md-1">
+                                <label class="required form-label">Tipo</label>
+                            </div>
                             <div class="col-md-6">
-                                <label class="required form-label">Tipo Especialidad</label>
                                 <select name="cboTipoEspe" id="cboTipoEspe" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo" data-dropdown-parent="#kt_modal_new_card_form" class="form-select mb-2">
                                     <option></option>
                                     <?php 
@@ -566,15 +572,14 @@
                                     <?php } ?>
                                 </select>
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Precio (PVP)</label>
-                                <input type="number" name="txtPvpNew" id="txtPvpNew" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                            <div class="col-md-2">
+                                <label class="required form-label">Precio (PVP)</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" name="txtPvpNew" id="txtPvpNew" class="form-control form-control-solid" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
                         </div>
-                        <div class="row mb-2">
-                            <label class="form-label">Descripcion</label>
-                            <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" maxlength="150" rows="1" onkeydown="return (event.keyCode!=13);"></textarea>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -699,7 +704,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Profesional/Configurar Horarios</h2>
-                <h2 id="headerTitle" class="fs-6 fw-bold form-label text-primary"></h2>
+                <h2 id="headerTitle" class="fs-6 fw-light text-primary"></h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -738,7 +743,7 @@
                                  <label class="required form-label">Intervalo
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Intervalo de 10 a 60 minutos"></i>
                                  </label>
-                                 <input type="number" name="txtIntervalo" id="txtIntervalo" min="10" max="60" step="10" class="form-control mb-2" value="10" onKeyPress="if(this.value.length==2) return false;"  pattern="/^-?\d+\.?\d*$/" />
+                                 <input type="number" name="txtIntervalo" id="txtIntervalo" min="10" max="60" step="10" class="form-control form-control-solid" value="10" onKeyPress="if(this.value.length==2) return false;"  pattern="/^-?\d+\.?\d*$/" />
                             </div>
                         </div>
                         <div class="form-group mt-5 mb-4">
@@ -769,7 +774,7 @@
     </div>
 </div>   
 
-<!--Modal Horarios -->             
+<!--Modal Horarios-Turnos -->             
 <div class="modal fade" id="modal_horarios" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
@@ -1078,7 +1083,7 @@
                                        <input type="text" name="txtApellidosProf" id="txtApellidosProf" class="form-control mb-2" maxlength="100" placeholder="Apellidos" />
                                    </div>
                                 </div>
-                                <div class="row">
+                                <div class="row mb-5">
                                    <div class="col-md-6">
                                         <label class="required form-label">Genero</label>
                                         <?php	
@@ -1106,43 +1111,11 @@
                                         </select>
                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-1 mb-xl-1">
-                   <div class="card-header border-0">
-                        <div class="d-flex align-items-center collapsible py-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_informacion_profesional">
-                            <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
-                                <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
-                                        <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>
-                                <span class="svg-icon toggle-off svg-icon-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
-                                        <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
-                                        <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>
-                            </div>
-                            <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Direccion-Telefonos-Email</h4>
-                        </div>
-                   </div>
-                   <div id="view_informacion_profesional" class="collapse fs-6 ms-1">
-                        <div class="card card-flush py-2">
-                            <div class="card-body pt-0">
                                 <div class="py-0" data-kt-customer-payment-method="row">
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#direccion_profesional" role="button" aria-expanded="false" aria-controls="direccion_profesional">
                                             <div class="me-3 rotate-90">
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
+                                                <i class="fa fa-chevron-circle-right" style="color:#5AD1F1;" aria-hidden="true"></i>
                                             </div>
                                             <i class="fa fa-location-arrow fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
                                             <div class="me-3">
@@ -1164,11 +1137,7 @@
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#telefono_profesional" role="button" aria-expanded="false" aria-controls="telefono_profesional">
                                             <div class="me-3 rotate-90">
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
+                                                <i class="fa fa-chevron-circle-right" style="color:#5AD1F1;" aria-hidden="true"></i>
                                             </div>
                                             <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
                                             <div class="me-3">
@@ -1195,13 +1164,9 @@
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#email_profesional" role="button" aria-expanded="false" aria-controls="email_profesional">
                                             <div class="me-3 rotate-90">
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
+                                                <i class="fa fa-chevron-circle-right" style="color:#5AD1F1;" aria-hidden="true"></i>
                                             </div>
-                                            <i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                            <i class="fa fa-envelope fa-1x me-2" style="color:#3B8CEC;" aria-hidden="true"></i>
                                             <div class="me-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="text-gray-800 fw-bolder">E-mail</div>
@@ -1223,7 +1188,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>                                
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -1240,7 +1205,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="mb-2 badge badge-light-primary fw-light fs-2 fst-italic">Motivos Especialidad</h2>
-                <h2 id="headerTitleMotivo" class="fs-6 fw-bold form-label mb-2 text-primary"></h2>
+                <h2 id="headerTitleMotivo" class="fs-6 fw-light text-primary"></h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

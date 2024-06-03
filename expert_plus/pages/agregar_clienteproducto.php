@@ -399,7 +399,7 @@
 
 <!--MODAL AGREGAR PRODUCTO-->
 <div class="modal fade" id="modal_addproducto" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Producto</h2>
@@ -412,28 +412,26 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body py-lg-10 px-lg-10">
-                <div class="card card-flush py-4">
+            <div class="modal-body py-lg-5 px-lg-10">
+                <div class="card card-flush py-2">
                     <div class="card-body pt-0">
-                        <div class="row">
+                        <div class="row mb-4">
                             <div class="col-md-12">
                                 <label class="required form-label">Producto</label>
-                                <input class="form-control mb-2 text-uppercase" type="text" name="txtProducto" id="txtProducto" class="form-control mb-2" maxlength="150" placeholder="Ingrese Producto" value="" />
+                                <input class="form-control" type="text" name="txtProducto" id="txtProducto" maxlength="150" placeholder="Ingrese Producto" value="" />
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mb-10">
                             <div class="col-md-12">
                                 <label class="form-label">Descripcion</label>
-                                <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
+                                <textarea class="form-control" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label class="required form-label">Costo</label>
-                                <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                            </div>
-                            <div class="col-md-6">
+                        <div class="row mb-10">
+                            <div class="col-md-1">
                                 <label class="required form-label">Grupo</label>
+                            </div>
+                            <div class="col-md-7"> 
                                 <select name="cboGrupo" id="cboGrupo" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#modal_addproducto" class="form-select mb-2" >
                                     <option></option>
                                     <?php foreach ($all_grupos as $datos) : ?>
@@ -441,15 +439,25 @@
                                     <?php endforeach ?>
                                 </select>
                             </div>
-                        </div>
-                        <div class="row mb-7">
-                            <div class="col-md-6">
-                                <label class="form-label">Asistencia Mes</label>
-                                <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control mb-2" value="1" onkeypress="return isNumberKey(event)" />   
+                            <div class="col-md-1">
+                                <label class="required form-label">Costo</label>
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Asistencia Anual</label>
-                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control mb-2" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
+                            <div class="col-md-3">
+                                <input type="number" name="txtCosto" id="txtCosto" class="form-control form-control-solid" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                            </div>  
+                        </div>
+                        <div class="row mb-10">
+                            <div class="col-md-3">
+                                <label class="form-label">Asistencia Mes:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control form-control-solid" value="1" onkeypress="return isNumberKey(event)" />   
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Asistencia Anual:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control form-control-solid" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
                             </div>
                         </div>
                         <div class="row border border-hover-primary py-lg-4 px-lg-20">
@@ -479,7 +487,7 @@
 
 <!--MODAL NUEVO GRUPO -->
 <div class="modal fade" id="modal_new_grupo" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-750px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Grupo</h2>
@@ -492,42 +500,50 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body py-lg-10 px-lg-10">
-                <div class="card card-flush py-4">
+            <div class="modal-body py-lg-5 px-lg-10">
+                <div class="card card-flush py-2">
                     <div class="card-body pt-0">
                         <div class="d-flex flex-column mb-7 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                 <span class="required">Grupo</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
                             </label>
-                            <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
+                            <input type="text" class="form-control" minlength="1" maxlength="80" placeholder="Ingrese Grupo" name="txtGrupo" id="txtGrupo" />
                         </div>
-                        <div class="fv-row mb-15">
+                        <div class="fv-row mb-10">
                             <label class="fs-6 fw-bold form-label mb-2">
                                 <span>Descripcion</span>
                             </label>
-                            <textarea class="form-control mb-2 text-uppercase" name="txtDescGrupo" id="txtDescGrupo" maxlength="150" onkeydown="return(event.keyCode!=13);"></textarea>
+                            <textarea class="form-control" name="txtDescGrupo" rows="1" id="txtDescGrupo" maxlength="150" onkeydown="return(event.keyCode!=13);"></textarea>
                         </div> 
-                        <div class="row mb-7">
-                            <div class="col-md-6">
-                                <label class="form-label">Secuencial Agenda</label>
-                                <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control mb-2" value="1"  />   
+                        <div class="row mb-10">
+                            <div class="col-md-4">
+                                <label class="required form-label">Secuencial Agenda</label>
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Secuencial Cancelado</label>
-                                <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control mb-2" placeholder="1" value="1" />  
+                            <div class="col-md-2">
+                                <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control form-control-solid" value="1"  />   
+                            </div>
+                            <div class="col-md-4">
+                                <label class="required form-label">Secuencial Cancelado</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control form-control-solid" placeholder="1" value="1" /> 
                             </div>
                         </div>
-                        <div class="row mb-7">
-                            <div class="col-md-6">
-                                <label class="form-label">Secuencial Atendido</label>
-                                <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control mb-2" value="1" />   
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="required form-label">Secuencial Atendido</label>
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Secuencial Ausente</label>
-                                <input type="number" name="txtnumausente" id="txtnumausente" class="form-control mb-2" placeholder="1" value="1" />  
+                            <div class="col-md-2">
+                                <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control form-control-solid" value="1" />  
                             </div>
-                        </div> 
+                            <div class="col-md-4">
+                                <label class="required form-label">Secuencial Ausente</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="number" name="txtnumausente" id="txtnumausente" class="form-control form-control-solid" placeholder="1" value="1" />  
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -416,18 +416,26 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body py-lg-10 px-lg-10">
+            <div class="modal-body py-lg-5 px-lg-10">
                 <div class="card card-flush py-2">
                     <div class="card-body pt-0" id="kt_modal_new_card_form">
-                        <div class="row mb-2">
+                        <div class="row mb-5">
                             <div class="col-md-12">
-                                 <label class="required form-label">Nombres</label>
-                                 <input type="text" class="form-control mb-2" maxlength="250" placeholder="Nombre Especialidad" name="txtEspecialidad" id="txtEspecialidad" />
+                                 <label class="required form-label">Nombre Especialidad</label>
+                                 <input type="text" class="form-control" maxlength="250" placeholder="Ingrese Especialidad" name="txtEspecialidad" id="txtEspecialidad" />
+                            </div>
+                        </div>
+                        <div class="row mb-12">
+                            <div class="col-md-12">
+                                <label class="form-label">Descripcion</label>
+                                <textarea class="form-control" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
                             </div>
                         </div>
                         <div class="row mb-2">
+                            <div class="col-md-1">
+                                <label class="required form-label">Tipo</label>
+                            </div>
                             <div class="col-md-6">
-                                <label class="required form-label">Tipo Especialidad</label>
                                 <select name="cboTipoEspe" id="cboTipoEspe" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo" data-dropdown-parent="#kt_modal_new_card_form" class="form-select mb-2">
                                     <option</option>
                                     <?php 
@@ -439,17 +447,13 @@
                                     <?php } ?>
                                 </select>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 <label class="required form-label">Precio (PVP)</label>
-                                <input type="number" name="txtPvpNew" id="txtPvpNew" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="form-label">Descripcion</label>
-                                <textarea class="form-control mb-2 text-uppercase" name="txtDescripcion" id="txtDescripcion" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                            <div class="col-md-3">
+                                <input type="number" name="txtPvpNew" id="txtPvpNew" class="form-control form-control-solid" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
-                        </div>
+                        </div>   
                     </div>
                 </div>
             </div>
