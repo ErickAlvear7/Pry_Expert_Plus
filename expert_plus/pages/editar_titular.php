@@ -352,7 +352,7 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body py-lg-10 px-lg-10 mt-n3">
+            <div class="modal-body py-lg-5 px-lg-10 mt-n3">
                 <div class="card mb-1 mb-xl-1">
                     <div class="card-header border-0">
                         <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_avatar">
@@ -417,7 +417,7 @@
                     <div id="view_datos_titular" class="collapse show fs-6 ms-1">
                         <div class="card card-flush py-1">
                             <div class="card-body pt-0">
-                                <div class="row mb-1">
+                                <div class="row mb-4">
                                     <div class="col-md-6">
                                         <label class="required form-label">Nombres</label>
                                         <input type="text" class="form-control mb-1" id="txtNombre" name="txtNombre" minlength="5" maxlength="100"  value="" />
@@ -427,85 +427,79 @@
                                         <input type="text" class="form-control mb-1" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" value="" />
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-2 mb-xl-8">
-                    <div class="card card-flush py-1">
-                        <div class="card-body pt-0">
-                            <div class="py-0" data-kt-customer-payment-method="row">
-                                <div class="py-3 d-flex flex-stack flex-wrap">
-                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#direccion_profesional" role="button" aria-expanded="false" aria-controls="direccion_profesional">
-                                        <div class="me-3 rotate-90">
-                                            <i class="fa fa-chevron-circle-right" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                <div class="py-0" data-kt-customer-payment-method="row">
+                                    <div class="py-3 d-flex flex-stack flex-wrap">
+                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#direccion_profesional" role="button" aria-expanded="false" aria-controls="direccion_profesional">
+                                            <div class="me-3 rotate-90">
+                                                <i class="fa fa-chevron-circle-right" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                            </div>
+                                            <i class="fa fa-location-arrow fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
+                                            <div class="me-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="text-gray-800 fw-bolder">Direccion</div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <i class="fa fa-location-arrow fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
-                                        <div class="me-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="text-gray-800 fw-bolder">Direccion</div>
+                                    </div>
+                                    <div id="direccion_profesional" class="collapse fs-6 ps-12" data-bs-parent="#datos_profesional">
+                                        <div class="row mb-4">
+                                            <div class="col-md-12">
+                                                <textarea class="form-control mb-2" id="txtDireccion" placeholder="Ingrese Direccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="direccion_profesional" class="collapse fs-6 ps-12" data-bs-parent="#datos_profesional">
-                                    <div class="row mb-4">
-                                        <div class="col-md-12">
-                                            <textarea class="form-control mb-2" id="txtDireccion" placeholder="Ingrese Direccion" style="text-transform: uppercase;" maxlength="250" rows="1" onkeydown="return(event.keyCode!=13);"></textarea>
+                                <div class="py-0" data-kt-customer-payment-method="row">
+                                    <div class="py-3 d-flex flex-stack flex-wrap">
+                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#telefono_profesional" role="button" aria-expanded="false" aria-controls="telefono_profesional">
+                                            <div class="me-3 rotate-90">
+                                                <i class="fa fa-chevron-circle-right" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                            </div>
+                                            <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
+                                            <div class="me-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="py-0" data-kt-customer-payment-method="row">
-                                <div class="py-3 d-flex flex-stack flex-wrap">
-                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#telefono_profesional" role="button" aria-expanded="false" aria-controls="telefono_profesional">
-                                        <div class="me-3 rotate-90">
-                                            <i class="fa fa-chevron-circle-right" style="color:#5AD1F1;" aria-hidden="true"></i>
-                                        </div>
-                                        <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
-                                        <div class="me-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                    <div id="telefono_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="fs-6 fw-bold mt-3 mb-3">Telefono 1</div>
+                                                <input type="text" class="form-control" id="txtTelcasa"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="" value=""/>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="fs-6 fw-bold mt-3 mb-3">Telefono 2</div>
+                                                <input type="text" class="form-control" id="txtTelofi"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="" value=""/>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="fs-6 fw-bold mt-3 mb-3">Celular</div>
+                                                <input type="text" class="form-control" id="txtCel"  maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="" value=""/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="telefono_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="fs-6 fw-bold mt-3 mb-3">Telefono 1</div>
-                                            <input type="text" class="form-control" id="txtTelcasa"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="" value=""/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="fs-6 fw-bold mt-3 mb-3">Telefono 2</div>
-                                            <input type="text" class="form-control" id="txtTelofi"  maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="" value=""/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="fs-6 fw-bold mt-3 mb-3">Celular</div>
-                                            <input type="text" class="form-control" id="txtCel"  maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="" value=""/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="py-0" data-kt-customer-payment-method="row">
-                                <div class="py-3 d-flex flex-stack flex-wrap">
-                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#email_profesional" role="button" aria-expanded="false" aria-controls="email_profesional">
-                                        <div class="me-3 rotate-90">
-                                            <i class="fa fa-chevron-circle-right" style="color:#5AD1F1;" aria-hidden="true"></i>
-                                        </div>
-                                        <i class="fa fa-envelope fa-1x me-2" style="color:#3B8CEC;" aria-hidden="true"></i>
-                                        <div class="me-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="text-gray-800 fw-bolder">E-mail</div>
+                                <div class="py-0" data-kt-customer-payment-method="row">
+                                    <div class="py-3 d-flex flex-stack flex-wrap">
+                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#email_profesional" role="button" aria-expanded="false" aria-controls="email_profesional">
+                                            <div class="me-3 rotate-90">
+                                                <i class="fa fa-chevron-circle-right" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                            </div>
+                                            <i class="fa fa-envelope fa-1x me-2" style="color:#3B8CEC;" aria-hidden="true"></i>
+                                            <div class="me-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="text-gray-800 fw-bolder">E-mail</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div id="email_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <input type="email" class="form-control text-lowercase" id="txtEmail"  minlength="5" maxlength="100" placeholder="ejemplo@gmail.com" value=""/>
-                                        </div>                                                   
+                                    <div id="email_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
+                                        <div class="d-flex flex-wrap gap-5">
+                                            <div class="fv-row w-100 flex-md-root">
+                                                <input type="email" class="form-control text-lowercase" id="txtEmail"  minlength="5" maxlength="100" placeholder="ejemplo@gmail.com" value=""/>
+                                            </div>                                                   
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -642,8 +636,8 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body py-lg-10 px-lg-10">
-                <div id="view_data" class="card mb-1 mb-xl-1">
+            <div class="modal-body py-lg-5 px-lg-10">
+                <div class="card mb-1 mb-xl-1">
                     <div class="card-header border-0">
                         <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_datos_beneficiario">														<!--begin::Icon-->
                             <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
@@ -665,7 +659,7 @@
                         </div>
                     </div>
                     <div id="view_datos_beneficiario" class="collapse show fs-6 ms-1">
-                        <div id="view_avatar" class="card card-flush py-1">
+                        <div id="view_data" class="card card-flush py-1">
                             <div class="card-body pt-0">
                                 <div class="row mb-3">
                                     <div class="col-md-6">
@@ -684,7 +678,7 @@
                                         </select> 
                                     </div>
                                 </div>
-                                <div class="row mb-1">
+                                <div class="row mb-4">
                                     <div class="col-md-4">
                                         <label class="required form-label">Nombres</label>
                                         <input type="text" class="form-control" id="txtAddNombreBe" value="" maxlength="80" placeholder="Ingrese Nombres" />   
@@ -698,90 +692,84 @@
                                         <input type="date" id="txtAddFechaNacimientoBe" class="form-control" value="" />   
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-1 mb-xl-1">
-                    <div class="card card-flush py-1">
-                        <div class="card-body pt-0">
-                            <div class="py-0" data-kt-customer-payment-method="row">
-                                <div class="py-3 d-flex flex-stack flex-wrap">
-                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#direccion_profesional" role="button" aria-expanded="false" aria-controls="direccion_profesional">
-                                        <div class="me-3 rotate-90">
-                                            <i class="fa fa-chevron-circle-right" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                <div class="py-0" data-kt-customer-payment-method="row">
+                                    <div class="py-3 d-flex flex-stack flex-wrap">
+                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#direccion_beneficiario" role="button" aria-expanded="false" aria-controls="direccion_profesional">
+                                            <div class="me-3 rotate-90">
+                                                <i class="fa fa-chevron-circle-right" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                            </div>
+                                            <i class="fa fa-location-arrow fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
+                                            <div class="me-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="text-gray-800 fw-bolder">Direccion</div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <i class="fa fa-location-arrow fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
-                                        <div class="me-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="text-gray-800 fw-bolder">Direccion</div>
+                                    </div>
+                                    <div id="direccion_beneficiario" class="collapse fs-6 ps-12" data-bs-parent="#datos_profesional">
+                                        <div class="row mb-4">
+                                            <div class="col-md-12">
+                                                <textarea class="form-control mb-2" id="txtAddDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea> 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="direccion_profesional" class="collapse fs-6 ps-12" data-bs-parent="#datos_profesional">
-                                    <div class="row mb-4">
-                                        <div class="col-md-12">
-                                            <textarea class="form-control mb-2" id="txtAddDireccionBe" style="text-transform: uppercase;" rows="1" onkeydown="return(event.keyCode!=13);"></textarea> 
+                                <div class="py-0" data-kt-customer-payment-method="row">
+                                    <div class="py-3 d-flex flex-stack flex-wrap">
+                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#telefono_beneficiario" role="button" aria-expanded="false" aria-controls="telefono_profesional">
+                                            <div class="me-3 rotate-90">
+                                                <i class="fa fa-chevron-circle-right" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                            </div>
+                                            <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
+                                            <div class="me-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="py-0" data-kt-customer-payment-method="row">
-                                <div class="py-3 d-flex flex-stack flex-wrap">
-                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#telefono_profesional" role="button" aria-expanded="false" aria-controls="telefono_profesional">
-                                        <div class="me-3 rotate-90">
-                                            <i class="fa fa-chevron-circle-right" style="color:#5AD1F1;" aria-hidden="true"></i>
-                                        </div>
-                                        <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
-                                        <div class="me-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="text-gray-800 fw-bolder">Telefonos</div>
+                                    <div id="telefono_beneficiario" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="fs-6 fw-bold mt-3 mb-3">Telefono 1</div>
+                                                <input type="text" id="txtAddTelCasaBe" class="form-control" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="fs-6 fw-bold mt-3 mb-3">Telefono 2</div>
+                                                <input type="text" id="txtAddTelOfiBe" class="form-control" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="fs-6 fw-bold mt-3 mb-3">Celular</div>
+                                                <input type="text" id="txtAddCelularBe" class="form-control" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="telefono_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="fs-6 fw-bold mt-3 mb-3">Telefono 1</div>
-                                            <input type="text" id="txtAddTelCasaBe" class="form-control" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="fs-6 fw-bold mt-3 mb-3">Telefono 2</div>
-                                            <input type="text" id="txtAddTelOfiBe" class="form-control" value="" placeholder="022222222" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="fs-6 fw-bold mt-3 mb-3">Celular</div>
-                                            <input type="text" id="txtAddCelularBe" class="form-control" value="" placeholder="0999999999" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="py-0" data-kt-customer-payment-method="row">
-                                <div class="py-3 d-flex flex-stack flex-wrap">
-                                    <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#email_profesional" role="button" aria-expanded="false" aria-controls="email_profesional">
-                                        <div class="me-3 rotate-90">
-                                            <i class="fa fa-chevron-circle-right" style="color:#5AD1F1;" aria-hidden="true"></i>
-                                        </div>
-                                        <i class="fa fa-envelope fa-1x me-2" style="color:#3B8CEC;" aria-hidden="true"></i>
-                                        <div class="me-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="text-gray-800 fw-bolder">E-mail</div>
+                                <div class="py-0" data-kt-customer-payment-method="row">
+                                    <div class="py-3 d-flex flex-stack flex-wrap">
+                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#email_beneficiario" role="button" aria-expanded="false" aria-controls="email_profesional">
+                                            <div class="me-3 rotate-90">
+                                                <i class="fa fa-chevron-circle-right" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                            </div>
+                                            <i class="fa fa-envelope fa-1x me-2" style="color:#3B8CEC;" aria-hidden="true"></i>
+                                            <div class="me-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="text-gray-800 fw-bolder">E-mail</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div id="email_profesional" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
-                                    <div class="d-flex flex-wrap gap-5">
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <input type="email" id="txtAddEmailBe" class="form-control text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
-                                        </div>                                                   
+                                    <div id="email_beneficiario" class="collapse fs-6 ps-10" data-bs-parent="#datos_profesional">
+                                        <div class="d-flex flex-wrap gap-5">
+                                            <div class="fv-row w-100 flex-md-root">
+                                                <input type="email" id="txtAddEmailBe" class="form-control text-lowercase" value="" placeholder="micorreo@gmail.com" maxlength="80" />
+                                            </div>                                                   
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
