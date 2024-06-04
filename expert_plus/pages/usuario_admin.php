@@ -534,7 +534,7 @@
 					_caduca = data[0]['CaducaPass'];
 					_fechaCaduca = data[0]['FechaCaduca'];
 					_cambiarPass = data[0]['CambiarPass'];
-					_avatar = data[0]['Avatar'] == '' ? 'default.png' : data[0]['Avatar'];
+					_avatar = data[0]['Avatar'] == '' ? 'user.png' : data[0]['Avatar'];
 
 					var _rdboption = 'rdboption_' + _cboPerfil;
 					$('#'+_rdboption).prop('checked','checked');
@@ -545,7 +545,7 @@
 					$("#txtPassword").val(_password);
 					$("#cboPerfil").val(_cboPerfil).change();
 					$("#txtFechacaduca").val(_fechaCaduca);
-					document.getElementById('imgfile').style.backgroundImage="url(img/" + _avatar + ")";
+					document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/" + _avatar + ")";
 
 					if(_caduca == 'SI'){
 						$("#chkCaducaPass").prop("checked", true);
