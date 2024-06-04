@@ -107,6 +107,10 @@
                             $xLogo = trim($presta['Logo']);
                             $xEstado = trim($presta['Estado']);
                             $xUrl = trim($presta['Url']);
+
+                            if($xLogo == ''){
+								$xLogo = 'logo.png';
+							}
                         ?>
                             <?php 
 
@@ -138,7 +142,7 @@
                                 </td>
                                 <td class="d-flex align-items-center">
                                     <a href="<?php echo $xUrl; ?>" <?php echo  $xTarget; ?> class="symbol symbol-50px">
-                                        <span class="symbol-label"  tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUrl; ?>" style="background-image:url(logos/<?php echo $xLogo; ?>);"></span>
+                                        <span class="symbol-label"  tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUrl; ?>" style="background-image:url(assets/images/prestadores/<?php echo $xLogo; ?>);"></span>
                                     </a>
                                     <span class="fw-bolder">&nbsp;&nbsp;<?php echo $xPrestador; ?></span>
                                 </td>

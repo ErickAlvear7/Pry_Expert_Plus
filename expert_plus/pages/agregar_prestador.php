@@ -73,8 +73,8 @@
                 </div>
                 <div id="view_logo" class="collapse fs-6 ms-1">
                     <div class="card-body text-center pt-0">
-                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
-                            <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfile"></div>
+                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
+                            <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/images/prestadores/logo.png);" id="imgfile"></div>
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
                                 <i class="bi bi-pencil-fill fs-7"></i>
                                 <input type="file" name="imglogo" id="imglogo" accept=".png, .jpg, .jpeg" />

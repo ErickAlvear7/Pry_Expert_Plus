@@ -172,7 +172,6 @@
 											</div>
 										</a>
 									</div>
-									
 									<div class="d-flex flex-column">
 										<a href="?page=editsuper_user&menuid=0&tokeid=<?php echo $idusuario; ?>" class="text-gray-800 text-hover-primary mb-1"><?php echo $usuario; ?></a>
 										<span><?php echo $login; ?></span>
