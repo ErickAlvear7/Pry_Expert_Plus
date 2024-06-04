@@ -329,7 +329,7 @@
                                         $xPerid = $per['PerId'];
                                         $xTituid = $per['Tituid'];
                                         $xNombres = $per['Nombres'];
-                                        $xImagen = $per['Imagen'];
+                                        $xAvatar = $per['Imagen'];
                                         $xEstado = $per['Estado'];
                                         $xProvid = $per['CiudadId'];
 
@@ -339,7 +339,10 @@
                                             $all_ciudad = mysqli_query($con, $xSQL);    
                                 
                                         }
-                                            
+
+                                        if($xAvatar == ''){
+                                            $xAvatar = 'user.png';
+                                        }
                                     ?>
                                     <?php 
 
@@ -373,9 +376,11 @@
                                     <?php }?>
                                     <td>
                                         <div class="d-flex align-items-center" data-kt-ecommerce-edit-order-filter="product" data-kt-ecommerce-edit-order-id="product_1">
-                                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
-                                                <span class="symbol-label" style="background-image:url(persona/<?php echo $xImagen; ?>);"></span>
-                                            </a>
+                                            <div class="symbol symbol-circle symbol-50px overflow-hidden me-1">
+                                                <div class="symbol-label">
+                                                    <img src="assets/images/persons/<?php echo $xAvatar; ?>" class="w-100" />
+                                                </div>
+                                            </div>
                                             <div class="ms-5">
                                             <?php echo $xNombres; ?>
                                             </div>
@@ -532,7 +537,7 @@
                                                 <div class="card card-flush py-2">
                                                     <div class="card-body pt-0">
                                                         <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
-                                                            <div class="image-input-wrapper w-150px h-150px" id="imgAvatar" style="background-image: url(assets/media/svg/avatars/Addimg.svg);"></div>
+                                                            <div class="image-input-wrapper w-150px h-150px" id="imgAvatar"></div>
                                                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar foto">
                                                                 <i class="bi bi-pencil-fill fs-7"></i>    
                                                                 <input type="file" id="imgTitular" accept=".png, .jpg, .jpeg" />
@@ -1091,6 +1096,8 @@
     $("#btnAgregartitu").click(function(){
  
         $("#kt_modal_create_app").find('input,textarea').val('').end();
+
+        document.getElementById('imgAvatar').style.backgroundImage="url(assets/images/user.png)";
 
         $('#cboDocumento').val(null).trigger('change');
         $('#cboGenero').val(null).trigger('change');

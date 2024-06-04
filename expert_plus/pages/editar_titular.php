@@ -626,7 +626,7 @@
    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Agregar Beneficiario</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Beneficiario</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -790,7 +790,7 @@
 
         _avatartitu = '<?php echo $xImagen; ?>';
 
-        document.getElementById('imgfiletitular').style.backgroundImage="url(persona/" + _avatartitu + ")";
+        document.getElementById('imgfiletitular').style.backgroundImage="url(assets/images/persons/" + _avatartitu + ")";
 
         var _mensaje = $('input#mensaje').val();
 
@@ -983,7 +983,7 @@
 
                 $("#txtNombre").val(_nombre);
                 $("#txtApellido").val(_apellido);
-                document.getElementById('imgfile').style.backgroundImage="url(persona/" + _avatar + ")";
+                document.getElementById('imgfile').style.backgroundImage="url(assets/images/persons/" + _avatar + ")";
                 $("#txtDireccion").val(_direccion);
                 $("#txtTelcasa").val(_telcasa);
                 $("#txtTelofi").val(_telofi);

@@ -45,7 +45,7 @@
 
             $xFile = (isset($_FILES['xxImgTitu']["name"])) ? $_FILES['xxImgTitu']["name"] : '';
 
-            $xPath = "../persona/";
+            $xPath = "../assets/images/persons/";
 
             $xFechafile = new DateTime();
             $xNombreFile = ($xFile != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxImgTitu"]["name"] : "";  
@@ -57,7 +57,7 @@
                     move_uploaded_file($xTmpFile,$xPath.$xNombreFile);
                 }
             }else{
-                $xNombreFile = "imaadd.png";
+                $xNombreFile = "user.png";
             } 
 
             
