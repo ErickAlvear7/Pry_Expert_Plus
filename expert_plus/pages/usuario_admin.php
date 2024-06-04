@@ -141,7 +141,7 @@
 							$avatar = trim($usu['LogoUser']);
 							$perfil = trim($usu['Perfil']);
 							if($avatar == ''){
-								$avatar = 'default.png';
+								$avatar = 'user.png';
 							}
 						?>
 							<?php 
@@ -168,7 +168,7 @@
 									<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
 										<a href="?page=editsuper_user&menuid=0&tokeid=<?php echo $idusuario; ?>">
 											<div class="symbol-label">
-												<img src="img/<?php echo $avatar; ?>" class="w-100" />
+												<img src="assets/images/users/<?php echo $avatar; ?>" class="w-100" />
 											</div>
 										</a>
 									</div>
@@ -227,7 +227,7 @@
                     </span>
                 </div>
             </div>
-            <div class="modal-body py-lg-10 px-lg-10 mt-n3">
+            <div class="modal-body py-lg-5 px-lg-10 mt-n3">
                 <div class="card mb-1 mb-xl-1">
 					<div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_avatar">
 						<div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
@@ -248,10 +248,10 @@
 						<h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Avatar</h4>
 					</div>
                     <div id="view_avatar" class="collapse fs-6 ms-1">
-                        <div class="card card-flush py-4">
+                        <div class="card card-flush py-2">
                             <div class="card-body pt-0">
-								<div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('img/default.png')">
-									<div class="image-input-wrapper w-125px h-125px" style="background-image: url(img/default.png);" id="imgfile"></div>
+								<div class="image-input image-input-outline" data-kt-image-input="true">
+									<div class="image-input-wrapper w-125px h-125px" id="imgfile"></div>
 									<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar Avatar">
 										<i class="bi bi-pencil-fill fs-7"></i>
 										<input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
@@ -340,7 +340,7 @@
 						<h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Perfiles</h4>
 					</div>
 					<div id="view_perfiles" class="collapse show">
-						<div class="card card-flush py-4">
+						<div class="card card-flush py-2">
 						    <div class="card-body pt-0">
 							    <div class="mb-7" id="divPerfil">
 									
@@ -384,7 +384,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="row g-9 mb-7">
+								<div class="row g-9 mb-2">
 									<div class="col-xl-6 fv-row text-center" id="content" style="display: none;">
 										<div class="position-relative d-flex align-items-center" >
 											<span class="svg-icon position-absolute ms-4 mb-1 svg-icon-2">
@@ -441,7 +441,7 @@
 			_cboPerfil = 0;
 			_avatar = '';
 
-			document.getElementById('imgfile').style.backgroundImage="url(img/default.png)";
+			document.getElementById('imgfile').style.backgroundImage="url(assets/images/user.png)";
 					
 			$("#titulo").text("Nuevo Usuario");
 			document.getElementById("btnSave").innerHTML = '<i class="las la-save"></i>Grabar';

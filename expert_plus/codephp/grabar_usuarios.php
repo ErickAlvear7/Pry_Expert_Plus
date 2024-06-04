@@ -36,7 +36,7 @@
             $xAvatar = $_POST['xxAvatar'];
 
             $xFile = (isset($_FILES['xxFile']["name"])) ? $_FILES['xxFile']["name"] : '';
-            $xPath = "../img/";
+            $xPath = "../assets/images/users/";
 
             $xFechafile = new DateTime();
             $xNombreFile = ($xFile != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFile"]["name"] : "";            
@@ -48,7 +48,7 @@
                     move_uploaded_file($xTmpFile,$xPath.$xNombreFile);
                 }
             }else{
-                $xNombreFile = "default.png";
+                $xNombreFile = "user.png";
             }            
          
             $xSQL ="INSERT INTO `expert_usuarios` (pais_id,empr_id,perf_id,usua_nombres,usua_apellidos,usua_login,usua_password,";
