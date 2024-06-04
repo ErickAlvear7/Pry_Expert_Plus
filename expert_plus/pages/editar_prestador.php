@@ -113,8 +113,8 @@
                 </div>
                 <div id="view_logo" class="collapse fs-6 ms-1">
                     <div class="card-body text-center pt-0">
-                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
-                            <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfile"></div>
+                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
+                            <div class="image-input-wrapper w-150px h-150px" id="imgfile"></div>
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
                                 <i class="bi bi-pencil-fill fs-7"></i>
                                 <input type="file" name="imglogo" id="imglogo" accept=".png, .jpg, .jpeg" />
@@ -1273,7 +1273,7 @@
         _selpresid = 0;
         _selespeid = 0;
 
-        _logo = _logo == '' ? 'companyname.png' : _logo;
+        _logo = _logo == '' ? 'logo.png' : _logo;
 
         $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
         $('#cboCiudad').val(<?php echo $xProvid; ?>).change();
@@ -1284,7 +1284,7 @@
         _enviar2 = "<?php echo $xEnviar2; ?>";
         _enviarprof = "";
 
-        document.getElementById('imgfile').style.backgroundImage="url(logos/" + _logo + ")";
+        document.getElementById('imgfile').style.backgroundImage="url(assets/images/prestadores/" + _logo + ")";
 
         $('#cboProvincia').change(function(){
             
