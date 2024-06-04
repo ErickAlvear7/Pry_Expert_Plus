@@ -37,7 +37,7 @@
             $xEnviar = trim(safe($_POST['xxEnviar']));
 
             $xFile = (isset($_FILES['xxFile']["name"])) ? $_FILES['xxFile']["name"] : '';
-            $xPath = "../img/";
+            $xPath = "../assets/images/persons/";
             $xNombreFile = "";
 
             if($xFile != ''){
@@ -65,6 +65,8 @@
                 $xTmpFile = $_FILES["xxFile"]["tmp_name"];
                 if($xTmpFile != ""){
                     move_uploaded_file($xTmpFile,$xPath.$xNombreFile);
+                }else{
+                    $xNombreFile = "user.png";
                 }
             }
 

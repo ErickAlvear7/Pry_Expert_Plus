@@ -1014,8 +1014,8 @@
                     <div id="view_avatar" class="collapse fs-6 ms-1">
                         <div class="card card-flush py-4">
                             <div class="card-body pt-0">
-                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/files/blank-image.svg')">
-                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfileprof"></div>
+                                <div class="image-input image-input-outline" data-kt-image-input="true">
+                                    <div class="image-input-wrapper w-125px h-125px" id="imgfileprof"></div>
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar Avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
@@ -1355,7 +1355,7 @@
         $("#btnNuevoProfesional").click(function(){
             
             //$('[href="#tabDatos"]').tab('show');
-            document.getElementById('imgfileprof').style.backgroundImage="url(assets/media/svg/files/blank-image.svg)";
+            document.getElementById('imgfileprof').style.backgroundImage="url(assets/images/persons/user.png)";
             $("#modal-new-profesional").find("input,textarea").val("");
             $("#modal-new-profesional").modal("show");
             $('#modal-new-profesional').modal('handleUpdate');
