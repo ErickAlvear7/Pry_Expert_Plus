@@ -309,11 +309,9 @@
                                     <h5 class="text-gray-800 fw-bolder">Grupo</h5>
                                     <div class="fw-bold">
                                         <label class="text-gray-600 text-uppercase"><?php echo $xGrupo; ?></label>
-                                        <button type="button" id="btnConfgrupo" onclick="f_SetGrupo()" class="btn btn-icon btn-light-primary" title="Configurar Secuencial Grupo" >
-                                        </button>
-                                        <!-- <i class="fa fa-cogs fa-1x ms-6 " id="btnGrupo" style="color:#55C4F4;" aria-hidden="true" title="Grupo" data-bs-toggle="tooltip" data-bs-placement="right"></i> -->
-                                        <!-- <a href="#" id="btnGrupo" class="fa fa-cogs fa-1x ms-6" title="Grupo" data-bs-toggle="tooltip" data-bs-placement="right"></a>                                         -->
-                                        <a href="#" id="btnGrupo" class="fa fa-cogs fa-1x ms-6" title="Grupo" data-bs-toggle="tooltip" data-bs-placement="right"></a>                                        
+                                        <button type="button" id="btnGrupo" onclick="" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Configurar" data-bs-toggle="tooltip" data-bs-placement="right">
+                                            <i class="fa fa-cogs " aria-hidden="true"></i>
+                                        </button>                                        
                                     </div>
                                 </div>
                             </div>
