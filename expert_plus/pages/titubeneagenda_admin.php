@@ -1,8 +1,8 @@
 
 <?php
 	
-	//error_reporting(E_ALL);
-    ini_set('display_errors', 0);
+	error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 
    	//file_put_contents('log_seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
 
@@ -309,9 +309,9 @@
                                     <h5 class="text-gray-800 fw-bolder">Grupo</h5>
                                     <div class="fw-bold">
                                         <label class="text-gray-600 text-uppercase"><?php echo $xGrupo; ?></label>
-                                        <button type="button" id="btnGrupo" onclick="" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Configurar" data-bs-toggle="tooltip" data-bs-placement="right">
+                                        <button type="button" id="btnGrupo" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Configurar" data-bs-toggle="tooltip" data-bs-placement="right">
                                             <i class="fa fa-cogs " aria-hidden="true"></i>
-                                        </button>                                        
+                                        </button>   
                                     </div>
                                 </div>
                             </div>
@@ -2167,9 +2167,7 @@
                 </div>   
             </div>   
         </div>
-
     </div>
-
 </div>
 
     <!--Modal Prestador-->
@@ -3165,9 +3163,7 @@
                 </div>
             </div>
         </div>
-    </div>      
-    
-
+    </div>   
 
 
 
@@ -3188,20 +3184,6 @@
         var _cboprestaid = 0;
         var _cbopreeid = 0;
         var _cboprofid = 0;
-
-        // var popover;
-        // var popoverState = false; 
-
-        // var data = {
-        //     id: '',
-        //     eventName: '',
-        //     eventDescription: '',
-        //     startDate: '',
-        //     endDate: '',
-        //     allDay: false
-        // };  
-
-        //OBTENER DATOS DE AGENDAMIENTO 
 
         var _parametros = {
             "xxPaisid": _paisid,
@@ -3655,7 +3637,9 @@
 
         $('#btnGrupo').click(function(){
 
-            _grupoid = "<?php echo $xGrupid; ?> ";
+            $("#modal_new_grupo").modal("show");
+
+            /*_grupoid = "<?php echo $xGrupid; ?> ";
 
             var _parametros = {
                 "xxPaisid" : _paisid,
@@ -3673,39 +3657,12 @@
                 $('#txtnumatendido').val(_json[0].secuencial_atendido);
                 $('#txtnumausente').val(_json[0].secuencial_ausente);
 
-                $("#modal_new_grupo").modal("show");
-            });
+                
+            });*/
             
             
         });
 
-        function f_GuardarGrupo(_paisid, emprid, grupo_id, usua_id){
-
-            _agendasecuen = $('#txtnumagenda').val();
-            _cancelasecuen = $('#txtnumcancelado').val();
-            _atendidosecuen = $('#txtnumatendido').val();
-            _ausentesecuen = $('#txtnumausente').val();
-
-            _parametros = {
-                "xxPaisid" : _paisid,
-                "xxEmprid" : _emprid,
-                "xxGrupoid" : _grupoid,
-                "xxGrupo" : "",
-                "xxSecuenAgenda" : _agendasecuen,
-                "xxSecuenCancela" : _cancelasecuen,
-                "xxSecuenAtendido" : _cancelasecuen,
-                "xxSecuenAusente" : _cancelasecuen,
-                "xxUsuaid" : _usuaid,
-            }
-            var xresult = $.post("codephp/update_grupoid.php", _parametros );
-            xresult.done(function(response){ 
-                if(response.trim() == 'OK'){
-                    toastSweetAlert("top-center",3000,"warning","Datos Actualizados..!");
-                }else{
-                    toastSweetAlert("top-center",3000,"warning","Ocurrio un error en el ajax..!");
-                }
-            });
-        }  
 
     });    
 
@@ -3713,7 +3670,45 @@
         let v = parseInt(this.value);
         if (v < 1) this.value = 1;
         if (v > 99999) this.value = 1;
-        });     
+    });     
+
+
+    function f_GuardarGrupo(_paisid, _emprid, _grupoid, usua_id){
+
+        _agendasecuen = $('#txtnumagenda').val();
+        _cancelasecuen = $('#txtnumcancelado').val();
+        _atendidosecuen = $('#txtnumatendido').val();
+        _ausentesecuen = $('#txtnumausente').val();
+
+        _parametros = {
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxGrupoid" : _grupoid,
+            "xxGrupo" : "",
+            "xxSecuenAgenda" : _agendasecuen,
+            "xxSecuenCancela" : _cancelasecuen,
+            "xxSecuenAtendido" : _cancelasecuen,
+            "xxSecuenAusente" : _cancelasecuen,
+            "xxUsuaid" : _usuaid,
+        }
+
+        var xresult = $.post("codephp/update_grupoid.php", _parametros );
+        xresult.done(function(response){ 
+            if(response.trim() == 'OK'){
+                toastSweetAlert("top-center",3000,"warning","Datos Actualizados..!");
+            }else{
+                toastSweetAlert("top-center",3000,"warning","Ocurrio un error en el ajax..!");
+            }
+        });
+    }     
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }   
+
     
    
     
@@ -3737,6 +3732,10 @@
     $("#modal_cita").draggable({
         handle: ".modal-header"
     });
+
+    $("#modal_new_grupo").draggable({
+        handle: ".modal-header"
+    });    
       
 
 
