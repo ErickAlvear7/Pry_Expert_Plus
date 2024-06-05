@@ -5,7 +5,7 @@
 	$xAvatar = $_SESSION["s_avatar"];
 
 	if(strlen($xAvatar) < 5){
-		$xAvatar = "userlogo.png";
+		$xAvatar = "user.png";
 	}	
 
 ?>
@@ -107,7 +107,7 @@
 									<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 										<!--begin::Menu wrapper-->
 										<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-											<img src="img/<?php echo $xAvatar; ?>" alt="user" />
+											<img src="assets/images/users/<?php echo $xAvatar; ?>" alt="user" />
 										</div>
 
 <?php include 'partials/menus/_user-account-menu.php' ?>
