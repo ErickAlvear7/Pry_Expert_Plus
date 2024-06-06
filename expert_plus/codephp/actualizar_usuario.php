@@ -30,7 +30,7 @@
             if($xCambiarAvatar == 'SI'){
                 $xFile = (isset($_FILES['xxFile']["name"])) ? $_FILES['xxFile']["name"] : '';
 
-                $xPath = "../img/";            
+                $xPath = "../assets/images/users/";            
 
                 $xFechafile = new DateTime();
                 $xNombreFile = ($xFile != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFile"]["name"] : "";            
@@ -43,7 +43,7 @@
                     }
                 }
 
-                if($xAvatar != 'default.png'){
+                if($xAvatar != ''){
                     if(file_exists($xPath . $xAvatar)){
                         unlink($xPath . $xAvatar);
                     }
