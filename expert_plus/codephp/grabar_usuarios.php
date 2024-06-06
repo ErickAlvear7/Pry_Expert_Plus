@@ -33,7 +33,6 @@
             $xFechaCaduca =  $_POST['xxFecha'];
             $xCambiarPass = $_POST['xxCambiarPass'];
             $xCambiarAvatar = $_POST['xxCambiarAvatar'];
-            $xAvatar = $_POST['xxAvatar'];
 
             $xFile = (isset($_FILES['xxFile']["name"])) ? $_FILES['xxFile']["name"] : '';
             $xPath = "../assets/images/users/";
@@ -47,9 +46,8 @@
                 if($xTmpFile != ""){
                     move_uploaded_file($xTmpFile,$xPath.$xNombreFile);
                 }
-            }else{
-                $xNombreFile = "user.png";
-            }            
+            }
+                        
          
             $xSQL ="INSERT INTO `expert_usuarios` (pais_id,empr_id,perf_id,usua_nombres,usua_apellidos,usua_login,usua_password,";
             $xSQL .= "usua_caducapass,usua_fechacaduca,usua_cambiarpass,usua_avatarlogin,usua_usuariocreacion,";

@@ -25,7 +25,6 @@
             $xFechaCaduca =  $_POST['xxFecha'];
             $xCambiarPass = $_POST['xxCambiarPass'];
             $xCambiarAvatar = $_POST['xxCambiarAvatar'];
-            $xAvatar = $_POST['xxAvatar'];
 
             if($xCambiarAvatar == 'SI'){
                 $xFile = (isset($_FILES['xxFile']["name"])) ? $_FILES['xxFile']["name"] : '';
@@ -42,14 +41,6 @@
                         move_uploaded_file($xTmpFile,$xPath.$xNombreFile);
                     }
                 }
-
-                if($xAvatar != ''){
-                    if(file_exists($xPath . $xAvatar)){
-                        unlink($xPath . $xAvatar);
-                    }
-                }
-            }else{
-                $xNombreFile = $xAvatar;
             }
 
             $xSQL = "UPDATE `expert_usuarios` SET perf_id=$xPerfilid,pais_id=$xPaisid,usua_nombres='$xNombre',usua_apellidos='$xApellido',";

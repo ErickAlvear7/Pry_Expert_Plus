@@ -236,7 +236,7 @@
                         <div class="card card-flush py-2">
                             <div class="card-body pt-0">
 								<div class="image-input image-input-outline" data-kt-image-input="true">
-									<div class="image-input-wrapper w-125px h-125px" id="imgfile"></div>
+									<div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/images/users/user.png);" id="imgfile"></div>
 									<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar Avatar">
 										<i class="bi bi-pencil-fill fs-7"></i>
 										<input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
@@ -372,7 +372,7 @@
 								<div class="row col-md-7 mt-3">
 									<div class="col-xl-6 fv-row text-center" id="content" style="display: none;">
 										<div class="position-relative d-flex align-items-center" >
-										    <i class="fa fa-calendar fa-2x me-1" aria-hidden="true"></i>
+										    <i class="fa fa-calendar-check fa-2x me-2" style="color:#3B8CEC;" aria-hidden="true"></i>
 											<input class="form-control form-control-solid ps-12" id="txtFechacaduca" name="txtFechacaduca" placeholder="Seleccione Fecha.." value="<?php echo date('Y-m-d',strtotime($xFechaActual)); ?> " />
 										</div>
 									</div>
@@ -420,7 +420,6 @@
 			_cboPerfil = 0;
 			_avatar = '';
 
-			document.getElementById('imgfile').style.backgroundImage="url(assets/images/user.png)";
 					
 			$("#titulo").text("Nuevo Usuario");
 			document.getElementById("btnSave").innerHTML = '<i class="las la-save"></i>Grabar';
@@ -429,7 +428,7 @@
 			$("#chkCamPass").prop("checked", false);
 			$("#lblCamPass").text("NO");
 			$('#txtPassword').prop('readonly', false);
-			$('#content').css('display','none'); 
+			$('#content').css('display','none');
 			$("#kt_modal_add_user").modal("show");	
 			    
 		});
@@ -662,7 +661,6 @@
 			form_data.append('xxFecha', _fechacaduca);
 			form_data.append('xxCambiarPass', _cambiarPass);
 			form_data.append('xxCambiarAvatar', _selecc);
-			form_data.append('xxAvatar', _avatar);
 			form_data.append('xxFile', _file);                    
 			
 			if(_buscar == 'SI'){
