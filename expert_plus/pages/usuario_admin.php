@@ -336,7 +336,7 @@
 												$xchkCheq = '';
 											?>
 
-											<?php   
+											<?php
 												if($xcontar == 0){
 													$xchkCheq = "checked='checked'";
 												}
@@ -423,6 +423,7 @@
 					
 			$("#titulo").text("Nuevo Usuario");
 			document.getElementById("btnSave").innerHTML = '<i class="las la-save"></i>Grabar';
+			document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/user.png)";
 			$("#chkCaducaPass").prop("checked", false);
 			$("#lblCaducaPass").text("NO");
 			$("#chkCamPass").prop("checked", false);
@@ -467,20 +468,21 @@
 
 		//refrescar modal al cerrar 
 
-		$('#kt_modal_add_user').on('hidden.bs.modal', function (e) {
-			$(this)
-			.find("input,textarea,select")
-			.val('')
-			.end()
-			.find("input[type=checkbox], input[type=radio]")
-			.prop("checked", "")
-			.end();
-		})
+		// $('#kt_modal_add_user').on('hidden.bs.modal', function (e) {
+		// 	$(this)
+		// 	.find("input,textarea,select")
+		// 	.val('')
+		// 	.end()
+		// 	.find("input[type=checkbox], input[type=radio]")
+		// 	.prop("checked", "")
+		// 	.end();
+		// })
 
 		//editar modal usuario
 
 		$(document).on("click",".btnEditar",function(){
-
+            
+			//debugger
 			$("#titulo").text("Editar Usuario");
 			var _emprid = "<?php echo $xEmprid; ?>"
 			_fila = $(this).closest("tr");
@@ -516,6 +518,7 @@
 
 					var _rdboption = 'rdboption_' + _cboPerfil;
 					$('#'+_rdboption).prop('checked','checked');
+					$("input").prop('disabled', false);	
 
 					$("#txtNombre").val(_nombres);
 					$("#txtApellido").val(_apellidos);
@@ -524,6 +527,10 @@
 					$("#cboPerfil").val(_cboPerfil).change();
 					$("#txtFechacaduca").val(_fechaCaduca);
 					document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/" + _avatar + ")";
+                    
+                    if(_login == 'admin@prestasalud.com' && _nombres == 'Administrador'){
+						$("input").prop('disabled', true);
+					}
 
 					if(_caduca == 'SI'){
 						$("#chkCaducaPass").prop("checked", true);
@@ -551,7 +558,6 @@
 					console.log(error);
 				}                            
 			}); 
-					
 			document.getElementById("btnSave").innerHTML = '<i class="las la-pencil-alt"></i>Modificar';
 			$("#kt_modal_add_user").modal("show");
 		});			
@@ -559,9 +565,7 @@
 		//Guardar usuario
 		$('#btnSave').click(function(e){
 			//e.preventDefault();
-			
-			//debugger;
-
+			debugger;
 			var _paisid = "<?php echo $xPaisid; ?>";
 			var _emprid = "<?php echo $xEmprid; ?>";
 			var _usuaid = "<?php echo $xUsuaid; ?>";
@@ -661,7 +665,8 @@
 			form_data.append('xxFecha', _fechacaduca);
 			form_data.append('xxCambiarPass', _cambiarPass);
 			form_data.append('xxCambiarAvatar', _selecc);
-			form_data.append('xxFile', _file);                    
+			form_data.append('xxFile', _file);
+			form_data.append('xxAvatar', _avatar);                    
 			
 			if(_buscar == 'SI'){
 				var xrespuesta = $.post("codephp/consultar_usuarios.php", {xxLogin: _login});
