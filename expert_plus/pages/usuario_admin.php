@@ -430,6 +430,11 @@
 			$("#lblCamPass").text("NO");
 			$('#txtPassword').prop('readonly', false);
 			$('#content').css('display','none');
+			$("#txtNombre").val('');
+			$("#txtApellido").val('');
+			$("#txtLogin").val('');
+			$("#txtPassword").val('');
+			$("input").prop('disabled', false);
 			$("#kt_modal_add_user").modal("show");	
 			    
 		});
@@ -482,7 +487,7 @@
 
 		$(document).on("click",".btnEditar",function(){
             
-			//debugger
+			debugger
 			$("#titulo").text("Editar Usuario");
 			var _emprid = "<?php echo $xEmprid; ?>"
 			_fila = $(this).closest("tr");
@@ -665,8 +670,7 @@
 			form_data.append('xxFecha', _fechacaduca);
 			form_data.append('xxCambiarPass', _cambiarPass);
 			form_data.append('xxCambiarAvatar', _selecc);
-			form_data.append('xxFile', _file);
-			form_data.append('xxAvatar', _avatar);                    
+			form_data.append('xxFile', _file);               
 			
 			if(_buscar == 'SI'){
 				var xrespuesta = $.post("codephp/consultar_usuarios.php", {xxLogin: _login});
