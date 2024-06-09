@@ -32,7 +32,7 @@
             mysqli_query($con, $xSQL);
 
             $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
-            $xSQL .= "VALUES('Cambio Datos del grupo',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
+            $xSQL .= "VALUES('Cambio secuencial del grupo',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
             mysqli_query($con, $xSQL);   
 
             $xRespuesta = "OK";

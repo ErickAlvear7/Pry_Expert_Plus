@@ -76,10 +76,7 @@
                         <option value="Inactivo">Inactivo</option>
                     </select>
                 </div>
-                <a href="?page=addprestador&menuid=<?php echo $menuid; ?>" class="btn btn-light-primary btn-sm">
-                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                    Nuevo Prestador
-                </a>
+                <button type="button" class="btn btn-light-primary btn-sm" onclick="f_NuevoPrestador()" ><i class="fa fa-plus-circle" ></i>Nuevo Prestador</button>
             </div>
         </div>
         <div class="card-body pt-0">
@@ -142,7 +139,7 @@
                                 </td>
                                 <td class="d-flex align-items-center">
                                     <a href="<?php echo $xUrl; ?>" <?php echo  $xTarget; ?> class="symbol symbol-50px">
-                                        <span class="symbol-label"  tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUrl; ?>" style="background-image:url(assets/images/prestadores/<?php echo $xLogo; ?>);"></span>
+                                        <span class="symbol-label" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUrl; ?>" style="background-image:url(assets/images/prestadores/<?php echo $xLogo; ?> );"></span>
                                     </a>
                                     <span class="fw-bolder">&nbsp;&nbsp;<?php echo $xPrestador; ?></span>
                                 </td>
@@ -238,7 +235,11 @@
         //$.redirect('?page=modprestador&menuid=<?php echo $menuid; ?>&id=' + _id); //POR METODO GET
         //location.href='?page=modprestador&menuid=<?php echo $menuid; ?>&id=' + _id; //POR METODO GET
         $.redirect('?page=modprestador&menuid=<?php echo $menuid; ?>', {'id': _id}); //POR METODO POST
-    }        
+    }
+
+    function f_NuevoPrestador(){
+        location.href='?page=addprestador&menuid=<?php echo $menuid; ?>' //POR METODO GET
+    }
 
 </script>
 

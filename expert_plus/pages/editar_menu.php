@@ -158,7 +158,7 @@
                                         <?php
                                                         
                                             if($tareas['Ckeck'] == 'SI'){
-                                                $xTextColorSub = "badge badge-light-success";
+                                                $xTextColorSub = "badge badge-light-primary";
                                                 $Checked = "checked='checked'";
                                             }else{
                                                 $xTextColorSub = "";

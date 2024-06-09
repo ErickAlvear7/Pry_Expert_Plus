@@ -309,7 +309,7 @@
                                     <h5 class="text-gray-800 fw-bolder">Grupo</h5>
                                     <div class="fw-bold">
                                         <label class="text-gray-600 text-uppercase"><?php echo $xGrupo; ?></label>
-                                        <button type="button" id="btnGrupo" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Configurar" data-bs-toggle="tooltip" data-bs-placement="right">
+                                        <button type="button" id="btnGrupo" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Configurar Secuencial" data-bs-toggle="tooltip" data-bs-placement="right">
                                             <i class="fa fa-cogs " aria-hidden="true"></i>
                                         </button>   
                                     </div>
@@ -3637,9 +3637,7 @@
 
         $('#btnGrupo').click(function(){
 
-            $("#modal_new_grupo").modal("show");
-
-            /*_grupoid = "<?php echo $xGrupid; ?> ";
+            _grupoid = "<?php echo $xGrupid; ?> ";
 
             var _parametros = {
                 "xxPaisid" : _paisid,
@@ -3656,24 +3654,39 @@
                 $('#txtnumcancelado').val(_json[0].secuencial_cancelado);
                 $('#txtnumatendido').val(_json[0].secuencial_atendido);
                 $('#txtnumausente').val(_json[0].secuencial_ausente);
-
                 
-            });*/
-            
-            
+                $("#modal_new_grupo").modal("show");
+                
+            });
         });
-
-
     });    
 
     document.getElementById("txtnumagenda").addEventListener("change", function() {
         let v = parseInt(this.value);
         if (v < 1) this.value = 1;
         if (v > 99999) this.value = 1;
-    });     
+    });
+
+    document.getElementById("txtnumcancelado").addEventListener("change", function() {
+        let v = parseInt(this.value);
+        if (v < 1) this.value = 1;
+        if (v > 99999) this.value = 1;
+    });
+    
+    document.getElementById("txtnumatendido").addEventListener("change", function() {
+        let v = parseInt(this.value);
+        if (v < 1) this.value = 1;
+        if (v > 99999) this.value = 1;
+    });
+    
+    document.getElementById("txtnumausente").addEventListener("change", function() {
+        let v = parseInt(this.value);
+        if (v < 1) this.value = 1;
+        if (v > 99999) this.value = 1;
+    });    
 
 
-    function f_GuardarGrupo(_paisid, _emprid, _grupoid, usua_id){
+    function f_GuardarGrupo(_paisid, _emprid, _grupoid, _usuaid){
 
         _agendasecuen = $('#txtnumagenda').val();
         _cancelasecuen = $('#txtnumcancelado').val();
@@ -3684,16 +3697,16 @@
             "xxPaisid" : _paisid,
             "xxEmprid" : _emprid,
             "xxGrupoid" : _grupoid,
-            "xxGrupo" : "",
             "xxSecuenAgenda" : _agendasecuen,
             "xxSecuenCancela" : _cancelasecuen,
-            "xxSecuenAtendido" : _cancelasecuen,
-            "xxSecuenAusente" : _cancelasecuen,
+            "xxSecuenAtendido" : _atendidosecuen,
+            "xxSecuenAusente" : _ausentesecuen,
             "xxUsuaid" : _usuaid,
         }
 
         var xresult = $.post("codephp/update_grupoid.php", _parametros );
-        xresult.done(function(response){ 
+        xresult.done(function(response){
+            $("#modal_new_grupo").modal("hide"); 
             if(response.trim() == 'OK'){
                 toastSweetAlert("top-center",3000,"warning","Datos Actualizados..!");
             }else{
@@ -3707,10 +3720,8 @@
         if (charCode > 31 && (charCode < 48 || charCode > 57))
             return false;
         return true;
-    }   
+    }
 
-    
-   
     
     //Desplazar-modal
     $("#modal-prestador").draggable({
