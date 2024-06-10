@@ -487,7 +487,7 @@
 
 		$(document).on("click",".btnEditar",function(){
             
-			debugger
+			//debugger
 			$("#titulo").text("Editar Usuario");
 			var _emprid = "<?php echo $xEmprid; ?>"
 			_fila = $(this).closest("tr");
@@ -570,7 +570,7 @@
 		//Guardar usuario
 		$('#btnSave').click(function(e){
 			//e.preventDefault();
-			debugger;
+			//debugger;
 			var _paisid = "<?php echo $xPaisid; ?>";
 			var _emprid = "<?php echo $xEmprid; ?>";
 			var _usuaid = "<?php echo $xUsuaid; ?>";
