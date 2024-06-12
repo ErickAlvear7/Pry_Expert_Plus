@@ -233,7 +233,7 @@
                 "xxTipo" : _tipo                    
             }
 
-            var xrespuesta = $.post("codephp/delnew_menu.php", $parametros);
+            var xrespuesta = $.post("codephp/delnew_menu.php", _parametros);
             xrespuesta.done(function(response){
             });
 
