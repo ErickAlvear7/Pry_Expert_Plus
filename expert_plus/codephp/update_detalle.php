@@ -21,9 +21,18 @@
         $xValorV = safe($_POST['xxValorV']);
         $xValorI = safe($_POST['xxValorI']);
 
-        $xSQL = "UPDATE `expert_parametro_detalle` SET pade_nombre = '$xDetalle', pade_valorV = '$xValorV', pade_valorI =  $xValorI ";
-        $xSQL .= "WHERE paca_id = $xPacaid AND pade_id = $xPadeid ";
-        mysqli_query($con, $xSQL);
+        if($xValorV != ''){
+            $xSQL = "UPDATE `expert_parametro_detalle` SET pade_nombre='$xDetalle',pade_valorV='$xValorV' ";
+            $xSQL .= "WHERE paca_id = $xPacaid AND pade_id = $xPadeid ";
+            mysqli_query($con, $xSQL);
+        }
+
+        if($xValorI != 0){
+            $xSQL = "UPDATE `expert_parametro_detalle` SET pade_nombre='$xDetalle',pade_valorI=$xValorI ";
+            $xSQL .= "WHERE paca_id = $xPacaid AND pade_id = $xPadeid ";
+            mysqli_query($con, $xSQL);
+
+        }
     
         $respuesta = "OK";
     }
