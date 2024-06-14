@@ -279,11 +279,13 @@
 
     $('#btnAgregar').click(function(){
       //debugger;
-       var _agregarDet = 'add';
+      
        var _continuar = true;
        var _output;
 
        var _idpais = '<?php echo $xPaisid; ?>';
+       var _idempr = '<?php echo $xEmprid; ?>';
+       var _parametro = $.trim($("#txtNombrePara").val());
 
         if($.trim($('#txtDetalle').val()).length == 0)
         {           
@@ -305,92 +307,93 @@
 
         _detalle = $.trim($('#txtDetalle').val());
         _valorV =  $.trim($('#txtValorV').val());
+        _valorI = $.trim($('#txtValorI').val());
 
-        if($.trim($('#txtValorI').val()).length == 0){
+        if(_valorI == ''){
             _valorI = 0;
-        }else{
-            _valorI = $.trim($('#txtValorI').val());
+            
+        }
+            
+                 
+        var _datosDet ={
+            "xxPaisId" : _idpais,
+            "xxEmprId" : _idempr,
+            "xxParemtro" : _parametro,
+            "xxDetalle" : _detalle,
+            "xxValorV" : _valorV,
+            "xxValorI" : _valorI
         }
 
-        if(_agregarDet == 'add'){
-                
-            var _datosDet ={
-                "xxPaisId" : _idpais,
-                "xxDetalle" : _detalle,
-                "xxValorV" : _valorV,
-                "xxValorI" : _valorI
-            }
+        var xrespuesta = $.post("codephp/consultar_detalle.php", _datosDet);
+        xrespuesta.done(function(response){
 
-            var xrespuesta = $.post("codephp/consultar_detalle.php", _datosDet);
-            xrespuesta.done(function(response){
+            if(response.trim() == 0){
 
-                if(response.trim() == 0){
-
-                    $.each(_result,function(i,item){
-                        if(item.arrydetalle.toUpperCase() == _detalle.toUpperCase())
-                        {                  
-                            toastSweetAlert("top-end",3000,"warning","Detalle ya existe..!!");
-                            _continuar = false;
-                            return false;
-                        }else{
-                            $.each(_result,function(i,item){
-                                if(_valorI == 0)
-                                {
-                                    if(item.arryvalorv.toUpperCase() == _valorV.toUpperCase())
-                                    {                               
-                                        toastSweetAlert("top-end",3000,"warning","Valor texto ya existe..!!");
-                                        _continuar = false;
-                                        return false;
-                                    }else{
-                                        _continuar = true;
-                                    }
-                                }else
-                                {
-                                    if(item.arryvalori == _valorI)
-                                    {                               
-                                        toastSweetAlert("top-end",3000,"warning","Valor entero ya existe..!!");
-                                        _continuar = false;
-                                        return false;
-                                    }else{
-                                        _continuar = true;
-                                    }                            
+                $.each(_result,function(i,item){
+                    if(item.arrydetalle.toUpperCase() == _detalle.toUpperCase())
+                    {                  
+                        toastSweetAlert("top-end",3000,"warning","Detalle ya existe..!!");
+                        _continuar = false;
+                        return false;
+                    }else{
+                        $.each(_result,function(i,item){
+                            if(_valorI == 0)
+                            {
+                                if(item.arryvalorv.toUpperCase() == _valorV.toUpperCase())
+                                {                               
+                                    toastSweetAlert("top-end",3000,"warning","Valor texto ya existe..!!");
+                                    _continuar = false;
+                                    return false;
+                                }else{
+                                    _continuar = true;
                                 }
-                            });
-                        }
-                    });
-
-                    if(_continuar){
-                        _count = _count + 1;
-
-                        _output = '<tr id="row_' + _count + '">';
-                        _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';                
-                        _output += '<td>' + _detalle + ' <input type="hidden" name="hidden_detalle[]" id="txtDetalle' + _count + '" value="' + _detalle + '" /></td>';
-                        _output += '<td>' + _valorV + ' <input type="hidden" name="hidden_valorv[]" id="txtValorV' +_count + '" value="' + _valorV + '" /></td>';
-                        _output += '<td>' + _valorI + ' <input type="hidden" name="hidden_valori[]" id="txtValorI' + _count + '" value="' + _valorI + '" /></td>';
-                        _output += '<td><div class="text-center"><div class="btn-group">';
-                        _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
-                        _output += '</tr>';
-
-                        $('#tblDetalle').append(_output);
-
-                        _objeto = {
-                            arrydetalle: _detalle,
-                            arryvalorv: _valorV,
-                            arryvalori: _valorI,
-                            arryorden: _count
-                        }
-
-                        _result.push(_objeto);
-
-                        $("#txtDetalle").val("");
-                        $("#txtValorV").val("");
-                        $("#txtValorI").val("");
+                            }else
+                            {
+                                if(item.arryvalori == _valorI)
+                                {                               
+                                    toastSweetAlert("top-end",3000,"warning","Valor entero ya existe..!!");
+                                    _continuar = false;
+                                    return false;
+                                }else{
+                                    _continuar = true;
+                                }                            
+                            }
+                        });
                     }
-                }else{
-                    toastSweetAlert("top-end",3000,"warning","Detalle valor texto o entero ya existe..!!");
+                });
+
+                if(_continuar){
+                    _count = _count + 1;
+                    
+                    _output = '<tr id="row_' + _count + '">';
+                    _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';                
+                    _output += '<td>' + _detalle + ' <input type="hidden" name="hidden_detalle[]" id="txtDetalle' + _count + '" value="' + _detalle + '" /></td>';
+                    _output += '<td>' + _valorV + ' <input type="hidden" name="hidden_valorv[]" id="txtValorV' +_count + '" value="' + _valorV + '" /></td>';
+                    _output += '<td>' + _valorI + ' <input type="hidden" name="hidden_valori[]" id="txtValorI' + _count + '" value="' + _valorI + '" /></td>';
+                    _output += '<td><div class="text-center"><div class="btn-group">';
+                    _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
+                    _output += '</tr>';
+
+                    $('#tblDetalle').append(_output);
+
+                    _objeto = {
+                        arrydetalle: _detalle,
+                        arryvalorv: _valorV,
+                        arryvalori: _valorI,
+                        arryorden: _count
+                    }
+
+                    _result.push(_objeto);
+
+                    $("#txtDetalle").val("");
+                    $("#txtValorV").val("");
+                    $("#txtValorI").val("");
                 }
-            });
-        }
+            }else{
+                toastSweetAlert("top-end",3000,"warning","Detalle, valor texto o entero ya existe..!!");
+            }
+        });
+        
     });
 
   

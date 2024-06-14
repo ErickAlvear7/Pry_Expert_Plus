@@ -307,7 +307,9 @@
 
         var _estado = 'A';
         var _pacaid = '<?php echo $idpaca; ?>';
-        _paisid = '<?php echo  $xPaisid; ?>';
+        var _paisid = '<?php echo  $xPaisid; ?>';
+        var _emprid = '<?php echo  $xEmprid; ?>';
+        var _parametro = $.trim($("#txtParaEdit").val());
         var _ordendet = '<?php echo  $xOrdenDet; ?>';
        
         if($.trim($('#txtDetalle').val()).length == 0)
@@ -342,6 +344,8 @@
 
         var _datosDetalle ={
             "xxPaisId" : _paisid,
+            "xxEmprId" : _emprid,
+            "xxParemtro" : _parametro,
             "xxDetalle" : _detalle,
             "xxValorV" : _valorV,
             "xxValorI" : _valorI
@@ -419,6 +423,7 @@
     //Editar Detalle Modal
 
     $(document).on("click",".btnEditar",function(){
+
         $("#modal_detalle input").val("");
         $("#txtValorVedit").prop("disabled",false);
         $("#txtValorIedit").prop("disabled",false);      
@@ -441,9 +446,12 @@
 					success: function(data){ 
 
                      //console.log(data);
+                        //debugger;
                         var _nombre = data[0]['Nombre'];
                         var _valorv = data[0]['ValorT'];
                         var _valori = data[0]['ValorI'];
+                        
+                        
 
                         $("#txtDetalleEdit").val(_nombre);
                         $("#txtValorVedit").val(_valorv);
@@ -456,7 +464,7 @@
                         if(_valorv == ''){
                             $("#txtValorVedit").prop("disabled",true);   
                         }
-                        if(_valori == 0){
+                        if(_valori == ''){
                             $("#txtValorIedit").prop("disabled",true);   
                         }
 
@@ -499,7 +507,7 @@
             }
         }
 
-        if(_valorI != 0){
+        if(_valorI != ''){
             if(_valorI != _valoriold){
                 _consultar = 'SI'; 
             }

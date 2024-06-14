@@ -40,7 +40,7 @@
                 }
             }
 
-            if($xValori != '0'){
+            if($xValori != ''){
                 if($xValori != $xValoriold){
                     $xSQL = " SELECT * FROM `expert_parametro_detalle` pade, `expert_parametro_cabecera` pac  ";
                     $xSQL .= " WHERE pac.paca_id=pade.paca_id AND pac.pais_id=$xPaisid AND pade.pade_valorV='$xValori' ";
