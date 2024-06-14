@@ -12,10 +12,10 @@
     $log_file = "err_consulta";
     $xRow = 0;  
 
-    if(isset($_POST['xxPaisId']) and isset($_POST['xxDetalle']) and isset($_POST['xxValorV']) and isset($_POST['xxValorI']) ){
-        if(isset($_POST['xxPaisId']) <> '' and isset($_POST['xxDetalle']) <> '' and isset($_POST['xxValorV']) <> '' and isset($_POST['xxValorI']) <> ''){ 
+    if(isset($_POST['xxPacaId']) and isset($_POST['xxDetalle']) and isset($_POST['xxValorV']) and isset($_POST['xxValorI']) ){
+        if(isset($_POST['xxPacaId']) <> '' and isset($_POST['xxDetalle']) <> '' and isset($_POST['xxValorV']) <> '' and isset($_POST['xxValorI']) <> ''){ 
 
-            $xPaisid = $_POST['xxPaisId'];
+            $xPacaid = $_POST['xxPacaId'];
             $xDetalle = $_POST['xxDetalle'];
             $xValorv = $_POST['xxValorV']; 
             $xValori = $_POST['xxValorI']; 
@@ -25,16 +25,14 @@
             $xValoriold = $_POST['xxValorIold']; 
             
             if(strtoupper($xDetalle) != strtoupper($xDetalleold)){
-                $xSQL = " SELECT * FROM `expert_parametro_detalle` pade, `expert_parametro_cabecera` pac  ";
-                $xSQL .= " WHERE pac.paca_id=pade.paca_id AND pac.pais_id=$xPaisid AND pade.pade_nombre='$xDetalle' ";
+                $xSQL = "SELECT * FROM `expert_parametro_detalle` pade WHERE pade.paca_id=$xPacaid AND pade.pade_nombre='$xDetalle'";
                 $all_det = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
                 $xRow = mysqli_num_rows($all_det);                
             }
 
             if($xValorv != ''){
                 if(strtoupper($xValorv) != strtoupper($xValorvold)){
-                    $xSQL = " SELECT * FROM `expert_parametro_detalle` pade, `expert_parametro_cabecera` pac  ";
-                    $xSQL .= " WHERE pac.paca_id=pade.paca_id AND pac.pais_id=$xPaisid AND pade.pade_valorV='$xValorv' ";
+                    $xSQL = "SELECT * FROM `expert_parametro_detalle` pade WHERE pade.paca_id=$xPacaid AND pade.pade_valorV='$xValorv'";
                     $all_det = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
                     $xRow = mysqli_num_rows($all_det);                    
                 }
@@ -42,8 +40,7 @@
 
             if($xValori != ''){
                 if($xValori != $xValoriold){
-                    $xSQL = " SELECT * FROM `expert_parametro_detalle` pade, `expert_parametro_cabecera` pac  ";
-                    $xSQL .= " WHERE pac.paca_id=pade.paca_id AND pac.pais_id=$xPaisid AND pade.pade_valorV='$xValori' ";
+                    $xSQL = "SELECT * FROM `expert_parametro_detalle` pade WHERE pade.paca_id=$xPacaid AND pade.pade_valorI='$xValori'";
                     $all_det = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
                     $xRow = mysqli_num_rows($all_det);                    
                 }

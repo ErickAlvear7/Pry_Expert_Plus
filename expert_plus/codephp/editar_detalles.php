@@ -16,24 +16,25 @@
             $xDataDetalle = [];
             $xValorI = '';
 
-            $xSQL =  "SELECT pade_nombre AS Nombre, pade_valorV AS ValorT, pade_valorI AS ValorI FROM `expert_parametro_detalle`  ";
-            $xSQL .= "WHERE pade_id = $xPadeid AND paca_id = $xPacaid ";
+
+            $xSQL = "SELECT pade.pade_nombre AS Nombre, pade.pade_valorV AS ValorV, pade.pade_valorI AS ValorI,(SELECT paca.paca_nombre ";
+            $xSQL .="FROM  `expert_parametro_cabecera` paca WHERE paca.paca_id=$xPacaid) AS Parametro ";
+            $xSQL .="FROM `expert_parametro_detalle` pade  WHERE pade.pade_id=$xPadeid";
             $consulta = mysqli_query($con, $xSQL);
 
             foreach ($consulta as $datos){ 
                 $xNombre = $datos["Nombre"];
-                $xValorV = $datos["ValorT"];
+                $xValorV = $datos["ValorV"];
                 $xValorI = $datos["ValorI"];
+                $xParametro = $datos["Parametro"];
 
-                if($xValorI == 0){
-                    $xValorI = '';
-                }
-         
 
                 $xDataDetalle[] = array(
                         'Nombre'=> $xNombre, 
-                        'ValorT'=> $xValorV, 
-                        'ValorI'=> $xValorI);
+                        'ValorV'=> $xValorV, 
+                        'ValorI'=> $xValorI,
+                        'Parametro'=> $xParametro,
+                    );
                                   
             }
 

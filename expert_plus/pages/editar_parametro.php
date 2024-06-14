@@ -248,6 +248,16 @@
                         <div class="row mb-7">
                             <div class="col-md-3">
                                 <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                    <span>Parametro:</span>
+                                </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="txtParametroEdit" name="txtParametroEdit" disabled />
+                            </div>
+                        </div>
+                        <div class="row mb-7">
+                            <div class="col-md-3">
+                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                                     <span class="required">Detalle</span>
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Ingrese Detalle"></i>
                                 </label>
@@ -448,11 +458,15 @@
                      //console.log(data);
                         //debugger;
                         var _nombre = data[0]['Nombre'];
-                        var _valorv = data[0]['ValorT'];
+                        var _valorv = data[0]['ValorV'];
                         var _valori = data[0]['ValorI'];
-                        
-                        
+                        var _parametro = data[0]['Parametro'];
 
+                        if(_valori == 0){
+                            _valori = '';
+                        }
+                        
+                        $("#txtParametroEdit").val(_parametro);
                         $("#txtDetalleEdit").val(_nombre);
                         $("#txtValorVedit").val(_valorv);
                         $("#txtValorIedit").val(_valori);
@@ -464,7 +478,7 @@
                         if(_valorv == ''){
                             $("#txtValorVedit").prop("disabled",true);   
                         }
-                        if(_valori == ''){
+                        if(_valori == 0){
                             $("#txtValorIedit").prop("disabled",true);   
                         }
 
@@ -531,8 +545,8 @@
             return false;
         }
 
-        var _datosDetalle ={
-            "xxPaisId" : _paisid,
+        var _parametros ={
+            "xxPacaId" : _pacaid,
             "xxDetalle" : _nombre,
             "xxValorV" : _valorV,
             "xxValorI" : _valorI,
@@ -542,7 +556,7 @@
         }
 
         if(_consultar == 'SI'){
-            var xrespuesta = $.post("codephp/consultar_detalledit.php", _datosDetalle);
+            var xrespuesta = $.post("codephp/consultar_detalledit.php", _parametros);
             xrespuesta.done(function(response){
                 if(response.trim() == 0){
 
