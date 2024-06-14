@@ -31,6 +31,7 @@
     $xPaisid = $_SESSION["i_paisid"];
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
+	$xCodigoPerf = 0;
 
 	$xFechaActual = strftime('%Y-%m-%d', time());
 	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
@@ -44,6 +45,11 @@
 	$xSQL .= " ORDER BY Codigo ";
 	//file_put_contents('log_seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
     $all_perfil = mysqli_query($con, $xSQL);
+	foreach($all_perfil as $perfil){ 
+		if($perfil['Descripcion'] == 'Administrador' ){
+			$xCodigoPerf = $perfil['Codigo'];
+		}
+	}
 
 ?>
  	<!--begin::Container-->
@@ -181,9 +187,9 @@
 											<button id="btnReset_<?php echo $idusuario; ?>" onclick="f_ResetPass(<?php echo $idusuario; ?>,<?php echo $xEmprid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledReset;?> title='Resetear Password' data-bs-toggle="tooltip" data-bs-placement="left">
 												<i class='fa fa-key'></i>
 											</button>		
-											<button id="btnEditar_<?php echo $idusuario; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Usuario' data-bs-toggle="tooltip" data-bs-placement="left">
+											<button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " <?php echo $xDisabledEdit; ?> onclick="f_EditarUsuario(<?php echo $idusuario; ?>,'<?php echo $usuario; ?>')" title='Editar Usuario' data-bs-toggle="tooltip" data-bs-placement="left" >
 												<i class='fa fa-edit'></i>
-											</button>	                                                
+											</button>													                                                
 										</div>
 									</div>
 								</td>	
@@ -410,6 +416,7 @@
 		//abrir-modal-nuevo-usuario
 		$("#btnNuevo").click(function(){
 
+			var _codigoperf = "<?php echo $xCodigoPerf; ?>";
 			_addmod = 'add';
 			_caduca = 'NO';
 			_cambiarPass = 'NO';
@@ -417,7 +424,7 @@
 			_cboPerfil = 0;
 			_avatar = '';
 
-					
+			console.log(_codigoperf);
 			$("#titulo").text("Nuevo Usuario");
 			document.getElementById("btnSave").innerHTML = '<i class="las la-save"></i>Grabar';
 			document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/user.png)";
@@ -432,6 +439,7 @@
 			$("#txtLogin").val('');
 			$("#txtPassword").val('');
 			$("input").prop('disabled', false);
+			$("#rdboption_" + _codigoperf).prop("checked", true);
 			$("#kt_modal_add_user").modal("show");	
 			    
 		});
@@ -479,89 +487,7 @@
 		// 	.prop("checked", "")
 		// 	.end();
 		// })
-
-		//editar modal usuario
-
-		$(document).on("click",".btnEditar",function(){
-            
-			//debugger
-			$("#titulo").text("Editar Usuario");
-			var _emprid = "<?php echo $xEmprid; ?>"
-			_fila = $(this).closest("tr");
-			var _data = $('#kt_table_users').dataTable().fnGetData(_fila);
-			
-			_idusu = _data[0];
-			_loginold = _data[1];
-			_addmod = 'mod';                     
-
-			$parametros = {
-				xxEmprid: _emprid,
-				xxIdUsuario: _idusu
-			}
-
-			$.ajax({
-				url: "codephp/editar_usuarios.php",
-				type: "POST",
-				dataType: "json",
-				data: $parametros,          
-				success: function(data){ 
-					//console.log(data);
-					//debugger;
-					var _nombres = data[0]['Nombres'];
-					var _apellidos = data[0]['Apellidos'];
-					var _login = data[0]['Login'];
-					var _password = data[0]['Password'];
-
-					_cboPerfil = data[0]['CodigoPerfil'];						
-					_caduca = data[0]['CaducaPass'];
-					_fechaCaduca = data[0]['FechaCaduca'];
-					_cambiarPass = data[0]['CambiarPass'];
-					_avatar = data[0]['Avatar'] == '' ? 'user.png' : data[0]['Avatar'];
-
-					var _rdboption = 'rdboption_' + _cboPerfil;
-					$('#'+_rdboption).prop('checked','checked');
-					$("input").prop('disabled', false);	
-
-					$("#txtNombre").val(_nombres);
-					$("#txtApellido").val(_apellidos);
-					$("#txtLogin").val(_login);
-					$("#txtPassword").val(_password);
-					$("#cboPerfil").val(_cboPerfil).change();
-					$("#txtFechacaduca").val(_fechaCaduca);
-					document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/" + _avatar + ")";
-                    
-                    if(_login == 'admin@prestasalud.com' && _nombres == 'Administrador'){
-						$("input").prop('disabled', true);
-					}
-
-					if(_caduca == 'SI'){
-						$("#chkCaducaPass").prop("checked", true);
-						$("#lblCaducaPass").text("SI");  
-						$('#content').css('display','block');       
-					}else if(_caduca == 'NO'){
-						$("#chkCaducaPass").prop("checked", false);
-						$("#lblCaducaPass").text("NO");  
-						$('#content').css('display','none');   
-
-					}
-
-					if(_cambiarPass == 'SI'){
-						$("#chkCamPass").prop("checked", true);
-						$("#lblCamPass").text('SI');
-					}else if(_cambiarPass == 'NO'){
-						$("#chkCamPass").prop("checked", false);
-						$("#lblCamPass").text('NO');	
-					}
-																							
-				},
-				error: function (error){
-					console.log(error);
-				}                            
-			}); 
-			document.getElementById("btnSave").innerHTML = '<i class="las la-pencil-alt"></i>Modificar';
-			$("#kt_modal_add_user").modal("show");
-		});			
-
+		
 		//Guardar usuario
 		$('#btnSave').click(function(e){
 			//e.preventDefault();
@@ -789,6 +715,77 @@
 	});
 
 	//cambiar estado y desactivar botones en linea
+
+	function f_EditarUsuario(_idusu,_loginold){
+			$("#titulo").text("Editar Usuario");
+			var _emprid = "<?php echo $xEmprid; ?>";
+			_addmod = 'mod';                     
+
+			var _parametros = {
+				xxEmprid: _emprid,
+				xxIdUsuario: _idusu
+			}
+
+			$.ajax({
+				url: "codephp/editar_usuarios.php",
+				type: "POST",
+				dataType: "json",
+				data: _parametros,          
+				success: function(data){ 
+					var _nombres = data[0]['Nombres'];
+					var _apellidos = data[0]['Apellidos'];
+					var _login = data[0]['Login'];
+					var _password = data[0]['Password'];
+
+					_cboPerfil = data[0]['CodigoPerfil'];						
+					_caduca = data[0]['CaducaPass'];
+					_fechaCaduca = data[0]['FechaCaduca'];
+					_cambiarPass = data[0]['CambiarPass'];
+					_avatar = data[0]['Avatar'] == '' ? 'user.png' : data[0]['Avatar'];
+
+					var _rdboption = 'rdboption_' + _cboPerfil;
+					$('#'+_rdboption).prop('checked','checked');
+					$("input").prop('disabled', false);	
+
+					$("#txtNombre").val(_nombres);
+					$("#txtApellido").val(_apellidos);
+					$("#txtLogin").val(_login);
+					$("#txtPassword").val(_password);
+					$("#cboPerfil").val(_cboPerfil).change();
+					$("#txtFechacaduca").val(_fechaCaduca);
+					document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/" + _avatar + ")";
+                    
+                    if(_login == 'admin@prestasalud.com' && _nombres == 'Administrador'){
+						$("input").prop('disabled', true);
+					}
+
+					if(_caduca == 'SI'){
+						$("#chkCaducaPass").prop("checked", true);
+						$("#lblCaducaPass").text("SI");  
+						$('#content').css('display','block');       
+					}else if(_caduca == 'NO'){
+						$("#chkCaducaPass").prop("checked", false);
+						$("#lblCaducaPass").text("NO");  
+						$('#content').css('display','none');   
+
+					}
+
+					if(_cambiarPass == 'SI'){
+						$("#chkCamPass").prop("checked", true);
+						$("#lblCamPass").text('SI');
+					}else if(_cambiarPass == 'NO'){
+						$("#chkCamPass").prop("checked", false);
+						$("#lblCamPass").text('NO');	
+					}
+																							
+				},
+				error: function (error){
+					console.log(error);
+				}                            
+			}); 
+			document.getElementById("btnSave").innerHTML = '<i class="las la-pencil-alt"></i>Modificar';
+			$("#kt_modal_add_user").modal("show");			
+		}	
 
 	function f_UpdateEstado(_emprid, _userid){
 		let _check = $("#chk" + _userid).is(":checked");
