@@ -27,7 +27,7 @@
             $xApellido = safe($_POST['xxApellido']);
             $xLogin = safe($_POST['xxLogin']); 
             $xPasword = safe($_POST['xxPassword']);
-            $xPass = md5('$xPasword'); 
+            $xPass = md5($xPasword); 
             $xPerfilid =  $_POST['xxPerfilid'];
             $xCaducaPass =  $_POST['xxCaducaPass'];
             $xFechaCaduca =  $_POST['xxFecha'];
@@ -47,8 +47,7 @@
                     move_uploaded_file($xTmpFile,$xPath.$xNombreFile);
                 }
             }
-                        
-         
+                                 
             $xSQL ="INSERT INTO `expert_usuarios` (pais_id,empr_id,perf_id,usua_nombres,usua_apellidos,usua_login,usua_password,";
             $xSQL .= "usua_caducapass,usua_fechacaduca,usua_cambiarpass,usua_avatarlogin,usua_usuariocreacion,";
             $xSQL .= "usua_fechacreacion,usua_terminalcreacion) ";

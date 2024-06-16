@@ -186,9 +186,9 @@
                 let _check = $("#chk" + _id).is(":checked");
                 
                 if(_check){
-                    $("#"+_div).addClass("badge badge-light-success");
+                    $("#"+_div).addClass("badge badge-light-primary");
                 }else{
-                    $("#"+_div).removeClass("badge badge-light-success");
+                    $("#"+_div).removeClass("badge badge-light-primary");
                 }
             });
 
