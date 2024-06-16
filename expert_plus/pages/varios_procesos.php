@@ -169,7 +169,7 @@
     mysqli_query($con, $xSQL);    
 
     $xSQL = "INSERT INTO `expert_menu_tarea` (empr_id,menu_id,tare_id,meta_orden) ";
-    $xSQL .= "VALUES(1,200005,100008,1 ) ";
+    $xSQL .= "VALUES(1,200005,100008,0 ) ";
     mysqli_query($con, $xSQL);    
 
     $xSQL = "DELETE FROM `expert_motivos_especialidad` ";    
@@ -183,27 +183,27 @@
     mysqli_query($con, $xSQL);  
 
     $xSQL = "INSERT INTO `expert_perfil_menu_tarea` (empr_id,meta_id,perf_id,pais_id,meta_estado) ";
-    $xSQL .= "VALUES(1,300001,2,1'A' ) ";
+    $xSQL .= "VALUES(1,300001,2,1,'A' ) ";
     mysqli_query($con, $xSQL);
 
     $xSQL = "INSERT INTO `expert_perfil_menu_tarea` (empr_id,meta_id,perf_id,pais_id,meta_estado) ";
-    $xSQL .= "VALUES(1,300002,2,1'A' ) ";
+    $xSQL .= "VALUES(1,300002,2,1,'A' ) ";
     mysqli_query($con, $xSQL);
 
     $xSQL = "INSERT INTO `expert_perfil_menu_tarea` (empr_id,meta_id,perf_id,pais_id,meta_estado) ";
-    $xSQL .= "VALUES(1,300003,2,1'A' ) ";
+    $xSQL .= "VALUES(1,300003,2,1,'A' ) ";
     mysqli_query($con, $xSQL);
 
     $xSQL = "INSERT INTO `expert_perfil_menu_tarea` (empr_id,meta_id,perf_id,pais_id,meta_estado) ";
-    $xSQL .= "VALUES(1,300004,2,1'A' ) ";
+    $xSQL .= "VALUES(1,300004,2,1,'A' ) ";
     mysqli_query($con, $xSQL);
 
     $xSQL = "INSERT INTO `expert_perfil_menu_tarea` (empr_id,meta_id,perf_id,pais_id,meta_estado) ";
-    $xSQL .= "VALUES(1,300005,2,1'A' ) ";
+    $xSQL .= "VALUES(1,300005,2,1,'A' ) ";
     mysqli_query($con, $xSQL);
 
     $xSQL = "INSERT INTO `expert_perfil_menu_tarea` (empr_id,meta_id,perf_id,pais_id,meta_estado) ";
-    $xSQL .= "VALUES(1,300006,2,1'A' ) ";
+    $xSQL .= "VALUES(1,300006,2,1,'A' ) ";
     mysqli_query($con, $xSQL);
 
     $xSQL = "DELETE FROM `expert_persona` ";    
