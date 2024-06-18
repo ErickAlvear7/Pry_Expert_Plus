@@ -121,10 +121,16 @@
         <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
             <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n2">
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">Datos Generales</a>
+                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">
+                       <i class="fa fa-tasks fa-1x me-2" aria-hidden="true"></i>  
+                        Datos Generales
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Especialidad Prestador</a>
+                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">
+                        <i class="fa fa-stethoscope fa-1x me-2" aria-hidden="true"></i>
+                        Especialidad Prestador
+                    </a>
                 </li>
                 <a href="?page=prestador_admin&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
@@ -136,7 +142,7 @@
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <h2>Datos Prestador</h2>
+                                    <h2 class="fw-normal">Datos Prestador</h2>
                                 </div>
                             </div>
                             <div class="card-body pt-0">
@@ -159,7 +165,6 @@
                                         <div class="fv-row mb-7">
                                             <label class="fs-6 fw-bold form-label mt-3">
                                                 <span class="required">Ciudad</span>
-                                                <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Enter the contact's phone number (optional)."></i> -->
                                             </label>
                                             <select name="cboCiudad" id="cboCiudad" aria-label="Seleccione Ciudad" data-control="select2" data-placeholder="Seleccione Ciudad" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2">
                                                 <option></option>
@@ -169,13 +174,12 @@
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="required form-label">Prestador</label>
-                                    <input type="text" name="txtPrestador" id="txtPrestador" class="form-control mb-2 text-uppercase" maxlength="150" placeholder="Nombre del Prestador" value="" />
+                                    <input type="text" name="txtPrestador" id="txtPrestador" class="form-control mb-2" maxlength="150" placeholder="Nombre del Prestador" value="" />
                                     <div class="text-muted fs-7">El Prestador puede ser Clinica/Centro Medico/Estudio/Consultorio/Otros..</div>
                                 </div>   
-                                
-                                <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                                <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-0 row-cols-lg-2">
                                     <div class="col">
-                                        <div class="fv-row mb-7">
+                                        <div class="fv-row mb-0">
                                             <label class="fs-6 fw-bold form-label mt-3">
                                                 <span class="required">Sector</span>
                                                 <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Ubicacion geografica del prestador"></i>
@@ -193,7 +197,7 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="fv-row mb-7">
+                                        <div class="fv-row mb-0">
                                             <label class="fs-6 fw-bold form-label mt-3">
                                                 <span class="required">Tipo Prestador</span>
                                                 <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Definicion del prestador"></i>
@@ -212,17 +216,15 @@
                                     </div>
                                 </div>                                        
                             </div>
-                        </div>
-                        <div class="card pt-4 mb-6 mb-xl-9">
                             <div class="card-header border-0">
                                 <div class="card-title">
-                                    <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                                    <h2 class="fw-normal">Direccion - Telefonos - Mails</h2>
                                 </div>
                             </div>
                             <div id="kt_customer_view_payment_method" class="card-body pt-0">
                                 <div class="py-0" data-kt-customer-payment-method="row">
                                     <div class="py-3 d-flex flex-stack flex-wrap">
-                                        <div class="d-flex align-items-center  collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_1" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_1">
+                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_1" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_1">
                                             <div class="me-3 rotate-90">
                                                 <span class="svg-icon svg-icon-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -243,10 +245,10 @@
                                             <div class="flex-equal me-5">
                                                 <div class="row mb-8">
                                                     <div class="col-xl-2">
-                                                        <div class="required fs-6 fw-bold mt-2 mb-3">Direccion:</div>
+                                                        <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
                                                     </div>
                                                     <div class="col-xl-10 fv-row">
-                                                        <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"></textarea>
+                                                        <textarea class="form-control mb-2" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-8">
@@ -261,7 +263,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="separator separator-dashed"></div>
                                 <div class="py-0" data-kt-customer-payment-method="row">
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_2" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_2">
@@ -279,7 +280,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div id="kt_customer_view_payment_method_2" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
                                         <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
@@ -312,8 +312,6 @@
                                         </div>                                                
                                     </div>
                                 </div>
-                                <div class="separator separator-dashed"></div>
-                                
                                 <div class="py-0" data-kt-customer-payment-method="row">
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_3" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_3">
@@ -360,34 +358,34 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
-                    <div class="d-flex flex-column gap-7 gap-lg-10">
-                        <div class="form-group mt-2 mb-n2">
-                            <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm mb-2" id="btnAddEspe"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    <div class="d-flex flex-column gap-7">
+                        <div class="form-group">
+                            <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm" id="btnAddEspe"><i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 Agregar Especialidad
                             </button>
                         </div>
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <h3 class="fw-bolder">Especialidades Asignadas</h2>
+                                    <h3 class="fw-normal">Especialidades Asignadas</h2>
                                 </div>
                             </div>
                             <div class="card-body pt-0">
-                                <div class="d-flex flex-column gap-10">
-                                    <table id="tblEspecialidad" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
+                                <div class="d-flex justify-content-center flex-column gap-5">
+                                    <table id="tblEspecialidad" class="table table-sm table-hover table-bordered">
                                         <thead>
                                             <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                                 <th style="display: none;">Id</th>
-                                                <th class="min-w-125px">Especialidad</th>
-                                                <th class="min-w-125px">Pvp</th>
-                                                <th class="min-w-125px">Costo</th>
-                                                <th class="min-w-125px">Opciones</th>
+                                                <th>Especialidad</th>
+                                                <th>Pvp</th>
+                                                <th>Costo</th>
+                                                <th>Opciones</th>
                                             </tr>
                                         </thead>
                                         <tbody class="fw-bold text-gray-600">
                                         </tbody>
                                     </table>
-                                </div>
+                                </div>  
                             </div>
                         </div>
                     </div>
@@ -689,7 +687,7 @@
             var xrespuesta = $.post("codephp/grabar_especialidad.php", _parametros);
             xrespuesta.done(function(response){
                 if(response.trim() == 'EXISTE'){
-                    toastSweetAlert("top-end",3000,"warning","Especialidad ya Existe..!!");
+                    toastSweetAlert("top-end",3000,"warning","Especialidad ya existe..!!");
                 }else{
                     if(response.trim() != 'ERR'){
                         toastSweetAlert("top-end",3000,"success","Especialidad Agregada");
@@ -727,7 +725,7 @@
             var xrespuesta = $.post("codephp/grabar_tipoprestador.php", _parametros);
             xrespuesta.done(function(response){
                 if(response.trim() == 'EXISTE'){
-                    toastSweetAlert("top-end",3000,"warning","Tipo Prestador/Valor ya Existe..!!");
+                    toastSweetAlert("top-end",3000,"warning","Tipo Prestador/Valor ya existe..!!");
                 }else{
                     if(response.trim() != 'ERR'){
                         toastSweetAlert("top-end",3000,"warning","Tipo Prestador Agregado");
@@ -1021,24 +1019,32 @@
                 toastSweetAlert("top-end",3000,"warning","Agregue una Especialidad..!!");
                 return;
            }
+
+           debugger
            
             var _imgfile = document.getElementById("imgfile").style.backgroundImage;
             var _urlimg = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
             var _pos = _urlimg.trim().indexOf('.');
             var _ext = _urlimg.trim().substr(_pos, 5);
 
-            if(_ext.trim() != '.svg'){
-                var _imagen = document.getElementById("imglogo");
-                var _file = _imagen.files[0];
-                var _fullPath = document.getElementById('imglogo').value;
-                _ext = _fullPath.substring(_fullPath.length - 4);
-                _ext = _ext.toLowerCase();   
+            if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
+				_selecc = 'SI';
+			}   
 
-                if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
-                    toastSweetAlert("top-end",3000,"error","Archivo no es una Imagen..!!");
-                    return;
-                }
+            if(_selecc == 'SI'){
+				var _imagen = document.getElementById("imglogo");
+				var _file = _imagen.files[0];
+				var _fullPath = document.getElementById('imglogo').value;
+				_ext = _fullPath.substring(_fullPath.length - 4);
+				_ext = _ext.toLowerCase();   
+			}else{
+                _file='';
             }
+
+			if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
+				toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una imagen..!");
+				return;
+			}
                                 
             form_data = new FormData();
             form_data.append('xxPaisid', _paisid);
@@ -1081,7 +1087,7 @@
                                 xrespuesta.done(function(xrespose){
 
                                     if(xrespose.trim() == 'OK'){
-                                        _detalle = 'Nuevo Prestador Agregado Correctamente';
+                                        _detalle = 'Agregado Correctamente';
                                         _respuesta = 'OK'; 
                                     }else{
                                         _detalle = 'Error creacion de especialidades';
