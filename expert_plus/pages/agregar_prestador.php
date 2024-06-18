@@ -1020,7 +1020,7 @@
                 return;
            }
 
-           debugger
+           //debugger
            
             var _imgfile = document.getElementById("imgfile").style.backgroundImage;
             var _urlimg = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');

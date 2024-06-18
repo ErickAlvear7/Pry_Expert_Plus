@@ -173,10 +173,16 @@
         <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
             <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n2">
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">Datos Generales</a>
+                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">
+                        <i class="fa fa-tasks fa-1x me-2" aria-hidden="true"></i> 
+                        Datos Generales
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Especialidad Prestador</a>
+                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">
+                        <i class="fa fa-stethoscope fa-1x me-2" aria-hidden="true"></i>
+                        Especialidad Prestador
+                    </a>
                 </li>
                 <a href="?page=prestador_admin&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
@@ -188,7 +194,7 @@
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <h2>Datos Prestador</h2>
+                                    <h2 class="fw-normal">Datos Prestador</h2>
                                 </div>
                             </div>
                             <div class="card-body pt-0">
@@ -247,12 +253,12 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="fv-row mb-7">
+                                        <div class="fv-row mb-1">
                                             <label class="fs-6 fw-bold form-label mt-3">
                                                 <span class="required">Tipo Prestador</span>
                                                 <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Definicion del prestador"></i>
                                             </label>
-                                            <select name="cboTipo" id="cboTipo" aria-label="Seleccione Tipo Prestador" data-control="select2" data-placeholder="Seleccione Tipo Prestador" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select mb-2">
+                                            <select name="cboTipo" id="cboTipo" aria-label="Seleccione Tipo Prestador" data-control="select2" data-placeholder="Seleccione Tipo Prestador" data-dropdown-parent="#kt_ecommerce_add_product_general" class="form-select">
                                                 <option></option>
                                                 <?php 
                                                 $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid ";
@@ -265,12 +271,10 @@
                                         </div>
                                     </div>
                                 </div>                                        
-                            </div>  
-                        </div>
-                        <div class="card pt-4 mb-6 mb-xl-9">
+                            </div> 
                             <div class="card-header border-0">
                                 <div class="card-title">
-                                    <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                                    <h2 class="fw-normal mb-0">Direccion - Telefonos - Mails</h2>
                                 </div>
                             </div>
                             <div id="kt_customer_view_payment_method" class="card-body pt-0">
@@ -315,7 +319,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="separator separator-dashed"></div>
                                 <div class="py-0" data-kt-customer-payment-method="row">
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_2" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_2">
@@ -338,34 +341,33 @@
                                         <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono1; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono1; ?>" />
                                             </div>
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono2; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono2; ?>" />
                                             </div> 
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono3" id="txtFono3" maxlength="9" placeholder="0299999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono3; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono3" id="txtFono3" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono3; ?>" />
                                             </div>                                                        
                                         </div>
                                         <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu1; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="09999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu1; ?>" />
                                             </div>
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu2; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu2; ?>" />
                                             </div> 
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" maxlength="10" placeholder="0987654321" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu3; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu3; ?>" />
                                             </div>
                                         </div>                                                
                                     </div>
                                 </div>
-                                <div class="separator separator-dashed"></div>
                                 <div class="py-0" data-kt-customer-payment-method="row">
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_3" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_3">
@@ -407,11 +409,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                     </div>
-                    <div class="d-flex justify-content-end">
-                        <!--<a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancelar</a>-->
+                    <div class="d-flex justify-content-end mt-7">
                         <button type="button" id="btnSave" class="btn btn-sm btn-primary"><i class="las la-save"></i>
                            Grabar
                         </button>
@@ -568,7 +569,7 @@
                                     $xSQL .= "AND pca.paca_nombre='Tipo Especialidad' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
                                     $all_datos =  mysqli_query($con, $xSQL);
                                     foreach ($all_datos as $datos){ ?>
-                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['Descripcion']); ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -1547,10 +1548,10 @@
 
                     _id = response;
                     _output = '<tr id=row_' + _id + '>';
-                    _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _especialidad + '</span><input type="hidden" id="txtEspecialidad' + _id + 'value="' + _especialidad +  '" /></div></div></td>';
-                    _output += '<td><div class=""><div class="ms-5"><span class="fw-bolder">' + _pvp + '</span></div></div></td>';
-                    _output += '<td><div class=""><div class="ms-5"><span class="fw-bolder">' + _costo + '</span></div></div></td>';
-                    _output += '<td id="td_' + _id + '"><div class=""><div class="ms-5"><div class="badge badge-light-primary">ACTIVO</div></div></div></td>';                        
+                    _output += '<td>' + _especialidad + '<input type="hidden" id="txtEspeciPrestador' + _id + 'value="' + _especialidad + '" /></td>';
+                    _output += '<td>' + _pvp + '</td>';
+                    _output += '<td>' + _costo + '</td>';
+                    _output += '<td id="td_' + _id + '"><div class="badge badge-light-primary">ACTIVO</div></td>';                        
                     _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                     _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _cboespe + '" onchange="f_UpdateEstado(';
                     _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
@@ -1709,6 +1710,8 @@
 
         $('#btnSave').click(function(e){
 
+            debugger
+
             var _presid = "<?php echo $xPresid; ?>";
             var _logo = "<?php echo $xLogo; ?>";
             var _provid = $('#cboProvincia').val();
@@ -1726,10 +1729,8 @@
             var _celular3 = $.trim($('#txtCelular3').val());
             var _email1 =  $.trim($('#txtEmail1').val());
             var _email2 =  $.trim($('#txtEmail2').val());
-
             var _providant = $.trim($('#txtcbociudad').val());
             var _prestaant = $.trim($('#txtPrestaant').val());
-
             var _cambiarlogo = 'NO';
             _respuesta = 'OK';
 
@@ -1848,19 +1849,24 @@
             var _ext = _urlimg.trim().substr(_pos, 5);
 
             if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
-                var _imagen = document.getElementById("imglogo");
-                var _file = _imagen.files[0];
-                var _fullPath = document.getElementById('imglogo').value;
-                _ext = _fullPath.substring(_fullPath.length - 4);
-                _ext = _ext.toLowerCase();   
-
-                if(_ext.trim() == '.png' || _ext.trim() == '.jpg' || _ext.trim() == '.jpeg' || _ext.trim() == 'jpeg' ){
-                    _cambiarlogo = 'SI';
-                }else{
-                    toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una Imagen..!"); 
-                    return;
-                }
+				_cambiarlogo = 'SI';
+			} 
+            
+            if(_cambiarlogo == 'SI'){
+				var _imagen = document.getElementById("imglogo");
+				var _file = _imagen.files[0];
+				var _fullPath = document.getElementById('imglogo').value;
+				_ext = _fullPath.substring(_fullPath.length - 4);
+				_ext = _ext.toLowerCase();   
+			}else{
+                _file = '';
             }
+
+            if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
+				toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una Imagen..!");
+				return;
+			}
+
 
             form_data = new FormData();                    
             form_data.append('xxPaisid', _paisid);
@@ -1899,9 +1905,9 @@
                 success: function(response){
                     
                     if(response == 'OK'){
-                        $.redirect('?page=prestador_admin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Actualizado con Exito..!'}); //POR METODO POST
+                        $.redirect('?page=prestador_admin&menuid=<?php echo $menuid; ?>', {'mensaje':'Actualizado con Exito'}); //POR METODO POST
                     }else{
-                        toastSweetAlert("top-end",3000,"info","Prestador ya Existe..!"); 
+                        toastSweetAlert("top-end",3000,"warning","Prestador ya Existe..!!"); 
                     }
                 },
                 error: function (error) {
