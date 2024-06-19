@@ -597,7 +597,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Especialidad Asignada</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Especialidad</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -630,7 +630,7 @@
                                <input type="number" name="txtPvp" id="txtPvp" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" disabled />
                             </div>
                             <div class="col-md-6">
-                               <label class="required form-label">Costo Red</label>
+                               <label class="form-label">Costo Red</label>
                                <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
                         </div>
@@ -650,7 +650,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Especialidad Asignada</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Especialidad</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -683,7 +683,7 @@
                                <input type="number" name="txtPvpEdit" id="txtPvpEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
                             <div class="col-md-6">
-                               <label class="required form-label">Costo Red</label>
+                               <label class="form-label">Costo Red</label>
                                <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
                             <input type="hidden" name="txtcboespe" id="txtcboespe" class="form-control mb-2"  />
@@ -1616,7 +1616,7 @@
                 var xrespuesta = $.post("codephp/grabar_tipoprofesion.php", _parametros);
                 xrespuesta.done(function(response){
 
-                    console.log(response);
+                    //console.log(response);
                     var json = JSON.parse(response);
                     var _pacaid = json.Pacaid;
                     var _padeid = json.Padeid;
@@ -1636,7 +1636,7 @@
                             _output += '<td><div class="btn-group"><button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
                             _output += 'title="Editar Tipo Profesion" onclick="f_EditarTipo(' + _pacaid + ',' + _padeid + ')" ><i class="fa fa-edit"></i></button></div></td></tr>';
                             
-                            console.log(_output);
+                            //console.log(_output);
 
                         }else{
                             _output = '<td>' + _tipoprofesion.toUpperCase() + '<input type="hidden" id="txtPadeid'  + _padeid + '" value="' + _padeid + '"/> <input type="hidden" id="txtTiprofe'  + _padeid + '" value="' + _tipoprofesion + '"/> <input type="hidden" id="txtValor' + _padeid + '" value="' + _valcodigoprof  + '"/></td>';
@@ -2653,17 +2653,19 @@
         xrespuesta.done(function(response){
 
             if(response.trim() == 'OK'){
-                _output = '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _especialidad + '</span><input type="hidden" id="txtEspeciPrestador' + _rowid + '" value="' + _especialidad + '"/></div></div></td>';
-                _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _pvp + '</span></div></div></td>';
-                _output += '<td><div class="d-flex align-items-center"><div class="ms-5"><span class="fw-bolder">' + _costo + '</span></div></div></td>';
-                _output += '<td id="td_' + _rowid + '"><div class="d-flex align-items-center"><div class="ms-5"><div class="badge badge-light-primary">ACTIVO</div></div></div></td>';                        
+                _output = '<td>' + _especialidad + '<input type="hidden" id="txtEspeciPrestador' + _rowid + '" value="' + _especialidad + '"/></td>';
+                _output += '<td>' + _pvp + '</td>';
+                _output += '<td>' + _costo + '</td>';
+                _output += '<td id="td_' + _rowid + '"><div class="badge badge-light-primary">ACTIVO</div></td>';                        
                 _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
                 _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _rowid + '" onchange="f_UpdateEstado(';
                 _output += _paisid + ',' + _emprid + ',' + _rowid + ')" value="' + _rowid + '"/></div></div></td>';
-                _output += '<td class=""><div class=""><div class="btn-group"><button id="btnEditar_' + _rowid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
+                _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEditar_' + _rowid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
                 _output += 'title="Editar Especialidad Asignada" ><i class="fa fa-edit"></i></button>';
                 _output += '<button id="btnPerson_' + _rowid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick="f_AgregarProfesional(';
                 _output += _paisid + ',' + _emprid + ',' + _presid + ',' + _rowid + ')" title="Agregar Profesional" ><i class="fas fa-user"></i></button>';
+                _output += '<button id="btnMotivos_' + _rowid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarMotivos(' + _paisid + ',' + _emprid + ',' + _rowid + ',' + _presid + ',' +_cboespeci + ') title="Agregar Motivos" data-bs-toggle="tooltip" data-bs-placement="left" >';
+                _output += '<i class="fas fa-book"></i></button>';
                 _output += '</div></div></td>';
 
                 $('#row_' + _rowid + '').html(_output);
