@@ -37,38 +37,21 @@
             $xEnviar = trim(safe($_POST['xxEnviar']));
 
             $xFile = (isset($_FILES['xxFile']["name"])) ? $_FILES['xxFile']["name"] : '';
-            $xPath = "../assets/images/persons/";
-            $xNombreFile = "";
+            $xPath = "../assets/images/profesionales/";
 
-            if($xFile != ''){
-                @$xTipo = $_FILES['xxFile']["tmp_name"];
-                @$xMime = mime_content_type($xTipo);
-    
-                if($xMime == 'application/pdf'){
-                    $xExt = '.pdf';
-                }
-    
-                if($xMime == 'image/jpeg' or $xMime == 'image/pjpeg' or $xMime == 'image/jpg' ){
-                    $xExt = '.jpg';
-                }
-    
-                if($xMime == 'image/png'){
-                    $xExt = '.png';
-                }            
-    
-                $xFechafile = new DateTime();
-                //$xNombreFile = ($xFile != "") ? $xNumDoc . "_$xFechafile->getTimestamp()" . "_" . $_FILES["xxFile"]["name"] : "";
-                $xNombreFile = ($xFile != "") ? $xNumDoc . "_" . $xFechafile->getTimestamp() . $xExt : "";
-            }
+            $xFechafile = new DateTime();
+            $xNombreFile = ($xFile != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFile"]["name"] : "";  
+         
 
             if($xFile != ''){
                 $xTmpFile = $_FILES["xxFile"]["tmp_name"];
                 if($xTmpFile != ""){
                     move_uploaded_file($xTmpFile,$xPath.$xNombreFile);
-                }else{
-                    $xNombreFile = "user.png";
                 }
-            }
+            }else{
+                $xNombreFile = "user.png";
+            } 
+
 
             $xSQL = "SELECT * FROM `expert_profesional` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND prof_numdoc='$xNumDoc' ";
             $all_datos = mysqli_query($con, $xSQL);

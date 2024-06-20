@@ -585,8 +585,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnSaveNew" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnSaveNew" class="btn btn-sm btn-light-primary"><i class="fa fa-hdd"></i>Grabar</button>
             </div>
         </div>
     </div>
@@ -597,7 +597,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Especialidad</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Especialidad</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -638,8 +638,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agregar</button> 
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="fa fa-plus me-1"></i>Agregar</button> 
             </div>
         </div>
     </div>
@@ -692,7 +692,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
                 <button type="button" id="btnEditarEspe" onclick="f_GrabarEspe(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>)" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
             </div>
         </div>
@@ -969,7 +969,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
@@ -1016,7 +1016,7 @@
                         <div class="card card-flush py-4">
                             <div class="card-body pt-0">
                                 <div class="image-input image-input-outline" data-kt-image-input="true">
-                                    <div class="image-input-wrapper w-125px h-125px" id="imgfileprof"></div>
+                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/images/users/user.png);" id="imgfileprof"></div>
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar Avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
@@ -1156,7 +1156,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="fs-6 fw-bold mt-3 mb-3">Celular</div>
-                                                <input type="text" class="form-control mb-3" name="txtCelularProf" id="txtCelularProf" maxlength="10" placeholder="099999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                                <input type="text" class="form-control mb-3" name="txtCelularProf" id="txtCelularProf" maxlength="10" placeholder="0999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                                             </div>
                                         </div>
                                     </div>
@@ -1193,8 +1193,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnSaveProf" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnSaveProf" class="btn btn-sm btn-light-primary"><i class="fa fa-hdd"></i>Grabar</button>
             </div>
         </div>
     </div>
@@ -1290,13 +1290,13 @@
         $('#cboProvincia').change(function(){
             
             //debugger;
-            _cboid = $(this).val(); //obtener el id seleccionado
+            _cboid = $(this).val(); //obtener el texto selecionado en el combo
             $("#cboCiudad").empty();
 
             var _parametros = {
-                "xxPaisId" : _paisid,
-                "xxEmprId" : _emprid,
-                "xxComboId" : _cboid,
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxComboid" : _cboid,
                 "xxOpcion" : 0
             }
 
@@ -1352,11 +1352,11 @@
             $("#modal_new_tipoprofesion").modal("show");
             $('#modal_new_tipoprofesion').modal('handleUpdate');
         });
-        
+
+        //Modal NUevo Profesional
         $("#btnNuevoProfesional").click(function(){
             
-            //$('[href="#tabDatos"]').tab('show');
-            document.getElementById('imgfileprof').style.backgroundImage="url(assets/images/persons/user.png)";
+            document.getElementById('imgfileprof').style.backgroundImage="url(assets/images/profesionales/user.png)";
             $("#modal-new-profesional").find("input,textarea").val("");
             $("#modal-new-profesional").modal("show");
             $('#modal-new-profesional').modal('handleUpdate');
@@ -1508,9 +1508,13 @@
                 $('#chkEnviar2').prop('checked','');
                 _enviar2 = 'NO';
             }
-        });                
+        });  
+        
+        //Agregar Especialidad directo a la BDD
 
         $('#btnAgregar').click(function(e){
+
+            debugger;
 
             var _cboespe = $('#cboEspecialidad').val();
             var _especialidad = $("#cboEspecialidad option:selected").text();
@@ -1548,11 +1552,11 @@
 
                     _id = response;
                     _output = '<tr id=row_' + _id + '>';
-                    _output += '<td>' + _especialidad + '<input type="hidden" id="txtEspeciPrestador' + _id + 'value="' + _especialidad + '" /></td>';
+                    _output += '<td>' + _especialidad + '<input type="hidden" id="txtEspeciPrestador' + _id + '" value="' + _especialidad + '" /></td>';
                     _output += '<td>' + _pvp + '</td>';
                     _output += '<td>' + _costo + '</td>';
                     _output += '<td id="td_' + _id + '"><div class="badge badge-light-primary">ACTIVO</div></td>';                        
-                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
+                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">'; 
                     _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _cboespe + '" onchange="f_UpdateEstado(';
                     _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
                     _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEditar_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
@@ -1565,8 +1569,6 @@
 
                     $('#tblEspecialidad').append(_output);
                     //console.log(_output);
-
-                    //mensajesalertify('Especialidad Agregada Correctamente..!', 'S', 'top-center', 3); 
                     $("#modal-add-especialidad").modal("hide");
                     toastSweetAlert("top-end",3000,"success","Especialidad Agregada");
                 }else{
@@ -2585,7 +2587,7 @@
 
     //Update estado Especialidades 
     function f_UpdateEstado(_paisid, _emprid, _preeid){
-        
+
         let _usuaid = "<?php echo $xUsuaid; ?>";
         let _check = $("#chk" + _preeid).is(":checked");
         let _checked = "";
@@ -2615,8 +2617,7 @@
 
         var _parametros = {
             "xxPaisid" : _paisid,
-            "xxEmprId" : _emprid,
-            "xxUsuaid" : _usuaid,
+            "xxEmprid" : _emprid,
             "xxPreeid" : _preeid,
             "xxEstado" : _estado
         }	
@@ -2627,6 +2628,7 @@
         });	
     }            
     
+    //Grabar Editar Especialidad Modal
     function f_GrabarEspe(_paisid, _emprid){
 
         _usuaid = "<?php echo $xUsuaid; ?>";
@@ -2729,8 +2731,18 @@
         var _pos = _url.trim().indexOf('.');
         var _ext = _url.trim().substr(_pos, 5);
 
-        if(_ext.trim() != '.svg' ){
+        if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
             _selecc = 'SI';
+        }  
+        
+        if(_selecc == 'SI'){
+            var _imagen = document.getElementById("imgavatar");
+            var _file = _imagen.files[0];
+            var _fullPath = document.getElementById('imgavatar').value;
+            _ext = _fullPath.substring(_fullPath.length - 4);
+            _ext = _ext.toLowerCase();   
+        }else{
+            _file = '';
         }
 
         if(_tipodoc == ''){
@@ -2746,13 +2758,18 @@
         if(_numdocumento != ''){
             _valor = document.getElementById("txtNumDocumento").value;
             if( !(/^(\d{10}|\d{13})$/.test(_valor)) ) {
-                toastSweetAlert("top-end",3000,"error","Documento Incorrecto..!");  
+                toastSweetAlert("top-end",3000,"error","Documento Incorrecto..!!");  
                 return;
 		    }                
         }
 
         if(_nombres == ''){
-            toastSweetAlert("top-end",3000,"warning","Ingrese Nombres..!!");
+            toastSweetAlert("top-end",3000,"warning","Ingrese Nombre..!!");
+            return;                    
+        }
+
+        if(_apellidos == ''){
+            toastSweetAlert("top-end",3000,"warning","Ingrese Apellido..!!");
             return;                    
         }
 
@@ -2763,7 +2780,6 @@
 
         if(_tipoprof == ''){
             toastSweetAlert("top-end",3000,"warning","Seleccione Profesion..!!");
-       
             return;                    
         }  
         
@@ -2786,18 +2802,6 @@
 			}
 		}
 
-        if(_selecc == 'SI'){
-            var _imagen = document.getElementById("imgavatar");
-            var _file = _imagen.files[0];
-            var _fullPath = document.getElementById('imgavatar').value;
-            _ext = _fullPath.substring(_fullPath.length - 4);
-            _ext = _ext.toLowerCase();   
-
-            if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
-                toastSweetAlert("top-end",3000,"error","Archivo no es Imagen..!!");
-                return;
-            }                    
-        }
 
         if(_emailprof.trim() != ''){
             var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
