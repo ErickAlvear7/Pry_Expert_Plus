@@ -9,12 +9,13 @@
 	$xUsuaid = $_SESSION["i_usuaid"];
 	$xPaisid = $_SESSION["i_paisid"];
 	$xAvatar = $_SESSION["s_avatar"];
+	$xMode = "dark";
 
 	if(strlen($xAvatar) < 5){
 		$xAvatar = "userlogo.png";
 	}
 
-	$xSql = "SELECT * FROM `expert_parametro_paginas` WHERE empr_id=$xEmprid AND usua_id=$xUsuaid ";
+	$xSql = "SELECT * FROM `expert_parametro_paginas` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND usua_id=$xUsuaid ";
 	$all_paginas = mysqli_query($con, $xSql);
 
 	foreach ($all_paginas as $pagina) {
@@ -159,7 +160,7 @@
 						</label>
 					</div>
 				</div>
-			</div>
+			</div> 
 										
 			<script>
 
@@ -179,7 +180,7 @@
 						_mode = "dark";
 					}
 
-					$parametros = {
+					var _parametros = {
 						xxPaisid: _paisid,
 						xxEmprid: _emprid,
 						xxUserid: _usuaid,
@@ -187,20 +188,20 @@
 						xxIndex: 'Content'
 					}
 
-					$.post("codephp/update_darklightmode.php", $parametros , function(response){
+					$.post("codephp/update_darklightmode.php", _parametros , function(response){
 						//console.log(response);
 
 						if(response.trim() == 'OK'){
 
                             /**PARA CREAR REGISTRO DE LOGS */
-                            $parametros = {
+                            var _parametros = {
                                 xxPaisid: _paisid,
                                 xxEmprid: _emprid,
                                 xxUsuaid: _usuaid,
                                 xxDetalle: 'Cambiar Modo a ' + _mode,
                             }					
 
-                            $.post("codephp/new_log.php", $parametros, function(response){
+                            $.post("codephp/new_log.php", _parametros, function(response){
                             }); 
 
 							$.redirect('?page=index');

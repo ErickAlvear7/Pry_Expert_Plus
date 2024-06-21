@@ -36,7 +36,7 @@
 	$xFechaActual = strftime('%Y-%m-%d', time());
 	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
 
-    $xSQL = "SELECT usu.usua_id AS Idusuario, CONCAT(usu.usua_nombres,' ',usu.usua_apellidos) AS Nombres, usu.usua_login AS Email, CASE usu.usua_estado WHEN 'A' THEN 'ACTIVO' ";
+    $xSQL = "SELECT usu.usua_id AS Idusuario, usu.pais_id, CONCAT(usu.usua_nombres,' ',usu.usua_apellidos) AS Nombres, usu.usua_login AS Email, CASE usu.usua_estado WHEN 'A' THEN 'ACTIVO' ";
 	$xSQL .= "ELSE 'INACTIVO' END AS Estado, usu.usua_caducapass AS CaducaPass, usu.usua_avatarlogin AS LogoUser, (SELECT per.perf_descripcion FROM `expert_perfil` per WHERE per.pais_id=$xPaisid AND per.perf_id=usu.perf_id) AS Perfil FROM `expert_usuarios` usu WHERE usu.pais_id=$xPaisid AND usu.empr_id=$xEmprid AND usu.perf_id>1 ";
 	$all_usuarios = mysqli_query($con, $xSQL);
 
@@ -131,6 +131,8 @@
 							$login = trim($usu['Email']);
 							$avatar = trim($usu['LogoUser']);
 							$perfil = trim($usu['Perfil']);
+							$xUserpais = $usu['pais_id'];
+
 							if($avatar == ''){
 								$avatar = 'user.png';
 							}
@@ -151,6 +153,11 @@
 									$xDisabledReset = 'disabled';
 								}
 
+								$xSQL = "SELECT * FROM `expert_pais` WHERE pais_id=$xUserpais ";
+								$all_pais = mysqli_query($con, $xSQL);
+								foreach($all_pais as $pais){ 
+									$xPaisName = $pais['pais_nombre'];
+								}
 							?>
 							<tr>
 								<td style="display:none;"><?php echo $idusuario; ?></td>
@@ -168,7 +175,7 @@
 										<span><?php echo $login; ?></span>
 									</div>
 								</td>
-								<td>Ecuador</td>
+								<td><?php echo $xPaisName; ?> </td>
 								<td><?php echo $perfil; ?></td>
 								<td id="td_<?php echo $idusuario; ?>">
 									<div class="<?php echo $xTextColor; ?>"><?php echo $estado; ?></div>
