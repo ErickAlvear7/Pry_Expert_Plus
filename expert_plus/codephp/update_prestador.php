@@ -51,7 +51,7 @@
             if($xCambiarlogo == 'SI'){
                 $xFile = (isset($_FILES['xxFile']["name"])) ? $_FILES['xxFile']["name"] : '';
 
-                $xPath = "../logos/";            
+                $xPath = "../assets/images/prestadores/";            
 
                 $xFechafile = new DateTime();
                 $xNombreFile = ($xFile != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFile"]["name"] : "";            
@@ -64,22 +64,17 @@
                     }
                 }
 
-                if($xLogo != 'companyname.png'){
-                    if(file_exists($xPath . $xLogo)){
-                        unlink($xPath . $xLogo);
-                    }
-                }
             }else{
                 $xNombreFile = $xLogo;
             }
 
             if($xProvid != $xProvidant){
-                $xSQL = "SELECT * FROM `expert_prestadora` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pres_nombre='$xPrestador' ";
+                $xSQL = "SELECT * FROM `expert_prestadora` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND prov_id=$xProvid AND pres_nombre='$xPrestador' ";
                 $all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
                 $xRow = mysqli_num_rows($all_datos);                
             }else{
                 if($xPrestador != $xPrestadorant){
-                    $xSQL = "SELECT * FROM `expert_prestadora` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pres_nombre='$xPrestador' ";
+                    $xSQL = "SELECT * FROM `expert_prestadora` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND prov_id=$xProvid AND pres_nombre='$xPrestador' ";
                     $all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
                     $xRow = mysqli_num_rows($all_datos);                       
                 }
