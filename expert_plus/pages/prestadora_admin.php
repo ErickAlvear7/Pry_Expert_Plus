@@ -73,7 +73,7 @@
                         <option value="Inactivo">Inactivo</option>
                     </select>
                 </div>
-                <button type="button" class="btn btn-light-primary btn-sm" onclick="f_NuevoPrestador()" ><i class="fa fa-plus-circle" ></i>Nuevo Prestador</button>
+                <button type="button" class="btn btn-light-primary btn-sm" onclick="f_NuevoPrestador()" ><i class="fa fa-plus-circle me-1"></i>Nuevo Prestador</button>
             </div>
         </div>
         <div class="card-body pt-0">

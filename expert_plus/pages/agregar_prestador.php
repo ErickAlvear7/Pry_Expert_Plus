@@ -392,7 +392,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button type="button" id="btnSave" class="btn btn-sm btn-primary"><i class="las la-save"></i>Grabar</button>
+                <button type="button" id="btnSave" class="btn btn-sm btn-primary"><i class="fa fa-hdd me-1"></i>Grabar</button>
             </div>
         </div>
     </form>
@@ -454,8 +454,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnSaveNew" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnSaveNew" class="btn btn-sm btn-light-primary"><i class="fa fa-hdd me-1"></i>Grabar</button>
             </div>
         </div>
     </div>
@@ -583,8 +583,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agregar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="fa fa-plus me-1"></i>Agregar</button>
             </div>
         </div>
     </div>
