@@ -50,7 +50,7 @@
         <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
             <div class="card card-flush py-4">
                 <div class="card-header">
-                    <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_logo">
+                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_logo">														<!--begin::Icon-->
                         <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
                             <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -69,7 +69,7 @@
                         <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Logo</h4>
                     </div>
                 </div>
-                <div id="view_logo" class="collapse fs-6 ms-1">
+                <div id="view_logo" class="collapse show fs-6 ms-1">
                     <div class="card-body text-center pt-0">
                         <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
                             <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/images/prestadores/logo.png);" id="imgfile"></div>
