@@ -665,8 +665,8 @@
                     <div class="card-body pt-0">
                         <div class="row mb-4">
                             <div class="col-md-12">
-                                 <label class="required form-label">Especialidad</label>
-                                <select name="cboEspecialidadEdit" id="cboEspecialidadEdit" aria-label="Seleccione Especialidad" data-control="select2" data-placeholder="Seleccione Especialidad" data-dropdown-parent="#modal-editar-especialidad" class="form-select mb-2">
+                                 <label class="form-label">Especialidad</label>
+                                <select name="cboEspecialidadEdit" id="cboEspecialidadEdit" aria-label="Seleccione Especialidad" data-control="select2" data-placeholder="Seleccione Especialidad" data-dropdown-parent="#modal-editar-especialidad" class="form-select mb-2 form-control form-control-solid" disabled>
                                     <option></option>
                                     <?php 
                                     $xSQL = "SELECT espe_id AS Codigo,espe_nombre AS NombreEspe FROM `expert_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND espe_estado='A' ";
@@ -704,7 +704,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-1000px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Profesional/Configurar Horarios</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Profesional - Configurar Horarios</h2>
                 <h2 id="headerTitle" class="fs-6 fw-light text-primary"></h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
@@ -749,7 +749,7 @@
                         </div>
                         <div class="form-group mt-5 mb-4">
                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarProfesional">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar Profesional
+                                <i class="fa fa-plus-circle me-1" aria-hidden="true"></i>Agregar Profesional
                             </button>
                         </div>
                         <table id="tblProfesional" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
@@ -769,7 +769,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
@@ -780,7 +780,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Configurar Horarios-Turnos</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Configurar Horarios - Turnos</h2>
                 <h5 class="text-primary fw-light" id="headertitu1"></h5>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
@@ -810,20 +810,20 @@
                             </div>
                             <div class="col-md-5">
                                  <label class="required form-label">Hora Desde</label>
-                                 <input class="form-control form-control-solid" name="txtHoraDesde" id="txtHoraDesde" placeholder="Hora Inicio" />
+                                 <input class="form-control" name="txtHoraDesde" id="txtHoraDesde" placeholder="Hora Inicio" />
                             </div>
                             <div class="col-md-5">
                                  <label class="required form-label">Hora Hasta</label>
-                                  <input class="form-control form-control-solid" name="txtHoraHasta" id="txtHoraHasta" placeholder="Hora Hasta" />
+                                  <input class="form-control" name="txtHoraHasta" id="txtHoraHasta" placeholder="Hora Hasta" />
                             </div>
                         </div>
                          <div class="form-group my-5">
                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarHorario">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar Horario
+                                <i class="fa fa-plus-circle me-1" aria-hidden="true"></i>Agregar Horario
                             </button>
                         </div>
                          <div class="separator my-7"></div>
-                        <h2>Turnos Asignados</h2>
+                        <h2 class="fw-normal">Turnos Asignados</h2>
                         <div class="mh-300px scroll-y me-n7 pe-7">
                             <table id="tblHorarios" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
                                 <thead>
@@ -844,7 +844,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
@@ -1220,7 +1220,7 @@
                 <div class="card card-flush pt-10 pb-n3">
                     <div class="card-body pt-0">
                         <div class="row">
-                            <div class="col-md-10">
+                            <div class="col-md-12">
                                  <label class="required form-label">Motivo Especialidad</label>
                                  <textarea class="form-control mb-2" name="txtmotivo" id="txtmotivo" maxlength="500" rows="1" onkeydown="return (event.keyCode!=13);"></textarea>
                             </div>
@@ -1244,7 +1244,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
@@ -1514,7 +1514,7 @@
 
         $('#btnAgregar').click(function(e){
 
-            debugger;
+            //debugger;
 
             var _cboespe = $('#cboEspecialidad').val();
             var _especialidad = $("#cboEspecialidad option:selected").text();
@@ -2031,21 +2031,28 @@
 
     $('#btnAgregarProfesional').click(function(e){
 
+        //debugger;
+
         _profid = $("#cboProfesional").val();
 
         var _profid = $('#cboProfesional').val();
+        var _tipoid = $('#cboTipoProfe').val();
         var _profesional = $('#cboProfesional option:selected').text();
         var _profesion = $('#cboTipoProfe option:selected').text();
         var _intervalo = $('#txtIntervalo').val();
-        
 
-        if(_profid == 0){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Profesional..!"); 
+        if(_tipoid == null){
+            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Profesion..!!"); 
+            return;
+        }
+        
+        if(_profid == ''){
+            toastSweetAlert("top-end",3000,"warning","Seleccione Profesional..!!"); 
             return;
         }
 
         if(_intervalo == ''){
-            toastSweetAlert("top-end",3000,"warning","Ingrese Internvalo..!"); 
+            toastSweetAlert("top-end",3000,"warning","Ingrese Internvalo..!!"); 
             return;
         }                
 
@@ -2079,9 +2086,10 @@
                 _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Eliminar Profesional Asignado" ><i class="fa fa-trash"></i></button></div></div></td></tr>'
                 
                 $('#tblProfesional').append(_output);
+                toastSweetAlert("top-end",3000,"success","Agregado Correctamente"); 
 
             }else{
-                toastSweetAlert("top-end",3000,"error","Error en Ajax-grabar_profescionalespeci"); 
+                toastSweetAlert("top-end",3000,"error","Profesional ya Existe..!!"); 
             }
 
             $("#cboTipoProfe").val(0).change(); 
@@ -2429,23 +2437,19 @@
 
         var _diatext = $('#cboDias option:selected').text();
 
-        if(_dia == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Dia..!");
+        if(_dia == null){
+            toastSweetAlert("top-end",3000,"warning","Seleccione Dia..!!");
             return;
         }
 
-        // if(_intervalo == ''){
-        //     mensajesalertify("Ingrese Internvalo..!", "W", "top-center", 5);
-        //     return;
-        // }
 
         if(_horadesde == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Hora Inicio..!");
+            toastSweetAlert("top-end",3000,"warning","Seleccione Hora Inicio..!!");
             return;
         }
 
         if(_horahasta == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Hora Final..!");
+            toastSweetAlert("top-end",3000,"warning","Seleccione Hora Final..!!");
             return;
         }                
 
@@ -2454,21 +2458,11 @@
         var minutos_inicio = _horadesde.split(':').reduce((p, c) => parseInt(p) * 60 + parseInt(c));
         var minutos_final = _horahasta.split(':').reduce((p, c) => parseInt(p) * 60 + parseInt(c));
         
-        if (minutos_final < minutos_inicio){
-            toastSweetAlert("top-end",3000,"question","La Hora Inicio no puede ser mayor a la Hora Final..!!");
+        if (minutos_final < minutos_inicio || minutos_inicio == minutos_final ){
+            toastSweetAlert("top-end",3000,"question","La Hora Inicio no puede ser menor/igual a la Hora Final..!!");
             return;
         } 
 
-        // var diferencia = minutos_final - minutos_inicio;
-
-        // if(parseInt(_intervalo) >= diferencia){
-        //     mensajesalertify("La diferencia del Intervalo es menor o igual a la horas establecidas..!", "W", "top-center", 5);
-        //     return;
-        // }
-
-        //var horas = Math.floor(diferencia / 60);
-        //var minutos = diferencia % 60;
-        //$('#horas_justificacion_real').val(horas + ':' + (minutos < 10 ? '0' : '') + minutos);
 
         var _parametros = {
             "xxPaisid" : _paisid,
@@ -2499,9 +2493,11 @@
 
                 $('#tblHorarios').append(_output);
                 toastSweetAlert("top-end",3000,"success","Horario Agregado");
+                $("#txtHoraDesde").val('');
+                $("#txtHoraHasta").val('');
 
             }else{
-                toastSweetAlert("top-end",3000,"info","Dia - Turno/Horario ya Existe..!!");
+                toastSweetAlert("top-end",3000,"warning","Dia/Horario ya Existe..!!");
             }
 
             $("#cboDias").val(0).change(); 
