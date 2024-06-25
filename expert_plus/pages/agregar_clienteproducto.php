@@ -52,7 +52,7 @@
         <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
             <div class="card card-flush py-4">
                 <div class="card-header">
-                    <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_logo_cabecera">
+                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_logo_cabecera">														<!--begin::Icon-->
                         <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
                             <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -71,7 +71,7 @@
                         <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Logo Cabecera</h4>
                     </div>
                 </div>
-                <div id="view_logo_cabecera" class="collapse fs-6 ms-1">
+                <div id="view_logo_cabecera" class="collapse show fs-6 ms-1">
                     <div class="card-body text-center pt-0">
                         <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
                             <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/images/clientes/cliente.png);" id="imgfileCab"></div>
@@ -151,7 +151,7 @@
                     <div class="card-body pt-0">
                         <div class="d-grid gap-2">
                             <button type="button" id="btnNewGrupo" class="btn btn-light-primary btn-sm">
-                                <i class="fa fa-plus-circle"></i>Nuevo Grupo                                                               
+                                <i class="fa fa-plus-circle me-1"></i>Nuevo Grupo                                                               
                             </button>
                         </div>                                                      
                     </div>
@@ -161,10 +161,16 @@
         <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
             <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n2">
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">Datos Generales</a>
+                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">
+                        <i class="fa fa-tasks fa-1x me-2" aria-hidden="true"></i> 
+                        Datos Generales
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Productos</a>
+                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">
+                        <i class="fa fa-briefcase fa-1x me-2" aria-hidden="true"></i> 
+                        Productos
+                    </a>
                 </li>
                 <a href="?page=admin_clienteproducto&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
@@ -176,7 +182,7 @@
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <h2>Datos Cliente</h2>
+                                    <h2 class="fw-normal">Datos Cliente</h2>
                                 </div>
                             </div>
                             <div class="card-body pt-0">
@@ -207,21 +213,19 @@
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="required form-label">Cliente</label>
-                                    <input class="form-control mb-2 text-uppercase" type="text" name="txtCliente" id="txtCliente"  minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="" />
+                                    <input class="form-control mb-2" type="text" name="txtCliente" id="txtCliente"  minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="" />
                                 </div>
-                                <div class="mb-5 fv-row">
+                                <div class="mb-2 fv-row">
                                     <label class="form-label">Descripcion</label>
-                                    <textarea class="form-control mb-2 text-uppercase" name="txtDesc" id="txtDesc" rows="1" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
-                                </div>                                 
+                                    <textarea class="form-control" name="txtDesc" id="txtDesc" rows="1" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                                </div> 
                             </div>
-                        </div>
-                        <div class="card pt-4 mb-6 mb-xl-9">
                             <div class="card-header border-0">
                                 <div class="card-title">
-                                    <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                                    <h2 class="fw-normal mb-0">Direccion - Telefonos - Mails</h2>
                                 </div>
                             </div>
-                            <div id="kt_customer_view_payment_method" class="card-body pt-0">
+                            <div class="card-body pt-0">
                                 <div class="py-0" data-kt-customer-payment-method="row">
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <div class="d-flex align-items-center  collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_1" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_1">
@@ -248,7 +252,7 @@
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
                                                     </div>
                                                     <div class="col-xl-10 fv-row">
-                                                        <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" rows="1" maxlength="250" onkeydown="return (event.keyCode!=13);"></textarea>
+                                                        <textarea class="form-control mb-2" name="txtDireccion" id="txtDireccion" rows="1" maxlength="250" onkeydown="return (event.keyCode!=13);"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-8">
@@ -263,7 +267,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="separator separator-dashed"></div>
                                 <div class="py-0" data-kt-customer-payment-method="row">
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_2" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_2">
@@ -314,7 +317,6 @@
                                         </div>                                                
                                     </div>
                                 </div>
-                                <div class="separator separator-dashed"></div>
                                 <div class="py-0" data-kt-customer-payment-method="row">
                                     <div class="py-3 d-flex flex-stack flex-wrap">
                                         <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_3" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_3">
@@ -348,7 +350,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>   
                         </div>
                     </div>
                 </div>
@@ -356,7 +358,7 @@
                     <div class="d-flex flex-column gap-7 gap-lg-10">
                         <div class="form-group mt-2 mb-n2">
                             <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm mb-2" id="btnAddProd">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar Producto
+                                <i class="fa fa-plus-circle me-1" aria-hidden="true"></i>Agregar Producto
                             </button>
                         </div>  
                         <div class="card card-flush py-4">
@@ -389,7 +391,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button type="button" id="btnGrabar" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary btn-sm"><i class="las la-save"></i>
+                <button type="button" id="btnGrabar" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-primary btn-sm"><i class="fa fa-hdd me-1"></i>
                     <span class="indicator-label">Grabar</span>
                 </button>
             </div>
@@ -478,8 +480,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agregar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="fa fa-hdd me-1"></i>Agregar</button>
             </div>
         </div>   
     </div>
@@ -521,13 +523,13 @@
                                 <label class="required form-label">Secuencial Agenda</label>
                             </div>
                             <div class="col-md-2">
-                                <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control form-control-solid" value="1"  />   
+                                <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control form-control-solid" value="1" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"  />   
                             </div>
                             <div class="col-md-4">
                                 <label class="required form-label">Secuencial Cancelado</label>
                             </div>
                             <div class="col-md-2">
-                                <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control form-control-solid" placeholder="1" value="1" /> 
+                                <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control form-control-solid" placeholder="1" value="1" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" /> 
                             </div>
                         </div>
                         <div class="row">
@@ -535,21 +537,21 @@
                                 <label class="required form-label">Secuencial Atendido</label>
                             </div>
                             <div class="col-md-2">
-                                <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control form-control-solid" value="1" />  
+                                <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control form-control-solid" value="1" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />  
                             </div>
                             <div class="col-md-4">
                                 <label class="required form-label">Secuencial Ausente</label>
                             </div>
                             <div class="col-md-2">
-                                <input type="number" name="txtnumausente" id="txtnumausente" class="form-control form-control-solid" placeholder="1" value="1" />  
+                                <input type="number" name="txtnumausente" id="txtnumausente" class="form-control form-control-solid" placeholder="1" value="1" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />  
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-sm btn-light-primary"><i class="las la-save"></i>Grabar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-sm btn-light-primary"><i class="fa fa-hdd me-1"></i>Grabar</button>
             </div>
         </div>
     </div>
@@ -569,9 +571,9 @@
 
 
             var _parametros = {
-                "xxPaisId" : _paisid,
-                "xxEmprId" : _emprid,
-                "xxComboId" : _cboid,
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxComboid" : _cboid,
                 "xxOpcion" : 0
             }
 
@@ -681,7 +683,6 @@
 
     $('#btnAgregar').click(function(){
         
-        var _agregarPro = 'add';
         var _gerencial = 'NO';
         var _continuar = true;
         var _output;
@@ -712,90 +713,94 @@
             return false;
         }
 
-        if(_agregarPro == 'add'){
                 
-            var _parametros = {
-                "xxEmprid" : _emprid,
-                "xxProducto" : _producto
-            }
+        var _parametros = {
 
-            var xrespuesta = $.post("codephp/consultar_producto.php", _parametros);
-                xrespuesta.done(function(response){
-
-                if(response == 0){
-
-                    $.each(_result,function(i,item){
-
-                        if(item.arryproducto.toUpperCase() == _producto.toUpperCase()){
-                            toastSweetAlert("top-end",3000,"warning","Producto ya Existe..!!");
-                            _continuar = false;
-                            return false;
-                        }else{
-                            _continuar = true;
-                        }
-
-                    });
-
-
-                    if(_continuar){
-
-                        var _checked = "checked='checked'";
-                        _count = _count + 1;
-                        _output = '<tr id="row_' + _count + '">';
-                        _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';
-                        _output += '<td>' + _txtGrupo + ' <input type="hidden" name="hidden_grupo[]" id="txtGrupo' + _count + '" value="' + _txtGrupo + '" /></td>';
-                        _output += '<td>' + _productoUpper + ' <input type="hidden" name="hidden_producto[]" id="txtProducto' + _count + '" value="' + _productoUpper + '" /></td>';
-                        _output += '<td>' + _costo + ' <input type="hidden" name="hidden_costo[]" id="txtCosto' + _count + '" value="' + _costo + '" /></td>';
-                        _output += '<td>';
-                        _output += '<button id="btnDelete' + _count + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"  onclick="f_DelProducto('+"'";
-                        _output +=  _producto + "'" + ',' + _count + ')"' + ' title="Eliminar Producto" data-bs-toggle="tooltip" data-bs-placement="right"><i class="fa fa-trash"></i></button></td>';
-                        _output += '</tr>';
-
-                        $('#tblProducto').append(_output);
-
-                        //console.log(_output);
-        
-                        var _objeto = {
-                            arryproducto: _producto,
-                            arrydescripcion: _descripcion,
-                            arrycosto: _costo,
-                            arrygrupid: _cbogrupo,
-                            arrycober: _cobertura,
-                            arrysist: _sistema,
-                            arryasismes: _asistemes,
-                            arryasisanu: _asistanu,
-                            arrygerencial: _gerencial
-                        }
-
-                        _result.push(_objeto);
-
-                        $("#txtProducto").val("");
-                        $("#txtDescripcion").val("");
-                        $("#txtCosto").val("0.00");
-                        $("#cboGrupo").val(0).change();
-                        $("#txtAsisMes").val("1");
-                        $("#txtAsisAnu").val("1");
-                        document.getElementById("chkCobertura").checked = false;
-                        _cobertura = "NO";
-                        $("#lblCobertura").text("Cobertura NO");
-                        document.getElementById("chkSistema").checked = false;
-                        _sistema = "NO";
-                        $("#lblSistema").text("Sistema NO");    
-
-                    }
-                    
-                }else{
-                    toastSweetAlert("top-end",3000,"warning","Producto ya Existe..!!");
-                    return false;
-                }
-            });
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxProducto" : _producto
         }
+
+        var xrespuesta = $.post("codephp/consultar_producto.php", _parametros);
+            xrespuesta.done(function(response){
+
+            if(response == 0){
+
+                $.each(_result,function(i,item){
+
+                    if(item.arryproducto.toUpperCase() == _producto.toUpperCase()){
+                        toastSweetAlert("top-end",3000,"warning","Producto ya Existe..!!");
+                        _continuar = false;
+                        return false;
+                    }else{
+                        _continuar = true;
+                    }
+
+                });
+
+
+                if(_continuar){
+
+                    var _checked = "checked='checked'";
+                    _count = _count + 1;
+                    _output = '<tr id="row_' + _count + '">';
+                    _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';
+                    _output += '<td>' + _txtGrupo + ' <input type="hidden" name="hidden_grupo[]" id="txtGrupo' + _count + '" value="' + _txtGrupo + '" /></td>';
+                    _output += '<td>' + _productoUpper + ' <input type="hidden" name="hidden_producto[]" id="txtProducto' + _count + '" value="' + _productoUpper + '" /></td>';
+                    _output += '<td>' + _costo + ' <input type="hidden" name="hidden_costo[]" id="txtCosto' + _count + '" value="' + _costo + '" /></td>';
+                    _output += '<td>';
+                    _output += '<button id="btnDelete' + _count + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"  onclick="f_DelProducto('+"'";
+                    _output +=  _producto + "'" + ',' + _count + ')"' + ' title="Eliminar Producto" data-bs-toggle="tooltip" data-bs-placement="right"><i class="fa fa-trash"></i></button></td>';
+                    _output += '</tr>';
+
+                    $('#tblProducto').append(_output);
+
+                    //console.log(_output);
+    
+                    var _objeto = {
+                        arryproducto: _producto,
+                        arrydescripcion: _descripcion,
+                        arrycosto: _costo,
+                        arrygrupid: _cbogrupo,
+                        arrycober: _cobertura,
+                        arrysist: _sistema,
+                        arryasismes: _asistemes,
+                        arryasisanu: _asistanu,
+                        arrygerencial: _gerencial
+                    }
+
+                    _result.push(_objeto);
+
+                    $("#txtProducto").val("");
+                    $("#txtDescripcion").val("");
+                    $("#txtCosto").val("0.00");
+                    $("#cboGrupo").val(0).change();
+                    $("#txtAsisMes").val("1");
+                    $("#txtAsisAnu").val("1");
+                    document.getElementById("chkCobertura").checked = false;
+                    _cobertura = "NO";
+                    $("#lblCobertura").text("Cobertura NO");
+                    document.getElementById("chkSistema").checked = false;
+                    _sistema = "NO";
+                    $("#lblSistema").text("Sistema NO");
+                    toastSweetAlert("top-end",3000,"success","Producto Agregado"); 
+                    $("#modal_addproducto").modal("hide");      
+
+                }
+                
+            }else{
+                toastSweetAlert("top-end",3000,"warning","Producto ya Existe..!!");
+                return false;
+            }
+        });
+        
     });
 
         
     // Guardar Cliente & Producto
     function f_Guardar(_idpais,_idempr,_iduser){
 
+        //debugger;
         var _cboProv = $('#cboProvincia').val();
         var _cboIdProv = $('#cboCiudad').val();
         var _cliente = $.trim($("#txtCliente").val());
@@ -810,48 +815,60 @@
         var _cel3 = $.trim($("#txtCelular3").val()); 
         var _email1 = $.trim($("#txtEmail1").val()); 
         var _email2 = $.trim($("#txtEmail2").val());
+        var _seleccab = 'NO';
+        var _selecpie = 'NO';
         
-
-                //Imagen Cabecera
-
+        //Logo Cabecera
         var _imgfileCab = document.getElementById("imgfileCab").style.backgroundImage;
         var _urlimgCab = _imgfileCab.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
         var _posCab = _urlimgCab.trim().indexOf('.');
         var _extCab = _urlimgCab.trim().substr(_posCab, 5);
 
-        if(_extCab.trim() != '.svg'){
-            var _imgCab = document.getElementById("logoCab");
-            var _fileCab = _imgCab.files[0];
-            var _fullPathCab = document.getElementById('logoCab').value;
-            _extCab = _fullPathCab.substring(_fullPathCab.length - 4);
-            _extCab = _extCab.toLowerCase();
+        if(_extCab.trim() != '.png' && _extCab.trim() != '.jpg' && _extCab.trim() != '.jpeg'){
+			_seleccab = 'SI';
+		}
 
-            if(_extCab.trim() != '.png' && _extCab.trim() != '.jpg' && _extCab.trim() != 'jpeg'){
-                toastSweetAlert("top-end",3000,"error","Archivo no es Imagen..!!");
-                return;
-            }               
+        if(_seleccab == 'SI'){
+				var _imagenCab = document.getElementById("logoCab");
+				var _fileCab = _imagenCab.files[0];
+				var _fullPathCab = document.getElementById('logoCab').value;
+				_extCab = _fullPathCab.substring(_fullPathCab.length - 4);
+				_extCab = _extCab.toLowerCase();   
+        }else{
+            _fileCab='';
+        }
+        
+        if(_extCab.trim() != '.png' && _extCab.trim() != '.jpg' && _extCab.trim() != 'jpeg'){
+            toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una imagen..!");
+            return;
         }
 
-            //Imagen Pie
-
+        //Logo Pie
         var _imgfilePie = document.getElementById("imgfilePie").style.backgroundImage;
         var _urlimgPie = _imgfilePie.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
         var _posPie = _urlimgPie.trim().indexOf('.');
         var _extPie = _urlimgPie.trim().substr(_posPie, 5);
 
-        if(_extPie.trim() != '.svg'){
-            var _imgPie = document.getElementById("logoPie");
-            var _filePie = _imgPie.files[0];
+        if(_extPie.trim() != '.png' && _extPie.trim() != '.jpg' && _extPie.trim() != '.jpeg'){
+			_selecpie = 'SI';
+		}
+
+        if(_selecpie == 'SI'){
+            var _imagenPie = document.getElementById("logoPie");
+            var _filePie = _imagenPie.files[0];
             var _fullPathPie = document.getElementById('logoPie').value;
             _extPie = _fullPathPie.substring(_fullPathPie.length - 4);
-            _extPie = _extPie.toLowerCase();
-
-            if(_extPie.trim() != '.png' && _extPie.trim() != '.jpg' && _extPie.trim() != 'jpeg'){
-                toastSweetAlert("top-end",3000,"error","Archivo no es Imagen..!!");
-                return;
-            }               
+            _extPie = _extPie.toLowerCase();   
+        }else{
+            _filePie='';
         }
 
+        if(_extPie.trim() != '.png' && _extPie.trim() != '.jpg' && _extPie.trim() != 'jpeg'){
+            toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una imagen..!");
+            return;
+        }
+
+        
         if(_cboProv == ''){
             toastSweetAlert("top-end",3000,"warning","Seleccione Provincia..!!");
             return false;
@@ -867,10 +884,6 @@
             return false;
         }
 
-        if(_count == 0){
-            toastSweetAlert("top-end",3000,"warning","Ingrese Producto..!!");
-            return false;
-        }
 
         if(_url != ''){
             try{
@@ -903,7 +916,7 @@
         {
             _valor = document.getElementById("txtFono3").value;
             if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
-                toastSweetAlert("top-end",3000,"error","Telefono 2 Incorrecto..!!");  
+                toastSweetAlert("top-end",3000,"error","Telefono 3 Incorrecto..!!");  
                 return;
             }
         }  
@@ -952,10 +965,15 @@
                 return false;
             }  
         }
+
+        if(_count == 0){
+            toastSweetAlert("top-end",3000,"warning","Agregue un Producto..!!");
+            return false;
+        }
         
         var _parametros = {            
-            "xxPaisId" : _idpais,
-            "xxEmprId" : _idempr,
+            "xxPaisid" : _idpais,
+            "xxEmprid" : _idempr,
             "xxCliente" : _cliente
         }
 
@@ -999,7 +1017,7 @@
                                         
                                 if(response.trim() == 'OK'){
 
-                                    $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito'}); //POR METODO POST
+                                    $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Agregado con Éxito'}); //POR METODO POST
                         
                                 }
 
@@ -1041,10 +1059,17 @@
     $("#modal_new_grupo").draggable({
         handle: ".modal-header"
     }); 
+
+    $("#modal_addproducto").draggable({
+        handle: ".modal-header"
+    }); 
+    
     
     //Agregar Grupos
 
     function f_GuardarGrupo(_paisid,_emprid,_usuaid){
+
+        debugger;
 
         var _nombreGrupo = $.trim($("#txtGrupo").val());
         var _descGrupo = $.trim($("#txtDescGrupo").val());
@@ -1059,9 +1084,9 @@
         }
 
         var _parametros = {
-            "xxPaisId" : _paisid,
-            "xxEmprId" : _emprid,
-            "xxUsuaId" : _usuaid,
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxUsuaid" : _usuaid,
             "xxGrupo" : _nombreGrupo,
             "xxDesc" : _descGrupo,
             "xxNumagenda" : _numagenda,

@@ -12,11 +12,11 @@
     $log_file = "err_consulta";
     $xRow = 0;  
 
-    if(isset($_POST['xxPaisId']) and isset($_POST['xxEmprId']) and isset($_POST['xxCliente'])){
-        if(isset($_POST['xxPaisId']) <> '' and isset($_POST['xxEmprId']) <> '' and isset($_POST['xxCliente']) <> ''){ 
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxCliente'])){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxCliente']) <> ''){ 
             
-            $xPaisid = $_POST['xxPaisId'];
-            $xEmprid = $_POST['xxEmprId'];
+            $xPaisid = $_POST['xxPaisid'];
+            $xEmprid = $_POST['xxPaisid'];
             $xCliente= trim(mb_strtoupper(safe($_POST['xxCliente'])));
 
          

@@ -12,15 +12,15 @@
     $log_file = "err_consulta";
     $xRow = 0;  
 
-    if(isset($_POST['xxEmprid']) and isset($_POST['xxProducto'])){
-        if(isset($_POST['xxEmprid']) <> '' and isset($_POST['xxProducto']) <> ''){ 
-
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxProducto'])){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxProducto']) <> ''){ 
+            
+            $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
             $xProducto= trim(mb_strtoupper(safe($_POST['xxProducto'])));
 
-            $xSQL = " SELECT * FROM `expert_productos` prod ";
-            $xSQL .= "INNER JOIN `expert_cliente` clie ON clie.clie_id=prod.clie_id ";
-            $xSQL .= " WHERE clie.empr_id=$xEmprid AND prod.prod_nombre='$xProducto'";
+            $xSQL = "SELECT * FROM `expert_productos` pro INNER JOIN `expert_cliente` clie ON pro.clie_id=clie.clie_id WHERE ";
+            $xSQL .= "pro.clie_id=clie.clie_id AND pro.pais_id=$xPaisid AND pro.empr_id=$xEmprid AND pro.prod_nombre='$xProducto'";
             $all_det = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
             $xRow = mysqli_num_rows($all_det);   
         }

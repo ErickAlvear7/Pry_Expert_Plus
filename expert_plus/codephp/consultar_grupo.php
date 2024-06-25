@@ -36,5 +36,4 @@
 
     mysqli_close($con);
     echo $resultado;
-
 ?>
