@@ -8,6 +8,8 @@
 	$xUsuaid = $_SESSION["i_usuaid"];
 	$xMode = "dark";
 
+	require_once("./dbcon/config.php");
+
 	$xSql = "SELECT * FROM `expert_parametro_paginas` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND usua_id=$xUsuaid ";
 	$all_paginas = mysqli_query($con, $xSql);
 

@@ -15,8 +15,10 @@
 		$xAvatar = "userlogo.png";
 	}
 
-	$xSql = "SELECT * FROM `expert_parametro_paginas` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND usua_id=$xUsuaid ";
-	$all_paginas = mysqli_query($con, $xSql);
+	require_once("./dbcon/config.php");
+
+	$xSQL = "SELECT * FROM `expert_parametro_paginas` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND usua_id=$xUsuaid ";
+	$all_paginas = mysqli_query($con, $xSQL);
 
 	foreach ($all_paginas as $pagina) {
 		$xMode = $pagina['index_content'];
@@ -181,11 +183,11 @@
 					}
 
 					var _parametros = {
-						xxPaisid: _paisid,
-						xxEmprid: _emprid,
-						xxUserid: _usuaid,
-						xxMode: _mode,
-						xxIndex: 'Content'
+						"xxPaisid": _paisid,
+						"xxEmprid": _emprid,
+						"xxUserid": _usuaid,
+						"xxMode": _mode,
+						"xxIndex": 'Content'
 					}
 
 					$.post("codephp/update_darklightmode.php", _parametros , function(response){
@@ -195,10 +197,10 @@
 
                             /**PARA CREAR REGISTRO DE LOGS */
                             var _parametros = {
-                                xxPaisid: _paisid,
-                                xxEmprid: _emprid,
-                                xxUsuaid: _usuaid,
-                                xxDetalle: 'Cambiar Modo a ' + _mode,
+                                "xxPaisid": _paisid,
+                                "xxEmprid": _emprid,
+                                "xxUsuaid": _usuaid,
+                                "xxDetalle": 'Cambiar Modo a ' + _mode,
                             }					
 
                             $.post("codephp/new_log.php", _parametros, function(response){
