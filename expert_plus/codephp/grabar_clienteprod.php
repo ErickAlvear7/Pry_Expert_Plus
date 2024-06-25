@@ -38,31 +38,32 @@
             $xEmail1 = trim(safe($_POST['xxEmail1']));
             $xEmail2 = trim(safe($_POST['xxEmail2']));
 
-            $xFile = (isset($_FILES['xxFileCab']["name"])) ? $_FILES['xxFileCab']["name"] : '';
+            $xFilecab = (isset($_FILES['xxFileCab']["name"])) ? $_FILES['xxFileCab']["name"] : '';
             $xFilepie = (isset($_FILES['xxFilePie']["name"])) ? $_FILES['xxFilePie']["name"] : '';
 
             $xPath = "../assets/images/clientes/";
 
-            $xFechafile = new DateTime();
-            $xNombreFile = ($xFile != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFileCab"]["name"] : "";  
+            $xFechafilecab = new DateTime();
+            $xNombreFileCab = ($xFilecab != "") ? $xFechafilecab->getTimestamp() . "_" . $_FILES["xxFileCab"]["name"] : "";  
             
-            if($xFile != ''){
-                $xTmpFile = $_FILES["xxFileCab"]["tmp_name"];
+            if($xFilecab != ''){
+                $xTmpFileCab = $_FILES["xxFileCab"]["tmp_name"];
 
-                if($xTmpFile != ""){
-                    move_uploaded_file($xTmpFile,$xPath.$xNombreFile);
+                if($xTmpFileCab != ""){
+                    move_uploaded_file($xTmpFileCab,$xPath.$xNombreFileCab);
                 }
             }else{
-                $xNombreFile = "cliente.png";
+                $xNombreFileCab = "cliente.png";
             } 
 
-            $xNombreFilePie = ($xFilepie != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFilePie"]["name"] : "";  
+            $xFechafilepie = new DateTime();
+            $xNombreFilePie = ($xFilepie != "") ? $xFechafilepie->getTimestamp() . "_" . $_FILES["xxFilePie"]["name"] : "";  
 
             if($xFilepie != ''){
-                $xTmpFile = $_FILES["xxFilePie"]["tmp_name"];
+                $xTmpFilePie = $_FILES["xxFilePie"]["tmp_name"];
 
-                if($xTmpFile != ""){
-                    move_uploaded_file($xTmpFile,$xPath.$xNombreFilePie);
+                if($xTmpFilePie != ""){
+                    move_uploaded_file($xTmpFilePie,$xPath.$xNombreFilePie);
                 }
             }else{
                 $xNombreFilePie = "cliente.png";
@@ -73,7 +74,7 @@
             $xSQL .= "clie_url,clie_tel1,clie_tel2,clie_tel3,clie_cel1,clie_cel2,clie_cel3,clie_email1,clie_email2, ";
             $xSQL .= "clie_imgcab,clie_imgpie,usuariocreacion,fechacreacion,terminalcreacion ) ";
             $xSQL .= "VALUES($xPaisid,$xEmprid,$xProvid,'$xCliente','$xDesc','$xDirec','$xUrl','$xTel1','$xTel2', ";
-            $xSQL .= "'$xTel3','$xCel1','$xCel2','$xCel3','$xEmail1','$xEmail2','$xNombreFile','$xNombreFilePie',$xUsuaid, ";
+            $xSQL .= "'$xTel3','$xCel1','$xCel2','$xCel3','$xEmail1','$xEmail2','$xNombreFileCab','$xNombreFilePie',$xUsuaid, ";
             $xSQL .= "'{$xFecha}','$xTerminal') ";
 
             if(mysqli_query($con, $xSQL)){

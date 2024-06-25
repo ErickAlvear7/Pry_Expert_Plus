@@ -16,12 +16,12 @@
     $xTerminal = gethostname();
     $resultado = "ERR";
   
-    if(isset($_POST['xxPaisId']) and isset($_POST['xxEmprId']) and isset($_POST['xxUsuaId']) and isset($_POST['xxGrupo'])){
-        if(isset($_POST['xxPaisId']) <> '' and isset($_POST['xxEmprId']) <> '' and isset($_POST['xxUsuaId']) <> '' and isset($_POST['xxGrupo']) <> ''){    
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxGrupo'])){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxGrupo']) <> ''){    
 
-            $xPaisid= $_POST['xxPaisId'];
-            $xEmprid = $_POST['xxEmprId'];
-            $xUsuaid = $_POST['xxUsuaId'];
+            $xPaisid= $_POST['xxPaisid'];
+            $xEmprid = $_POST['xxEmprid'];
+            $xUsuaid = $_POST['xxUsuaid'];
             $xGrupo = trim(mb_strtoupper(safe($_POST['xxGrupo'])));
             $xDesc = trim(mb_strtoupper(safe($_POST['xxDesc'])));
 
