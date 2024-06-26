@@ -393,7 +393,7 @@
 				</div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
                 <button type="button" id="btnSave" class="btn btn-sm btn-light-primary"></button> 
             </div>
         </div>
@@ -433,7 +433,7 @@
 
 			console.log(_codigoperf);
 			$("#titulo").text("Nuevo Usuario");
-			document.getElementById("btnSave").innerHTML = '<i class="las la-save"></i>Grabar';
+			document.getElementById("btnSave").innerHTML = '<i class="fa fa-hdd me-1"></i>Grabar';
 			document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/user.png)";
 			$("#chkCaducaPass").prop("checked", false);
 			$("#lblCaducaPass").text("NO");
