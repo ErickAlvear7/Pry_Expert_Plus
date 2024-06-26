@@ -65,11 +65,11 @@
 					}
 
 					var _parametros = {
-						xxPaisid: _paisid,
-						xxEmprid: _emprid,
-						xxUserid: _usuaid,
-						xxMode: _mode,
-						xxIndex: 'Menu'
+						"xxPaisid": _paisid,
+						"xxEmprid": _emprid,
+						"xxUserid": _usuaid,
+						"xxMode": _mode,
+						"xxIndex": 'Menu'
 					}
 
 					$.post("codephp/update_darklightmode.php", _parametros , function(response){
@@ -79,10 +79,10 @@
 
                             /**PARA CREAR REGISTRO DE LOGS */
                             var _parametros = {
-                                xxPaisid: _paisid,
-                                xxEmprid: _emprid,
-                                xxUsuaid: _usuaid,
-                                xxDetalle: 'Cambiar Modo a ' + _mode,
+                                "xxPaisid": _paisid,
+                                "xxEmprid": _emprid,
+                                "xxUsuaid": _usuaid,
+                                "xxDetalle": 'Cambiar Modo a ' + _mode,
                             }					
 
                             $.post("codephp/new_log.php", _parametros, function(response){
