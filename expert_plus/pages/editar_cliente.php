@@ -92,7 +92,7 @@
         <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
             <div class="card card-flush py-4">
                 <div class="card-header">
-                    <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_logo_cabecera">
+                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_logo_cabecera">														<!--begin::Icon-->
                         <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
                             <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -111,10 +111,10 @@
                         <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Logo Cabecera</h4>
                     </div>
                 </div>
-                <div id="view_logo_cabecera" class="collapse fs-6 ms-1">
+                <div id="view_logo_cabecera" class="collapse show fs-6 ms-1">
                     <div class="card-body text-center pt-0">
-                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
-                            <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfileCab"></div>
+                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
+                            <div class="image-input-wrapper w-150px h-150px" id="imgfileCab"></div>
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
                                 <i class="bi bi-pencil-fill fs-7"></i>
                                 <input type="file" name="avatar" id="logoCab" accept=".png, .jpg, .jpeg" />
@@ -154,8 +154,8 @@
                 </div>
                 <div id="view_logo_pie" class="collapse fs-6 ms-1">
                     <div class="card-body text-center pt-0">
-                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
-                            <div class="image-input-wrapper w-150px h-150px" style="background-image: url(assets/media/svg/files/blank-image.svg);" id="imgfilePie"></div>
+                        <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
+                            <div class="image-input-wrapper w-150px h-150px" id="imgfilePie"></div>
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cargar Logo">
                                 <i class="bi bi-pencil-fill fs-7"></i>
                                 <input type="file" name="avatar" id="logoPie" accept=".png, .jpg, .jpeg" />
@@ -227,7 +227,7 @@
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <h2>Datos Cliente</h2>
+                                    <h2 class="fw-normal">Datos Cliente</h2>
                                 </div>
                             </div>
                             <div class="card-body pt-0">
@@ -262,19 +262,17 @@
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="required form-label">Cliente</label>
-                                    <input type="text" name="txtCliente" id="txtCliente" class="form-control mb-2 text-uppercase" minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="<?php echo $xCliente; ?>" />
+                                    <input type="text" name="txtCliente" id="txtCliente" class="form-control mb-2" minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="<?php echo $xCliente; ?>" />
                                     <input type="hidden" name="txtClieant" id="txtClieant" class="form-control mb-2" value="<?php echo $xCliente; ?>" />
                                 </div>
-                                <div class="mb-5 fv-row">
+                                <div class="mb-1 fv-row">
                                     <label class="form-label">Descripcion</label>
-                                    <textarea class="form-control mb-2 text-uppercase" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"><?php echo $xDesc; ?></textarea>
+                                    <textarea class="form-control mb-2" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"><?php echo $xDesc; ?></textarea>
                                 </div>                                 
                             </div>
-                        </div>
-                        <div class="card pt-4 mb-6 mb-xl-9">
                             <div class="card-header border-0">
                                 <div class="card-title">
-                                    <h2 class="fw-bolder mb-0">Direccion/Telefono/Mails</h2>
+                                    <h2 class="fw-normal">Direccion - Telefonos - Mails</h2>
                                 </div>
                             </div>
                             <div id="kt_customer_view_payment_method" class="card-body pt-0">
@@ -304,7 +302,7 @@
                                     					<div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
                                     				</div>
                                     				<div class="col-xl-10 fv-row">
-                                    					<textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDirec; ?> </textarea>
+                                    					<textarea class="form-control mb-2" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDirec; ?> </textarea>
                                     				</div>
                                     			</div>
                                     			<div class="row mb-8">
@@ -351,7 +349,7 @@
                                             </div> 
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel3; ?>" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono3" id="txtFono3" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel3; ?>" />
                                             </div>                                                        
                                         </div>
                                         <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
@@ -405,10 +403,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>    
                     </div>
-                    <div class="d-flex justify-content-end">
-                		<button type="button" id="btnGrabar" class="btn btn-primary btn-sm"><i class="las la-save"></i>
+                    <div class="d-flex justify-content-end mt-5">
+                		<button type="button" id="btnGrabar" class="btn btn-primary btn-sm"><i class="fa fa-hdd me-1"></i>
                 			<span class="indicator-label">Grabar</span>
                 		</button>
             	   </div>
@@ -585,8 +583,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-               <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" class="btn btn-sm btn-light-primary" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" ><i class="las la-save"></i>Grabar</button>
+               <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-primary" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" ><i class="fa fa-hdd me-1"></i>Grabar</button>
             </div>
         </div>
     </div>
@@ -720,7 +718,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
@@ -807,8 +805,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="las la-plus"></i>Agregar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="fa fa-plus me-1"></i>Agregar</button>
             </div>
         </div>   
     </div>
@@ -903,7 +901,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
                 <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
             </div>
         </div>
@@ -928,12 +926,12 @@
 
         //Cargar imagen logo cabecera
         var _imgCab  = "<?php echo $xImgc; ?>";
-        _imgCab = _imgCab == '' ? 'logo.png' : _imgCab;
-        document.getElementById('imgfileCab').style.backgroundImage="url(logos/" + _imgCab + ")"; 
+        _imgCab = _imgCab == '' ? 'cliente.png' : _imgCab;
+        document.getElementById('imgfileCab').style.backgroundImage="url(assets/images/clientes/" + _imgCab + ")"; 
             //Cargar imagen logp pie
         var _imgPie = "<?php echo $xImgp; ?>";
-        _imgPie = _imgPie == '' ? 'logo.png' : _imgPie;  
-        document.getElementById('imgfilePie').style.backgroundImage="url(logos/" + _imgPie + ")"; 
+        _imgPie = _imgPie == '' ? 'cliente.png' : _imgPie;  
+        document.getElementById('imgfilePie').style.backgroundImage="url(assets/images/clientes/" + _imgPie + ")"; 
         
         $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
         $('#cboCiudad').val(<?php echo $xProvid; ?>).change();
@@ -962,9 +960,9 @@
             $("#cboCiudad").empty();
 
             var _parametros = {
-                "xxPaisId" : _paisid,
-                "xxEmprId" : _emprid,
-                "xxComboId" : _cboid,
+                "xxPaisid" : _paisid,
+                "xxEmprid" : _emprid,
+                "xxComboid" : _cboid,
                 "xxOpcion" : 0
             }
 
@@ -1654,6 +1652,7 @@
     //Grabar editar cliente
     $('#btnGrabar').click(function(e){
 
+        //debugger;
         var _idclie = '<?php echo $clieid; ?>';
         var _idpais = '<?php echo $xPaisid; ?>';
         var _idempr = '<?php echo $xEmprid; ?>';
@@ -1675,6 +1674,8 @@
 
         var _providant = $.trim($('#txtcbociudad').val());
         var _clieant = $.trim($("#txtClieant").val());
+        var _seleccab = 'NO';
+        var _selecpie = 'NO';
       
 
         if(_cboCiudad == ''){
@@ -1773,12 +1774,13 @@
 
             
         //Log Cabecera
-        var _logocab = document.getElementById("imgfileCab").style.backgroundImage;
-        var _urlcab = _logocab.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-            _extcab = _urlcab.substring(_urlcab.length - 4);
+        var _imgfilecab = document.getElementById("imgfileCab").style.backgroundImage;
+        var _urlimgcab = _imgfilecab.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+        var _poscab = _urlimgcab.trim().indexOf('.');
+        var _extcab = _urlimgcab.trim().substr(_poscab, 5);
 
         if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != 'jpeg'){
-             _seleccab = 'SI';
+            _seleccab = 'SI';
         }  
 
         if(_seleccab == 'SI'){
@@ -1787,18 +1789,20 @@
             var _fullPathcab = document.getElementById('logoCab').value;
             _extcab = _fullPathcab.substring(_fullPathcab.length - 4);
             _extcab = _extcab.toLowerCase();   
+        }else{
+            _filecab='';
         }
 
         if(_extcab.trim() != '.png' && _extcab.trim() != '.jpg' && _extcab.trim() != 'jpeg'){
-            toastSweetAlert("top-end",3000,"error","Cabecera no es Imagen..!!");
+            toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una Imagen..!!");
             return;
         }
 
-            //Log Pie
-      
-        var _logopie = document.getElementById("imgfilePie").style.backgroundImage;
-        var _urlpie = _logopie.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-        _extpie = _urlpie.substring(_urlpie.length - 4);
+        //Log Pie
+        var _imgfilepie = document.getElementById("imgfilePie").style.backgroundImage;
+        var _urlimgpie = _imgfilepie.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+        var _pospie = _urlimgpie.trim().indexOf('.');
+        var _extpie = _urlimgpie.trim().substr(_pospie, 5);
      
         if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != 'jpeg'){
              _selecpie = 'SI';
@@ -1810,6 +1814,8 @@
             var _fullPathpie = document.getElementById('logoPie').value;
             _extpie = _fullPathpie.substring(_fullPathpie.length - 4);
             _extpie = _extpie.toLowerCase();   
+        }else{
+            _filepie='';
         }
 
         if(_extpie.trim() != '.png' && _extpie.trim() != '.jpg' && _extpie.trim() != 'jpeg'){

@@ -48,7 +48,7 @@
 
             if($xCambiarcab == 'SI'){
                 $xFile = (isset($_FILES['xxFileCab']["name"])) ? $_FILES['xxFileCab']["name"] : '';
-                $xPath = "../logos/";
+                $xPath = "../assets/images/clientes/";
 
                 $xFechafile = new DateTime();
                 $xNombreFile = ($xFile != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFileCab"]["name"] : "";  
@@ -61,7 +61,7 @@
                     }
                 }
                 
-                $xSQL = "UPDATE `expert_cliente` SET clie_imgcab='$xNombreFile' WHERE clie_id=$xClieid AND pais_id=$xPaisid ";
+                $xSQL = "UPDATE `expert_cliente` SET clie_imgcab='$xNombreFile' WHERE clie_id=$xClieid AND pais_id=$xPaisid AND empr_id=$xEmprid";
                 mysqli_query($con, $xSQL);
 
             }
@@ -69,7 +69,7 @@
             if($xCambiarpie == 'SI'){
 
                 $xFilepie = (isset($_FILES['xxFilePie']["name"])) ? $_FILES['xxFilePie']["name"] : '';
-                $xPath = "../logos/";
+                $xPath = "../assets/images/clientes/";
 
                 $xFechafile = new DateTime();
                 $xNombreFilePie = ($xFilepie != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFilePie"]["name"] : ""; 
@@ -82,7 +82,7 @@
                     }
                 }
 
-                $xSQL = "UPDATE `expert_cliente` SET clie_imgpie='$xNombreFilePie' WHERE clie_id=$xClieid AND pais_id=$xPaisid ";
+                $xSQL = "UPDATE `expert_cliente` SET clie_imgpie='$xNombreFilePie' WHERE clie_id=$xClieid AND pais_id=$xPaisid AND empr_id=$xEmprid";
                 mysqli_query($con, $xSQL);
 
             }
@@ -93,7 +93,7 @@
                 $xRow = mysqli_num_rows($all_datos);                
             }else{
                 if($xCliente != $xCienteant){
-                    $xSQL = "SELECT * FROM `expert_cliente` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND clie_nombre='$xCliente' ";
+                    $xSQL = "SELECT * FROM `expert_cliente` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND prov_id=$xProvid AND clie_nombre='$xCliente' ";
                     $all_datos = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
                     $xRow = mysqli_num_rows($all_datos);                       
                 }
