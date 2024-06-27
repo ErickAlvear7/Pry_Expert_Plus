@@ -759,6 +759,10 @@
                                 <label class="required form-label">Grupo</label>
                             </div>
                             <div class="col-md-7">
+                               <?php
+                                    $xSQL = "SELECT grup_id AS Codigo,grup_nombre AS NombreGrupo FROM `expert_grupos` WHERE pais_id=$xPaisid AND empr_id=$xEmprid ";
+                                    $all_grupos =  mysqli_query($con, $xSQL);
+                                ?>
                                 <select name="cboGrupo" id="cboGrupo" aria-label="Seleccione Grupo" data-control="select2" data-placeholder="Seleccione Grupo" data-dropdown-parent="#modal_addproducto" class="form-select mb-2" >
                                     <option></option>
                                     <?php foreach ($all_grupos as $datos) : ?>
@@ -1101,6 +1105,7 @@
     //Agregar Producto directo a la base
     $('#btnAgregar').click(function(){
 
+       debugger;
         var _gerencial = 'NO';
         var _output;
         var _clieid = "<?php echo $clieid; ?>";
@@ -1121,15 +1126,17 @@
             return false;
         }
 
+        if(_txtGrupo == ''){
+            toastSweetAlert("top-end",3000,"warning","Seleccione Grupo..!!");
+            return false;
+        }
+
         if(_costo == 0){
             toastSweetAlert("top-end",3000,"warning","Ingrese Costo..!!");
             return false;
         }
 
-        if(_txtGrupo == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Grupo..!!");
-            return false;
-        }
+      
 
         var _parametros = {
             
@@ -1170,14 +1177,13 @@
                 _output +='</tr>';
 
                 $('#tblProducto').append(_output);
-                //mensajesalertify('Agregado Correctamente..!', 'S', 'top-center', 3);
-
+             
                 $('#modal_addproducto').modal('hide');
-                toastSweetAlert("top-end",3000,"success","Agregado");
+                toastSweetAlert("top-end",3000,"success","Producto Agregado");
               
 
             }else{
-                toastSweetAlert("top-end",3000,"error","Ya está Agregado..!!");
+                toastSweetAlert("top-end",3000,"error","Producto ya Existe..!!");
                 document.getElementById("chkCobertura").checked = false;
                 _cobertura = "NO";
                 $("#lblCobertura").text("Cobertura NO");
@@ -1212,7 +1218,6 @@
     //Guardar nuevo grupo
     
     function f_GuardarGrupo(_paisid,_emprid,_usuaid){
-
         //debugger;
         var _nombreGrupo = $.trim($("#txtGrupo").val());
         var _descGrupo = $.trim($("#txtDescGrupo").val());
@@ -1228,9 +1233,9 @@
 
         var _parametros = {
 
-            "xxPaisId" : _paisid,
-            "xxEmprId" : _emprid,
-            "xxUsuaId" : _usuaid,
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxUsuaid" : _usuaid,
             "xxGrupo" : _nombreGrupo,
             "xxDesc" : _descGrupo,
             "xxNumagenda" : _numagenda,
@@ -1399,17 +1404,17 @@
                     xresult.done(function(response){           
 
                         if(response.trim() == 'OK'){
-                            _output = '<td>' + _gruponew.toUpperCase() + '<input type="hidden" id="txtgrupoid'  + _grupoid + '" value="' + _grupoid + '"/> <input type="hidden" id="txtgrupo'  + _grupoid + '" value="' + _gruponew + '"/></td>';
+                            _output = '<td>' + _gruponew.toUpperCase() + '<input type="hidden" id="txtgrupoid'  + _grupoid + '" value="' + _grupoid + '"/><input type="hidden" id="txtgrupo'  + _grupoid + '" value="' + _gruponew + '"/></td>';
                             _output += '<td>' + _agendanew + '<input type="hidden" id="txtsecagenda'  + _grupoid + '" value="' + _agendanew + '"/></td>';
                             _output += '<td>' + _cancelanew + '<input type="hidden" id="txtseccancela'  + _grupoid + '" value="' + _cancelanew + '"/></td>';
                             _output += '<td id="tdgru_' + _grupoid + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
-                            _output += '<td class="text-end"><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
+                            _output += '<td class="text-end"><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">'; 
                             _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chkgru' + _grupoid + '" onchange="f_UpdateEstGrupo(';
                             _output += _paisid + ',' + _emprid + ',' + _grupoid + ')" value="' + _grupoid + '"/></div></div></td>';
                             _output += '<td class="text-end"><div class="text-center"><div class="btn-group"><button id="btnEditargru_' + _grupoid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
-                            _output += 'title="Editar Grupo" onclick="f_EditarGrupo(' + _grupoid + ')" ><i class="fa fa-edit"></i></button></div></div></td>';
+                            _output += 'title="Editar Grupo" onclick="f_EditarGrupo(' + _grupoid + ')"><i class="fa fa-edit"></i></button></div></div></td>';
 
-                            console.log(_output);
+                            //console.log(_output);
 
                             $('#trgru_' + _grupoid + '').html(_output);
 
@@ -1443,7 +1448,7 @@
                     _output += '<td class="text-end"><div class="text-center"><div class="btn-group"><button id="btnEditargru_' + _grupoid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
                     _output += 'title="Editar Grupo" onclick="f_EditarGrupo(' + _grupoid + ')" ><i class="fa fa-edit"></i></button></div></div></td>';
 
-                    console.log(_output);
+                    //console.log(_output);
 
                     $('#trgru_' + _grupoid + '').html(_output);
 
