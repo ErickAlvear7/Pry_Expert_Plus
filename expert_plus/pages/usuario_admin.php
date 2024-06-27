@@ -369,12 +369,12 @@
 									<div class="row mb-4">
 										<div class="col-md-6 fv-row text-center">
 										    <label class="fs-6 fw-bold mb-2 px-2">Password Caduca</label>
-											<input class="form-check-input h-20px w-20px" type="checkbox" id="chkCaducaPass" name="chkCaducaPass" value=""  />
+											<input class="form-check-input border border-primary h-20px w-20px" type="checkbox" id="chkCaducaPass" name="chkCaducaPass" value=""  />
 											<label class="form-check-label" id="lblCaducaPass">NO</label>
 										</div>
 										<div class="col-md-6 fv-row text-center">
 										    <label class="fs-6 fw-bold mb-2 px-2">Cambiar Password</label> 
-											<input class="form-check-input h-20px w-20px" type="checkbox" id="chkCamPass" name="chkCamPass" value="" />
+											<input class="form-check-input border border-primary h-20px w-20px" type="checkbox" id="chkCamPass" name="chkCamPass" value="" />
 											<label class="form-check-label" id="lblCamPass">NO</label>	
 										</div>
 									</div>
