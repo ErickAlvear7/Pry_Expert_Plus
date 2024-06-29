@@ -11,15 +11,16 @@
     mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
 
-    if(isset($_POST['xxUsuaid']) and isset($_POST['xxEmprid']) and isset($_POST['xxNombre']) and isset($_POST['xxApellido']) and isset($_POST['xxLogin']) and isset($_POST['xxPerfilid']) and isset($_POST['xxPaisid']) ){
-        if(isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxNombre']) <> '' and isset($_POST['xxApellido']) <> ''){
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxEmprid']) and isset($_POST['xxUserid'])){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUserid']) <> ''){
 
-            $xEmprid = $_POST['xxEmprid'];
+            $xPaisid =  $_POST['xxPaisid'];
             $xUsuaid = $_POST['xxUsuaid'];
+            $xEmprid = $_POST['xxEmprid'];
+            $xUserid = $_POST['xxUserid'];
             $xNombre = safe($_POST['xxNombre']);
             $xApellido = safe($_POST['xxApellido']);
             $xLogin = safe($_POST['xxLogin']);  
-            $xPaisid =  $_POST['xxPaisid'];
             $xPerfilid =  $_POST['xxPerfilid'];
             $xCaducaPass =  $_POST['xxCaducaPass'];
             $xFechaCaduca =  $_POST['xxFecha'];
@@ -42,18 +43,21 @@
                     }
                 }
 
-                $xSQL = "UPDATE `expert_usuarios` SET perf_id=$xPerfilid,pais_id=$xPaisid,usua_nombres='$xNombre',usua_apellidos='$xApellido',";
-                $xSQL .= "usua_login=LOWER('$xLogin'),usua_caducapass='$xCaducaPass',usua_fechacaduca='{$xFechaCaduca}',usua_cambiarpass='$xCambiarPass',usua_avatarlogin='$xNombreFile' WHERE usua_id=$xUsuaid ";
+                $xSQL = "UPDATE `expert_usuarios` SET perf_id=$xPerfilid,usua_nombres='$xNombre',usua_apellidos='$xApellido',";
+                $xSQL .= "usua_login=LOWER('$xLogin'),usua_caducapass='$xCaducaPass',usua_fechacaduca='{$xFechaCaduca}',";
+                $xSQL .="usua_cambiarpass='$xCambiarPass',usua_avatarlogin='$xNombreFile',usua_usuariocreacion=$xUsuaid ";
+                $xSQL .=" WHERE usua_id=$xUserid AND pais_id=$xPaisid AND empr_id=$xEmprid";
                 mysqli_query($con, $xSQL);
 
                 
             }else{
-                $xSQL = "UPDATE `expert_usuarios` SET perf_id=$xPerfilid,pais_id=$xPaisid,usua_nombres='$xNombre',usua_apellidos='$xApellido',";
-                $xSQL .= "usua_login=LOWER('$xLogin'),usua_caducapass='$xCaducaPass',usua_fechacaduca='{$xFechaCaduca}',usua_cambiarpass='$xCambiarPass' WHERE usua_id=$xUsuaid ";
+                $xSQL = "UPDATE `expert_usuarios` SET perf_id=$xPerfilid,usua_nombres='$xNombre',usua_apellidos='$xApellido',";
+                $xSQL .= "usua_login=LOWER('$xLogin'),usua_caducapass='$xCaducaPass',usua_fechacaduca='{$xFechaCaduca}',";
+                $xSQL .="usua_cambiarpass='$xCambiarPass',usua_usuariocreacion=$xUsuaid WHERE usua_id=$xUserid AND pais_id=$xPaisid AND empr_id=$xEmprid";
                 mysqli_query($con, $xSQL);
-            }
-
             
+            }
+    
             
         }
     }

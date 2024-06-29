@@ -12,12 +12,14 @@
     $log_file = "err_consulta";
     $xRow = 0;  
 
-    if(isset($_POST['xxLogin']) ){
-        if(isset($_POST['xxLogin']) <> ''){ 
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxLogin']) ){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxLogin']) <> ''){ 
             
-            $xLogin = safe($_POST['xxLogin']);            
+            $xPaisid=$_POST['xxPaisid'];
+            $xEmprid=$_POST['xxEmprid'];
+            $xLogin=safe($_POST['xxLogin']);            
 
-            $xSQL = "SELECT * FROM `expert_usuarios` WHERE usua_login='$xLogin' ";
+            $xSQL = "SELECT * FROM `expert_usuarios` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND usua_login='$xLogin'";
             $all_user = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
             $xRow = mysqli_num_rows($all_user);
             

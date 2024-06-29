@@ -17,8 +17,8 @@
     $xTerminal = gethostname();
     $last_id = 0;
 
-    if(isset($_POST['xxPaisid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxEmprid']) and isset($_POST['xxNombre']) and isset($_POST['xxApellido']) and isset($_POST['xxLogin']) and isset($_POST['xxPerfilid']) ){
-        if(isset($_POST['xxEmprid']) <> '' and isset($_POST['xxNombre']) <> '' and isset($_POST['xxApellido']) <> ''){
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxEmprid'])){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxEmprid']) <> ''){
 
             $xPaisid =  $_POST['xxPaisid'];
             $xUsuaid = $_POST['xxUsuaid'];

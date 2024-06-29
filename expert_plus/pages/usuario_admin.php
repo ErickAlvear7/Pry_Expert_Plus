@@ -194,7 +194,7 @@
 											<button id="btnReset_<?php echo $idusuario; ?>" onclick="f_ResetPass(<?php echo $idusuario; ?>,<?php echo $xEmprid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledReset;?> title='Resetear Password' data-bs-toggle="tooltip" data-bs-placement="left">
 												<i class='fa fa-key'></i>
 											</button>		
-											<button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " <?php echo $xDisabledEdit; ?> onclick="f_EditarUsuario(<?php echo $idusuario; ?>,'<?php echo $usuario; ?>')" title='Editar Usuario' data-bs-toggle="tooltip" data-bs-placement="left" >
+											<button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " <?php echo $xDisabledEdit; ?> onclick="f_EditarUsuario(<?php echo $idusuario; ?>,'<?php echo $login; ?>')" title='Editar Usuario' data-bs-toggle="tooltip" data-bs-placement="left" >
 												<i class='fa fa-edit'></i>
 											</button>													                                                
 										</div>
@@ -421,295 +421,511 @@
 		}).mask("#txtFechacaduca");
 
 		//abrir-modal-nuevo-usuario
-		$("#btnNuevo").click(function(){
-
-			var _codigoperf = "<?php echo $xCodigoPerf; ?>";
-			_addmod = 'add';
-			_caduca = 'NO';
-			_cambiarPass = 'NO';
-			_idusu = 0;
-			_cboPerfil = 0;
-			_avatar = '';
-
-			console.log(_codigoperf);
-			$("#titulo").text("Nuevo Usuario");
-			document.getElementById("btnSave").innerHTML = '<i class="fa fa-hdd me-1"></i>Grabar';
-			document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/user.png)";
-			$("#chkCaducaPass").prop("checked", false);
-			$("#lblCaducaPass").text("NO");
-			$("#chkCamPass").prop("checked", false);
-			$("#lblCamPass").text("NO");
-			$('#txtPassword').prop('readonly', false);
-			$('#content').css('display','none');
-			$("#txtNombre").val('');
-			$("#txtApellido").val('');
-			$("#txtLogin").val('');
-			$("#txtPassword").val('');
-			$("input").prop('disabled', false);
-			$("#rdboption_" + _codigoperf).prop("checked", true);
-			$("#kt_modal_add_user").modal("show");	
-			    
-		});
-
-		$(document).on("click","#chkCaducaPass",function(){
-			
-			element = document.getElementById("content");
-			if($("#chkCaducaPass").is(":checked")){
-				element.style.display='block';
-				$("#lblCaducaPass").text("SI");
-				_caduca = 'SI';
-				var now = new Date();
-				var day = ("0" + now.getDate()).slice(-2);
-				var month = ("0" + (now.getMonth() + 1)).slice(-2);
-				var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-				$('#txtFechacaduca').val(today);
-			}else{
-				element.style.display='none';
-				$("#lblCaducaPass").text("NO");
-				_caduca = 'NO';					
-			}
-
-		});
-
-		$(document).on("click","#chkCamPass",function(){
-
-			if($("#chkCamPass").is(":checked")){
-				$("#lblCamPass").text("SI");
-				_cambiarPass = 'SI';
-			}else{
-				$("#lblCamPass").text("NO");
-				_cambiarPass = 'NO';
-			}
-
-		});
-
-		//refrescar modal al cerrar 
-
-		// $('#kt_modal_add_user').on('hidden.bs.modal', function (e) {
-		// 	$(this)
-		// 	.find("input,textarea,select")
-		// 	.val('')
-		// 	.end()
-		// 	.find("input[type=checkbox], input[type=radio]")
-		// 	.prop("checked", "")
-		// 	.end();
-		// })
 		
-		//Guardar usuario
-		$('#btnSave').click(function(e){
-			//e.preventDefault();
-			//debugger;
-			var _paisid = "<?php echo $xPaisid; ?>";
-			var _emprid = "<?php echo $xEmprid; ?>";
-			var _usuaid = "<?php echo $xUsuaid; ?>";
-			var _nombre = $.trim($("#txtNombre").val());
-			var _apellido = $.trim($("#txtApellido").val());
-			var _login = $.trim($("#txtLogin").val());
-			var _password = $.trim($("#txtPassword").val());
-			var _perfilid = $("input[type='radio'][name='rdbperfil']:checked").val();
-			var _selecc = 'NO';
-			//var _perfilname = $("#cboPerfil option:selected").text();
 
-			var _imgfile = document.getElementById("imgfile").style.backgroundImage;
-			var _url = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-			var _pos = _url.trim().indexOf('.');
-			var _ext = _url.trim().substr(_pos, 5);
-
-			if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
-				_selecc = 'SI';
-			}                    
-
-			if(_selecc == 'SI'){
-				var _imagen = document.getElementById("imgavatar");
-				var _file = _imagen.files[0];
-				var _fullPath = document.getElementById('imgavatar').value;
-				_ext = _fullPath.substring(_fullPath.length - 4);
-				_ext = _ext.toLowerCase();   
-			}
-
-			if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
-				toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una Imagen..!");
-				return;
-			}
-
-			_fechacaduca = $.trim($("#txtFechacaduca").val());
-			_buscar = 'SI';
-			//_continuar = 'SI';
-			_respuesta = 'OK';
-
-			if(_nombre == ''){                        
-				toastSweetAlert("top-end",3000,"warning","Ingrese Nombre..!!");
-				return;
-			}
-
-			if(_apellido == ''){                        
-				toastSweetAlert("top-end",3000,"warning","Ingrese Apellido..!!");
-				return;
-			}
-
-			if(_login == ''){                        
-				toastSweetAlert("top-end",3000,"warning","Ingrese Email..!!");
-				return;
-			}
+		// $(document).on("click","#chkCaducaPass",function(){
 			
-			var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-			if(regex.test(_login.trim())){
-			}else{
-				toastSweetAlert("top-end",3000,"error","Email incorrecto..!!");
-				return;
-			}                    
+		// 	element = document.getElementById("content");
+		// 	if($("#chkCaducaPass").is(":checked")){
+		// 		element.style.display='block';
+		// 		$("#lblCaducaPass").text("SI");
+		// 		_caduca = 'SI';
+		// 		var now = new Date();
+		// 		var day = ("0" + now.getDate()).slice(-2);
+		// 		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+		// 		var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+		// 		$('#txtFechacaduca').val(today);
+		// 	}else{
+		// 		element.style.display='none';
+		// 		$("#lblCaducaPass").text("NO");
+		// 		_caduca = 'NO';					
+		// 	}
 
-			if(_password == ''){                        
-				toastSweetAlert("top-end",3000,"warning","Ingrese Password..!!");
-				return;
-			}
+		// });
 
-			if(_paisid == '0'){                        
-				toastSweetAlert("top-end",3000,"warning","Seleccione Pais..!!");
-				return;
-			}
-			
-			if(_perfilid == '0'){                        
-				toastSweetAlert("top-end",3000,"warning","Seleccione Perfil..!!");
-				return;
-			}
-			
-			if(_addmod == 'mod'){
-				if(_loginold.toLowerCase() != _login.toLowerCase()){
-					_buscar = 'SI';
-				}else{
-					_buscar = 'NO';
-				}                        
-				_ulr = "codephp/actualizar_usuario.php";
-			}else{
-				_ulr = "codephp/grabar_usuarios.php";    
-			}
+		// $(document).on("click","#chkCamPass",function(){
 
-			form_data = new FormData();            
-			form_data.append('xxPaisid', _paisid);
-			form_data.append('xxUsuaid', _idusu == 0 ? _usuaid : _idusu);
-			form_data.append('xxEmprid', _emprid);
-			form_data.append('xxNombre', _nombre);
-			form_data.append('xxApellido', _apellido);
-			form_data.append('xxLogin', _login);
-			form_data.append('xxPassword', _password);
-			form_data.append('xxPerfilid', _perfilid);
-			form_data.append('xxCaducaPass', _caduca);
-			form_data.append('xxFecha', _fechacaduca);
-			form_data.append('xxCambiarPass', _cambiarPass);
-			form_data.append('xxCambiarAvatar', _selecc);
-			form_data.append('xxFile', _file);               
+		// 	if($("#chkCamPass").is(":checked")){
+		// 		$("#lblCamPass").text("SI");
+		// 		_cambiarPass = 'SI';
+		// 	}else{
+		// 		$("#lblCamPass").text("NO");
+		// 		_cambiarPass = 'NO';
+		// 	}
+
+		// });	
+
+		// $("#btnNuevo").click(function(){
+
+		// 	var _codigoperf = "<?php echo $xCodigoPerf; ?>";
+		// 	_addmod = 'add';
+		// 	_caduca = 'NO';
+		// 	_cambiarPass = 'NO';
+		// 	_idusu = 0;
+		// 	_cboPerfil = 0;
+		// 	_avatar = '';
+
+		// 	console.log(_codigoperf);
+		// 	$("#titulo").text("Nuevo Usuario");
+		// 	document.getElementById("btnSave").innerHTML = '<i class="fa fa-hdd me-1"></i>Grabar';
+		// 	document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/user.png)";
+		// 	$("#chkCaducaPass").prop("checked", false);
+		// 	$("#lblCaducaPass").text("NO");
+		// 	$("#chkCamPass").prop("checked", false);
+		// 	$("#lblCamPass").text("NO");
+		// 	$('#txtPassword').prop('readonly', false);
+		// 	$('#content').css('display','none');
+		// 	$("#txtNombre").val('');
+		// 	$("#txtApellido").val('');
+		// 	$("#txtLogin").val('');
+		// 	$("#txtPassword").val('');
+		// 	$("input").prop('disabled', false);
+		// 	$("#rdboption_" + _codigoperf).prop("checked", true);
+		// 	$("#kt_modal_add_user").modal("show");	
+				
+		// });
+
+		// function f_EditarUsuario(userid,userlogin){
 			
-			if(_buscar == 'SI'){
-				var xrespuesta = $.post("codephp/consultar_usuarios.php", {xxLogin: _login});
-				xrespuesta.done(function(response){
+		// 	$("#titulo").text("Editar Usuario");
+		// 	var _emprid = "<?php echo $xEmprid; ?>";
+		// 	var _paisid = "<?php echo $xPaisid; ?>";
+		// 	_addmod = 'mod';
+		// 	_loginant=userlogin;
+		// 	_userid=userid;                 
+
+		// 	var _parametros = {
+		// 		xxUserid: _userid,
+		// 		xxPaisid:_paisid,
+		// 		xxEmprid: _emprid,
+		// 	}
+
+		// 	$.ajax({
+		// 		url: "codephp/editar_usuarios.php",
+		// 		type: "POST",
+		// 		dataType: "json",
+		// 		data: _parametros,          
+		// 		success: function(data){ 
+		// 			var _nombres = data[0]['Nombres'];
+		// 			var _apellidos = data[0]['Apellidos'];
+		// 			var _login = data[0]['Login'];
+		// 			var _password = data[0]['Password'];
+
+		// 			_cboPerfil = data[0]['CodigoPerfil'];						
+		// 			_caduca = data[0]['CaducaPass'];
+		// 			_fechaCaduca = data[0]['FechaCaduca'];
+		// 			_cambiarPass = data[0]['CambiarPass'];
+		// 			_avatar = data[0]['Avatar'] == '' ? 'user.png' : data[0]['Avatar'];
+
+		// 			var _rdboption = 'rdboption_' + _cboPerfil;
+		// 			$('#'+_rdboption).prop('checked','checked');
+		// 			$("input").prop('disabled', false);	
+
+		// 			$("#txtNombre").val(_nombres);
+		// 			$("#txtApellido").val(_apellidos);
+		// 			$("#txtLogin").val(_login);
+		// 			$("#txtPassword").val(_password);
+		// 			$("#cboPerfil").val(_cboPerfil).change();
+		// 			$("#txtFechacaduca").val(_fechaCaduca);
+		// 			document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/" + _avatar + ")";
 					
-					if(response == 0){
+		// 			if(_login == 'admin@prestasalud.com' && _nombres == 'Administrador'){
+		// 				$("input").prop('disabled', true);
+		// 			}
 
-						$.ajax({
-							url: _ulr,
-							type: "post",
-							data: form_data,
-							processData: false,
-							contentType: false,
-							dataType: "json",
-							success: function(response){
+		// 			if(_caduca == 'SI'){
+		// 				$("#chkCaducaPass").prop("checked", true);
+		// 				$("#lblCaducaPass").text("SI");  
+		// 				$('#content').css('display','block');       
+		// 			}else if(_caduca == 'NO'){
+		// 				$("#chkCaducaPass").prop("checked", false);
+		// 				$("#lblCaducaPass").text("NO");  
+		// 				$('#content').css('display','none');   
 
-								var _userid = response;	
-								var _usuario = _nombre + ' ' + _apellido;
+		// 			}
 
-								if(_userid != 0){
-	
-									if(_addmod == 'add'){
-										_detalle = 'Nuevo usuario creado';
-										_mensaje = 'Grabado con Exito';
-									}
-									else{
-										_detalle = 'Actualizar usuario';
-										_mensaje = 'Actualizado con Exito';
-									} 
-								}else{
-									_detalle = 'Error encontrado en sentecia SQL';
-									_respuesta = 'ERR';                                
-								}
+		// 			if(_cambiarPass == 'SI'){
+		// 				$("#chkCamPass").prop("checked", true);
+		// 				$("#lblCamPass").text('SI');
+		// 			}else if(_cambiarPass == 'NO'){
+		// 				$("#chkCamPass").prop("checked", false);
+		// 				$("#lblCamPass").text('NO');	
+		// 			}
+																							
+		// 		},
+		// 		error: function (error){
+		// 			console.log(error);
+		// 		}                            
+		// 	}); 
+		// 	document.getElementById("btnSave").innerHTML = '<i class="las la-pencil-alt"></i>Modificar';
+		// 	$("#kt_modal_add_user").modal("show");			
+		// }
 
-								/**PARA CREAR REGISTRO DE LOGS */
-								$parametros = {
-									xxPaisid: _paisid,
-									xxEmprid: _emprid,
-									xxUsuaid: _usuaid,
-									xxDetalle: _detalle
-								}					
-	
-								$.post("codephp/new_log.php", $parametros, function(response){
-								});                                         
+	});
 
-								if(_respuesta == 'OK'){
-									// if(_addmod == 'add'){
-									// }else{
-									//     $("#kt_modal_add_user").modal("hide");
-									// }
-									$.redirect('?page=seg_usuarioadmin&menuid=<?php echo $menuid; ?>', { 'mensaje': _mensaje } ); //POR METODO POST
-								}                                        
-							},								
-							error: function (error){
-								console.log(error);
-							}
-						});
-					}else{
-						toastSweetAlert("top-end",3000,"warning","Login/Email ya existe..!!"); 
-						return;
-					}
-				});
+
+	//Modal Nuevo Usuario
+	$("#btnNuevo").click(function(){
+
+		var _codigoperf = "<?php echo $xCodigoPerf; ?>";
+		_addmod = 'add';
+		_caduca = 'NO';
+		_cambiarPass = 'NO';
+		_idusu = 0;
+		_cboPerfil = 0;
+		_avatar = '';
+		_userid = 0;
+		_loginant = '';
+
+
+		$("#titulo").text("Nuevo Usuario");
+		document.getElementById("btnSave").innerHTML = '<i class="fa fa-hdd me-1"></i>Grabar';
+		document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/user.png)";
+		$("#chkCaducaPass").prop("checked", false);
+		$("#lblCaducaPass").text("NO");
+		$("#chkCamPass").prop("checked", false);
+		$("#lblCamPass").text("NO");
+		$('#txtPassword').prop('readonly', false);
+		$('#content').css('display','none');
+		$("#txtNombre").val('');
+		$("#txtApellido").val('');
+		$("#txtLogin").val('');
+		$("#txtPassword").val('');
+		$("input").prop('disabled', false);
+		$("#rdboption_" + _codigoperf).prop("checked", true);
+		$("#kt_modal_add_user").modal("show");	
+			
+	});
+
+    //Modal Editar Usuario
+	function f_EditarUsuario(userid,userlogin){
+		
+		$("#titulo").text("Editar Usuario");
+		var _emprid = "<?php echo $xEmprid; ?>";
+		var _paisid = "<?php echo $xPaisid; ?>";
+		_addmod = 'mod';
+		_loginant=userlogin;
+		_userid=userid; 
+		
+		//console.log(_addmod);
+
+		var _parametros = {
+			xxUserid: _userid,
+			xxPaisid:_paisid,
+			xxEmprid: _emprid,
+		}
+
+		$.ajax({
+			url: "codephp/editar_usuarios.php",
+			type: "POST",
+			dataType: "json",
+			data: _parametros,          
+			success: function(data){ 
+				var _nombres = data[0]['Nombres'];
+				var _apellidos = data[0]['Apellidos'];
+				var _login = data[0]['Login'];
+				var _password = data[0]['Password'];
+
+				_cboPerfil = data[0]['CodigoPerfil'];						
+				_caduca = data[0]['CaducaPass'];
+				_fechaCaduca = data[0]['FechaCaduca'];
+				_cambiarPass = data[0]['CambiarPass'];
+				_avatar = data[0]['Avatar'] == '' ? 'user.png' : data[0]['Avatar'];
+
+				var _rdboption = 'rdboption_' + _cboPerfil;
+				$('#'+_rdboption).prop('checked','checked');
+				$("input").prop('disabled', false);	
+
+				$("#txtNombre").val(_nombres);
+				$("#txtApellido").val(_apellidos);
+				$("#txtLogin").val(_login);
+				$("#txtPassword").val(_password);
+				$("#cboPerfil").val(_cboPerfil).change();
+				$("#txtFechacaduca").val(_fechaCaduca);
+				document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/" + _avatar + ")";
+				
+				if(_login == 'admin@prestasalud.com' && _nombres == 'Administrador'){
+					$("input").prop('disabled', true);
+				}
+
+				if(_caduca == 'SI'){
+					$("#chkCaducaPass").prop("checked", true);
+					$("#lblCaducaPass").text("SI");  
+					$('#content').css('display','block');       
+				}else if(_caduca == 'NO'){
+					$("#chkCaducaPass").prop("checked", false);
+					$("#lblCaducaPass").text("NO");  
+					$('#content').css('display','none');   
+
+				}
+
+				if(_cambiarPass == 'SI'){
+					$("#chkCamPass").prop("checked", true);
+					$("#lblCamPass").text('SI');
+				}else if(_cambiarPass == 'NO'){
+					$("#chkCamPass").prop("checked", false);
+					$("#lblCamPass").text('NO');	
+				}
+																						
+			},
+			error: function (error){
+				console.log(error);
+			}                            
+		}); 
+		document.getElementById("btnSave").innerHTML = '<i class="las la-pencil-alt"></i>Modificar';
+		$("#kt_modal_add_user").modal("show");			
+	}
+
+	//Check caduca Password
+	$(document).on("click","#chkCaducaPass",function(){
+			
+		element = document.getElementById("content");
+		if($("#chkCaducaPass").is(":checked")){
+			element.style.display='block';
+			$("#lblCaducaPass").text("SI");
+			_caduca = 'SI';
+			var now = new Date();
+			var day = ("0" + now.getDate()).slice(-2);
+			var month = ("0" + (now.getMonth() + 1)).slice(-2);
+			var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+			$('#txtFechacaduca').val(today);
+		}else{
+			element.style.display='none';
+			$("#lblCaducaPass").text("NO");
+			_caduca = 'NO';					
+		}
+
+	});
+
+	//Check Cambiar Password
+	$(document).on("click","#chkCamPass",function(){
+
+		if($("#chkCamPass").is(":checked")){
+			$("#lblCamPass").text("SI");
+			_cambiarPass = 'SI';
+		}else{
+			$("#lblCamPass").text("NO");
+			_cambiarPass = 'NO';
+		}
+
+	});	
+
+    	
+	//Guardar usuario y editar
+	$('#btnSave').click(function(e){
+		
+		var _paisid = "<?php echo $xPaisid; ?>";
+		var _emprid = "<?php echo $xEmprid; ?>";
+		var _usuaid = "<?php echo $xUsuaid; ?>";
+		var _nombre = $.trim($("#txtNombre").val());
+		var _apellido = $.trim($("#txtApellido").val());
+		var _login = $.trim($("#txtLogin").val());
+		var _password = $.trim($("#txtPassword").val());
+		var _perfilid = $("input[type='radio'][name='rdbperfil']:checked").val();
+		var _selecc = 'NO';
+		var _buscar = 'NO';
+
+		var _imgfile = document.getElementById("imgfile").style.backgroundImage;
+		var _url = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+		var _pos = _url.trim().indexOf('.');
+		var _ext = _url.trim().substr(_pos, 5);
+
+		if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
+			_selecc = 'SI';
+		}                    
+
+		if(_selecc == 'SI'){
+			var _imagen = document.getElementById("imgavatar");
+			var _file = _imagen.files[0];
+			var _fullPath = document.getElementById('imgavatar').value;
+			_ext = _fullPath.substring(_fullPath.length - 4);
+			_ext = _ext.toLowerCase();   
+		}
+
+		if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
+			toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una Imagen..!");
+			return;
+		}
+
+		_fechacaduca = $.trim($("#txtFechacaduca").val());
+		_buscar = 'SI';
+		//_continuar = 'SI';
+		_respuesta = 'OK';
+
+		if(_nombre == ''){                        
+			toastSweetAlert("top-end",3000,"warning","Ingrese Nombre..!!");
+			return;
+		}
+
+		if(_apellido == ''){                        
+			toastSweetAlert("top-end",3000,"warning","Ingrese Apellido..!!");
+			return;
+		}
+
+		if(_login == ''){                        
+			toastSweetAlert("top-end",3000,"warning","Ingrese Email..!!");
+			return;
+		}
+		
+		var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+		if(regex.test(_login.trim())){
+		}else{
+			toastSweetAlert("top-end",3000,"error","Email incorrecto..!!");
+			return;
+		}                    
+
+		if(_password == ''){                        
+			toastSweetAlert("top-end",3000,"warning","Ingrese Password..!!");
+			return;
+		}
+
+		if(_paisid == '0'){                        
+			toastSweetAlert("top-end",3000,"warning","Seleccione Pais..!!");
+			return;
+		}
+		
+		if(_perfilid == '0'){                        
+			toastSweetAlert("top-end",3000,"warning","Seleccione Perfil..!!");
+			return;
+		}
+		//debugger;
+		
+		if(_addmod == 'mod'){
+			if(_loginant.toLowerCase() != _login.toLowerCase()){
+				_buscar = 'SI';
 			}else{
+				_buscar = 'NO';
+			}                        
+			_ulr = "codephp/actualizar_usuario.php";
+		}else{
+			_ulr = "codephp/grabar_usuarios.php";    
+		}
+        
+		form_data = new FormData();            
+		form_data.append('xxPaisid', _paisid);
+		form_data.append('xxUsuaid', _usuaid);
+		form_data.append('xxEmprid', _emprid);
+		form_data.append('xxUserid', _userid);
+		form_data.append('xxNombre', _nombre);
+		form_data.append('xxApellido', _apellido);
+		form_data.append('xxLogin', _login);
+		form_data.append('xxPassword', _password);
+		form_data.append('xxPerfilid', _perfilid);
+		form_data.append('xxCaducaPass', _caduca);
+		form_data.append('xxFecha', _fechacaduca);
+		form_data.append('xxCambiarPass', _cambiarPass);
+		form_data.append('xxCambiarAvatar', _selecc);
+		form_data.append('xxFile', _file);               
+		
+		if(_buscar == 'SI'){
+			var xrespuesta = $.post("codephp/consultar_usuarios.php", {xxPaisid: _paisid,xxEmprid:_emprid,xxLogin: _login});
+			xrespuesta.done(function(response){
+				
+				if(response == 0){
 
-				$.ajax({
-					url: _ulr,
-					type: "post",                
-					data: form_data,
-					processData: false,
-					contentType: false,
-					dataType: "json",
-					success: function(response){   
+					$.ajax({
+						url: _ulr,
+						type: "post",
+						data: form_data,
+						processData: false,
+						contentType: false,
+						dataType: "json",
+						success: function(response){
 
-						var _userid = response;	
-						var _usuario = _nombre + ' ' + _apellido;
+							var _userid = response;	
+							var _usuario = _nombre + ' ' + _apellido;
 
-						if(_userid != 0){
+							if(_userid != 0){
 
-							if(_addmod == 'add'){
-								_detalle = 'Nuevo usuario creado';
-								_mensaje = 'Agregado con Exito';
+								if(_addmod == 'add'){
+									_detalle = 'Nuevo usuario creado';
+									_mensaje = 'Grabado con Exito';
+								}
+								else{
+									_detalle = 'Actualizar usuario';
+									_mensaje = 'Actualizado con Exito';
+								} 
 							}else{
-								_detalle = 'Actualizar usuario';
-								_mensaje = 'Actualizado con Exito';
-							} 
-						}else{
-							_detalle = 'Error encontrado en sentecia SQL';
-							_respuesta = 'ERR';                                
+								_detalle = 'Error encontrado en sentecia SQL';
+								_respuesta = 'ERR';                                
+							}
+
+							/**PARA CREAR REGISTRO DE LOGS */
+							$parametros = {
+								xxPaisid: _paisid,
+								xxEmprid: _emprid,
+								xxUsuaid: _usuaid,
+								xxDetalle: _detalle
+							}					
+
+							$.post("codephp/new_log.php", $parametros, function(response){
+							});                                         
+
+							if(_respuesta == 'OK'){
+								// if(_addmod == 'add'){
+								// }else{
+								//     $("#kt_modal_add_user").modal("hide");
+								// }
+								$.redirect('?page=seg_usuarioadmin&menuid=<?php echo $menuid; ?>', { 'mensaje': _mensaje } ); //POR METODO POST
+							}                                        
+						},								
+						error: function (error){
+							console.log(error);
 						}
+					});
+				}else{
+					toastSweetAlert("top-end",3000,"warning","Email ya Existe..!!"); 
+					return;
+				}
+			});
+		}else{
 
-						// /**PARA CREAR REGISTRO DE LOGS */
-						var _parametros = {
-							"xxPaisid" : _paisid,
-							"xxEmprid" : _emprid,
-							"xxUsuaid" : _usuaid,
-							"xxDetalle" : _detalle,
-						}					
+			$.ajax({
+				url: _ulr,
+				type: "post",                
+				data: form_data,
+				processData: false,
+				contentType: false,
+				dataType: "json",
+				success: function(response){   
 
-						$.post("codephp/new_log.php", _parametros, function(response){
-						});                                         
+					var _userid = response;	
+					var _usuario = _nombre + ' ' + _apellido;
 
-						if(_respuesta == 'OK'){
-							$.redirect('?page=seg_usuarioadmin&menuid=<?php echo $menuid; ?>', {'mensaje': _mensaje}); //POR METODO POST
-						}                                        
-					},
-					error: function (error) {
-						console.log(error);
+					if(_userid != 0){
+
+						if(_addmod == 'add'){
+							_detalle = 'Nuevo usuario creado';
+							_mensaje = 'Agregado con Exito';
+						}else{
+							_detalle = 'Actualizar usuario';
+							_mensaje = 'Actualizado con Exito';
+						} 
+					}else{
+						_detalle = 'Error encontrado en sentecia SQL';
+						_respuesta = 'ERR';                                
 					}
-				}); 
-			}
-		});	
+
+					// /**PARA CREAR REGISTRO DE LOGS */
+					var _parametros = {
+						"xxPaisid" : _paisid,
+						"xxEmprid" : _emprid,
+						"xxUsuaid" : _usuaid,
+						"xxDetalle" : _detalle,
+					}					
+
+					$.post("codephp/new_log.php", _parametros, function(response){
+					});                                         
+
+					if(_respuesta == 'OK'){
+						$.redirect('?page=seg_usuarioadmin&menuid=<?php echo $menuid; ?>', {'mensaje': _mensaje}); //POR METODO POST
+					}                                        
+				},
+				error: function (error) {
+					console.log(error);
+				}
+			}); 
+		}
 	});	
 
 	//cambiar estado y desactivar botones en linea
@@ -723,77 +939,7 @@
 
 	//cambiar estado y desactivar botones en linea
 
-	function f_EditarUsuario(_idusu,_loginold){
-			$("#titulo").text("Editar Usuario");
-			var _emprid = "<?php echo $xEmprid; ?>";
-			_addmod = 'mod';                     
-
-			var _parametros = {
-				xxEmprid: _emprid,
-				xxIdUsuario: _idusu
-			}
-
-			$.ajax({
-				url: "codephp/editar_usuarios.php",
-				type: "POST",
-				dataType: "json",
-				data: _parametros,          
-				success: function(data){ 
-					var _nombres = data[0]['Nombres'];
-					var _apellidos = data[0]['Apellidos'];
-					var _login = data[0]['Login'];
-					var _password = data[0]['Password'];
-
-					_cboPerfil = data[0]['CodigoPerfil'];						
-					_caduca = data[0]['CaducaPass'];
-					_fechaCaduca = data[0]['FechaCaduca'];
-					_cambiarPass = data[0]['CambiarPass'];
-					_avatar = data[0]['Avatar'] == '' ? 'user.png' : data[0]['Avatar'];
-
-					var _rdboption = 'rdboption_' + _cboPerfil;
-					$('#'+_rdboption).prop('checked','checked');
-					$("input").prop('disabled', false);	
-
-					$("#txtNombre").val(_nombres);
-					$("#txtApellido").val(_apellidos);
-					$("#txtLogin").val(_login);
-					$("#txtPassword").val(_password);
-					$("#cboPerfil").val(_cboPerfil).change();
-					$("#txtFechacaduca").val(_fechaCaduca);
-					document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/" + _avatar + ")";
-                    
-                    if(_login == 'admin@prestasalud.com' && _nombres == 'Administrador'){
-						$("input").prop('disabled', true);
-					}
-
-					if(_caduca == 'SI'){
-						$("#chkCaducaPass").prop("checked", true);
-						$("#lblCaducaPass").text("SI");  
-						$('#content').css('display','block');       
-					}else if(_caduca == 'NO'){
-						$("#chkCaducaPass").prop("checked", false);
-						$("#lblCaducaPass").text("NO");  
-						$('#content').css('display','none');   
-
-					}
-
-					if(_cambiarPass == 'SI'){
-						$("#chkCamPass").prop("checked", true);
-						$("#lblCamPass").text('SI');
-					}else if(_cambiarPass == 'NO'){
-						$("#chkCamPass").prop("checked", false);
-						$("#lblCamPass").text('NO');	
-					}
-																							
-				},
-				error: function (error){
-					console.log(error);
-				}                            
-			}); 
-			document.getElementById("btnSave").innerHTML = '<i class="las la-pencil-alt"></i>Modificar';
-			$("#kt_modal_add_user").modal("show");			
-		}	
-
+	
 	function f_UpdateEstado(_emprid, _userid){
 		let _check = $("#chk" + _userid).is(":checked");
 		let _checked = "";
