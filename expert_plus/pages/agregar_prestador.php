@@ -293,7 +293,7 @@
                                             </div> 
                                             <div class="col">
                                                 <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono3" id="txtFono2" maxlength="9" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono3" id="txtFono3" maxlength="9" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                             </div>                                                        
                                         </div>
                                         <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
@@ -656,18 +656,18 @@
 
         $('#btnSaveNew').click(function(e){
 
-            var _cbotipoespe = $('#cboTipoEspe').val();
+            var _cbotipoespe = $("#cboTipoEspe option:selected").text();
             var _especialidad = $.trim($("#txtEspecialidad").val());
             var _descripcion = $.trim($("#txtDescripcion").val());
             var _pvpnew = $("#txtPvpNew").val();
 
-            if(_cbotipoespe == '0'){
-                toastSweetAlert("top-end",3000,"warning","Seleccion Tipo Especialidad..!!");
+            if(_especialidad == ''){
+                toastSweetAlert("top-end",3000,"warning","Ingrese Especialidad..!!");
                 return;
             }
 
-            if(_especialidad == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Especialidad..!!");
+            if(_cbotipoespe == ''){
+                toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Especialidad..!!");
                 return;
             }
 
@@ -1020,7 +1020,6 @@
                 return;
            }
 
-           //debugger
            
             var _imgfile = document.getElementById("imgfile").style.backgroundImage;
             var _urlimg = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');

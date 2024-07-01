@@ -304,7 +304,7 @@
                                                         <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
                                                     </div>
                                                     <div class="col-xl-10 fv-row">
-                                                        <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDireccion; ?> </textarea>
+                                                        <textarea class="form-control mb-2" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDireccion; ?> </textarea>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-8">
@@ -1372,21 +1372,22 @@
         });                 
 
         $('#btnSaveNew').click(function(e){
-
-            var _cbotipoespe = $('#cboTipoEspe').val();
+ 
             var _especialidad = $.trim($("#txtEspecialidad").val());
+            var _cbotipoespe = $("#cboTipoEspe option:selected").text();
             var _descripcion = $.trim($("#txtDescripcion").val());
             var _pvpnew = $("#txtPvpNew").val();
+
+            if(_especialidad == ''){
+                toastSweetAlert("top-end",3000,"warning","Ingrese Especialidad..!!");
+                return;
+            }
 
             if(_cbotipoespe == ''){
                 toastSweetAlert("top-end",3000,"warning","Seleccion Tipo Especialidad..!!");
                 return;
             }
 
-            if(_especialidad == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Especialidad..!!");
-                return;
-            }
 
             if(_pvpnew == ''){
                 _pvpnew = '0.00';
@@ -1561,9 +1562,9 @@
                     _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
                     _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEditar_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
                     _output += 'title="Editar Especialidad"><i class="fa fa-edit"></i></button>';
-                    _output += '<button id="btnPerson_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarProfesional(' + _paisid + ',' + _emprid + ',' + _presid + ',' + _id + ') title="Agregar Profesional" data-bs-toggle="tooltip" data-bs-placement="left" >';
+                    _output += '<button id="btnPerson_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarProfesional(' + _paisid + ',' + _emprid + ',' + _presid + ',' + _id + ') title="Agregar Profesional" data-bs-toggle="tooltip" data-bs-placement="left">';
                     _output += '<i class="fas fa-user"></i></button>';
-                    _output += '<button id="btnMotivos_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarMotivos(' + _paisid + ',' + _emprid + ',' + _id + ',' + _presid + ',' +_cboespe + ') title="Agregar Motivos" data-bs-toggle="tooltip" data-bs-placement="left" >';
+                    _output += '<button id="btnMotivos_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarMotivos(' + _paisid + ',' + _emprid + ',' + _id + ',' + _presid + ',' +_cboespe + ') title="Agregar Motivos" data-bs-toggle="tooltip" data-bs-placement="left">';
                     _output += '<i class="fas fa-book"></i></button>';
                     _output += '</div></div></td></tr>';
 
@@ -1711,9 +1712,7 @@
         });
 
         $('#btnSave').click(function(e){
-
-            debugger
-
+            //debugger
             var _presid = "<?php echo $xPresid; ?>";
             var _logo = "<?php echo $xLogo; ?>";
             var _provid = $('#cboProvincia').val();
@@ -2031,31 +2030,21 @@
 
     $('#btnAgregarProfesional').click(function(e){
 
-        //debugger;
-
+        var _tipoprofesion = $("#cboTipoProfe option:selected").text();
+        var _profesional = $('#cboProfesional option:selected').text();
+        var _intervalo = $('#txtIntervalo').val();
         _profid = $("#cboProfesional").val();
 
-        var _profid = $('#cboProfesional').val();
-        var _tipoid = $('#cboTipoProfe').val();
-        var _profesional = $('#cboProfesional option:selected').text();
-        var _profesion = $('#cboTipoProfe option:selected').text();
-        var _intervalo = $('#txtIntervalo').val();
-
-        if(_tipoid == null){
+        if(_tipoprofesion == ''){
             toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Profesion..!!"); 
             return;
         }
         
-        if(_profid == ''){
+        if(_profesional == ''){
             toastSweetAlert("top-end",3000,"warning","Seleccione Profesional..!!"); 
             return;
         }
-
-        if(_intervalo == ''){
-            toastSweetAlert("top-end",3000,"warning","Ingrese Internvalo..!!"); 
-            return;
-        }                
-
+             
         var _parametros = {
             "xxPaisid" : _paisid,
             "xxEmprid" : _emprid,
@@ -2073,7 +2062,7 @@
 
                 _output = '<tr id="trprof_' + _id + '">';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _profesional + '</span><input type="hidden" id="txtProfesional_' + _id + '" value="' + _profesional +  '" /></div></div></td>';
-                _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _profesion + '</span></div></div></td>';
+                _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _tipoprofesion + '</span></div></div></td>';
                 _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
                 _output += '<td id="tdprof_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="badge badge-light-primary">ACTIVO</div></div></div></td>';
                 _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
@@ -2255,8 +2244,8 @@
     //Cambiar estado Nuevo Tipo Profesion Modal
     function f_UpdateEstTipo(_pacaid, _padeid){  
 
-        alert(_padeid);
-        debugger;
+        //alert(_padeid);
+        //debugger;
         var _check = $("#chktipo" + _padeid).is(":checked");
         var _checked = '';
         var _class = '';
@@ -2709,12 +2698,12 @@
         var _paisid = "<?php echo $xPaisid; ?>";
         var _emprid = "<?php echo $xEmprid; ?>";
         var _usuaid = "<?php echo $xUsuaid; ?>";
-        var _tipodoc = $('#cboTipoDoc').val();
+        var _tipodoc = $("#cboTipoDoc option:selected").text();
         var _numdocumento = $.trim($("#txtNumDocumento").val());
         var _nombres = $.trim($("#txtNombresProf").val());
         var _apellidos = $.trim($("#txtApellidosProf").val());
-        var _genero = $('#cboTipoGenero').val();
-        var _tipoprof = $('#cboTipoProfesion').val();
+        var _genero = $("#cboTipoGenero option:selected").text();
+        var _tipoprof = $("#cboTipoProfesion option:selected").text();
         var _direccion = $.trim($("#txtDireccionProf").val());
         var _telefono = $.trim($("#txtFonoProf").val());
         var _celular = $.trim($("#txtCelularProf").val());
@@ -2760,12 +2749,12 @@
         }
 
         if(_nombres == ''){
-            toastSweetAlert("top-end",3000,"warning","Ingrese Nombre..!!");
+            toastSweetAlert("top-end",3000,"warning","Ingrese Nombres..!!");
             return;                    
         }
 
         if(_apellidos == ''){
-            toastSweetAlert("top-end",3000,"warning","Ingrese Apellido..!!");
+            toastSweetAlert("top-end",3000,"warning","Ingrese Apellidos..!!");
             return;                    
         }
 
