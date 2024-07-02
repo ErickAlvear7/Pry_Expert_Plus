@@ -399,7 +399,7 @@
 </div>
 <!--Modal Nueva Especialidad -->
 <div class="modal fade" id="modal-new-especialidad" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nueva Especialidad</h2>
@@ -415,25 +415,11 @@
             <div class="modal-body py-lg-5 px-lg-10">
                 <div class="card card-flush py-2">
                     <div class="card-body pt-0" id="kt_modal_new_card_form">
-                        <div class="row mb-5">
-                            <div class="col-md-12">
-                                 <label class="required form-label">Nombre Especialidad</label>
-                                 <input type="text" class="form-control" maxlength="250" placeholder="Ingrese Especialidad" name="txtEspecialidad" id="txtEspecialidad" />
-                            </div>
-                        </div>
-                        <div class="row mb-12">
-                            <div class="col-md-12">
-                                <label class="form-label">Descripcion</label>
-                                <textarea class="form-control" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-md-1">
+                        <div class="row mb-7">
+                            <div class="col-md-8">
                                 <label class="required form-label">Tipo</label>
-                            </div>
-                            <div class="col-md-6">
                                 <select name="cboTipoEspe" id="cboTipoEspe" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo" data-dropdown-parent="#kt_modal_new_card_form" class="form-select mb-2">
-                                    <option</option>
+                                    <option></option>
                                     <?php 
                                     $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid ";
                                     $xSQL .= "AND pca.paca_nombre='Tipo Especialidad' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
@@ -443,13 +429,24 @@
                                     <?php } ?>
                                 </select>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <label class="required form-label">Precio (PVP)</label>
-                            </div>
-                            <div class="col-md-3">
                                 <input type="number" name="txtPvpNew" id="txtPvpNew" class="form-control form-control-solid" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
-                        </div>   
+                        </div>  
+                        <div class="row mb-5">
+                            <div class="col-md-12">
+                                 <label class="required form-label">Nombre Especialidad</label>
+                                 <input type="text" class="form-control" maxlength="250" placeholder="Ingrese Especialidad" name="txtEspecialidad" id="txtEspecialidad" />
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                <label class="form-label">Descripcion</label>
+                                <textarea class="form-control" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                            </div>
+                        </div>
+                     
                     </div>
                 </div>
             </div>
@@ -661,13 +658,13 @@
             var _descripcion = $.trim($("#txtDescripcion").val());
             var _pvpnew = $("#txtPvpNew").val();
 
-            if(_especialidad == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Especialidad..!!");
+            if(_cbotipoespe == ''){
+                toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Especialidad..!!");
                 return;
             }
 
-            if(_cbotipoespe == ''){
-                toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Especialidad..!!");
+            if(_especialidad == ''){
+                toastSweetAlert("top-end",3000,"warning","Ingrese Especialidad..!!");
                 return;
             }
 
