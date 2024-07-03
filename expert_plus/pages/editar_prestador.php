@@ -92,7 +92,7 @@
         <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
             <div class="card card-flush py-4">
                 <div class="card-header">
-                    <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_logo">
+                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#view_logo">														<!--begin::Icon-->
                         <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
                             <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -111,7 +111,7 @@
                         <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Logo</h4>
                     </div>
                 </div>
-                <div id="view_logo" class="collapse fs-6 ms-1">
+                <div id="view_logo" class="collapse show fs-6 ms-1">
                     <div class="card-body text-center pt-0">
                         <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
                             <div class="image-input-wrapper w-150px h-150px" id="imgfile"></div>
@@ -634,8 +634,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="fa fa-plus me-1"></i>Agregar</button> 
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-plus me-1"></i>Agregar</button> 
             </div>
         </div>
     </div>
@@ -688,8 +688,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnEditarEspe" onclick="f_GrabarEspe(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>)" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnEditarEspe" onclick="f_GrabarEspe(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>)" class="btn btn-sm btn-light-primary border border-primary"><i class="las la-pencil-alt"></i>Modificar</button>
             </div>
         </div>
     </div>
@@ -744,7 +744,7 @@
                             </div>
                         </div>
                         <div class="form-group mt-5 mb-4">
-                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarProfesional">
+                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary border border-primary" id="btnAgregarProfesional">
                                 <i class="fa fa-plus-circle me-1" aria-hidden="true"></i>Agregar Profesional
                             </button>
                         </div>
@@ -765,7 +765,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
@@ -814,7 +814,7 @@
                             </div>
                         </div>
                          <div class="form-group my-5">
-                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarHorario">
+                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary border border-primary" id="btnAgregarHorario">
                                 <i class="fa fa-plus-circle me-1" aria-hidden="true"></i>Agregar Horario
                             </button>
                         </div>
@@ -840,7 +840,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
@@ -881,7 +881,7 @@
                             </div>
                         </div>
                         <div class="form-group my-5">
-                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarTipo">
+                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary border border-primary" id="btnAgregarTipo">
                                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 Agregar
                             </button>
@@ -965,7 +965,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
@@ -1189,8 +1189,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnSaveProf" class="btn btn-sm btn-light-primary"><i class="fa fa-hdd"></i>Grabar</button>
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnSaveProf" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-hdd"></i>Grabar</button>
             </div>
         </div>
     </div>
@@ -1240,7 +1240,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
@@ -2700,6 +2700,7 @@
         var _apellidos = $.trim($("#txtApellidosProf").val());
         var _genero = $("#cboTipoGenero option:selected").text();
         var _tipoprof = $("#cboTipoProfesion option:selected").text();
+        var _tipoprofv = $("#cboTipoProfesion").val();
         var _direccion = $.trim($("#txtDireccionProf").val());
         var _telefono = $.trim($("#txtFonoProf").val());
         var _celular = $.trim($("#txtCelularProf").val());
@@ -2810,7 +2811,7 @@
         form_data.append('xxNombres', _nombres);
         form_data.append('xxApellidos', _apellidos);
         form_data.append('xxGenero', _genero);
-        form_data.append('xxTipoProfesion', _tipoprof);
+        form_data.append('xxTipoProfesion', _tipoprofv);
         form_data.append('xxDireccion', _direccion);
         form_data.append('xxFono', _telefono);
         form_data.append('xxCelular', _celular);

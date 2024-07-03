@@ -42,6 +42,9 @@
                 $xSQL = "UPDATE `expert_prestadora_especialidad` SET espe_id=$xEspeid,pree_pvp=$xPvp,pree_costo=$xCosto WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pres_id=$xPresid AND espe_id=$xEspeidant ";
                 mysqli_query($con, $xSQL);
 
+                $xSQL = "UPDATE `expert_especialidad` SET espe_pvp=$xPvp WHERE espe_id=$xEspeid AND pais_id=$xPaisid AND empr_id=$xEmprid";
+                mysqli_query($con, $xSQL);
+
                 $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
                 $xSQL .= "VALUES('Actualización Especialidad Asignada',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
                 mysqli_query($con, $xSQL);            
