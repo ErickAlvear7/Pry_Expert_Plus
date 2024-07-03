@@ -581,8 +581,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnSaveNew" class="btn btn-sm btn-light-primary"><i class="fa fa-hdd"></i>Grabar</button>
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnSaveNew" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-hdd"></i>Grabar</button>
             </div>
         </div>
     </div>
@@ -1373,7 +1373,7 @@
             var _cbotipoespe = $("#cboTipoEspe option:selected").text();
             var _descripcion = $.trim($("#txtDescripcion").val());
             var _pvpnew = $("#txtPvpNew").val();
-
+            
             if(_cbotipoespe == ''){
                 toastSweetAlert("top-end",3000,"warning","Seleccion Tipo Especialidad..!!");
                 return;
