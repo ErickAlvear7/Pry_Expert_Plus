@@ -480,8 +480,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="fa fa-hdd me-1"></i>Agregar</button>
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-hdd me-1"></i>Agregar</button>
             </div>
         </div>   
     </div>
@@ -550,8 +550,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-sm btn-light-primary"><i class="fa fa-hdd me-1"></i>Grabar</button>
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-hdd me-1"></i>Grabar</button>
             </div>
         </div>
     </div>
@@ -562,6 +562,7 @@
     var _cobertura = "NO",_sistema = "NO", _count = 0, _result = [],_paisid = "<?php echo $xPaisid; ?>",_emprid = "<?php echo $xEmprid; ?>";
 
     $(document).ready(function(){
+
 
         $('#cboProvincia').change(function(){
                               
@@ -688,8 +689,7 @@
         var _output;
         var _emprid = "<?php echo $xEmprid; ?>";
         var _paisid = "<?php echo $xPaisid; ?>";
-        var _producto = $.trim($("#txtProducto").val());
-        var _productoUpper = _producto.toUpperCase();
+        var _producto = $.trim($("#txtProducto").val()).toUpperCase();
         var _descripcion = $.trim($("#txtDescripcion").val());
         var _costo = $.trim($("#txtCosto").val());
         var _cbogrupo = $('#cboGrupo').val();
@@ -703,22 +703,23 @@
             return false;
         }
 
-        if(_costo == 0){
-            toastSweetAlert("top-end",3000,"warning","Ingrese Costo..!!");
+        if(_txtGrupo == ''){
+            toastSweetAlert("top-end",3000,"warning","Seleccione Grupo..!!");
             return false;
         }
 
-        if(_txtGrupo == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Grupo..!!");
+        if(_costo == 0){
+            toastSweetAlert("top-end",3000,"warning","Ingrese Costo..!!");
             return false;
         }
 
                 
         var _parametros = {
 
+            "xxClieid" : 0,
             "xxPaisid" : _paisid,
             "xxEmprid" : _emprid,
-            "xxProducto" : _producto
+            "xxProducto" : _producto,
         }
 
         var xrespuesta = $.post("codephp/consultar_producto.php", _parametros);
@@ -728,7 +729,7 @@
 
                 $.each(_result,function(i,item){
 
-                    if(item.arryproducto.toUpperCase() == _producto.toUpperCase()){
+                    if(item.arryproducto == _producto){
                         toastSweetAlert("top-end",3000,"warning","Producto ya Existe..!!");
                         _continuar = false;
                         return false;
@@ -746,7 +747,7 @@
                     _output = '<tr id="row_' + _count + '">';
                     _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_orden[]" id="orden' + _count + '" value="' + _count + '" /></td>';
                     _output += '<td>' + _txtGrupo + ' <input type="hidden" name="hidden_grupo[]" id="txtGrupo' + _count + '" value="' + _txtGrupo + '" /></td>';
-                    _output += '<td>' + _productoUpper + ' <input type="hidden" name="hidden_producto[]" id="txtProducto' + _count + '" value="' + _productoUpper + '" /></td>';
+                    _output += '<td>' + _producto + ' <input type="hidden" name="hidden_producto[]" id="txtProducto' + _count + '" value="' + _producto + '" /></td>';
                     _output += '<td>' + _costo + ' <input type="hidden" name="hidden_costo[]" id="txtCosto' + _count + '" value="' + _costo + '" /></td>';
                     _output += '<td>';
                     _output += '<button id="btnDelete' + _count + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"  onclick="f_DelProducto('+"'";
@@ -974,6 +975,7 @@
         var _parametros = {            
             "xxPaisid" : _idpais,
             "xxEmprid" : _idempr,
+            "xxProvid" : _cboIdProv,
             "xxCliente" : _cliente
         }
 
@@ -1069,7 +1071,7 @@
 
     function f_GuardarGrupo(_paisid,_emprid,_usuaid){
 
-        debugger;
+        //debugger;
 
         var _nombreGrupo = $.trim($("#txtGrupo").val());
         var _descGrupo = $.trim($("#txtDescGrupo").val());

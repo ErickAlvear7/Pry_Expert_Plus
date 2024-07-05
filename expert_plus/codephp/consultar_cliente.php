@@ -12,16 +12,16 @@
     $log_file = "err_consulta";
     $xRow = 0;  
 
-    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxCliente'])){
-        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxCliente']) <> ''){ 
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxProvid']) and isset($_POST['xxCliente'])){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxProvid']) <> '' and isset($_POST['xxCliente']) <> ''){ 
             
             $xPaisid = $_POST['xxPaisid'];
-            $xEmprid = $_POST['xxPaisid'];
+            $xEmprid = $_POST['xxEmprid'];
+            $xProvid = $_POST['xxProvid'];
             $xCliente= trim(mb_strtoupper(safe($_POST['xxCliente'])));
 
          
-            $xSQL = " SELECT * FROM `expert_cliente` clie ";
-            $xSQL .= " WHERE clie.pais_id=$xPaisid AND clie.empr_id=$xEmprid AND clie.clie_nombre='$xCliente' ";
+            $xSQL = "SELECT * FROM `expert_cliente` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND prov_id=$xProvid AND clie_nombre='$xCliente'";
             $all_det = mysqli_query($con, $xSQL) or die (error_log(mysqli_error($con), 3, $log_file));
             $xRow = mysqli_num_rows($all_det);   
         }
