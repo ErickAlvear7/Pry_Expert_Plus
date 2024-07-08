@@ -583,8 +583,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-               <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" class="btn btn-sm btn-light-primary" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" ><i class="fa fa-hdd me-1"></i>Grabar</button>
+               <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-primary border border-primary" id="btnGuardar" onclick="f_GuardarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)" ><i class="fa fa-hdd me-1"></i>Grabar</button>
             </div>
         </div>
     </div>
@@ -629,7 +629,7 @@
                             </div>
 
                             <div class="form-group my-5">
-                                <button type="button" id="btneditargrupo" onclick="f_ModificarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
+                                <button type="button" id="btneditargrupo" onclick="f_ModificarGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" class="btn btn-sm btn-light-primary border border-primary"><i class="las la-pencil-alt"></i>Modificar</button>
                             </div>
                         </div>
                         <div class="mh-300px scroll-y me-n7 pe-7">
@@ -718,7 +718,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>
@@ -809,8 +809,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary"><i class="fa fa-plus me-1"></i>Agregar</button>
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-plus me-1"></i>Agregar</button>
             </div>
         </div>   
     </div>
@@ -905,8 +905,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnGuardar" onclick="f_EditarProd(<?php echo $xPaisid; ?>,<?php echo $xEmprid;?>,<?php echo $xUsuaid;?>)" class="btn btn-sm btn-light-primary border border-primary"><i class="las la-pencil-alt"></i>Modificar</button>
             </div>
         </div>
     </div>
@@ -925,7 +925,7 @@
         var _mensaje = $('input#mensaje').val();
 
             if(_mensaje != ''){
-                mensajesalertify(_mensaje,"S","top-center",3); 
+                toastSweetAlert("top-end",3000,"success",_mensaje);
             }
 
         //Cargar imagen logo cabecera
@@ -1370,8 +1370,9 @@
     }
 
     function f_ModificarGrupo(_paisid,_emprid){
-
+   
         _usuaid = '<?php echo $xUsuaid; ?>';
+        _clieid = '<?php echo $clieid; ?>';
 
         _grupoid = $('#txteditargrupoid').val();
         _gruponew = $('#txteditarGrupo').val();
@@ -1417,6 +1418,11 @@
                             //console.log(_output);
 
                             $('#trgru_' + _grupoid + '').html(_output);
+                            // $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {
+                            //     'mensaje': 'Actualizado con Exito',
+                            //     'idclie': _clieid
+                            
+                            // });
 
                         }
                     });
