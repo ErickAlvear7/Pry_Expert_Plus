@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                           <button class="btn btn-sm btn-primary" type="button" id="btnGuardarEdit" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $idpaca; ?>)"><i class="las la-save"></i>Grabar</button>
+                           <button class="btn btn-sm btn-primary" type="button" id="btnGuardarEdit" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $idpaca; ?>)"><i class="fa fa-hdd me-1"></i>Grabar</button>
                         </div>	
                     </div>
                 </div>
@@ -131,7 +131,7 @@
                                     <input type="text" class="form-control form-control-solid" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" placeholder="valor entero" value="" />                       
                                 </div>
                                 <div class="col-md-2 fv-row">
-                                <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm mb-2" id="btnAgregar"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm mb-2 border border-primary" id="btnAgregar"><i class="fa fa-plus me-1" aria-hidden="true"></i>
                                     Agregar
                                 </button>
                                 </div>
@@ -292,8 +292,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnGuardar" class="btn btn-sm btn-light-primary"><i class="las la-pencil-alt"></i>Modificar</button>
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnGuardar" class="btn btn-sm btn-light-primary border border-primary"><i class="las la-pencil-alt me-1"></i>Modificar</button>
             </div>
             <input type="hidden" id="txtDetalleold" name="txtDetalleold" />
             <input type="hidden" id="txtValortexto" name="txtDetalleold" />

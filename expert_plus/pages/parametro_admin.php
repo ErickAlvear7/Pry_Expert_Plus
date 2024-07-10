@@ -161,7 +161,7 @@
                     <div class="card-body pt-0">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel"> 
-                                <div class="card-body pt-0">
+                                <div class="card-body pt-0 mb-6">
                                     <div class="row g-9 mb-10">
                                         <div class="col-md-12 fv-row">
                                             <label class="d-flex align-items-center fs-6 fw-bold mb-3">
@@ -177,7 +177,7 @@
                                                 <span class="required">Descripcion</span>
                                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique una descripcion del parametro"></i>
                                             </label>
-                                            <textarea class="form-control" name="txtDesc" id="txtDesc" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                                            <textarea class="form-control" name="txtDesc" id="txtDesc" maxlength="150" row="2" onkeydown="return (event.keyCode!=13);"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -208,8 +208,8 @@
                                             <input type="text" class="form-control form-control-solid" id="txtValorI" name="txtValorI" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" minlength="1" maxlength="10" placeholder="valor entero" value="" />                       
                                         </div>
                                         <div class="col-md-2 fv-row">
-                                            <button class="btn btn-sm btn-light-primary" id="btnAgregar">
-                                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                            <button class="btn btn-sm btn-light-primary border border-primary" id="btnAgregar">
+                                                <i class="fa fa-plus me-1" aria-hidden="true"></i>
                                                 Agregar    
                                             </button>
                                         </div>
@@ -235,8 +235,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnGuardar" class="btn btn-sm btn-light-primary" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-save"></i>Grabar</button>
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnGuardar" class="btn btn-sm btn-light-primary border border-primary" onclick="f_Guardar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="fa fa-hdd me-1"></i>Grabar</button>
             </div>
         </div>
     </div>

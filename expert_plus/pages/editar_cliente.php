@@ -1418,11 +1418,11 @@
                             //console.log(_output);
 
                             $('#trgru_' + _grupoid + '').html(_output);
-                            // $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {
-                            //     'mensaje': 'Actualizado con Exito',
-                            //     'idclie': _clieid
+                                $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {
+                                'mensaje': 'Actualizado con Exito',
+                                 'idclie': _clieid
                             
-                            // });
+                            });
 
                         }
                     });

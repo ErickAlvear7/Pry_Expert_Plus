@@ -106,7 +106,7 @@
                                 </div> -->
                                 <div class="col">
                                     <div class="d-grid gap-2">
-                                        <button type="button" class="btn btn-light-primary btn-sm" onclick="f_Editar(<?php echo $perfil['Id']; ?>,'<?php echo $xNamePerfil; ?>','<?php echo $perfil['Descripcion']; ?>')"><i class="las la-pencil-alt" aria-hidden="true"></i>Editar Perfil</button>
+                                        <button type="button" class="btn btn-light-primary border border-primary btn-sm" onclick="f_Editar(<?php echo $perfil['Id']; ?>,'<?php echo $xNamePerfil; ?>','<?php echo $perfil['Descripcion']; ?>')"><i class="las la-pencil-alt me-1" aria-hidden="true"></i>Editar Perfil</button>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                 <img src="assets/media/illustrations/sketchy-1/4.png" class="card-img-top" alt="..." height="200">
                 <div class="card-body">
                     <div class="d-grid gap-2">
-                        <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm" id="btnNuevo"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        <button type="button" data-repeater-create="" class="btn btn-light-primary border border-primary btn-sm" id="btnNuevo"><i class="fa fa-list-ol me-1" aria-hidden="true"></i>
                         Nuevo Perfil
                         </button>
                     </div>
@@ -257,8 +257,8 @@
                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="reset" class="btn btn-sm btn-light-danger" data-kt-roles-modal-action="cancel"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                    <button type="button" class="btn btn-sm btn-light-primary" id="btnGrabar" onclick="f_Grabar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-save"></i>Grabar</button>
+                    <button type="reset" class="btn btn-sm btn-light-danger border border-danger" data-kt-roles-modal-action="cancel"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                    <button type="button" class="btn btn-sm btn-light-primary border border-primary" id="btnGrabar" onclick="f_Grabar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="fa fa-hdd me-1"></i>Grabar</button>
                 </div>
             </div>
         </div>
@@ -366,8 +366,8 @@
                     </div>
                 </div>
                 <div class="modal-footer"> 
-                    <button type="reset" class="btn btn-sm btn-light-danger" data-kt-roles-modal-action="cancel"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-                    <button type="button" id="btnGrabarEdit" class="btn btn-sm btn-light-primary" onclick="f_GrabarEditar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-pencil-alt"></i>Modificar</button>
+                    <button type="reset" class="btn btn-sm btn-light-danger border border-danger" data-kt-roles-modal-action="cancel"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                    <button type="button" id="btnGrabarEdit" class="btn btn-sm btn-light-primary border border-primary" onclick="f_GrabarEditar(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xUsuaid; ?>)"><i class="las la-pencil-alt me-1"></i>Modificar</button>
                 </div>
             </div>
         </div>
