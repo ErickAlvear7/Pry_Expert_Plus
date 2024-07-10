@@ -481,7 +481,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-hdd me-1"></i>Agregar</button>
+                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-plus me-1"></i>Agregar</button>
             </div>
         </div>   
     </div>
