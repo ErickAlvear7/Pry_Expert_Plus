@@ -943,7 +943,7 @@
 	        {
                 _valor = document.getElementById("txtFono1").value;
                 if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
-                    toastSweetAlert("top-end",3000,"error","Telefono 1 Incorrecto..!");  
+                    toastSweetAlert("top-end",3000,"error","Telefono 1 Incorrecto..!!");  
                     return;
                 }
             } 
@@ -952,7 +952,7 @@
 	        {
                 _valor = document.getElementById("txtFono2").value;
                 if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
-                    toastSweetAlert("top-end",3000,"error","Telefono 2 Incorrecto..!");  
+                    toastSweetAlert("top-end",3000,"error","Telefono 2 Incorrecto..!!");  
                     return;
                 }
             } 
@@ -961,7 +961,7 @@
 	        {
                 _valor = document.getElementById("txtFono3").value;
                 if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
-                    toastSweetAlert("top-end",3000,"error","Telefono 3 Incorrecto..!");  
+                    toastSweetAlert("top-end",3000,"error","Telefono 3 Incorrecto..!!");  
                     return;
                 }
             } 
@@ -1077,15 +1077,17 @@
                         data: form_data,
                         processData: false,
                         contentType: false,
-                        dataType: "json",
-                        success: function(dataid){   
+                        dataType: "html",
+                        success: function(dataid){
+                            console.log(dataid)
                             if(dataid != 0){
+                                //debugger;
 
-                                var xrespuesta = $.post("codephp/grabar_prestaespeci.php", { xxPaisid: _paisid, xxEmprid: _emprid, xxUsuaid: _usuaid, xxPresid: dataid, xxResult: _result });
-                                xrespuesta.done(function(xrespose){
+                                var xresultado = $.post("codephp/grabar_prestaespeci.php", { xxPaisid: _paisid, xxEmprid: _emprid, xxUsuaid: _usuaid, xxPresid: dataid, xxResult: _result });
+                                xresultado.done(function(xrespose){
 
                                     if(xrespose.trim() == 'OK'){
-                                        _detalle = 'Agregado Correctamente';
+                                        _detalle = 'Grabado con Exito';
                                         _respuesta = 'OK'; 
                                     }else{
                                         _detalle = 'Error creacion de especialidades';
@@ -1093,7 +1095,7 @@
                                     }
 
                                     /**PARA CREAR REGISTRO DE LOGS */
-                                    _parametros = {
+                                    /*_parametros = {
                                         "xxPaisid" : _paisid,
                                         "xxEmprid" : _emprid,
                                         "xxUsuaid" : _usuaid,
@@ -1101,16 +1103,19 @@
                                     }					
         
                                     $.post("codephp/new_log.php", _parametros, function(response){
-                                    });                                              
+                                    });*/     
+                                    
+                                    if(_respuesta == 'OK'){
+                                        $.redirect('?page=prestador_admin&menuid=<?php echo $menuid; ?>', {'mensaje': _detalle}); //POR METODO POST
+                                    }else{
+                                        toastSweetAlert("top-end",3000,"warning",_detalle);
+                                    }
                                 });    
                               
                             }else{
                                 _detalle = 'Error creacion nuevo prestador';
-                                _respuesta = 'ERR';                                
-                            }
-
-                            if(_respuesta == 'OK'){
-                                $.redirect('?page=prestador_admin&menuid=<?php echo $menuid; ?>', {'mensaje': 'Grabado con Éxito..!'}); //POR METODO POST
+                                //_respuesta = 'ERR';     
+                                toastSweetAlert("top-end",3000,"warning",_detalle);
                             }
                         },
                         error: function (error) {

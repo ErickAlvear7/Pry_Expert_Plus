@@ -745,7 +745,7 @@
                         </div>
                         <div class="form-group mt-5 mb-4">
                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary border border-primary" id="btnAgregarProfesional">
-                                <i class="fa fa-plus-circle me-1" aria-hidden="true"></i>Agregar Profesional
+                                <i class="fa fa-plus me-1" aria-hidden="true"></i>Agregar Profesional
                             </button>
                         </div>
                         <table id="tblProfesional" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
@@ -882,7 +882,7 @@
                         </div>
                         <div class="form-group my-5">
                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary border border-primary" id="btnAgregarTipo">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                <i class="fa fa-plus me-1" aria-hidden="true"></i>
                                 Agregar
                             </button>
                         </div>
@@ -2770,7 +2770,7 @@
         {
             _valor = document.getElementById("txtFonoProf").value;
             if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
-                toastSweetAlert("top-end",3000,"error","Telefono Incorrecto..!");  
+                toastSweetAlert("top-end",3000,"error","Telefono Incorrecto..!!");  
                 return;
             }
         }   
@@ -2779,7 +2779,7 @@
 		{
 			_valor = document.getElementById("txtCelularProf").value;
 			if( !(/^\d{10}$/.test(_valor)) ) {
-				toastSweetAlert("top-end",3000,"error","Celular Incorrecto..!"); 
+				toastSweetAlert("top-end",3000,"error","Celular Incorrecto..!!"); 
 				return;
 			}
 		}
