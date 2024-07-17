@@ -413,7 +413,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end mt-7">
-                        <button type="button" id="btnSave" class="btn btn-sm btn-primary"><i class="las la-save"></i>
+                        <button type="button" id="btnSave" class="btn btn-sm btn-primary"><i class="fa fa-hdd me-1"></i>
                            Grabar
                         </button>
                     </div>                            
@@ -815,7 +815,7 @@
                         </div>
                          <div class="form-group my-5">
                             <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary border border-primary" id="btnAgregarHorario">
-                                <i class="fa fa-plus-circle me-1" aria-hidden="true"></i>Agregar Horario
+                                <i class="fa fa-plus me-1" aria-hidden="true"></i>Agregar Horario
                             </button>
                         </div>
                          <div class="separator my-7"></div>
@@ -1222,8 +1222,8 @@
                             </div>
                         </div>
                         <div class="form-group mt-5 mb-4">
-                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary" id="btnAgregarMotivo">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Motivo
+                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary border border-primary" id="btnAgregarMotivo">
+                                <i class="fa fa-plus me-1" aria-hidden="true"></i> Agregar Motivo
                             </button>
                         </div>
                         <table id="tblMotivo" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
@@ -1341,7 +1341,7 @@
             
             //$("#modal_new_tipoprofesion").find("input,textarea").val("");
             const btn = document.getElementById('btnAgregarTipo');
-            btn.innerHTML = '<i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar';
+            btn.innerHTML = '<i class="fa fa-plus me-1" aria-hidden="true"></i>Agregar';
 
             $("#txtTipoProfesion").val('');
             $("#txtCodigoTipo").val('');
