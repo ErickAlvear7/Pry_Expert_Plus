@@ -110,8 +110,8 @@
                 <div id="view_opciones" class="collapse show fs-6 ms-1">
                     <div class="card-body pt-0">
                         <div class="d-grid gap-2">
-                            <button type="button" id="btnNuevaEspe" class="btn btn-light-primary btn-sm mb-10"><i class="fa fa-plus-circle" aria-hidden="true"></i>                                                          
-                                Nueva Especialidad
+                            <button type="button" id="btnModalAsis" class="btn btn-light-primary btn-sm border border-primary"><i class="fa fa-users me-1" aria-hidden="true"></i>                                                          
+                                Nuevo Tipo Asistencia
                             </button> 
                         </div>                          
                     </div>
@@ -128,8 +128,8 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">
-                        <i class="fa fa-stethoscope fa-1x me-2" aria-hidden="true"></i>
-                        Especialidad Prestador
+                        <i class="fa fa-user fa-1x me-2" aria-hidden="true"></i>
+                        Servicios Prestador
                     </a>
                 </li>
                 <a href="?page=prestador_admin&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
@@ -313,26 +313,27 @@
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                     <div class="d-flex flex-column gap-7">
                         <div class="form-group">
-                            <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm" id="btnAddEspe"><i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                Agregar Especialidad
+                            <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm border border-primary" id="btnAddEspe"><i class="fa fa-users me-1" aria-hidden="true"></i>
+                                Agregar Tipo Servicio
                             </button>
                         </div>
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <h3 class="fw-normal">Especialidades Asignadas</h2>
+                                    <h3 class="fw-normal">Servicios Asignados</h3>
                                 </div>
                             </div>
                             <div class="card-body pt-0">
                                 <div class="d-flex justify-content-center flex-column gap-5">
                                     <table id="tblEspecialidad" class="table table-sm table-hover table-bordered">
                                         <thead>
-                                            <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                                            <tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
                                                 <th style="display: none;">Id</th>
-                                                <th>Especialidad</th>
-                                                <th>Pvp</th>
-                                                <th>Costo</th>
-                                                <th>Opciones</th>
+                                                <th>TIPO ASISTENCIA</th>
+                                                <th>TIPO ATENCION</th>
+                                                <th>RED</th>
+                                                <th>PVP</th>
+                                                <th>OPCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody class="fw-bold text-gray-600">
@@ -350,12 +351,12 @@
         </div>
     </form>
 </div>
-<!--Modal Nueva Especialidad -->
-<div class="modal fade" id="modal-new-especialidad" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+<!--Modal Nueva Asistencia -->
+<div class="modal fade" id="modal_new_asistencia" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-800px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nueva Especialidad</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Tipo Asistencia</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -369,34 +370,30 @@
                 <div class="card card-flush py-2">
                     <div class="card-body pt-0" id="kt_modal_new_card_form">
                         <div class="row mb-7">
-                            <div class="col-md-8">
-                                <label class="required form-label">Tipo</label>
-                                <select name="cboTipoEspe" id="cboTipoEspe" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo" data-dropdown-parent="#kt_modal_new_card_form" class="form-select mb-2">
+                            <div class="col">
+                                <label class="required form-label">Seleccione Asistencia</label>
+                                <select name="cboAsistencia" id="cboAsistencia" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo" data-dropdown-parent="#kt_modal_new_card_form" class="form-select mb-2">
                                     <option></option>
                                     <?php 
                                     $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid ";
-                                    $xSQL .= "AND pca.paca_nombre='Tipo Especialidad' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                    $xSQL .= "AND pca.paca_nombre='Asistencia' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
                                     $all_datos =  mysqli_query($con, $xSQL);
                                     foreach ($all_datos as $datos){ ?>
                                         <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['Descripcion']) ?></option>
                                     <?php } ?>
                                 </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="required form-label">Precio (PVP)</label>
-                                <input type="number" name="txtPvpNew" id="txtPvpNew" class="form-control form-control-solid" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                            </div>
+                            </div> 
                         </div>  
                         <div class="row mb-5">
-                            <div class="col-md-12">
-                                 <label class="required form-label">Nombre Especialidad</label>
-                                 <input type="text" class="form-control" maxlength="250" placeholder="Ingrese Especialidad" name="txtEspecialidad" id="txtEspecialidad" />
+                            <div class="col">
+                                 <label class="required form-label">Nombre Tipo Asistencia</label>
+                                 <input type="text" class="form-control text-uppercase" maxlength="300" placeholder="Ingrese Asistencia" name="txtTipoAsistencia" id="txtTipoAsistencia" />
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-md-12">
+                            <div class="col">
                                 <label class="form-label">Descripcion</label>
-                                <textarea class="form-control" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="150" onkeydown="return (event.keyCode!=13);"></textarea>
+                                <textarea class="form-control text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="2" maxlength="300" onkeydown="return (event.keyCode!=13);"></textarea>
                             </div>
                         </div>
                      
@@ -405,12 +402,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnSaveNew" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-hdd me-1"></i>Grabar</button>
+                <button type="button" id="btnSaveAsistencia" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-hdd me-1"></i>Grabar</button>
             </div>
         </div>
     </div>
 </div>  
-<div class="modal fade" id="modal-new-tipoprestador" tabindex="-1" aria-hidden="true">
+<!-- <div class="modal fade" id="modal-new-tipoprestador" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
             <div class="modal-header">
@@ -486,7 +483,7 @@
             </div>
         </div>
     </div>
-</div>  
+</div>   -->
 <!--Modal Agregar Especialidad -->
 <div class="modal fade" id="agregar_especialidad" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
@@ -510,10 +507,10 @@
                             <select name="cboEspecialidad" id="cboEspecialidad" aria-label="Seleccione Especialidad" data-control="select2" data-placeholder="Seleccione Especialidad" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2">
                                 <option></option>
                                 <?php 
-                                $xSQL = "SELECT espe_id AS Codigo,espe_nombre AS NombreEspe FROM `expert_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND espe_estado='A' ";
+                                $xSQL = "SELECT asis_id AS Codigo,asis_nombre AS TipoAsistencia FROM `expert_tipo_asistencia` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND asis_estado='A' ";
                                 $all_datos =  mysqli_query($con, $xSQL);
                                 foreach ($all_datos as $datos){ ?>
-                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['NombreEspe'] ?></option>
+                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['TipoAsistencia'] ?></option>
                                 <?php } ?>                                                        
                             </select>                                             
                         </div>
@@ -586,15 +583,16 @@
         
         $( "#txtPvpNew" ).blur(function() {
             this.value = parseFloat(this.value).toFixed(2);
-        });                 
+        });  
+        
+        //Levantar Modal Asistencia
 
-        $("#btnNuevaEspe").click(function(){
+        $("#btnModalAsis").click(function(){
             
-            $("#modal-new-especialidad").find("input,textarea").val("");
-            $("#modal-new-especialidad").modal("show");
-            $('#modal-new-especialidad').modal('handleUpdate');
-            $("#txtPvpNew").val("0.00");
-            $("#cboTipoEspe").val(0).change();    
+            $("#modal_new_asistencia").find("input,textarea").val("");
+            $("#modal_new_asistencia").modal("show");
+            $('#modal_new_asistencia').modal('handleUpdate');
+            $("#cboAsistencia").val(0).change();    
         }); 
 
         $("#btnNuevoTipo").click(function(){
@@ -602,50 +600,47 @@
             $("#modal-new-tipoprestador").find("input,textarea").val("");
             $("#modal-new-tipoprestador").modal("show");
             $('#modal-new-tipoprestador').modal('handleUpdate');
-        });                 
+        });  
+        
+        
+        //Modal Grabar Nuevo Tipo Asistencia 
+        $('#btnSaveAsistencia').click(function(e){
 
-        $('#btnSaveNew').click(function(e){
-
-            var _cbotipoespe = $("#cboTipoEspe option:selected").text();
-            var _especialidad = $.trim($("#txtEspecialidad").val());
+            var _cboasistencia = $('#cboAsistencia').val();
+            var _txtasistencia = $("#cboAsistencia option:selected").text();
+            var _tipoasistencia = $.trim($("#txtTipoAsistencia").val());
             var _descripcion = $.trim($("#txtDescripcion").val());
-            var _pvpnew = $("#txtPvpNew").val();
             
-            if(_cbotipoespe == ''){
-                toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Especialidad..!!");
+            if(_txtasistencia == ''){
+                toastSweetAlert("top-end",3000,"warning","Seleccione Asistencia..!!");
                 return;
             }
 
 
-            if(_especialidad == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Especialidad..!!");
+            if(_tipoasistencia == ''){
+                toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Asistencia..!!");
                 return;
             }
 
-         
-            if(_pvpnew == ''){
-                _pvpnew = '0.00';
-            }
             var _parametros = {
-                xxPaisId: _paisid,
-                xxEmprId: _emprid,
-                xxUsuaId: _usuaid,
-                xxEspecialidad: _especialidad,
+                xxPaisid: _paisid,
+                xxEmprid: _emprid,
+                xxUsuaid: _usuaid,
+                xxAsistencia: _cboasistencia,
+                xxTipoAsistencia: _tipoasistencia,
                 xxDescripcion: _descripcion,
-                xxTipoEspe: _cbotipoespe,
-                xxPrecio: _pvpnew
             }                    
 
-            var xrespuesta = $.post("codephp/grabar_especialidad.php", _parametros);
+            var xrespuesta = $.post("codephp/grabar_tipoasistencia.php", _parametros);
             xrespuesta.done(function(response){
                 if(response.trim() == 'EXISTE'){
-                    toastSweetAlert("top-end",3000,"warning","Especialidad ya existe..!!");
+                    toastSweetAlert("top-end",3000,"warning","Tipo Asistencia ya Existe..!!");
                 }else{
                     if(response.trim() != 'ERR'){
-                        toastSweetAlert("top-end",3000,"success","Especialidad Agregada");
-                        $("#cboEspecialidad").empty();
-                        $("#cboEspecialidad").html(response);
-                        $("#modal-new-especialidad").modal("hide");
+                        toastSweetAlert("top-end",3000,"success","Agregado");
+                        $("#cboAsistencia").empty();
+                        $("#cboAsistencia").html(response);
+                        $("#modal_new_asistencia").modal("hide");
                     }
                 }
             });
