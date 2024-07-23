@@ -313,7 +313,7 @@
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                     <div class="d-flex flex-column gap-7">
                         <div class="form-group">
-                            <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm border border-primary" id="btnAddEspe"><i class="fa fa-users me-1" aria-hidden="true"></i>
+                            <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm border border-primary" id="btnAddServicio"><i class="fa fa-users me-1" aria-hidden="true"></i>
                                 Agregar Tipo Servicio
                             </button>
                         </div>
@@ -484,12 +484,12 @@
         </div>
     </div>
 </div>   -->
-<!--Modal Agregar Especialidad -->
-<div class="modal fade" id="agregar_especialidad" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
+<!--Modal Agregar Servicio -->
+<div class="modal fade" id="agregar_servicio" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-800px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Datos Especialidad</h2>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Datos Nuevo Servicio</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -502,28 +502,34 @@
             <div class="modal-body py-lg-10 px-lg-10">
                 <div class="card card-flush py-2">
                     <div class="card-body pt-0">
-                        <div class="mb-10 fv-row">
-                            <label class="required form-label">Especialidad</label>
-                            <select name="cboEspecialidad" id="cboEspecialidad" aria-label="Seleccione Especialidad" data-control="select2" data-placeholder="Seleccione Especialidad" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2">
+                        <div class="mb-5 fv-row">
+                            <label class="required form-label">Tipo Asistencia</label>
+                            <select name="cboAsis" id="cboAsis" aria-label="Seleccione Tipo Asistencia" data-control="select2" data-placeholder="Seleccione Especialidad" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2">
                                 <option></option>
                                 <?php 
-                                $xSQL = "SELECT asis_id AS Codigo,asis_nombre AS TipoAsistencia FROM `expert_tipo_asistencia` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND asis_estado='A' ";
+                                $xSQL = "SELECT asis_tipo AS Codigo,asis_nombre AS TipoAsistencia FROM `expert_tipo_asistencia` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND asis_estado='A' ";
                                 $all_datos =  mysqli_query($con, $xSQL);
                                 foreach ($all_datos as $datos){ ?>
                                     <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['TipoAsistencia'] ?></option>
                                 <?php } ?>                                                        
                             </select>                                             
                         </div>
+                        <div class="row mb-5">
+                            <div class="col">
+                                <label class="required form-label">Tipo Atencion</label>
+                                <textarea class="form-control text-uppercase" name="txtTipoAtencion" id="txtTipoAtencion" rows="2" maxlength="300" onkeydown="return (event.keyCode!=13);"></textarea>
+                            </div>
+                        </div>
                         <div class="mb-2 fv-row">
                             <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                 <div class="col">
-                                    <label class="form-label">Pvp</label>
-                                    <input type="number" name="txtPvp" id="txtPvp" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" disabled />
+                                    <label class="required form-label">Costo Red</label>
+                                    <input type="text" name="txtRed" id="txtRed" class="form-control mb-2" placeholder="Red (0.00)" min="0" maxlength = "6" />
                                 </div>
                                 <div class="col">
-                                    <label class="form-label">Costo Red</label>
-                                    <input type="number" name="txtCosto" id="txtCosto" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
-                                </div>
+                                    <label class="required form-label">Pvp</label>
+                                    <input type="text" name="txtPvp" id="txtPvp" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" />
+                                </div>    
                             </div>
                         </div> 
                     </div>
@@ -573,17 +579,6 @@
 
         });
 
-        $( "#txtPvp" ).blur(function() {
-            this.value = parseFloat(this.value).toFixed(2);
-        });
-
-        $( "#txtCosto" ).blur(function() {
-            this.value = parseFloat(this.value).toFixed(2);
-        });  
-        
-        $( "#txtPvpNew" ).blur(function() {
-            this.value = parseFloat(this.value).toFixed(2);
-        });  
         
         //Levantar Modal Asistencia
 
@@ -638,8 +633,8 @@
                 }else{
                     if(response.trim() != 'ERR'){
                         toastSweetAlert("top-end",3000,"success","Agregado");
-                        $("#cboAsistencia").empty();
-                        $("#cboAsistencia").html(response);
+                        $("#cboAsis").empty();
+                        $("#cboAsis").html(response);
                         $("#modal_new_asistencia").modal("hide");
                     }
                 }
@@ -740,43 +735,55 @@
             }
         });  
         
-        //Modal Especialidad
-        $("#btnAddEspe").click(function(){
+        //Levantar Modal Tipo Servicio
+        $("#btnAddServicio").click(function(){
             
-            $("#agregar_especialidad").find("input,textarea").val("");
-            $("#agregar_especialidad").modal("show");
-            $('#agregar_especialidad').modal('handleUpdate');
-            $("#cboEspecialidad").val(0).change();    
+            $("#agregar_servicio").find("input,textarea").val("");
+            $("#agregar_servicio").modal("show");
+            $('#agregar_servicio').modal('handleUpdate');
+            $("#cboAsis").val(0).change();    
         }); 
 
-        //Agregar Especialidad
+        //Agregar Nuevo Servicio Modal
         $('#btnAgregar').click(function(e){
 
-            var _cboespe = $('#cboEspecialidad').val();
-            var _especialidad = $("#cboEspecialidad option:selected").text();
+            var _cboasistencia = $('#cboAsis').val();
+            var _txttipoasistencia = $("#cboAsis option:selected").text();
+            var _txttipoatencion = $.trim($('#txtTipoAtencion').val()).toUpperCase();
+            var _red = $.trim($("#txtRed").val());
             var _pvp = $.trim($("#txtPvp").val());
-            var _costo = $.trim($("#txtCosto").val());
+            var  _continuar = true;
+            var _count = 0;
+           
+            if(_txttipoasistencia == ''){
+                toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Asistencia..!!");
+                return;
+            }
 
-            if(_especialidad == ''){
-                toastSweetAlert("top-end",3000,"warning","Seleccione Especialidad..!!");
+            if(_txttipoatencion == ''){
+                toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Atencion..!!");
+                return;
+            }
+
+            if(_red == ''){
+                toastSweetAlert("top-end",3000,"warning","Ingrese Costo de Red..!!");
                 return;
             }
 
             if(_pvp == ''){
-                _pvp = '0.00';
+                toastSweetAlert("top-end",3000,"warning","Ingrese Pvp..!!");
+                return;
             }
 
-            if(_costo == ''){
-                _costo = '0.00';
-            }                    
-
+        
             $.each(_result,function(i,item){
-                if(item.arryid.toUpperCase() == _cboespe.toUpperCase())
+                if(item.arryatencion == _txttipoatencion)
                 {                  
-                    toastSweetAlert("top-end",3000,"warning","Especialidad ya Existe..!!");   
-                    $("#cboEspecialidad").val(0).change();
-                    $("#txtPvp").val('0.00');
-                    $("#txtCosto").val('0.00');                            
+                    toastSweetAlert("top-end",3000,"warning","Tipo Atencion ya Existe..!!");   
+                    $("#cboAsis").val(0).change();
+                    $("#txtTipoAtencion").val('');
+                    $("#txtRed").val('');
+                    $("#txtPvp").val('');                           
                     _continuar = false;
                     return false;
                 }
@@ -784,54 +791,59 @@
 
             if(_continuar){
                 
-                //_count = _count + 1;
-                _output = '<tr id="row_' + _cboespe + '">';
-                _output += '<td style="display: none;">' + _cboespe + '</td>';                
-                _output += '<td>' + _especialidad + '</td>';
+                _count = _count + 1;
+                _output = '<tr id="row_' + _count + '">';
+                _output += '<td style="display: none;">' + _count + '</td>';                
+                _output += '<td>' + _txttipoasistencia + '</td>';
+                _output += '<td>' + _txttipoatencion + '</td>';
+                _output += '<td>' + _red + '</td>';
                 _output += '<td>' + _pvp + '</td>';
-                _output += '<td>' + _costo + '</td>';
                 _output += '<td><div class=""><div class="btn-group">';
-                _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _cboespe + '"><i class="fa fa-trash"></i></button></div></div></td>';
+                _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
                 _output += '</tr>';
 
                 $('#tblEspecialidad').append(_output);
 
+                //console.log(_output);
+
                 _objeto = {
-                    arryid: _cboespe,
-                    arryespeci: _especialidad,
-                    arrypvp: _pvp,
-                    arrycosto: _costo
+                    arryid: _cboasistencia,
+                    arryasistencia: _txttipoasistencia,
+                    arryatencion: _txttipoatencion,
+                    arryred: _red,
+                    arrypvp: _pvp
                 }
 
                 _result.push(_objeto);
-                $("#cboEspecialidad").val(0).change();
-                $("#txtPvp").val('0.00');
-                $("#txtCosto").val('0.00');
-                $("#agregar_especialidad").modal("hide");
+                $("#cboAsis").val(0).change();
+                $("#txtTipoAtencion").val('');
+                $("#txtRed").val('');
+                $("#txtPvp").val('');
+                $("#agregar_servicio").modal("hide");
 
             }
         });
         
-        $('#cboEspecialidad').change(function(){                    
-            _cboid = $(this).val();
+        // $('#cboEspecialidad').change(function(){                    
+        //     _cboid = $(this).val();
 
-            if(_cboid != null){
-                var _parametros = {
-                    "xxPaisId" : _paisid,
-                    "xxEmprId" : _emprid,
-                    "xxEspeId" : _cboid
-                } 
+        //     if(_cboid != null){
+        //         var _parametros = {
+        //             "xxPaisId" : _paisid,
+        //             "xxEmprId" : _emprid,
+        //             "xxEspeId" : _cboid
+        //         } 
 
-                var xrespuesta = $.post("codephp/get_DatosEspecialidad.php", _parametros);
-                xrespuesta.done(function(response){
-                    if(response.trim() == '0'){
-                        $("#txtPvp").val('0.00');
-                    }else{
-                        $("#txtPvp").val(response);
-                    }
-                });
-            }
-        });
+        //         var xrespuesta = $.post("codephp/get_DatosEspecialidad.php", _parametros);
+        //         xrespuesta.done(function(response){
+        //             if(response.trim() == '0'){
+        //                 $("#txtPvp").val('0.00');
+        //             }else{
+        //                 $("#txtPvp").val(response);
+        //             }
+        //         });
+        //     }
+        // });
 
         $('#btnSave').click(function(e){
            
