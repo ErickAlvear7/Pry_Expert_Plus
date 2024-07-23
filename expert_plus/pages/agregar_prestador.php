@@ -296,12 +296,36 @@
                                     <div class="row">
                                         <div class="col-md-8">
                                             <label class="form-label">Email 2</label>
-                                            <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" />   
+                                            <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="" class="form-control mb-2 text-lowercase" value="" />   
                                         </div>
                                         <div class="col-md-3">
                                             <label class="form-check form-switch form-check-custom form-check-solid mt-5">
                                                 <input class="form-check-input mt-5" name="chkEnviar2" id="chkEnviar2" type="checkbox" />
                                                 <span class="form-check-label fw-bold text-muted mt-3" for="chkEnviar2">No Enviar</span>
+                                            </label>    
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label class="form-label">Email 3</label>
+                                            <input type="email" name="txtEmail3" id="txtEmail3" maxlength="150" placeholder="" class="form-control mb-2 text-lowercase" value="" />   
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-check form-switch form-check-custom form-check-solid mt-5">
+                                                <input class="form-check-input mt-5" name="chkEnviar3" id="chkEnviar3" type="checkbox" />
+                                                <span class="form-check-label fw-bold text-muted mt-3" for="chkEnviar3">No Enviar</span>
+                                            </label>    
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label class="form-label">Email 4</label>
+                                            <input type="email" name="txtEmail4" id="txtEmail4" maxlength="150" placeholder="" class="form-control mb-2 text-lowercase" value="" />   
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-check form-switch form-check-custom form-check-solid mt-5">
+                                                <input class="form-check-input mt-5" name="chkEnviar4" id="chkEnviar4" type="checkbox" />
+                                                <span class="form-check-label fw-bold text-muted mt-3" for="chkEnviar4">No Enviar</span>
                                             </label>    
                                         </div>
                                     </div>
@@ -504,10 +528,10 @@
                     <div class="card-body pt-0">
                         <div class="mb-5 fv-row">
                             <label class="required form-label">Tipo Asistencia</label>
-                            <select name="cboAsis" id="cboAsis" aria-label="Seleccione Tipo Asistencia" data-control="select2" data-placeholder="Seleccione Especialidad" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2">
+                            <select name="cboAsis" id="cboAsis" aria-label="Seleccione Tipo Asistencia" data-control="select2" data-placeholder="Seleccione Tipo Asistencia" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2">
                                 <option></option>
                                 <?php 
-                                $xSQL = "SELECT asis_tipo AS Codigo,asis_nombre AS TipoAsistencia FROM `expert_tipo_asistencia` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND asis_estado='A' ";
+                                $xSQL = "SELECT asis_id AS Codigo,asis_nombre AS TipoAsistencia FROM `expert_tipo_asistencia` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND asis_estado='A' ";
                                 $all_datos =  mysqli_query($con, $xSQL);
                                 foreach ($all_datos as $datos){ ?>
                                     <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['TipoAsistencia'] ?></option>
@@ -775,6 +799,9 @@
                 return;
             }
 
+            _red = parseFloat(_red);
+            _pvp = parseFloat(_pvp);
+            
         
             $.each(_result,function(i,item){
                 if(item.arryatencion == _txttipoatencion)
@@ -791,20 +818,20 @@
 
             if(_continuar){
                 
-                _count = _count + 1;
-                _output = '<tr id="row_' + _count + '">';
-                _output += '<td style="display: none;">' + _count + '</td>';                
+                //_count = _count + 1;
+                _output = '<tr id="row_' + _cboasistencia + '">';
+                _output += '<td style="display: none;">' + _cboasistencia + '</td>';                
                 _output += '<td>' + _txttipoasistencia + '</td>';
                 _output += '<td>' + _txttipoatencion + '</td>';
                 _output += '<td>' + _red + '</td>';
                 _output += '<td>' + _pvp + '</td>';
                 _output += '<td><div class=""><div class="btn-group">';
-                _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
+                _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _cboasistencia + '"><i class="fa fa-trash"></i></button></div></div></td>';
                 _output += '</tr>';
 
                 $('#tblEspecialidad').append(_output);
 
-                //console.log(_output);
+                console.log(_output);
 
                 _objeto = {
                     arryid: _cboasistencia,
