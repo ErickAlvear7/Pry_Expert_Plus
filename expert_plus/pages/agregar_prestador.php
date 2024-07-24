@@ -177,7 +177,7 @@
                                     <input type="text" name="txtPrestador" id="txtPrestador" class="form-control mb-2 text-uppercase" maxlength="150" placeholder="Nombre del Prestador" value="" />
                                     <div class="text-muted fs-7">El Prestador puede ser Clinica/Centro Medico/Estudio/Consultorio/Otros..</div>
                                 </div>   
-                                <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-0 row-cols-lg-2">
+                                <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-0 row-cols-lg-2 mb-2">
                                     <div class="col">
                                         <div class="fv-row mb-0">
                                             <label class="fs-6 fw-bold form-label mt-3">
@@ -219,14 +219,14 @@
                                     <label class="form-label">Direccion</label>
                                     <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"></textarea>
                                 </div>
-                                <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-0 row-cols-lg-2">
+                                <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-0 row-cols-lg-2 mb-2">
                                     <div class="col">
                                         <div class="fv-row mb-0">
                                             <label class="fs-6 fw-bold form-label mt-3">
                                                 <i class="fa fa-map-marker fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
                                                 <span class="">Ubicacion Prestador</span>   
                                             </label>
-                                            <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="200" placeHolder="https://url" />
+                                            <input type="text" class="form-control mb-2 text-lowercase" name="txtUbi" id="txtUbi" maxlength="250" placeHolder="https://url" />
                                         </div>
                                     </div>
                                     <div class="col">
@@ -235,7 +235,7 @@
                                                 <i class="fa fa-globe fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
                                                 <span class="">Pagina Web Prestador</span>   
                                             </label>
-                                            <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="200" placeHolder="https://wwww.prestador.com" />
+                                            <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" placeHolder="https://wwww.prestador.com" />
                                         </div>
                                     </div>
                                 </div>
@@ -880,15 +880,15 @@
            var _sector = $('#cboSector').val();
            var _tipopresta = $('#cboTipo').val();
            var _direccion = $.trim($('#txtDireccion').val());
+           var _ubicacion = $.trim($('#txtUbi').val());
            var _url = $.trim($('#txtUrl').val());
            var _telefono1 = $.trim($('#txtFono1').val());
            var _telefono2 = $.trim($('#txtFono2').val());
-           var _telefono3 = $.trim($('#txtFono3').val());
            var _celular1 = $.trim($('#txtCelular1').val());
-           var _celular2 = $.trim($('#txtCelular2').val());
-           var _celular3 = $.trim($('#txtCelular3').val());
            var _email1 =  $.trim($('#txtEmail1').val());
            var _email2 =  $.trim($('#txtEmail2').val());
+           var _email3 =  $.trim($('#txtEmail3').val());
+           var _email4 =  $.trim($('#txtEmail4').val());
            var _selecc = 'NO';
            _respuesta = 'OK';
 
@@ -944,15 +944,6 @@
                 }
             } 
 
-            if(_telefono3 != '')
-	        {
-                _valor = document.getElementById("txtFono3").value;
-                if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
-                    toastSweetAlert("top-end",3000,"error","Telefono 3 Incorrecto..!!");  
-                    return;
-                }
-            } 
-           
            
            if(_celular1 != '')
            {
@@ -962,44 +953,7 @@
                    return;
                }
            }                     
-           
-           if(_celular2 != '')
-           {
-               _valor = document.getElementById("txtCelular2").value;
-               if( !(/^\d{10}$/.test(_valor)) ) {
-                   toastSweetAlert("top-end",3000,"error","Celular 2 Incorrecto..!!"); 
-                   return;
-               }
-           }
-           
-           if(_celular3 != '')
-           {
-               _valor = document.getElementById("txtCelular3").value;
-               if( !(/^\d{10}$/.test(_valor)) ) {
-                   toastSweetAlert("top-end",3000,"error","Celular 3 Incorrecto..!!");
-                   return;
-               }
-           }                    
-           
-           if(_email1 != ''){
-               var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-           
-               if (regex.test($('#txtEmail1').val().trim())) {
-               }else{
-                   toastSweetAlert("top-end",3000,"error","Email 1 Incorrecto..!!");
-                   return;
-               }
-           }
-
-           if(_email2 != ''){
-               var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-           
-               if (regex.test($('#txtEmail2').val().trim())) {
-               }else{
-                   toastSweetAlert("top-end",3000,"error","Email 2 Incorrecto..!!");
-                   return;
-               }
-           }
+                             
 
            if(_result.length == 0){
                 toastSweetAlert("top-end",3000,"warning","Agregue una Especialidad..!!");
@@ -1039,13 +993,11 @@
             form_data.append('xxSector', _sector);
             form_data.append('xxTipo', _tipopresta);
             form_data.append('xxDireccion', _direccion);
+            form_data.append('xxUbicacion', _ubicacion);
             form_data.append('xxUrl', _url);
             form_data.append('xxFono1', _telefono1);
             form_data.append('xxFono2', _telefono2);
-            form_data.append('xxFono3', _telefono3);
             form_data.append('xxCelular1', _celular1);
-            form_data.append('xxCelular2', _celular2);
-            form_data.append('xxCelular3', _celular3);
             form_data.append('xxEmail1', _email1);
             form_data.append('xxEnviar1', _enviar1);
             form_data.append('xxEmail2', _email2);
