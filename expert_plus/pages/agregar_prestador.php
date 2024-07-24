@@ -226,7 +226,7 @@
                                                 <i class="fa fa-map-marker fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
                                                 <span class="">Ubicacion Prestador</span>   
                                             </label>
-                                            <input type="text" class="form-control mb-2 text-lowercase" name="txtUbi" id="txtUbi" maxlength="250" placeHolder="https://url" />
+                                            <textarea class="form-control mb-2 text-uppercase" name="txtUbi" id="txtUbi" rows="3" maxlength="250" onkeydown="return (event.keyCode!=13);"></textarea>   
                                         </div>
                                     </div>
                                     <div class="col">
@@ -301,7 +301,7 @@
                                         <div class="col-md-3">
                                             <label class="form-check form-switch form-check-custom form-check-solid mt-5">
                                                 <input class="form-check-input mt-5" name="chkEnviar2" id="chkEnviar2" type="checkbox" />
-                                                <span class="form-check-label fw-bold text-muted mt-3" for="chkEnviar2">No Enviar</span>
+                                                <span id="spanEnv2" class="form-check-label fw-bold text-muted mt-3" for="chkEnviar2">No Enviar</span>
                                             </label>    
                                         </div>
                                     </div>
@@ -313,7 +313,7 @@
                                         <div class="col-md-3">
                                             <label class="form-check form-switch form-check-custom form-check-solid mt-5">
                                                 <input class="form-check-input mt-5" name="chkEnviar3" id="chkEnviar3" type="checkbox" />
-                                                <span class="form-check-label fw-bold text-muted mt-3" for="chkEnviar3">No Enviar</span>
+                                                <span id="spanEnv3" class="form-check-label fw-bold text-muted mt-3" for="chkEnviar3">No Enviar</span>
                                             </label>    
                                         </div>
                                     </div>
@@ -325,7 +325,7 @@
                                         <div class="col-md-3">
                                             <label class="form-check form-switch form-check-custom form-check-solid mt-5">
                                                 <input class="form-check-input mt-5" name="chkEnviar4" id="chkEnviar4" type="checkbox" />
-                                                <span class="form-check-label fw-bold text-muted mt-3" for="chkEnviar4">No Enviar</span>
+                                                <span id="spanEnv4" class="form-check-label fw-bold text-muted mt-3" for="chkEnviar4">No Enviar</span>
                                             </label>    
                                         </div>
                                     </div>
@@ -757,7 +757,63 @@
                 $('#chkEnviar2').prop('checked','');
                 _enviar2 = 'NO';
             }
-        });  
+        });
+        
+        $(document).on("click","#chkEnviar3",function(){
+            
+            var _chanspan = document.getElementById("spanEnv3");
+            var _email3 =  $.trim($('#txtEmail3').val());
+
+            if(_email3 != ''){
+                var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+            
+                if (regex.test($('#txtEmail3').val().trim())){
+                    if($("#chkEnviar3").is(":checked")){
+                        _chanspan.innerHTML = '<span id="spanEnv3" class="form-check-label fw-bold" for="chkEnviar3"><strong>Enviar</strong></span>';
+                        _enviar3 = 'SI';
+                    }else{
+                        _chanspan.innerHTML = '<span id="spanEnv3" class="form-check-label fw-bold text-muted" for="chkEnviar3">No Enviar</span>';
+                        _enviar3 = 'NO';
+                    }                            
+                }else{
+                    $('#chkEnviar3').prop('checked','');
+                    toastSweetAlert("top-end",3000,"error","Email Invalido..!!");
+                    _enviar3 = 'NO';
+                    return;
+                }
+            }else{
+                $('#chkEnviar3').prop('checked','');
+                _enviar3 = 'NO';
+            }
+        }); 
+
+        $(document).on("click","#chkEnviar4",function(){
+            
+            var _chanspan = document.getElementById("spanEnv4");
+            var _email4 =  $.trim($('#txtEmail4').val());
+
+            if(_email4 != ''){
+                var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+            
+                if (regex.test($('#txtEmail4').val().trim())){
+                    if($("#chkEnviar4").is(":checked")){
+                        _chanspan.innerHTML = '<span id="spanEnv4" class="form-check-label fw-bold" for="chkEnviar4"><strong>Enviar</strong></span>';
+                        _enviar4 = 'SI';
+                    }else{
+                        _chanspan.innerHTML = '<span id="spanEnv4" class="form-check-label fw-bold text-muted" for="chkEnviar4">No Enviar</span>';
+                        _enviar4 = 'NO';
+                    }                            
+                }else{
+                    $('#chkEnviar4').prop('checked','');
+                    toastSweetAlert("top-end",3000,"error","Email Invalido..!!");
+                    _enviar4 = 'NO';
+                    return;
+                }
+            }else{
+                $('#chkEnviar4').prop('checked','');
+                _enviar4 = 'NO';
+            }
+        }); 
         
         //Levantar Modal Tipo Servicio
         $("#btnAddServicio").click(function(){
@@ -851,26 +907,7 @@
             }
         });
         
-        // $('#cboEspecialidad').change(function(){                    
-        //     _cboid = $(this).val();
 
-        //     if(_cboid != null){
-        //         var _parametros = {
-        //             "xxPaisId" : _paisid,
-        //             "xxEmprId" : _emprid,
-        //             "xxEspeId" : _cboid
-        //         } 
-
-        //         var xrespuesta = $.post("codephp/get_DatosEspecialidad.php", _parametros);
-        //         xrespuesta.done(function(response){
-        //             if(response.trim() == '0'){
-        //                 $("#txtPvp").val('0.00');
-        //             }else{
-        //                 $("#txtPvp").val(response);
-        //             }
-        //         });
-        //     }
-        // });
 
         $('#btnSave').click(function(e){
            
@@ -956,7 +993,7 @@
                              
 
            if(_result.length == 0){
-                toastSweetAlert("top-end",3000,"warning","Agregue una Especialidad..!!");
+                toastSweetAlert("top-end",3000,"warning","Agregue un Servicio al Prestador..!!");
                 return;
            }
 
@@ -1002,6 +1039,10 @@
             form_data.append('xxEnviar1', _enviar1);
             form_data.append('xxEmail2', _email2);
             form_data.append('xxEnviar2', _enviar2);
+            form_data.append('xxEmail3', _email3);
+            form_data.append('xxEnviar3', _enviar3);
+            form_data.append('xxEmail4', _email4);
+            form_data.append('xxEnviar4', _enviar4);
             form_data.append('xxFile', _file);
             form_data.append('xxUsuaid', _usuaid);
 

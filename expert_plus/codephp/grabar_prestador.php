@@ -29,17 +29,19 @@
             $xSector = trim(safe($_POST['xxSector']));
             $xTipoPesta = trim(safe($_POST['xxTipo']));
             $xDireccion = trim(mb_strtoupper(safe($_POST['xxDireccion'])));
+            $xUbicacion = trim(safe($_POST['xxUbicacion']));
             $xUrl = trim(safe($_POST['xxUrl']));
             $xFono1 = trim(safe($_POST['xxFono1']));
             $xFono2 = trim(safe($_POST['xxFono2']));
-            $xFono3 = trim(safe($_POST['xxFono3']));
             $xCelular1 = trim(safe($_POST['xxCelular1']));
-            $xCelular2 = trim(safe($_POST['xxCelular2']));
-            $xCelular3 = trim(safe($_POST['xxCelular3']));
             $xEmail1 = trim(safe($_POST['xxEmail1']));
             $xEnviar1 = trim(safe($_POST['xxEnviar1']));
             $xEmail2 = trim(safe($_POST['xxEmail2']));
             $xEnviar2 = trim(safe($_POST['xxEnviar2']));
+            $xEmail3 = trim(safe($_POST['xxEmail3']));
+            $xEnviar3 = trim(safe($_POST['xxEnviar3']));
+            $xEmail4 = trim(safe($_POST['xxEmail4']));
+            $xEnviar4 = trim(safe($_POST['xxEnviar4']));
 
             $xFile = (isset($_FILES['xxFile']["name"])) ? $_FILES['xxFile']["name"] : '';
             $xPath = "../assets/images/prestadores/";
