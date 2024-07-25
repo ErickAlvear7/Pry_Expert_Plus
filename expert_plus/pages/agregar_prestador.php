@@ -577,6 +577,8 @@
         var _continuar = true;
         _enviar1 = 'NO';
         _enviar2 = 'NO';
+        _enviar3 = 'NO';
+        _enviar4 = 'NO';
 
         $('#cboProvincia').change(function(){
                 
@@ -855,12 +857,19 @@
                 return;
             }
 
-            _red = parseFloat(_red);
-            _pvp = parseFloat(_pvp);
+           debugger;
+            _red = _red.replace(/[a-z]/g,'0');
+            _pvp = _pvp.replace(/[a-z]/g,'0');
+
+            // _red = _red.replace(/(?=.*?[#?!@$ %^&*-])/g,_red);
+            // _pvp = _pvp.replace(/(?=.*?[#?!@$ %^&*-])/g,_pvp);
+      
+            _red = parseFloat(_red)
+            _pvp = parseFloat(_pvp)
             
         
             $.each(_result,function(i,item){
-                if(item.arryatencion == _txttipoatencion)
+                if(item.arryasistencia == _txttipoasistencia && item.arryatencion == _txttipoatencion)
                 {                  
                     toastSweetAlert("top-end",3000,"warning","Tipo Atencion ya Existe..!!");   
                     $("#cboAsis").val(0).change();
@@ -891,7 +900,7 @@
 
                 _objeto = {
                     arryid: _cboasistencia,
-                    arryasistencia: _txttipoasistencia,
+                    arryasistencia:_txttipoasistencia,
                     arryatencion: _txttipoatencion,
                     arryred: _red,
                     arrypvp: _pvp
@@ -908,7 +917,7 @@
         });
         
 
-
+       //Grabar Prestador-Servicio 
         $('#btnSave').click(function(e){
            
            var _provid = $('#cboProvincia').val();
@@ -1067,7 +1076,7 @@
                                 xresultado.done(function(xrespose){
 
                                     if(xrespose.trim() == 'OK'){
-                                        _detalle = 'Grabado con Exito';
+                                        _detalle = 'Prestador Agregado';
                                         _respuesta = 'OK'; 
                                     }else{
                                         _detalle = 'Error creacion de especialidades';

@@ -27,7 +27,7 @@
             $xUsuaid = $_POST['xxUsuaid']; 
             $xPrestador = trim(mb_strtoupper(safe($_POST['xxPrestador'])));
             $xSector = trim(safe($_POST['xxSector']));
-            $xTipoPesta = trim(safe($_POST['xxTipo']));
+            $xTipoPresta = trim(safe($_POST['xxTipo']));
             $xDireccion = trim(mb_strtoupper(safe($_POST['xxDireccion'])));
             $xUbicacion = trim(safe($_POST['xxUbicacion']));
             $xUrl = trim(safe($_POST['xxUrl']));
@@ -58,12 +58,16 @@
                 $xNombreFile = "logo.png";
             }             
 
-            $xSQL = "INSERT INTO `expert_prestadora`(pais_id,empr_id,prov_id,pres_nombre,pres_sector,pres_tipoprestador,pres_direccion,pres_url,pres_fono1,pres_fono2,pres_fono3,pres_celular1,pres_celular2,pres_celular3,pres_email1,pres_enviar1,pres_email2,pres_enviar2,pres_logo,fechacreacion,usuariocreacion,terminalcreacion) ";
-            $xSQL .= "VALUES($xPaisid,$xEmprid,$xProvid,'$xPrestador','$xSector','$xTipoPesta','$xDireccion','$xUrl','$xFono1','$xFono2','$xFono3','$xCelular1','$xCelular2','$xCelular3','$xEmail1','$xEnviar1','$xEmail2','$xEnviar2','$xNombreFile','{$xFecha}',$xUsuaid,'$xTerminal')";
+            $xSQL = "INSERT INTO `expert_prestadora`(pais_id,empr_id,prov_id,pres_nombre,pres_sector,pres_tipoprestador,pres_direccion,";
+            $xSQL .="pres_ubicacion,pres_url,pres_fono1,pres_fono2,pres_celular1,pres_email1,pres_enviar1,pres_email2,pres_enviar2,";
+            $xSQL .="pres_email3,pres_enviar3,pres_email4,pres_enviar4,pres_logo,fechacreacion,usuariocreacion,terminalcreacion)";
+            $xSQL .= "VALUES($xPaisid,$xEmprid,$xProvid,'$xPrestador','$xSector','$xTipoPresta','$xDireccion','$xUbicacion','$xUrl','$xFono1',";
+            $xSQL .="'$xFono2','$xCelular1','$xEmail1','$xEnviar1','$xEmail2','$xEnviar2','$xEmail3','$xEnviar3','$xEmail4','$xEnviar4',";
+            $xSQL .="'$xNombreFile','{$xFecha}',$xUsuaid,'$xTerminal')";
+
             if(mysqli_query($con, $xSQL)){
 
                 $xId = mysqli_insert_id($con);
-
                 $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
                 $xSQL .= "VALUES('Nuevo Prestador Agregado',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
                 mysqli_query($con, $xSQL);                

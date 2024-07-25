@@ -28,12 +28,16 @@
             $xResult = $_POST['xxResult']; 
             
             foreach($xResult as $drfila){
-                $xEspeid = $drfila['arryid'];
-                $xPvp = $drfila['arrypvp'];
-                $xCosto = $drfila['arrycosto'];
+                $xAsisid = $drfila['arryid'];
+                $xAsistencia = $drfila['arryasistencia'];
+                $xTipoAtencion = $drfila['arryatencion'];
+                $xRed = safe($drfila['arryred']);
+                $xPvp = safe($drfila['arrypvp']);
+                
 
-                $xSQL = "INSERT INTO `expert_prestadora_especialidad`(pais_id,empr_id,pres_id,espe_id,pree_pvp,pree_costo,fechacreacion,usuariocreacion,terminalcreacion) ";
-                $xSQL .= "VALUES($xPaisid,$xEmprid,$xPresid,$xEspeid,$xPvp,$xCosto,'{$xFecha}',$xUsuaid,'$xTerminal')";
+                $xSQL ="INSERT INTO `expert_prestadora_servicio`(pais_id,empr_id,pres_id,asis_id,prse_atencion,prse_red,";
+                $xSQL .="prse_pvp,fechacreacion,usuariocreacion,terminalcreacion)";
+                $xSQL .="VALUES($xPaisid,$xEmprid,$xPresid,$xAsisid,'$xTipoAtencion',$xRed,$xPvp,'{$xFecha}',$xUsuaid,'$xTerminal')";
                 mysqli_query($con, $xSQL);
 
                 $respuesta = "OK";
