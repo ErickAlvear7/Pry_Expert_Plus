@@ -337,7 +337,7 @@
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                     <div class="d-flex flex-column gap-7">
                         <div class="form-group">
-                            <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm border border-primary" id="btnAddServicio"><i class="fa fa-users me-1" aria-hidden="true"></i>
+                            <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm border border-primary" id="btnAddServicio"><i class="fa fa-user-plus me-1" aria-hidden="true"></i>
                                 Agregar Tipo Servicio
                             </button>
                         </div>
@@ -547,11 +547,11 @@
                         <div class="mb-2 fv-row">
                             <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                                 <div class="col">
-                                    <label class="required form-label">Costo Red</label>
+                                    <label class="required form-label">Valor Red</label>
                                     <input type="text" name="txtRed" id="txtRed" class="form-control mb-2" placeholder="Red (0.00)" min="0" maxlength = "6" />
                                 </div>
                                 <div class="col">
-                                    <label class="required form-label">Pvp</label>
+                                    <label class="required form-label">Valor Pvp</label>
                                     <input type="text" name="txtPvp" id="txtPvp" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" />
                                 </div>    
                             </div>
@@ -658,7 +658,7 @@
                     toastSweetAlert("top-end",3000,"warning","Tipo Asistencia ya Existe..!!");
                 }else{
                     if(response.trim() != 'ERR'){
-                        toastSweetAlert("top-end",3000,"success","Agregado");
+                        toastSweetAlert("top-end",3000,"success","Asistencia Agregada");
                         $("#cboAsis").empty();
                         $("#cboAsis").html(response);
                         $("#modal_new_asistencia").modal("hide");
@@ -857,7 +857,7 @@
                 return;
             }
 
-           debugger;
+           //debugger;
             _red = _red.replace(/[a-z]/g,'0');
             _pvp = _pvp.replace(/[a-z]/g,'0');
 
@@ -1124,6 +1124,8 @@
         this.value = parseFloat(this.value).toFixed(2);
     }
 
+
+    //Eliminar Servicios Asigandos de la tabla
     $(document).on("click",".btnDelete",function(){
         row_id = $(this).attr("id");
         
@@ -1142,11 +1144,11 @@
     });            
 
     //Desplazar-modal
-    $("#modal-new-especialidad").draggable({
+    $("#modal_new_asistencia").draggable({
         handle: ".modal-header"
     });    
     
-    $("#agregar_especialidad").draggable({
+    $("#agregar_servicio").draggable({
         handle: ".modal-header"
     });  
 

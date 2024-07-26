@@ -45,7 +45,7 @@
     $all_perfil = mysqli_query($con, $xSQL);
 
     $xSQL = "SELECT (SELECT prv.ciudad FROM `provincia_ciudad` prv WHERE prv.prov_id=pre.prov_id) AS Ciudad,pre.pres_nombre AS Prestadora,";
-    $xSQL .= "(SELECT pde.pade_nombre FROM `expert_parametro_detalle` pde, `expert_parametro_cabecera` pca WHERE pde.paca_id=pca.paca_id AND pca.paca_nombre='Tipo Sector' AND pde.pade_valorv=pre.pres_sector) AS Sector,(SELECT pde.pade_nombre FROM `expert_parametro_detalle` pde, `expert_parametro_cabecera` pca WHERE pde.paca_id=pca.paca_id AND pca.paca_nombre='Tipo Prestador' AND pde.pade_valorv=pre.pres_tipoprestador) AS TipoPrestador,pre.pres_logo AS Logo,pre.pres_estado AS Estado,pre.pres_url AS Url,pre.pres_id AS Id FROM `expert_prestadora` pre ";
+    $xSQL .= "(SELECT pde.pade_nombre FROM `expert_parametro_detalle` pde, `expert_parametro_cabecera` pca WHERE pde.paca_id=pca.paca_id AND pca.paca_nombre='Tipo Sector' AND pde.pade_valorv=pre.pres_sector) AS Sector,(SELECT pde.pade_nombre FROM `expert_parametro_detalle` pde, `expert_parametro_cabecera` pca WHERE pde.paca_id=pca.paca_id AND pca.paca_nombre='Tipo Prestador' AND pde.pade_valorv=pre.pres_tipoprestador) AS TipoPrestador,pre.pres_logo AS Logo,pre.pres_estado AS Estado,pre.pres_ubicacion AS Ubicacion,pre.pres_url AS Url,pre.pres_id AS Id FROM `expert_prestadora` pre ";
     $all_prestador = mysqli_query($con, $xSQL);
     
     //file_put_contents('log_seguimiento.txt', $xSQL . "\n\n", FILE_APPEND);
@@ -82,6 +82,7 @@
                     <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                         <th class="">Ciudad</th>
                         <th class="min-w-125px">Prestador</th>
+                        <th class="">Ubicacion</th>
                         <th>Sector</th>
                         <th class="min-w-125px">Tipo Prestador</th>
                         <th>Estado</th>
@@ -100,6 +101,7 @@
                             $xTipoPresta = trim($presta['TipoPrestador']);
                             $xLogo = trim($presta['Logo']);
                             $xEstado = trim($presta['Estado']);
+                            $xUbicacion = trim($presta['Ubicacion']);
                             $xUrl = trim($presta['Url']);
 
                             if($xLogo == ''){
@@ -111,6 +113,7 @@
                                 $chkEstado = '';
                                 $xDisabledEdit = '';
                                 $xTarget = '';
+                                $xTargeturl = '';
 
                                 if($xEstado == 'A'){
                                     $xEstado = 'ACTIVO';
@@ -121,13 +124,18 @@
                                     $xTextColor = "badge badge-light-danger";
                                     $xDisabledEdit = 'disabled';
                                 }
-                                
+
                                 if($xUrl != ''){
+                                    $xTargeturl = 'target="_blank"'.' '. 'rel="noopener noreferrer"';
+                                }else{
+                                    $xUrl="#";   
+                                }
+                                
+                                if($xUbicacion != ''){
                                     $xTarget =  'target="_blank"' .' '. 'rel="noopener noreferrer"';
                                 }else{
-                                    $xUrl = '#';
-                                    $xTarget = '';
-                                }
+                                    $xUbicacion ="#";    
+                                }   
 
                             ?>
                             <tr>
@@ -135,10 +143,17 @@
                                   <span class="fw-bolder"><?php echo $xCiudad; ?></span>
                                 </td>
                                 <td class="d-flex align-items-center">
-                                    <a href="<?php echo $xUrl; ?>" <?php echo  $xTarget; ?> class="symbol symbol-50px">
+                                    <a href="<?php echo $xUrl; ?>" <?php echo $xTargeturl; ?> class="symbol symbol-50px">
                                         <span class="symbol-label" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUrl; ?>" style="background-image:url(assets/images/prestadores/<?php echo $xLogo; ?> );"></span>
                                     </a>
                                     <span class="fw-bolder">&nbsp;&nbsp;<?php echo $xPrestador; ?></span>
+                                </td>
+                                <td>
+                                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUbicacion; ?>">
+                                    <a href="<?php echo $xUbicacion; ?>" <?php echo $xTarget; ?> class="symbol symbol-50px">  
+                                        <i class="fa fa-map-marker fa-2x ms-7" aria-hidden="true" style="color:#F46D55;"></i>  
+                                    </a>
+                                </span>     
                                 </td>
                                 <td>
                                   <span class="fw-bolder"><?php echo $xSector; ?></span>
