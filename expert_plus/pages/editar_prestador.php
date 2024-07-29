@@ -53,17 +53,19 @@
         $xSector = $presta['pres_sector'];
         $xTipoPresta = $presta['pres_tipoprestador'];
         $xDireccion = $presta['pres_direccion'];
+        $xUbicacion = $presta['pres_ubicacion'];
         $xUrl = $presta['pres_url'];
         $xFono1 = $presta['pres_fono1'];
         $xFono2 = $presta['pres_fono2'];
-        $xFono3 = $presta['pres_fono3'];
         $xCelu1 = $presta['pres_celular1'];
-        $xCelu2 = $presta['pres_celular2'];
-        $xCelu3 = $presta['pres_celular3'];
         $xEmail1 = $presta['pres_email1'];
         $xEnviar1 = $presta['pres_enviar1'];
         $xEmail2 = $presta['pres_email2'];
         $xEnviar2 = $presta['pres_enviar2'];
+        $xEmail3 = $presta['pres_email3'];
+        $xEnviar3 = $presta['pres_enviar3'];
+        $xEmail4 = $presta['pres_email4'];
+        $xEnviar4 = $presta['pres_enviar4'];
         $xLogo = $presta['pres_logo'];
     }
 
@@ -81,8 +83,10 @@
     $xSQL .= "ORDER BY pde.pade_orden ";
     $all_tipopresta = mysqli_query($con, $xSQL);
 
-    $xSQL = "SELECT * FROM `expert_prestadora_especialidad` xpe, `expert_especialidad` esp  WHERE xpe.espe_id=esp.espe_id AND xpe.pais_id=$xPaisid AND xpe.empr_id=$xEmprid AND xpe.pres_id=$xPresid ";
-    $all_especialidad = mysqli_query($con, $xSQL);
+    $xSQL = "SELECT (SELECT tpa.asis_nombre FROM `expert_tipo_asistencia` tpa WHERE tpa.asis_id=prs.asis_id) AS Asistencia,";
+    $xSQL .="prs.prse_id AS Id,prs.prse_atencion AS Atencion, CASE prs.prse_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado, prs.prse_red AS Red,";
+    $xSQL .="prs.prse_pvp AS Pvp FROM `expert_prestadora_servicio` prs WHERE prs.pres_id=$xPresid";
+    $all_prestaservicio = mysqli_query($con, $xSQL);
 
 
 ?>
@@ -180,8 +184,8 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">
-                        <i class="fa fa-stethoscope fa-1x me-2" aria-hidden="true"></i>
-                        Especialidad Prestador
+                        <i class="fa fa-user fa-1x me-2" aria-hidden="true"></i>
+                        Servicios Prestador
                     </a>
                 </li>
                 <a href="?page=prestador_admin&menuid=<?php echo $menuid;?>" class="btn btn-icon btn-light-primary btn-sm ms-auto me-lg-n7" title="Regresar" data-bs-toggle="tooltip" data-bs-placement="left">
@@ -270,146 +274,123 @@
                                             </select>                                                      
                                         </div>
                                     </div>
-                                </div>                                        
-                            </div> 
-                            <div class="card-header border-0">
-                                <div class="card-title">
-                                    <h2 class="fw-normal mb-0">Direccion - Telefonos - Mails</h2>
+                                </div> 
+                                <div class="mb-2 fv-row">
+                                    <label class="form-label">Direccion</label>
+                                    <textarea class="form-control mb-2 text-uppercase" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"><?php echo $xDireccion; ?></textarea>
                                 </div>
-                            </div>
-                            <div id="kt_customer_view_payment_method" class="card-body pt-0">
-                                <div class="py-0" data-kt-customer-payment-method="row">
-                                    <div class="py-3 d-flex flex-stack flex-wrap">
-                                        <div class="d-flex align-items-center  collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_1" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_1">
-                                            <div class="me-3 rotate-90">
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                            <i class="fa fa-location-arrow fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
-                                            <div class="me-3">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="text-gray-800 fw-bolder">Direccion</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="kt_customer_view_payment_method_1" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
-                                        <div class="d-flex flex-wrap py-5">
-                                            <div class="flex-equal me-5">
-                                                <div class="row mb-8">
-                                                    <div class="col-xl-2">
-                                                        <div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
-                                                    </div>
-                                                    <div class="col-xl-10 fv-row">
-                                                        <textarea class="form-control mb-2" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDireccion; ?> </textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-8">
-                                                    <div class="col-xl-2">
-                                                        <div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
-                                                    </div>
-                                                    <div class="col-xl-10 fv-row">
-                                                        <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" placeHolder="https://wwww.dominio.com" value="<?php echo $xUrl; ?>" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="py-0" data-kt-customer-payment-method="row">
-                                    <div class="py-3 d-flex flex-stack flex-wrap">
-                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_2" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_2">
-                                            <div class="me-3 rotate-90">
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                            <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
-                                            <div class="me-3">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="text-gray-800 fw-bolder">Telefonos</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="kt_customer_view_payment_method_2" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
-                                        <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono1; ?>" />
-                                            </div>
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono2; ?>" />
-                                            </div> 
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono3" id="txtFono3" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono3; ?>" />
-                                            </div>                                                        
-                                        </div>
-                                        <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="09999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu1; ?>" />
-                                            </div>
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu2; ?>" />
-                                            </div> 
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" maxlength="10" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu3; ?>" />
-                                            </div>
-                                        </div>                                                
-                                    </div>
-                                </div>
-                                <div class="py-0" data-kt-customer-payment-method="row">
-                                    <div class="py-3 d-flex flex-stack flex-wrap">
-                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_3" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_3">
-                                            <div class="me-3 rotate-90">
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                            <i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
-                                            <div class="me-3">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="text-gray-800 fw-bolder">E-mail</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="kt_customer_view_payment_method_3" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
-                                        <div class="d-flex flex-wrap gap-5">
-                                            <div class="fv-row w-100 flex-md-root">
-                                                <label class="form-label">Email 1</label>
-                                                <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="<?php echo $xEmail1; ?>" />
-                                            </div>
-                                            <label class="form-check form-switch form-check-custom form-check-solid">
-                                                <input class="form-check-input" name="chkEnviar1" id="chkEnviar1" type="checkbox" <?php if($xEmail1 != '') { echo 'checked'; } ?> />
-                                                <span id="spanEnv1" class="form-check-label fw-bold text-muted" for="chkEnviar1"> <?php if($xEmail1 != '') { echo 'Si Enviar'; }else { echo 'No Enviar'; } ?> </span>
-                                            </label>                                                    
-                                        </div>
-                                        <div class="d-flex flex-wrap gap-5">
-                                            <div class="fv-row w-100 flex-md-root">
-                                                <label class="form-label">Email 2</label>
-                                                <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="" />
-                                            </div>
-                                            <label class="form-check form-switch form-check-custom form-check-solid">
-                                                <input class="form-check-input" name="chkEnviar2" id="chkEnviar2" type="checkbox" />
-                                                <span class="form-check-label fw-bold text-muted" for="chkEnviar2">No Enviar</span>
+                                <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-0 row-cols-lg-2 mb-2">
+                                    <div class="col">
+                                        <div class="fv-row mb-0">
+                                            <label class="fs-6 fw-bold form-label mt-3">
+                                                <i class="fa fa-map-marker fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
+                                                <span class="">Ubicacion Prestador</span>   
                                             </label>
+                                            <textarea class="form-control mb-2 text-uppercase" name="txtUbi" id="txtUbi" rows="3" maxlength="250" onkeydown="return (event.keyCode!=13);"><?php echo $xUbicacion; ?></textarea>   
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="fv-row mb-0">
+                                            <label class="fs-6 fw-bold form-label mt-3">
+                                                <i class="fa fa-globe fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                                <span class="">Pagina Web Prestador</span>   
+                                            </label>
+                                            <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" placeHolder="https://wwww.prestador.com" value="<?php echo $xUrl; ?>" />
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label class="fs-6 fw-bold form-label mt-3">
+                                            <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
+                                            <span class="">Telefono 1</span>   
+                                        </label>
+                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono1; ?>" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="fs-6 fw-bold form-label mt-3">
+                                            <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
+                                            <span class="">Telefono 2</span>   
+                                        </label>
+                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xFono2; ?>" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="fs-6 fw-bold form-label mt-3">
+                                            <i class="fa fa-mobile fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                            <span class="">Celular</span>   
+                                        </label>
+                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="0999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCelu1; ?>" />
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_2_1">														<!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Emails</h4>
+                                </div> 
+                                <div id="kt_job_2_1" class="collapse show fs-6 ms-1">
+                                    <div class="row mb-2">
+                                        <div class="col-md-8">
+                                            <label class="form-label">Email 1</label>
+                                            <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="<?php echo $xEmail1; ?>" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-check form-switch form-check-custom form-check-solid mt-5">
+                                                <input class="form-check-input mt-5" name="chkEnviar1" id="chkEnviar1" type="checkbox"<?php if($xEmail1 != '') echo 'checked'; ?> />
+                                                <span id="spanEnv1" class="form-check-label fw-bold text-muted mt-3" for="chkEnviar1"><?php if($xEmail1 != '') { echo 'Si Enviar'; }else { echo 'No Enviar'; } ?></span>
+                                            </label>    
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label class="form-label">Email 2</label>
+                                            <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="" class="form-control mb-2 text-lowercase" value="" />   
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-check form-switch form-check-custom form-check-solid mt-5">
+                                                <input class="form-check-input mt-5" name="chkEnviar2" id="chkEnviar2" type="checkbox"<?php if($xEmail2 != '') echo 'checked'; ?> />
+                                                <span id="spanEnv2" class="form-check-label fw-bold text-muted mt-3" for="chkEnviar2"><?php if($xEmail2 != '') { echo 'Si Enviar'; }else { echo 'No Enviar'; } ?></span>
+                                            </label>    
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label class="form-label">Email 3</label>
+                                            <input type="email" name="txtEmail3" id="txtEmail3" maxlength="150" placeholder="" class="form-control mb-2 text-lowercase" value="" />   
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-check form-switch form-check-custom form-check-solid mt-5">
+                                                <input class="form-check-input mt-5" name="chkEnviar3" id="chkEnviar3" type="checkbox"<?php if($xEmail3 != '') echo 'checked'; ?> />
+                                                <span id="spanEnv3" class="form-check-label fw-bold text-muted mt-3" for="chkEnviar3"><?php if($xEmail3 != '') { echo 'Si Enviar'; }else { echo 'No Enviar'; } ?></span>
+                                            </label>    
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label class="form-label">Email 4</label>
+                                            <input type="email" name="txtEmail4" id="txtEmail4" maxlength="150" placeholder="" class="form-control mb-2 text-lowercase" value="" />   
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-check form-switch form-check-custom form-check-solid mt-5">
+                                                <input class="form-check-input mt-5" name="chkEnviar4" id="chkEnviar4" type="checkbox"<?php if($xEmail4 != '') echo 'checked'; ?> />
+                                                <span id="spanEnv4" class="form-check-label fw-bold text-muted mt-3" for="chkEnviar4"><?php if($xEmail4 != '') { echo 'Si Enviar'; }else { echo 'No Enviar'; } ?></span>
+                                            </label>    
+                                        </div>
+                                    </div>
+                                </div>                                       
+                            </div>   
                         </div>
                     </div>
                     <div class="d-flex justify-content-end mt-7">
@@ -439,9 +420,10 @@
                                             <thead>
                                                 <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                                     <th style="display: none;">Id</th>
-                                                    <th class="min-w-125px">Especialidad</th>
-                                                    <th>Pvp</th>
-                                                    <th>Costo</th>
+                                                    <th class="">TIPO ASISTENCIA</th>
+                                                    <th class="min-w-125px">TIPO ATENCION</th>
+                                                    <th>RED</th>
+                                                    <th>PVP</th>
                                                     <th class="min-w-125px">Estado</th>
                                                     <th>Status</th>
                                                     <th class="min-w-125px" style="text-align: center;">Opciones</th>
@@ -451,13 +433,14 @@
 
                                                 <?php 
                                         
-                                                    foreach($all_especialidad as $especi){
-                                                        $xEspeid = $especi['espe_id'];
-                                                        $xId = $especi['pree_id'];
-                                                        $xEspecialidad = trim($especi['espe_nombre']);
-                                                        $xPvp = trim($especi['pree_pvp']);
-                                                        $xCosto = trim($especi['pree_costo']);
-                                                        $xEstado = trim($especi['pree_estado']);
+                                                    foreach($all_prestaservicio as $serv){
+                                                        $xServid = $serv['Id'];
+                                                        $xAsistencia = $serv['Asistencia'];
+                                                        $xAtencion = trim($serv['Atencion']);
+                                                        $xEstado = trim($serv['Estado']);
+                                                        $xRed = trim($serv['Red']);
+                                                        $xPvp = trim($serv['Pvp']);
+                                                        
                                                     ?>
                                                         <?php 
                         
@@ -466,12 +449,10 @@
                                                             $xDisabledPerson = '';
                                                             $xDisabledMotivos = '';
                         
-                                                            if($xEstado == 'A'){
-                                                                $xEstado = 'ACTIVO';
+                                                            if($xEstado == 'ACTIVO'){
                                                                 $chkEstado = 'checked="checked"';
                                                                 $xTextColor = "badge badge-light-primary";
                                                             }else{
-                                                                $xEstado = 'INACTIVO';
                                                                 $xTextColor = "badge badge-light-danger";
                                                                 $xDisabledEdit = 'disabled';
                                                                 $xDisabledPerson = 'disabled';
@@ -479,34 +460,35 @@
                                                             }
                         
                                                         ?>
-                                                        <tr id="row_<?php echo $xId; ?>">
+                                                        <tr id="row_<?php echo $xServid; ?>">
                                                             <td>  
-                                                                <?php echo $xEspecialidad; ?>
-                                                                <input type="hidden" id="txtEspeciPrestador<?php echo $xId; ?>" value="<?php echo $xEspecialidad; ?>" />
+                                                                <?php echo $xAsistencia; ?>
+                                                                <input type="hidden" id="txtAsistencia" value="<?php echo $xAsistencia; ?>" />
                                                             </td>
-                                                            <td> <?php echo $xPvp; ?></td>
-                                                            <td><?php echo $xCosto; ?> </td>                               
+                                                            <td> <?php echo $xAtencion; ?></td>
+                                                            <td><?php echo $xRed; ?> </td>
+                                                            <td><?php echo $xPvp; ?> </td>                                
                                                             <td id="td_<?php echo $xId; ?>"> 
                                                                 <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div> 
                                                             </td>
                                                             <td>
                                                                 <div class="text-center">
                                                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                        <input class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $xId; ?>" 
-                                                                            onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>)" value="<?php echo $xId; ?>"/>
+                                                                        <input class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $xServid; ?>" 
+                                                                            onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xServid; ?>)" value="<?php echo $xServid; ?>"/>
                                                                     </div>
                                                                 </div>
                                                             </td> 													
                                                             <td>
                                                                 <div class="text-center">
                                                                     <div class="btn-group">
-                                                                        <button id="btnEditar_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Especialidad' data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                                        <button id="btnEditar_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Especialidad' data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class='fa fa-edit'></i>
                                                                         </button>	
-                                                                        <button id="btnPerson_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick='f_AgregarProfesional(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xPresid; ?>,<?php echo $xId; ?>)' title='Agregar Profesional' data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                                        <button id="btnPerson_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick='f_AgregarProfesional()' title='Agregar Profesional' data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class="fas fa-user"></i>
                                                                         </button>	
-                                                                        <button id="btnMotivos_<?php echo $xId; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledMotivos; ?> onclick='f_AgregarMotivos(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xPresid; ?>,<?php echo $xEspeid; ?>)' title='Agregar Motivos' data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                                        <button id="btnMotivos_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledMotivos; ?> onclick='f_AgregarMotivos()' title='Agregar Motivos' data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class="fas fa-book"></i>
                                                                         </button>	                                                                                                                                                                                                      
                                                                     </div>
