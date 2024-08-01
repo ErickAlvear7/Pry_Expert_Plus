@@ -848,12 +848,12 @@
             }
 
             if(_red == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Costo de Red..!!");
+                toastSweetAlert("top-end",3000,"warning","Ingrese Valor de Red..!!");
                 return;
             }
 
             if(_pvp == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Pvp..!!");
+                toastSweetAlert("top-end",3000,"warning","Ingrese Valor Pvp..!!");
                 return;
             }
 

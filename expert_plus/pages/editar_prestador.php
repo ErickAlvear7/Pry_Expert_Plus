@@ -156,17 +156,17 @@
                 <div id="view_opciones" class="collapse show fs-6 ms-1">
                     <div class="card-body pt-0">
                         <div class="d-grid gap-2">
-                            <button type="button" id="btnNuevaEspe" class="btn btn-light-primary btn-sm mb-5">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                Nueva Especialidad
+                            <button type="button" id="btnAsistencia" class="btn btn-light-primary btn-sm mb-5 border border-primary">
+                                <i class="fa fa-users me-1" aria-hidden="true"></i>
+                                Nuevo Tipo Asistencia
                             </button>
-                            <button type="button" id="btnNuevaProfesion" class="btn btn-light-primary btn-sm mb-5">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i>                                                               
+                            <button type="button" id="btnNuevaProfesion" class="btn btn-light-primary btn-sm mb-5 border border-primary">
+                                <i class="fa fa-briefcase me-1" aria-hidden="true"></i>                                                               
                                 Nuevo Tipo Profesion
                             </button>                                 
                             
-                            <button type="button" id="btnNuevoProfesional" class="btn btn-light-primary btn-sm mb-5" >
-                                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                            <button type="button" id="btnNuevoProfesional" class="btn btn-light-primary btn-sm mb-5 border border-primary">
+                                <i class="fa fa-user-circle me-1" aria-hidden="true"></i>
                                 Nuevo Profesional
                             </button>    
                         </div>  
@@ -402,15 +402,15 @@
                 <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                     <div class="d-flex flex-column gap-7 gap-lg-10">
                         <div class="d-flex justify-content-start">
-                            <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm mb-1" id="btnAddespe">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                Agregar Especialidad
+                            <button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm mb-1 border border-primary" id="btnServicio">
+                                <i class="fa fa-user-plus me-1" aria-hidden="true"></i>
+                                Agregar Tipo Servicio
                             </button>
                         </div>
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <h2>Especialidades Asignadas</h2>
+                                    <h2>Servicios Asignados</h2>
                                 </div>
                             </div>
                             <div class="card-body pt-0" id="kt_contacts_list_body">
@@ -509,48 +509,144 @@
     </div>
 </div>
 
+<!--Modal Nueva Asistencia -->
+<div class="modal fade" id="modal_new_asistencia" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-800px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Tipo Asistencia</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-5 px-lg-10">
+                <div class="card card-flush py-2">
+                    <div class="card-body pt-0" id="kt_modal_new_card_form">
+                        <div class="row mb-7">
+                            <div class="col">
+                                <label class="required form-label">Seleccione Asistencia</label>
+                                <select name="cboAsistencia" id="cboAsistencia" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo" data-dropdown-parent="#kt_modal_new_card_form" class="form-select mb-2">
+                                    <option></option>
+                                    <?php 
+                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid ";
+                                    $xSQL .= "AND pca.paca_nombre='Asistencia' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                    $all_datos =  mysqli_query($con, $xSQL);
+                                    foreach ($all_datos as $datos){ ?>
+                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo mb_strtoupper($datos['Descripcion']) ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div> 
+                        </div>  
+                        <div class="row mb-5">
+                            <div class="col">
+                                 <label class="required form-label">Nombre Tipo Asistencia</label>
+                                 <input type="text" class="form-control text-uppercase" maxlength="300" placeholder="Ingrese Asistencia" name="txtTipoAsistencia" id="txtTipoAsistencia" />
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <label class="form-label">Descripcion</label>
+                                <textarea class="form-control text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="2" maxlength="300" onkeydown="return (event.keyCode!=13);"></textarea>
+                            </div>
+                        </div>
+                     
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnSaveAsistencia" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-hdd me-1"></i>Grabar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Agregar Servicio -->
+<div class="modal fade" id="agregar_servicio" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-800px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Datos Nuevo Servicio</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-2">
+                    <div class="card-body pt-0">
+                        <div class="mb-5 fv-row">
+                            <label class="required form-label">Tipo Asistencia</label>
+                            <select name="cboAsis" id="cboAsis" aria-label="Seleccione Tipo Asistencia" data-control="select2" data-placeholder="Seleccione Tipo Asistencia" data-dropdown-parent="#kt_ecommerce_add_product_advanced" class="form-select mb-2">
+                                <option></option>
+                                <?php 
+                                $xSQL = "SELECT asis_id AS Codigo,asis_nombre AS TipoAsistencia FROM `expert_tipo_asistencia` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND asis_estado='A' ";
+                                $all_datos =  mysqli_query($con, $xSQL);
+                                foreach ($all_datos as $datos){ ?>
+                                    <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['TipoAsistencia'] ?></option>
+                                <?php } ?>                                                        
+                            </select>                                             
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col">
+                                <label class="required form-label">Tipo Atencion</label>
+                                <textarea class="form-control text-uppercase" name="txtTipoAtencion" id="txtTipoAtencion" rows="2" maxlength="300" onkeydown="return (event.keyCode!=13);"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-2 fv-row">
+                            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                                <div class="col">
+                                    <label class="required form-label">Valor Red</label>
+                                    <input type="text" name="txtRed" id="txtRed" class="form-control mb-2" placeholder="Red (0.00)" min="0" maxlength = "6" />
+                                </div>
+                                <div class="col">
+                                    <label class="required form-label">Valor Pvp</label>
+                                    <input type="text" name="txtPvp" id="txtPvp" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" />
+                                </div>    
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnAddServicio" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-plus me-1"></i>Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>  
+
 
 <script>
     $(document).ready(function(){
-
-        flatpickr(txtHoraDesde, {
-                enableTime: true,
-                noCalendar: true,
-                dateFormat: "H:i",
-        }); 
-        
-        flatpickr(txtHoraHasta, {
-                enableTime: true,
-                noCalendar: true,
-                dateFormat: "H:i",
-        });                  
-
+               
+        _presid = "<?php echo $xPresid; ?>"
         _paisid = "<?php echo $xPaisid; ?>";
         _emprid = "<?php echo $xEmprid; ?>";
         _usuaid = "<?php echo $xUsuaid; ?>";
         _logo  = "<?php echo $xLogo; ?>";
-        _btnopctiontipo = 'Add';
-        _selpreeid = 0;
-        _selpresid = 0;
-        _selespeid = 0;
-
-        _logo = _logo == '' ? 'logo.png' : _logo;
-        debugger;
-
+        
         $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
         $('#cboCiudad').val(<?php echo $xProvid; ?>).change();
         $('#cboSector').val("<?php echo $xSector; ?>").change();
         $('#cboTipo').val("<?php echo $xTipoPresta; ?>").change();
 
-        _enviar1 = "<?php echo $xEnviar1; ?>";
-        _enviar2 = "<?php echo $xEnviar2; ?>";
-        _enviarprof = "";
-
+        
+        _logo = _logo == '' ? 'logo.png' : _logo;
         document.getElementById('imgfile').style.backgroundImage="url(assets/images/prestadores/" + _logo + ")";
+
 
         $('#cboProvincia').change(function(){
             
-            debugger;
             _cboid = $(this).val(); //obtener el texto selecionado en el combo
             $("#cboCiudad").empty();
 
@@ -573,1572 +669,128 @@
             });                
 
         });
+    }); 
 
-        $( "#txtPvp" ).blur(function() {
-            this.value = parseFloat(this.value).toFixed(2);
-        });
 
-        $( "#txtCosto" ).blur(function() {
-            this.value = parseFloat(this.value).toFixed(2);
-        });  
-        
-        $( "#txtPvpNew" ).blur(function() {
-            this.value = parseFloat(this.value).toFixed(2);
-        });
+    //Levantqr Modal Nueva Asistencia
+    $('#btnAsistencia').click(function(){
 
-        //MODAL AGREGAR ESPECIALIDAD
-        $('#btnAddespe').click(function(){
+        $("#cboAsistencia").val(0).change(); 
+        $("#modal_new_asistencia").find("input,textarea").val("");
+        $('#modal_new_asistencia').modal('handleUpdate');
+        $("#modal_new_asistencia").modal("show");
 
-            $("#modal-add-especialidad").modal("show");
-            $("#cboEspecialidad").val(0).change();
-        });
+    });
 
-        $("#btnNuevaEspe").click(function(){
+    //Levantar Modal Tipo Servicio
+    $("#btnServicio").click(function(){
             
-            $("#modal-new-especialidad").find("input,textarea").val("");
-            $("#modal-new-especialidad").modal("show");
-            $('#modal-new-especialidad').modal('handleUpdate');
-            $("#txtPvpNew").val("0.00");
-            $("#cboTipoEspe").val(0).change();    
+            $("#agregar_servicio").find("input,textarea").val("");
+            $("#agregar_servicio").modal("show");
+            $('#agregar_servicio').modal('handleUpdate');
+            $("#cboAsis").val(0).change();    
         }); 
 
-        $("#btnNuevaProfesion").click(function(){
-            
-            //$("#modal_new_tipoprofesion").find("input,textarea").val("");
-            const btn = document.getElementById('btnAgregarTipo');
-            btn.innerHTML = '<i class="fa fa-plus me-1" aria-hidden="true"></i>Agregar';
+    //Guardar Nuevo Tipo Asistencia Modal
+    $('#btnSaveAsistencia').click(function(e){
 
-            $("#txtTipoProfesion").val('');
-            $("#txtCodigoTipo").val('');
-            $("#modal_new_tipoprofesion").modal("show");
-            $('#modal_new_tipoprofesion').modal('handleUpdate');
-        });
+        var _cboasistencia = $('#cboAsistencia').val();
+        var _txtasistencia = $("#cboAsistencia option:selected").text();
+        var _tipoasistencia = $.trim($("#txtTipoAsistencia").val());
+        var _descripcion = $.trim($("#txtDescripcion").val());
 
-        //Modal NUevo Profesional
-        $("#btnNuevoProfesional").click(function(){
-            
-            document.getElementById('imgfileprof').style.backgroundImage="url(assets/images/profesionales/user.png)";
-            $("#modal-new-profesional").find("input,textarea").val("");
-            $("#modal-new-profesional").modal("show");
-            $('#modal-new-profesional').modal('handleUpdate');
-            //$("#txtPvpNew").val("0.00");
-            $("#cboTipoDoc").val('').change();
-            $("#cboTipoGenero").val('').change();
-            $("#cboTipoProfesion").val('').change();
-        });     
-        
-        $("#btnProbarAgenda").click(function(){
-            $.redirect('?page=adminagenda&menuid=<?php echo $menuid; ?>', { 'tituid': 1, 'prodid': 6, 'grupid': 2 });
-
-        });                 
-
-        $('#btnSaveNew').click(function(e){
- 
-            var _especialidad = $.trim($("#txtEspecialidad").val());
-            var _cbotipoespe = $("#cboTipoEspe option:selected").text();
-            var _descripcion = $.trim($("#txtDescripcion").val());
-            var _pvpnew = $("#txtPvpNew").val();
-            
-            if(_cbotipoespe == ''){
-                toastSweetAlert("top-end",3000,"warning","Seleccion Tipo Especialidad..!!");
-                return;
-            }
-
-            if(_especialidad == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Especialidad..!!");
-                return;
-            }
+        if(_txtasistencia == ''){
+        toastSweetAlert("top-end",3000,"warning","Seleccione Asistencia..!!");
+        return;
+        }
 
 
-            if(_pvpnew == ''){
-                _pvpnew = '0.00';
-            }
-            var _parametros = {
-                "xxPaisId" : _paisid,
-                "xxEmprId" : _emprid,
-                "xxUsuaId" : _usuaid,
-                "xxEspecialidad" : _especialidad,
-                "xxDescripcion" : _descripcion,
-                "xxTipoEspe" : _cbotipoespe,
-                "xxPrecio" : _pvpnew
-            }                    
+        if(_tipoasistencia == ''){
+        toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Asistencia..!!");
+        return;
+        }
 
-            var xrespuesta = $.post("codephp/grabar_especialidad.php", _parametros);
-            xrespuesta.done(function(response){
-                if(response.trim() == 'EXISTE'){
-                    toastSweetAlert("top-end",3000,"warning","Especialidad ya Existe..!!");
-                }else{
-                    if(response.trim() != 'ERR'){
-                        toastSweetAlert("top-end",3000,"success","Especialidad Agregada");
-                        $("#cboEspecialidad").empty();
-                        $("#cboEspecialidad").html(response);
-                        $("#modal-new-especialidad").modal("hide");
-                    }
-                }
-            });
-        }); 
-        
-        $('#btnSaveTipo').click(function(e){
+        var _parametros = {
+        xxPaisid: _paisid,
+        xxEmprid: _emprid,
+        xxUsuaid: _usuaid,
+        xxAsistencia: _cboasistencia,
+        xxTipoAsistencia: _tipoasistencia,
+        xxDescripcion: _descripcion,
+        }                    
 
-            var _tipoprestador = $.trim($("#txtTipoPrestador").val());
-            var _valorv = $.trim($("#txtValor").val());
-
-            if(_tipoprestador == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Prestador..!!");
-                return;
-            }
-
-            if(_valorv == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Valor..!!");
-                return;
-            }
-
-            var _parametros = {
-                "xxPaisId" : _paisid,
-                "xxEmprId" : _emprid,
-                "xxUsuaId" : _usuaid,
-                "xxTipoPrestador" : _tipoprestador,
-                "xxValor" : _valorv
-            }
-
-            var xrespuesta = $.post("codephp/grabar_tipoprestador.php", _parametros);
-            xrespuesta.done(function(response){
-                if(response.trim() == 'EXISTE'){
-                    toastSweetAlert("top-end",3000,"info","Tipo Prestador/Valor ya Existe..!!");
-                }else{
-                    if(response.trim() != 'ERR'){
-                        toastSweetAlert("top-end",3000,"success","Prestador Agregado");
-                        $("#cboTipo").empty();
-                        $("#cboTipo").html(response);
-                        $("#modal-new-tipoprestador").modal("hide");
-                    }
-                }
-            });
-        });
-        
-        $(document).on("click","#chkEnviar1",function(){
-            
-            var _chanspan = document.getElementById("spanEnv1");
-            var _email1 =  $.trim($('#txtEmail1').val());
-
-            if(_email1 != ''){
-                var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-            
-                if (regex.test($('#txtEmail1').val().trim())){
-                    if($("#chkEnviar1").is(":checked")){
-                        _chanspan.innerHTML = '<span id="spanEnv1" class="form-check-label fw-bold" for="chkEnviar1"><strong>Enviar</strong></span>';
-                        _enviar1 = 'SI';
-                    }else{
-                        _chanspan.innerHTML = '<span id="spanEnv1" class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>';
-                        _enviar1 = 'NO';
-                    }
-                }else{
-                    $('#chkEnviar1').prop('checked','');
-                    toastSweetAlert("top-end",3000,"error","Email no es Valido..!!");
-                    _enviar1 = 'SI';
-                    return;
-                }
+        var xrespuesta = $.post("codephp/grabar_tipoasistencia.php", _parametros);
+        xrespuesta.done(function(response){
+            if(response.trim() == 'EXISTE'){
+                toastSweetAlert("top-end",3000,"warning","Tipo Asistencia ya Existe..!!");
             }else{
-                $('#chkEnviar1').prop('checked','');
-                _enviar1 = 'NO';
+                if(response.trim() != 'ERR'){
+                    toastSweetAlert("top-end",3000,"success","Asistencia Agregada");
+                    $("#cboAsis").empty();
+                    $("#cboAsis").html(response);
+                    $("#modal_new_asistencia").modal("hide");
+                }
             }
         });
+    });
+    
+    //Agregar Servicio Directo a la BDD
+    $('#btnAddServicio').click(function(){
+
+        var _asistid = $('#cboAsis').val();
+        var _txtasistencia = $("#cboAsis option:selected").text();
+        var _txtatencion = $.trim($('#txtTipoAtencion').val()).toUpperCase();
+        var _red = $.trim($("#txtRed").val());
+        var _pvp = $.trim($("#txtPvp").val());
         
-        $(document).on("click","#chkEnviar2",function(){
-            
-            var _chanspan = document.getElementById("spanEnv2");
-            var _email2 =  $.trim($('#txtEmail2').val());
+        if(_txtasistencia == ''){
+            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Asistencia..!!");
+            return;
+        }
 
-            if(_email2 != ''){
-                var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-            
-                if (regex.test($('#txtEmail2').val().trim())){
-                    if($("#chkEnviar2").is(":checked")){
-                        _chanspan.innerHTML = '<span id="spanEnv2" class="form-check-label fw-bold" for="chkEnviar2"><strong>Enviar</strong></span>';
-                        _enviar2 = 'SI';
-                    }else{
-                        _chanspan.innerHTML = '<span id="spanEnv2" class="form-check-label fw-bold text-muted" for="chkEnviar2">No Enviar</span>';
-                        _enviar2 = 'NO';
-                    }                            
-                }else{
-                    $('#chkEnviar2').prop('checked','');
-                    toastSweetAlert("top-end",3000,"error","Email no es Valido..!!");
-                    _enviar2 = 'NO';
-                    return;
-                }
-            }else{
-                $('#chkEnviar2').prop('checked','');
-                _enviar2 = 'NO';
-            }
-        });  
-        
-        //Agregar Especialidad directo a la BDD
+        if(_txtatencion == ''){
+            toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Atencion..!!");
+            return;
+        }
 
-        $('#btnAgregar').click(function(e){
+        if(_red == ''){
+            toastSweetAlert("top-end",3000,"warning","Ingrese Valor de Red..!!");
+            return;
+        }
 
-            //debugger;
+        if(_pvp == ''){
+            toastSweetAlert("top-end",3000,"warning","Ingrese Valor Pvp..!!");
+            return;
+        }
 
-            var _cboespe = $('#cboEspecialidad').val();
-            var _especialidad = $("#cboEspecialidad option:selected").text();
-            var _pvp = $.trim($("#txtPvp").val());
-            var _costo = $.trim($("#txtCosto").val());
-            var _presid = <?php echo $xPresid; ?>;
+      
+        _red = _red.replace(/[a-z]/g,'0');
+        _pvp = _pvp.replace(/[a-z]/g,'0');
 
-            if(_especialidad == ''){
-                toastSweetAlert("top-end",3000,"warning","Seleccione Especialidad..!!");
-                return;
-            }
+        _red = parseFloat(_red)
+        _pvp = parseFloat(_pvp)
 
-            if(_pvp == ''){
-                _pvp = '0.00';
-            }
+        var _parametros = {
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxPresid" : _presid,
+            "xxAsisid" : _asistid,
+            "xxAtencion" : _txtatencion,
+            "xxRed" : _red,
+            "xxPvp" : _pvp,  
+            "xxUsuaid" : _usuaid,                             
+        }
 
-            if(_costo == ''){
-                _costo = '0.00';
-            }
-            
-            var _parametros = {
-                "xxPaisid" : _paisid,
-                "xxEmprid" : _emprid,
-                "xxUsuaid" : _usuaid,
-                "xxPresid" : _presid,
-                "xxEspeid" : _cboespe,                        
-                "xxPvp" : _pvp,
-                "xxCosto" : _costo
-            }
-
-            var xrespuesta = $.post("codephp/consultar_prestaespeci.php", _parametros);
-            xrespuesta.done(function(response){
+        var xrespuesta = $.post("codephp/grabar_prestaservicio.php", _parametros);
+        xrespuesta.done(function(response){
 
                 if(response != 0){
-
-                    _id = response;
-                    _output = '<tr id=row_' + _id + '>';
-                    _output += '<td>' + _especialidad + '<input type="hidden" id="txtEspeciPrestador' + _id + '" value="' + _especialidad + '" /></td>';
-                    _output += '<td>' + _pvp + '</td>';
-                    _output += '<td>' + _costo + '</td>';
-                    _output += '<td id="td_' + _id + '"><div class="badge badge-light-primary">ACTIVO</div></td>';                        
-                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">'; 
-                    _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _cboespe + '" onchange="f_UpdateEstado(';
-                    _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
-                    _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEditar_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
-                    _output += 'title="Editar Especialidad"><i class="fa fa-edit"></i></button>';
-                    _output += '<button id="btnPerson_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarProfesional(' + _paisid + ',' + _emprid + ',' + _presid + ',' + _id + ') title="Agregar Profesional" data-bs-toggle="tooltip" data-bs-placement="left">';
-                    _output += '<i class="fas fa-user"></i></button>';
-                    _output += '<button id="btnMotivos_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarMotivos(' + _paisid + ',' + _emprid + ',' + _id + ',' + _presid + ',' +_cboespe + ') title="Agregar Motivos" data-bs-toggle="tooltip" data-bs-placement="left">';
-                    _output += '<i class="fas fa-book"></i></button>';
-                    _output += '</div></div></td></tr>';
-
-                    $('#tblEspecialidad').append(_output);
-                    //console.log(_output);
-                    $("#modal-add-especialidad").modal("hide");
-                    toastSweetAlert("top-end",3000,"success","Especialidad Agregada");
-                }else{
-                    toastSweetAlert("top-end",3000,"error","Especialidad ya Existe..!!");
-                }
-
-                $("#cboEspecialidad").val(0).change();
-                $("#txtPvp").val('0.00');
-                $("#txtCosto").val('0.00');                        
-            });
-        });
-        
-        $('#btnAgregarTipo').click(function(e){
-
-            var _tipoprofesion = $.trim($('#txtTipoProfesion').val());
-            var _valcodigoprof = $.trim($('#txtCodigoTipo').val());
-            var _continuar = true;
-
-            if(_tipoprofesion == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Profesion..!!");
-                return;
-            }
-
-            if(_valcodigoprof == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Valor/Codigo..!!");
-                return;
-            }
-
-            if(_btnopctiontipo == 'Add'){
-                _padeidact = 0;
-            }else{
-                if(_tipoprofesion == _tipoprofeold){
-                    _continuar = false;
-                }
-            }
-            
-            if(_continuar){
-                var _parametros = {
-                    "xxPaisid" : _paisid,
-                    "xxEmprid" : _emprid,
-                    "xxUsuaid" : _usuaid,
-                    "xxTipoProfe" : _tipoprofesion,
-                    "xxValCodigoProf" : _valcodigoprof,
-                    "xxPadeid" : _padeidact
-                }
-
-                var xrespuesta = $.post("codephp/grabar_tipoprofesion.php", _parametros);
-                xrespuesta.done(function(response){
-
-                    //console.log(response);
-                    var json = JSON.parse(response);
-                    var _pacaid = json.Pacaid;
-                    var _padeid = json.Padeid;
-
-                    //console.log(_pacaid);
-                    //console.log(_padeid);
-
-                    if(_padeid > 0){
-
-                        if(_btnopctiontipo == 'Add'){
-                            _output = '<tr id="tr_' + _padeid + '">';    
-                            _output += '<td>' + _tipoprofesion.toUpperCase() + '<input type="hidden" id="txtPadeid' + _padeid + '" value="' + _padeid + '"/> <input type="hidden" id="txtTiprofe' + _padeid + '" value="' + _tipoprofesion + '"/> <input type="hidden" id="txtValor' + _padeid + '" value="' + _valcodigoprof  + '"/></td>';
-                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-primary">ACTIVO</div></div></td>';
-                            _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
-                            _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _padeid + '" onchange="f_UpdateEstTipo(';
-                            _output += _pacaid + ',' + _padeid + ')" value="' + _padeid + '"/></div></div></td>';
-                            _output += '<td><div class="btn-group"><button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
-                            _output += 'title="Editar Tipo Profesion" onclick="f_EditarTipo(' + _pacaid + ',' + _padeid + ')" ><i class="fa fa-edit"></i></button></div></td></tr>';
-                            
-                            //console.log(_output);
-
-                        }else{
-                            _output = '<td>' + _tipoprofesion.toUpperCase() + '<input type="hidden" id="txtPadeid'  + _padeid + '" value="' + _padeid + '"/> <input type="hidden" id="txtTiprofe'  + _padeid + '" value="' + _tipoprofesion + '"/> <input type="hidden" id="txtValor' + _padeid + '" value="' + _valcodigoprof  + '"/></td>';
-                            _output += '<td id="td_' + _padeid + '"><div class="d-flex align-items-center"><div class="badge badge-light-primary">ACTIVO</div></div></td>';
-                            _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
-                            _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _padeid + '" onchange="f_UpdateEstTipo(';
-                            _output += _pacaid + ',' + _padeid + ')" value="' + _padeid + '"/></div></div></td>';
-                            _output += '<td><div class="btn-group"><button id="btnEdiTipo" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
-                            _output += 'title="Editar Tipo Profesion" onclick="f_EditarTipo(' + _pacaid + ',' + _padeid + ')" ><i class="fa fa-edit"></i></button></div></td>';                                    
-                        }
-
-                        if(_btnopctiontipo == 'Add'){
-                            $('#tblTipoProfesion').append(_output);
-                            //_mensaje = "Tipo Profesion Agregada Correctamente..!";
-                            toastSweetAlert("top-end",3000,"success","Profesional Agregado");
-                        }else{
-                            $('#tr_' + _padeid + '').html(_output);
-                            toastSweetAlert("top-end",3000,"success","Profesional Modificado");
-                        }                                
-
-                        //Listar Nuevamente los tipos de Profesion
-                        var _parametros = {
-                            "xxPaisid" : _paisid,
-                            "xxEmprid" : _emprid,
-                            "xxParametro" : 'Tipo Profesion'
-                        }
-
-                        var xtiposprofesion = $.post("codephp/get_parametroxtipo.php", _parametros);
-                        xtiposprofesion.done(function(xresponse){
-                            $("#cboTipoProfesion").empty();
-                            $("#cboTipoProfesion").html(xresponse);
-                        });                                
-                    }else{
-                        toastSweetAlert("top-end",3000,"warning","Profesion ya Existe.!!");                           
-                    }
-
-                    $("#txtTipoProfesion").val('');
-                    $("#txtCodigoTipo").val('');
-                    $('#txtCodigoTipo').attr('disabled',false);
-                    _btnopctiontipo = "Add";
-                });                        
-            }
-
-            $('#txtTipoProfesion').val('');
-            $('#txtCodigoTipo').val('');
-            const btn = document.getElementById('btnAgregarTipo');
-            btn.innerHTML = '<i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar';
-
-        });
-
-        $('#cboEspecialidad').change(function(){                    
-            _cboid = $(this).val();
-
-            if(_cboid != null){
-                var _parametros = {
-                    "xxPaisId" : _paisid,
-                    "xxEmprId" : _emprid,
-                    "xxEspeId" : _cboid
-                } 
-
-                var xrespuesta = $.post("codephp/get_DatosEspecialidad.php", _parametros);
-                xrespuesta.done(function(response){
-                    if(response.trim() == '0'){
-                        $("#txtPvp").val('0.00');
-                    }else{
-                        $("#txtPvp").val(response);
-                    }
-                });
-            }
-        });
-
-        $('#btnSave').click(function(e){
-            //debugger
-            var _presid = "<?php echo $xPresid; ?>";
-            var _logo = "<?php echo $xLogo; ?>";
-            var _provid = $('#cboProvincia').val();
-            var _ciudid = $('#cboCiudad').val();
-            var _prestador = $.trim($('#txtPrestador').val());
-            var _sector = $('#cboSector').val();
-            var _tipopresta = $('#cboTipo').val();
-            var _direccion = $.trim($('#txtDireccion').val());
-            var _url = $.trim($('#txtUrl').val());
-            var _telefono1 = $.trim($('#txtFono1').val());
-            var _telefono2 = $.trim($('#txtFono2').val());
-            var _telefono3 = $.trim($('#txtFono3').val());
-            var _celular1 = $.trim($('#txtCelular1').val());
-            var _celular2 = $.trim($('#txtCelular2').val());
-            var _celular3 = $.trim($('#txtCelular3').val());
-            var _email1 =  $.trim($('#txtEmail1').val());
-            var _email2 =  $.trim($('#txtEmail2').val());
-            var _providant = $.trim($('#txtcbociudad').val());
-            var _prestaant = $.trim($('#txtPrestaant').val());
-            var _cambiarlogo = 'NO';
-            _respuesta = 'OK';
-
-            if(_provid == ''){
-                toastSweetAlert("top-end",3000,"warning","Seleccione Provincia..!"); 
-                return; 
-            }
-
-            if(_ciudid == ''){
-                toastSweetAlert("top-end",3000,"warning","Seleccione Ciudad..!"); 
-                return; 
-            }
-
-            if(_prestador == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Prestador..!"); 
-                return;                         
-            }
-
-            if(_sector == ''){
-                toastSweetAlert("top-end",3000,"warning","Seleccione Sector..!"); 
-                return; 
-            }
-            
-            if(_tipopresta == ''){
-                toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Prestador..!"); 
-                return; 
-            }                       
-            
-            if(_url != ''){
-                try{
-                    new URL(_url);
-                }catch(err){
-                    toastSweetAlert("top-end",3000,"error","Direccion URL Incorrecta..!"); 
-                    return false;
-                }
-            }
-            
-            if(_telefono1 != '')
-            {
-                _valor = document.getElementById("txtFono1").value;
-                if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
-                    toastSweetAlert("top-end",3000,"error","Telefono 1 incorrecto..!"); 
-                    return;
-                }
-            }
-
-            if(_telefono2 != '')
-            {
-                _valor = document.getElementById("txtFono2").value;
-                if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
-                    toastSweetAlert("top-end",3000,"error","Telefono 2 incorrecto..!");  
-                    return;
-                }
-            }                    
-
-            if(_telefono3 != '')
-            {
-            
-               _valor = document.getElementById("txtFono3").value;
-                if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
-                    toastSweetAlert("top-end",3000,"error","Telefono 3 incorrecto..!");  
-                    return;
-                }
-            }  
-            
-            if(_celular1 != '')
-            {
-                _valor = document.getElementById("txtCelular1").value;
-                if( !(/^\d{10}$/.test(_valor)) ) {
-                    toastSweetAlert("top-end",3000,"error","Celular 1 incorrecto..!");  
-                    return;
-                }
-            }                     
-            
-            if(_celular2 != '')
-            {
-                _valor = document.getElementById("txtCelular2").value;
-                if( !(/^\d{10}$/.test(_valor)) ) {
-                    toastSweetAlert("top-end",3000,"error","Celular 2 incorrecto..!"); 
-                    return;
-                }
-            }
-            
-            if(_celular3 != '')
-            {
-                _valor = document.getElementById("txtCelular3").value;
-                if( !(/^\d{10}$/.test(_valor)) ) {
-                    toastSweetAlert("top-end",3000,"error","Celular 3 incorrecto..!");  
-                    return;
-                }
-            }                    
-            
-            if(_email1 != ''){
-                var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-            
-                if (regex.test($('#txtEmail1').val().trim())) {
-                }else{
-                    toastSweetAlert("top-end",3000,"error","Email 1 no es Valido..!"); 
-                    return;
-                }
-            }
-
-            if(_email2 != ''){
-                var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-            
-                if (regex.test($('#txtEmail2').val().trim())) {
-                }else{
-                    toastSweetAlert("top-end",3000,"error","Email 2 no es Valido..!"); 
-                    return;
-                }
-            }
-
-            var _imgfile = document.getElementById("imgfile").style.backgroundImage;
-            var _urlimg = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-            var _pos = _urlimg.trim().indexOf('.');
-            var _ext = _urlimg.trim().substr(_pos, 5);
-
-            if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
-				_cambiarlogo = 'SI';
-			} 
-            
-            if(_cambiarlogo == 'SI'){
-				var _imagen = document.getElementById("imglogo");
-				var _file = _imagen.files[0];
-				var _fullPath = document.getElementById('imglogo').value;
-				_ext = _fullPath.substring(_fullPath.length - 4);
-				_ext = _ext.toLowerCase();   
-			}else{
-                _file = '';
-            }
-
-            if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
-				toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una Imagen..!");
-				return;
-			}
-
-
-            form_data = new FormData();                    
-            form_data.append('xxPaisid', _paisid);
-            form_data.append('xxEmprid', _emprid);
-            form_data.append('xxUsuaid', _usuaid);
-            form_data.append('xxPresid', _presid);
-            form_data.append('xxProvid', _ciudid);
-            form_data.append('xxProvidant', _providant);
-            form_data.append('xxPrestador', _prestador);
-            form_data.append('xxPrestadorant', _prestaant);
-            form_data.append('xxSector', _sector);
-            form_data.append('xxTipo', _tipopresta);
-            form_data.append('xxDireccion', _direccion);
-            form_data.append('xxUrl', _url);
-            form_data.append('xxFono1', _telefono1);
-            form_data.append('xxFono2', _telefono2);
-            form_data.append('xxFono3', _telefono3);
-            form_data.append('xxCelular1', _celular1);
-            form_data.append('xxCelular2', _celular2);
-            form_data.append('xxCelular3', _celular3);
-            form_data.append('xxEmail1', _email1);
-            form_data.append('xxEnviar1', _enviar1);
-            form_data.append('xxEmail2', _email2);
-            form_data.append('xxEnviar2', _enviar2);
-            form_data.append('xxFile', _file);
-            form_data.append('xxCambiarlogo', _cambiarlogo);
-            form_data.append('xxLogo', _logo);
-
-            $.ajax({
-                url: "codephp/update_prestador.php",
-                type: "post",
-                data: form_data,
-                processData: false,
-                contentType: false,
-                dataType: "json",
-                success: function(response){
                     
-                    if(response == 'OK'){
-                        $.redirect('?page=prestador_admin&menuid=<?php echo $menuid; ?>', {'mensaje':'Actualizado con Exito'}); //POR METODO POST
-                    }else{
-                        toastSweetAlert("top-end",3000,"warning","Prestador ya Existe..!!"); 
-                    }
-                },
-                error: function (error) {
-                    console.log(error);
                 }
-            });
         });
+
 
     });
-
-    $(document).on("click",".btnEditar",function(){
-
-        _rowid = $(this).attr("id");
-        _rowid = _rowid.substring(10);
-
-        var _parametros = {
-            "xxPaisid" : _paisid,
-            "xxEmprid" : _emprid,
-            "xxPreeid" : _rowid
-        }                
-
-        var xrespuesta = $.post("codephp/get_datosespecipresta.php", _parametros );
-        xrespuesta.done(function(response){
-            
-            var _datos = JSON.parse(response);
-
-            $.each(_datos,function(i,item){
-
-                _espeid =  _datos[i].Espeid;
-                _pvp =  _datos[i].Pvp;
-                _costo =  _datos[i].Costo;
-
-                $('#cboEspecialidadEdit').val(_espeid).change();
-                $('#txtPvpEdit').val(_pvp);
-                $('#txtCostoEdit').val(_costo);
-                $('#txtcboespe').val(_espeid);
-
-            });
-            
-            $("#modal-editar-especialidad").modal("show");
-        });
-
-    });	
-    
-    function f_AgregarProfesional(_paisid, _emprid, _presid, _preeid){
-
-        //debugger;
-        var tb = document.getElementById('tblProfesional');
-            while(tb.rows.length > 1) {
-            tb.deleteRow(1);
-        }                
-
-        _selpreeid = _preeid;
-
-        _selespecialidad = $('#txtEspeciPrestador' + _preeid).val();
-        document.getElementById("headerTitle").innerHTML = "Especialidad: " + _selespecialidad;
-
-        var _parametros = {
-            "xxPaisid" : _paisid,
-            "xxEmprid" : _emprid,
-            "xxPreeid" : _preeid
-        }
-
-        $.ajax({
-            url: "codephp/get_datosprofesional.php",
-            type: "POST",
-            dataType: "json",
-            data: _parametros,
-            success: function(response){ 
-                $.each(response, function(i, item){
-
-                    _id = item.Id;
-                    _nombres = item.Nombres + ' ' + item.Apellidos;
-                    _tipoprofe = item.Profesion;
-                    _estado = item.Estado;
-                    _intervalo = item.Intervalo;
-                    _checked = '';
-                    _disabledbtn1 = '';
-                    _disabledbtn2 = '';
-
-                    if(_estado == "ACTIVO"){
-                        _checked = "checked='checked'";
-                        _textcolor = "badge badge-light-primary";
-                    }else{
-                        _textcolor = "badge badge-light-danger";
-                        _disabledbtn1 = 'disabled';
-                        _disabledbtn2 = 'disabled';
-                    }
-
-                    _output = '<tr id="trprof_' + _id + '">';
-                    _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _nombres + '</span><input type="hidden" id="txtProfesional_' + _id + '" value="' + _nombres + '" /></div></div></td>';
-                    _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _tipoprofe + '</span></div></div></td>';
-                    _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
-                    _output += '<td id="tdprof_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="' + _textcolor + '">' + _estado + '</div></div></div></td>';
-                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
-                    _output += '<input class="form-check-input h-20px w-20px border-primary" ' +  _checked + ' type="checkbox" id="chkprof' + _id + '" onchange="f_UpdateEstProf(';
-                    _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
-                    _output += '<td class=""><div class=""><div class="btn-group">'
-                    _output += '<button id="btnHorario_' + _id  + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnhorario"' + _disabledbtn1 + ' onclick="f_ConfHorario(';
-                    _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Configurar Horario" data-bs-toggle="tooltip" data-bs-placement="left" ><i class="fas fa-cogs"></i></button>';
-                    _output += '<button id="btnDelProf_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"' + _disabledbtn2 + ' onclick="f_DelAsigProf(';
-                    _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Eliminar Profesional Asignado" data-bs-toggle="tooltip" data-bs-placement="left" ><i class="fa fa-trash"></i></button></div></div></td></tr>'
-
-                    $('#tblProfesional').append(_output);
-
-                });
-
-                $("#cboTipoProfe").val(0).change(); 
-                $("#txtIntervalo").val(10);
-                //$("#modal_profesional").find("input,textarea").val("");
-                $("#modal_profesional").modal("show");
-                $('#modal_profesional').modal('handleUpdate');                           
-            },
-            error: function (error){
-                console.log(error);
-            }
-        });
-    }
-
-    $('#btnAgregarProfesional').click(function(e){
-
-        var _tipoprofesion = $("#cboTipoProfe option:selected").text();
-        var _profesional = $('#cboProfesional option:selected').text();
-        var _intervalo = $('#txtIntervalo').val();
-        _profid = $("#cboProfesional").val();
-
-        if(_tipoprofesion == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Profesion..!!"); 
-            return;
-        }
-        
-        if(_profesional == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Profesional..!!"); 
-            return;
-        }
-             
-        var _parametros = {
-            "xxPaisid" : _paisid,
-            "xxEmprid" : _emprid,
-            "xxUsuaid" : _usuaid,
-            "xxPreeid" : _selpreeid,
-            "xxIntervalo" : _intervalo,
-            "xxProfid" : _profid
-        }	
-
-        var xrespuesta = $.post("codephp/grabar_profesionalespeci.php", _parametros);
-        xrespuesta.done(function(response){
-            if(response > 0){
-
-                _id = response.trim();
-
-                _output = '<tr id="trprof_' + _id + '">';
-                _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _profesional + '</span><input type="hidden" id="txtProfesional_' + _id + '" value="' + _profesional +  '" /></div></div></td>';
-                _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _tipoprofesion + '</span></div></div></td>';
-                _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
-                _output += '<td id="tdprof_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="badge badge-light-primary">ACTIVO</div></div></div></td>';
-                _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
-                _output += '<input class="form-check-input h-20px w-20px border-primary" type="checkbox" checked="checked" id="chkprof' + _id + '" onchange="f_UpdateEstProf(';
-                _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
-                _output += '<td class=""><div class=""><div class="btn-group">';
-                _output += '<button id="btnHorario_' + _id  + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick="f_ConfHorario(';
-                _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Configurar Horario" ><i class="fas fa-cogs"></i></button>';                        
-                _output += '<button id="btnDelProf_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" onclick="f_DelAsigProf(';
-                _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Eliminar Profesional Asignado" ><i class="fa fa-trash"></i></button></div></div></td></tr>'
-                
-                $('#tblProfesional').append(_output);
-                toastSweetAlert("top-end",3000,"success","Agregado Correctamente"); 
-
-            }else{
-                toastSweetAlert("top-end",3000,"error","Profesional ya Existe..!!"); 
-            }
-
-            $("#cboTipoProfe").val(0).change(); 
-            $("#cboProfesional").val(0).change(); 
-
-        });	                
-
-    });
-
-    function f_AgregarMotivos(_paisid, _emprid, _preeid, _presid, _espeid){
-
-        var tb = document.getElementById('tblMotivo');
-            while(tb.rows.length > 1) {
-            tb.deleteRow(1);
-        }
-
-        _selpreeid = _preeid;
-        _selpresid = _presid;
-        _selespeid =  _espeid   
-
-        _selespecialidad = $('#txtEspeciPrestador' + _preeid).val();
-        document.getElementById("headerTitleMotivo").innerHTML = "Especialidad: " + _selespecialidad;
-
-        var _parametros = {
-            "xxPaisid" : _paisid,
-            "xxEmprid" : _emprid,
-            "xxPresid" : _presid,
-            "xxEspeid" : _espeid,
-        }
-
-        $.ajax({
-            url: "codephp/get_datosmotivo.php",
-            type: "POST",
-            dataType: "json",
-            data: _parametros,
-            success: function(response){ 
-                $.each(response, function(i, item){
-
-                    _id = item.mtes_id;
-                    _motivo = item.motivos_especialidad;
-                    _estado = item.mtes_estado;
-                    _checked = '';
-                    _disabledbtn1 = 'disabled';
-
-                    if(_estado == "A"){
-                        _checked = "checked='checked'";
-                        _textcolor = "badge badge-light-primary";
-                    }else{
-                        _textcolor = "badge badge-light-danger";
-                    }
-
-                    if(_estado == 'A'){
-                        _estado = 'ACTIVO';
-                    }else{
-                        _estado = 'INACTIVO';
-                    }
-
-                    _output = '<tr id="trmot_' + _id + '">';
-                    _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _motivo + '</span><input type="hidden" id="txtMotivo_' + _id + '" value="' + _motivo + '" /></div></div></td>';
-                    _output += '<td id="tdmot_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="' + _textcolor + '">' + _estado + '</div></div></div></td>';
-                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
-                    _output += '<input class="form-check-input h-20px w-20px border-primary" ' +  _checked + ' type="checkbox" id="chkmoti' + _id + '" onchange="f_UpdateMotivo(';
-                    _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td></tr>';
-
-                    $('#tblMotivo').append(_output);
-
-                });
-
-                $("#modal-motivos").modal("show");
-                $('#modal-motivos').modal('handleUpdate');                           
-            },
-            error: function (error){
-                console.log(error);
-            }
-        });        
-
-    }
-
-    $('#btnAgregarMotivo').click(function(e){
-
-        var _motivo = $('#txtmotivo').val();
-        
-        if(_motivo == ''){
-            toastSweetAlert("top-end",3000,"warning","Ingrese Motivo..!"); 
-            return;
-        }                
-
-        var _parametros = {
-            "xxPaisid" : _paisid,
-            "xxEmprid" : _emprid,
-            "xxUsuaid" : _usuaid,
-            "xxPresid" : _selpresid,
-            "xxEspeid" : _selespeid,
-            "xxMotivo" : _motivo
-        }	
-
-        var xrespuesta = $.post("codephp/grabar_motivoespecialidad.php", _parametros);
-        xrespuesta.done(function(response){
-            if(response > 0){
-
-                _id = response.trim();
-
-                _estado = 'ACTIVO';
-                _checked = "checked='checked'";
-                _textcolor = "badge badge-light-primary";                
-
-                _output = '<tr id="trmot_' + _id + '">';
-                _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _motivo.toUpperCase() + '</span><input type="hidden" id="txtMotivo_' + _id + '" value="' + _motivo + '" /></div></div></td>';
-                _output += '<td id="tdmot_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="' + _textcolor + '">' + _estado + '</div></div></div></td>';
-                _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
-                _output += '<input class="form-check-input h-20px w-20px border-primary" ' +  _checked + ' type="checkbox" id="chkmoti' + _id + '" onchange="f_UpdateMotivo(';
-                _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td></tr>';
-
-                $('#tblMotivo').append(_output);
-
-            }else{
-                toastSweetAlert("top-end",3000,"error","Error en Ajax-grabar_motivoespecialidad"); 
-            }
-
-            $("#txtmotivo").val(''); 
-        });
-    });
-
-    function f_UpdateEstProf(_paisid, _emprid, _pfesid){
-
-        let _usuaid = "<?php echo $xUsuaid; ?>";
-        let _check = $("#chkprof" + _pfesid).is(":checked");
-        let _checked = "";
-        let _class = "badge badge-light-primary";
-        let _td = "tdprof_" + _pfesid;
-        let _btnhorario = "btnHorario_" + _pfesid;
-        let _btnelimina = "btnDelProf_" + _pfesid;
-
-        if(_check){
-            _estado = "ACTIVO";
-            _checked = "checked='checked'";
-            $('#'+_btnhorario).prop("disabled",false);
-            $('#'+_btnelimina).prop("disabled",false);
-        }else{                    
-            _estado = "INACTIVO";
-            _class = "badge badge-light-danger";
-            $('#'+_btnhorario).prop("disabled",true);
-            $('#'+_btnelimina).prop("disabled",true);
-        }
-
-        var _changetd = document.getElementById(_td);
-        _changetd.innerHTML = '<div class="d-flex align-items-center"><div class="ms-0"><div class="' + _class + '">' + _estado + ' </div></div>';
-
-        var _parametros = {
-            "xxPaisid" : _paisid,
-            "xxEmprId" : _emprid,
-            "xxUsuaid" : _usuaid,
-            "xxPfesid" : _pfesid,
-            "xxEstado" : _estado
-        }	
-
-        var xrespuesta = $.post("codephp/update_profesionalespeci.php", _parametros);
-            xrespuesta.done(function(response){
-
-        });
-    }
-
-    //Cambiar estado Nuevo Tipo Profesion Modal
-    function f_UpdateEstTipo(_pacaid, _padeid){  
-
-        //alert(_padeid);
-        //debugger;
-        var _check = $("#chktipo" + _padeid).is(":checked");
-        var _checked = '';
-        var _class = '';
-        var _td = 'td_' + _padeid;
-        var _estado = 'ACTIVO';
-        var _btnedit = 'btnEdiTipo_' + _padeid;
-
-        if(_check){
-            _checked = "checked='checked'";
-            _class = 'badge badge-light-primary';
-            $('#'+_btnedit).prop('disabled',false); 
-        }else{
-            _estado = 'INACTIVO';
-            _class = 'badge badge-light-danger';
-            $('#'+_btnedit).prop('disabled',true);
-        }
-        
-        var _changetd = document.getElementById(_td);
-        _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
-
-        var _parametros = {
-            "xxPadeid" : _padeid,
-            "xxEstado" : _estado,
-        }
-
-        var xrespuesta = $.post("codephp/update_tipoprofesion.php", _parametros);
-            xrespuesta.done(function(response){
-
-        });
-    }
-
-    function f_UpdateMotivo(_paisid, _emprid, _motid){
-
-        let _usuaid = "<?php echo $xUsuaid; ?>";
-        let _check = $("#chkmoti" + _motid).is(":checked");
-        let _checked = "";
-        let _class = "badge badge-light-primary";
-        let _td = "tdmot_" + _motid;
-
-        if(_check){
-            _estado = "ACTIVO";
-            _checked = "checked='checked'";
-        }else{                    
-            _estado = "INACTIVO";
-            _class = "badge badge-light-danger";
-        }
-
-        var _changetd = document.getElementById(_td);
-        _changetd.innerHTML = '<div class="d-flex align-items-center"><div class="ms-0"><div class="' + _class + '">' + _estado + ' </div></div>';
-
-        var _parametros = {
-            "xxPaisid" : _paisid,
-            "xxEmprid" : _emprid,
-            "xxUsuaid" : _usuaid,
-            "xxMotivoid" : _motid,
-            "xxEstado" : _estado
-        }	
-
-        var xrespuesta = $.post("codephp/update_estadomotivoespeci.php", _parametros);
-            xrespuesta.done(function(response){
-
-        });
-    }    
-
-    function f_ConfHorario(_paisid, _emprid, _pfesid){
-
-        var tb = document.getElementById('tblHorarios');
-            while(tb.rows.length > 1) {
-            tb.deleteRow(1);
-        }                   
-
-        _selecpfesid = _pfesid
-        _selprofesional = $('#txtProfesional_' + _pfesid).val();
-        document.getElementById("headertitu1").innerHTML = "Especialidad: " + _selespecialidad + "<br><br>" + "Profesional: " + _selprofesional;
-
-        $("#cboDias").val(0).change();
-        //$("#txtIntervalo").val(10);
-        $("#txtHoraDesde").val('');
-        $("#txtHoraHasta").val('');
-
-        var _parametros = {
-            "xxPaisid" : _paisid,
-            "xxEmprid" : _emprid,
-            "xxPfesid" : _pfesid
-        }
-
-        $.ajax({
-            url: "codephp/get_profesionalhorario.php",
-            type: "POST",
-            dataType: "json",
-            data: _parametros,
-            success: function(response){ 
-                $.each(response, function(i, item){
-
-                    //debugger;
-                    
-                    _id = item.Id;
-                    _dia = item.Dia;
-                    //_intervalo = item.Intervalo;
-                    _horadesde = item.HoraDesde;
-                    _horafdesde = _horadesde.substring(0,5);
-                    _horahasta = item.HoraHasta;
-                    _horafhasta = _horahasta.substring(0,5);
-
-                    _output = '<tr id="trhorario_' + _id + '">';
-                    _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _dia + '</span></div></div></td>';
-                    //_output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
-                    _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _horafdesde + '</span></div></div></td>';
-                    _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _horafhasta + '</span></div></div></td>';
-                    _output += '<td class=""><div class=""><div class="btn-group">'
-                    _output += '<button id="btnDelHorario_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"  onclick="f_DelHorario(';
-                    _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Eliminar Turno/Horario" ><i class="fa fa-trash"></i></button></div></div></td></tr>'
-
-                    $('#tblHorarios').append(_output);
-
-                });
-
-                $("#modal_profesional").modal("hide");
-                $("#modal_horarios").modal("show");
-
-                //$("#modal_horarios").find("input,textarea").val("");
-                $('#modal_horarios').modal('handleUpdate');                           
-            },
-            error: function (error){
-                console.log(error);
-            }
-        });
-    }
-
-    function f_DelAsigProf(_paisid, _emprid, _pfesid){
-
-        _parametros = {
-            "xxPaisid" : _paisid,
-            "xxEmprid" : _emprid,
-            "xxPfesid" : _pfesid
-        }
-
-        var xrespuesta = $.post("codephp/consultar_horarioprofesional.php", _parametros);
-            xrespuesta.done(function(response){
-            if(response.trim() == 'OK'){
-                toastSweetAlert("top-end",3000,"error","Registro Eliminado");
-                $('#trprof_' + _pfesid).remove();
-            }else{
-                toastSweetAlert("top-end",3000,"warning","El registro tiene horarios configurados..!!");
-            }
-        });
-    }
-
-    function f_DelHorario(_paisid, _emprid, _horaid){
-
-        let _usuaid = "<?php echo $xUsuaid; ?>";
-
-        _parametros = {
-            "xxPaisid" : _paisid,
-            "xxEmprid" : _emprid,
-            "xxUsuaid" : _usuaid,
-            "xxHoraid" : _horaid
-        }
-
-        var xrespuesta = $.post("codephp/del_horarioprofesional.php", _parametros);
-            xrespuesta.done(function(response){
-            if(response.trim() == 'OK'){
-                toastSweetAlert("top-end",3000,"error","Registro Eliminado");
-                $('#trhorario_' + _horaid).remove();
-            }else{
-                toastSweetAlert("top-end",3000,"question","Hubo algun error, no se puedo eliminar..!!");
-            }
-        });
-    }            
-    
-    $('#btnAgregarHorario').click(function(e){
-
-        var _dia = $('#cboDias').val();
-        var _intervalo = 0;
-        //var _intervalo = $('#txtIntervalo').val();
-        var _horadesde = $('#txtHoraDesde').val();
-        var _horahasta = $('#txtHoraHasta').val();                
-
-        var _diatext = $('#cboDias option:selected').text();
-
-        if(_dia == null){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Dia..!!");
-            return;
-        }
-
-
-        if(_horadesde == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Hora Inicio..!!");
-            return;
-        }
-
-        if(_horahasta == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Hora Final..!!");
-            return;
-        }                
-
-        //VALIDAR LAS HORAS
-
-        var minutos_inicio = _horadesde.split(':').reduce((p, c) => parseInt(p) * 60 + parseInt(c));
-        var minutos_final = _horahasta.split(':').reduce((p, c) => parseInt(p) * 60 + parseInt(c));
-        
-        if (minutos_final < minutos_inicio || minutos_inicio == minutos_final ){
-            toastSweetAlert("top-end",3000,"question","La Hora Inicio no puede ser menor/igual a la Hora Final..!!");
-            return;
-        } 
-
-
-        var _parametros = {
-            "xxPaisid" : _paisid,
-            "xxEmprid" : _emprid,
-            "xxUsuaid" : _usuaid,
-            "xxPfesid" : _selecpfesid,
-            "xxDia" : _dia,
-            "xxDiaText" : _diatext,
-            "xxIntervalo" : _intervalo,
-            "xxHoraInicio" : _horadesde,
-            "xxHoraFin" : _horahasta
-        }	
-
-        var xrespuesta = $.post("codephp/grabar_turnohorarios.php", _parametros);
-        xrespuesta.done(function(response){
-            if(response > 0){
-
-                _id = response;
-
-                _output = '<tr id="trhorario_' + _id + '">';
-                _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _diatext + '</span></div></div></td>';
-                //_output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
-                _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _horadesde + '</span></div></div></td>';
-                _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _horahasta + '</span></div></div></td>';
-                _output += '<td class=""><div class=""><div class="btn-group">';
-                _output += '<button id="btnDelHorario_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" onclick="f_DelHorario(';
-                _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Eliminar Turno/Horario" ><i class="fa fa-trash"></i></button></div></div></td></tr>'
-
-                $('#tblHorarios').append(_output);
-                toastSweetAlert("top-end",3000,"success","Horario Agregado");
-                $("#txtHoraDesde").val('');
-                $("#txtHoraHasta").val('');
-
-            }else{
-                toastSweetAlert("top-end",3000,"warning","Dia/Horario ya Existe..!!");
-            }
-
-            $("#cboDias").val(0).change(); 
-            $("#cboProfesional").val(0).change(); 
-
-        });
-
-    });            
-
-    function f_GetProfesional(_paisid, _emprid, obj){
-
-        _tipoprofe = obj.value;
-
-        _parametros = {
-            "xxPaisid" : _paisid,
-            "xxEmprid" : _paisid,
-            "xxTipoProfe" : _tipoprofe  
-        }
-
-        $("#cboProfesional").empty();
-
-        var _respuesta = $.post("codephp/get_dropprofesional.php", _parametros);
-        _respuesta.done(function(response) {
-            $("#cboProfesional").html(response);
-            
-        });
-    }
-
-    function setTwoNumberDecimal(event) {
-        this.value = parseFloat(this.value).toFixed(2);
-    }
-
-    $(document).on("click",".btnDelete",function(){
-        row_id = $(this).attr("id");
-        
-        $.each(_result,function(i,item){
-            if(item.arryid == row_id)
-            {
-                _result.splice(i, 1);
-                return false;
-            }else{
-                continuar = true;
-            }
-        });  
-
-        $('#row_' + row_id + '').remove();
-
-    });
-
-    $(document).on("click",".btnDelete",function(){
-        row_id = $(this).attr("id");
-        
-        $.each(_result,function(i,item){
-            if(item.arryid == row_id)
-            {
-                _result.splice(i, 1);
-                return false;
-            }else{
-                continuar = true;
-            }
-        });  
-
-        $('#row_' + row_id + '').remove();
-
-    });
-    
-    function f_EditarTipo(_pacaid, _padeid){
-
-        _btnopctiontipo = "Mod";
-
-        const btn = document.getElementById('btnAgregarTipo');
-        btn.innerHTML = '<i class="las la-pencil-alt"></i>Modificar';
-
-        _padeidact = $('#txtPadeid' + _padeid).val();
-        _tipoprofeold = $('#txtTiprofe' + _padeid).val();
-        _valorvold = $('#txtValor' + _padeid).val();
-
-        $('#txtTipoProfesion').val(_tipoprofeold);
-        $('#txtCodigoTipo').val(_valorvold);
-        $('#txtCodigoTipo').attr('disabled',true);
-
-    }
-
-    //Update estado Especialidades 
-    function f_UpdateEstado(_paisid, _emprid, _preeid){
-
-        let _usuaid = "<?php echo $xUsuaid; ?>";
-        let _check = $("#chk" + _preeid).is(":checked");
-        let _checked = "";
-        let _class = "badge badge-light-primary";
-        let _td = "td_" + _preeid;
-        let _btnedit = "btnEditar_" + _preeid;
-        let _btnper = "btnPerson_" + _preeid;
-        let _btnmot = "btnMotivos_" + _preeid;
-        
-
-        if(_check){
-            _estado = "ACTIVO";
-            _checked = "checked='checked'";
-            $('#'+_btnedit).prop("disabled",false);
-            $('#'+_btnper).prop("disabled",false);
-            $('#'+_btnmot).prop("disabled",false);
-        }else{                    
-            _estado = "INACTIVO";
-            _class = "badge badge-light-danger";
-            $('#'+_btnedit).prop("disabled",true);
-            $('#'+_btnper).prop("disabled",true);
-            $('#'+_btnmot).prop("disabled",true);
-        }
-
-        var _changetd = document.getElementById(_td);
-        _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
-
-        var _parametros = {
-            "xxPaisid" : _paisid,
-            "xxEmprid" : _emprid,
-            "xxPreeid" : _preeid,
-            "xxEstado" : _estado
-        }	
-
-        var xrespuesta = $.post("codephp/update_estadoespecipresta.php", _parametros);
-            xrespuesta.done(function(response){
-
-        });	
-    }            
-    
-    //Grabar Editar Especialidad Modal
-    function f_GrabarEspe(_paisid, _emprid){
-
-        _usuaid = "<?php echo $xUsuaid; ?>";
-        _presid = "<?php echo $xPresid; ?>";
-
-        _cboespeci = $('#cboEspecialidadEdit').val();
-        _pvp = $('#txtPvpEdit').val();
-        _costo = $('#txtCostoEdit').val();
-        _espeid = $('#txtcboespe').val();
-        _especialidad = $("#cboEspecialidadEdit option:selected").text();
-
-        var _parametros = {
-            "xxPaisid" : _paisid,
-            "xxEmprId" : _emprid,
-            "xxUsuaid" : _usuaid,
-            "xxPresid" : _presid,
-            "xxEspeid" : _cboespeci,
-            "xxEspeidant" : _espeid,
-            "xxPvp" : _pvp,
-            "xxCosto": _costo
-        }
-
-        var xrespuesta = $.post("codephp/grabar_editarprestaespeci.php", _parametros);
-        xrespuesta.done(function(response){
-
-            if(response.trim() == 'OK'){
-                _output = '<td>' + _especialidad + '<input type="hidden" id="txtEspeciPrestador' + _rowid + '" value="' + _especialidad + '"/></td>';
-                _output += '<td>' + _pvp + '</td>';
-                _output += '<td>' + _costo + '</td>';
-                _output += '<td id="td_' + _rowid + '"><div class="badge badge-light-primary">ACTIVO</div></td>';                        
-                _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
-                _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _rowid + '" onchange="f_UpdateEstado(';
-                _output += _paisid + ',' + _emprid + ',' + _rowid + ')" value="' + _rowid + '"/></div></div></td>';
-                _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEditar_' + _rowid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
-                _output += 'title="Editar Especialidad Asignada" ><i class="fa fa-edit"></i></button>';
-                _output += '<button id="btnPerson_' + _rowid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick="f_AgregarProfesional(';
-                _output += _paisid + ',' + _emprid + ',' + _presid + ',' + _rowid + ')" title="Agregar Profesional" ><i class="fas fa-user"></i></button>';
-                _output += '<button id="btnMotivos_' + _rowid + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarMotivos(' + _paisid + ',' + _emprid + ',' + _rowid + ',' + _presid + ',' +_cboespeci + ') title="Agregar Motivos" data-bs-toggle="tooltip" data-bs-placement="left" >';
-                _output += '<i class="fas fa-book"></i></button>';
-                _output += '</div></div></td>';
-
-                $('#row_' + _rowid + '').html(_output);
-            }else{
-                toastSweetAlert("top-end",3000,"warning","Especialidad ya Existe..!!");
-            }
-        });	                
-
-        $("#modal-editar-especialidad").modal("hide");
-
-    }
-
-    $(document).on("click","#chkEnviarProf",function(){
-            
-        var _chanspan = document.getElementById("spanEnvProf");
-        var _emailprof =  $.trim($('#txtEmailProf').val());
-
-        if(_emailprof != ''){
-            var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-        
-            if (regex.test($('#txtEmailProf').val().trim())){
-                if($("#chkEnviarProf").is(":checked")){
-                    _chanspan.innerHTML = '<span id="spanEnv1" class="form-check-label fw-bold" for="chkEnviar1"><strong>Enviar</strong></span>';
-                    _enviarprof = 'SI';
-                }else{
-                    _chanspan.innerHTML = '<span id="spanEnv1" class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>';
-                    _enviarprof = 'NO';
-                }
-            }else{
-                $('#chkEnviarProf').prop('checked','');
-                toastSweetAlert("top-end",3000,"error","Email no es Valido..!!");
-                _enviarprof = 'SI';
-                return;
-            }
-        }else{
-            $('#chkEnviarProf').prop('checked','');
-            _enviarprof = 'NO';
-        }
-    });            
-
-    $('#btnSaveProf').click(function(e){
-
-        var _paisid = "<?php echo $xPaisid; ?>";
-        var _emprid = "<?php echo $xEmprid; ?>";
-        var _usuaid = "<?php echo $xUsuaid; ?>";
-        var _tipodoc = $("#cboTipoDoc option:selected").text();
-        var _numdocumento = $.trim($("#txtNumDocumento").val());
-        var _nombres = $.trim($("#txtNombresProf").val());
-        var _apellidos = $.trim($("#txtApellidosProf").val());
-        var _genero = $("#cboTipoGenero option:selected").text();
-        var _tipoprof = $("#cboTipoProfesion option:selected").text();
-        var _tipoprofv = $("#cboTipoProfesion").val();
-        var _direccion = $.trim($("#txtDireccionProf").val());
-        var _telefono = $.trim($("#txtFonoProf").val());
-        var _celular = $.trim($("#txtCelularProf").val());
-        var _emailprof = $.trim($("#txtEmailProf").val());
-        var _selecc = 'NO'; 
-        var _continuar = true;
-        
-        var _imgfile = document.getElementById("imgfileprof").style.backgroundImage;
-        var _url = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-        var _pos = _url.trim().indexOf('.');
-        var _ext = _url.trim().substr(_pos, 5);
-
-        if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
-            _selecc = 'SI';
-        }  
-        
-        if(_selecc == 'SI'){
-            var _imagen = document.getElementById("imgavatar");
-            var _file = _imagen.files[0];
-            var _fullPath = document.getElementById('imgavatar').value;
-            _ext = _fullPath.substring(_fullPath.length - 4);
-            _ext = _ext.toLowerCase();   
-        }else{
-            _file = '';
-        }
-
-        if(_tipodoc == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Documento..!");
-            return;                    
-        }
-
-        if(_numdocumento == ''){
-            toastSweetAlert("top-end",3000,"warning","Ingrese Documento..!!");
-            return;                    
-        }
-
-        if(_numdocumento != ''){
-            _valor = document.getElementById("txtNumDocumento").value;
-            if( !(/^(\d{10}|\d{13})$/.test(_valor)) ) {
-                toastSweetAlert("top-end",3000,"error","Documento Incorrecto..!!");  
-                return;
-		    }                
-        }
-
-        if(_nombres == ''){
-            toastSweetAlert("top-end",3000,"warning","Ingrese Nombres..!!");
-            return;                    
-        }
-
-        if(_apellidos == ''){
-            toastSweetAlert("top-end",3000,"warning","Ingrese Apellidos..!!");
-            return;                    
-        }
-
-        if(_genero == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Genero..!!");
-            return;                    
-        }
-
-        if(_tipoprof == ''){
-            toastSweetAlert("top-end",3000,"warning","Seleccione Profesion..!!");
-            return;                    
-        }  
-        
-
-        if(_telefono != '')
-        {
-            _valor = document.getElementById("txtFonoProf").value;
-            if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
-                toastSweetAlert("top-end",3000,"error","Telefono Incorrecto..!!");  
-                return;
-            }
-        }   
-
-        if(_celular != '')
-		{
-			_valor = document.getElementById("txtCelularProf").value;
-			if( !(/^\d{10}$/.test(_valor)) ) {
-				toastSweetAlert("top-end",3000,"error","Celular Incorrecto..!!"); 
-				return;
-			}
-		}
-
-
-        if(_emailprof.trim() != ''){
-            var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-        
-            if (regex.test($('#txtEmailProf').val().trim())) {
-            }else{
-                toastSweetAlert("top-end",3000,"error","Email Incorrecto..!!");
-                return;
-            }
-        }
-
-        if(_enviarprof == 'SI'){
-            if(_emailprof.trim() == ''){
-                toastSweetAlert("top-end",3000,"warning","Ingrese Email..!!");
-            }
-        }
-
-        
-        form_data = new FormData();                    
-        form_data.append('xxPaisid', _paisid);
-        form_data.append('xxEmprid', _emprid);
-        form_data.append('xxUsuaid', _usuaid);
-        form_data.append('xxTipoDoc', _tipodoc);
-        form_data.append('xxNumDoc', _numdocumento);
-        form_data.append('xxNombres', _nombres);
-        form_data.append('xxApellidos', _apellidos);
-        form_data.append('xxGenero', _genero);
-        form_data.append('xxTipoProfesion', _tipoprofv);
-        form_data.append('xxDireccion', _direccion);
-        form_data.append('xxFono', _telefono);
-        form_data.append('xxCelular', _celular);
-        form_data.append('xxEmail', _emailprof);
-        form_data.append('xxEnviar', _enviarprof);
-        form_data.append('xxFile', _file);
-        
-        $.ajax({
-            url: "codephp/grabar_profesional.php",
-            type: "post",
-            data: form_data,
-            processData: false,
-            contentType: false,
-            dataType: "json",
-            success: function(response){
-                
-                if(response.trim() == 'OK'){
-                    toastSweetAlert("top-end",3000,"success","Profesional Agregado");
-                    $("#modal-new-profesional").modal("hide");
-
-                }else{
-                    toastSweetAlert("top-end",3000,"warning","Profesional ya Existe..!!");
-                }
-            },								
-            error: function (error){
-                console.log(error);
-            }
-        });
-    });
-
-    //Desplazar-modal
-    $("#modal-new-especialidad").draggable({
-        handle: ".modal-header"
-    }); 
-
-    $("#modal-add-especialidad").draggable({
-        handle: ".modal-header"
-    });
-    
-    $("#modal-editar-especialidad").draggable({
-        handle: ".modal-header"
-    });
-    
-    $("#modal-new-profesional").draggable({
-        handle: ".modal-header"
-    });
-    
-    $("#modal_new_tipoprofesion").draggable({
-        handle: ".modal-header"
-    });
-
-    $("#modal_profesional").draggable({
-        handle: ".modal-header"
-    });
-
-    $("#modal_horarios").draggable({
-        handle: ".modal-header"
-    }); 
-    
-    $("#modal-motivos").draggable({
-        handle: ".modal-header"
-    });     
 
 </script>
 
