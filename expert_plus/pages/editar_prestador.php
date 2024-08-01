@@ -84,7 +84,7 @@
     $all_tipopresta = mysqli_query($con, $xSQL);
 
     $xSQL = "SELECT (SELECT tpa.asis_nombre FROM `expert_tipo_asistencia` tpa WHERE tpa.asis_id=prs.asis_id) AS Asistencia,";
-    $xSQL .="prs.prse_id AS Id,prs.prse_atencion AS Atencion, CASE prs.prse_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado, prs.prse_red AS Red,";
+    $xSQL .="prs.prse_id AS Id,prs.asis_id AS Idasis,prs.prse_atencion AS Atencion, CASE prs.prse_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado, prs.prse_red AS Red,";
     $xSQL .="prs.prse_pvp AS Pvp FROM `expert_prestadora_servicio` prs WHERE prs.pres_id=$xPresid";
     $all_prestaservicio = mysqli_query($con, $xSQL);
 
@@ -416,7 +416,7 @@
                             <div class="card-body pt-0" id="kt_contacts_list_body">
                                 <div class="d-flex flex-column gap-10">
                                     <div class="scroll-y me-n7 pe-7" id="parametro_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#parametro_header" data-kt-scroll-wrappers="#parametro_scroll" data-kt-scroll-offset="300px">
-                                        <table id="tblEspecialidad" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
+                                        <table id="tblServivio" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
                                             <thead>
                                                 <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                                     <th style="display: none;">Id</th>
@@ -434,7 +434,8 @@
                                                 <?php 
                                         
                                                     foreach($all_prestaservicio as $serv){
-                                                        $xServid = $serv['Id'];
+                                                        $xId = $serv['Id'];
+                                                        $xIdasis = $serv['Idasis'];
                                                         $xAsistencia = $serv['Asistencia'];
                                                         $xAtencion = trim($serv['Atencion']);
                                                         $xEstado = trim($serv['Estado']);
@@ -460,10 +461,10 @@
                                                             }
                         
                                                         ?>
-                                                        <tr id="row_<?php echo $xServid; ?>">
+                                                        <tr id="row_<?php echo $xId; ?>">
                                                             <td>  
                                                                 <?php echo $xAsistencia; ?>
-                                                                <input type="hidden" id="txtAsistencia" value="<?php echo $xAsistencia; ?>" />
+                                                                <input type="hidden" id="txtAsistencia_<?php echo $xIdasis; ?>" value="<?php echo $xIdasis; ?>" />
                                                             </td>
                                                             <td> <?php echo $xAtencion; ?></td>
                                                             <td><?php echo $xRed; ?> </td>
@@ -474,15 +475,15 @@
                                                             <td>
                                                                 <div class="text-center">
                                                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                        <input class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $xServid; ?>" 
-                                                                            onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xServid; ?>)" value="<?php echo $xServid; ?>"/>
+                                                                        <input class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $xId; ?>" 
+                                                                            onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>)" value="<?php echo $xId; ?>"/>
                                                                     </div>
                                                                 </div>
                                                             </td> 													
                                                             <td>
                                                                 <div class="text-center">
                                                                     <div class="btn-group">
-                                                                        <button id="btnEditar_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Especialidad' data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                                        <button id="btnEditar_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Servicio' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarServicio()" >
                                                                             <i class='fa fa-edit'></i>
                                                                         </button>	
                                                                         <button id="btnPerson_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick='f_AgregarProfesional()' title='Agregar Profesional' data-bs-toggle="tooltip" data-bs-placement="left" >
@@ -785,10 +786,36 @@
         xrespuesta.done(function(response){
 
                 if(response != 0){
-                    
-                }
-        });
 
+                    _id = response;
+                    _output = '<tr id=row_' + _id + '>';
+                    _output += '<td>' + _txtasistencia + '<input type="hidden" id="txtAsistencia_' + _asistid + '" value="' + _asistid + '"/></td>';
+                    _output += '<td>' + _txtatencion  + '</td>';
+                    _output += '<td>' + _red  + '</td>';
+                    _output += '<td>' + _pvp  + '</td>';
+                    _output += '<td id="td_' + _id + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
+                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">'; 
+                    _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _id + '" onchange="f_UpdateEstado(';
+                    _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
+                    _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEditar_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
+                    _output += 'title="Editar Servicio" data-bs-toggle="tooltip" data-bs-placement="left" onclick=f_EditarServicio()><i class="fa fa-edit"></i></button>';
+                    _output += '<button id="btnPerson_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarProfesional() title="Agregar Profesional" data-bs-toggle="tooltip" data-bs-placement="left">';
+                    _output += '<i class="fas fa-user"></i></button>';
+                    _output += '<button id="btnMotivos_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarMotivos() title="Agregar Motivos" data-bs-toggle="tooltip" data-bs-placement="left">';
+                    _output += '<i class="fas fa-book"></i></button>';
+                    _output += '</div></div></td></tr>';
+                    $('#tblServivio').append(_output);
+                    //console.log(_output);
+                    $("#agregar_servicio").modal("hide");
+                    $("#cboAsis").val(0).change();   
+                    $("#agregar_servicio").find("input,textarea").val("");
+                    toastSweetAlert("top-end",3000,"success","Servicio Agregado");
+                }else{
+                    toastSweetAlert("top-end",3000,"error","Servicio ya Existe..!!");  
+                }
+
+               
+        });
 
     });
 
