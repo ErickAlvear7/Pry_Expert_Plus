@@ -151,7 +151,7 @@
                                 <td>
                                 <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUbicacion; ?>">
                                     <a href="<?php echo $xUbicacion; ?>" <?php echo $xTarget; ?> class="symbol symbol-50px">  
-                                        <i class="fa fa-map-marker fa-2x ms-7" aria-hidden="true" style="color:#F46D55;"></i>  
+                                        <i class="fa fa-map-marker fa-2x ms-7" aria-hidden="true" style="color:#3B8CEC;"></i>  
                                     </a>
                                 </span>     
                                 </td>

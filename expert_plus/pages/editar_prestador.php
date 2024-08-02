@@ -84,7 +84,7 @@
     $all_tipopresta = mysqli_query($con, $xSQL);
 
     $xSQL = "SELECT (SELECT tpa.asis_nombre FROM `expert_tipo_asistencia` tpa WHERE tpa.asis_id=prs.asis_id) AS Asistencia,";
-    $xSQL .="prs.prse_id AS Id,prs.asis_id AS Idasis,prs.prse_atencion AS Atencion, CASE prs.prse_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado, prs.prse_red AS Red,";
+    $xSQL .="prs.prse_id AS Id,prs.pres_id AS Idpres,prs.asis_id AS Idasis,prs.prse_atencion AS Atencion, CASE prs.prse_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado, prs.prse_red AS Red,";
     $xSQL .="prs.prse_pvp AS Pvp FROM `expert_prestadora_servicio` prs WHERE prs.pres_id=$xPresid";
     $all_prestaservicio = mysqli_query($con, $xSQL);
 
@@ -435,6 +435,7 @@
                                         
                                                     foreach($all_prestaservicio as $serv){
                                                         $xId = $serv['Id'];
+                                                        $xIdpres = $serv['Idpres'];
                                                         $xIdasis = $serv['Idasis'];
                                                         $xAsistencia = $serv['Asistencia'];
                                                         $xAtencion = trim($serv['Atencion']);
@@ -483,7 +484,7 @@
                                                             <td>
                                                                 <div class="text-center">
                                                                     <div class="btn-group">
-                                                                        <button id="btnEditar_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Servicio' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarServicio()" >
+                                                                        <button id="btnEditar_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Servicio' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarServicio(<?php echo $xId; ?>,<?php echo $xIdpres; ?>,<?php echo $xIdasis; ?>)" >
                                                                             <i class='fa fa-edit'></i>
                                                                         </button>	
                                                                         <button id="btnPerson_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick='f_AgregarProfesional()' title='Agregar Profesional' data-bs-toggle="tooltip" data-bs-placement="left" >
@@ -624,7 +625,63 @@
             </div>
         </div>
     </div>
-</div>  
+</div>
+
+<!--Modal Editar Servicio -->
+<div class="modal fade" id="editar_servicio" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Datos Servicio Prestador</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div class="card-body pt-0">
+                        <div class="row mb-5">
+                            <div class="col-md-12">
+                                 <label class="required form-label">Tipo Asistencia</label>
+                                 <input type="text" name="txtEditAsis" id="txtEditAsis" class="form-control mb-2"/>
+                                 <input type="hidden" name="txtEditAsisAnt" id="txtEditAsisAnt" class="form-control mb-2"/>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col">
+                                <label class="required form-label">Tipo Atencion</label>
+                                <textarea class="form-control text-uppercase" name="txtEditAten" id="txtEditAten" rows="2" maxlength="300" onkeydown="return (event.keyCode!=13);"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-2 fv-row">
+                            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                                <div class="col">
+                                    <label class="required form-label">Valor Red</label>
+                                    <input type="text" name="txtEditRed" id="txtEditRed" class="form-control mb-2" placeholder="Red (0.00)" min="0" maxlength = "6" />
+                                </div>
+                                <div class="col">
+                                    <label class="required form-label">Valor Pvp</label>
+                                    <input type="text" name="txtEditPvp" id="txtEditPvp" class="form-control mb-2" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" />
+                                </div>    
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-sm btn-light-primary border border-primary" id=""><i class="las la-pencil-alt me-1"></i>Editar</button>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
 
 
 <script>
@@ -785,39 +842,72 @@
         var xrespuesta = $.post("codephp/grabar_prestaservicio.php", _parametros);
         xrespuesta.done(function(response){
 
-                if(response != 0){
+            if(response != 0){
 
-                    _id = response;
-                    _output = '<tr id=row_' + _id + '>';
-                    _output += '<td>' + _txtasistencia + '<input type="hidden" id="txtAsistencia_' + _asistid + '" value="' + _asistid + '"/></td>';
-                    _output += '<td>' + _txtatencion  + '</td>';
-                    _output += '<td>' + _red  + '</td>';
-                    _output += '<td>' + _pvp  + '</td>';
-                    _output += '<td id="td_' + _id + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
-                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">'; 
-                    _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _id + '" onchange="f_UpdateEstado(';
-                    _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
-                    _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEditar_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
-                    _output += 'title="Editar Servicio" data-bs-toggle="tooltip" data-bs-placement="left" onclick=f_EditarServicio()><i class="fa fa-edit"></i></button>';
-                    _output += '<button id="btnPerson_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarProfesional() title="Agregar Profesional" data-bs-toggle="tooltip" data-bs-placement="left">';
-                    _output += '<i class="fas fa-user"></i></button>';
-                    _output += '<button id="btnMotivos_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarMotivos() title="Agregar Motivos" data-bs-toggle="tooltip" data-bs-placement="left">';
-                    _output += '<i class="fas fa-book"></i></button>';
-                    _output += '</div></div></td></tr>';
-                    $('#tblServivio').append(_output);
-                    //console.log(_output);
-                    $("#agregar_servicio").modal("hide");
-                    $("#cboAsis").val(0).change();   
-                    $("#agregar_servicio").find("input,textarea").val("");
-                    toastSweetAlert("top-end",3000,"success","Servicio Agregado");
-                }else{
-                    toastSweetAlert("top-end",3000,"error","Servicio ya Existe..!!");  
-                }
-
-               
+                _id = response;
+                _output = '<tr id=row_' + _id + '>';
+                _output += '<td>' + _txtasistencia + '<input type="hidden" id="txtAsistencia_' + _asistid + '" value="' + _asistid + '"/></td>';
+                _output += '<td>' + _txtatencion  + '</td>';
+                _output += '<td>' + _red  + '</td>';
+                _output += '<td>' + _pvp  + '</td>';
+                _output += '<td id="td_' + _id + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
+                _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">'; 
+                _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _id + '" onchange="f_UpdateEstado(';
+                _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
+                _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEditar_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
+                _output += 'title="Editar Servicio" data-bs-toggle="tooltip" data-bs-placement="left" onclick=f_EditarServicio()><i class="fa fa-edit"></i></button>';
+                _output += '<button id="btnPerson_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarProfesional() title="Agregar Profesional" data-bs-toggle="tooltip" data-bs-placement="left">';
+                _output += '<i class="fas fa-user"></i></button>';
+                _output += '<button id="btnMotivos_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarMotivos() title="Agregar Motivos" data-bs-toggle="tooltip" data-bs-placement="left">';
+                _output += '<i class="fas fa-book"></i></button>';
+                _output += '</div></div></td></tr>';
+                $('#tblServivio').append(_output);
+                //console.log(_output);
+                $("#agregar_servicio").modal("hide");
+                $("#cboAsis").val(0).change();   
+                $("#agregar_servicio").find("input,textarea").val("");
+                toastSweetAlert("top-end",3000,"success","Servicio Agregado");
+            }else{
+                toastSweetAlert("top-end",3000,"error","Servicio ya Existe..!!");  
+            }     
         });
 
     });
+
+    //Editar Servicio Modal
+    function f_EditarServicio(_idser,_idpres,_idasis){
+
+        var _parametros = {
+
+            "xxPrseid" : _idser,
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxPresid" : _idpres,
+            "xxAsisid" : _idasis
+        }  
+
+        var xrespuesta = $.post("codephp/get_datoservipresta.php", _parametros );
+        xrespuesta.done(function(response){
+
+            var _datos = JSON.parse(response);
+            //console.log(_datos);
+
+            $.each(_datos,function(i,item){
+                _asistencia = _datos[i].Asistencia;
+                _atencion = _datos[i].Atencion;
+                _red = _datos[i].Red;
+                _pvp = _datos[i].Pvp;
+
+                $('#txtEditAsis').val(_asistencia);  
+                $('#txtEditAten').val(_atencion);
+                $('#txtEditRed').val(_red); 
+                $('#txtEditPvp').val(_pvp);  
+
+            });
+        });
+        
+        $("#editar_servicio").modal("show");
+    }
 
 </script>
 
