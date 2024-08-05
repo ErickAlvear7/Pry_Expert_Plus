@@ -487,10 +487,10 @@
                                                                         <button id="btnEditar_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Servicio' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarServicio(<?php echo $xId; ?>,<?php echo $xIdpres; ?>,<?php echo $xIdasis; ?>)" >
                                                                             <i class='fa fa-edit'></i>
                                                                         </button>	
-                                                                        <button id="btnPerson_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick='f_AgregarProfesional()' title='Agregar Profesional' data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                                        <button id="btnPerson_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick="f_AgregarProfesional()" title='Agregar Profesional' data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class="fas fa-user"></i>
                                                                         </button>	
-                                                                        <button id="btnMotivos_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledMotivos; ?> onclick='f_AgregarMotivos()' title='Agregar Motivos' data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                                        <button id="btnMotivos_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledMotivos; ?> onclick="f_AgregarMotivos()" title='Agregar Motivos' data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class="fas fa-book"></i>
                                                                         </button>	                                                                                                                                                                                                      
                                                                     </div>
@@ -680,6 +680,271 @@
         </div>
     </div>
 </div> 
+
+<!--Modal Nuevo Profesional -->
+<div class="modal fade" id="modal_profesional" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-800px">
+        <div class="modal-content"> 
+            <div class="modal-header">
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Profesional</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10 mt-n3">
+                <!-- <div class="card card-flush py-2">
+                    <div class="card-header border-0">
+                        <div class="d-flex align-items-center collapsible py-1 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_avatar">
+                            <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <span class="svg-icon toggle-off svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                        <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                        <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Avatar</h4>
+                        </div>
+                    </div>
+                    <div id="view_avatar" class="collapse fs-6 ms-1">
+                        <div class="card card-flush py-4">
+                            <div class="card-body pt-0">
+                                <div class="image-input image-input-outline" data-kt-image-input="true">
+                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/images/users/user.png);" id="imgfileprof"></div>
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar Avatar">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
+                                        <input type="hidden" name="avatar_remove" />
+                                    </label>
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                </div>
+                                <div class="form-text">Archivos permitidos: png, jpg, jpeg.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="card card-flush py-2">
+                    <div class="card-body pt-0">
+                        <div class="row mb-4" id="modal_select">
+                            <div class="col-md-12">
+                                <label class="required form-label">Tipo Profesion</label>
+                                 <?php	
+                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Profesion' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
+                                    $all_parametro = mysqli_query($con, $xSQL);    
+                                ?>
+                                <select name="cboTipoProfesion" id="cboTipoProfesion" aria-label="Seleccione Profesion" data-control="select2" data-placeholder="Seleccione Profesion" data-dropdown-parent="#modal_select" class="form-select mb-2" >
+                                    <option></option>
+                                    <?php foreach ($all_parametro as $parametro) : ?>
+                                        <option value="<?php echo $parametro['Codigo'] ?>"><?php echo $parametro['Descripcion']; ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="required form-label">Tipo Documento</label>
+                                <?php	
+                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Documento' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
+                                    $all_parametro = mysqli_query($con, $xSQL);    
+                                ?>
+                                <select name="cboTipoDoc" id="cboTipoDoc" aria-label="Seleccione Tipo Documento" data-control="select2" data-placeholder="Seleccione Tipo Documento" data-dropdown-parent="#modal_select" class="form-select mb-2" >
+                                    <option></option>
+                                    <?php foreach ($all_parametro as $parametro) : ?>
+                                        <option value="<?php echo $parametro['Codigo'] ?>"><?php echo mb_strtoupper($parametro['Descripcion']); ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                                </div>
+                            <div class="col-md-6">
+                                <label class="required form-label">Numero Documento</label>
+                                <input type="text" name="txtNumDocumento" id="txtNumDocumento" class="form-control mb-2" maxlength="13" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" placeholder="Numero Documento"  />
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="required form-label">Nombres</label>
+                                <input type="text" name="txtNombresProf" id="txtNombresProf" class="form-control mb-2" maxlength="100" placeholder="Nombres"  />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="required form-label">Apellidos</label>
+                                <input type="text" name="txtApellidosProf" id="txtApellidosProf" class="form-control mb-2" maxlength="100" placeholder="Apellidos" />
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <div class="fs-6 fw-bold mt-3 mb-3"><i class="fa fa-phone fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>Telefono 1</div>
+                                <input type="text" class="form-control mb-3" name="txtFonoProf" id="txtFonoProf" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                            </div>
+                            <div class="col-md-4">
+                                <div class="fs-6 fw-bold mt-3 mb-3"><i class="fa fa-phone fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>Telefono 2</div>
+                                <input type="text" class="form-control mb-3" name="txtFonoProf" id="txtFonoProf" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                            </div>
+                            <div class="col-md-4">
+                                <div class="fs-6 fw-bold mt-3 mb-3"><i class="fa fa-mobile fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>Celular</div>
+                                <input type="text" class="form-control mb-3" name="txtCelularProf" id="txtCelularProf" maxlength="10" placeholder="0999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>Email 1</label>
+                                <input type="email" name="txtEmailProf" id="txtEmailProf" maxlength="100" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>Email 2</label>
+                                <input type="email" name="txtEmailProf" id="txtEmailProf" maxlength="100" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase"/>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnSaveProf" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-hdd"></i>Grabar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Profesional /Configurar Horarios-->
+<div class="modal fade" id="modal_Agregar_profesional" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Agregar Profesional - Configurar Horarios</h2>
+                <h2 id="headerTitle" class="fs-6 fw-light text-primary"></h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-2 px-lg-10">
+                <div class="card card-flush pt-10 pb-n3">
+                    <div class="card-body pt-0">
+                        <div class="row mb-4" id="modal_profesional">
+                            <div class="col-md-12">
+                                 <label class="required form-label">Profesion</label>
+                                <?php 
+                                    $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid ";
+                                    $xSQL .= "AND pca.paca_nombre='Tipo Profesion' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
+                                    $all_datos =  mysqli_query($con, $xSQL);
+                                ?>
+                                <select name="cboTipoProfe" id="cboTipoProfe" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo Profesion" data-dropdown-parent="#modal_profesional" class="form-select mb-2" onchange="f_GetProfesional(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,this)">
+                                    <option></option>
+                                    <?php 
+                                    foreach ($all_datos as $datos){ ?>
+                                        <option value="<?php echo $datos['Codigo'] ?>"><?php echo $datos['Descripcion'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>  
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <label class="required form-label">Profesional</label>
+                                <select name="cboProfesional" id="cboProfesional" aria-label="Seleccione Profesional" data-control="select2" data-placeholder="Seleccione Profesional" data-dropdown-parent="#modal_profesional" class="form-select mb-2">
+                                    <option></option>
+                                </select> 
+                            </div>
+                            <div class="col-md-2">
+                                 <label class="required form-label">Intervalo
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Intervalo de 10 a 60 minutos"></i>
+                                 </label>
+                                 <input type="number" name="txtIntervalo" id="txtIntervalo" min="10" max="60" step="10" class="form-control form-control-solid" value="10" onKeyPress="if(this.value.length==2) return false;"  pattern="/^-?\d+\.?\d*$/" />
+                            </div>
+                        </div>
+                        <div class="form-group mt-5 mb-4">
+                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary border border-primary" id="btnAgregarProfesional">
+                                <i class="fa fa-plus me-1" aria-hidden="true"></i>Agregar Profesional
+                            </button>
+                        </div>
+                        <table id="tblProfesional" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
+                            <thead>
+                                <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                                    <th class="min-w-125px">Profesional</th>
+                                    <th class="min-w-125px">Tipo_Profesion</th>
+                                    <th>Intervalo</th>
+                                    <th class="min-w-125px">Estado</th>
+                                    <th>Status</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fw-bold text-gray-600"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal MOTIVOS ESPECIALIDAD-->
+<div class="modal fade" id="modal_motivos" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="mb-2 badge badge-light-primary fw-light fs-2 fst-italic">Motivos Servicios Prestador</h2>
+                <h2 id="headerTitleMotivo" class="fs-6 fw-light text-primary"></h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-2 px-lg-10">
+                <div class="card card-flush pt-10 pb-n3">
+                    <div class="card-body pt-0">
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                 <label class="required form-label">Motivo Servicio</label>
+                                 <textarea class="form-control text-uppercase" name="txtmotivo" id="txtmotivo" maxlength="500" rows="2" onkeydown="return (event.keyCode!=13);"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary border border-primary" id="btnAgregarMotivo">
+                                <i class="fa fa-plus me-1" aria-hidden="true"></i> Agregar Motivo
+                            </button>
+                        </div>
+                        <table id="tblMotivo" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
+                            <thead>
+                                <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                                    <th class="max-w-125px"">Motivo</th>
+                                    <th class="">Estado</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fw-bold text-gray-600"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>   
 
 
 
@@ -908,6 +1173,28 @@
         
         $("#editar_servicio").modal("show");
     }
+
+    //Modal Agregar Profesional / Configurar Horarios
+    function f_AgregarProfesional(){
+
+       
+
+        $("#modal_Agregar_profesional").modal("show");
+    }
+
+    //Modal Agregar Motivos Servicios
+    function f_AgregarMotivos(){
+
+        $("#modal_motivos").modal("show");
+
+    }
+
+    //Modal Profesional 
+    $('#btnNuevoProfesional').click(function(){
+
+        $("#modal_profesional").modal("show");
+
+    });
 
 </script>
 
