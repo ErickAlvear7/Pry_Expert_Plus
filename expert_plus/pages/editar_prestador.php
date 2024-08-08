@@ -697,7 +697,7 @@
                 </div>
             </div>
             <div class="modal-body py-lg-10 px-lg-10 mt-n3">
-                <!-- <div class="card card-flush py-2">
+                <div class="card card-flush py-2">
                     <div class="card-header border-0">
                         <div class="d-flex align-items-center collapsible py-1 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#view_avatar">
                             <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
@@ -715,7 +715,7 @@
                                     </svg>
                                 </span>
                             </div>
-                            <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Avatar</h4>
+                            <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">Foto</h4>
                         </div>
                     </div>
                     <div id="view_avatar" class="collapse fs-6 ms-1">
@@ -723,12 +723,12 @@
                             <div class="card-body pt-0">
                                 <div class="image-input image-input-outline" data-kt-image-input="true">
                                     <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/images/users/user.png);" id="imgfileprof"></div>
-                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar Avatar">
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar Foto">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <input type="file" name="avatar" id="imgavatar" accept=".png, .jpg, .jpeg" />
                                         <input type="hidden" name="avatar_remove" />
                                     </label>
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Logo">
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar Foto">
                                         <i class="bi bi-x fs-2"></i>
                                     </span>
                                 </div>
@@ -736,7 +736,7 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div> 
                 <div class="card card-flush py-2">
                     <div class="card-body pt-0">
                         <div class="row mb-4" id="modal_select">
@@ -786,11 +786,11 @@
                         <div class="row mb-4">
                             <div class="col-md-4">
                                 <div class="fs-6 fw-bold mt-3 mb-3"><i class="fa fa-phone fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>Telefono 1</div>
-                                <input type="text" class="form-control mb-3" name="txtFonoProf" id="txtFonoProf" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                <input type="text" class="form-control mb-3" name="txtFono1Prof" id="txtFono1Prof" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
                             <div class="col-md-4">
                                 <div class="fs-6 fw-bold mt-3 mb-3"><i class="fa fa-phone fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>Telefono 2</div>
-                                <input type="text" class="form-control mb-3" name="txtFonoProf" id="txtFonoProf" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                <input type="text" class="form-control mb-3" name="txtFono2Prof" id="txtFono2Prof" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
                             <div class="col-md-4">
                                 <div class="fs-6 fw-bold mt-3 mb-3"><i class="fa fa-mobile fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>Celular</div>
@@ -800,11 +800,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="form-label"><i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>Email 1</label>
-                                <input type="email" name="txtEmailProf" id="txtEmailProf" maxlength="100" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase"/>
+                                <input type="email" name="txtEmail1Prof" id="txtEmail1Prof" maxlength="100" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase"/>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label"><i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>Email 2</label>
-                                <input type="email" name="txtEmailProf" id="txtEmailProf" maxlength="100" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase"/>
+                                <input type="email" name="txtEmail2Prof" id="txtEmail2Prof" maxlength="100" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase"/>
                             </div>
                         </div> 
                     </div>
@@ -837,7 +837,7 @@
             <div class="modal-body py-lg-2 px-lg-10">
                 <div class="card card-flush pt-10 pb-n3">
                     <div class="card-body pt-0">
-                        <div class="row mb-4" id="modal_profesional">
+                        <div class="row mb-4" id="div_modal_profesional">
                             <div class="col-md-12">
                                  <label class="required form-label">Profesion</label>
                                 <?php 
@@ -845,7 +845,7 @@
                                     $xSQL .= "AND pca.paca_nombre='Tipo Profesion' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
                                     $all_datos =  mysqli_query($con, $xSQL);
                                 ?>
-                                <select name="cboTipoProfe" id="cboTipoProfe" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo Profesion" data-dropdown-parent="#modal_profesional" class="form-select mb-2" onchange="f_GetProfesional(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,this)">
+                                <select name="cboTipoProfe" id="cboTipoProfe" aria-label="Seleccione Tipo" data-control="select2" data-placeholder="Seleccione Tipo Profesion" data-dropdown-parent="#modal_Agregar_profesional" class="form-select mb-2" onchange="f_GetProfesional(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,this)">
                                     <option></option>
                                     <?php 
                                     foreach ($all_datos as $datos){ ?>
@@ -857,7 +857,7 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <label class="required form-label">Profesional</label>
-                                <select name="cboProfesional" id="cboProfesional" aria-label="Seleccione Profesional" data-control="select2" data-placeholder="Seleccione Profesional" data-dropdown-parent="#modal_profesional" class="form-select mb-2">
+                                <select name="cboProfesional" id="cboProfesional" aria-label="Seleccione Profesional" data-control="select2" data-placeholder="Seleccione Profesional" data-dropdown-parent="#modal_Agregar_profesional" class="form-select mb-2">
                                     <option></option>
                                 </select> 
                             </div>
@@ -946,6 +946,130 @@
     </div>
 </div>   
 
+<!--Modal Tipo Porfesion -->      
+<div class="modal fade" id="modal_new_tipoprofesion" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-800px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Nuevo Tipo Profesion</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-4">
+                    <div class="card-body pt-0">
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <label class="required form-label">Tipo Profesion
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Ingrese Tipo Profesion (Medico-Odontolo-Educador-Plomero-etc.."></i>
+                                </label>
+                                <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="150" placeholder="Tipo Profesion" name="txtTipoProfesion" id="txtTipoProfesion" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="required form-label">Valor/Codigo
+                                    
+                                </label>
+                                <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="100" placeholder="Valor/Codigo" name="txtCodigoTipo" id="txtCodigoTipo" />
+                            </div>
+                        </div>
+                        <div class="form-group my-5">
+                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary border border-primary" id="btnAgregarTipo">
+                                <i class="fa fa-plus me-1" aria-hidden="true"></i>
+                                Agregar
+                            </button>
+                        </div>
+                        <div class="mh-300px scroll-y me-n7 pe-7">
+                            <table id="tblTipoProfesion" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
+                                <thead>
+                                    <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                                        <th class="min-w-125px">Tipo Profesion</th>
+                                        <th>Estado</th>
+                                        <th>Status</th>                                
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+
+                                <?php 
+                                    $xSQL = "SELECT pca.paca_id,pde.pade_id,pde.pade_nombre,pde.pade_estado,pde.pade_valorV FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Tipo Profesion' ORDER BY pde.pade_orden ";
+                                    $all_tipos = mysqli_query($con, $xSQL);
+                                ?>
+                                <tbody class="text-gray-600 fw-bold">
+
+                                    <?php 
+                                                
+                                        foreach($all_tipos as $tipo){
+                                            $xPacaid = $tipo['paca_id'];
+                                            $xPadeid = $tipo['pade_id'];
+                                            $xTipoProfe = trim($tipo['pade_nombre']);
+                                            $xValorV = trim($tipo['pade_valorV']);
+                                            $xEstado = trim($tipo['pade_estado']);
+                                        ?>
+                                            <?php 
+
+                                                $xChkSelecc = '';
+                                                $xDisabledEdit = '';
+
+                                                if($xEstado == 'A'){
+                                                    $xChkSelecc = 'checked="checked"';
+                                                    $xTextColor = "badge badge-light-primary";
+                                                    $xEstadoTxt = 'ACTIVO';
+                                                }else{
+                                                    $xTextColor = "badge badge-light-danger";
+                                                    $xDisabledEdit = 'disabled';
+                                                    $xDisabledReset = 'disabled';
+                                                    $xEstadoTxt = 'INACTIVO';
+                                                }
+
+                                            ?>
+                                            <tr id="tr_<?php echo $xPadeid; ?>">
+                                                <td>
+                                                    <?php echo $xTipoProfe; ?>
+                                                    <input type="hidden" id="txtPadeid<?php echo $xPadeid; ?>" value="<?php echo $xPadeid; ?>" />
+                                                    <input type="hidden" id="txtTiprofe<?php echo $xPadeid; ?>" value="<?php echo $xTipoProfe; ?>" />
+                                                    <input type="hidden" id="txtValor<?php echo $xPadeid; ?>" value="<?php echo $xValorV; ?>" />
+                                                </td>
+                                                
+                                                <td id="td_<?php echo $xPadeid; ?>">
+                                                    <div class="<?php echo $xTextColor; ?>"><?php echo $xEstadoTxt; ?></div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-center">
+                                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                            <input <?php echo $xChkSelecc; ?> class="form-check-input h-20px w-20px border-primary" type="checkbox" id="chktipo<?php echo $xPadeid; ?>" 
+                                                                onchange="f_UpdateEstTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)" />
+                                                        </div>
+                                                    </div>
+                                                </td> 													
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button id="btnEdiTipo_<?php echo $xPadeid; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledEdit; ?> title='Editar Tipo Profesion' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarTipo(<?php echo $xPacaid; ?>,<?php echo $xPadeid; ?>)">
+                                                            <i class='fa fa-edit'></i>
+                                                        </button>	                                                
+                                                    </div>
+                                                </td>   
+                                            </tr>
+                                    <?php } ?>  
+
+                                </tbody>
+                            </table>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>   
 
 
 
@@ -1174,27 +1298,151 @@
         $("#editar_servicio").modal("show");
     }
 
+    function f_GetProfesional(_paisid, _emprid, obj){
+
+        _tipoprofe = obj.value;
+
+        _parametros = {
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _paisid,
+            "xxTipoProfe" : _tipoprofe  
+        }
+
+        $("#cboProfesional").empty();
+
+        var _respuesta = $.post("codephp/get_dropprofesional.php", _parametros);
+        _respuesta.done(function(response) {
+            $("#cboProfesional").html(response);
+            
+        });
+    }
+    
+    $('#btnAgregarProfesional').click(function(e){
+
+        var _tipoprofesion = $("#cboTipoProfe option:selected").text();
+        var _profesional = $('#cboProfesional option:selected').text();
+        var _intervalo = $('#txtIntervalo').val();
+        _profid = $("#cboProfesional").val();
+
+        if(_tipoprofesion == ''){
+            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Profesion..!!"); 
+            return;
+        }
+
+        if(_profesional == ''){
+            toastSweetAlert("top-end",3000,"warning","Seleccione Profesional..!!"); 
+            return;
+        }
+            
+        var _parametros = {
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxUsuaid" : _usuaid,
+            "xxPreeid" : _selpreeid,
+            "xxIntervalo" : _intervalo,
+            "xxProfid" : _profid
+        }	
+
+        var xrespuesta = $.post("codephp/grabar_profesionalespeci.php", _parametros);
+        xrespuesta.done(function(response){
+            if(response > 0){
+
+                _id = response.trim();
+
+                _output = '<tr id="trprof_' + _id + '">';
+                _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _profesional + '</span><input type="hidden" id="txtProfesional_' + _id + '" value="' + _profesional +  '" /></div></div></td>';
+                _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _tipoprofesion + '</span></div></div></td>';
+                _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
+                _output += '<td id="tdprof_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="badge badge-light-primary">ACTIVO</div></div></div></td>';
+                _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
+                _output += '<input class="form-check-input h-20px w-20px border-primary" type="checkbox" checked="checked" id="chkprof' + _id + '" onchange="f_UpdateEstProf(';
+                _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
+                _output += '<td class=""><div class=""><div class="btn-group">';
+                _output += '<button id="btnHorario_' + _id  + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick="f_ConfHorario(';
+                _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Configurar Horario" ><i class="fas fa-cogs"></i></button>';                        
+                _output += '<button id="btnDelProf_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" onclick="f_DelAsigProf(';
+                _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Eliminar Profesional Asignado" ><i class="fa fa-trash"></i></button></div></div></td></tr>'
+                
+                $('#tblProfesional').append(_output);
+                toastSweetAlert("top-end",3000,"success","Agregado Correctamente"); 
+
+            }else{
+                toastSweetAlert("top-end",3000,"error","Profesional ya Existe..!!"); 
+            }
+
+            $("#cboTipoProfe").val(0).change(); 
+            $("#cboProfesional").val(0).change(); 
+
+        });
+
+    });    
+
     //Modal Agregar Profesional / Configurar Horarios
     function f_AgregarProfesional(){
-
-       
-
         $("#modal_Agregar_profesional").modal("show");
     }
 
     //Modal Agregar Motivos Servicios
     function f_AgregarMotivos(){
-
         $("#modal_motivos").modal("show");
-
     }
 
     //Modal Profesional 
     $('#btnNuevoProfesional').click(function(){
 
+        $("#cboTipoProfesion").val(0).change(); 
+        $("#cboTipoDoc").val(0).change();    
+        document.getElementById('imgfileprof').style.backgroundImage="url(assets/images/users/user.png)";
+        $("#modal_profesional").find("input,textarea").val("");
+        $('#modal_profesional').modal('handleUpdate');
         $("#modal_profesional").modal("show");
-
     });
+
+    $("#btnNuevaProfesion").click(function(){
+            
+        //$("#modal_new_tipoprofesion").find("input,textarea").val("");
+        const btn = document.getElementById('btnAgregarTipo');
+        btn.innerHTML = '<i class="fa fa-plus me-1" aria-hidden="true"></i>Agregar';
+
+        $("#txtTipoProfesion").val('');
+        $("#txtCodigoTipo").val('');
+        $("#modal_new_tipoprofesion").modal("show");
+        $('#modal_new_tipoprofesion').modal('handleUpdate');
+    });    
+
+
+    //Desplazar-modal
+    $("#modal-new-especialidad").draggable({
+        handle: ".modal-header"
+    }); 
+
+    $("#modal-add-especialidad").draggable({
+        handle: ".modal-header"
+    });
+    
+    $("#modal-editar-especialidad").draggable({
+        handle: ".modal-header"
+    });
+    
+    $("#modal-new-profesional").draggable({
+        handle: ".modal-header"
+    });
+    
+    $("#modal_new_tipoprofesion").draggable({
+        handle: ".modal-header"
+    });
+
+    $("#modal_profesional").draggable({
+        handle: ".modal-header"
+    });
+
+    $("#modal_horarios").draggable({
+        handle: ".modal-header"
+    }); 
+    
+    $("#modal-motivos").draggable({
+        handle: ".modal-header"
+    });     
 
 </script>
 
