@@ -627,6 +627,8 @@
             return false;
         }
 
+        _costo = parseFloat(_costo);
+
                 
         var _parametros = {
 
@@ -688,7 +690,7 @@
 
                     $("#txtProducto").val("");
                     $("#txtDescripcion").val("");
-                    $("#txtCosto").val("0.00");
+                    $("#txtCosto").val("");
                     $("#cboGrupo").val(0).change();
                     $("#txtAsisMes").val("1");
                     $("#txtAsisAnu").val("1");
@@ -989,10 +991,10 @@
 
         var _nombreGrupo = $.trim($("#txtGrupo").val());
         var _descGrupo = $.trim($("#txtDescGrupo").val());
-        var _numagenda = $("#txtnumagenda").val();
-        var _numcancela = $("#txtnumcancelado").val();
-        var _numatendido = $("#txtnumatendido").val();
-        var _numausente = $("#txtnumausente").val();        
+        var _numagenda = $.trim(("#txtnumagenda").val());
+        var _numcancela = $.trim(("#txtnumcancelado").val());
+        var _numatendido = $.trim(("#txtnumatendido").val());
+        var _numausente = $.trim(("#txtnumausente").val());        
 
         if(_nombreGrupo == ''){
             toastSweetAlert("top-end",3000,"warning","Ingrese Grupo..!!");  
