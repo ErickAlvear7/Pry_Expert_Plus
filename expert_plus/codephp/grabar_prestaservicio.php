@@ -26,7 +26,7 @@
             $xRed = $_POST['xxRed'];
             $xPvp = $_POST['xxPvp'];
             $xUsuaid = $_POST['xxUsuaid'];
-           
+
             $xSQL = "SELECT * FROM `expert_prestadora_servicio` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pres_id=$xPresid AND asis_id=$xAsisid AND prse_atencion='$xAtencion'";
             $all_datos = mysqli_query($con, $xSQL);
             $xRow = mysqli_num_rows($all_datos); 

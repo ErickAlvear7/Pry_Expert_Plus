@@ -28,13 +28,19 @@
             $xNumDoc = trim(safe($_POST['xxNumDoc']));
             $xNombres = trim(mb_strtoupper(safe($_POST['xxNombres'])));
             $xApellidos = trim(mb_strtoupper(safe($_POST['xxApellidos'])));
-            $xGenero = trim(safe($_POST['xxGenero']));
+            //$xGenero = trim(safe($_POST['xxGenero']));
             $xTipoProf = trim(safe($_POST['xxTipoProfesion']));
-            $xDireccion = trim(mb_strtoupper(safe($_POST['xxDireccion'])));
-            $xFono = trim(safe($_POST['xxFono']));
+            //$xDireccion = trim(mb_strtoupper(safe($_POST['xxDireccion'])));
+            $xFono1 = trim(safe($_POST['xxFono1']));
+            $xFono2 = trim(safe($_POST['xxFono2']));
             $xCelular = trim(safe($_POST['xxCelular']));
-            $xEmail = trim(safe($_POST['xxEmail']));
-            $xEnviar = trim(safe($_POST['xxEnviar']));
+            $xEmail1 = trim(safe($_POST['xxEmail1']));
+            $xEnviar1 = trim(safe($_POST['xxEnviar1']));
+            $xEmail2 = trim(safe($_POST['xxEmail2']));
+            $xEnviar2 = trim(safe($_POST['xxEnviar2']));
+
+            $xGenero = "";
+            $xDireccion = "";
 
             $xFile = (isset($_FILES['xxFile']["name"])) ? $_FILES['xxFile']["name"] : '';
             $xPath = "../assets/images/profesionales/";
@@ -57,8 +63,8 @@
             $all_datos = mysqli_query($con, $xSQL);
             if(mysqli_num_rows($all_datos) == 0 )
             {
-                $xSQL = "INSERT INTO `expert_profesional`(pais_id,empr_id,prof_tipodoc,prof_numdoc,prof_nombres,prof_apellidos,prof_genero,prof_tipoprofesion,prof_avatar,prof_direccion,prof_telefono,prof_celular,prof_email,prof_enviarmail,fechacreacion,usuariocreacion,terminalcreacion) ";
-                $xSQL .= "VALUES($xPaisid,$xEmprid,'$xTipoDoc','$xNumDoc','$xNombres','$xApellidos','$xGenero','$xTipoProf','$xNombreFile','$xDireccion','$xFono','$xCelular','$xEmail','$xEnviar','{$xFecha}',$xUsuaid,'$xTerminal')";
+                $xSQL = "INSERT INTO `expert_profesional`(pais_id,empr_id,prof_tipodoc,prof_numdoc,prof_nombres,prof_apellidos,prof_genero,prof_tipoprofesion,prof_avatar,prof_direccion,prof_telefono,prof_telefono1,prof_celular,prof_email,prof_enviarmail,prof_email1,prof_enviarmail1,fechacreacion,usuariocreacion,terminalcreacion) ";
+                $xSQL .= "VALUES($xPaisid,$xEmprid,'$xTipoDoc','$xNumDoc','$xNombres','$xApellidos','$xGenero','$xTipoProf','$xNombreFile','$xDireccion','$xFono1','$xFono2','$xCelular','$xEmail1','$xEnviar1','$xEmail2','$xEnviar2','{$xFecha}',$xUsuaid,'$xTerminal')";
                 if(mysqli_query($con, $xSQL)){
     
                     $xId = mysqli_insert_id($con);

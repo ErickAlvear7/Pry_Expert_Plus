@@ -88,7 +88,6 @@
     $xSQL .="prs.prse_pvp AS Pvp FROM `expert_prestadora_servicio` prs WHERE prs.pres_id=$xPresid";
     $all_prestaservicio = mysqli_query($con, $xSQL);
 
-
 ?>
 
 <div id="kt_content_container" class="container-xxl">
@@ -487,7 +486,7 @@
                                                                         <button id="btnEditar_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" <?php echo $xDisabledEdit; ?> title='Editar Servicio' data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarServicio(<?php echo $xId; ?>,<?php echo $xIdpres; ?>,<?php echo $xIdasis; ?>)" >
                                                                             <i class='fa fa-edit'></i>
                                                                         </button>	
-                                                                        <button id="btnPerson_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick="f_AgregarProfesional()" title='Agregar Profesional' data-bs-toggle="tooltip" data-bs-placement="left" >
+                                                                        <button id="btnPerson_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledPerson; ?> onclick="f_AgregarProfesional(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>)" title='Agregar Profesional' data-bs-toggle="tooltip" data-bs-placement="left" >
                                                                             <i class="fas fa-user"></i>
                                                                         </button>	
                                                                         <button id="btnMotivos_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledMotivos; ?> onclick="f_AgregarMotivos()" title='Agregar Motivos' data-bs-toggle="tooltip" data-bs-placement="left" >
@@ -797,16 +796,32 @@
                                 <input type="text" class="form-control mb-3" name="txtCelularProf" id="txtCelularProf" maxlength="10" placeholder="0999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
+
+                        <div class="row mb-2">
+                            <div class="col-md-8">
                                 <label class="form-label"><i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>Email 1</label>
-                                <input type="email" name="txtEmail1Prof" id="txtEmail1Prof" maxlength="100" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase"/>
+                                <input type="email" name="txtEmail1Prof" id="txtEmail1Prof" maxlength="100" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="<?php echo $xEmail1; ?>" />
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
+                                <label class="form-check form-switch form-check-custom form-check-solid mt-5">
+                                    <input class="form-check-input mt-5" name="chkEnviarprof1" id="chkEnviarprof1" type="checkbox" />
+                                    <span id="spanEnv1" class="form-check-label fw-bold text-muted mt-3" for="chkEnviarprof1">No Enviar</span>
+                                </label>    
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8">
                                 <label class="form-label"><i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>Email 2</label>
-                                <input type="email" name="txtEmail2Prof" id="txtEmail2Prof" maxlength="100" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase"/>
+                                <input type="email" name="txtEmail2Prof" id="txtEmail2Prof" maxlength="100" placeholder="" class="form-control mb-2 text-lowercase" value="" />   
                             </div>
-                        </div> 
+                            <div class="col-md-3">
+                                <label class="form-check form-switch form-check-custom form-check-solid mt-5">
+                                    <input class="form-check-input mt-5" name="chkEnviarprof2" id="chkEnviarprof2" type="checkbox" />
+                                    <span id="spanEnv2" class="form-check-label fw-bold text-muted mt-3" for="chkEnviarprof2">No Enviar</span>
+                                </label>    
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -839,7 +854,8 @@
                     <div class="card-body pt-0">
                         <div class="row mb-4" id="div_modal_profesional">
                             <div class="col-md-12">
-                                 <label class="required form-label">Profesion</label>
+                                <input type="text" name="txtprseid" id="txtprseid" class="form-control form-control-solid" value=""  />
+                                <label class="required form-label">Profesion</label>
                                 <?php 
                                     $xSQL = "SELECT pde.pade_valorV AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_detalle` pde,`expert_parametro_cabecera` pca WHERE pca.pais_id=$xPaisid ";
                                     $xSQL .= "AND pca.paca_nombre='Tipo Profesion' AND pca.paca_id=pde.paca_id AND pca.paca_estado='A' AND pade_estado='A' ";
@@ -865,7 +881,7 @@
                                  <label class="required form-label">Intervalo
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Intervalo de 10 a 60 minutos"></i>
                                  </label>
-                                 <input type="number" name="txtIntervalo" id="txtIntervalo" min="10" max="60" step="10" class="form-control form-control-solid" value="10" onKeyPress="if(this.value.length==2) return false;"  pattern="/^-?\d+\.?\d*$/" />
+                                 <input type="number" name="txtIntervalo" id="txtIntervalo" min="5" max="60" step="5" class="form-control form-control-solid" value="5" onKeyPress="if(this.value.length==2) return false;"  pattern="/^-?\d+\.?\d*$/" />
                             </div>
                         </div>
                         <div class="form-group mt-5 mb-4">
@@ -974,10 +990,10 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <label class="required form-label">Valor/Codigo
+                                <label class="required form-label">Codigo
                                     
                                 </label>
-                                <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="100" placeholder="Valor/Codigo" name="txtCodigoTipo" id="txtCodigoTipo" />
+                                <input type="text" class="form-control mb-2 text-uppercase" minlength="1" maxlength="100" placeholder="Codigo" name="txtCodigoTipo" id="txtCodigoTipo" />
                             </div>
                         </div>
                         <div class="form-group my-5">
@@ -1071,7 +1087,80 @@
     </div>
 </div>   
 
+<!--Modal Horarios-Turnos -->             
+<div class="modal fade" id="modal_horarios" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mw-900px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Configurar Horarios - Turnos</h2>
+                <h5 class="text-primary fw-light" id="headertitu1"></h5>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="card card-flush py-2">
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-md-4">
+                                 <label class="required form-label">Seleccione Dia</label>
+                                   <?php	
+                                        $xSQL = "SELECT pde.pade_valorI AS Codigo,pde.pade_nombre AS Descripcion FROM `expert_parametro_cabecera` pca, `expert_parametro_detalle` pde WHERE pca.paca_id=pde.paca_id AND pca.pais_id=$xPaisid AND pca.empr_id=$xEmprid AND pca.paca_nombre='Dias Semana' AND pca.paca_estado='A' AND pde.pade_estado='A' ";
+                                        $all_dias = mysqli_query($con, $xSQL);    
+                                    ?>
+                                    <select name="cboDias" id="cboDias" aria-label="Seleccione Dia" data-control="select2" data-placeholder="Dia" data-dropdown-parent="#modal_horarios" class="form-select mb-2" >
+                                        <option></option>
+                                        <?php foreach ($all_dias as $dias) : ?>
+                                            <option value="<?php echo $dias['Codigo'] ?>"><?php echo $dias['Descripcion']; ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                            </div>
+                            <div class="col-md-4">
+                                 <label class="required form-label">Hora Desde</label>
+                                 <input class="form-control form-control-solid" name="txtHoraDesde" id="txtHoraDesde" placeholder="Hora Inicio" />
+                            </div>
+                            <div class="col-md-4">
+                                 <label class="required form-label">Hora Hasta</label>
+                                  <input class="form-control form-control-solid" name="txtHoraHasta" id="txtHoraHasta" placeholder="Hora Hasta" />
+                            </div>
+                        </div>
+                         <div class="form-group my-5">
+                            <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary border border-primary" id="btnAgregarHorario">
+                                <i class="fa fa-plus me-1" aria-hidden="true"></i>Agregar Horario
+                            </button>
+                        </div>
+                         <div class="separator my-7"></div>
+                        <h2 class="fw-normal">Turnos Asignados</h2>
+                        <div class="mh-300px scroll-y me-n7 pe-7">
+                            <table id="tblHorarios" class="table align-middle table-row-dashed table-hover fs-6 gy-5" style="width: 100%;">
+                                <thead>
+                                    <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                                        <th class="min-w-125px">Dia</th>
+                                        <!-- <th>Intervalo</th> -->
+                                        <th class="min-w-125px">H.Desde</th>
+                                        <th class="min-w-125px">H.Hasta</th>
+                                        <th class="min-w-125px">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="fw-bold text-gray-600">
 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>  
 
 <script>
     $(document).ready(function(){
@@ -1081,16 +1170,17 @@
         _emprid = "<?php echo $xEmprid; ?>";
         _usuaid = "<?php echo $xUsuaid; ?>";
         _logo  = "<?php echo $xLogo; ?>";
+
+        _enviarmail1 = "NO";
+        _enviarmail2 = "NO";
         
         $('#cboProvincia').val("<?php echo $xCboProv; ?>").change();
         $('#cboCiudad').val(<?php echo $xProvid; ?>).change();
         $('#cboSector').val("<?php echo $xSector; ?>").change();
         $('#cboTipo').val("<?php echo $xTipoPresta; ?>").change();
 
-        
         _logo = _logo == '' ? 'logo.png' : _logo;
         document.getElementById('imgfile').style.backgroundImage="url(assets/images/prestadores/" + _logo + ")";
-
 
         $('#cboProvincia').change(function(){
             
@@ -1116,6 +1206,27 @@
             });                
 
         });
+
+        $('#modal_horarios').on('hidden.bs.modal', function () {
+            $("#modal_Agregar_profesional").modal("show");
+
+        });
+
+
+        $('#txtHoraDesde').flatpickr({
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            defaultDate: "07:00"
+        });
+
+        $('#txtHoraHasta').flatpickr({
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            defaultDate: "12:00"
+        });         
+
     }); 
 
 
@@ -1210,7 +1321,6 @@
             return;
         }
 
-      
         _red = _red.replace(/[a-z]/g,'0');
         _pvp = _pvp.replace(/[a-z]/g,'0');
 
@@ -1244,14 +1354,15 @@
                 _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _id + '" onchange="f_UpdateEstado(';
                 _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
                 _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEditar_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnEditar" ';
-                _output += 'title="Editar Servicio" data-bs-toggle="tooltip" data-bs-placement="left" onclick=f_EditarServicio()><i class="fa fa-edit"></i></button>';
-                _output += '<button id="btnPerson_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarProfesional() title="Agregar Profesional" data-bs-toggle="tooltip" data-bs-placement="left">';
+                _output += 'title="Editar Servicio" data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarServicio()"><i class="fa fa-edit"></i></button>';
+                _output += '<button id="btnPerson_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick="f_AgregarProfesional(';
+                _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Agregar Profesional" data-bs-toggle="tooltip" data-bs-placement="left">';
                 _output += '<i class="fas fa-user"></i></button>';
-                _output += '<button id="btnMotivos_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick=f_AgregarMotivos() title="Agregar Motivos" data-bs-toggle="tooltip" data-bs-placement="left">';
+                _output += '<button id="btnMotivos_" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" onclick="f_AgregarMotivos()" title="Agregar Motivos" data-bs-toggle="tooltip" data-bs-placement="left">';
                 _output += '<i class="fas fa-book"></i></button>';
                 _output += '</div></div></td></tr>';
                 $('#tblServivio').append(_output);
-                //console.log(_output);
+                console.log(_output);
                 $("#agregar_servicio").modal("hide");
                 $("#cboAsis").val(0).change();   
                 $("#agregar_servicio").find("input,textarea").val("");
@@ -1298,6 +1409,111 @@
         $("#editar_servicio").modal("show");
     }
 
+    function f_ConfHorario(_paisid, _emprid, _pfesid){
+
+        var tb = document.getElementById('tblHorarios');
+            while(tb.rows.length > 1) {
+            tb.deleteRow(1);
+        }
+
+        //_selecpfesid = _pfesid
+        _selprofesional = $('#txtProfesional_' + _pfesid).val();
+        //document.getElementById("headertitu1").innerHTML = "Especialidad: " + _selespecialidad + "<br><br>" + "Profesional: " + _selprofesional;
+        document.getElementById("headertitu1").innerHTML = "Profesional: " + _selprofesional;
+
+        $("#cboDias").val(0).change();
+        //$("#txtIntervalo").val(10);
+        //$("#txtHoraDesde").val('07:00');
+        //$("#txtHoraHasta").val('12:00');
+
+        var _parametros = {
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxPfesid" : _pfesid
+        }
+
+        $.ajax({
+            url: "codephp/get_profesionalhorario.php",
+            type: "POST",
+            dataType: "json",
+            data: _parametros,
+            success: function(response){ 
+                $.each(response, function(i, item){
+
+                    //debugger;
+                    
+                    _id = item.Id;
+                    _dia = item.Dia;
+                    //_intervalo = item.Intervalo;
+                    _horadesde = item.HoraDesde;
+                    _horafdesde = _horadesde.substring(0,5);
+                    _horahasta = item.HoraHasta;
+                    _horafhasta = _horahasta.substring(0,5);
+
+                    _output = '<tr id="trhorario_' + _id + '">';
+                    _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _dia + '</span></div></div></td>';
+                    //_output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
+                    _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _horafdesde + '</span></div></div></td>';
+                    _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _horafhasta + '</span></div></div></td>';
+                    _output += '<td class=""><div class=""><div class="btn-group">'
+                    _output += '<button id="btnDelHorario_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"  onclick="f_DelHorario(';
+                    _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Eliminar Turno/Horario" ><i class="fa fa-trash"></i></button></div></div></td></tr>'
+
+                    $('#tblHorarios').append(_output);
+
+                });
+
+                $("#modal_Agregar_profesional").modal("hide");
+                $("#modal_horarios").modal("show");
+                $('#modal_horarios').modal('handleUpdate');                           
+            },
+            error: function (error){
+                console.log(error);
+            }
+        });
+    }
+
+    function f_DelAsigProf(_paisid, _emprid, _pfesid){
+
+        _parametros = {
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxPfesid" : _pfesid
+        }
+
+        var xrespuesta = $.post("codephp/consultar_horarioprofesional.php", _parametros);
+            xrespuesta.done(function(response){
+            if(response.trim() == 'OK'){
+                toastSweetAlert("top-end",3000,"error","Registro Eliminado");
+                $('#trprof_' + _pfesid).remove();
+            }else{
+                toastSweetAlert("top-end",3000,"warning","El registro tiene horarios configurados..!!");
+            }
+        });
+    }
+
+    function f_DelHorario(_paisid, _emprid, _horaid){
+
+        let _usuaid = "<?php echo $xUsuaid; ?>";
+
+        _parametros = {
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxUsuaid" : _usuaid,
+            "xxHoraid" : _horaid
+        }
+
+        var xrespuesta = $.post("codephp/del_horarioprofesional.php", _parametros);
+            xrespuesta.done(function(response){
+            if(response.trim() == 'OK'){
+                toastSweetAlert("top-end",3000,"error","Registro Eliminado");
+                $('#trhorario_' + _horaid).remove();
+            }else{
+                toastSweetAlert("top-end",3000,"question","Hubo algun error, no se puedo eliminar..!!");
+            }
+        });
+    }     
+
     function f_GetProfesional(_paisid, _emprid, obj){
 
         _tipoprofe = obj.value;
@@ -1323,6 +1539,7 @@
         var _profesional = $('#cboProfesional option:selected').text();
         var _intervalo = $('#txtIntervalo').val();
         _profid = $("#cboProfesional").val();
+        _prseid = $("#txtprseid").val();
 
         if(_tipoprofesion == ''){
             toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Profesion..!!"); 
@@ -1338,7 +1555,7 @@
             "xxPaisid" : _paisid,
             "xxEmprid" : _emprid,
             "xxUsuaid" : _usuaid,
-            "xxPreeid" : _selpreeid,
+            "xxPrseid" : _prseid,
             "xxIntervalo" : _intervalo,
             "xxProfid" : _profid
         }	
@@ -1372,14 +1589,93 @@
 
             $("#cboTipoProfe").val(0).change(); 
             $("#cboProfesional").val(0).change(); 
+            $("#txtIntervalo").val('5'); 
 
         });
 
     });    
 
     //Modal Agregar Profesional / Configurar Horarios
-    function f_AgregarProfesional(){
-        $("#modal_Agregar_profesional").modal("show");
+    function f_AgregarProfesional(_paisid,_emprid,_prseid){
+
+        $("#txtprseid").val(_prseid);
+        $("#cboTipoProfe").val(0).change(); 
+        $("#cboProfesional").val(0).change(); 
+        $("#txtIntervalo").val('5');
+
+        //$("#modal_Agregar_profesional").modal("show");
+
+        var tb = document.getElementById('tblProfesional');
+            while(tb.rows.length > 1) {
+            tb.deleteRow(1);
+        }                
+
+        //_selpreeid = _preeid;
+
+        //_selespecialidad = $('#txtEspeciPrestador' + _preeid).val();
+        //document.getElementById("headerTitle").innerHTML = "Especialidad: " + _selespecialidad;
+
+        var _parametros = {
+            "xxPaisid" : _paisid,
+            "xxEmprid" : _emprid,
+            "xxPrseid" : _prseid
+        }
+
+        $.ajax({
+            url: "codephp/get_datosprofesional.php",
+            type: "POST",
+            dataType: "json",
+            data: _parametros,
+            success: function(response){ 
+                $.each(response, function(i, item){
+
+                    _id = item.Id;
+                    _nombres = item.Nombres;
+                    _tipoprofe = item.Profesion;
+                    _estado = item.Estado;
+                    _intervalo = item.Intervalo;
+                    _checked = '';
+                    _disabledbtn1 = '';
+                    _disabledbtn2 = '';
+
+                    if(_estado == "ACTIVO"){
+                        _checked = "checked='checked'";
+                        _textcolor = "badge badge-light-primary";
+                    }else{
+                        _textcolor = "badge badge-light-danger";
+                        _disabledbtn1 = 'disabled';
+                        _disabledbtn2 = 'disabled';
+                    }
+
+                    _output = '<tr id="trprof_' + _id + '">';
+                    _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _nombres + '</span><input type="hidden" id="txtProfesional_' + _id + '" value="' + _nombres + '" /></div></div></td>';
+                    _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _tipoprofe + '</span></div></div></td>';
+                    _output += '<td><div class="d-flex align-items-center"><div class="ms-0"><span class="fw-bolder">' + _intervalo + '</span></div></div></td>';
+                    _output += '<td id="tdprof_' + _id + '"><div class="d-flex align-items-center"><div class="ms-0"><div class="' + _textcolor + '">' + _estado + '</div></div></div></td>';
+                    _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid"> '; 
+                    _output += '<input class="form-check-input h-20px w-20px border-primary" ' +  _checked + ' type="checkbox" id="chkprof' + _id + '" onchange="f_UpdateEstProf(';
+                    _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
+                    _output += '<td class=""><div class=""><div class="btn-group">'
+                    _output += '<button id="btnHorario_' + _id  + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 btnhorario"' + _disabledbtn1 + ' onclick="f_ConfHorario(';
+                    _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Configurar Horario" data-bs-toggle="tooltip" data-bs-placement="left" ><i class="fas fa-cogs"></i></button>';
+                    _output += '<button id="btnDelProf_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"' + _disabledbtn2 + ' onclick="f_DelAsigProf(';
+                    _output += _paisid + ',' + _emprid + ',' + _id + ')" title="Eliminar Profesional Asignado" data-bs-toggle="tooltip" data-bs-placement="left" ><i class="fa fa-trash"></i></button></div></div></td></tr>'
+
+                    $('#tblProfesional').append(_output);
+
+                });
+
+                //$("#cboTipoProfe").val(0).change(); 
+                //$("#txtIntervalo").val(10);
+                //$("#modal_profesional").find("input,textarea").val("");
+                $("#modal_Agregar_profesional").modal("show");
+                $('#modal_Agregar_profesional').modal('handleUpdate');                           
+            },
+            error: function (error){
+                console.log(error);
+            }
+        });
+
     }
 
     //Modal Agregar Motivos Servicios
@@ -1411,6 +1707,245 @@
     });    
 
 
+    $(document).on("click","#chkEnviarprof1",function(){
+        
+        var _chanspan = document.getElementById("spanEnv1");
+        var _emailprof =  $.trim($('#txtEmail1Prof').val());
+
+        if(_emailprof != ''){
+            var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+        
+            if (regex.test($('#txtEmail1Prof').val().trim())){
+                if($("#chkEnviarprof1").is(":checked")){
+                    _chanspan.innerHTML = '<span id="spanEnv1" class="form-check-label fw-bold" for="chkEnviar1"><strong>Enviar</strong></span>';
+                    _enviarmail1 = 'SI';
+                }else{
+                    _chanspan.innerHTML = '<span id="spanEnv1" class="form-check-label fw-bold text-muted" for="chkEnviar1">No Enviar</span>';
+                    _enviarmail1 = 'NO';
+                }
+            }else{
+                $('#chkEnviarprof1').prop('checked','');
+                toastSweetAlert("top-end",3000,"error","Email no es Valido..!!");
+                _enviarmail1 = 'SI';
+                return;
+            }
+        }else{
+            $('#chkEnviarprof1').prop('checked','');
+            _enviarmail1 = 'NO';
+        }
+    });
+
+    $(document).on("click","#chkEnviarprof2",function(){
+            
+            var _chanspan = document.getElementById("spanEnv2");
+            var _emailprof =  $.trim($('#txtEmail2Prof').val());
+    
+            if(_emailprof != ''){
+                var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+            
+                if (regex.test($('#txtEmail2Prof').val().trim())){
+                    if($("#chkEnviarprof2").is(":checked")){
+                        _chanspan.innerHTML = '<span id="spanEnv2" class="form-check-label fw-bold" for="chkEnviarprof2"><strong>Enviar</strong></span>';
+                        _enviarmail2 = 'SI';
+                    }else{
+                        _chanspan.innerHTML = '<span id="spanEnv2" class="form-check-label fw-bold text-muted" for="chkEnviarprof2">No Enviar</span>';
+                        _enviarmail2 = 'NO';
+                    }
+                }else{
+                    $('#chkEnviarprof2').prop('checked','');
+                    toastSweetAlert("top-end",3000,"error","Email no es Valido..!!");
+                    _enviarmail2 = 'SI';
+                    return;
+                }
+            }else{
+                $('#chkEnviarprof2').prop('checked','');
+                _enviarmail2 = 'NO';
+            }
+        });    
+
+
+    $('#btnSaveProf').click(function(e){
+
+        var _paisid = "<?php echo $xPaisid; ?>";
+        var _emprid = "<?php echo $xEmprid; ?>";
+        var _usuaid = "<?php echo $xUsuaid; ?>";
+        //var _tipodoc = $("#cboTipoDoc option:selected").text();
+        var _tipodoc = $("#cboTipoDoc").val();
+        var _numdocumento = $.trim($("#txtNumDocumento").val());
+        var _nombres = $.trim($("#txtNombresProf").val());
+        var _apellidos = $.trim($("#txtApellidosProf").val());
+        //var _genero = $("#cboTipoGenero option:selected").text();
+        var _tipoprof = $("#cboTipoProfesion option:selected").text();
+        var _tipoprofv = $("#cboTipoProfesion").val();
+        //var _direccion = $.trim($("#txtDireccionProf").val());
+        var _telefono1 = $.trim($("#txtFono1Prof").val());
+        var _telefono2 = $.trim($("#txtFono2Prof").val());
+        var _celular = $.trim($("#txtCelularProf").val());
+        var _emailprof1 = $.trim($("#txtEmail1Prof").val());
+        var _emailprof2 = $.trim($("#txtEmail2Prof").val());
+        var _selecc = 'NO'; 
+        var _continuar = true;
+
+        var _imgfile = document.getElementById("imgfileprof").style.backgroundImage;
+        var _url = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+        var _pos = _url.trim().indexOf('.');
+        var _ext = _url.trim().substr(_pos, 5);
+
+        if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
+            _selecc = 'SI';
+        }  
+
+        if(_selecc == 'SI'){
+            var _imagen = document.getElementById("imgavatar");
+            var _file = _imagen.files[0];
+            var _fullPath = document.getElementById('imgavatar').value;
+            _ext = _fullPath.substring(_fullPath.length - 4);
+            _ext = _ext.toLowerCase();   
+        }else{
+            _file = '';
+        }
+
+        if(_tipodoc == ''){
+            toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Documento..!");
+            return;                    
+        }
+
+        if(_numdocumento == ''){
+            toastSweetAlert("top-end",3000,"warning","Ingrese Documento..!!");
+            return;                    
+        }
+
+        if(_numdocumento != ''){
+            _valor = document.getElementById("txtNumDocumento").value;
+            if( !(/^(\d{10}|\d{13})$/.test(_valor)) ) {
+                toastSweetAlert("top-end",3000,"error","Documento Incorrecto..!!");  
+                return;
+            }                
+        }
+
+        if(_nombres == ''){
+            toastSweetAlert("top-end",3000,"warning","Ingrese Nombres..!!");
+            return;                    
+        }
+
+        if(_apellidos == ''){
+            toastSweetAlert("top-end",3000,"warning","Ingrese Apellidos..!!");
+            return;                    
+        }
+
+        //if(_genero == ''){
+        //    toastSweetAlert("top-end",3000,"warning","Seleccione Genero..!!");
+        //    return;                    
+        //}
+
+        if(_tipoprof == ''){
+            toastSweetAlert("top-end",3000,"warning","Seleccione Profesion..!!");
+            return;                    
+        }  
+
+        if(_telefono1 != '')
+        {
+            _valor = document.getElementById("txtFono1Prof").value;
+            if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
+                toastSweetAlert("top-end",3000,"error","Telefono Incorrecto..!!");  
+                return;
+            }
+        }   
+
+        if(_telefono2 != '')
+        {
+            _valor = document.getElementById("txtFono2Prof").value;
+            if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
+                toastSweetAlert("top-end",3000,"error","Telefono Incorrecto..!!");  
+                return;
+            }
+        }         
+
+        if(_celular != '')
+        {
+            _valor = document.getElementById("txtCelularProf").value;
+            if( !(/^\d{10}$/.test(_valor)) ) {
+                toastSweetAlert("top-end",3000,"error","Celular Incorrecto..!!"); 
+                return;
+            }
+        }
+
+        if(_emailprof1.trim() != ''){
+            var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+
+            if (regex.test($('#txtEmail1Prof').val().trim())) {
+            }else{
+                toastSweetAlert("top-end",3000,"error","Email Incorrecto..!!");
+                return;
+            }
+        }
+
+        if(_enviarmail1 == 'SI'){
+            if(_emailprof1.trim() == ''){
+                toastSweetAlert("top-end",3000,"warning","Ingrese Email..!!");
+            }
+        }
+
+        if(_emailprof2.trim() != ''){
+            var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+
+            if (regex.test($('#txtEmail2Prof').val().trim())) {
+            }else{
+                toastSweetAlert("top-end",3000,"error","Email Incorrecto..!!");
+                return;
+            }
+        }
+
+        if(_enviarmail2 == 'SI'){
+            if(_emailprof2.trim() == ''){
+                toastSweetAlert("top-end",3000,"warning","Ingrese Email..!!");
+            }
+        }        
+
+        form_data = new FormData();                    
+        form_data.append('xxPaisid', _paisid);
+        form_data.append('xxEmprid', _emprid);
+        form_data.append('xxUsuaid', _usuaid);
+        form_data.append('xxTipoDoc', _tipodoc);
+        form_data.append('xxNumDoc', _numdocumento);
+        form_data.append('xxNombres', _nombres);
+        form_data.append('xxApellidos', _apellidos);
+        //form_data.append('xxGenero', _genero);
+        form_data.append('xxTipoProfesion', _tipoprofv);
+        //form_data.append('xxDireccion', _direccion);
+        form_data.append('xxFono1', _telefono1);
+        form_data.append('xxFono2', _telefono2);
+        form_data.append('xxCelular', _celular);
+        form_data.append('xxEmail1', _emailprof1);        
+        form_data.append('xxEnviar1', _enviarmail1);
+        form_data.append('xxEmail2', _emailprof2);        
+        form_data.append('xxEnviar2', _enviarmail2);
+        form_data.append('xxFile', _file);
+
+        $.ajax({
+            url: "codephp/grabar_profesional.php",
+            type: "post",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            success: function(response){
+                
+                if(response.trim() == 'OK'){
+                    toastSweetAlert("top-end",3000,"success","Profesional Agregado");
+                    $("#modal_profesional").modal("hide");
+
+                }else{
+                    toastSweetAlert("top-end",3000,"warning","Profesional ya Existe..!!");
+                }
+            },								
+            error: function (error){
+                console.log(error);
+            }
+        });
+    });    
+
+
     //Desplazar-modal
     $("#modal-new-especialidad").draggable({
         handle: ".modal-header"
@@ -1421,10 +1956,6 @@
     });
     
     $("#modal-editar-especialidad").draggable({
-        handle: ".modal-header"
-    });
-    
-    $("#modal-new-profesional").draggable({
         handle: ".modal-header"
     });
     
@@ -1443,6 +1974,8 @@
     $("#modal-motivos").draggable({
         handle: ".modal-header"
     });     
+
+   
 
 </script>
 

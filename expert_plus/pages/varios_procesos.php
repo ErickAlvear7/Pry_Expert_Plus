@@ -277,6 +277,16 @@
     $xSQL .= "VALUES(1,1,2,'dark','dark','A' ) ";
     mysqli_query($con, $xSQL);
 
+    $xSQL = "DELETE FROM `expert_tipo_asistencia` ";    
+    mysqli_query($con, $xSQL);
+    $xSQL = "ALTER TABLE `expert_tipo_asistencia` AUTO_INCREMENT = 1";
+    mysqli_query($con, $xSQL);
+
+    $xSQL = "DELETE FROM `expert_prestadora_servicio` ";    
+    mysqli_query($con, $xSQL);
+    $xSQL = "ALTER TABLE `expert_prestadora_servicio` AUTO_INCREMENT = 1";
+    mysqli_query($con, $xSQL);    
+
     
     echo 'PROCESO FINALIZADO..!';
 
