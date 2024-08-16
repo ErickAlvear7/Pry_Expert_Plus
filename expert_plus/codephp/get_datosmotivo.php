@@ -9,23 +9,20 @@
     mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
 
-    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxPresid']) and isset($_POST['xxEspeid'])  ){
-        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxPresid']) <> '' and isset($_POST['xxEspeid']) <> '' ){ 
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxPrseid'])  ){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxPrseid']) <> '' ){ 
 
             $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
-            $xPresid = $_POST['xxPresid'];
-            $xEspeid = $_POST['xxEspeid'];
+            $xPrseid = $_POST['xxPrseid'];
             
-            $xSQL = "SELECT * FROM `expert_motivos_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pres_id=$xPresid AND espe_id=$xEspeid  ";
-
+            $xSQL = "SELECT * FROM `expert_motivos_especialidad` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND prse_id=$xPrseid  ";
             $all_motivos = mysqli_query($con, $xSQL);
             $resultado = mysqli_fetch_all($all_motivos,MYSQLI_ASSOC);
-
         }
     }
     
     mysqli_close($con);
-    echo json_encode($resultado);
+    print json_encode($resultado);
 
 ?>
