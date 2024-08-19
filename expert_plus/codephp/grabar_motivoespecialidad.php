@@ -18,18 +18,17 @@
     $xTerminal = gethostname();
     $xRespuesta = 0;
 
-    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxPresid']) and isset($_POST['xxEspeid']) and isset($_POST['xxMotivo'])  ){
-        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxPresid']) <> '' and isset($_POST['xxEspeid']) <> '' and isset($_POST['xxMotivo']) <> ''  ){
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxUsuaid']) and isset($_POST['xxPrseid']) and isset($_POST['xxMotivo'])  ){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxPrseid']) <> '' and isset($_POST['xxMotivo']) <> ''  ){
             
             $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
             $xUsuaid = $_POST['xxUsuaid'];
-            $xPresid = $_POST['xxPresid'];
-            $xEspeid = $_POST['xxEspeid'];
+            $xPrseid = $_POST['xxPrseid'];
             $xMotivo =  trim(mb_strtoupper(safe($_POST['xxMotivo'])));
             
-            $xSQL = "INSERT INTO `expert_motivos_especialidad`(pais_id,empr_id,pres_id,espe_id,motivos_especialidad,mtes_estado,fechacreacion,usuariocreacion,terminalcreacion) ";
-            $xSQL .= "VALUES($xPaisid,$xEmprid,$xPresid,$xEspeid,'$xMotivo','A','{$xFecha}',$xUsuaid,'$xTerminal')";
+            $xSQL = "INSERT INTO `expert_motivos_especialidad`(pais_id,empr_id,prse_id,motivos_especialidad,mtes_estado,fechacreacion,usuariocreacion,terminalcreacion) ";
+            $xSQL .= "VALUES($xPaisid,$xEmprid,$xPrseid,'$xMotivo','A','{$xFecha}',$xUsuaid,'$xTerminal')";
             if(mysqli_query($con, $xSQL)){
     
                 $xId = mysqli_insert_id($con);
