@@ -26,15 +26,11 @@
             $xUsuaid = $_POST['xxUsuaid'];
             $xProvid = $_POST['xxProv'];
             $xCliente = trim(mb_strtoupper(safe($_POST['xxCliente'])));
-            $xDesc = trim(mb_strtoupper(safe($_POST['xxDescrip'])));
             $xDirec = trim(mb_strtoupper(safe($_POST['xxDirec'])));
             $xUrl = safe($_POST['xxUrl']);
             $xTel1 = trim($_POST['xxTel1']);
             $xTel2 = trim($_POST['xxTel2']);
-            $xTel3 = trim($_POST['xxTel3']);
-            $xCel1 = trim($_POST['xxCel1']);
-            $xCel2 = trim($_POST['xxCel2']);
-            $xCel3 = trim($_POST['xxCel3']);
+            $xCel = trim($_POST['xxCel']);
             $xEmail1 = trim(safe($_POST['xxEmail1']));
             $xEmail2 = trim(safe($_POST['xxEmail2']));
 
@@ -70,11 +66,11 @@
             } 
 
             
-            $xSQL = "INSERT INTO `expert_cliente` (pais_id,empr_id,prov_id,clie_nombre,clie_descripcion,clie_direccion, ";
-            $xSQL .= "clie_url,clie_tel1,clie_tel2,clie_tel3,clie_cel1,clie_cel2,clie_cel3,clie_email1,clie_email2, ";
-            $xSQL .= "clie_imgcab,clie_imgpie,usuariocreacion,fechacreacion,terminalcreacion ) ";
-            $xSQL .= "VALUES($xPaisid,$xEmprid,$xProvid,'$xCliente','$xDesc','$xDirec','$xUrl','$xTel1','$xTel2', ";
-            $xSQL .= "'$xTel3','$xCel1','$xCel2','$xCel3','$xEmail1','$xEmail2','$xNombreFileCab','$xNombreFilePie',$xUsuaid, ";
+            $xSQL = "INSERT INTO `expert_cliente` (pais_id,empr_id,prov_id,clie_nombre,clie_direccion,";
+            $xSQL .= "clie_url,clie_tel1,clie_tel2,clie_cel1,clie_email1,clie_email2,";
+            $xSQL .= "clie_imgcab,clie_imgpie,usuariocreacion,fechacreacion,terminalcreacion) ";
+            $xSQL .= "VALUES($xPaisid,$xEmprid,$xProvid,'$xCliente','$xDirec','$xUrl','$xTel1','$xTel2',";
+            $xSQL .= "'$xCel','$xEmail1','$xEmail2','$xNombreFileCab','$xNombreFilePie',$xUsuaid,";
             $xSQL .= "'{$xFecha}','$xTerminal') ";
 
             if(mysqli_query($con, $xSQL)){

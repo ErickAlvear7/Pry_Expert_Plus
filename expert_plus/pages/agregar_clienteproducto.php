@@ -217,7 +217,7 @@
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="form-label">Direccion</label>
-                                    <textarea class="form-control" name="txtDireccion" id="txtDireccion" rows="2" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
+                                    <textarea class="form-control text-uppercase" name="txtDireccion" id="txtDireccion" rows="2" maxlength="200" onkeydown="return (event.keyCode!=13);"></textarea>
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="form-label">Url</label>
@@ -243,7 +243,7 @@
                                             <i class="fa fa-mobile fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
                                             <span class="">Celular</span>   
                                         </label>
-                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="0999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular" id="txtCelular" maxlength="10" placeholder="0999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -721,15 +721,11 @@
         var _cboProv = $('#cboProvincia').val();
         var _cboIdProv = $('#cboCiudad').val();
         var _cliente = $.trim($("#txtCliente").val());
-        var _desc = $.trim($("#txtDesc").val());
         var _direc = $.trim($("#txtDireccion").val()); 
         var _url = $.trim($("#txtUrl").val()); 
         var _telefono1 = $.trim($("#txtFono1").val()); 
-        var _telefono2 = $.trim($("#txtFono2").val()); 
-        var _telefono3 = $.trim($("#txtFono3").val()); 
-        var _cel1 = $.trim($("#txtCelular1").val()); 
-        var _cel2 = $.trim($("#txtCelular2").val()); 
-        var _cel3 = $.trim($("#txtCelular3").val()); 
+        var _telefono2 = $.trim($("#txtFono2").val());  
+        var _celular = $.trim($("#txtCelular").val()); 
         var _email1 = $.trim($("#txtEmail1").val()); 
         var _email2 = $.trim($("#txtEmail2").val());
         var _seleccab = 'NO';
@@ -828,43 +824,16 @@
                 return;
             }
         }  
-
-        if(_telefono3 != '')
-        {
-            _valor = document.getElementById("txtFono3").value;
-            if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
-                toastSweetAlert("top-end",3000,"error","Telefono 3 Incorrecto..!!");  
-                return;
-            }
-        }  
         
-        if(_cel1 != '')
+        if(_celular != '')
         {
-            _valor = document.getElementById("txtCelular1").value;
+            _valor = document.getElementById("txtCelular").value;
             if( !(/^\d{10}$/.test(_valor)) ) {
-                toastSweetAlert("top-end",3000,"error","Celular 1 Incorrecto..!!");  
+                toastSweetAlert("top-end",3000,"error","Celular Incorrecto..!!");  
                 return;
             }
         }                     
-        
-        if(_cel2 != '')
-        {
-            _valor = document.getElementById("txtCelular2").value;
-            if( !(/^\d{10}$/.test(_valor)) ) {
-                toastSweetAlert("top-end",3000,"error","Celular 2 Incorrecto..!!");  
-                return;
-            }
-        }
-        
-        if(_cel3 != '')
-        {
-            _valor = document.getElementById("txtCelular3").value;
-            if( !(/^\d{10}$/.test(_valor)) ) {
-                toastSweetAlert("top-end",3000,"error","Celular 3 Incorrecto..!!");  
-                return;
-            }
-        }                    
-                
+                              
         if(_email1 != ''){
             var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
             if (regex.test(_email1.trim())){
@@ -906,15 +875,11 @@
                 form_data.append('xxUsuaid', _iduser);
                 form_data.append('xxProv', _cboIdProv);
                 form_data.append('xxCliente', _cliente);
-                form_data.append('xxDescrip', _desc);
                 form_data.append('xxDirec', _direc);
                 form_data.append('xxUrl', _url);
                 form_data.append('xxTel1', _telefono1);
                 form_data.append('xxTel2', _telefono2);
-                form_data.append('xxTel3', _telefono3);
-                form_data.append('xxCel1', _cel1);
-                form_data.append('xxCel2', _cel2);
-                form_data.append('xxCel3', _cel3);
+                form_data.append('xxCel', _celular);
                 form_data.append('xxEmail1', _email1);
                 form_data.append('xxEmail2', _email2);
                 form_data.append('xxFileCab', _fileCab);
@@ -935,7 +900,7 @@
                                         
                                 if(response.trim() == 'OK'){
 
-                                    $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Agregado con Éxito'}); //POR METODO POST
+                                    $.redirect('?page=admin_clienteproducto&menuid=<?php echo $menuid; ?>', {'mensaje': 'Cliente Agregado'}); //POR METODO POST
                         
                                 }
 
