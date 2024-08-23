@@ -466,9 +466,9 @@
                                                                 <?php echo $xAsistencia; ?>
                                                                 <input type="hidden" id="txtAsistencia_<?php echo $xId; ?>" value="<?php echo $xAsistencia; ?>" />
                                                             </td>
-                                                            <td> <?php echo $xAtencion; ?></td>
-                                                            <td><?php echo $xRed; ?> </td>
-                                                            <td><?php echo $xPvp; ?> </td>                                
+                                                            <td id="tdaten_<?php echo $xId; ?>"> <?php echo $xAtencion; ?></td>
+                                                            <td id="tdred_<?php echo $xId; ?>"><?php echo $xRed; ?> </td>
+                                                            <td id="tdpvp_<?php echo $xId; ?>"><?php echo $xPvp; ?> </td>                                
                                                             <td id="td_<?php echo $xId; ?>"> 
                                                                 <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div> 
                                                             </td>
@@ -632,7 +632,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Editar Datos Servicio Prestador</h2>
-                <input type="text" name="txtcodprseid" id="txtcodprseid" class="form-control form-control-solid" value=""  />
+                <input type="hidden" name="txtcodprseid" id="txtcodprseid" class="form-control form-control-solid" value=""  />
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -655,7 +655,7 @@
                             <div class="col">
                                 <label class="required form-label">Tipo Atencion</label>
                                 <textarea class="form-control text-uppercase" name="txtEditAten" id="txtEditAten" rows="2" maxlength="300" onkeydown="return (event.keyCode!=13);"></textarea>
-                                <input type="text" name="txtEditAtenold" id="txtEditAtenold" class="form-control mb-2" maxlength="300" />
+                                <input type="hidden" name="txtEditAtenold" id="txtEditAtenold" class="form-control mb-2" maxlength="300" />
                             </div>
                         </div>
                         <div class="mb-2 fv-row">
@@ -1403,6 +1403,16 @@
         var _red = $.trim($("#txtEditRed").val());
         var _pvp = $.trim($("#txtEditPvp").val());
 
+        let _tda = "tdaten_" + _prseid;
+        var _changetda = document.getElementById(_tda);
+
+        let _tdb = "tdred_" + _prseid;
+        var _changetdb = document.getElementById(_tdb);
+
+        let _tdc = "tdpvp_" + _prseid;
+        var _changetdc = document.getElementById(_tdc);
+
+
         if(_txtatencion == ''){
             toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Atencion..!!");
             return;
@@ -1444,7 +1454,7 @@
             "xxPaisid" : _paisid,
             "xxEmprid" : _emprid,
             "xxUsuaid" : _usuaid,
-            "xxPresid" : _prseid,
+            "xxPrseid" : _prseid,
             "xxAtencion" : _txtatencion,
             "xxAtencionold" : _txtatencionold,
             "xxRed" : _red,
@@ -1453,11 +1463,16 @@
 
         var xrespuesta = $.post("codephp/update_datosservicio.php", _parametros);
         xrespuesta.done(function(response){
-            if(response == 0){
-                _id = response;
+            if(response.trim() == "OK"){
+                _changetda.innerHTML = _txtatencion;
+                _changetdb.innerHTML = _red;
+                _changetdc.innerHTML = _pvp;
+                toastSweetAlert("top-end",3000,"success","Cambio realizado correctamente..!");  
             }else{
-                toastSweetAlert("top-end",3000,"error","Tipo de Atencion ya Existe..!");  
+                toastSweetAlert("top-end",3000,"error","Tipo de Atencion ya existe para este servicio..!");  
             }     
+
+            $("#editar_servicio").modal("hide");
         });
 
     });

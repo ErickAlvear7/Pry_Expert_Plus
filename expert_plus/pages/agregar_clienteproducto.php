@@ -436,7 +436,7 @@
                                 <label class="required form-label">Secuencial Agenda</label>
                             </div>
                             <div class="col-md-2">
-                                <input type="text" name="txtnumagenda" id="txtnumagenda" class="form-control" placeholder="1"  maxlength="6" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"  />   
+                                <input type="text" name="txtnumagenda" id="txtnumagenda" value="1" class="form-control" placeholder="1" value="1" maxlength="6" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false; "  />   
                             </div>
                             <div class="col-md-4">
                                 <label class="required form-label">Secuencial Cancelado</label>
@@ -534,7 +534,13 @@
 
         $("#btnNewGrupo").click(function(){
 
-            $("#modal_new_grupo").find("input,textarea").val("");
+            //$("#modal_new_grupo").find("input,textarea").val("");
+            $("#txtGrupo").val('');
+            $("#txtDescGrupo").val('');
+            $("#txtnumagenda").val(1);
+            $("#txtnumcancelado").val(1);
+            $("#txtnumatendido").val(1);
+            $("#txtnumausente").val(1);
             $("#modal_new_grupo").modal("show");
         });
 
@@ -953,13 +959,12 @@
     function f_GuardarGrupo(_paisid,_emprid,_usuaid){
 
         //debugger;
-
         var _nombreGrupo = $.trim($("#txtGrupo").val());
         var _descGrupo = $.trim($("#txtDescGrupo").val());
-        var _numagenda = $.trim(("#txtnumagenda").val());
-        var _numcancela = $.trim(("#txtnumcancelado").val());
-        var _numatendido = $.trim(("#txtnumatendido").val());
-        var _numausente = $.trim(("#txtnumausente").val());        
+        var _numagenda = $("#txtnumagenda").val();
+        var _numcancela = $("#txtnumcancelado").val();
+        var _numatendido = $("#txtnumatendido").val();
+        var _numausente = $("#txtnumausente").val();        
 
         if(_nombreGrupo == ''){
             toastSweetAlert("top-end",3000,"warning","Ingrese Grupo..!!");  

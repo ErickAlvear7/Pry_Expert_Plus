@@ -12,7 +12,7 @@
     mysqli_query($con,'SET NAMES utf8');  
     mysqli_set_charset($con,'utf8');	
 
-    $xRespuesta = 0;
+    $xRespuesta = "ERR";
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());  
     $xTerminal = gethostname();    
 
@@ -27,27 +27,32 @@
             $xAtencionold = safe($_POST['xxAtencionold']);
             $xRed = $_POST['xxRed'];
             $xPvp = $_POST['xxPvp'];
+            $xasisid = 0;
 
             if($xAtencion != $xAtencionold ){
-                $xSQL = "SELECT asis_id FROM `expert_prestadora_servicio` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND prse_id=$xPrseid AND prse_atencio='$xAtencionold' LIMIT 1 ";
+                $xSQL = "SELECT asis_id FROM `expert_prestadora_servicio` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND prse_id=$xPrseid AND prse_atencion='$xAtencionold' LIMIT 1 ";
                 $all_servicio = mysqli_query($con, $xSQL);
                 foreach ($all_servicio as $servicio) {
                     $xasisid = $servicio['asis_id'];
-                }    
+                }
 
-                $xSQL = "SELECT * FROM `expert_prestadora_servicio` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND asis_id=$xasisid AND prse_atencion='$xAtencion' ";
-                $all_servicio = mysqli_query($con, $xSQL);
-                if(mysqli_num_rows($all_servicio) > 0 ){
-                    $xRespuesta = 1;
+                if($xasisid != 0){
+                    $xSQL = "SELECT * FROM `expert_prestadora_servicio` WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND asis_id=$xasisid AND prse_atencion='$xAtencion' ";
+                    $all_servicio = mysqli_query($con, $xSQL);
+                    if(mysqli_num_rows($all_servicio) > 0 ){
+                        $xRespuesta = "ERR";
+                    }else{
+                        $xSQL = "UPDATE `expert_prestadora_servicio` SET prse_atencion='$xAtencion', prse_red=$xRed , prse_pvp=$xPvp  WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND prse_id=$xPrseid ";
+                        mysqli_query($con, $xSQL);
+
+                        $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
+                        $xSQL .= "VALUES('Actualizar datos prestadora servicios',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
+                        mysqli_query($con, $xSQL);
+
+                        $xRespuesta = "OK";
+                    }
                 }else{
-                    $xSQL = "UPDATE `expert_prestadora_servicio` SET prse_atencion='$xAtencion', prse_red=$xRed , prse_pvp=$xPvp  WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND prse_id=$xPrseid ";
-                    mysqli_query($con, $xSQL);
-
-                    $xSQL = "INSERT INTO `expert_logs`(log_detalle,usua_id,pais_id,empr_id,log_fechacreacion,log_terminalcreacion) ";
-                    $xSQL .= "VALUES('Actualizar datos prestadora servicios',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
-                    mysqli_query($con, $xSQL);
-
-                    $xRespuesta = 0;
+                    $xRespuesta = "ERR";
                 }
             }else{
                 $xSQL = "UPDATE `expert_prestadora_servicio` SET prse_atencion='$xAtencion', prse_red=$xRed , prse_pvp=$xPvp  WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND prse_id=$xPrseid ";
@@ -57,7 +62,7 @@
                 $xSQL .= "VALUES('Actualizar datos prestadora servicios',$xUsuaid,$xPaisid,$xEmprid,'{$xFecha}','$xTerminal') ";
                 mysqli_query($con, $xSQL);
 
-                $xRespuesta = 0;
+                $xRespuesta = "OK";
             }
         }
     }
