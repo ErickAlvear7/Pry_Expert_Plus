@@ -77,7 +77,7 @@
     $xSQL = "SELECT pro.prod_id AS Idprod, pro.prod_nombre AS Producto, pro.prod_descripcion AS Descrip, pro.prod_costo AS Costo, ";
     $xSQL .="pro.prod_asistmes AS AsisMes, pro.prod_asistanu AS AsisAnu, pro.prod_cobertura AS Cobertura, pro.prod_sistema AS Sistema, ";
     $xSQL .="pro.prod_gerencial AS Gerencial,CASE pro.prod_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado, gru.grup_id AS Idgrup,gru.grup_nombre AS Grupo FROM `expert_productos` pro INNER JOIN ";
-    $xSQL .="`expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.clie_id =$clieid AND pro.pais_id =$xPaisid AND pro.empr_id =$xEmprid ORDER BY gru.grup_nombre ";
+    $xSQL .="`expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.clie_id =$clieid AND pro.pais_id =$xPaisid AND pro.empr_id =$xEmprid AND gru.grup_estado='A' ORDER BY gru.grup_nombre ";
     $all_prod = mysqli_query($con, $xSQL);
 
 ?>
@@ -462,13 +462,13 @@
                                 <label class="required form-label">Secuencial Agenda</label>
                             </div>
                             <div class="col-md-2">
-                                <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control form-control-solid" value="1" onkeypress="return isNumberKey(event)" />   
+                                <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control" value="1" onkeypress="return isNumberKey(event)" />   
                             </div>
                             <div class="col-md-4">
                                 <label class="required form-label">Secuencial Cancelado</label>
                             </div>
                             <div class="col-md-2">
-                                <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control form-control-solid" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
+                                <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control" value="1" onkeypress="return isNumberKey(event)" />  
                             </div>
                         </div>
                         <div class="row">
@@ -476,13 +476,13 @@
                                 <label class="required form-label">Secuencial Atendido</label>
                             </div>
                             <div class="col-md-2">
-                                <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control form-control-solid" value="1" onkeypress="return isNumberKey(event)" />   
+                                <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control" value="1" onkeypress="return isNumberKey(event)" />   
                             </div>
                             <div class="col-md-4">
                                 <label class="required form-label">Secuencial Ausente</label>
                             </div>
                             <div class="col-md-2">
-                                <input type="number" name="txtnumausente" id="txtnumausente" class="form-control form-control-solid" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
+                                <input type="number" name="txtnumausente" id="txtnumausente" class="form-control" value="1" onkeypress="return isNumberKey(event)" />  
                             </div>
                         </div> 
                     </div>
@@ -601,7 +601,7 @@
                                                     <div class="text-center">
                                                         <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                             <input class="form-check-input h-20px w-20px border-primary" <?php echo $xChkEstado; ?> type="checkbox" id="chkgru<?php echo $xId; ?>" 
-                                                            onchange="f_UpdateEstGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xUsuaid; ?>)" value="<?php echo $xId; ?>"/>
+                                                            onchange="f_UpdateEstGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xUsuaid; ?>,<?php echo $clieid; ?>)" value="<?php echo $xId; ?>"/>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -657,7 +657,7 @@
                         <div class="row mb-10">
                             <div class="col-md-12">
                                 <label class="form-label">Descripcion</label>
-                                <textarea class="form-control textx-uppercase" name="txtDescripcion" id="txtDescripcion" rows="2" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
+                                <textarea class="form-control text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="2" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
                             </div>
                         </div>
                         <div class="row mb-10">
@@ -680,7 +680,7 @@
                                 <label class="required form-label">Costo</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" name="txtCosto" id="txtCosto" class="form-control form-control-solid" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                <input type="number" name="txtCosto" id="txtCosto" class="form-control" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div> 
                         </div>
                         <div class="row mb-10">
@@ -688,13 +688,13 @@
                                 <label class="form-label">Asistencia Mes:</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control form-control-solid" value="1" />   
+                                <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control" value="1" />   
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Asistencia Anual:</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control form-control-solid" placeholder="1" value="1" />  
+                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control" value="1" />  
                             </div>
                         </div>
                         <div class="row border border-hover-primary py-lg-4 px-lg-20">
@@ -770,7 +770,7 @@
                                 <label class="required form-label">Costo</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control form-control-solid" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
                         </div>
                         <div class="row mb-10">
@@ -778,13 +778,13 @@
                                 <label class="form-label">Asistencia Mes:</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control form-control-solid" value="1" onkeypress="return isNumberKey(event)" />  
+                                <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control" value="1" onkeypress="return isNumberKey(event)" />  
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Asistencia Anual:</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control form-control-solid" value="1" onkeypress="return isNumberKey(event)" />   
+                                <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control" value="1" onkeypress="return isNumberKey(event)" />   
                             </div>
                         </div>
                         <div class="row border border-hover-primary py-lg-4 px-lg-10">
@@ -852,7 +852,12 @@
         }); 
         
         $("#btnNewGrupo").click(function(){
-
+            $('#txtGrupo').val('');
+            $('#txtDescGrupo').val('');
+            $('#txtnumagenda').val(1);
+            $('#txtnumcancelado').val(1);
+            $('#txtnumatendido').val(1);
+            $('#txtnumausente').val(1);
             $("#modal_new_grupo").modal("show");
         });
 
@@ -1011,7 +1016,7 @@
     //Agregar Producto directo a la base
     $('#btnAgregar').click(function(){
 
-       debugger;
+       //debugger;
         var _gerencial = 'NO';
         var _output;
         var _clieid = "<?php echo $clieid; ?>";
@@ -1174,8 +1179,6 @@
 
             }else  if(response.trim() == 'EXISTE'){
                 toastSweetAlert("top-end",3000,"warning","Grupo ya Existe..!!");
-                $("#txtGrupo").val("");
-                $("#txtDescGrupo").val("");
             }
         });
     }
@@ -1223,7 +1226,7 @@
 
     }
 
-    function f_UpdateEstGrupo(_paisid, _emprid, _id, _usuaid){
+    function f_UpdateEstGrupo(_paisid, _emprid, _id, _usuaid,_clieid){
 
         let _check= $('#chkgru'+_id).is(':checked');
         let _checked = "";
@@ -1255,6 +1258,10 @@
 
         var xrespuesta = $.post("codephp/update_estadogrupo.php", _parametros);
             xrespuesta.done(function(response){
+                $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {
+                    'mensaje': '',
+                    'idclie': _clieid
+                });
         });        
 
     }
@@ -1327,8 +1334,7 @@
                                 $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {
                                 'mensaje': 'Actualizado con Exito',
                                  'idclie': _clieid
-                            
-                            });
+                                });
 
                         }
                     });
