@@ -45,15 +45,11 @@
 
         $xProvid = $clie['prov_id'];
         $xCliente = $clie['clie_nombre'];
-        $xDesc = $clie['clie_descripcion'];
         $xDirec = $clie['clie_direccion'];
         $xUrl = $clie['clie_url'];
         $xTel1 = $clie['clie_tel1'];
         $xTel2 = $clie['clie_tel2'];
-        $xTel3 = $clie['clie_tel3'];
         $xCel1 = $clie['clie_cel1'];
-        $xCel2 = $clie['clie_cel2'];
-        $xCel3 = $clie['clie_cel3'];
         $xEmail1 = $clie['clie_email1'];
         $xEmail2 = $clie['clie_email2'];
         $xImgc = $clie['clie_imgcab'];
@@ -81,7 +77,7 @@
     $xSQL = "SELECT pro.prod_id AS Idprod, pro.prod_nombre AS Producto, pro.prod_descripcion AS Descrip, pro.prod_costo AS Costo, ";
     $xSQL .="pro.prod_asistmes AS AsisMes, pro.prod_asistanu AS AsisAnu, pro.prod_cobertura AS Cobertura, pro.prod_sistema AS Sistema, ";
     $xSQL .="pro.prod_gerencial AS Gerencial,CASE pro.prod_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado, gru.grup_id AS Idgrup,gru.grup_nombre AS Grupo FROM `expert_productos` pro INNER JOIN ";
-    $xSQL .="`expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.clie_id =$clieid AND pro.pais_id =$xPaisid AND pro.empr_id =$xEmprid ORDER BY gru.grup_nombre ";
+    $xSQL .="`expert_grupos` gru ON pro.grup_id = gru.grup_id WHERE pro.clie_id =$clieid AND pro.pais_id =$xPaisid AND pro.empr_id =$xEmprid AND gru.grup_estado='A' ORDER BY gru.grup_nombre ";
     $all_prod = mysqli_query($con, $xSQL);
 
 ?>
@@ -262,147 +258,57 @@
                                 </div>
                                 <div class="mb-5 fv-row">
                                     <label class="required form-label">Cliente</label>
-                                    <input type="text" name="txtCliente" id="txtCliente" class="form-control mb-2" minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="<?php echo $xCliente; ?>" />
-                                    <input type="hidden" name="txtClieant" id="txtClieant" class="form-control mb-2" value="<?php echo $xCliente; ?>" />
+                                    <input type="text" name="txtCliente" id="txtCliente" class="form-control text-uppercase" minlength="5" maxlength="150" placeholder="Ingrese Nombre" value="<?php echo $xCliente; ?>" />
+                                    <input type="hidden" name="txtClieant" id="txtClieant" class="form-control" value="<?php echo $xCliente; ?>" />
                                 </div>
-                                <div class="mb-1 fv-row">
-                                    <label class="form-label">Descripcion</label>
-                                    <textarea class="form-control mb-2" name="txtDesc" id="txtDesc" maxlength="200" onkeydown="return (event.keyCode!=13);"><?php echo $xDesc; ?></textarea>
-                                </div>                                 
-                            </div>
-                            <div class="card-header border-0">
-                                <div class="card-title">
-                                    <h2 class="fw-normal">Direccion - Telefonos - Mails</h2>
+                                <div class="mb-5 fv-row">
+                                    <label class="form-label">Direccion</label>
+                                    <textarea class="form-control" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDirec; ?> </textarea>
                                 </div>
-                            </div>
-                            <div id="kt_customer_view_payment_method" class="card-body pt-0">
-                                <div class="py-0" data-kt-customer-payment-method="row">
-                                    <div class="py-3 d-flex flex-stack flex-wrap">
-                                    	<div class="d-flex align-items-center  collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_1" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_1">
-                                    		<div class="me-3 rotate-90">
-                                    			<span class="svg-icon svg-icon-3">
-                                    				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    					<path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                    				</svg>
-                                    			</span>
-                                    		</div>
-                                    		<i class="fa fa-location-arrow fa-1x me-2" style="color:#F46D55;" aria-hidden="true"></i>
-                                    		<div class="me-3">
-                                    			<div class="d-flex align-items-center">
-                                    				<div class="text-gray-800 fw-bolder">Direccion</div>
-                                    			</div>
-                                    		</div>
-                                    	</div>
+                                <div class="mb-5 fv-row">
+                                    <label class="form-label">Url</label>
+                                    <input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" placeHolder="https://wwww.dominio.com" value="<?php echo $xUrl; ?>" />
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col-md-4">
+                                        <label class="fs-6 fw-bold form-label mt-3">
+                                            <i class="fa fa-phone fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                            <span class="">Telefono 1</span>   
+                                        </label>
+                                        <input type="text" class="form-control mb-2" name="txtFono1" id="txtFono1" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel1; ?>" />
                                     </div>
-                                    <div id="kt_customer_view_payment_method_1" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
-                                    	<div class="d-flex flex-wrap py-5">
-                                    		<div class="flex-equal me-5">
-                                    			<div class="row mb-8">
-                                    				<div class="col-xl-2">
-                                    					<div class="fs-6 fw-bold mt-2 mb-3">Direccion:</div>
-                                    				</div>
-                                    				<div class="col-xl-10 fv-row">
-                                    					<textarea class="form-control mb-2" name="txtDireccion" id="txtDireccion" maxlength="250" onkeydown="return (event.keyCode!=13);"> <?php echo $xDirec; ?> </textarea>
-                                    				</div>
-                                    			</div>
-                                    			<div class="row mb-8">
-                                    				<div class="col-xl-2">
-                                    					<div class="fs-6 fw-bold mt-2 mb-3">URL:</div>
-                                    				</div>
-                                    				<div class="col-xl-10 fv-row">
-                                    					<input type="text" class="form-control mb-2 text-lowercase" name="txtUrl" id="txtUrl" maxlength="150" placeHolder="https://wwww.dominio.com" value="<?php echo $xUrl; ?>" />
-                                    				</div>
-                                    			</div>
-                                    		</div>
-                                    	</div>
+                                    <div class="col-md-4">
+                                        <label class="fs-6 fw-bold form-label mt-3">
+                                            <i class="fa fa-phone fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                            <span class="">Telefono 2</span>   
+                                        </label>
+                                        <input type="text" class="form-control mb-2" name="txtFono2" id="txtFono2" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel2; ?>" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="fs-6 fw-bold form-label mt-3">
+                                            <i class="fa fa-mobile fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                            <span class="">Celular</span>   
+                                        </label>
+                                        <input type="text" class="form-control mb-2" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="0999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCel1; ?>" />
                                     </div>
                                 </div>
-                                <div class="separator separator-dashed"></div>
-                                <div class="py-0" data-kt-customer-payment-method="row">
-                                    <div class="py-3 d-flex flex-stack flex-wrap">
-                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_2" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_2">
-                                            <div class="me-3 rotate-90">
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                            <i class="fa fa-phone fa-1x me-2" style="color:#7DF57D;" aria-hidden="true"></i>
-                                            <div class="me-3">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="text-gray-800 fw-bolder">Telefonos</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div id="kt_customer_view_payment_method_2" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
-                                        <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Telefono 1:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel1; ?>" />
-                                            </div>
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Telefono 2:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel2; ?>" />
-                                            </div> 
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Telefono 3:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtFono3" id="txtFono3" maxlength="9" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xTel3; ?>" />
-                                            </div>                                                        
-                                        </div>
-                                        <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-3 row-cols-lg-3">
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Celular 1:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular1" id="txtCelular1" maxlength="10" placeholder="0999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCel1; ?>" />
-                                            </div>
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Celular 2:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular2" id="txtCelular2" maxlength="10"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCel2; ?>" />
-                                            </div> 
-                                            <div class="col">
-                                                <div class="fs-6 fw-bold mt-2 mb-3">Celular 3:</div>
-                                                <input type="text" class="form-control mb-2 w-150px" name="txtCelular3" id="txtCelular3" maxlength="10"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="<?php echo $xCel3; ?>" />
-                                            </div>
-                                        </div>                                                
-                                    </div>
-                                </div>
-                                <div class="separator separator-dashed"></div>
-                                <div class="py-0" data-kt-customer-payment-method="row">
-                                    <div class="py-3 d-flex flex-stack flex-wrap">
-                                        <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_customer_view_payment_method_3" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_3">
-                                            <div class="me-3 rotate-90">
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor" />
-                                                    </svg>
-                                                </span>
-                                            </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="fs-6 fw-bold form-label mt-3">
                                             <i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
-                                            <div class="me-3">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="text-gray-800 fw-bolder">E-mail</div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            <span class="">Email 1</span>   
+                                        </label>
+                                        <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="<?php echo $xEmail1; ?>" />
                                     </div>
-                                    <div id="kt_customer_view_payment_method_3" class="collapse fs-6 ps-10" data-bs-parent="#kt_customer_view_payment_method">
-                                        <div class="d-flex flex-wrap gap-5">
-                                            <div class="fv-row w-100 flex-md-root">
-                                                <label class="form-label">Email 1</label>
-                                                <input type="email" name="txtEmail1" id="txtEmail1" maxlength="150" placeholder="micorre@dominio.com" class="form-control mb-2 text-lowercase" value="<?php echo $xEmail1; ?>" />
-                                            </div>                                                 
-                                        </div>
-                                        <div class="d-flex flex-wrap gap-5">
-                                            <div class="fv-row w-100 flex-md-root">
-                                                <label class="form-label">Email 2</label>
-                                                <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" class="form-control mb-2 text-lowercase" value="<?php echo $xEmail2; ?>" />
-                                            </div>
-                                        </div>
+                                    <div class="col-md-6">
+                                        <label class="fs-6 fw-bold form-label mt-3">
+                                            <i class="fa fa-envelope fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
+                                            <span class="">Email 2</span>   
+                                        </label>
+                                        <input type="email" name="txtEmail2" id="txtEmail2" maxlength="150" class="form-control mb-2 text-lowercase" value="<?php echo $xEmail2; ?>" />
                                     </div>
-                                </div>
-                            </div>
+                                </div>                                
+                            </div>  
                         </div>    
                     </div>
                     <div class="d-flex justify-content-end mt-5">
@@ -543,26 +449,26 @@
                                 <span class="required">Grupo</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre del grupo"></i>
                             </label>
-                            <input type="text" class="form-control" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
+                            <input type="text" class="form-control text-uppercase" maxlength="80" placeholder="Nombre Grupo" name="txtGrupo" id="txtGrupo" />
                         </div>
                         <div class="fv-row mb-15">
                             <label class="fs-6 fw-bold form-label mb-2">
                                 <span>Descripcion</span>
                             </label>
-                            <textarea class="form-control" name="txtDescGrupo" id="txtDescGrupo" rows="1" maxlength="150" onkeydown="return(event.keyCode!=13);"></textarea>
+                            <textarea class="form-control text-uppercase" name="txtDescGrupo" id="txtDescGrupo" rows="2" maxlength="150" onkeydown="return(event.keyCode!=13);"></textarea>
                         </div>
                         <div class="row mb-10">
                             <div class="col-md-4">
                                 <label class="required form-label">Secuencial Agenda</label>
                             </div>
                             <div class="col-md-2">
-                                <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control form-control-solid" value="1" onkeypress="return isNumberKey(event)" />   
+                                <input type="number" name="txtnumagenda" id="txtnumagenda" class="form-control" value="1" onkeypress="return isNumberKey(event)" />   
                             </div>
                             <div class="col-md-4">
                                 <label class="required form-label">Secuencial Cancelado</label>
                             </div>
                             <div class="col-md-2">
-                                <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control form-control-solid" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
+                                <input type="number" name="txtnumcancelado" id="txtnumcancelado" class="form-control" value="1" onkeypress="return isNumberKey(event)" />  
                             </div>
                         </div>
                         <div class="row">
@@ -570,13 +476,13 @@
                                 <label class="required form-label">Secuencial Atendido</label>
                             </div>
                             <div class="col-md-2">
-                                <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control form-control-solid" value="1" onkeypress="return isNumberKey(event)" />   
+                                <input type="number" name="txtnumatendido" id="txtnumatendido" class="form-control" value="1" onkeypress="return isNumberKey(event)" />   
                             </div>
                             <div class="col-md-4">
                                 <label class="required form-label">Secuencial Ausente</label>
                             </div>
                             <div class="col-md-2">
-                                <input type="number" name="txtnumausente" id="txtnumausente" class="form-control form-control-solid" placeholder="1" value="1" onkeypress="return isNumberKey(event)" />  
+                                <input type="number" name="txtnumausente" id="txtnumausente" class="form-control" value="1" onkeypress="return isNumberKey(event)" />  
                             </div>
                         </div> 
                     </div>
@@ -695,7 +601,7 @@
                                                     <div class="text-center">
                                                         <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                             <input class="form-check-input h-20px w-20px border-primary" <?php echo $xChkEstado; ?> type="checkbox" id="chkgru<?php echo $xId; ?>" 
-                                                            onchange="f_UpdateEstGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xUsuaid; ?>)" value="<?php echo $xId; ?>"/>
+                                                            onchange="f_UpdateEstGrupo(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>,<?php echo $xUsuaid; ?>,<?php echo $clieid; ?>)" value="<?php echo $xId; ?>"/>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -745,13 +651,13 @@
                         <div class="row mb-4">
                             <div class="col-md-12">
                                 <label class="required form-label">Producto</label>
-                                <input type="text" name="txtProducto" id="txtProducto" class="form-control" maxlength="150" placeholder="Ingrese Producto" value="" />
+                                <input type="text" name="txtProducto" id="txtProducto" class="form-control text-uppercase" maxlength="150" placeholder="Ingrese Producto" value="" />
                             </div>
                         </div>
                         <div class="row mb-10">
                             <div class="col-md-12">
                                 <label class="form-label">Descripcion</label>
-                                <textarea class="form-control" name="txtDescripcion" id="txtDescripcion" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
+                                <textarea class="form-control text-uppercase" name="txtDescripcion" id="txtDescripcion" rows="2" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
                             </div>
                         </div>
                         <div class="row mb-10">
@@ -774,7 +680,7 @@
                                 <label class="required form-label">Costo</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" name="txtCosto" id="txtCosto" class="form-control form-control-solid" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                <input type="number" name="txtCosto" id="txtCosto" class="form-control" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div> 
                         </div>
                         <div class="row mb-10">
@@ -782,13 +688,13 @@
                                 <label class="form-label">Asistencia Mes:</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control form-control-solid" value="1" />   
+                                <input type="number" name="txtAsisMes" id="txtAsisMes" class="form-control" value="1" />   
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Asistencia Anual:</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control form-control-solid" placeholder="1" value="1" />  
+                                <input type="number" name="txtAsisAnu" id="txtAsisAnu" class="form-control" value="1" />  
                             </div>
                         </div>
                         <div class="row border border-hover-primary py-lg-4 px-lg-20">
@@ -836,13 +742,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label class="required form-label">Producto</label>
-                                <input type="text" name="txtProductoEdit" id="txtProductoEdit" class="form-control" maxlength="150" placeholder="Ingrese Producto" value="" />
+                                <input type="text" name="txtProductoEdit" id="txtProductoEdit" class="form-control text-uppercase" maxlength="150" placeholder="Ingrese Producto" value="" />
                             </div>
                         </div>
                         <div class="row mb-10">
                             <div class="col-md-12">
                                 <label class="form-label">Descripcion</label>
-                                <textarea class="form-control " name="txtDescripcionEdit" id="txtDescripcionEdit" rows="1" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
+                                <textarea class="form-control text-uppercase" name="txtDescripcionEdit" id="txtDescripcionEdit" rows="2" maxlength="200" onkeydown="return(event.keyCode!=13);"></textarea>
                             </div>    
                         </div>
                         <div class="row mb-10">
@@ -864,7 +770,7 @@
                                 <label class="required form-label">Costo</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control form-control-solid" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                                <input type="number" name="txtCostoEdit" id="txtCostoEdit" class="form-control" placeholder="Precio al Publico (0.00)" min="0" maxlength = "6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="0.00" step="0.01" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
                             </div>
                         </div>
                         <div class="row mb-10">
@@ -872,13 +778,13 @@
                                 <label class="form-label">Asistencia Mes:</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control form-control-solid" value="1" onkeypress="return isNumberKey(event)" />  
+                                <input type="number" name="txtAsisMesEdit" id="txtAsisMesEdit" class="form-control" value="1" onkeypress="return isNumberKey(event)" />  
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Asistencia Anual:</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control form-control-solid" value="1" onkeypress="return isNumberKey(event)" />   
+                                <input type="number" name="txtAsisAnuEdit" id="txtAsisAnuEdit" class="form-control" value="1" onkeypress="return isNumberKey(event)" />   
                             </div>
                         </div>
                         <div class="row border border-hover-primary py-lg-4 px-lg-10">
@@ -946,7 +852,12 @@
         }); 
         
         $("#btnNewGrupo").click(function(){
-
+            $('#txtGrupo').val('');
+            $('#txtDescGrupo').val('');
+            $('#txtnumagenda').val(1);
+            $('#txtnumcancelado').val(1);
+            $('#txtnumatendido').val(1);
+            $('#txtnumausente').val(1);
             $("#modal_new_grupo").modal("show");
         });
 
@@ -1105,7 +1016,7 @@
     //Agregar Producto directo a la base
     $('#btnAgregar').click(function(){
 
-       debugger;
+       //debugger;
         var _gerencial = 'NO';
         var _output;
         var _clieid = "<?php echo $clieid; ?>";
@@ -1268,8 +1179,6 @@
 
             }else  if(response.trim() == 'EXISTE'){
                 toastSweetAlert("top-end",3000,"warning","Grupo ya Existe..!!");
-                $("#txtGrupo").val("");
-                $("#txtDescGrupo").val("");
             }
         });
     }
@@ -1317,7 +1226,7 @@
 
     }
 
-    function f_UpdateEstGrupo(_paisid, _emprid, _id, _usuaid){
+    function f_UpdateEstGrupo(_paisid, _emprid, _id, _usuaid,_clieid){
 
         let _check= $('#chkgru'+_id).is(':checked');
         let _checked = "";
@@ -1349,6 +1258,10 @@
 
         var xrespuesta = $.post("codephp/update_estadogrupo.php", _parametros);
             xrespuesta.done(function(response){
+                $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {
+                    'mensaje': '',
+                    'idclie': _clieid
+                });
         });        
 
     }
@@ -1421,8 +1334,7 @@
                                 $.redirect('?page=editcliente&menuid=<?php echo $menuid; ?>', {
                                 'mensaje': 'Actualizado con Exito',
                                  'idclie': _clieid
-                            
-                            });
+                                });
 
                         }
                     });

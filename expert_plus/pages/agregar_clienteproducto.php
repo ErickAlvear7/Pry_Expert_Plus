@@ -229,21 +229,21 @@
                                             <i class="fa fa-phone fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
                                             <span class="">Telefono 1</span>   
                                         </label>
-                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono1" id="txtFono1" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                        <input type="text" class="form-control mb-2" name="txtFono1" id="txtFono1" maxlength="9" placeholder="022222222" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                     </div>
                                     <div class="col-md-4">
                                         <label class="fs-6 fw-bold form-label mt-3">
                                             <i class="fa fa-phone fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
                                             <span class="">Telefono 2</span>   
                                         </label>
-                                        <input type="text" class="form-control mb-2 w-150px" name="txtFono2" id="txtFono2" maxlength="9" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                        <input type="text" class="form-control mb-2" name="txtFono2" id="txtFono2" maxlength="9" placeholder="" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                     </div>
                                     <div class="col-md-4">
                                         <label class="fs-6 fw-bold form-label mt-3">
                                             <i class="fa fa-mobile fa-1x me-2" style="color:#5AD1F1;" aria-hidden="true"></i>
                                             <span class="">Celular</span>   
                                         </label>
-                                        <input type="text" class="form-control mb-2 w-150px" name="txtCelular" id="txtCelular" maxlength="10" placeholder="0999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
+                                        <input type="text" class="form-control mb-2" name="txtCelular" id="txtCelular" maxlength="10" placeholder="0999999999" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="" />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -261,7 +261,6 @@
                                         </label>
                                         <input type="email" class="form-control text-lowercase" name="txtEmail2" id="txtEmail2" maxlength="150" placeholder="correo@dominio.com" />
                                     </div>
-
                                 </div>
                             </div>     
                         </div>
