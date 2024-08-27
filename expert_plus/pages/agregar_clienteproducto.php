@@ -550,6 +550,11 @@
         // });
 
         $('#btnAddProd').click(function(){
+
+            $("#txtProducto").val('');
+            $("#txtDescripcion").val('');
+            $("#cboGrupo").val('');
+
             $('#modal_addproducto').modal('show');
         });
         

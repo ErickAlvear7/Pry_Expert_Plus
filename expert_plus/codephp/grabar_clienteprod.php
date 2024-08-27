@@ -15,6 +15,12 @@
 
     $xFecha = strftime("%Y-%m-%d %H:%M:%S", time());  
     $xTerminal = gethostname();
+    //$xTerminal = htmlspecialchars(strip_tags(trim($_SERVER['REMOTE_ADDR'])));
+    $xLocalIP = htmlspecialchars(strip_tags($_SERVER['HTTP_CLIENT_IP'])) 
+    ? htmlspecialchars(strip_tags($_SERVER['HTTP_CLIENT_IP'])) 
+    : (htmlspecialchars(strip_tags($_SERVER['HTTP_X_FORWARDED_FOR'])) 
+         ? htmlspecialchars(strip_tags($_SERVER['HTTP_X_FORWARDED_FOR'])) 
+         : htmlspecialchars(strip_tags($_SERVER['REMOTE_ADDR'])));    
     $respuesta = "ERR";
     $last_id = 0;
 
