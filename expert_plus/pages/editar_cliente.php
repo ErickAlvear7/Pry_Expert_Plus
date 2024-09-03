@@ -935,7 +935,7 @@
         let v = parseInt(this.value);
         if (v < 1) this.value = 1;
         if (v > 99999) this.value = 1;
-    }); 
+    });
     
     document.getElementById("txtnumatendido").addEventListener("change", function() {
         let v = parseInt(this.value);
