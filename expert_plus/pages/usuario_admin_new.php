@@ -80,46 +80,8 @@
 						Nuevo Usuario
 				</button>
 		    </div>			
-
-			<!-- <div class="card-toolbar">
-				<div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-					<button type="button" class="btn btn-light-primary btn-sm me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-				    <i class="fa fa-filter" aria-hidden="true"></i>
-					Filtrar</button>
-					<div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
-						<div class="px-7 py-5">
-							<div class="fs-5 text-dark fw-bolder">Opciones</div>
-						</div>
-						<div class="separator border-gray-200"></div>
-						<div class="px-7 py-5" data-kt-user-table-filter="form">
-							<div class="mb-10">
-								<label class="form-label fs-6 fw-bold">Perfiles:</label>
-								<select class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="--Seleccione Perfil--" data-allow-clear="true" data-kt-user-table-filter="role" data-hide-search="true">
-									<option></option>
-									<?php foreach ($all_perfil as $per) : ?>
-										<option value="<?= $per['Descripcion'] ?>"><?= $per['Descripcion'] ?></option>
-									<?php endforeach ?>  
-								</select>
-							</div>
-							<div class="mb-10">
-								<label class="form-label fs-6 fw-bold">Estado:</label>
-								<select class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="--Seleccione Estado--" data-allow-clear="true" data-kt-user-table-filter="two-step" data-hide-search="true">
-									<option></option>
-									<option value="Activo">ACTIVO</option>
-									<option value="Inactivo">INACTIVO</option>
-								</select>
-							</div>
-							<div class="d-flex justify-content-end">
-								<button type="reset" class="btn btn-sm btn-light-danger me-2" data-kt-menu-dismiss="true" data-kt-user-table-filter="reset"><i class="fa fa-window-close" aria-hidden="true"></i>Cerrar</button>
-								<button type="submit" class="btn btn-sm btn-light-primary" data-kt-menu-dismiss="true" data-kt-user-table-filter="filter"><i class="fa fa-check" aria-hidden="true"></i>Aplicar</button>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div> -->
-
 		</div>
+		
 		<div class="card-body py-4" >
 			<table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="kt_table_users" style="width: 100%;">
 				<thead>
@@ -239,6 +201,7 @@
 		</div>
 	</div>
 </div>
+
 <!--Modal Usuario-->
 <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable  mw-900px">

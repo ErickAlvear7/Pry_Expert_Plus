@@ -55,7 +55,7 @@ var KTUsersList = function () {
             "pageLength": 10,
             "language": {
                 "zeroRecords": "Sin resultados encontrados",
-              }            
+              }
             
         });
 
