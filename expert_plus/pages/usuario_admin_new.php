@@ -187,18 +187,18 @@
 									<div class="card card-flush h-md-100">
 										<div class="card-body d-flex flex-center flex-column pt-12 p-9">
 											<div class="symbol symbol-65px symbol-circle mb-5">
-												<img src="assets/images/users/<?php echo $avatar; ?>" class="w-100" />
+												<img src="assets/images/users/<?php echo $avatar; ?>" class="w-150" />
 												<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>
 											</div>   
 											<h2 class="badge badge-light-primary fw-light fs-2 fst-italic"><?php echo $login; ?></h2>
 											<div class="fw-bold text-gray-400 mb-6"><?php echo $perfil; ?></div>
-											<div class="<?php echo $xTextColor; ?>"><?php echo $estado; ?></div>
+											<div id="divEstado_<?php echo $usu['Idusuario']; ?>"  class="<?php echo $xTextColor; ?>"><?php echo $estado; ?></div>
 											<div class="text-center">
 												<div class="form-check form-check-sm form-check-custom form-check-solid">
 													<input <?php echo $cheking; ?> class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $idusuario; ?>" 
 														onchange="f_UpdateEstado(<?php echo $xEmprid; ?>,<?php echo $usu['Idusuario']; ?>)" value="<?php echo $idusuario; ?>"/>
 												</div>
-											</div>                                                
+											</div>
 										</div>
 										<div class="card-footer flex-wrap pt-0">
 											<div class="row">
@@ -977,7 +977,7 @@
 		let _checked = "";
 		let _disabled = "";
 		let _class = "badge badge-light-primary";
-		let _td = "td_" + _userid;
+		let _td = "divEstado_" + _userid;
 		let _btnreset = "btnReset_" + _userid;
 		let _btnedit = "btnEditar_" + _userid;
 
@@ -996,7 +996,7 @@
 		}
 
 		var _changetd = document.getElementById(_td);
-		_changetd.innerHTML = '<td><div class="' + _class + '">' + _estado + ' </div>';
+		_changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
 
 		var _parametros = {
 			"xxUsuaid" : _userid,
