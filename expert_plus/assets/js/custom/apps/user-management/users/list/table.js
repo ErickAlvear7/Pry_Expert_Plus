@@ -15,36 +15,36 @@ var KTUsersList = function () {
 
         tableRows.forEach(row => {
             const dateRow = row.querySelectorAll('td');
-            const lastLogin = dateRow[3].innerText.toLowerCase(); // Get last login time
-            let timeCount = 0;
-            let timeFormat = 'minutes';
+            //const lastLogin = dateRow[3].innerText.toLowerCase(); // Get last login time
+            //let timeCount = 0;
+            //let timeFormat = 'minutes';
 
             // Determine date & time format -- add more formats when necessary
-            if (lastLogin.includes('yesterday')) {
-                timeCount = 1;
-                timeFormat = 'days';
-            } else if (lastLogin.includes('mins')) {
-                timeCount = parseInt(lastLogin.replace(/\D/g, ''));
-                timeFormat = 'minutes';
-            } else if (lastLogin.includes('hours')) {
-                timeCount = parseInt(lastLogin.replace(/\D/g, ''));
-                timeFormat = 'hours';
-            } else if (lastLogin.includes('days')) {
-                timeCount = parseInt(lastLogin.replace(/\D/g, ''));
-                timeFormat = 'days';
-            } else if (lastLogin.includes('weeks')) {
-                timeCount = parseInt(lastLogin.replace(/\D/g, ''));
-                timeFormat = 'weeks';
-            }
+            //if (lastLogin.includes('yesterday')) {
+            //    timeCount = 1;
+            //    timeFormat = 'days';
+            //} else if (lastLogin.includes('mins')) {
+            //    timeCount = parseInt(lastLogin.replace(/\D/g, ''));
+            //    timeFormat = 'minutes';
+            //} else if (lastLogin.includes('hours')) {
+            //    timeCount = parseInt(lastLogin.replace(/\D/g, ''));
+            //    timeFormat = 'hours';
+            //} else if (lastLogin.includes('days')) {
+            //    timeCount = parseInt(lastLogin.replace(/\D/g, ''));
+            //    timeFormat = 'days';
+            //} else if (lastLogin.includes('weeks')) {
+            //    timeCount = parseInt(lastLogin.replace(/\D/g, ''));
+            //    timeFormat = 'weeks';
+           // }
 
             // Subtract date/time from today -- more info on moment datetime subtraction: https://momentjs.com/docs/#/durations/subtract/
-            const realDate = moment().subtract(timeCount, timeFormat).format();
+            //const realDate = moment().subtract(timeCount, timeFormat).format();
 
             // Insert real date to last login attribute
             //dateRow[3].setAttribute('data-order', realDate);
 
             // Set real date for joined column
-            const joinedDate = moment(dateRow[5].innerHTML, "DD MMM YYYY, LT").format(); // select date from 5th column in table
+            //const joinedDate = moment(dateRow[5].innerHTML, "DD MMM YYYY, LT").format(); // select date from 5th column in table
            // dateRow[5].setAttribute('data-order', joinedDate);
         });
 
@@ -53,7 +53,9 @@ var KTUsersList = function () {
             "info": false,
             'order': [],
             "pageLength": 10,
-            "lengthChange": false
+            "language": {
+                "zeroRecords": "Sin resultados encontrados",
+              }            
             
         });
 
@@ -75,51 +77,41 @@ var KTUsersList = function () {
 
     // Filter Datatable
     var handleFilterDatatable = () => {
-        // Select filter options
-        const filterForm = document.querySelector('[data-kt-user-table-filter="form"]');
-        const filterButton = filterForm.querySelector('[data-kt-user-table-filter="filter"]');
-        const selectOptions = filterForm.querySelectorAll('select');
+        // const filterForm = document.querySelector('[data-kt-user-table-filter="form"]');
+        // const filterButton = filterForm.querySelector('[data-kt-user-table-filter="filter"]');
+        // const selectOptions = filterForm.querySelectorAll('select');
 
-        // Filter datatable on submit
-        filterButton.addEventListener('click', function () {
-            var filterString = '';
+        // filterButton.addEventListener('click', function () {
+        //     var filterString = '';
 
-            // Get filter values
-            selectOptions.forEach((item, index) => {
-                if (item.value && item.value !== '') {
-                    if (index !== 0) {
-                        filterString += ' ';
-                    }
+        //     selectOptions.forEach((item, index) => {
+        //         if (item.value && item.value !== '') {
+        //             if (index !== 0) {
+        //                 filterString += ' ';
+        //             }
 
-                    // Build filter value options
-                    filterString += item.value;
-                }
-            });
+        //             filterString += item.value;
+        //         }
+        //     });
 
-            // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
-            datatable.search(filterString).draw();
-        });
+        //     datatable.search(filterString).draw();
+        //});
     }
 
     // Reset Filter
     var handleResetForm = () => {
-        // Select reset button
-        const resetButton = document.querySelector('[data-kt-user-table-filter="reset"]');
+        // const resetButton = document.querySelector('[data-kt-user-table-filter="reset"]');
 
-        // Reset datatable
-        resetButton.addEventListener('click', function () {
-            // Select filter options
-            const filterForm = document.querySelector('[data-kt-user-table-filter="form"]');
-            const selectOptions = filterForm.querySelectorAll('select');
+        // resetButton.addEventListener('click', function () {
+        //     const filterForm = document.querySelector('[data-kt-user-table-filter="form"]');
+        //     const selectOptions = filterForm.querySelectorAll('select');
 
-            // Reset select2 values -- more info: https://select2.org/programmatic-control/add-select-clear-items
-            selectOptions.forEach(select => {
-                $(select).val('').trigger('change');
-            });
+        //     selectOptions.forEach(select => {
+        //         $(select).val('').trigger('change');
+        //     });
 
-            // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
-            datatable.search('').draw();
-        });
+        //     datatable.search('').draw();
+        // });
     }
 
 
@@ -186,25 +178,20 @@ var KTUsersList = function () {
 
     // Init toggle toolbar
     var initToggleToolbar = () => {
-        // Toggle selected action toolbar
-        // Select all checkboxes
-        const checkboxes = table.querySelectorAll('[type="checkbox"]');
+        // const checkboxes = table.querySelectorAll('[type="checkbox"]');
 
-        // Select elements
-        toolbarBase = document.querySelector('[data-kt-user-table-toolbar="base"]');
-        toolbarSelected = document.querySelector('[data-kt-user-table-toolbar="selected"]');
-        selectedCount = document.querySelector('[data-kt-user-table-select="selected_count"]');
-        const deleteSelected = document.querySelector('[data-kt-user-table-select="delete_selected"]');
+        // toolbarBase = document.querySelector('[data-kt-user-table-toolbar="base"]');
+        // toolbarSelected = document.querySelector('[data-kt-user-table-toolbar="selected"]');
+        // selectedCount = document.querySelector('[data-kt-user-table-select="selected_count"]');
+        // const deleteSelected = document.querySelector('[data-kt-user-table-select="delete_selected"]');
 
-        // Toggle delete selected toolbar
-        checkboxes.forEach(c => {
-            // Checkbox on click event
-            c.addEventListener('click', function () {
-                setTimeout(function () {
-                    toggleToolbars();
-                }, 50);
-            });
-        });
+        // checkboxes.forEach(c => {
+        //     c.addEventListener('click', function () {
+        //         setTimeout(function () {
+        //             toggleToolbars();
+        //         }, 50);
+        //     });
+        // });
 
         // Deleted selected rows
         // deleteSelected.addEventListener('click', function () {
@@ -262,30 +249,22 @@ var KTUsersList = function () {
 
     // Toggle toolbars
     const toggleToolbars = () => {
-        // Select refreshed checkbox DOM elements 
-        const allCheckboxes = table.querySelectorAll('tbody [type="checkbox"]');
+        // const allCheckboxes = table.querySelectorAll('tbody [type="checkbox"]');
 
-        // Detect checkboxes state & count
-        let checkedState = false;
-        let count = 0;
+        // let checkedState = false;
+        // let count = 0;
 
-        // Count checked boxes
-        allCheckboxes.forEach(c => {
-            if (c.checked) {
-                checkedState = true;
-                count++;
-            }
-        });
+        // allCheckboxes.forEach(c => {
+        //     if (c.checked) {
+        //         checkedState = true;
+        //         count++;
+        //     }
+        // });
 
-        // Toggle toolbars
-        if (checkedState) {
-            // selectedCount.innerHTML = count;
-            // toolbarBase.classList.add('d-none');
-            // toolbarSelected.classList.remove('d-none');
-        } else {
-            toolbarBase.classList.remove('d-none');
-            //toolbarSelected.classList.add('d-none');
-        }
+        // if (checkedState) {
+        // } else {
+        //     toolbarBase.classList.remove('d-none');
+        // }
     }
 
     return {

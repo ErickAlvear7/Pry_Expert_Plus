@@ -57,7 +57,7 @@
 
             ?>
                 <div class="col-md-4">
-                        <div class="card card-flush h-md-100">
+                    <div class="card card-flush h-md-100">
                         <div class="card-header">
                             <div class="card-title">
                                 <h2 class="badge badge-light-primary fw-light fs-2 fst-italic"><?php echo $perfil['Perfil']; ?></h2>

@@ -32,6 +32,8 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 	$xCodigoPerf = 0;
+    $xCantidad = 0;
+    $xTotalUsuarios = 0;
 
 	$xFechaActual = strftime('%Y-%m-%d', time());
 	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
@@ -50,6 +52,13 @@
 			$xCodigoPerf = $perfil['Codigo'];
 		}
 	}
+
+    $xSQL = "SELECT COUNT(*) as Contar  FROM `expert_usuarios` usu WHERE usu.pais_id=$xPaisid AND usu.empr_id=$xEmprid AND usu.perf_id>1 ";
+	$all_contar = mysqli_query($con, $xSQL);
+    foreach($all_contar as $contar){ 
+        $xTotalUsuarios = $contar['Contar'];
+    }
+
 
 ?>
  	<!--begin::Container-->
@@ -111,25 +120,25 @@
 			</div> -->
 
 		</div>
-		<div class="card-body py-4">
+		<div class="card-body py-4" >
 			<table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="kt_table_users" style="width: 100%;">
 				<thead>
 					<tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
-						<th style="display:none;">Id</th>
-						<th style="display:none;">Login</th>
-						<th class="min-w-125px">Usuario</th>
-						<th>Pais</th>
-						<th>Perfil</th>
-						<th>Estado</th>
-						<th>Status</th>                                
-						<th style="text-align: center;">Opciones</th>
+						<th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
 					</tr>
 				</thead>
 
 				<tbody class="text-gray-600 fw-bold">
 
 					<?php 
-								
+							
+                        $xCantidad = 0;
 						foreach($all_usuarios as $usu){
 							$idusuario = $usu['Idusuario'];
 							$estado = trim($usu['Estado']);
@@ -142,6 +151,9 @@
 							if($avatar == ''){
 								$avatar = 'user.png';
 							}
+
+                            $xCantidad = $xCantidad + 1; 
+                           
 						?>
 							<?php 
 
@@ -165,49 +177,63 @@
 									$xPaisName = $pais['pais_nombre'];
 								}
 							?>
-							<tr>
-								<td style="display:none;"><?php echo $idusuario; ?></td>
-								<td style="display:none;"><?php echo $login; ?></td>
-								<td class="d-flex align-items-center">
-									<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-										<a href="?page=editsuper_user&menuid=0&tokeid=<?php echo $idusuario; ?>">
-											<div class="symbol-label">
+                            
+                            <?php if($xCantidad == 1 ){ ?>
+                            <tr> 
+                            <?php } ?>
+                                <td style="width: 1%;"></td>
+                                <td style="width: 32%;">
+                                    
+									<div class="card card-flush h-md-100">
+										<div class="card-body d-flex flex-center flex-column pt-12 p-9">
+											<div class="symbol symbol-65px symbol-circle mb-5">
 												<img src="assets/images/users/<?php echo $avatar; ?>" class="w-100" />
+												<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>
+											</div>   
+											<h2 class="badge badge-light-primary fw-light fs-2 fst-italic"><?php echo $login; ?></h2>
+											<div class="fw-bold text-gray-400 mb-6"><?php echo $perfil; ?></div>
+											<div class="<?php echo $xTextColor; ?>"><?php echo $estado; ?></div>
+											<div class="text-center">
+												<div class="form-check form-check-sm form-check-custom form-check-solid">
+													<input <?php echo $cheking; ?> class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $idusuario; ?>" 
+														onchange="f_UpdateEstado(<?php echo $xEmprid; ?>,<?php echo $usu['Idusuario']; ?>)" value="<?php echo $idusuario; ?>"/>
+												</div>
+											</div>                                                
+										</div>
+										<div class="card-footer flex-wrap pt-0">
+											<div class="row">
+												<div class="col">
+													<div class="d-grid gap-2">
+														<button type="button" class="btn btn-light-primary border border-primary btn-sm" onclick="f_EditarUsuario(<?php echo $idusuario; ?>,'<?php echo $login; ?>')"><i class="las la-pencil-alt me-1" aria-hidden="true"></i>Editar Usuario</button>
+													</div>
+												</div>
 											</div>
-										</a>
-									</div>
-									<div class="d-flex flex-column">
-										<a href="?page=editsuper_user&menuid=0&tokeid=<?php echo $idusuario; ?>" class="text-gray-800 text-hover-primary mb-1"><?php echo $usuario; ?></a>
-										<span><?php echo $login; ?></span>
-									</div>
-								</td>
-								<td><?php echo $xPaisName; ?> </td>
-								<td><?php echo $perfil; ?></td>
-								<td id="td_<?php echo $idusuario; ?>">
-									<div class="<?php echo $xTextColor; ?>"><?php echo $estado; ?></div>
-								</td>
-								<td>
-									<div class="text-center">
-										<div class="form-check form-check-sm form-check-custom form-check-solid">
-											<input <?php echo $cheking; ?> class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $idusuario; ?>" 
-												onchange="f_UpdateEstado(<?php echo $xEmprid; ?>,<?php echo $usu['Idusuario']; ?>)" value="<?php echo $idusuario; ?>"/>
 										</div>
 									</div>
-								</td> 													
-								<td class="text-end">
-									<div class="text-center">
-										<div class="btn-group">
-											<button id="btnReset_<?php echo $idusuario; ?>" onclick="f_ResetPass(<?php echo $idusuario; ?>,<?php echo $xEmprid; ?>)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" <?php echo $xDisabledReset;?> title='Resetear Password' data-bs-toggle="tooltip" data-bs-placement="left">
-												<i class='fa fa-key'></i>
-											</button>		
-											<button id="btnEditar" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " <?php echo $xDisabledEdit; ?> onclick="f_EditarUsuario(<?php echo $idusuario; ?>,'<?php echo $login; ?>')" title='Editar Usuario' data-bs-toggle="tooltip" data-bs-placement="left" >
-												<i class='fa fa-edit'></i>
-											</button>													                                                
-										</div>
-									</div>
-								</td>	
+                                </td>
+
+								<?php if($xCantidad == 3) { $xTotalUsuarios = $xTotalUsuarios - $xCantidad; $xCantidad = 0; ?>
+									<td style="width: 1%;"></td>
+									</tr>
+								<?php } ?>
+
+					<?php 	} ?>  
+
+					<?php
+						if($xTotalUsuarios == 1) { ?>
+							<td style="width: 1%;"></td>
+							<td style="width: 32%;"></td>
+							<td style="width: 1%;"></td>
+							<td style="width: 32%;"></td>
+							<td style="width: 1%;"></td>
 							</tr>
-					<?php } ?>  
+					<?php  }elseif($xTotalUsuarios == 2) { ?>
+							<td style="width: 1%;"></td>
+							<td style="width: 32%;"></td>
+							<td style="width: 1%;"></td>
+							</tr>
+					<?php } ?>
+
 				</tbody>
 			</table>
 		</div>
@@ -651,7 +677,7 @@
 				document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/" + _avatar + ")";
 				
 				if(_login == 'admin@prestasalud.com' && _nombres == 'Administrador'){
-					$("input").prop('disabled', true);
+					//$("input").prop('disabled', true);
 				}
 
 				if(_caduca == 'SI'){

@@ -1858,7 +1858,6 @@
                 console.log(error);
             }
         });
-
     }
 
     //Modal Agregar Motivos Servicios
@@ -1874,7 +1873,7 @@
         }
 
         var _selespecialidad = $('#txtAsistencia_' + _prseid).val();
-        console.log(_selespecialidad);
+        //console.log(_selespecialidad);
         document.getElementById("headerTitleMotivo").innerHTML = "Asistencia: " + _selespecialidad;
 
         var _parametros = {
@@ -1926,8 +1925,6 @@
                 console.log(error);
             }
         });
-      
-
     }
 
     //Modal Profesional 

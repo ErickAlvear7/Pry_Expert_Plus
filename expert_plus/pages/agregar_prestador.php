@@ -348,16 +348,13 @@
                                 </div>
                             </div>
                             <div class="card-body pt-0">
-                                <div class="d-flex justify-content-center flex-column gap-5">
-                                    <table id="tblEspecialidad" class="table table-sm table-hover table-bordered">
+                                <div class="mh-300px scroll-y me-n7 pe-7">
+                                    <table id="tblAsistencia" class="table table-sm table-hover table-bordered">
                                         <thead>
                                             <tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
-                                                <th style="display: none;">Id</th>
-                                                <th>TIPO ASISTENCIA</th>
-                                                <th>TIPO ATENCION</th>
-                                                <th>RED</th>
-                                                <th>PVP</th>
-                                                <th>OPCIONES</th>
+                                                <th>Asistencia</th>
+                                                <th>No. Atenciones</th>
+                                                <th>Opciones</th>
                                             </tr>
                                         </thead>
                                         <tbody class="fw-bold text-gray-600">
@@ -375,6 +372,7 @@
         </div>
     </form>
 </div>
+
 <!--Modal Nueva Asistencia -->
 <div class="modal fade" id="modal_new_asistencia" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-800px">
@@ -431,83 +429,48 @@
         </div>
     </div>
 </div>  
-<!-- <div class="modal fade" id="modal-new-tipoprestador" tabindex="-1" aria-hidden="true">
+
+<!--Modal Lista Servicios -->
+<div class="modal fade" id="modal_lista_servicios" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Nuevo Tipo Prestador</h2>
-                <i class="fa fa-window-close fa-2x" aria-hidden="true" data-bs-dismiss="modal"></i>
+                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic">Lista de Servicios</h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
             </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <form id="kt_modal_new_card_form" class="form">
-                    <div class="d-flex flex-column mb-7 fv-row">
-                        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                            <span class="required">Tipo Prestador</span>
-                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Especifique el nombre de la especialidad"></i>
-                        </label>
-                        <input type="text" class="form-control mb-2" maxlength="150" placeholder="Tipo Prestador" name="txtTipoPrestador" id="txtTipoPrestador" />
-                    </div>
-
-                    <div class="d-flex flex-column mb-7 fv-row">
-                        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                            <span>Valor</span>
-                        </label>
-                        <input type="text" class="form-control mb-2" maxlength="100" placeholder="ValorV" name="txtValor" id="txtValor" />
-                    </div>
-                    <div class="d-flex flex-column mb-7 fv-row">
-                        <div class="mb-10">
-                            <div class="fs-6 fw-bold mb-2">Tipo Prestadores</div>
-                            <div class="mh-300px scroll-y me-n7 pe-7">
-                                <table id="tblTipoPrestador" class="table align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
-                                    <thead>
-                                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                            <th>Tipo Prestador</th>
-                                            <th>Valor</th>
-                                            <th>Estado</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="fw-bold text-gray-600">
-                                        <?php 
-                                
-                                            foreach($all_tipopresta as $presta){
-                                                $xNombre = $presta['Nombre'];
-                                                $xValor = $presta['Valor'];
-                                                $xEstado = $presta['Estado'];
-                                            ?>
-                                                <?php                     
-                                                    if($xEstado == 'Activo'){
-                                                        $xTextColor = "badge badge-light-primary";
-                                                    }else{
-                                                        $xTextColor = "badge badge-light-danger";
-                                                    }                    
-                                                ?>
-                                                <tr>
-                                                    <td><?php echo $xNombre; ?></td>
-                                                    <td><?php echo $xValor; ?></td>                                                            
-                                                    <td>
-                                                        <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
-                                                    </td>                                                            
-                                                </tr>
-                                        <?php } ?>                                                  
-                                    </tbody>
-                                </table>
-                            </div>
+            <div class="modal-body py-lg-10 px-lg-10">
+                <div class="d-flex flex-column mb-7 fv-row">
+                    <div class="mb-10">
+                        <div class="mh-300px scroll-y me-n7 pe-7">
+                            <table id="tbllistaservicios" class="table align-middle table-row-dashed fs-6 gy-5" style="width: 100%;">
+                                <thead>
+                                    <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                        <th>Servicio</th>
+                                        <th>Valor Red</th>
+                                        <th>Valor PVP</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="fw-bold text-gray-600">
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-
-                    <div class="text-center pt-15">
-                        <button type="reset" data-bs-dismiss="modal" class="btn btn-secondary">Cerrar</button>
-                        <button type="button" id="btnSaveTipo" class="btn btn-primary">
-                            <span class="indicator-label">Grabar</span>
-                            <span class="indicator-progress">Espere un momento...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                    </div>
-                </form>
+                </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>                
+            </div>            
         </div>
     </div>
-</div>   -->
+</div>  
+
 <!--Modal Agregar Servicio -->
 <div class="modal fade" id="agregar_servicio" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-800px">
@@ -556,12 +519,31 @@
                                 </div>    
                             </div>
                         </div> 
+
+                        <div class="col-md-2 fv-row">
+                            <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-plus me-1"></i>Agregar</button>
+                        </div>                        
+
+                        <hr class="bg-primary border-2 border-top border-primary">
+                        <div class="mh-300px scroll-y me-n7 pe-7">
+                            <table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="tblatenciones" style="width: 100%;">
+                                <thead>
+                                    <tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
+                                        <th class="min-w-125px">Atencion</th>
+                                        <th>Valor Red</th>
+                                        <th>Valor Pvp</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="fw-bold text-gray-600"></tbody>
+                            </table>    
+                        </div>                    
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-plus me-1"></i>Agregar</button>
+                <button type="button" id="btnfinalizar" class="btn btn-sm btn-light-primary border border-secundary"><i class="fa fa-save me-1"></i>Finalizar</button>
+                <button type="button" class="btn btn-sm btn-light-danger border border-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>                
             </div>
         </div>
     </div>
@@ -579,6 +561,7 @@
         _enviar2 = 'NO';
         _enviar3 = 'NO';
         _enviar4 = 'NO';
+        var _count = 0;
 
         $('#cboProvincia').change(function(){
                 
@@ -824,6 +807,15 @@
             $("#agregar_servicio").modal("show");
             $('#agregar_servicio').modal('handleUpdate');
             $("#cboAsis").val(0).change();    
+            $("#cboAsis").prop("disabled",false);
+            var tb = document.getElementById('tblatenciones');
+            while(tb.rows.length > 1) {
+                tb.deleteRow(1);
+            }   
+            $.each(_result,function(i,item){
+                _result.splice(i, 1);
+            });             
+            
         }); 
 
         //Agregar Nuevo Servicio Modal
@@ -835,7 +827,8 @@
             var _red = $.trim($("#txtRed").val());
             var _pvp = $.trim($("#txtPvp").val());
             var  _continuar = true;
-            var _count = 0;
+            
+            //_count++;
            
             if(_txttipoasistencia == ''){
                 toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Asistencia..!!");
@@ -857,22 +850,33 @@
                 return;
             }
 
-           //debugger;
+            var regex = /^\d{1,3}(\.\d{1,3})?$/;
+        
+            if (regex.test($('#txtRed').val().trim())){
+            }else{
+                toastSweetAlert("top-end",3000,"warning","Valor ingresado incorrecto (ejmpl: 100.12)..! ");
+                $("#txtRed").val('');
+                return;
+            }
+
+            if (regex.test($('#txtPvp').val().trim())){
+            }else{
+                toastSweetAlert("top-end",3000,"warning","Valor ingresado incorrecto (ejmpl: 100.12)..!");
+                $("#txtPvp").val('');
+                return;
+            }             
+
             _red = _red.replace(/[a-z]/g,'0');
             _pvp = _pvp.replace(/[a-z]/g,'0');
 
-            // _red = _red.replace(/(?=.*?[#?!@$ %^&*-])/g,_red);
-            // _pvp = _pvp.replace(/(?=.*?[#?!@$ %^&*-])/g,_pvp);
-      
             _red = parseFloat(_red)
             _pvp = parseFloat(_pvp)
             
-        
             $.each(_result,function(i,item){
                 if(item.arryasistencia == _txttipoasistencia && item.arryatencion == _txttipoatencion)
                 {                  
                     toastSweetAlert("top-end",3000,"warning","Tipo Atencion ya Existe..!!");   
-                    $("#cboAsis").val(0).change();
+                    //$("#cboAsis").val(0).change();
                     $("#txtTipoAtencion").val('');
                     $("#txtRed").val('');
                     $("#txtPvp").val('');                           
@@ -884,22 +888,21 @@
             if(_continuar){
                 
                 //_count = _count + 1;
-                _output = '<tr id="row_' + _cboasistencia + '">';
-                _output += '<td style="display: none;">' + _cboasistencia + '</td>';                
-                _output += '<td>' + _txttipoasistencia + '</td>';
+                _count++;
+                _output = '<tr id="row_' + _count + '">';
                 _output += '<td>' + _txttipoatencion + '</td>';
                 _output += '<td>' + _red + '</td>';
                 _output += '<td>' + _pvp + '</td>';
                 _output += '<td><div class=""><div class="btn-group">';
-                _output += '<button type="button" name="btnDelete" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 btnDelete" id="' + _cboasistencia + '"><i class="fa fa-trash"></i></button></div></div></td>';
-                _output += '</tr>';
+                _output += '<button type="button" id="btndelatencion_' + _count + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 " onclick="f_DelRegistro(';
+                //_output += _count + ',"' + _txttipoatencion + '")" title="Borrar registro"><i class="fa fa-trash"></i></button></div></div></td></tr>';
+                _output += _count + ')" title="Borrar registro"><i class="fa fa-trash"></i></button></div></div></td></tr>';
 
-                $('#tblEspecialidad').append(_output);
-
-                console.log(_output);
+                $('#tblatenciones').append(_output);
 
                 _objeto = {
-                    arryid: _cboasistencia,
+                    arryid: _count,
+                    arryasisid: _cboasistencia,
                     arryasistencia:_txttipoasistencia,
                     arryatencion: _txttipoatencion,
                     arryred: _red,
@@ -907,16 +910,15 @@
                 }
 
                 _result.push(_objeto);
-                $("#cboAsis").val(0).change();
+                //$("#cboAsis").val(0).change();
+                $("#cboAsis").prop("disabled",true);
                 $("#txtTipoAtencion").val('');
                 $("#txtRed").val('');
                 $("#txtPvp").val('');
-                $("#agregar_servicio").modal("hide");
-
+                //$("#agregar_servicio").modal("hide");
             }
         });
         
-
        //Grabar Prestador-Servicio 
         $('#btnSave').click(function(e){
            
@@ -989,7 +991,6 @@
                     return;
                 }
             } 
-
            
            if(_celular1 != '')
            {
@@ -1000,12 +1001,10 @@
                }
            }                     
                              
-
            if(_result.length == 0){
                 toastSweetAlert("top-end",3000,"warning","Agregue un Servicio al Prestador..!!");
                 return;
            }
-
            
             var _imgfile = document.getElementById("imgfile").style.backgroundImage;
             var _urlimg = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
@@ -1113,17 +1112,91 @@
                     });   
 
                 }else{
-                    toastSweetAlert("top-end",3000,"warning","Prestador ya Existe..!!");
+                    toastSweetAlert("top-end",3000,"warning","Prestador ya Existe..!");
                 }
-            });                    
-       });                
+            });
+       });
+
+       $('#agregar_servicio').on('hidden.bs.modal', function () {
+            console.log('cerro ventana');
+        });
 
     });
 
-    function setTwoNumberDecimal(event) {
+    /*function setTwoNumberDecimal(event) {
         this.value = parseFloat(this.value).toFixed(2);
+    }*/
+
+    $('#btnfinalizar').click(function(e){
+        
+        let _asistenciaid = $('#cboAsis').val();
+        let _txttipoasistencia = $("#cboAsis option:selected").text();
+        let _atenciones = _result.length;
+
+        if(_asistenciaid == 0){
+            toastSweetAlert("top-end",3000,"warning","Seleccione tipo de asistencia..!");
+            return;
+        }
+
+        if(_atenciones == 0){
+            toastSweetAlert("top-end",3000,"warning","Ingrese datos para atencion..!");
+            return;
+        }
+
+        _output = '<tr id="trservicios_' + _asistenciaid + '">';
+        _output += '<td>' + _txttipoasistencia + '</td>';
+        _output += '<td>' + _atenciones + '</td>';
+        _output += '<td><div class=""><div class="btn-group">';
+        _output += '<button type="button" id="btnview_' + _asistenciaid + '" class="btn btn-icon btn-bg-light btn-active-color-success  btn-sm me-1 " onclick="f_ViewDatos(';
+        _output += _asistenciaid + ')" title="Listar Servicios "><i class="fa fa-search text-warning mr-5"></i></button>';
+        _output += '<button type="button" id="btndelasistencia_' + _asistenciaid + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 " onclick="f_DelAsistencia(';
+        _output += _asistenciaid + ')" title="Borrar registro"><i class="fa fa-trash"></i></button>';
+        _output += '</div></div></td></tr>';
+
+        console.log(_output);
+
+        $('#tblAsistencia').append(_output);
+
+        $("#agregar_servicio").modal("hide");
+     
+    });
+
+    function f_DelRegistro(_id){
+
+        $.each(_result,function(i,item){
+
+            if(item.arryid == _asistenid)
+            {
+                _result.splice(i, 1);
+                $('#row_' + _id + '').remove();
+                return false;
+            }
+        });
+
     }
 
+    function f_ViewDatos(_asisid){
+
+        console.log(_asisid);
+
+        $.each(_result,function(i,item){
+
+            if(item.arryid == _asisid)
+            {
+                _result.splice(i, 1);
+                $('#row_' + _id + '').remove();
+
+
+                
+                return false;
+            }
+        });
+
+
+        $("#modal_lista_servicios").modal("show");
+
+        
+    }
 
     //Eliminar Servicios Asigandos de la tabla
     $(document).on("click",".btnDelete",function(){
