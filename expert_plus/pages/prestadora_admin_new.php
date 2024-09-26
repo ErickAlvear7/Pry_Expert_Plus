@@ -56,7 +56,7 @@
 					<span class="svg-icon svg-icon-1 position-absolute ms-6">
 					    <i class="fa fa-search fa-1x" style="color:#3B8CEC;" aria-hidden="true"></i> 
 					</span>
-					<input type="text" data-kt-user-table-filter="search" class="form-control w-250px ps-14" placeholder="Buscar Usuario" />
+					<input type="text" data-kt-user-table-filter="search" class="form-control w-250px ps-14" placeholder="Buscar Prestador" />
 				</div>
 			</div>	
 			
@@ -137,17 +137,49 @@
                                     <td style="width: 32%;">
                                         <div class="card card-flush h-md-100">
                                             <div class="card-body d-flex flex-center flex-column pt-12 p-9">
+                                               
                                                 <div class="symbol symbol-65px symbol-circle mb-5">
-                                                    <img src="assets/images/users/<?php echo $xLogo; ?>" class="w-150" />
-                                                    <div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>
+                                                    <a href="<?php echo $xUrl; ?>" <?php echo $xTargeturl; ?> class="symbol symbol-50px">
+                                                        <span class="symbol-label" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUrl; ?>" style="background-image:url(assets/images/prestadores/<?php echo $xLogo; ?> );"></span>
+                                                    </a>   
                                                 </div>   
-                                                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic"><?php echo $xPrestador; ?></h2>
-                                                <div id="divEstado_"  class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div>
-                                                <div class="text-center">
-                                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic mb-4"><?php echo $xPrestador; ?></h2>  
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center flex-row-fluid pe-11 mb-5">
+                                                <div class="d-flex fs-6 fw-bold align-items-center mb-3">
+                                                    <div class="bullet bg-primary ms-9 me-3"></div>
+                                                    <div class="text-gray-400 me-1">Cuidad</div>
+                                                    <div class="ms-auto fw-bolder text-gray-700"><?php echo $xCiudad; ?></div>
+                                                </div>
+                                                <div class="d-flex fs-6 fw-bold align-items-center mb-3">
+                                                    <div class="bullet bg-primary ms-9 me-3"></div>
+                                                    <div class="text-gray-400 me-1">Tipo</div>
+                                                    <div class="ms-auto fw-bolder text-gray-700"><?php echo $xTipoPresta; ?></div>
+                                                </div>
+                                                <div class="d-flex fs-6 fw-bold align-items-center mb-3">
+                                                    <div class="bullet bg-primary ms-9 me-3"></div>
+                                                    <div class="text-gray-400 me-1">Sector</div>
+                                                    <div class="ms-auto fw-bolder text-gray-700"><?php echo $xSector; ?></div>
+                                                </div>
+                                                <div class="d-flex fs-6 fw-bold align-items-center mb-4">
+                                                    <div class="bullet bg-primary ms-9 me-3"></div>
+                                                    <div class="text-gray-400 me-9">Estado</div>
+                                                    <div class="form-check form-check-sm form-check-custom form-check-solidmt-4">
                                                         <input class="form-check-input h-20px w-20px border-primary" type="checkbox" id="" 
-                                                            onchange="" value=""/>
-                                                    </div>
+                                                        onchange="" value=""/>
+                                                        <label class="<?php echo $xTextColor; ?>" for="flexCheckChecked">
+                                                            <?php echo $xEstado; ?>
+                                                        </label>
+                                                    </div>   
+                                                </div>
+                                                <div class="d-flex fs-6 fw-bold align-items-center mb-3">
+                                                    <div class="bullet bg-primary ms-9 me-3"></div>
+                                                    <div class="text-gray-400 me-1">Ubicacion</div>
+                                                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUbicacion; ?>">
+                                                        <a href="<?php echo $xUbicacion; ?>" <?php echo $xTarget; ?> class="symbol symbol-50px">  
+                                                            <i class="fa fa-map-marker fa-2x ms-7" aria-hidden="true" style="color:#3B8CEC;"></i>  
+                                                        </a>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="card-footer flex-wrap pt-0">
