@@ -137,7 +137,6 @@
                                     <td style="width: 32%;">
                                         <div class="card card-flush h-md-100">
                                             <div class="card-body d-flex flex-center flex-column pt-12 p-9">
-                                               
                                                 <div class="symbol symbol-65px symbol-circle mb-5">
                                                     <a href="<?php echo $xUrl; ?>" <?php echo $xTargeturl; ?> class="symbol symbol-50px">
                                                         <span class="symbol-label" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUrl; ?>" style="background-image:url(assets/images/prestadores/<?php echo $xLogo; ?> );"></span>
@@ -213,15 +212,8 @@
 							<td style="width: 1%;"></td>
 							</tr>
 					<?php } ?>
-                   
-
-                </tbody>
-                
+                </tbody>   
             </table>
-
-        </div>
-        
+        </div>    
     </div>
-
-
 </div>
