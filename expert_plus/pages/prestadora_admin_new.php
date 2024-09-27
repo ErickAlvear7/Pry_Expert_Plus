@@ -85,10 +85,10 @@
                         $xCantidad = 0;          
                         foreach($all_prestador as $presta){
                             $xId = $presta['Id'];
-                            $xCiudad = trim($presta['Ciudad']);
-                            $xPrestador = trim($presta['Prestadora']);
-                            $xSector = trim($presta['Sector']);
-                            $xTipoPresta = trim($presta['TipoPrestador']);
+                            $xCiudad = trim(mb_strtoupper($presta['Ciudad']));
+                            $xPrestador = trim(mb_strtoupper($presta['Prestadora']));
+                            $xSector = trim(mb_strtoupper($presta['Sector']));
+                            $xTipoPresta = trim(mb_strtoupper($presta['TipoPrestador']));
                             $xLogo = trim($presta['Logo']);
                             $xEstado = trim($presta['Estado']);
                             $xUbicacion = trim($presta['Ubicacion']);
@@ -147,7 +147,7 @@
                                             <div class="d-flex flex-column justify-content-center flex-row-fluid pe-11 mb-5">
                                                 <div class="d-flex fs-6 fw-bold align-items-center mb-3">
                                                     <div class="bullet bg-primary ms-9 me-3"></div>
-                                                    <div class="text-gray-400 me-1">Cuidad</div>
+                                                    <div class="text-gray-400 me-1">Ciudad</div>
                                                     <div class="ms-auto fw-bolder text-gray-700"><?php echo $xCiudad; ?></div>
                                                 </div>
                                                 <div class="d-flex fs-6 fw-bold align-items-center mb-3">
@@ -164,11 +164,13 @@
                                                     <div class="bullet bg-primary ms-9 me-3"></div>
                                                     <div class="text-gray-400 me-9">Estado</div>
                                                     <div class="form-check form-check-sm form-check-custom form-check-solidmt-4">
-                                                        <input class="form-check-input h-20px w-20px border-primary" type="checkbox" id="" 
-                                                        onchange="" value=""/>
-                                                        <label class="<?php echo $xTextColor; ?>" for="flexCheckChecked">
-                                                            <?php echo $xEstado; ?>
-                                                        </label>
+                                                        <input class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $xId; ?>" 
+                                                        onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>)" value=""/>
+                                                        <div id="td_<?php echo $xId; ?>">
+                                                            <div class="<?php echo $xTextColor; ?>">
+                                                                <?php echo $xEstado; ?>
+                                                            </div>
+                                                        </div>
                                                     </div>   
                                                 </div>
                                                 <div class="d-flex fs-6 fw-bold align-items-center mb-3">
@@ -176,7 +178,8 @@
                                                     <div class="text-gray-400 me-1">Ubicacion</div>
                                                     <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUbicacion; ?>">
                                                         <a href="<?php echo $xUbicacion; ?>" <?php echo $xTarget; ?> class="symbol symbol-50px">  
-                                                            <i class="fa fa-map-marker fa-2x ms-7" aria-hidden="true" style="color:#3B8CEC;"></i>  
+                                                            <!-- <i class="fa fa-map-marker fa-2x ms-7" aria-hidden="true" style="color:#3B8CEC;"></i> -->
+                                                            <i class="fa fa-map fa-2x ms-2" aria-hidden="true" style="color:#3B8CEC;"></i>  
                                                         </a>
                                                     </span>
                                                 </div>
@@ -185,7 +188,7 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="d-grid gap-2">
-                                                            <button type="button" class="btn btn-light-primary border border-primary btn-sm" onclick=""><i class="las la-pencil-alt me-1" aria-hidden="true"></i>Editar Prestador</button>
+                                                            <button id="btnEditar_<?php echo $xId; ?>" type="button" class="btn btn-light-primary border border-primary btn-sm" <?php echo $xDisabledEdit; ?> onclick="f_Editar(<?php echo $xId; ?>)" ><i class="las la-pencil-alt me-1" aria-hidden="true"></i>Editar Prestador</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -217,3 +220,53 @@
         </div>    
     </div>
 </div>
+<script>
+
+    $(document).ready(function(){
+
+    });
+
+    function f_UpdateEstado(_paisid, _emprid, _presid){
+        
+        let _usuaid = "<?php echo $xUsuaid; ?>";
+        let _check = $("#chk" + _presid).is(":checked");
+        let _checked = "";
+        let _class = "badge badge-light-primary";
+        let _td = "td_" + _presid;
+        let _btnedit = "btnEditar_" + _presid;
+
+        if(_check){
+            _estado = "ACTIVO";
+            _checked = "checked='checked'";
+            $('#'+_btnedit).prop("disabled",false);
+        }else{                    
+            _estado = "INACTIVO";
+            _class = "badge badge-light-danger";
+            $('#'+_btnedit).prop("disabled",true);
+        }
+
+        var _changetd = document.getElementById(_td);
+        _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
+
+        _parametros = {
+            "xxPaisid" : _paisid,
+            "xxEmprId" : _emprid,
+            "xxUsuaid" : _usuaid,
+            "xxPresid" : _presid,
+            "xxEstado" : _estado
+        }	
+
+        var xrespuesta = $.post("codephp/update_estadoprestador.php", _parametros);
+        xrespuesta.done(function(response){
+
+            if(response.trim() == 'OK'){
+             
+            }
+            
+        });	
+    }
+
+    function f_Editar(_id){
+        $.redirect('?page=modprestador&menuid=<?php echo $menuid; ?>', {'id': _id}); //POR METODO POST
+    }
+</script>
