@@ -32,6 +32,9 @@
     $xEmprid = $_SESSION["i_emprid"];
     $xUsuaid = $_SESSION["i_usuaid"];
 
+    $xFechaActual = strftime('%Y-%m-%d', time());
+	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
+
     $xSQL = "SELECT (SELECT prv.ciudad FROM `provincia_ciudad` prv WHERE prv.prov_id=pre.prov_id) AS Ciudad,pre.pres_nombre AS Prestadora,";
     $xSQL .= "(SELECT pde.pade_nombre FROM `expert_parametro_detalle` pde, `expert_parametro_cabecera` pca WHERE pde.paca_id=pca.paca_id AND pca.paca_nombre='Tipo Sector' AND pde.pade_valorv=pre.pres_sector) AS Sector,(SELECT pde.pade_nombre FROM `expert_parametro_detalle` pde, `expert_parametro_cabecera` pca WHERE pde.paca_id=pca.paca_id AND pca.paca_nombre='Tipo Prestador' AND pde.pade_valorv=pre.pres_tipoprestador) AS TipoPrestador,pre.pres_logo AS Logo,pre.pres_estado AS Estado,pre.pres_ubicacion AS Ubicacion,pre.pres_url AS Url,pre.pres_id AS Id FROM `expert_prestadora` pre ";
     $all_prestador = mysqli_query($con, $xSQL);
@@ -49,6 +52,7 @@
 ?>
 
 <div id="kt_content_container" class="container-xxl">
+    <input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
     <div class="card">
         <div class="card-header border-0 pt-6">
 			<div class="card-title">
@@ -61,7 +65,7 @@
 			</div>	
 			
             <div class="card-toolbar">
-				<button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm" id="btnNuevo"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+				<button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm" id="btnNuevo" onclick="f_NuevoPrestador()"><i class="fa fa-plus-circle" aria-hidden="true"></i>
 						Nuevo Prestador
 				</button>
 		    </div>			
@@ -153,7 +157,7 @@
                                                 <div class="d-flex fs-6 fw-bold align-items-center mb-3">
                                                     <div class="bullet bg-primary ms-9 me-3"></div>
                                                     <div class="text-gray-400 me-1">Tipo</div>
-                                                    <div class="ms-auto fw-bolder text-gray-700"><?php echo $xTipoPresta; ?></div>
+                                                    <div class="ms-auto text-end fw-bolder text-gray-700"><?php echo $xTipoPresta; ?></div>
                                                 </div>
                                                 <div class="d-flex fs-6 fw-bold align-items-center mb-3">
                                                     <div class="bullet bg-primary ms-9 me-3"></div>
@@ -223,6 +227,11 @@
 <script>
 
     $(document).ready(function(){
+        _mensaje = $('input#mensaje').val();
+
+        if(_mensaje != ''){					
+            toastSweetAlert("top-end",3000,"success",_mensaje);
+        }
 
     });
 
@@ -269,4 +278,9 @@
     function f_Editar(_id){
         $.redirect('?page=modprestador&menuid=<?php echo $menuid; ?>', {'id': _id}); //POR METODO POST
     }
+
+    function f_NuevoPrestador(){
+        location.href='?page=addprestador&menuid=<?php echo $menuid; ?>' //POR METODO GET
+    }
+
 </script>
