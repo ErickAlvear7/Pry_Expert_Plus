@@ -556,6 +556,8 @@
         var _emprid = "<?php echo $xEmprid; ?>";
         var _usuaid = "<?php echo $xUsuaid; ?>";
         _result = [];
+        _resultTMP = [];
+        _finally = [];
         var _continuar = true;
         _enviar1 = 'NO';
         _enviar2 = 'NO';
@@ -619,7 +621,6 @@
                 toastSweetAlert("top-end",3000,"warning","Seleccione Asistencia..!!");
                 return;
             }
-
 
             if(_tipoasistencia == ''){
                 toastSweetAlert("top-end",3000,"warning","Ingrese Tipo Asistencia..!!");
@@ -808,13 +809,15 @@
             $('#agregar_servicio').modal('handleUpdate');
             $("#cboAsis").val(0).change();    
             $("#cboAsis").prop("disabled",false);
+            
             var tb = document.getElementById('tblatenciones');
             while(tb.rows.length > 1) {
                 tb.deleteRow(1);
             }   
-            $.each(_result,function(i,item){
+            
+            $.each(_resultTMP,function(i,item){
                 _result.splice(i, 1);
-            });             
+            });
             
         }); 
 
@@ -869,13 +872,25 @@
             _red = _red.replace(/[a-z]/g,'0');
             _pvp = _pvp.replace(/[a-z]/g,'0');
 
-            _red = parseFloat(_red)
-            _pvp = parseFloat(_pvp)
+            _red = parseFloat(_red);
+            _pvp = parseFloat(_pvp);
+
+            if(_finally.length > 0){
+                $.each(_finally,function(i,item){
+                    if(item.arryasisid == _cboasistencia){
+                        toastSweetAlert("top-end",3000,"warning","Tipo Asistencia ya Existe..!");
+                        $("#cboAsis").val(0).change();  
+                        $("#txtTipoAtencion").val("");
+                        _continuar = false;
+                        return false;
+                    }
+                });
+            }
             
-            $.each(_result,function(i,item){
+            $.each(_resultTMP,function(i,item){
                 if(item.arryasistencia == _txttipoasistencia && item.arryatencion == _txttipoatencion)
                 {                  
-                    toastSweetAlert("top-end",3000,"warning","Tipo Atencion ya Existe..!!");   
+                    toastSweetAlert("top-end",3000,"warning","Tipo Atencion ya Existe..!");   
                     //$("#cboAsis").val(0).change();
                     $("#txtTipoAtencion").val('');
                     $("#txtRed").val('');
@@ -891,8 +906,8 @@
                 _count++;
                 _output = '<tr id="row_' + _count + '">';
                 _output += '<td>' + _txttipoatencion + '</td>';
-                _output += '<td>' + _red + '</td>';
-                _output += '<td>' + _pvp + '</td>';
+                _output += '<td>' + Number(_red).toFixed(2) + '</td>';
+                _output += '<td>' + Number(_pvp).toFixed(2) + '</td>';
                 _output += '<td><div class=""><div class="btn-group">';
                 _output += '<button type="button" id="btndelatencion_' + _count + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 " onclick="f_DelRegistro(';
                 //_output += _count + ',"' + _txttipoatencion + '")" title="Borrar registro"><i class="fa fa-trash"></i></button></div></div></td></tr>';
@@ -941,27 +956,27 @@
            _respuesta = 'OK';
 
            if(_provid == ''){
-               toastSweetAlert("top-end",3000,"warning","Seleccione Provincia..!!");
+               toastSweetAlert("top-end",3000,"warning","Seleccione Provincia..!");
                return; 
            }
 
            if(_ciudid == ''){
-               toastSweetAlert("top-end",3000,"warning","Seleccione Ciudad..!!");
+               toastSweetAlert("top-end",3000,"warning","Seleccione Ciudad..!");
                return; 
            }
 
            if(_prestador == ''){
-               toastSweetAlert("top-end",3000,"warning","Ingrese Prestador..!!");
+               toastSweetAlert("top-end",3000,"warning","Ingrese Prestador..!");
                return;                         
            }
 
            if(_sector == ''){
-               toastSweetAlert("top-end",3000,"warning","Seleccione Sector..!!");
+               toastSweetAlert("top-end",3000,"warning","Seleccione Sector..!");
                return; 
            }
            
            if(_tipopresta == ''){
-               toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Prestador..!!");
+               toastSweetAlert("top-end",3000,"warning","Seleccione Tipo Prestador..!");
                return; 
            }                       
            
@@ -969,7 +984,7 @@
                try{
                    new URL(_url);
                }catch(err){
-                   toastSweetAlert("top-end",3000,"error","Direccion URL Incorrecta...!!");
+                   toastSweetAlert("top-end",3000,"error","Direccion URL Incorrecta..!");
                    return false;
                }
            }
@@ -978,7 +993,7 @@
 	        {
                 _valor = document.getElementById("txtFono1").value;
                 if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
-                    toastSweetAlert("top-end",3000,"error","Telefono 1 Incorrecto..!!");  
+                    toastSweetAlert("top-end",3000,"error","Telefono 1 Incorrecto..!");  
                     return;
                 }
             } 
@@ -987,7 +1002,7 @@
 	        {
                 _valor = document.getElementById("txtFono2").value;
                 if( !(/^(\d{7}|\d{9})$/.test(_valor)) ) {
-                    toastSweetAlert("top-end",3000,"error","Telefono 2 Incorrecto..!!");  
+                    toastSweetAlert("top-end",3000,"error","Telefono 2 Incorrecto..!");  
                     return;
                 }
             } 
@@ -1002,7 +1017,7 @@
            }                     
                              
            if(_result.length == 0){
-                toastSweetAlert("top-end",3000,"warning","Agregue un Servicio al Prestador..!!");
+                toastSweetAlert("top-end",3000,"warning","Agregue un Servicio al Prestador..!");
                 return;
            }
            
@@ -1118,7 +1133,7 @@
        });
 
        $('#agregar_servicio').on('hidden.bs.modal', function () {
-            console.log('cerro ventana');
+            //console.log('cerro ventana');
         });
 
     });
@@ -1131,7 +1146,7 @@
         
         let _asistenciaid = $('#cboAsis').val();
         let _txttipoasistencia = $("#cboAsis option:selected").text();
-        let _atenciones = _result.length;
+        let _atenciones = _result.filter(item => item.arryasisid ==_asistenciaid ).length;
 
         if(_asistenciaid == 0){
             toastSweetAlert("top-end",3000,"warning","Seleccione tipo de asistencia..!");
@@ -1143,21 +1158,26 @@
             return;
         }
 
+        _objeto = {
+            arryasisid: _asistenciaid,
+        }
+
+        _finally.push(_objeto);        
+
         _output = '<tr id="trservicios_' + _asistenciaid + '">';
         _output += '<td>' + _txttipoasistencia + '</td>';
         _output += '<td>' + _atenciones + '</td>';
         _output += '<td><div class=""><div class="btn-group">';
         _output += '<button type="button" id="btnview_' + _asistenciaid + '" class="btn btn-icon btn-bg-light btn-active-color-success  btn-sm me-1 " onclick="f_ViewDatos(';
-        _output += _asistenciaid + ')" title="Listar Servicios "><i class="fa fa-search text-warning mr-5"></i></button>';
+        _output += _asistenciaid + ')" title="Servicios asignados "><i class="fa fa-search text-warning mr-5"></i></button>';
         _output += '<button type="button" id="btndelasistencia_' + _asistenciaid + '" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1 " onclick="f_DelAsistencia(';
         _output += _asistenciaid + ')" title="Borrar registro"><i class="fa fa-trash"></i></button>';
         _output += '</div></div></td></tr>';
 
-        console.log(_output);
-
         $('#tblAsistencia').append(_output);
-
         $("#agregar_servicio").modal("hide");
+
+        console.log(_finally);
      
     });
 
@@ -1165,7 +1185,7 @@
 
         $.each(_result,function(i,item){
 
-            if(item.arryid == _asistenid)
+            if(item.arryid == _id)
             {
                 _result.splice(i, 1);
                 $('#row_' + _id + '').remove();
@@ -1177,25 +1197,30 @@
 
     function f_ViewDatos(_asisid){
 
-        console.log(_asisid);
+        console.log(_result);
+        var _output = "";
+
+        var tb = document.getElementById('tbllistaservicios');
+            while(tb.rows.length > 1) {
+            tb.deleteRow(1);
+        }        
 
         $.each(_result,function(i,item){
 
-            if(item.arryid == _asisid)
+            if(item.arryasisid == _asisid)
             {
-                _result.splice(i, 1);
-                $('#row_' + _id + '').remove();
+                _output = '<tr id="trlista_' + _asisid + '">';
+                _output += '<td>' + item.arryatencion + '</td>';
+                _output += '<td>' + Number(item.arryred).toFixed(2); + '</td>';
+                _output += '<td>' + Number(item.arrypvp).toFixed(2); + '</td>';
+                _output += '</tr>';
 
+                $('#tbllistaservicios').append(_output);
 
-                
-                return false;
             }
         });
 
-
         $("#modal_lista_servicios").modal("show");
-
-        
     }
 
     //Eliminar Servicios Asigandos de la tabla
