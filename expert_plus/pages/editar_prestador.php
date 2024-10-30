@@ -84,8 +84,8 @@
     $all_tipopresta = mysqli_query($con, $xSQL);
 
     $xSQL = "SELECT (SELECT tpa.asis_nombre FROM `expert_tipo_asistencia` tpa WHERE tpa.asis_id=prs.asis_id) AS Asistencia,";
-    $xSQL .="prs.prse_id AS Id,prs.pres_id AS Idpres,prs.asis_id AS Idasis,prs.prse_atencion AS Atencion, CASE prs.prse_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado, prs.prse_red AS Red,";
-    $xSQL .="prs.prse_pvp AS Pvp FROM `expert_prestadora_servicio` prs WHERE prs.pres_id=$xPresid";
+    $xSQL .="prs.prse_id AS Id,prs.pres_id AS Idpres,prs.asis_id AS Idasis, CASE prs.prse_estado WHEN 'A' THEN 'ACTIVO' ELSE 'INACTIVO' END AS Estado, prs.prse_red AS Red,";
+    $xSQL .="prs.prse_pvp AS Pvp FROM `expert_prestadora_servicio` prs WHERE prs.pres_id=$xPresid GROUP BY prs.asis_id  ";
     $all_prestaservicio = mysqli_query($con, $xSQL);
 
 ?>
@@ -420,9 +420,6 @@
                                                 <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                                     <th style="display: none;">Id</th>
                                                     <th class="">TIPO ASISTENCIA</th>
-                                                    <th class="min-w-125px">TIPO ATENCION</th>
-                                                    <th>RED</th>
-                                                    <th>PVP</th>
                                                     <th class="min-w-125px">Estado</th>
                                                     <th>Status</th>
                                                     <th class="min-w-125px" style="text-align: center;">Opciones</th>
@@ -437,10 +434,7 @@
                                                         $xIdpres = $serv['Idpres'];
                                                         $xIdasis = $serv['Idasis'];
                                                         $xAsistencia = $serv['Asistencia'];
-                                                        $xAtencion = trim($serv['Atencion']);
                                                         $xEstado = trim($serv['Estado']);
-                                                        $xRed = trim($serv['Red']);
-                                                        $xPvp = trim($serv['Pvp']);
                                                         
                                                     ?>
                                                         <?php 
@@ -466,9 +460,6 @@
                                                                 <?php echo $xAsistencia; ?>
                                                                 <input type="hidden" id="txtAsistencia_<?php echo $xId; ?>" value="<?php echo $xAsistencia; ?>" />
                                                             </td>
-                                                            <td id="tdaten_<?php echo $xId; ?>"> <?php echo $xAtencion; ?></td>
-                                                            <td id="tdred_<?php echo $xId; ?>"><?php echo $xRed; ?> </td>
-                                                            <td id="tdpvp_<?php echo $xId; ?>"><?php echo $xPvp; ?> </td>                                
                                                             <td id="td_<?php echo $xId; ?>"> 
                                                                 <div class="<?php echo $xTextColor; ?>"><?php echo $xEstado; ?></div> 
                                                             </td>
@@ -476,7 +467,7 @@
                                                                 <div class="text-center">
                                                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                                         <input class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $xId; ?>" 
-                                                                            onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>)" value="<?php echo $xId; ?>"/>
+                                                                            onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xIdpres; ?>,<?php echo $xIdasis; ?>,<?php echo $xId; ?>)" value="<?php echo $xId; ?>"/>
                                                                     </div>
                                                                 </div>
                                                             </td> 													
@@ -615,6 +606,25 @@
                                 </div>    
                             </div>
                         </div> 
+
+                        <div class="col-md-2 fv-row">
+                            <button type="button" id="btnAgregar" class="btn btn-sm btn-light-primary border border-primary"><i class="fa fa-plus me-1"></i>Agregar</button>
+                        </div>                        
+
+                        <hr class="bg-primary border-2 border-top border-primary">
+                        <div class="mh-300px scroll-y me-n7 pe-7">
+                            <table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="tblatenciones" style="width: 100%;">
+                                <thead>
+                                    <tr class="text-start text-gray-800 fw-bolder fs-7 gs-0">
+                                        <th class="min-w-125px">Atencion</th>
+                                        <th>Valor Red</th>
+                                        <th>Valor Pvp</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="fw-bold text-gray-600"></tbody>
+                            </table>    
+                        </div>  
                     </div>
                 </div>
             </div>
@@ -1371,7 +1381,7 @@
                 _output += '<td id="td_' + _id + '"><div class="badge badge-light-primary">ACTIVO</div></td>';
                 _output += '<td><div class="text-center"><div class="form-check form-check-sm form-check-custom form-check-solid">'; 
                 _output += '<input class="form-check-input h-20px w-20px border-primary" checked="checked" type="checkbox" id="chk' + _id + '" onchange="f_UpdateEstado(';
-                _output += _paisid + ',' + _emprid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
+                _output += _paisid + ',' + _emprid + ',' + _presid + ',' + _asistid + ',' + _id + ')" value="' + _id + '"/></div></div></td>';
                 _output += '<td><div class="text-center"><div class="btn-group"><button id="btnEditar_' + _id + '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 " ';
                 _output += 'title="Editar Servicio" data-bs-toggle="tooltip" data-bs-placement="left" onclick="f_EditarServicio(' ;
                 _output += _paisid + ',' + _emprid + ',' + _id + ')"><i class="fa fa-edit"></i></button>';
@@ -2268,7 +2278,7 @@
     }
 
     //Update estado Especialidades 
-    function f_UpdateEstado(_paisid, _emprid, _prseid){
+    function f_UpdateEstado(_paisid, _emprid, _presid, _asisid, _prseid){
 
         let _usuaid = "<?php echo $xUsuaid; ?>";
         let _check = $("#chk" + _prseid).is(":checked");
@@ -2300,7 +2310,8 @@
         var _parametros = {
             "xxPaisid" : _paisid,
             "xxEmprid" : _emprid,
-            "xxPreeid" : _preeid,
+            "xxPresid" : _presid,
+            "xxAsisid" : _asisid,
             "xxEstado" : _estado
         }	
 

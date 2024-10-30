@@ -815,9 +815,13 @@
                 tb.deleteRow(1);
             }   
             
-            $.each(_resultTMP,function(i,item){
-                _result.splice(i, 1);
-            });
+            /*$.each(_resultTMP,function(i,item){
+                _resultTMP.splice(i, 1);
+            });*/
+
+            _resultTMP = [];
+
+            console.log(_resultTMP);
             
         }); 
 
@@ -924,7 +928,8 @@
                     arrypvp: _pvp
                 }
 
-                _result.push(_objeto);
+                //_result.push(_objeto);
+                _resultTMP.push(_objeto);
                 //$("#cboAsis").val(0).change();
                 $("#cboAsis").prop("disabled",true);
                 $("#txtTipoAtencion").val('');
@@ -937,6 +942,7 @@
        //Grabar Prestador-Servicio 
         $('#btnSave').click(function(e){
            
+           debugger;
            var _provid = $('#cboProvincia').val();
            var _ciudid = $('#cboCiudad').val();
            var _prestador = $.trim($('#txtPrestador').val());
@@ -1082,7 +1088,7 @@
                         contentType: false,
                         dataType: "html",
                         success: function(dataid){
-                            console.log(dataid)
+                            //console.log(dataid)
                             if(dataid != 0){
                                 //debugger;
 
@@ -1097,17 +1103,6 @@
                                         _respuesta = 'ERR';                                
                                     }
 
-                                    /**PARA CREAR REGISTRO DE LOGS */
-                                    /*_parametros = {
-                                        "xxPaisid" : _paisid,
-                                        "xxEmprid" : _emprid,
-                                        "xxUsuaid" : _usuaid,
-                                        "xxDetalle" : _detalle,
-                                    }					
-        
-                                    $.post("codephp/new_log.php", _parametros, function(response){
-                                    });*/     
-                                    
                                     if(_respuesta == 'OK'){
                                         $.redirect('?page=prestador_admin&menuid=<?php echo $menuid; ?>', {'mensaje': _detalle}); //POR METODO POST
                                     }else{
@@ -1146,7 +1141,7 @@
         
         let _asistenciaid = $('#cboAsis').val();
         let _txttipoasistencia = $("#cboAsis option:selected").text();
-        let _atenciones = _result.filter(item => item.arryasisid ==_asistenciaid ).length;
+        let _atenciones = _resultTMP.filter(item => item.arryasisid ==_asistenciaid ).length;
 
         if(_asistenciaid == 0){
             toastSweetAlert("top-end",3000,"warning","Seleccione tipo de asistencia..!");
@@ -1162,7 +1157,23 @@
             arryasisid: _asistenciaid,
         }
 
-        _finally.push(_objeto);        
+        _finally.push(_objeto);
+
+        $.each(_resultTMP,function(i,item){
+            _objetonew = {
+                    arryid: item.arryid,
+                    arryasisid: item.arryasisid,
+                    arryasistencia: item.arryasistencia,
+                    arryatencion: item.arryatencion,
+                    arryred: item.arryred,
+                    arrypvp: item.arrypvp
+                }
+                
+            _result.push(_objetonew);
+
+        });
+        
+        //_result = _resultTMP.slice();
 
         _output = '<tr id="trservicios_' + _asistenciaid + '">';
         _output += '<td>' + _txttipoasistencia + '</td>';
@@ -1177,27 +1188,45 @@
         $('#tblAsistencia').append(_output);
         $("#agregar_servicio").modal("hide");
 
-        console.log(_finally);
-     
     });
 
     function f_DelRegistro(_id){
 
-        $.each(_result,function(i,item){
+        $.each(_resultTMP,function(i,item){
 
             if(item.arryid == _id)
             {
-                _result.splice(i, 1);
+                _resultTMP.splice(i, 1);
                 $('#row_' + _id + '').remove();
                 return false;
             }
         });
-
     }
+
+    function f_DelAsistencia(_asisid){
+        
+        $.each(_result,function(i,item){
+
+            if(item.arryasisid == _asisid)
+            {
+                _result.splice(i, 1);
+                $('#trservicios_' + _asisid + '').remove();
+                return false ;
+            }
+        });
+
+        $.each(_finally,function(i,data){
+
+            if(data.arryasisid == _asisid)
+            {
+                _finally.splice(i, 1);
+                return false;
+            }
+        });        
+    }    
 
     function f_ViewDatos(_asisid){
 
-        console.log(_result);
         var _output = "";
 
         var tb = document.getElementById('tbllistaservicios');
@@ -1222,24 +1251,6 @@
 
         $("#modal_lista_servicios").modal("show");
     }
-
-    //Eliminar Servicios Asigandos de la tabla
-    $(document).on("click",".btnDelete",function(){
-        row_id = $(this).attr("id");
-        
-        $.each(_result,function(i,item){
-            if(item.arryid == row_id)
-            {
-                _result.splice(i, 1);
-                return false;
-            }else{
-                continuar = true;
-            }
-        });  
-
-        $('#row_' + row_id + '').remove();
-
-    });            
 
     //Desplazar-modal
     $("#modal_new_asistencia").draggable({

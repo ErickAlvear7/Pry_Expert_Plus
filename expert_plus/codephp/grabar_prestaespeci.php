@@ -28,7 +28,7 @@
             $xResult = $_POST['xxResult']; 
             
             foreach($xResult as $drfila){
-                $xAsisid = $drfila['arryid'];
+                $xAsisid = $drfila['arryasisid'];
                 $xAsistencia = $drfila['arryasistencia'];
                 $xTipoAtencion = $drfila['arryatencion'];
                 $xRed = safe($drfila['arryred']);

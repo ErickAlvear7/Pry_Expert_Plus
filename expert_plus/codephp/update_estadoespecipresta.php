@@ -11,19 +11,22 @@
 
     $xresultado = "ERR";  
 
-    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxPreeid']) and isset($_POST['xxEstado'])){
-        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxPreeid']) <> '' and isset($_POST['xxEstado']) <> ''){  
+    if(isset($_POST['xxPaisid']) and isset($_POST['xxEmprid']) and isset($_POST['xxPresid']) and isset($_POST['xxAsisid']) and isset($_POST['xxEstado'])){
+        if(isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> '' and isset($_POST['xxPresid']) <> '' and isset($_POST['xxAsisid']) <> '' and isset($_POST['xxEstado']) <> ''){  
             
             $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
-            $xPreeid = $_POST['xxPreeid'];
+            $xPresid = $_POST['xxPresid'];
+            $xAsisid = $_POST['xxAsisid'];
             $xEstado = $_POST['xxEstado'];
 
-            if($xEstado == 'ACTIVO'){
-                $xSql = "UPDATE `expert_prestadora_especialidad` SET pree_estado='A' WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pree_id=$xPreeid";
-            }else if($xEstado == 'INACTIVO'){
-                $xSql = "UPDATE `expert_prestadora_especialidad` SET pree_estado='I' WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pree_id=$xPreeid";
+            if($xEstado == 'ACTIVO' ){
+                $xEstado = 'A';
+            }else{
+                $xEstado = 'I';
             }
+
+            $xSql = "UPDATE `expert_prestadora_servicio` SET prse_estado='$xEstado' WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pres_id=$xPresid AND asis_id=$xAsisid  ";
 
             if(mysqli_query($con, $xSql)){
                 $xresultado="OK";

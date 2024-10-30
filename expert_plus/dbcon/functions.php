@@ -26,23 +26,6 @@
         $valor = str_ireplace(" INTO ","",$valor);
         $valor = str_ireplace(" VALUES","",$valor);
         $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
-        $valor = str_ireplace("--"," ",$valor);
         $valor = str_ireplace("^"," ",$valor);
         $valor = str_ireplace("["," ",$valor);
         $valor = str_ireplace("]"," ",$valor);
@@ -53,6 +36,8 @@
         $valor = str_ireplace("="," ",$valor);
         $valor = str_ireplace(">"," ",$valor);
         $valor = str_ireplace("<"," ",$valor);
+        $valor = str_ireplace("'"," ",$valor);
+        $valor = str_ireplace("´"," ",$valor);
         return $valor;
     }
 ?>
