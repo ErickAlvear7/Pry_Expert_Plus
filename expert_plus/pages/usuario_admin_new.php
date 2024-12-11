@@ -76,7 +76,7 @@
 			</div>	
 			
             <div class="card-toolbar">
-				<button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm" id="btnNuevo"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+				<button type="button" data-repeater-create="" class="btn btn-primary btn-lg" id="btnNuevo"><i class="fa fa-plus-circle" aria-hidden="true"></i>
 						Nuevo Usuario
 				</button>
 		    </div>			
@@ -388,8 +388,8 @@
 				</div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light-danger" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
-                <button type="button" id="btnSave" class="btn btn-sm btn-light-primary"></button> 
+                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="fa fa-times me-1" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" id="btnSave" class="btn btn-sm btn-light-primary border border-primary"></button> 
             </div>
         </div>
     </div>
