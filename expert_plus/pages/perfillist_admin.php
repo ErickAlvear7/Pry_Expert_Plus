@@ -70,8 +70,8 @@
             ?>
                 <div class="col-md-4">
                     <div class="card card-flush h-md-100 bg-secondary">
-                        <div class="card-body">
-                            <h2 class="text-center text-primary fst-italic"><?php echo $perfil['Perfil']; ?></h2>
+                        <div class="card-body d-flex flex-center">
+                            <h2 class="text-primary fst-italic"><?php echo $perfil['Perfil']; ?></h2>
                         </div>
                         <div class="card-body mt-n5">
                             <div class="form-check">
@@ -747,14 +747,10 @@
     function f_UpdateEstado(_idperfil,_idpais,_idempri){
 
         var _check = $("#chk_" + _idperfil).is(":checked");
-        var _checked = '';
-        var _disabled = '';
         var _estado = '';
-        var _class = 'text-primary';
+        var _class = '';
         var _lbl = "lblcolor_"+_idperfil;
         var _btnedit = "btnedit_"+_idperfil;
-
-        console.log(_btnedit);
 
         if(_check){
             _estado = 'A';

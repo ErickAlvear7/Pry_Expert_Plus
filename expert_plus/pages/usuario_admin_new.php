@@ -38,8 +38,8 @@
 	$xFechaActual = strftime('%Y-%m-%d', time());
 	$mensaje = (isset($_POST['mensaje'])) ? $_POST['mensaje'] : '';
 
-    $xSQL = "SELECT usu.usua_id AS Idusuario, usu.pais_id, CONCAT(usu.usua_nombres,' ',usu.usua_apellidos) AS Nombres, usu.usua_login AS Email, CASE usu.usua_estado WHEN 'A' THEN 'ACTIVO' ";
-	$xSQL .= "ELSE 'INACTIVO' END AS Estado, usu.usua_caducapass AS CaducaPass, usu.usua_avatarlogin AS LogoUser, (SELECT per.perf_descripcion FROM `expert_perfil` per WHERE per.pais_id=$xPaisid AND per.perf_id=usu.perf_id) AS Perfil FROM `expert_usuarios` usu WHERE usu.pais_id=$xPaisid AND usu.empr_id=$xEmprid AND usu.perf_id>1 ";
+    $xSQL = "SELECT usu.usua_id AS Idusuario, usu.pais_id, CONCAT(usu.usua_nombres,' ',usu.usua_apellidos) AS Nombres, usu.usua_login AS Email, CASE usu.usua_estado WHEN 'A' THEN 'Activo' ";
+	$xSQL .= "ELSE 'Inactivo' END AS Estado, usu.usua_caducapass AS CaducaPass, usu.usua_avatarlogin AS LogoUser, (SELECT per.perf_descripcion FROM `expert_perfil` per WHERE per.pais_id=$xPaisid AND per.perf_id=usu.perf_id) AS Perfil FROM `expert_usuarios` usu WHERE usu.pais_id=$xPaisid AND usu.empr_id=$xEmprid AND usu.perf_id>1 ";
 	$all_usuarios = mysqli_query($con, $xSQL);
 
 	$xSQL = "SELECT perf_descripcion AS Descripcion, perf_id AS Codigo,perf_observacion AS Observacion FROM `expert_perfil` ";
@@ -76,7 +76,7 @@
 			</div>	
 			
             <div class="card-toolbar">
-				<button type="button" data-repeater-create="" class="btn btn-primary btn-lg" id="btnNuevo"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+				<button type="button" data-repeater-create="" class="btn btn-primary btn-sm" id="btnNuevo"><i class="fa fa-plus-circle" aria-hidden="true"></i>
 						Nuevo Usuario
 				</button>
 		    </div>			
@@ -103,7 +103,7 @@
                         $xCantidad = 0;
 						foreach($all_usuarios as $usu){
 							$idusuario = $usu['Idusuario'];
-							$estado = trim($usu['Estado']);
+							$Estado = trim($usu['Estado']);
 							$usuario = trim($usu['Nombres']);
 							$login = trim($usu['Email']);
 							$avatar = trim($usu['LogoUser']);
@@ -124,11 +124,11 @@
 								$xDisabledEdit = '';
 								$xDisabledReset = '';
 
-								if($estado == 'ACTIVO'){
+								if($estado == 'Activo'){
 									$cheking = 'checked="checked"';
-									$xTextColor = "badge badge-light-primary";
+									$xColor = "text-center text-primary";
 								}else{
-									$xTextColor = "badge badge-light-danger";
+									$xColor = "text-center text-danger";
 									$xDisabledEdit = 'disabled';
 									$xDisabledReset = 'disabled';
 								}
@@ -146,30 +146,36 @@
                                 <td style="width: 1%;"></td>
                                 <td style="width: 32%;">
                                     
-									<div class="card card-flush h-md-100">
-										<div class="card-body d-flex flex-center flex-column pt-12 p-9">
+									<div class="card card-flush h-md-100 bg-secondary">
+										<div class="card-body d-flex flex-center">
 											<div class="symbol symbol-65px symbol-circle mb-5">
 												<img src="assets/images/users/<?php echo $avatar; ?>" class="w-150" />
 												<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>
-											</div>   
-											<h2 class="badge badge-light-primary fw-light fs-2 fst-italic"><?php echo $login; ?></h2>
-											<div class="fw-bold text-gray-400 mb-6"><?php echo $perfil; ?></div>
-											<div id="divEstado_<?php echo $usu['Idusuario']; ?>"  class="<?php echo $xTextColor; ?>"><?php echo $estado; ?></div>
-											<div class="text-center">
-												<div class="form-check form-check-sm form-check-custom form-check-solid">
-													<input <?php echo $cheking; ?> class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $idusuario; ?>" 
-														onchange="f_UpdateEstado(<?php echo $xEmprid; ?>,<?php echo $usu['Idusuario']; ?>)" value="<?php echo $idusuario; ?>"/>
-												</div>
 											</div>
+										</div>
+										<div class="card-body d-flex flex-center mt-n5">
+											<h2 class="text-primary fw-light fs-2 fst-italic"><?php echo $login; ?></h2>
+										</div>
+										<div class="card-body mt-n5">
+											<div class="form-check">
+												<input <?php echo $cheking; ?> class="form-check-input" type="checkbox" value="" id="chk_<?php echo $idusuario; ?>" 
+													onchange="f_UpdateEstado(<?php echo $idusuario; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)">
+												<label id="lblcolor_<?php echo $idusuario; ?>" class="form-check-label <?php echo $xColor; ?>">
+												    <?php echo $Estado; ?>
+												</label>	
+											</div>
+										</div>
+										<div class="card-body pt-1">
+										    <div class="fw-bold text-gray-800 mb-5"><?php echo $perfil; ?></div>
 										</div>
 										<div class="card-footer flex-wrap pt-0">
 											<div class="row">
 												<div class="col">
 													<div class="d-grid gap-2">
-														<button type="button" class="btn btn-light-primary border border-primary btn-sm" onclick="f_EditarUsuario(<?php echo $idusuario; ?>,'<?php echo $login; ?>')"><i class="las la-pencil-alt me-1" aria-hidden="true"></i>Editar Usuario</button>
+														<button id="btnedit_<?php echo $idusuario; ?>" <?php echo $xDisabledEdit; ?> type="button" class="btn btn-primary btn-sm" onclick="f_EditarUsuario(<?php echo $idusuario; ?>,'<?php echo $login; ?>')"><i class="las la-pencil-alt me-1" aria-hidden="true"></i>Editar Usuario</button>
 													</div>
 												</div>
-											</div>
+											</div> 
 										</div>
 									</div>
                                 </td>
@@ -935,39 +941,37 @@
 	//cambiar estado y desactivar botones en linea
 
 	
-	function f_UpdateEstado(_emprid, _userid){
-		let _check = $("#chk" + _userid).is(":checked");
-		let _checked = "";
-		let _disabled = "";
-		let _class = "badge badge-light-primary";
-		let _td = "divEstado_" + _userid;
-		let _btnreset = "btnReset_" + _userid;
-		let _btnedit = "btnEditar_" + _userid;
-
+	function f_UpdateEstado(_userid,_paisid,_emprid, ){
+		var _check = $("#chk_" + _userid).is(":checked");
+        var _estado = '';
+        var _class = '';
+        var _lbl = "lblcolor_"+_userid;
+        var _btnedit = "btnedit_"+_userid;
+	
 		if(_check){
-			_estado = "ACTIVO";
-			_disabled = "";
-			_checked = "checked='checked'";
-			$('#'+_btnreset).prop("disabled",false);
+			_estado = "A";
+			_lblestado = "Activo";
+			_class = 'form-check-label text-center text-primary';
 			$('#'+_btnedit).prop("disabled",false);                    
 		}else{                    
-			_estado = "INACTIVO";
+			_estado = "I";
+			_lblestado = "Inactivo";
 			_disabled = "disabled";
-			_class = "badge badge-light-danger";
-			$('#'+_btnreset).prop("disabled",true);
+			_class = "form-check-label text-center text-danger";
 			$('#'+_btnedit).prop("disabled",true);
 		}
 
-		var _changetd = document.getElementById(_td);
-		_changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
+		var _lblChanged = document.getElementById(_lbl);
+        _lblChanged.innerHTML = '<label class="' + _class + '">' + _lblestado + '</label>';
 
 		var _parametros = {
 			"xxUsuaid" : _userid,
+			"xxPaisid" : _paisid,
 			"xxEmprid" : _emprid,
 			"xxEstado" : _estado
 		}
 
-		var xrespuesta = $.post("codephp/delnew_usuario.php", _parametros);
+		var xrespuesta = $.post("codephp/update_estadousuario.php", _parametros);
 		xrespuesta.done(function(response){
 		});	
 								
