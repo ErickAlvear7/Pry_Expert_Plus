@@ -150,7 +150,7 @@
                                 <td style="width: 1%;"></td>
                                 <td style="width: 32%;">
                                     
-									<div class="card card-flush h-md-100 bg-info">
+									<div class="card border-secondary h-md-100 bg-secondary">
 										<div class="card-body d-flex flex-center">
 											<div class="symbol symbol-65px symbol-circle mb-5">
 												<img src="assets/images/users/<?php echo $avatar; ?>" alt="image" />
@@ -158,7 +158,7 @@
 											</div>
 										</div>
 										<div class="card-body d-flex flex-center mt-n5">
-											<h2 class="text-white fw-light fs-2 fst-italic"><?php echo $login; ?></h2>
+											<h2 class="text-primary fw-light fs-2 fst-italic"><?php echo $login; ?></h2>
 										</div>
 										<div class="card-body mt-n5">
 											<div class="form-check">
@@ -175,7 +175,7 @@
 													<label class="form-label">Perfil:</label>
 												</div>
 												<div class="col-md-10">
-												    <label class="form-label text-white"><?php echo $perfil; ?></label>
+												    <label class="form-label text-primary"><?php echo $perfil; ?></label>
 												</div>
 											</div>
 											<div class="row mb-2">
@@ -308,13 +308,13 @@
 										<label class="required form-label">Nombres
 											<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el nombre del usuario"></i>
 										</label>
-										<input type="text" class="form-control" id="txtNombre" name="txtNombre" minlength="5" maxlength="100" placeholder="Ingrese Nombre"  />
+										<input type="text" class="form-control text-uppercase" id="txtNombre" name="txtNombre" minlength="5" maxlength="100" placeholder="Ingrese Nombre"  />
                                     </div>
                                     <div class="col-md-6">
 									    <label class="required form-label">Apellidos
 											<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="especifique el apellido del usuario"></i>
 										</label>
-										<input type="text" class="form-control" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" placeholder="Ingrese Apellido" />
+										<input type="text" class="form-control text-uppercase" id="txtApellido" name="txtApellido" minlength="5" maxlength="100" placeholder="Ingrese Apellido" />
                                     </div>
                                 </div>
 								<div class="row">
@@ -485,8 +485,6 @@
 		_addmod = 'mod';
 		_loginant=userlogin;
 		_userid=userid; 
-		
-		//console.log(_addmod);
 
 		var _parametros = {
 			xxUserid: _userid,
@@ -571,7 +569,8 @@
 		}else{
 			element.style.display='none';
 			$("#lblCaducaPass").text("NO");
-			_caduca = 'NO';					
+			_caduca = 'NO';
+			$('#txtFechacaduca').val('');					
 		}
 
 	});
@@ -596,13 +595,15 @@
 		var _paisid = "<?php echo $xPaisid; ?>";
 		var _emprid = "<?php echo $xEmprid; ?>";
 		var _usuaid = "<?php echo $xUsuaid; ?>";
-		var _nombre = $.trim($("#txtNombre").val());
-		var _apellido = $.trim($("#txtApellido").val());
-		var _login = $.trim($("#txtLogin").val());
+		var _nombre = $.trim($("#txtNombre").val()).toUpperCase();
+		var _apellido = $.trim($("#txtApellido").val()).toUpperCase();
+		var _login = $.trim($("#txtLogin").val()).toLowerCase();
 		var _password = $.trim($("#txtPassword").val());
 		var _perfilid = $("input[type='radio'][name='rdbperfil']:checked").val();
 		var _selecc = 'NO';
 		var _buscar = 'NO';
+
+		//debugger;
 
 		var _imgfile = document.getElementById("imgfile").style.backgroundImage;
 		var _url = _imgfile.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
@@ -621,10 +622,11 @@
 			_ext = _ext.toLowerCase();   
 		}
 
-		if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != 'jpeg'){
+		if(_ext.trim() != '.png' && _ext.trim() != '.jpg' && _ext.trim() != '.jpeg'){
 			toastSweetAlert("top-end",3000,"error","El archivo seleccionado no es una Imagen..!");
 			return;
 		}
+		
 
 		_fechacaduca = $.trim($("#txtFechacaduca").val());
 		_buscar = 'SI';
@@ -667,7 +669,8 @@
 			toastSweetAlert("top-end",3000,"warning","Seleccione Perfil..!!");
 			return;
 		}
-		//debugger;
+
+		
 		
 		if(_addmod == 'mod'){
 			if(_loginant.toLowerCase() != _login.toLowerCase()){
@@ -675,7 +678,7 @@
 			}else{
 				_buscar = 'NO';
 			}                        
-			_ulr = "codephp/actualizar_usuario.php";
+			_ulr = "codephp/update_usuario.php";
 		}else{
 			_ulr = "codephp/grabar_usuarios.php";    
 		}
@@ -718,11 +721,11 @@
 
 								if(_addmod == 'add'){
 									_detalle = 'Nuevo usuario creado';
-									_mensaje = 'Grabado con Exito';
+									_mensaje = 'Usuario Agregado';
 								}
 								else{
 									_detalle = 'Actualizar usuario';
-									_mensaje = 'Actualizado con Exito';
+									_mensaje = 'Usuario Actualizado';
 								} 
 							}else{
 								_detalle = 'Error encontrado en sentecia SQL';
@@ -775,10 +778,10 @@
 
 						if(_addmod == 'add'){
 							_detalle = 'Nuevo usuario creado';
-							_mensaje = 'Agregado con Exito';
+							_mensaje = 'Usuario Agregado';
 						}else{
 							_detalle = 'Actualizar usuario';
-							_mensaje = 'Actualizado con Exito';
+							_mensaje = 'Usuario Actualizado';
 						} 
 					}else{
 						_detalle = 'Error encontrado en sentecia SQL';

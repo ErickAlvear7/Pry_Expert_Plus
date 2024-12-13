@@ -69,9 +69,9 @@
                
             ?>
                 <div class="col-md-4">
-                    <div class="card card-flush h-md-100 bg-info">
+                    <div class="card border-secondary h-md-100 bg-secondary">
                         <div class="card-body d-flex flex-center">
-                            <h2 class="text-white fst-italic"><?php echo $perfil['Perfil']; ?></h2>
+                            <h2 class="text-primary fst-italic"><?php echo $perfil['Perfil']; ?></h2>
                         </div>
                         <div class="card-body mt-n5">
                             <div class="form-check">
@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div class="card-body pt-1">
-                            <div class="fw-bolder text-white mb-5">Total Usuarios con el perfil: <?php echo $xTotal; ?></div>
+                            <div class="fw-bolder text-black mb-5">Total Usuarios con el perfil: <?php echo $xTotal; ?></div>
                             <?php if($perfil['perf_detalle1'] != '') { ?>
                                 <div class="d-flex align-items-center py-2">
                                     <span class="bullet bg-primary me-3"></span><?php echo $perfil['perf_detalle1']; ?>
@@ -636,7 +636,7 @@
     function f_GrabarEditar(_paisid, _emprid, _usuaid){
 
         var _perfil = $.trim($("#txtPerfiledit").val());
-        var _observacion = $.trim($("#txtObservacionedit").val());
+        var _observacion = $.trim($("#txtObservacionedit").val()).toUpperCase();
         
         var _detalle1 = $.trim($("#txtDetalleedit1").val());
         var _detalle2 = $.trim($("#txtDetalleedit2").val());

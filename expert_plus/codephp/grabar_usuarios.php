@@ -40,7 +40,7 @@
             $xFechafile = new DateTime();
             $xNombreFile = ($xFile != "") ? $xFechafile->getTimestamp() . "_" . $_FILES["xxFile"]["name"] : "";            
 
-            if($xFile != ''){
+            if($xFile != ""){
                 $xTmpFile = $_FILES["xxFile"]["tmp_name"];
 
                 if($xTmpFile != ""){
