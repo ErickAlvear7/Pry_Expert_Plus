@@ -82,7 +82,7 @@
 		    </div>			
 		</div>
 		
-		<div class="card-body py-4" >
+		<div class="card-body py-4">
 			<table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="kt_table_users" style="width: 100%;">
 				<thead>
 					<tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
@@ -119,18 +119,22 @@
 						?>
 							<?php 
 
-								$cheking = '';
-								$chkEstado = '';
-								$xDisabledEdit = '';
-								$xDisabledReset = '';
+								$cheking = "";
+								$chkEstado = "";
+								$xDisabledEdit = "";
+								$xDisabledReset = "";
+								$bgcolor = "";
 
-								if($estado == 'Activo'){
+								if($Estado == 'Activo'){
 									$cheking = 'checked="checked"';
 									$xColor = "text-center text-primary";
+									$bgcolor = "bg-success";
+									
 								}else{
 									$xColor = "text-center text-danger";
 									$xDisabledEdit = 'disabled';
-									$xDisabledReset = 'disabled';
+									$bgcolor = "bg-danger";
+									
 								}
 
 								$xSQL = "SELECT * FROM `expert_pais` WHERE pais_id=$xUserpais ";
@@ -146,15 +150,15 @@
                                 <td style="width: 1%;"></td>
                                 <td style="width: 32%;">
                                     
-									<div class="card card-flush h-md-100 bg-secondary">
+									<div class="card card-flush h-md-100 bg-info">
 										<div class="card-body d-flex flex-center">
 											<div class="symbol symbol-65px symbol-circle mb-5">
-												<img src="assets/images/users/<?php echo $avatar; ?>" class="w-150" />
-												<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>
+												<img src="assets/images/users/<?php echo $avatar; ?>" alt="image" />
+												<div id="bgcolor_<?php echo $idusuario; ?>" class="<?php echo $bgcolor; ?> position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3 "></div>
 											</div>
 										</div>
 										<div class="card-body d-flex flex-center mt-n5">
-											<h2 class="text-primary fw-light fs-2 fst-italic"><?php echo $login; ?></h2>
+											<h2 class="text-white fw-light fs-2 fst-italic"><?php echo $login; ?></h2>
 										</div>
 										<div class="card-body mt-n5">
 											<div class="form-check">
@@ -166,13 +170,28 @@
 											</div>
 										</div>
 										<div class="card-body pt-1">
-										    <div class="fw-bold text-gray-800 mb-5"><?php echo $perfil; ?></div>
+											<div class="row mb-4">
+											    <div class="col-md-2">
+													<label class="form-label">Perfil:</label>
+												</div>
+												<div class="col-md-10">
+												    <label class="form-label text-white"><?php echo $perfil; ?></label>
+												</div>
+											</div>
+											<div class="row mb-2">
+											    <div class="col-md-8">
+													<label class="form-label">Resetear Password:</label>
+												</div>
+												<div class="col-md-4">
+												<i onclick="f_ResetPassword(<?php echo $idusuario; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" class="fa fa-unlock-alt fa-2x mt-n2" data-bs-toggle="tooltip" title="Resetear password -> 12345" role="button"></i>
+												</div>
+											</div>
 										</div>
 										<div class="card-footer flex-wrap pt-0">
 											<div class="row">
 												<div class="col">
 													<div class="d-grid gap-2">
-														<button id="btnedit_<?php echo $idusuario; ?>" <?php echo $xDisabledEdit; ?> type="button" class="btn btn-primary btn-sm" onclick="f_EditarUsuario(<?php echo $idusuario; ?>,'<?php echo $login; ?>')"><i class="las la-pencil-alt me-1" aria-hidden="true"></i>Editar Usuario</button>
+														<button <?php $xDisabledRese; ?> id="btnedit_<?php echo $idusuario; ?>" type="button" class="btn btn-primary btn-sm" onclick="f_EditarUsuario(<?php echo $idusuario; ?>,'<?php echo $login; ?>')"><i class="las la-pencil-alt me-1" aria-hidden="true"></i>Editar Usuario</button>
 													</div>
 												</div>
 											</div> 
@@ -420,147 +439,6 @@
 		Inputmask({
 			"mask" : "9999-99-99"
 		}).mask("#txtFechacaduca");
-
-		//abrir-modal-nuevo-usuario
-		
-
-		// $(document).on("click","#chkCaducaPass",function(){
-			
-		// 	element = document.getElementById("content");
-		// 	if($("#chkCaducaPass").is(":checked")){
-		// 		element.style.display='block';
-		// 		$("#lblCaducaPass").text("SI");
-		// 		_caduca = 'SI';
-		// 		var now = new Date();
-		// 		var day = ("0" + now.getDate()).slice(-2);
-		// 		var month = ("0" + (now.getMonth() + 1)).slice(-2);
-		// 		var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-		// 		$('#txtFechacaduca').val(today);
-		// 	}else{
-		// 		element.style.display='none';
-		// 		$("#lblCaducaPass").text("NO");
-		// 		_caduca = 'NO';					
-		// 	}
-
-		// });
-
-		// $(document).on("click","#chkCamPass",function(){
-
-		// 	if($("#chkCamPass").is(":checked")){
-		// 		$("#lblCamPass").text("SI");
-		// 		_cambiarPass = 'SI';
-		// 	}else{
-		// 		$("#lblCamPass").text("NO");
-		// 		_cambiarPass = 'NO';
-		// 	}
-
-		// });	
-
-		// $("#btnNuevo").click(function(){
-
-		// 	var _codigoperf = "<?php echo $xCodigoPerf; ?>";
-		// 	_addmod = 'add';
-		// 	_caduca = 'NO';
-		// 	_cambiarPass = 'NO';
-		// 	_idusu = 0;
-		// 	_cboPerfil = 0;
-		// 	_avatar = '';
-
-		// 	console.log(_codigoperf);
-		// 	$("#titulo").text("Nuevo Usuario");
-		// 	document.getElementById("btnSave").innerHTML = '<i class="fa fa-hdd me-1"></i>Grabar';
-		// 	document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/user.png)";
-		// 	$("#chkCaducaPass").prop("checked", false);
-		// 	$("#lblCaducaPass").text("NO");
-		// 	$("#chkCamPass").prop("checked", false);
-		// 	$("#lblCamPass").text("NO");
-		// 	$('#txtPassword').prop('readonly', false);
-		// 	$('#content').css('display','none');
-		// 	$("#txtNombre").val('');
-		// 	$("#txtApellido").val('');
-		// 	$("#txtLogin").val('');
-		// 	$("#txtPassword").val('');
-		// 	$("input").prop('disabled', false);
-		// 	$("#rdboption_" + _codigoperf).prop("checked", true);
-		// 	$("#kt_modal_add_user").modal("show");	
-				
-		// });
-
-		// function f_EditarUsuario(userid,userlogin){
-			
-		// 	$("#titulo").text("Editar Usuario");
-		// 	var _emprid = "<?php echo $xEmprid; ?>";
-		// 	var _paisid = "<?php echo $xPaisid; ?>";
-		// 	_addmod = 'mod';
-		// 	_loginant=userlogin;
-		// 	_userid=userid;                 
-
-		// 	var _parametros = {
-		// 		xxUserid: _userid,
-		// 		xxPaisid:_paisid,
-		// 		xxEmprid: _emprid,
-		// 	}
-
-		// 	$.ajax({
-		// 		url: "codephp/editar_usuarios.php",
-		// 		type: "POST",
-		// 		dataType: "json",
-		// 		data: _parametros,          
-		// 		success: function(data){ 
-		// 			var _nombres = data[0]['Nombres'];
-		// 			var _apellidos = data[0]['Apellidos'];
-		// 			var _login = data[0]['Login'];
-		// 			var _password = data[0]['Password'];
-
-		// 			_cboPerfil = data[0]['CodigoPerfil'];						
-		// 			_caduca = data[0]['CaducaPass'];
-		// 			_fechaCaduca = data[0]['FechaCaduca'];
-		// 			_cambiarPass = data[0]['CambiarPass'];
-		// 			_avatar = data[0]['Avatar'] == '' ? 'user.png' : data[0]['Avatar'];
-
-		// 			var _rdboption = 'rdboption_' + _cboPerfil;
-		// 			$('#'+_rdboption).prop('checked','checked');
-		// 			$("input").prop('disabled', false);	
-
-		// 			$("#txtNombre").val(_nombres);
-		// 			$("#txtApellido").val(_apellidos);
-		// 			$("#txtLogin").val(_login);
-		// 			$("#txtPassword").val(_password);
-		// 			$("#cboPerfil").val(_cboPerfil).change();
-		// 			$("#txtFechacaduca").val(_fechaCaduca);
-		// 			document.getElementById('imgfile').style.backgroundImage="url(assets/images/users/" + _avatar + ")";
-					
-		// 			if(_login == 'admin@prestasalud.com' && _nombres == 'Administrador'){
-		// 				$("input").prop('disabled', true);
-		// 			}
-
-		// 			if(_caduca == 'SI'){
-		// 				$("#chkCaducaPass").prop("checked", true);
-		// 				$("#lblCaducaPass").text("SI");  
-		// 				$('#content').css('display','block');       
-		// 			}else if(_caduca == 'NO'){
-		// 				$("#chkCaducaPass").prop("checked", false);
-		// 				$("#lblCaducaPass").text("NO");  
-		// 				$('#content').css('display','none');   
-
-		// 			}
-
-		// 			if(_cambiarPass == 'SI'){
-		// 				$("#chkCamPass").prop("checked", true);
-		// 				$("#lblCamPass").text('SI');
-		// 			}else if(_cambiarPass == 'NO'){
-		// 				$("#chkCamPass").prop("checked", false);
-		// 				$("#lblCamPass").text('NO');	
-		// 			}
-																							
-		// 		},
-		// 		error: function (error){
-		// 			console.log(error);
-		// 		}                            
-		// 	}); 
-		// 	document.getElementById("btnSave").innerHTML = '<i class="las la-pencil-alt"></i>Modificar';
-		// 	$("#kt_modal_add_user").modal("show");			
-		// }
 
 	});
 
@@ -940,29 +818,39 @@
 
 	//cambiar estado y desactivar botones en linea
 
-	
 	function f_UpdateEstado(_userid,_paisid,_emprid, ){
+
+		debugger;
+
 		var _check = $("#chk_" + _userid).is(":checked");
         var _estado = '';
-        var _class = '';
+        var _class = "";
         var _lbl = "lblcolor_"+_userid;
         var _btnedit = "btnedit_"+_userid;
+		var _bgcolor = 'bgcolor_' + _userid;
+		var _color = "";
 	
 		if(_check){
 			_estado = "A";
 			_lblestado = "Activo";
 			_class = 'form-check-label text-center text-primary';
+			_color = "bg-success";
 			$('#'+_btnedit).prop("disabled",false);                    
 		}else{                    
 			_estado = "I";
 			_lblestado = "Inactivo";
-			_disabled = "disabled";
 			_class = "form-check-label text-center text-danger";
+			_color = "bg-danger";
 			$('#'+_btnedit).prop("disabled",true);
 		}
 
 		var _lblChanged = document.getElementById(_lbl);
         _lblChanged.innerHTML = '<label class="' + _class + '">' + _lblestado + '</label>';
+
+		var _bgcolorChanged = document.getElementById(_bgcolor);
+		_bgcolorChanged.innerHTML = '<div class="' + _color + '">'+'</div>';
+		console.log(_bgcolorChanged);
+		
 
 		var _parametros = {
 			"xxUsuaid" : _userid,
@@ -977,16 +865,11 @@
 								
 	}
 
-	//desplazar ventana modal
-	$("#kt_modal_add_user").draggable({
-		handle: ".modal-header"
-	}); 
-
-	//resetaer password
-	function f_ResetPass(_usuaid, _emprid){
-
+	//Resetear Passsword usuario
+	function f_ResetPassword(_usuid,_paisid,_emprid){
 		var _parametros = {
-			"xxUsuaid" : _usuaid,
+			"xxUsuaid" : _usuid,
+			"xxPaisid" : _paisid,
 			"xxEmprid" : _emprid
 		}
 
@@ -994,8 +877,13 @@
 			if(response.trim() == 'OK'){
 				toastSweetAlert("top-end",3000,"success","Password Actualizado");
 			}     
-		}); 			
+		}); 	
 	}
+
+	//desplazar ventana modal
+	$("#kt_modal_add_user").draggable({
+		handle: ".modal-header"
+	}); 
 
 
 </script> 	

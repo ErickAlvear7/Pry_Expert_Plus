@@ -11,14 +11,15 @@
 
     $respuesta = "ERR";
 
-    if(isset($_POST['xxUsuaid']) and isset($_POST['xxEmprid'])){
-        if(isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxEmprid']) <> ''){
+    if(isset($_POST['xxUsuaid']) and isset($_POST['xxPaisid']) and isset($_POST['xxEmprid'])){
+        if(isset($_POST['xxUsuaid']) <> '' and isset($_POST['xxPaisid']) <> '' and isset($_POST['xxEmprid']) <> ''){
             
             $xUsuaid = $_POST['xxUsuaid'];
+            $xPaisid = $_POST['xxPaisid'];
             $xEmprid = $_POST['xxEmprid'];
     
             $xSQL = "UPDATE `expert_usuarios` SET usua_password=MD5('12345') ";
-            $xSQL .= "WHERE usua_id=$xUsuaid AND empr_id=$xEmprid ";
+            $xSQL .= "WHERE usua_id=$xUsuaid AND pais_id=$xPaisid AND empr_id=$xEmprid ";
     
             if(mysqli_query($con, $xSQL)){
                 $respuesta = "OK";
