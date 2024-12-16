@@ -61,171 +61,130 @@
 
 
 ?>
- 	<!--begin::Container-->
-<div id="kt_content_container" class="container-xxl">
-	<input type="hidden" id="mensaje" value="<?php echo $mensaje ?>">
-	<div class="card">
-		<div class="card-header border-0 pt-6">
+<div id="kt_content_container" class="container-xxl">	
+	<div class="card card-flush">
+		<div class="card-header align-items-center py-5 gap-2 gap-md-5">
 			<div class="card-title">
 				<div class="d-flex align-items-center position-relative my-1">
-					<span class="svg-icon svg-icon-1 position-absolute ms-6">
-					    <i class="fa fa-search fa-1x" style="color:#3B8CEC;" aria-hidden="true"></i> 
+					<span class="svg-icon svg-icon-1 position-absolute ms-4">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+							<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+						</svg>
 					</span>
-					<input type="text" data-kt-user-table-filter="search" class="form-control w-250px ps-14" placeholder="Buscar Usuario" />
+					<input type="text" id="mySearch" data-kt-ecommerce-product-filter="search" class="form-control w-250px ps-14" placeholder="Search User" />
 				</div>
-			</div>	
-			
-            <div class="card-toolbar">
-				<button type="button" data-repeater-create="" class="btn btn-primary btn-sm" id="btnNuevo"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+			</div>
+			<div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+				<div class="w-100 mw-150px">
+					<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Status" data-kt-ecommerce-product-filter="status">
+						<option></option>
+						<option value="all">All</option>
+						<option value="activo">Activo</option>
+						<option value="inactivo">Inactivo</option>
+					</select>
+				</div>
+				<button type="button" data-repeater-create="" class="btn btn-primary btn-lg" id="btnNuevo"><i class="fa fa-plus-circle" aria-hidden="true"></i>
 						Nuevo Usuario
 				</button>
-		    </div>			
+			</div>
 		</div>
-		
-		<div class="card-body py-4">
-			<table class="table align-middle table-row-dashed table-hover fs-6 gy-5" id="kt_table_users" style="width: 100%;">
-				<thead>
-					<tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
-						<th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-					</tr>
-				</thead>
+		<div class="card-body pt-0">
+			<div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-5 g-xl-9">
+				<?php 
+						
+					foreach($all_usuarios as $usu){
+						$idusuario = $usu['Idusuario'];
+						$Nombres = trim($usu['Nombres']);
+						$Estado = trim($usu['Estado']);
+						$usuario = trim($usu['Nombres']);
+						$login = trim($usu['Email']);
+						$avatar = trim($usu['LogoUser']);
+						$perfil = trim($usu['Perfil']);
+						$xUserpais = $usu['pais_id'];
 
-				<tbody class="text-gray-600 fw-bold">
+						if($avatar == ''){
+							$avatar = 'user.png';
+						}
 
-					<?php 
+						$cheking = "";
+						$chkEstado = "";
+						$xDisabledEdit = "";
+						$xDisabledReset = "";
+						$bgcolor = "";
+
+						if($Estado == 'Activo'){
+							$cheking = 'checked="checked"';
+							$xColor = "text-center text-primary";
+							$bgcolor = "bg-success";
 							
-                        $xCantidad = 0;
-						foreach($all_usuarios as $usu){
-							$idusuario = $usu['Idusuario'];
-							$Estado = trim($usu['Estado']);
-							$usuario = trim($usu['Nombres']);
-							$login = trim($usu['Email']);
-							$avatar = trim($usu['LogoUser']);
-							$perfil = trim($usu['Perfil']);
-							$xUserpais = $usu['pais_id'];
-
-							if($avatar == ''){
-								$avatar = 'user.png';
-							}
-
-                            $xCantidad = $xCantidad + 1; 
-                           
-						?>
-							<?php 
-
-								$cheking = "";
-								$chkEstado = "";
-								$xDisabledEdit = "";
-								$xDisabledReset = "";
-								$bgcolor = "";
-
-								if($Estado == 'Activo'){
-									$cheking = 'checked="checked"';
-									$xColor = "text-center text-primary";
-									$bgcolor = "bg-success";
-									
-								}else{
-									$xColor = "text-center text-danger";
-									$xDisabledEdit = 'disabled';
-									$bgcolor = "bg-danger";
-									
-								}
-
-								$xSQL = "SELECT * FROM `expert_pais` WHERE pais_id=$xUserpais ";
-								$all_pais = mysqli_query($con, $xSQL);
-								foreach($all_pais as $pais){ 
-									$xPaisName = $pais['pais_nombre'];
-								}
-							?>
-                            
-                            <?php if($xCantidad == 1 ){ ?>
-                            <tr> 
-                            <?php } ?>
-                                <td style="width: 1%;"></td>
-                                <td style="width: 32%;">
-                                    
-									<div class="card border-secondary h-md-100 bg-secondary">
-										<div class="card-body d-flex flex-center">
-											<div class="symbol symbol-65px symbol-circle mb-5">
-												<img src="assets/images/users/<?php echo $avatar; ?>" alt="image" />
-												<div id="bgcolor_<?php echo $idusuario; ?>" class="<?php echo $bgcolor; ?> position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3 "></div>
-											</div>
-										</div>
-										<div class="card-body d-flex flex-center mt-n5">
-											<h2 class="text-primary fw-light fs-2 fst-italic"><?php echo $login; ?></h2>
-										</div>
-										<div class="card-body mt-n5">
-											<div class="form-check">
-												<input <?php echo $cheking; ?> class="form-check-input" type="checkbox" value="" id="chk_<?php echo $idusuario; ?>" 
-													onchange="f_UpdateEstado(<?php echo $idusuario; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)">
-												<label id="lblcolor_<?php echo $idusuario; ?>" class="form-check-label <?php echo $xColor; ?>">
-												    <?php echo $Estado; ?>
-												</label>	
-											</div>
-										</div>
-										<div class="card-body pt-1">
-											<div class="row mb-4">
-											    <div class="col-md-2">
-													<label class="form-label">Perfil:</label>
-												</div>
-												<div class="col-md-10">
-												    <label class="form-label text-primary"><?php echo $perfil; ?></label>
-												</div>
-											</div>
-											<div class="row mb-2">
-											    <div class="col-md-8">
-													<label class="form-label">Resetear Password:</label>
-												</div>
-												<div class="col-md-4">
-												<i onclick="f_ResetPassword(<?php echo $idusuario; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" class="fa fa-unlock-alt fa-2x mt-n2" data-bs-toggle="tooltip" title="Resetear password -> 12345" role="button"></i>
-												</div>
-											</div>
-										</div>
-										<div class="card-footer flex-wrap pt-0">
-											<div class="row">
-												<div class="col">
-													<div class="d-grid gap-2">
-														<button <?php $xDisabledRese; ?> id="btnedit_<?php echo $idusuario; ?>" type="button" class="btn btn-primary btn-sm" onclick="f_EditarUsuario(<?php echo $idusuario; ?>,'<?php echo $login; ?>')"><i class="las la-pencil-alt me-1" aria-hidden="true"></i>Editar Usuario</button>
-													</div>
-												</div>
-											</div> 
-										</div>
-									</div>
-                                </td>
-
-								<?php if($xCantidad == 3) { $xTotalUsuarios = $xTotalUsuarios - $xCantidad; $xCantidad = 0; ?>
-									<td style="width: 1%;"></td>
-									</tr>
-								<?php } ?>
-
-					<?php 	} ?>  
-
-					<?php
-						if($xTotalUsuarios == 1) { ?>
-							<td style="width: 1%;"></td>
-							<td style="width: 32%;"></td>
-							<td style="width: 1%;"></td>
-							<td style="width: 32%;"></td>
-							<td style="width: 1%;"></td>
-							</tr>
-					<?php  }elseif($xTotalUsuarios == 2) { ?>
-							<td style="width: 1%;"></td>
-							<td style="width: 32%;"></td>
-							<td style="width: 1%;"></td>
-							</tr>
-					<?php } ?>
-
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>
+						}else{
+							$xColor = "text-center text-danger";
+							$xDisabledEdit = 'disabled';
+							$bgcolor = "bg-danger";
+							
+						}	
+				?>
+				<div class="col-md-4">				
+					<div class="card border-secondary h-md-100" style="background-color: #82a4db;" id="myUser">
+						<div class="card-body d-flex flex-center">
+							<div class="symbol symbol-65px symbol-circle mb-5">
+								<img src="assets/images/users/<?php echo $avatar; ?>" alt="image" />
+								<div id="bgcolor_<?php echo $idusuario; ?>" class="<?php echo $bgcolor; ?> position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3 "></div>
+							</div>
+						</div>
+						<div class="card-title d-flex flex-center mt-n5">
+							<h2 class="text-white fw-light fs-2 fst-italic"><?php echo $login; ?></h2>
+						</div>
+						<div class="card-body mt-n5">
+							<div class="form-check">
+								<input <?php echo $cheking; ?> class="form-check-input" type="checkbox" value="" id="chk_<?php echo $idusuario; ?>" 
+									onchange="f_UpdateEstado(<?php echo $idusuario; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)">
+								<label id="lblcolor_<?php echo $idusuario; ?>" class="form-check-label <?php echo $xColor; ?>">
+									<?php echo $Estado; ?>
+								</label>	
+							</div>
+						</div>
+						<div class="card-body pt-1">
+							<div class="row mb-4">
+								<div class="col-md-3">
+									<h2 class="form-label">Perfil:</h2>
+								</div>
+								<div class="col-md-9">
+									<h2 class="form-label text-white"><?php echo $perfil; ?></h2>
+								</div>
+							</div>
+							<div class="row mb-4">
+								<div class="col-md-4">
+									<h2 class="form-label">Usuario:</h2>
+								</div>
+								<div class="col-md-8">
+									<label class="form-label text-white"><?php echo $Nombres; ?></label>
+								</div>
+							</div>
+							<div class="row mb-2">
+								<div class="col-md-8">
+									<h2 class="form-label">Resetear Password:</h2>
+								</div>
+								<div class="col-md-4">
+								<i onclick="f_ResetPassword(<?php echo $idusuario; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" class="fa fa-unlock-alt fa-2x mt-n2" data-bs-toggle="tooltip" title="Resetear password -> 12345" role="button" style="color:#2e97f4"></i>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="d-grid gap-2">
+									<button <?php $xDisabledRese; ?> id="btnedit_<?php echo $idusuario; ?>" type="button" class="btn btn-outline-primary btn-sm text-black" onclick="f_EditarUsuario(<?php echo $idusuario; ?>,'<?php echo $login; ?>')"><i class="las la-pencil-alt me-1" aria-hidden="true" style="color: black"></i>Editar Usuario</button>
+								</div>
+							</div>
+						</div> 	
+					</div>			
+				</div>
+			<?php } ?>
+			</div>
+		</div>	
+	</div>	
+</div>	
 
 <!--Modal Usuario-->
 <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
@@ -423,14 +382,24 @@
 <script>
 	$(document).ready(function(){
 
+
+	    $('#mySearch').keyup(function(){
+			var search = $(this).val().toLowerCase();
+			$('#myUser label').filter(function(){
+               
+				$(this).toggle($(this).text().toLowerCase().indexOf(search) > -1)
+
+			});
+		});
+
 		var _cambiarPass, _nombre, _apellido, _login, _password, _perfil, _caduca,
 				_fechacaduca, _fila, _addmod, _idusu;
 
-		_mensaje = $('input#mensaje').val();
+		//_mensaje = $('input#mensaje').val();
 
-		if(_mensaje != ''){
-			toastSweetAlert("top-end",3000,"success",_mensaje); 
-		}
+		// if(_mensaje != ''){
+		// 	toastSweetAlert("top-end",3000,"success",_mensaje); 
+		// }
 		
 		$("#txtFechacaduca").flatpickr({
 				dateFormat: "Y-m-d"

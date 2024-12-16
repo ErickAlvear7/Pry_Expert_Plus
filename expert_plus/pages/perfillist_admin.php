@@ -69,9 +69,9 @@
                
             ?>
                 <div class="col-md-4">
-                    <div class="card border-secondary h-md-100 bg-secondary">
+                    <div class="card border-secondary h-md-100" style="background-color: #82a4db;">
                         <div class="card-body d-flex flex-center">
-                            <h2 class="text-primary fst-italic"><?php echo $perfil['Perfil']; ?></h2>
+                            <h2 class="text-white fst-italic"><?php echo $perfil['Perfil']; ?></h2>
                         </div>
                         <div class="card-body mt-n5">
                             <div class="form-check">
@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div class="card-body pt-1">
-                            <div class="fw-bolder text-black mb-5">Total Usuarios con el perfil: <?php echo $xTotal; ?></div>
+                            <div class="fw-bolder text-white mb-5">Total Usuarios con el perfil: <?php echo $xTotal; ?></div>
                             <?php if($perfil['perf_detalle1'] != '') { ?>
                                 <div class="d-flex align-items-center py-2">
                                     <span class="bullet bg-primary me-3"></span><?php echo $perfil['perf_detalle1']; ?>
@@ -114,15 +114,13 @@
                                 </div> 
                             <?php } ?>                                    
                         </div>
-                        <div class="card-footer flex-wrap pt-0">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="d-grid gap-2">
-                                        <button <?php echo $xDisabledEdit; ?> id="btnedit_<?php echo $xid; ?>" type="button" class="btn btn-primary btn-sm" onclick="f_Editar(<?php echo $perfil['Id']; ?>,'<?php echo $xNamePerfil; ?>','<?php echo $perfil['Descripcion']; ?>')"><i class="las la-pencil-alt me-1" aria-hidden="true"></i>Editar Perfil</button>
-                                    </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-grid gap-2">
+                                    <button <?php echo $xDisabledEdit; ?> id="btnedit_<?php echo $xid; ?>" type="button" class="btn btn-outline-primary btn-sm text-black" onclick="f_Editar(<?php echo $perfil['Id']; ?>,'<?php echo $xNamePerfil; ?>','<?php echo $perfil['Descripcion']; ?>')"><i class="las la-pencil-alt me-1" aria-hidden="true" style="color: black"></i>Editar Perfil</button>
                                 </div>
                             </div>
-                        </div> 
+                        </div>  
                     </div>
                 </div>
             <?php }
@@ -132,8 +130,8 @@
                 <img src="assets/media/illustrations/sketchy-1/4.png" class="card-img-top" alt="..." height="200">
                 <div class="card-body">
                     <div class="d-grid gap-2">
-                        <button type="button" data-repeater-create="" class="btn btn-light-primary border border-primary btn-sm" id="btnNuevo"><i class="fa fa-user-plus me-1" aria-hidden="true"></i>
-                        Agregar Nuevo Perfil
+                        <button type="button" data-repeater-create="" class="btn btn-primary btn-lg" id="btnNuevo"><i class="fa fa-user-plus me-1" aria-hidden="true"></i>
+                        Agregar Perfil
                         </button>
                     </div>
                 </div>
