@@ -141,7 +141,7 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="assets/js/scripts.bundle.js"></script>
 
 		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-		<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+		<script src="assets/plugins/custom/datatables/datatables.bundlemod.js"></script>
 
 		<!--begin::Page USUARIOS-->
         <script src="assets/js/custom/apps/user-management/users/list/table.js"></script>

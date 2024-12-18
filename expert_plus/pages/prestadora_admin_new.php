@@ -45,10 +45,6 @@
         $xTotalPrestadores = $contar['Contar'];
     }
 
-
-
-
-
 ?>
 
 <div id="kt_content_container" class="container-xxl">
@@ -63,7 +59,6 @@
 					<input type="text" data-kt-user-table-filter="search" class="form-control w-250px ps-14" placeholder="Buscar Prestador" />
 				</div>
 			</div>	
-			
             <div class="card-toolbar">
 				<button type="button" data-repeater-create="" class="btn btn-light-primary btn-sm" id="btnNuevo" onclick="f_NuevoPrestador()"><i class="fa fa-plus-circle" aria-hidden="true"></i>
 						Nuevo Prestador
