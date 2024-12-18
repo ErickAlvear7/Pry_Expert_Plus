@@ -25,12 +25,6 @@
             $xPresid = $_POST['xxPresid'];
             $xEstado = safe($_POST['xxEstado']);
 
-            if($xEstado == 'ACTIVO'){
-                $xEstado = 'A';
-            }else{
-                $xEstado = 'I';
-            }
-
             $xSQL = "UPDATE `expert_prestadora` SET pres_estado='$xEstado' ";
             $xSQL .= "WHERE pais_id=$xPaisid AND empr_id=$xEmprid AND pres_id=$xPresid ";
             mysqli_query($con, $xSQL);

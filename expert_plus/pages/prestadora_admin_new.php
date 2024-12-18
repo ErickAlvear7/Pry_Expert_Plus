@@ -107,12 +107,12 @@
                                 $xTargeturl = '';
 
                                 if($xEstado == 'A'){
-                                    $xEstado = 'ACTIVO';
+                                    $xEstado = 'Activo';
                                     $chkEstado = 'checked="checked"';
-                                    $xTextColor = "badge badge-light-primary";
+                                    $xTextColor = "text-center text-primary";
                                 }else{
-                                    $xEstado = 'INACTIVO';
-                                    $xTextColor = "badge badge-light-danger";
+                                    $xEstado = 'Inactivo';
+                                    $xTextColor = "text-center text-danger";
                                     $xDisabledEdit = 'disabled';
                                 }
 
@@ -134,64 +134,64 @@
                             <?php } ?>
                                     <td style="width: 1%;"></td>
                                     <td style="width: 32%;">
-                                        <div class="card card-flush h-md-100">
+                                        <div class="card card-flush h-md-100" style="background-color: #82a4db;">
                                             <div class="card-body d-flex flex-center flex-column pt-12 p-9">
                                                 <div class="symbol symbol-65px symbol-circle mb-5">
                                                     <a href="<?php echo $xUrl; ?>" <?php echo $xTargeturl; ?> class="symbol symbol-50px">
-                                                        <span class="symbol-label" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUrl; ?>" style="background-image:url(assets/images/prestadores/<?php echo $xLogo; ?> );"></span>
-                                                    </a>   
+                                                        <img src="assets/images/prestadores/<?php echo $xLogo; ?>" alt="image" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUrl; ?>" />
+                                                    </a>
+                                                    <div id="bgcolor_<?php echo $xId; ?>" class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3 "></div>  
                                                 </div>   
-                                                <h2 class="badge badge-light-primary fw-light fs-2 fst-italic mb-4"><?php echo $xPrestador; ?></h2>  
+                                                <h2 class="text-white fw-light fs-3 fst-italic"><?php echo $xPrestador; ?></h2>  
                                             </div>
-                                            <div class="d-flex flex-column justify-content-center flex-row-fluid pe-11 mb-5">
-                                                <div class="d-flex fs-6 fw-bold align-items-center mb-3">
-                                                    <div class="bullet bg-primary ms-9 me-3"></div>
-                                                    <div class="text-gray-400 me-1">Ciudad</div>
-                                                    <div class="ms-auto fw-bolder text-gray-700"><?php echo $xCiudad; ?></div>
-                                                </div>
-                                                <div class="d-flex fs-6 fw-bold align-items-center mb-3">
-                                                    <div class="bullet bg-primary ms-9 me-3"></div>
-                                                    <div class="text-gray-400 me-1">Tipo</div>
-                                                    <div class="ms-auto text-end fw-bolder text-gray-700"><?php echo $xTipoPresta; ?></div>
-                                                </div>
-                                                <div class="d-flex fs-6 fw-bold align-items-center mb-3">
-                                                    <div class="bullet bg-primary ms-9 me-3"></div>
-                                                    <div class="text-gray-400 me-1">Sector</div>
-                                                    <div class="ms-auto fw-bolder text-gray-700"><?php echo $xSector; ?></div>
-                                                </div>
-                                                <div class="d-flex fs-6 fw-bold align-items-center mb-4">
-                                                    <div class="bullet bg-primary ms-9 me-3"></div>
-                                                    <div class="text-gray-400 me-9">Estado</div>
-                                                    <div class="form-check form-check-sm form-check-custom form-check-solidmt-4">
-                                                        <input class="form-check-input h-20px w-20px border-primary" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $xId; ?>" 
-                                                        onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>)" value=""/>
-                                                        <div id="td_<?php echo $xId; ?>">
-                                                            <div class="<?php echo $xTextColor; ?>">
-                                                                <?php echo $xEstado; ?>
-                                                            </div>
-                                                        </div>
-                                                    </div>   
-                                                </div>
-                                                <div class="d-flex fs-6 fw-bold align-items-center mb-3">
-                                                    <div class="bullet bg-primary ms-9 me-3"></div>
-                                                    <div class="text-gray-400 me-1">Ubicacion</div>
-                                                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUbicacion; ?>">
-                                                        <a href="<?php echo $xUbicacion; ?>" <?php echo $xTarget; ?> class="symbol symbol-50px">  
-                                                            <!-- <i class="fa fa-map-marker fa-2x ms-7" aria-hidden="true" style="color:#3B8CEC;"></i> -->
-                                                            <i class="fa fa-map fa-2x ms-2" aria-hidden="true" style="color:#3B8CEC;"></i>  
-                                                        </a>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="card-footer flex-wrap pt-0">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="d-grid gap-2">
-                                                            <button id="btnEditar_<?php echo $xId; ?>" type="button" class="btn btn-light-primary border border-primary btn-sm" <?php echo $xDisabledEdit; ?> onclick="f_Editar(<?php echo $xId; ?>)" ><i class="las la-pencil-alt me-1" aria-hidden="true"></i>Editar Prestador</button>
-                                                        </div>
+                                            <div class="card-body mt-n5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $xId; ?>" 
+                                                    onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>)" value=""/>
+                                                    <label id="lblcolor_<?php echo $xId; ?>" class="form-check-label <?php echo $xTextColor; ?>">
+                                                        <?php echo $xEstado; ?>
+                                                    </label>	
+                                                </div>  
+                                                <div class="d-flex flex-column justify-content-center flex-row-fluid pe-11 mb-5">
+                                                    <div class="d-flex fs-6 fw-bold align-items-center mb-3">
+                                                        <div class="bullet text-gray-800 ms-9 me-3"></div>
+                                                        <div class="text-gray-800 me-1">Ciudad:</div>
+                                                        <div class="text-white fw-light fs-6 fst-italic"><?php echo $xCiudad; ?></div>
+                                                    </div>
+                                                    <div class="d-flex fs-6 fw-bold align-items-center mb-3">
+                                                        <div class="bullet text-gray-800 ms-9 me-3"></div>
+                                                        <div class="text-gray-800 me-1">Tipo:</div>
+                                                        <div class="text-white fw-light fs-6 fst-italic"><?php echo $xTipoPresta; ?></div>
+                                                    </div>
+                                                    <div class="d-flex fs-6 fw-bold align-items-center mb-3">
+                                                        <div class="bullet text-gray-800 ms-9 me-3"></div>
+                                                        <div class="text-gray-800 me-1">Sector:</div>
+                                                        <div class="text-white fw-light fs-6 fst-italic"><?php echo $xSector; ?></div>
+                                                    </div>
+                                                    <!-- <div class="d-flex fs-6 fw-bold align-items-center mb-4">
+                                                        <div class="bullet text-gray-800 ms-9 me-3"></div>
+                                                        <div class="text-gray-800 me-9">Estado:</div>
+                                                      
+                                                    </div> -->
+                                                    <div class="d-flex fs-6 fw-bold align-items-center mb-3">
+                                                        <div class="bullet text-gray-800 ms-9 me-3"></div>
+                                                        <div class="text-gray-800 me-1">Ubicacion:</div>
+                                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="<?php echo $xUbicacion; ?>">
+                                                            <a href="<?php echo $xUbicacion; ?>" <?php echo $xTarget; ?> class="symbol symbol-50px">  
+                                                                <!-- <i class="fa fa-map-marker fa-2x ms-7" aria-hidden="true" style="color:#3B8CEC;"></i> -->
+                                                                <i class="fa fa-map fa-2x ms-2" aria-hidden="true" style="color:#3B8CEC;"></i>  
+                                                            </a>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="d-grid gap-2">
+                                                        <button id="btnEditar_<?php echo $xId; ?>" type="button" class="btn btn-outline-primary btn-sm text-gray-800" <?php echo $xDisabledEdit; ?> onclick="f_Editar(<?php echo $xId; ?>)" ><i class="las la-pencil-alt me-1" aria-hidden="true" style="color: black"></i>Editar Prestador</button>
+                                                    </div>
+                                                </div>
+                                            </div> 
                                         </div>
                                     </td>
                             <?php if($xCantidad == 3) { $xTotalPrestadores = $xTotalPrestadores - $xCantidad; $xCantidad = 0; ?>
@@ -232,25 +232,27 @@
 
     function f_UpdateEstado(_paisid, _emprid, _presid){
         
-        let _usuaid = "<?php echo $xUsuaid; ?>";
-        let _check = $("#chk" + _presid).is(":checked");
-        let _checked = "";
-        let _class = "badge badge-light-primary";
-        let _td = "td_" + _presid;
-        let _btnedit = "btnEditar_" + _presid;
+        var _usuaid = "<?php echo $xUsuaid; ?>";
+        var _check = $("#chk" + _presid).is(":checked");
+        var _class = "";
+        var _lblestado = '';
+        var _lbl = "lblcolor_"+_presid;
+        var _btnedit = "btnEditar_" + _presid;
 
         if(_check){
-            _estado = "ACTIVO";
-            _checked = "checked='checked'";
+            _estado = "A";
+            _lblestado = "Activo";
+            _class = 'form-check-label text-center text-primary';
             $('#'+_btnedit).prop("disabled",false);
         }else{                    
-            _estado = "INACTIVO";
-            _class = "badge badge-light-danger";
+            _estado = "I";
+            _lblestado = "Inactivo";
+            _class = "form-check-label text-center text-danger";
             $('#'+_btnedit).prop("disabled",true);
         }
 
-        var _changetd = document.getElementById(_td);
-        _changetd.innerHTML = '<div class="' + _class + '">' + _estado + ' </div>';
+        var _lblChanged = document.getElementById(_lbl);
+        _lblChanged.innerHTML = '<label class="' + _class + '">' + _lblestado + '</label>';
 
         _parametros = {
             "xxPaisid" : _paisid,
