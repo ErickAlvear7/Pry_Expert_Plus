@@ -145,7 +145,7 @@
 						<?php } ?>
 								<td style="width: 1%;"></td>
 								<td style="width: 32%;">
-									<div class="card card-flush h-md-100" style="background-color: #82a4db;" id="myUser">
+									<div class="card card-flush h-md-100" style="background-color: #dff8f1 ;" id="myUser">
 										<div class="card-body d-flex flex-center">
 											<div class="symbol symbol-65px symbol-circle mb-5">
 												<img src="assets/images/users/<?php echo $avatar; ?>" alt="image" />
@@ -153,10 +153,10 @@
 											</div>
 										</div>
 										<div class="card-title d-flex flex-center mt-n5">
-											<h2 class="text-white fw-light fs-3 fst-italic"><?php echo $login; ?></h2>
+											<h2 class="text-primary fw-light fs-3 fst-italic"><?php echo $login; ?></h2>
 										</div>
 										<div class="card-body mt-n5">
-											<div class="form-check">
+											<div class="form-check d-flex flex-center mb-2">
 												<input <?php echo $cheking; ?> class="form-check-input" type="checkbox" value="" id="chk_<?php echo $idusuario; ?>" 
 													onchange="f_UpdateEstado(<?php echo $idusuario; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)">
 												<label id="lblcolor_<?php echo $idusuario; ?>" class="form-check-label <?php echo $xColor; ?>">
@@ -164,20 +164,20 @@
 												</label>	
 											</div>
 											<div class="d-flex flex-column justify-content-center flex-row-fluid pe-11 mb-5 mt-3">
-												<div class="d-flex fs-6 fw-bold align-items-center mb-3">
-													<div class="text-gray-800 me-1">Perfil:</div>
-													<div class="text-white fw-light fs-6 fst-italic"><?php echo $perfil; ?></div>
+												<div class="d-flex flex-stack fw-bold fs-7 text-muted mb-4">
+												    <div class="text-primary me-1">Perfil:</div>
+													<div class="text-gray-700 fw-bold fs-6 fst-italic text-end"><?php echo $perfil; ?></div>
 												</div>
 										    </div>
 											<div class="d-flex flex-column justify-content-center flex-row-fluid pe-11 mb-5 mt-2">
-												<div class="d-flex fs-6 fw-bold align-items-center mb-3">
-													<div class="text-gray-800 me-1">Usuario:</div>
-													<div class="text-white fw-light fs-9"><?php echo $Nombres; ?></div>
+												<div class="d-flex flex-stack fw-bold fs-7 text-muted mb-4">
+												    <div class="text-primary me-1">Usuario:</div>
+													<div class="text-gray-700 fw-bold fs-9 fst-italic text-wrap text-end"><?php echo $Nombres; ?></div>
 												</div>
 										    </div>
 											<div class="d-flex flex-column justify-content-center flex-row-fluid pe-11 mb-5 mt-2">
-												<div class="d-flex fs-6 fw-bold align-items-center mb-3">
-													<div class="text-gray-800 me-1">Resetear Password:</div>
+												<div class="d-flex fs-7 fw-bold align-items-center mb-3">
+													<div class="text-primary me-1">Resetear Password:</div>
 													<div class="ms-auto fw-bolder text-primary-700 fs-8">
 													    <i onclick="f_ResetPassword(<?php echo $idusuario; ?>,<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>)" class="fa fa-unlock-alt fa-2x mt-n2" data-bs-toggle="tooltip" title="Resetear password -> 12345" role="button" style="color:#2e97f4"></i>
 													</div>
@@ -187,7 +187,7 @@
 										<div class="row">
 											<div class="col">
 												<div class="d-grid gap-2">
-													<button <?php $xDisabledRese; ?> id="btnedit_<?php echo $idusuario; ?>" type="button" class="btn btn-outline-primary btn-sm text-gray-800" onclick="f_EditarUsuario(<?php echo $idusuario; ?>,'<?php echo $login; ?>')"><i class="las la-pencil-alt me-1" aria-hidden="true" style="color: black"></i>Editar Usuario</button>
+													<button <?php $xDisabledRese; ?> id="btnedit_<?php echo $idusuario; ?>" type="button" class="btn btn-outline-primary btn-sm text-primary" onclick="f_EditarUsuario(<?php echo $idusuario; ?>,'<?php echo $login; ?>')"><i class="las la-pencil-alt me-1" aria-hidden="true" style="color: black"></i>Editar Usuario</button>
 												</div>
 											</div>
 										</div> 	

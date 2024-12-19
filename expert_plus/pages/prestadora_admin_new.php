@@ -134,7 +134,7 @@
                             <?php } ?>
                                     <td style="width: 1%;"></td>
                                     <td style="width: 32%;">
-                                        <div class="card card-flush h-md-100" style="background-color: #82a4db;">
+                                        <div class="card card-flush h-md-100" style="background-color: #c8f1ee;">
                                             <div class="card-body d-flex flex-center flex-column pt-12 p-9">
                                                 <div class="symbol symbol-65px symbol-circle mb-5">
                                                     <a href="<?php echo $xUrl; ?>" <?php echo $xTargeturl; ?> class="symbol symbol-50px">
@@ -145,7 +145,7 @@
                                                 <h2 class="text-white fw-light fs-3 fst-italic"><?php echo $xPrestador; ?></h2>  
                                             </div>
                                             <div class="card-body mt-n5">
-                                                <div class="form-check">
+                                                <div class="form-check d-flex flex-center">
                                                     <input class="form-check-input" <?php echo $chkEstado; ?> type="checkbox" id="chk<?php echo $xId; ?>" 
                                                     onchange="f_UpdateEstado(<?php echo $xPaisid; ?>,<?php echo $xEmprid; ?>,<?php echo $xId; ?>)" value=""/>
                                                     <label id="lblcolor_<?php echo $xId; ?>" class="form-check-label <?php echo $xTextColor; ?>">
@@ -168,11 +168,6 @@
                                                         <div class="text-gray-800 me-1">Sector:</div>
                                                         <div class="text-white fw-light fs-6 fst-italic"><?php echo $xSector; ?></div>
                                                     </div>
-                                                    <!-- <div class="d-flex fs-6 fw-bold align-items-center mb-4">
-                                                        <div class="bullet text-gray-800 ms-9 me-3"></div>
-                                                        <div class="text-gray-800 me-9">Estado:</div>
-                                                      
-                                                    </div> -->
                                                     <div class="d-flex fs-6 fw-bold align-items-center mb-3">
                                                         <div class="bullet text-gray-800 ms-9 me-3"></div>
                                                         <div class="text-gray-800 me-1">Ubicacion:</div>
