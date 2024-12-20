@@ -187,7 +187,7 @@
 										<div class="row">
 											<div class="col">
 												<div class="d-grid gap-2">
-													<button <?php $xDisabledRese; ?> id="btnedit_<?php echo $idusuario; ?>" type="button" class="btn btn-outline-primary btn-sm text-primary" onclick="f_EditarUsuario(<?php echo $idusuario; ?>,'<?php echo $login; ?>')"><i class="las la-pencil-alt me-1" aria-hidden="true" style="color: black"></i>Editar Usuario</button>
+													<button <?php $xDisabledRese; ?> id="btnedit_<?php echo $idusuario; ?>" type="button" class="btn btn-outline-primary btn-sm text-black" onclick="f_EditarUsuario(<?php echo $idusuario; ?>,'<?php echo $login; ?>')"><i class="las la-pencil-alt me-1" aria-hidden="true" style="color: black"></i>Editar Usuario</button>
 												</div>
 											</div>
 										</div> 	
